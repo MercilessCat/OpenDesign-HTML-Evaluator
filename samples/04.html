@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebGL Occlusion Mastery</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+color: #e6e6e6;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+.header {
+background: rgba(10, 15, 30, 0.8);
+backdrop-filter: blur(10px);
+padding: 1rem 2rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid rgba(100, 150, 255, 0.2);
+position: fixed;
+width: 100%;
+top: 0;
+z-index: 1000;
+}
+
+.logo {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+
+.logo-icon {
+width: 40px;
+height: 40px;
+background: linear-gradient(45deg, #4cc9f0, #4361ee);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: bold;
+font-size: 20px;
+}
+
+.nav-links {
+display: flex;
+gap: 2rem;
+}
+
+.nav-links a {
+color: #a0a0c0;
+text-decoration: none;
+transition: color 0.3s;
+font-weight: 500;
+}
+
+.nav-links a:hover {
+color: #4cc9f0;
+}
+
+.hero {
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+overflow: hidden;
+}
+
+#webgl-container {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+
+.hero-content {
+text-align: center;
+z-index: 10;
+max-width: 800px;
+padding: 2rem;
+background: rgba(15, 25, 45, 0.7);
+backdrop-filter: blur(20px);
+border-radius: 20px;
+border: 1px solid rgba(100, 150, 255, 0.3);
+}
+
+h1 {
+font-size: 3.5rem;
+margin-bottom: 1rem;
+background: linear-gradient(45deg, #4cc9f0, #4361ee);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+text-shadow: 0 0 20px rgba(76, 201, 240, 0.3);
+}
+
+.subtitle {
+font-size: 1.2rem;
+margin-bottom: 2rem;
+color: #a0a0c0;
+line-height: 1.6;
+}
+
+.cta-button {
+background: linear-gradient(45deg, #4361ee, #3a0ca3);
+color: white;
+border: none;
+padding: 1rem 2rem;
+font-size: 1.1rem;
+border-radius: 50px;
+cursor: pointer;
+transition: transform 0.3s, box-shadow 0.3s;
+font-weight: 600;
+box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+}
+
+.cta-button:hover {
+transform: translateY(-3px);
+box-shadow: 0 8px 25px rgba(67, 97, 238, 0.5);
+}
+
+.features {
+padding: 6rem 2rem;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.feature-card {
+background: rgba(25, 35, 60, 0.6);
+border-radius: 15px;
+padding: 2rem;
+text-align: center;
+transition: transform 0.3s, background 0.3s;
+border: 1px solid rgba(100, 150, 255, 0.2);
+}
+
+.feature-card:hover {
+transform: translateY(-10px);
+background: rgba(35, 45, 70, 0.7);
+}
+
+.feature-icon {
+width: 70px;
+height: 70px;
+margin: 0 auto 1.5rem;
+background: linear-gradient(45deg, #4cc9f0, #4361ee);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 24px;
+}
+
+.feature-card h3 {
+font-size: 1.5rem;
+margin-bottom: 1rem;
+color: #4cc9f0;
+}
+
+.feature-card p {
+color: #a0a0c0;
+line-height: 1.6;
+}
+
+.sandbox-section {
+padding: 4rem 2rem;
+text-align: center;
+background: rgba(10, 15, 30, 0.5);
+}
+
+.section-title {
+font-size: 2.5rem;
+margin-bottom: 1rem;
+background: linear-gradient(45deg, #f72585, #b5179e);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.sandbox-container {
+max-width: 1000px;
+margin: 2rem auto;
+background: rgba(20, 30, 50, 0.8);
+border-radius: 15px;
+overflow: hidden;
+border: 1px solid rgba(100, 150, 255, 0.3);
+}
+
+#sandbox-canvas {
+width: 100%;
+height: 500px;
+display: block;
+}
+
+.code-editor {
+background: #0a0f1f;
+padding: 1rem;
+font-family: 'Courier New', monospace;
+color: #4cc9f0;
+height: 200px;
+overflow: auto;
+border-top: 1px solid rgba(100, 150, 255, 0.2);
+}
+
+.tutorials {
+padding: 4rem 2rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.tutorial-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 2rem;
+margin-top: 2rem;
+}
+
+.tutorial-card {
+background: rgba(25, 35, 60, 0.6);
+border-radius: 15px;
+overflow: hidden;
+transition: transform 0.3s;
+border: 1px solid rgba(100, 150, 255, 0.2);
+}
+
+.tutorial-card:hover {
+transform: translateY(-5px);
+}
+
+.tutorial-preview {
+height: 200px;
+background: linear-gradient(45deg, #3a0ca3, #7209b7);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 3rem;
+}
+
+.tutorial-content {
+padding: 1.5rem;
+}
+
+.tutorial-content h3 {
+color: #f72585;
+margin-bottom: 0.5rem;
+}
+
+.tutorial-content p {
+color: #a0a0c0;
+margin-bottom: 1rem;
+line-height: 1.5;
+}
+
+.difficulty {
+display: inline-block;
+padding: 0.3rem 0.8rem;
+border-radius: 20px;
+font-size: 0.8rem;
+font-weight: bold;
+}
+
+.beginner {
+background: rgba(76, 201, 240, 0.2);
+color: #4cc9f0;
+}
+
+.intermediate {
+background: rgba(247, 37, 133, 0.2);
+color: #f72585;
+}
+
+.advanced {
+background: rgba(181, 23, 158, 0.2);
+color: #b5179e;
+}
+
+footer {
+background: rgba(5, 10, 20, 0.9);
+padding: 3rem 2rem;
+text-align: center;
+border-top: 1px solid rgba(100, 150, 255, 0.2);
+}
+
+.footer-content {
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.footer-logo {
+font-size: 2rem;
+margin-bottom: 1rem;
+background: linear-gradient(45deg, #4cc9f0, #4361ee);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.footer-links {
+display: flex;
+justify-content: center;
+gap: 2rem;
+margin: 2rem 0;
+}
+
+.footer-links a {
+color: #a0a0c0;
+text-decoration: none;
+transition: color 0.3s;
+}
+
+.footer-links a:hover {
+color: #4cc9f0;
+}
+
+.copyright {
+color: #6c757d;
+margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+.header {
+flex-direction: column;
+gap: 1rem;
+padding: 1rem;
+}
+
+h1 {
+font-size: 2.5rem;
+}
+
+.nav-links {
+gap: 1rem;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.features {
+grid-template-columns: 1fr;
+}
+}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="logo">
+<div class="logo-icon">W</div>
+<h2>WebGL Occlusion Mastery</h2>
+</div>
+<nav class="nav-links">
+<a href="#lessons">Lessons</a>
+<a href="#sandbox">Sandbox</a>
+<a href="#tutorials">Tutorials</a>
+<a href="#resources">Resources</a>
+</nav>
+</header>
+
+<section class="hero">
+<div id="webgl-container"></div>
+<div class="hero-content">
+<h1>Master Advanced WebGL Occlusion Techniques</h1>
+<p class="subtitle">Dive deep into cutting-edge 3D rendering methods. Learn from industry experts, experiment in our interactive sandbox, and elevate your WebGL skills to the next level.</p>
+<button class="cta-button">Start Learning Now</button>
+</div>
+</section>
+
+<section class="features">
+<div class="feature-card">
+<div class="feature-icon">📚</div>
+<h3>Interactive Lessons</h3>
+<p>Step-by-step guided courses covering fundamental to advanced occlusion techniques including depth buffering, stencil testing, and hierarchical Z-buffer algorithms.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🧪</div>
+<h3>Sandbox Environment</h3>
+<p>Experiment with real-time WebGL code in our browser-based sandbox. Test occlusion culling algorithms and visualize performance improvements instantly.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">👨‍🏫</div>
+<h3>Expert Tutorials</h3>
+<p>Learn from leading WebGL developers through comprehensive video tutorials and detailed written guides covering industry best practices.</p>
+</div>
+</section>
+
+<section id="sandbox" class="sandbox-section">
+<h2 class="section-title">Occlusion Sandbox</h2>
+<p style="color: #a0a0c0; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+Experiment with different occlusion techniques in real-time. Modify parameters and see immediate results.
+</p>
+<div class="sandbox-container">
+<canvas id="sandbox-canvas"></canvas>
+<div class="code-editor">// Sample occlusion query implementation<br>
+function setupOcclusionQuery() {<br>
+&nbsp;&nbsp;// Initialize query object<br>
+&nbsp;&nbsp;const query = gl.createQuery();<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;// Begin query<br>
+&nbsp;&nbsp;gl.beginQuery(gl.ANY_SAMPLES_PASSED, query);<br>
+&nbsp;&nbsp;// Render occluder geometry<br>
+&nbsp;&nbsp;renderOccluder();<br>
+&nbsp;&nbsp;gl.endQuery(gl.ANY_SAMPLES_PASSED);<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;// Check results later<br>
+&nbsp;&nbsp;const result = gl.getQueryParameter(query, gl.QUERY_RESULT_AVAILABLE);<br>
+}</div>
+</div>
+</section>
+
+<section id="tutorials" class="tutorials">
+<h2 class="section-title">Featured Tutorials</h2>
+<div class="tutorial-grid">
+<div class="tutorial-card">
+<div class="tutorial-preview">HZB</div>
+<div class="tutorial-content">
+<h3>Hierarchical Z-Buffer</h3>
+<p>Learn how to implement hierarchical Z-buffers for efficient occlusion culling in large scenes.</p>
+<span class="difficulty intermediate">Intermediate</span>
+</div>
+</div>
+<div class="tutorial-card">
+<div class="tutorial-preview">ST</div>
+<div class="tutorial-content">
+<h3>Stencil Buffer Techniques</h3>
+<p>Master advanced stencil buffer operations for complex occlusion scenarios and masking effects.</p>
+<span class="difficulty advanced">Advanced</span>
+</div>
+</div>
+<div class="tutorial-card">
+<div class="tutorial-preview">HQ</div>
+<div class="tutorial-content">
+<h3>Occlusion Queries</h3>
+<p>Implement hardware-accelerated occlusion queries for dynamic level of detail systems.</p>
+<span class="difficulty beginner">Beginner</span>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="footer-content">
+<div class="footer-logo">WebGL Occlusion Mastery</div>
+<p style="color: #a0a0c0; max-width: 600px; margin: 0 auto 2rem;">
+Advance your WebGL skills with our comprehensive platform for mastering 3D occlusion techniques.
+</p>
+<div class="footer-links">
+<a href="#">Documentation</a>
+<a href="#">Community</a>
+<a href="#">GitHub</a>
+<a href="#">Contact</a>
+<a href="#">Privacy Policy</a>
+</div>
+<p class="copyright">© 2023 WebGL Occlusion Mastery. All rights reserved.</p>
+</div>
+</footer>
+
+<script>
+// Main WebGL Scene
+let scene, camera, renderer, controls;
+let occluder, objects = [];
+
+function initMainScene() {
+const container = document.getElementById('webgl-container');
+
+// Scene setup
+scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0f1f);
+scene.fog = new THREE.Fog(0x0a0f1f, 20, 100);
+
+// Camera
+camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(0, 5, 15);
+
+// Renderer
+renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+container.appendChild(renderer.domElement);
+
+// Controls
+controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0x404040, 1);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(10, 20, 15);
+directionalLight.castShadow = true;
+scene.add(directionalLight);
+
+// Create occluder (large central object)
+const occluderGeometry = new THREE.BoxGeometry(4, 4, 4);
+const occluderMaterial = new THREE.MeshPhongMaterial({
+color: 0x4361ee,
+transparent: true,
+opacity: 0.7,
+wireframe: false
+});
+occluder = new THREE.Mesh(occluderGeometry, occluderMaterial);
+occluder.position.y = 2;
+occluder.castShadow = true;
+scene.add(occluder);
+
+// Create surrounding objects
+for (let i = 0; i < 20; i++) {
+const geometry = new THREE.IcosahedronGeometry(0.5, 0);
+const material = new THREE.MeshPhongMaterial({
+color: new THREE.Color(Math.random() * 0xffffff),
+shininess: 100
+});
+
+const mesh = new THREE.Mesh(geometry, material);
+mesh.position.set(
+(Math.random() - 0.5) * 20,
+Math.random() * 10,
+(Math.random() - 0.5) * 20
+);
+mesh.castShadow = true;
+mesh.receiveShadow = true;
+scene.add(mesh);
+objects.push(mesh);
+}
+
+// Ground plane
+const groundGeometry = new THREE.PlaneGeometry(50, 50);
+const groundMaterial = new THREE.MeshPhongMaterial({
+color: 0x1e1e2e,
+side: THREE.DoubleSide
+});
+const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = -2;
+ground.receiveShadow = true;
+scene.add(ground);
+
+// Handle window resize
+window.addEventListener('resize', onWindowResize);
+
+// Start animation
+animate();
+}
+
+function onWindowResize() {
+camera.aspect = window.innerWidth / window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function animate() {
+requestAnimationFrame(animate);
+
+// Animate occluder
+occluder.rotation.x += 0.005;
+occluder.rotation.y += 0.007;
+
+// Animate surrounding objects
+objects.forEach((obj, index) => {
+obj.rotation.x += 0.01;
+obj.rotation.y += 0.015;
+obj.position.y += Math.sin(Date.now() * 0.001 + index) * 0.01;
+});
+
+controls.update();
+renderer.render(scene, camera);
+}
+
+// Sandbox WebGL Setup
+function initSandbox() {
+const canvas = document.getElementById('sandbox-canvas');
+const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+if (!gl) {
+console.error('WebGL not supported');
+return;
+}
+
+// Set canvas size
+function resizeCanvas() {
+canvas.width = canvas.clientWidth;
+canvas.height = canvas.clientHeight;
+gl.viewport(0, 0, canvas.width, canvas.height);
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// Simple vertex shader
+const vsSource = `
+attribute vec4 aVertexPosition;
+uniform mat4 uModelViewMatrix;
+uniform mat4 uProjectionMatrix;
+void main() {
+gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
+}
+`;
+
+// Simple fragment shader
+const fsSource = `
+precision mediump float;
+uniform vec4 uColor;
+void main() {
+gl_FragColor = uColor;
+}
+`;
+
+// Compile shader
+function compileShader(source, type) {
+const shader = gl.createShader(type);
+gl.shaderSource(shader, source);
+gl.compileShader(shader);
+
+if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+console.error('Shader compilation error:', gl.getShaderInfoLog(shader));
+gl.deleteShader(shader);
+return null;
+}
+
+return shader;
+}
+
+const vertexShader = compileShader(vsSource, gl.VERTEX_SHADER);
+const fragmentShader = compileShader(fsSource, gl.FRAGMENT_SHADER);
+
+// Create program
+const shaderProgram = gl.createProgram();
+gl.attachShader(shaderProgram, vertexShader);
+gl.attachShader(shaderProgram, fragmentShader);
+gl.linkProgram(shaderProgram);
+
+if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+console.error('Program linking error:', gl.getProgramInfoLog(shaderProgram));
+}
+
+// Get attribute and uniform locations
+const programInfo = {
+program: shaderProgram,
+attribLocations: {
+vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
+},
+uniformLocations: {
+projectionMatrix: gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
+modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
+color: gl.getUniformLocation(shaderProgram, 'uColor'),
+},
+};
+
+// Create a simple cube
+const positions = new Float32Array([
+// Front face
+-1.0, -1.0, 1.0,
+1.0, -1.0, 1.0,
+1.0, 1.0, 1.0,
+-1.0, 1.0, 1.0,
+
+// Back face
+-1.0, -1.0, -1.0,
+-1.0, 1.0, -1.0,
+1.0, 1.0, -1.0,
+1.0, -1.0, -1.0,
+
+// Top face
+-1.0, 1.0, -1.0,
+-1.0, 1.0, 1.0,
+1.0, 1.0, 1.0,
+1.0, 1.0, -1.0,
+
+// Bottom face
+-1.0, -1.0, -1.0,
+1.0, -1.0, -1.0,
+1.0, -1.0, 1.0,
+-1.0, -1.0, 1.0,
+
+// Right face
+1.0, -1.0, -1.0,
+1.0, 1.0, -1.0,
+1.0, 1.0, 1.0,
+1.0, -1.0, 1.0,
+
+// Left face
+-1.0, -1.0, -1.0,
+-1.0, -1.0, 1.0,
+-1.0, 1.0, 1.0,
+-1.0, 1.0, -1.0,
+]);
+
+const vertexBuffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+
+// Set clear color and enable depth test
+gl.clearColor(0.1, 0.1, 0.2, 1.0);
+gl.enable(gl.DEPTH_TEST);
+gl.depthFunc(gl.LEQUAL);
+
+// Animation variables
+let rotation = 0;
+
+// Draw scene function
+function drawScene() {
+gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+// Create perspective matrix
+const fieldOfView = 45 * Math.PI / 180;
+const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
+const zNear = 0.1;
+const zFar = 100.0;
+const projectionMatrix = mat4.create();
+mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
+
+// Create model-view matrix
+const modelViewMatrix = mat4.create();
+mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -6.0]);
+mat4.rotate(modelViewMatrix, modelViewMatrix, rotation, [0, 1, 0]);
+mat4.rotate(modelViewMatrix, modelViewMatrix, rotation * 0.7, [1, 0, 0]);
+
+// Tell WebGL how to pull out the positions from the position buffer
+gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+gl.vertexAttribPointer(
+programInfo.attribLocations.vertexPosition,
+3, // 3 components per iteration
+gl.FLOAT, // the data is 32bit floats
+false, // don't normalize
+0, // stride
+0 // offset
+);
+gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+
+// Tell WebGL to use our program when drawing
+gl.useProgram(programInfo.program);
+
+// Set the shader uniforms
+gl.uniformMatrix4fv(
+programInfo.uniformLocations.projectionMatrix,
+false,
+projectionMatrix
+);
+gl.uniformMatrix4fv(
+programInfo.uniformLocations.modelViewMatrix,
+false,
+modelViewMatrix
+);
+
+// Set color based on rotation
+const r = (Math.sin(rotation) + 1) / 2;
+const g = (Math.sin(rotation * 1.3) + 1) / 2;
+const b = (Math.sin(rotation * 0.7) + 1) / 2;
+gl.uniform4f(programInfo.uniformLocations.color, r, g, b, 1.0);
+
+// Draw
+gl.drawArrays(gl.TRIANGLE_FAN, 0, 4); // Front
+gl.drawArrays(gl.TRIANGLE_FAN, 4, 4); // Back
+gl.drawArrays(gl.TRIANGLE_FAN, 8, 4); // Top
+gl.drawArrays(gl.TRIANGLE_FAN, 12, 4); // Bottom
+gl.drawArrays(gl.TRIANGLE_FAN, 16,

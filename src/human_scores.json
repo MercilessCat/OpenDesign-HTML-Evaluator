@@ -1,0 +1,36 @@
+[
+    {
+        "html":"01.html",
+        "functional":8,
+        "usability":7,
+        "aesthetic":8
+    },
+
+    {
+        "html":"02.html",
+        "functional":6,
+        "usability":6,
+        "aesthetic":7
+    },
+
+    {
+        "html":"03.html",
+        "functional":5,
+        "usability":4,
+        "aesthetic":5
+    },
+
+    {
+        "html":"04.html",
+        "functional":7,
+        "usability":6,
+        "aesthetic":6
+    },
+
+    {
+        "html":"05.html",
+        "functional":4,
+        "usability":5,
+        "aesthetic":4
+    }
+]

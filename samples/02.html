@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HoloCard Studio - Create Mesmerizing 3D Holographic Cards</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+color: #fff;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+.header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1rem 2rem;
+background: rgba(0, 0, 0, 0.3);
+backdrop-filter: blur(10px);
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+font-size: 1.8rem;
+font-weight: 700;
+background: linear-gradient(45deg, #00dbde, #fc00ff);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+text-shadow: 0 0 20px rgba(252, 0, 255, 0.3);
+}
+
+.nav-links {
+display: flex;
+gap: 2rem;
+}
+
+.nav-links a {
+color: #fff;
+text-decoration: none;
+font-weight: 500;
+transition: all 0.3s ease;
+position: relative;
+}
+
+.nav-links a:hover {
+color: #00dbde;
+}
+
+.nav-links a::after {
+content: '';
+position: absolute;
+bottom: -5px;
+left: 0;
+width: 0;
+height: 2px;
+background: linear-gradient(45deg, #00dbde, #fc00ff);
+transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+width: 100%;
+}
+
+.hero {
+text-align: center;
+padding: 4rem 2rem;
+background: radial-gradient(circle at center, rgba(0, 219, 222, 0.1), transparent 70%);
+}
+
+.hero h1 {
+font-size: 3.5rem;
+margin-bottom: 1rem;
+background: linear-gradient(45deg, #00dbde, #fc00ff);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.hero p {
+font-size: 1.2rem;
+max-width: 700px;
+margin: 0 auto 2rem;
+opacity: 0.9;
+}
+
+.cta-button {
+background: linear-gradient(45deg, #00dbde, #fc00ff);
+color: white;
+border: none;
+padding: 1rem 2rem;
+font-size: 1.1rem;
+border-radius: 50px;
+cursor: pointer;
+transition: all 0.3s ease;
+box-shadow: 0 5px 15px rgba(252, 0, 255, 0.4);
+}
+
+.cta-button:hover {
+transform: translateY(-3px);
+box-shadow: 0 8px 25px rgba(252, 0, 255, 0.6);
+}
+
+.features {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+padding: 3rem 2rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.feature-card {
+background: rgba(255, 255, 255, 0.05);
+border-radius: 15px;
+padding: 2rem;
+text-align: center;
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 10px 30px rgba(0, 219, 222, 0.2);
+border-color: rgba(0, 219, 222, 0.3);
+}
+
+.feature-icon {
+font-size: 3rem;
+margin-bottom: 1rem;
+background: linear-gradient(45deg, #00dbde, #fc00ff);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.feature-card h3 {
+font-size: 1.5rem;
+margin-bottom: 1rem;
+}
+
+.editor-section {
+padding: 3rem 2rem;
+text-align: center;
+}
+
+.editor-container {
+max-width: 1000px;
+margin: 2rem auto;
+height: 500px;
+border-radius: 15px;
+overflow: hidden;
+box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+position: relative;
+}
+
+#three-canvas {
+width: 100%;
+height: 100%;
+}
+
+.templates {
+padding: 3rem 2rem;
+text-align: center;
+}
+
+.template-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 2rem;
+max-width: 1200px;
+margin: 2rem auto;
+}
+
+.template-card {
+background: rgba(255, 255, 255, 0.05);
+border-radius: 15px;
+overflow: hidden;
+transition: all 0.3s ease;
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.template-card:hover {
+transform: scale(1.05);
+box-shadow: 0 10px 30px rgba(252, 0, 255, 0.3);
+}
+
+.template-preview {
+height: 200px;
+background: linear-gradient(45deg, #00dbde, #fc00ff);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 3rem;
+}
+
+.template-info {
+padding: 1.5rem;
+}
+
+.community {
+padding: 3rem 2rem;
+text-align: center;
+}
+
+.gallery {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 1.5rem;
+max-width: 1200px;
+margin: 2rem auto;
+}
+
+.gallery-item {
+height: 200px;
+border-radius: 10px;
+overflow: hidden;
+position: relative;
+background: linear-gradient(45deg, #00dbde, #fc00ff);
+}
+
+.footer {
+text-align: center;
+padding: 2rem;
+background: rgba(0, 0, 0, 0.3);
+margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+.header {
+flex-direction: column;
+gap: 1rem;
+}
+
+.hero h1 {
+font-size: 2.5rem;
+}
+
+.nav-links {
+flex-wrap: wrap;
+justify-content: center;
+}
+}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="logo">HoloCard Studio</div>
+<nav class="nav-links">
+<a href="#editor">Editor</a>
+<a href="#templates">Templates</a>
+<a href="#community">Community</a>
+<a href="#marketplace">Marketplace</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Create Mesmerizing 3D Holographic Cards</h1>
+<p>Design, animate, and share stunning holographic greeting cards with our intuitive 3D editor. No experience needed!</p>
+<button class="cta-button">Start Creating Now</button>
+</section>
+
+<section class="features">
+<div class="feature-card">
+<div class="feature-icon">✨</div>
+<h3>Real-time Editor</h3>
+<p>Design your holographic cards with our powerful real-time 3D editor. See changes instantly as you create.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🎨</div>
+<h3>Template Library</h3>
+<p>Choose from hundreds of professionally designed templates to kickstart your creativity.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">👥</div>
+<h3>Community Gallery</h3>
+<p>Showcase your creations and get inspired by other designers in our vibrant community.</p>
+</div>
+</section>
+
+<section id="editor" class="editor-section">
+<h2>3D Holographic Card Editor</h2>
+<p>Drag to rotate, scroll to zoom, and customize your holographic creation</p>
+<div class="editor-container">
+<canvas id="three-canvas"></canvas>
+</div>
+</section>
+
+<section id="templates" class="templates">
+<h2>Popular Templates</h2>
+<div class="template-grid">
+<div class="template-card">
+<div class="template-preview">🎉</div>
+<div class="template-info">
+<h3>Birthday Celebration</h3>
+<p>Vibrant colors with floating particles</p>
+</div>
+</div>
+<div class="template-card">
+<div class="template-preview">❤️</div>
+<div class="template-info">
+<h3>Romantic Hearts</h3>
+<p>Elegant hearts animation with glow effect</p>
+</div>
+</div>
+<div class="template-card">
+<div class="template-preview">🎄</div>
+<div class="template-info">
+<h3>Holiday Magic</h3>
+<p>Snowflakes and festive lights animation</p>
+</div>
+</div>
+<div class="template-card">
+<div class="template-preview">🎓</div>
+<div class="template-info">
+<h3>Graduation Stars</h3>
+<p>Sparkling stars with celebratory effects</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="community" class="community">
+<h2>Community Showcase</h2>
+<div class="gallery">
+<div class="gallery-item"></div>
+<div class="gallery-item"></div>
+<div class="gallery-item"></div>
+<div class="gallery-item"></div>
+<div class="gallery-item"></div>
+<div class="gallery-item"></div>
+</div>
+</section>
+
+<footer class="footer">
+<p>&copy; 2023 HoloCard Studio. All rights reserved.</p>
+<p>Share your creations with #HoloCardMagic</p>
+</footer>
+
+<script>
+// Initialize Three.js scene
+let scene, camera, renderer, controls;
+
+function init() {
+// Create scene
+scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a1a);
+scene.fog = new THREE.Fog(0x0a0a1a, 15, 30);
+
+// Create camera
+camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 15;
+
+// Create renderer
+const canvas = document.getElementById('three-canvas');
+renderer = new THREE.WebGLRenderer({
+canvas: canvas,
+antialias: true,
+alpha: true
+});
+renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+
+// Add orbit controls
+controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
+// Add lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0x00dbde, 1);
+directionalLight.position.set(5, 5, 5);
+scene.add(directionalLight);
+
+const pointLight = new THREE.PointLight(0xfc00ff, 1, 100);
+pointLight.position.set(-5, -5, 5);
+scene.add(pointLight);
+
+// Create holographic card
+createHolographicCard();
+
+// Add particles
+createParticles();
+
+// Handle window resize
+window.addEventListener('resize', onWindowResize);
+
+// Start animation loop
+animate();
+}
+
+function createHolographicCard() {
+// Card base
+const cardGeometry = new THREE.BoxGeometry(8, 5, 0.2);
+const cardMaterial = new THREE.MeshPhongMaterial({
+color: 0x1a1a2e,
+emissive: 0x0a0a1a,
+shininess: 100,
+transparent: true,
+opacity: 0.9
+});
+const card = new THREE.Mesh(cardGeometry, cardMaterial);
+scene.add(card);
+
+// Holographic effect
+const hologramGeometry = new THREE.PlaneGeometry(7.8, 4.8);
+const hologramMaterial = new THREE.MeshBasicMaterial({
+color: 0x00dbde,
+transparent: true,
+opacity: 0.3,
+wireframe: true
+});
+const hologram = new THREE.Mesh(hologramGeometry, hologramMaterial);
+hologram.position.z = 0.11;
+card.add(hologram);
+
+// Floating elements
+const floatGeometry = new THREE.IcosahedronGeometry(0.5, 0);
+const floatMaterial = new THREE.MeshPhongMaterial({
+color: 0xfc00ff,
+emissive: 0xfc00ff,
+emissiveIntensity: 0.5,
+shininess: 100
+});
+
+for (let i = 0; i < 12; i++) {
+const float = new THREE.Mesh(floatGeometry, floatMaterial);
+float.position.set(
+(Math.random() - 0.5) * 6,
+(Math.random() - 0.5) * 3,
+Math.random() * 2 + 1
+);
+float.userData.velocity = {
+x: (Math.random() - 0.5) * 0.02,
+y: (Math.random() - 0.5) * 0.02,
+z: (Math.random() - 0.5) * 0.02
+};
+scene.add(float);
+}
+
+// Text
+const textGeometry = new THREE.BoxGeometry(0.2, 1, 0.2);
+const textMaterial = new THREE.MeshPhongMaterial({ color: 0x00dbde });
+
+// Create "H" letter
+const h1 = new THREE.Mesh(textGeometry, textMaterial);
+h1.position.set(-1, 0, 0.2);
+card.add(h1);
+
+const h2 = new THREE.Mesh(textGeometry, textMaterial);
+h2.position.set(-1, 0, 0.2);
+h2.scale.set(1, 0.5, 1);
+h2.position.y = 0.5;
+card.add(h2);
+
+const h3 = new THREE.Mesh(textGeometry, textMaterial);
+h3.position.set(-1, 0, 0.2);
+h3.scale.set(1, 0.5, 1);
+h3.position.y = -0.5;
+card.add(h3);
+
+const h4 = new THREE.Mesh(textGeometry, textMaterial);
+h4.position.set(-1, 0, 0.2);
+h4.scale.set(0.5, 1, 1);
+h4.position.x = -0.8;
+card.add(h4);
+}
+
+function createParticles() {
+const particleCount = 500;
+const particles = new THREE.BufferGeometry();
+const posArray = new Float32Array(particleCount * 3);
+
+for (let i = 0; i < particleCount * 3; i++) {
+posArray[i] = (Math.random() - 0.5) * 30;
+}
+
+particles.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+const particleMaterial = new THREE.PointsMaterial({
+color: 0x00dbde,
+size: 0.1,
+transparent: true,
+blending: THREE.AdditiveBlending
+});
+
+const particleSystem = new THREE.Points(particles, particleMaterial);
+scene.add(particleSystem);
+}
+
+function onWindowResize() {
+const canvas = document.getElementById('three-canvas');
+camera.aspect = canvas.clientWidth / canvas.clientHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+}
+
+function animate() {
+requestAnimationFrame(animate);
+
+// Rotate card
+scene.children[3].rotation.y += 0.005;
+
+// Animate floating elements
+scene.children.slice(4).forEach(child => {
+if (child.isMesh) {
+child.position.x += child.userData.velocity.x;
+child.position.y += child.userData.velocity.y;
+child.position.z += child.userData.velocity.z;
+
+// Bounce off boundaries
+if (Math.abs(child.position.x) > 15) child.userData.velocity.x *= -1;
+if (Math.abs(child.position.y) > 15) child.userData.velocity.y *= -1;
+if (Math.abs(child.position.z) > 15) child.userData.velocity.z *= -1;
+
+// Rotate
+child.rotation.x += 0.01;
+child.rotation.y += 0.01;
+}
+});
+
+controls.update();
+renderer.render(scene, camera);
+}
+
+// Initialize when page loads
+window.onload = init;
+</script>
+</body>
+</html>

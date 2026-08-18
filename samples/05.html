@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDF Studio - 3D Shape Creation Platform</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+color: #e6e6e6;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+header {
+background: rgba(10, 15, 30, 0.8);
+backdrop-filter: blur(10px);
+padding: 1rem 2rem;
+position: fixed;
+width: 100%;
+top: 0;
+z-index: 1000;
+border-bottom: 1px solid rgba(100, 150, 255, 0.2);
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.logo {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+
+.logo h1 {
+background: linear-gradient(90deg, #4cc9f0, #4361ee);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+font-size: 1.8rem;
+font-weight: 700;
+}
+
+.logo-icon {
+width: 40px;
+height: 40px;
+background: linear-gradient(135deg, #4361ee, #4cc9f0);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: bold;
+font-size: 1.2rem;
+}
+
+nav ul {
+display: flex;
+list-style: none;
+gap: 2rem;
+}
+
+nav a {
+color: #a0a0c0;
+text-decoration: none;
+font-weight: 500;
+transition: all 0.3s ease;
+padding: 0.5rem 1rem;
+border-radius: 4px;
+}
+
+nav a:hover, nav a.active {
+color: #4cc9f0;
+background: rgba(67, 97, 238, 0.1);
+}
+
+.user-actions {
+display: flex;
+gap: 1rem;
+align-items: center;
+}
+
+.btn {
+padding: 0.6rem 1.2rem;
+border-radius: 30px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+border: none;
+font-size: 0.9rem;
+}
+
+.btn-primary {
+background: linear-gradient(90deg, #4361ee, #3a0ca3);
+color: white;
+}
+
+.btn-secondary {
+background: transparent;
+color: #4cc9f0;
+border: 1px solid #4cc9f0;
+}
+
+.btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hero {
+height: 100vh;
+display: flex;
+align-items: center;
+padding: 0 5%;
+position: relative;
+overflow: hidden;
+}
+
+.hero-content {
+max-width: 600px;
+z-index: 10;
+}
+
+.hero h2 {
+font-size: 3.5rem;
+margin-bottom: 1.5rem;
+line-height: 1.2;
+}
+
+.hero p {
+font-size: 1.2rem;
+margin-bottom: 2rem;
+color: #b0b0d0;
+line-height: 1.6;
+}
+
+.gradient-text {
+background: linear-gradient(90deg, #4cc9f0, #4361ee, #f72585);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.canvas-container {
+position: absolute;
+top: 0;
+right: 0;
+width: 60%;
+height: 100%;
+}
+
+#three-canvas {
+width: 100%;
+height: 100%;
+}
+
+.features {
+padding: 5rem 5%;
+background: rgba(15, 23, 42, 0.7);
+}
+
+.section-title {
+text-align: center;
+font-size: 2.5rem;
+margin-bottom: 3rem;
+}
+
+.features-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+}
+
+.feature-card {
+background: rgba(30, 41, 70, 0.5);
+border-radius: 15px;
+padding: 2rem;
+transition: all 0.3s ease;
+border: 1px solid rgba(100, 150, 255, 0.1);
+}
+
+.feature-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+border-color: rgba(100, 150, 255, 0.3);
+}
+
+.feature-icon {
+width: 60px;
+height: 60px;
+background: linear-gradient(135deg, #4361ee, #4cc9f0);
+border-radius: 15px;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 1.5rem;
+font-size: 1.8rem;
+}
+
+.feature-card h3 {
+font-size: 1.5rem;
+margin-bottom: 1rem;
+color: #4cc9f0;
+}
+
+.feature-card p {
+color: #b0b0d0;
+line-height: 1.6;
+}
+
+.gallery {
+padding: 5rem 5%;
+}
+
+.gallery-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+gap: 1.5rem;
+}
+
+.gallery-item {
+border-radius: 10px;
+overflow: hidden;
+position: relative;
+height: 250px;
+background: rgba(30, 41, 70, 0.5);
+border: 1px solid rgba(100, 150, 255, 0.1);
+transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+transform: scale(1.05);
+box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+border-color: rgba(100, 150, 255, 0.3);
+}
+
+.gallery-item img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: all 0.3s ease;
+}
+
+.gallery-item:hover img {
+opacity: 0.7;
+}
+
+.gallery-item .overlay {
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+padding: 1rem;
+transform: translateY(100%);
+transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .overlay {
+transform: translateY(0);
+}
+
+.resources {
+padding: 5rem 5%;
+background: rgba(15, 23, 42, 0.7);
+}
+
+.resources-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+}
+
+.resource-card {
+background: rgba(30, 41, 70, 0.5);
+border-radius: 15px;
+padding: 2rem;
+transition: all 0.3s ease;
+border: 1px solid rgba(100, 150, 255, 0.1);
+}
+
+.resource-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+border-color: rgba(100, 150, 255, 0.3);
+}
+
+.resource-card h3 {
+font-size: 1.5rem;
+margin-bottom: 1rem;
+color: #f72585;
+}
+
+.resource-card ul {
+list-style-type: none;
+padding-left: 1rem;
+}
+
+.resource-card li {
+margin-bottom: 0.8rem;
+position: relative;
+padding-left: 1.5rem;
+}
+
+.resource-card li:before {
+content: "→";
+position: absolute;
+left: 0;
+color: #4cc9f0;
+}
+
+footer {
+background: rgba(10, 15, 30, 0.9);
+padding: 3rem 5%;
+text-align: center;
+border-top: 1px solid rgba(100, 150, 255, 0.2);
+}
+
+.footer-content {
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.footer-logo {
+font-size: 2rem;
+margin-bottom: 1rem;
+background: linear-gradient(90deg, #4cc9f0, #4361ee);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.footer-links {
+display: flex;
+justify-content: center;
+gap: 2rem;
+margin: 2rem 0;
+flex-wrap: wrap;
+}
+
+.footer-links a {
+color: #a0a0c0;
+text-decoration: none;
+transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+color: #4cc9f0;
+}
+
+.copyright {
+color: #6c757d;
+margin-top: 2rem;
+}
+
+@media (max-width: 900px) {
+.hero {
+flex-direction: column;
+text-align: center;
+padding-top: 5rem;
+}
+
+.hero-content {
+max-width: 100%;
+margin-bottom: 2rem;
+}
+
+.canvas-container {
+position: relative;
+width: 100%;
+height: 50vh;
+}
+
+nav ul {
+display: none;
+}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<div class="logo-icon">SDF</div>
+<h1>SDF Studio</h1>
+</div>
+<nav>
+<ul>
+<li><a href="#" class="active">Home</a></li>
+<li><a href="#">Editor</a></li>
+<li><a href="#">Gallery</a></li>
+<li><a href="#">Resources</a></li>
+<li><a href="#">Community</a></li>
+</ul>
+</nav>
+<div class="user-actions">
+<button class="btn btn-secondary">Sign In</button>
+<button class="btn btn-primary">Get Started</button>
+</div>
+</header>
+
+<section class="hero">
+<div class="hero-content">
+<h2>Create <span class="gradient-text">Stunning 3D Shapes</span> with Signed Distance Fields</h2>
+<p>Join a community of artists and developers exploring the infinite possibilities of SDF-based 3D creation. Visual editor, collaborative projects, and educational resources.</p>
+<div class="hero-buttons">
+<button class="btn btn-primary">Launch Editor</button>
+<button class="btn btn-secondary">Explore Gallery</button>
+</div>
+</div>
+<div class="canvas-container">
+<canvas id="three-canvas"></canvas>
+</div>
+</section>
+
+<section class="features">
+<h2 class="section-title">Powerful Features</h2>
+<div class="features-grid">
+<div class="feature-card">
+<div class="feature-icon">🎨</div>
+<h3>Visual SDF Editor</h3>
+<p>Intuitive node-based editor for creating complex 3D shapes using mathematical functions. Real-time preview and GLSL shader export.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">👥</div>
+<h3>Collaborative Projects</h3>
+<p>Work together with other creators on shared projects. Version control, real-time collaboration, and commenting system.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🏆</div>
+<h3>Creative Challenges</h3>
+<p>Participate in weekly challenges to push your creative boundaries. Compete with the community and showcase your skills.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">📚</div>
+<h3>Educational Resources</h3>
+<p>Comprehensive tutorials, documentation, and examples to master SDF techniques from beginner to advanced levels.</p>
+</div>
+</div>
+</section>
+
+<section class="gallery">
+<h2 class="section-title">Community Creations</h2>
+<div class="gallery-grid">
+<div class="gallery-item">
+<div style="background: linear-gradient(45deg, #ff9a9e, #fad0c4); width: 100%; height: 100%;"></div>
+<div class="overlay">
+<h4>Organic Sculpture</h4>
+<p>by @artist123</p>
+</div>
+</div>
+<div class="gallery-item">
+<div style="background: linear-gradient(45deg, #a1c4fd, #c2e9fb); width: 100%; height: 100%;"></div>
+<div class="overlay">
+<h4>Geometric Patterns</h4>
+<p>by @geometer</p>
+</div>
+</div>
+<div class="gallery-item">
+<div style="background: linear-gradient(45deg, #ffecd2, #fcb69f); width: 100%; height: 100%;"></div>
+<div class="overlay">
+<h4>Voxel Landscape</h4>
+<p>by @voxelmaster</p>
+</div>
+</div>
+<div class="gallery-item">
+<div style="background: linear-gradient(45deg, #84fab0, #8fd3f4); width: 100%; height: 100%;"></div>
+<div class="overlay">
+<h4>Fractal Universe</h4>
+<p>by @fractalist</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="resources">
+<h2 class="section-title">Learning Resources</h2>
+<div class="resources-grid">
+<div class="resource-card">
+<h3>Getting Started</h3>
+<ul>
+<li>Introduction to SDFs</li>
+<li>Basic Shapes Tutorial</li>
+<li>Boolean Operations</li>
+<li>Distance Transform Basics</li>
+</ul>
+</div>
+<div class="resource-card">
+<h3>Advanced Techniques</h3>
+<ul>
+<li>Ray Marching Fundamentals</li>
+<li>Surface Shading Models</li>
+<li>Animation with Time</li>
+<li>Procedural Texturing</li>
+</ul>
+</div>
+<div class="resource-card">
+<h3>Community Guides</h3>
+<ul>
+<li>Optimization Strategies</li>
+<li>Workflow Tips</li>
+<li>Shader Performance</li>
+<li>Export & Integration</li>
+</ul>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="footer-content">
+<div class="footer-logo">SDF Studio</div>
+<p>Empowering creators with mathematical art tools</p>
+<div class="footer-links">
+<a href="#">About</a>
+<a href="#">Documentation</a>
+<a href="#">Blog</a>
+<a href="#">GitHub</a>
+<a href="#">Discord</a>
+<a href="#">Twitter</a>
+</div>
+<div class="copyright">
+&copy; 2023 SDF Studio. All rights reserved.
+</div>
+</div>
+</footer>
+
+<script>
+// Initialize Three.js scene
+const canvas = document.getElementById('three-canvas');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0f1e);
+
+// Camera setup
+const camera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000);
+camera.position.z = 5;
+
+// Renderer setup
+const renderer = new THREE.WebGLRenderer({
+canvas: canvas,
+antialias: true,
+alpha: true
+});
+renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+// Add orbit controls
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
+// Create SDF-inspired geometry
+const createSDFShape = () => {
+const group = new THREE.Group();
+
+// Create multiple torus knots with different parameters
+const geometries = [
+new THREE.TorusKnotGeometry(1, 0.3, 128, 32, 2, 3),
+new THREE.TorusKnotGeometry(0.7, 0.2, 128, 32, 3, 4),
+new THREE.TorusKnotGeometry(0.5, 0.15, 128, 32, 4, 3)
+];
+
+const colors = [
+new THREE.Color(0x4361ee),
+new THREE.Color(0x4cc9f0),
+new THREE.Color(0xf72585)
+];
+
+for (let i = 0; i < geometries.length; i++) {
+const material = new THREE.MeshStandardMaterial({
+color: colors[i],
+metalness: 0.7,
+roughness: 0.2,
+wireframe: false
+});
+
+const mesh = new THREE.Mesh(geometries[i], material);
+mesh.rotation.x = Math.random() * Math.PI;
+mesh.rotation.y = Math.random() * Math.PI;
+group.add(mesh);
+}
+
+return group;
+};
+
+// Add shape to scene
+const sdfShape = createSDFShape();
+scene.add(sdfShape);
+
+// Add lights
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(5, 5, 5);
+scene.add(directionalLight);
+
+const pointLight = new THREE.PointLight(0x4cc9f0, 1, 100);
+pointLight.position.set(-5, -5, -5);
+scene.add(pointLight);
+
+// Handle window resize
+window.addEventListener('resize', () => {
+camera.aspect = canvas.offsetWidth / canvas.offsetHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
+
+// Animation loop
+const animate = () => {
+requestAnimationFrame(animate);
+
+// Rotate the SDF shape
+sdfShape.rotation.x += 0.005;
+sdfShape.rotation.y += 0.007;
+
+controls.update();
+renderer.render(scene, camera);
+};
+
+// Start animation
+animate();
+
+// Add some interactive elements
+document.querySelectorAll('.feature-card, .resource-card').forEach(card => {
+card.addEventListener('mouseenter', function() {
+this.style.transform = 'translateY(-10px)';
+});
+
+card.addEventListener('mouseleave', function() {
+this.style.transform = 'translateY(0)';
+});
+});
+</script>
+</body>
+</html>

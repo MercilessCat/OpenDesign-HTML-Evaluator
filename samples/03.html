@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edge3D - Ultra-Low Latency 3D Applications</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+color: #fff;
+overflow-x: hidden;
+min-height: 100vh;
+}
+
+.header {
+position: fixed;
+top: 0;
+width: 100%;
+padding: 20px 5%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+z-index: 1000;
+background: rgba(15, 12, 41, 0.8);
+backdrop-filter: blur(10px);
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+font-size: 28px;
+font-weight: 700;
+background: linear-gradient(45deg, #00c9ff, #92fe9d);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+text-shadow: 0 0 20px rgba(0, 201, 255, 0.3);
+}
+
+.nav-links {
+display: flex;
+gap: 30px;
+}
+
+.nav-links a {
+color: #fff;
+text-decoration: none;
+font-weight: 500;
+transition: all 0.3s ease;
+position: relative;
+padding: 5px 0;
+}
+
+.nav-links a:hover {
+color: #00c9ff;
+}
+
+.nav-links a::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 2px;
+background: linear-gradient(45deg, #00c9ff, #92fe9d);
+transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+width: 100%;
+}
+
+.hero {
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+overflow: hidden;
+}
+
+#webgl-container {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+}
+
+.hero-content {
+text-align: center;
+max-width: 800px;
+padding: 0 20px;
+z-index: 10;
+}
+
+.hero h1 {
+font-size: 4rem;
+margin-bottom: 20px;
+background: linear-gradient(45deg, #00c9ff, #92fe9d);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+line-height: 1.2;
+}
+
+.hero p {
+font-size: 1.2rem;
+margin-bottom: 30px;
+opacity: 0.9;
+line-height: 1.6;
+}
+
+.cta-button {
+background: linear-gradient(45deg, #00c9ff, #92fe9d);
+color: #0f0c29;
+border: none;
+padding: 15px 40px;
+font-size: 1.1rem;
+font-weight: 600;
+border-radius: 50px;
+cursor: pointer;
+transition: all 0.3s ease;
+box-shadow: 0 10px 30px rgba(0, 201, 255, 0.3);
+}
+
+.cta-button:hover {
+transform: translateY(-5px);
+box-shadow: 0 15px 40px rgba(0, 201, 255, 0.5);
+}
+
+.section {
+padding: 100px 5%;
+}
+
+.section-title {
+text-align: center;
+font-size: 2.5rem;
+margin-bottom: 60px;
+position: relative;
+}
+
+.section-title::after {
+content: '';
+position: absolute;
+bottom: -15px;
+left: 50%;
+transform: translateX(-50%);
+width: 100px;
+height: 4px;
+background: linear-gradient(45deg, #00c9ff, #92fe9d);
+border-radius: 2px;
+}
+
+.features-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 30px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.feature-card {
+background: rgba(255, 255, 255, 0.05);
+border-radius: 20px;
+padding: 30px;
+text-align: center;
+transition: all 0.3s ease;
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-card:hover {
+transform: translateY(-10px);
+background: rgba(255, 255, 255, 0.1);
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.feature-icon {
+font-size: 3rem;
+margin-bottom: 20px;
+background: linear-gradient(45deg, #00c9ff, #92fe9d);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.feature-card h3 {
+font-size: 1.5rem;
+margin-bottom: 15px;
+}
+
+.latency-comparison {
+background: rgba(15, 12, 41, 0.6);
+border-radius: 20px;
+padding: 40px;
+max-width: 1000px;
+margin: 0 auto;
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comparison-bars {
+display: flex;
+justify-content: space-around;
+align-items: flex-end;
+height: 300px;
+margin-top: 40px;
+}
+
+.bar {
+width: 80px;
+background: linear-gradient(to top, #00c9ff, #92fe9d);
+border-radius: 10px 10px 0 0;
+position: relative;
+transition: height 1s ease;
+}
+
+.bar-label {
+position: absolute;
+bottom: -30px;
+left: 50%;
+transform: translateX(-50%);
+white-space: nowrap;
+}
+
+.bar-value {
+position: absolute;
+top: -30px;
+left: 50%;
+transform: translateX(-50%);
+font-weight: bold;
+}
+
+.demo-section {
+text-align: center;
+}
+
+.demo-container {
+width: 100%;
+height: 500px;
+background: rgba(0, 0, 0, 0.3);
+border-radius: 20px;
+margin: 40px 0;
+overflow: hidden;
+position: relative;
+}
+
+.toolkit-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 25px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.tool-card {
+background: rgba(255, 255, 255, 0.05);
+border-radius: 15px;
+padding: 25px;
+transition: all 0.3s ease;
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tool-card:hover {
+transform: translateY(-5px);
+background: rgba(255, 255, 255, 0.1);
+box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.tool-card h3 {
+font-size: 1.3rem;
+margin-bottom: 15px;
+color: #00c9ff;
+}
+
+.footer {
+background: rgba(0, 0, 0, 0.3);
+padding: 50px 5% 30px;
+text-align: center;
+}
+
+.footer-links {
+display: flex;
+justify-content: center;
+gap: 30px;
+margin-bottom: 30px;
+flex-wrap: wrap;
+}
+
+.footer-links a {
+color: #fff;
+text-decoration: none;
+transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+color: #00c9ff;
+}
+
+.copyright {
+opacity: 0.7;
+font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+.hero h1 {
+font-size: 2.5rem;
+}
+
+.nav-links {
+display: none;
+}
+
+.comparison-bars {
+flex-direction: column;
+align-items: center;
+height: auto;
+gap: 50px;
+}
+
+.bar {
+width: 60px;
+height: 100px !important;
+}
+}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="logo">EDGE3D</div>
+<nav class="nav-links">
+<a href="#features">Features</a>
+<a href="#latency">Latency</a>
+<a href="#demos">Demos</a>
+<a href="#toolkit">Toolkit</a>
+<a href="#community">Community</a>
+</nav>
+</header>
+
+<section class="hero">
+<div id="webgl-container"></div>
+<div class="hero-content">
+<h1>Ultra-Low Latency 3D at the Edge</h1>
+<p>Harness the power of edge computing to deliver immersive 3D experiences with sub-millisecond response times. Transform how users interact with real-time 3D applications.</p>
+<button class="cta-button">Explore Edge Solutions</button>
+</div>
+</section>
+
+<section id="features" class="section">
+<h2 class="section-title">Core Capabilities</h2>
+<div class="features-grid">
+<div class="feature-card">
+<div class="feature-icon">⚡</div>
+<h3>Sub-Millisecond Latency</h3>
+<p>Achieve latencies under 1ms by processing data closer to end users, enabling truly real-time interactions.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🌐</div>
+<h3>Global Edge Network</h3>
+<p>Leverage distributed infrastructure across 200+ cities worldwide for optimal performance everywhere.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🎮</div>
+<h3>Immersive Experiences</h3>
+<p>Create seamless AR/VR applications, interactive simulations, and high-fidelity 3D environments.</p>
+</div>
+</div>
+</section>
+
+<section id="latency" class="section">
+<h2 class="section-title">Latency Comparison</h2>
+<div class="latency-comparison">
+<p>Experience the dramatic difference edge computing makes for 3D applications:</p>
+<div class="comparison-bars">
+<div class="bar" style="height: 280px;">
+<div class="bar-value">280ms</div>
+<div class="bar-label">Traditional Cloud</div>
+</div>
+<div class="bar" style="height: 150px;">
+<div class="bar-value">150ms</div>
+<div class="bar-label">Regional Data Center</div>
+</div>
+<div class="bar" style="height: 20px;">
+<div class="bar-value">20ms</div>
+<div class="bar-label">Edge Computing</div>
+</div>
+<div class="bar" style="height: 2px;">
+<div class="bar-value">0.5ms</div>
+<div class="bar-label">Optimized Edge</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="demos" class="section demo-section">
+<h2 class="section-title">Live Demos</h2>
+<p>See ultra-low latency 3D in action with our interactive demonstrations</p>
+<div class="demo-container" id="demo-canvas"></div>
+<button class="cta-button">Access Developer Demos</button>
+</section>
+
+<section id="toolkit" class="section">
+<h2 class="section-title">Developer Toolkit</h2>
+<div class="toolkit-grid">
+<div class="tool-card">
+<h3>Edge SDK</h3>
+<p>Comprehensive libraries for integrating edge computing into your 3D applications with minimal setup.</p>
+</div>
+<div class="tool-card">
+<h3>Performance Analyzer</h3>
+<p>Real-time monitoring tools to visualize latency improvements and optimize your deployments.</p>
+</div>
+<div class="tool-card">
+<h3>API Documentation</h3>
+<p>Detailed guides and examples for implementing edge solutions in Unity, Unreal, and WebGL.</p>
+</div>
+<div class="tool-card">
+<h3>Deployment Manager</h3>
+<p>One-click deployment tools for distributing your 3D applications across global edge nodes.</p>
+</div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="footer-links">
+<a href="#">Documentation</a>
+<a href="#">Case Studies</a>
+<a href="#">Developer Forum</a>
+<a href="#">API Reference</a>
+<a href="#">Support</a>
+</div>
+<div class="copyright">© 2023 EDGE3D. All rights reserved. Powering the future of 3D computing.</div>
+</footer>
+
+<script>
+// Initialize Three.js scene for hero background
+let scene, camera, renderer, particles;
+
+function init() {
+// Create scene
+scene = new THREE.Scene();
+
+// Create camera
+camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 5;
+
+// Create renderer
+renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+document.getElementById('webgl-container').appendChild(renderer.domElement);
+
+// Create particle system for background effect
+const particleCount = 2000;
+const geometry = new THREE.BufferGeometry();
+const positions = new Float32Array(particleCount * 3);
+const colors = new Float32Array(particleCount * 3);
+
+for (let i = 0; i < particleCount; i++) {
+const i3 = i * 3;
+positions[i3] = (Math.random() - 0.5) * 20;
+positions[i3 + 1] = (Math.random() - 0.5) * 20;
+positions[i3 + 2] = (Math.random() - 0.5) * 20;
+
+colors[i3] = Math.random() * 0.5 + 0.5;
+colors[i3 + 1] = Math.random() * 0.5 + 0.5;
+colors[i3 + 2] = 1;
+}
+
+geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+const material = new THREE.PointsMaterial({
+size: 0.05,
+vertexColors: true,
+transparent: true,
+opacity: 0.8
+});
+
+particles = new THREE.Points(geometry, material);
+scene.add(particles);
+
+// Add ambient light
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
+
+// Add directional light
+const directionalLight = new THREE.DirectionalLight(0x00c9ff, 1);
+directionalLight.position.set(5, 5, 5);
+scene.add(directionalLight);
+
+// Handle window resize
+window.addEventListener('resize', onWindowResize);
+
+// Start animation
+animate();
+}
+
+function onWindowResize() {
+camera.aspect = window.innerWidth / window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function animate() {
+requestAnimationFrame(animate);
+
+// Rotate particles
+particles.rotation.x += 0.001;
+particles.rotation.y += 0.002;
+
+renderer.render(scene, camera);
+}
+
+// Initialize demo section
+function initDemo() {
+const container = document.getElementById('demo-canvas');
+const demoScene = new THREE.Scene();
+
+// Create demo camera
+const demoCamera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+demoCamera.position.z = 5;
+
+// Create demo renderer
+const demoRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+demoRenderer.setSize(container.clientWidth, container.clientHeight);
+demoRenderer.setPixelRatio(window.devicePixelRatio);
+container.appendChild(demoRenderer.domElement);
+
+// Create rotating cube
+const geometry = new THREE.BoxGeometry(2, 2, 2);
+const material = new THREE.MeshPhongMaterial({
+color: 0x00c9ff,
+shininess: 100,
+specular: 0x92fe9d
+});
+const cube = new THREE.Mesh(geometry, material);
+demoScene.add(cube);
+
+// Add lights
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+demoScene.add(ambientLight);
+
+const pointLight = new THREE.PointLight(0x92fe9d, 1, 100);
+pointLight.position.set(5, 5, 5);
+demoScene.add(pointLight);
+
+// Animation loop
+function demoAnimate() {
+requestAnimationFrame(demoAnimate);
+
+cube.rotation.x += 0.01;
+cube.rotation.y += 0.01;
+
+demoRenderer.render(demoScene, demoCamera);
+}
+
+demoAnimate();
+
+// Handle demo container resize
+const resizeObserver = new ResizeObserver(() => {
+demoCamera.aspect = container.clientWidth / container.clientHeight;
+demoCamera.updateProjectionMatrix();
+demoRenderer.setSize(container.clientWidth, container.clientHeight);
+});
+
+resizeObserver.observe(container);
+}
+
+// Smooth scrolling for navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+window.scrollTo({
+top: target.offsetTop - 80,
+behavior: 'smooth'
+});
+}
+});
+});
+
+// Initialize everything when page loads
+window.addEventListener('load', () => {
+init();
+initDemo();
+});
+</script>
+</body>
+</html>
