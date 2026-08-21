@@ -1,0 +1,103 @@
+{
+  "row_id": "00_022044",
+  "shard": 0,
+  "id": 22044,
+  "category": "3D design",
+  "prompt": "Design a platform for advanced 3D object tracking using HTML5. Users can explore applications in various fields, from motion capture to augmented reality, experiencing innovative tracking technologies that enhance interactive experiences and open new possibilities for creative digital projects.",
+  "html_len": 20730,
+  "html_sha256": "822bebd1956be0669f8c37d724d809f3fcbd982c917467a9c4fed47a4e239cd1",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "拖拽3D场景旋转视角",
+        "expected": "视角随拖拽变化，场景可交互旋转",
+        "evidence": "探针在canvas上指针拖拽后像素变化明显，无JS错误，OrbitControls已初始化并绑定到canvas",
+        "ok": 1
+      },
+      {
+        "name": "切换跟踪模式",
+        "expected": "选择不同的跟踪模式后可视化场景发生对应变化",
+        "evidence": "HTML中tracking-mode元素绑定了change事件，调用updateTrackingVisualization改变scene.background颜色，运行时无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "调整灵敏度/平滑度滑块",
+        "expected": "滑块数值标签实时更新，反映当前设置",
+        "evidence": "sensitivity和smoothing滑块均绑定input事件，更新对应span文本，运行时无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "选择预测算法",
+        "expected": "选择算法后应有状态反馈或可视化变化",
+        "evidence": "prediction下拉框没有任何事件绑定，选择后页面无任何反馈，属于未实现的死控件",
+        "ok": 0
+      },
+      {
+        "name": "点击重置跟踪系统",
+        "expected": "重置3D对象位置并出现视觉反馈",
+        "evidence": "探针点击Reset Tracking System后DOM有变化（闪白效果），且代码中重置了trackedObject位置和旋转，无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "点击应用卡片探索领域应用",
+        "expected": "点击Motion Capture、AR等卡片应进入详情或触发相关内容展示",
+        "evidence": "应用卡片仅有hover样式，没有绑定任何click事件，点击无反应，需求中'explore applications'的功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "3D可视化核心交互（拖拽、模式切换、滑块、重置）均正常工作，但预测算法选择无事件绑定、应用卡片不可点击，属于占位入口未实现；需求中用户探索应用的功能缺失，且未实现入口超过2个，因此功能评分上限为4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在多个核心可用性问题：1. 灵敏度、平滑度滑块和预测算法选择等核心控件调节后仅改变数值/无任何实际效果，用户无法通过调节影响3D跟踪行为，属于'核心控件调节无效'；2. 应用卡片带有hover和cursor:pointer，明显可点击，但点击后无任何响应，属于'主要入口点击无实际反馈'。次要瑕疵：跟踪模式切换仅改变背景色，无明显视觉差异，用户难以感知模式变化；缺少图例/说明文字，如跟踪点颜色、统计数值含义不明确；统计数值随机跳动无解释，容易误导用户。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面整体视觉设计优秀，高度契合“高级3D物体跟踪平台”的科技感与未来感需求。\n\n**优点：**\n- 色彩搭配专业：采用深紫色渐变背景（#0f0c29 → #302b63 → #24243e），配合青色（#00dbde）与品红（#fc00ff）的渐变高亮，形成强烈的科技视觉冲击，同时明暗对比合理，信息层级清晰。\n- 布局协调：主区域采用弹性布局，3D可视化面板与控制面板比例得当（3:1），下方应用卡片采用响应式网格，整体结构均衡，阅读与操作动线流畅。\n- 组件设计精致：半透明玻璃拟态面板（backdrop-filter + rgba背景 + 细腻边框），圆角与阴影使用到位，悬浮卡片有微动效，交互反馈明确。\n- CSS细节考究：渐变文字、动态脉冲指示、统计面板、hover位移与阴影过渡等，均体现出较高的设计完成度。\n- 3D场景与页面风格统一：Three.js场景中的物体材质、灯光颜色、点光源及追踪点色彩与界面主色（青/品红）呼应，强化了整体主题。\n- 响应式设计完善：媒体查询处理了小屏适配，按钮与控件排版合理。\n\n**可提升之处：**\n- 字体选择较为常规（Segoe UI），缺乏独特个性，若采用具有科技感的现代字体（如Space Grotesk、Orbitron）可进一步提升品牌感。\n- 滑块控件依赖浏览器默认样式，与整体自定义风格略有脱节，可增加Webkit滑块样式优化。\n- 部分区域（如控制面板文字）对比度稍低，深色背景上细字体可能影响可读性。\n\n总体而言，页面视觉吸引力强，色彩、布局与3D交互融合自然，符合现代网页设计规范和用户需求方向。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.5,
+  "baseline_overall": 5.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_022044.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Tracking System",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

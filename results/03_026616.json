@@ -1,0 +1,53 @@
+{
+  "row_id": "03_026616",
+  "shard": 3,
+  "id": 26616,
+  "category": "Game dev",
+  "prompt": "Enter a whimsical landscape where users become virtual topiary artists, transforming bushes into stunning animal sculptures. The platform offers design tools, a gallery for showcasing creations, and tutorials on advanced techniques. Users can join collaborative challenges, earn badges, and trade templates with other topiary enthusiasts worldwide.",
+  "html_len": 17623,
+  "html_sha256": "c03c1f5421ed1d21b4475e13acb717a582abdcf3b47f38067ea4a50ad5dd9fe4",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_026616.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating!",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

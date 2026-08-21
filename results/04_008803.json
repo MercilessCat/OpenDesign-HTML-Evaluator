@@ -1,0 +1,181 @@
+{
+  "row_id": "04_008803",
+  "shard": 4,
+  "id": 8803,
+  "category": "Website",
+  "prompt": "Explore the future of construction with a platform dedicated to transparent wood and concrete innovations. Showcase projects, research, and applications through immersive galleries and expert interviews. Connect industry professionals and enthusiasts via forums and webinars, fostering collaboration and inspiration in sustainable building practices and materials.",
+  "html_len": 30348,
+  "html_sha256": "faddaa3a66abfd42a43f5f1d3f15beb329f6b30da05bed34334798110e5bae59",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "导航栏锚点跳转",
+        "expected": "点击导航链接后页面应平滑滚动到对应内容区块（Home/Materials/Projects/Research/Community）",
+        "evidence": "探针点击 Home/Materials/Projects/Research/Community 均报告 DOM 变化并发生跳转，且无 JS 错误；HTML 中导航 href 为对应锚点。",
+        "ok": 1
+      },
+      {
+        "name": "Explore Materials 按钮",
+        "expected": "点击后应跳转/滚动到材料展示区，或展示材料详情/触发材料浏览",
+        "evidence": "探针点击后 DOM 变化=无，无网络请求，无 JS 错误；HTML 中该 button 未绑定任何事件，点击无任何业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "View Projects 按钮",
+        "expected": "点击后应展示项目列表或滚动到项目区块",
+        "evidence": "探针点击后 DOM 变化=无；button 无事件绑定，纯静态按钮，无反馈。",
+        "ok": 0
+      },
+      {
+        "name": "Join Platform 按钮",
+        "expected": "点击后应打开注册/登录入口、会员表单或跳转到社区加入流程",
+        "evidence": "探针点击后 DOM 变化=无，无网络请求；按钮无 onclick，也没有关联 modal 或表单，核心 CTA 未实现。",
+        "ok": 0
+      },
+      {
+        "name": "材料卡片 Learn More 按钮",
+        "expected": "点击后应查看材料的详细说明、性能数据或应用案例",
+        "evidence": "HTML 中三个材料卡片均有 Learn More 按钮，但均为无事件绑定的 button；无任何探针或脚本证据表明点击可展开详情，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "Forum/Webinar 社区入口",
+        "expected": "用户需求要求通过论坛和网络研讨会连接专业人士，页面应提供可用的社区/论坛/网络研讨会功能或可点击入口",
+        "evidence": "页脚存在 Webinars、Events Calendar、Materials Database 等链接，但 href 均为 \"#\"；社区区块的 Become a Member 按钮同样无事件绑定；需求声明的关键社区功能未实现，纯占位。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面内容展示完整，导航锚点可用，但所有核心 CTA（Explore Materials、View Projects、Join Platform、Learn More、Become a Member）点击均无任何反馈；需求中明确提到的论坛、网络研讨会等关键入口为 href=\"#\" 或死按钮，存在多个未实现功能。核心交互大面积失败，仅导航和静态内容可用，故评分较低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）主要 CTA 按钮无实际反馈：Explore Materials、View Projects、Join Platform、Become a Member 等点击后 DOM 无变化、无网络请求，用户无法通过主要入口进入目标内容；2）Learn More、Read Study、View All Projects 等详情按钮均为死路，无法查看材料、研究或项目详情；3）社区/论坛/网络研讨会模块仅有展示性内容，加入、报名等核心操作无法完成，导致用户无法完成“连接专业人士”的任务；4）页脚及社交链接大量为占位 href=\"#\"，点击无实际落地页。次要瑕疵：项目卡片使用色块渐变代替真实项目图片，沉浸式画廊感不足；邮箱订阅表单无提交反馈或成功提示；导航锚点可滚动到区块，但页面整体交互反馈缺失严重。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，采用深色渐变背景搭配亮蓝色科技感点缀，营造出未来感与可持续建筑创新的氛围。色彩搭配高级协调，深蓝灰背景与#0ea5e9主色形成良好对比，玻璃拟态卡片和渐变光晕增强了层次感。布局清晰，导航、Hero区、统计、材料、项目、研究、社区、页脚等区块划分合理，网格系统和间距规范。字体使用Inter，现代简洁，文字疏密适度。CSS设计专业，包含backdrop-filter玻璃效果、渐变文字、悬浮动效、滚动显现动画、Three.js 3D可视化等，符合现代网页设计规范。交互探针显示按钮点击无错误，运行流畅。扣分点在于页面完全依赖渐变和图标代替真实图片，视觉丰富度略受影响；部分按钮无实际功能但美观性不受影响。整体属于高质量现代暗色系设计，与用户需求的创新、可持续建筑风格高度契合。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_008803.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Materials",
+      "href": "#materials",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Projects",
+      "href": "#projects",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Research",
+      "href": "#research",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Platform",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Materials",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Projects",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "row_id": "00_015116",
+  "shard": 0,
+  "id": 15116,
+  "category": "3D design",
+  "prompt": "Create a visually stunning platform showcasing the art of layered parallax transitions in web design. Users can explore interactive demos, access design templates, and share their creations. Key features include a drag-and-drop editor, performance optimization tips, and a community forum, empowering designers to craft immersive digital experiences.",
+  "html_len": 13118,
+  "html_sha256": "9b702c932729e65ef226048a9bb142b1df3e31661c24b0a0d343b6ecb2aea6ab",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_015116.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Demos",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Templates",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Layer",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Animate",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

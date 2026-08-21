@@ -1,0 +1,110 @@
+{
+  "row_id": "00_002043",
+  "shard": 0,
+  "id": 2043,
+  "category": "3D design",
+  "prompt": "Develop an engaging platform to explore CSS-powered 3D effects, focusing on card flips and animations. The core idea is to inspire creative web design. Users can experiment, learn, and share CSS tricks. Key features include an effect library, live demos, and design challenges to foster community interaction and learning.",
+  "html_len": 16162,
+  "html_sha256": "7842ce717d849e5e0e84c1a6708e842a68d655024179e8c190e5e075ace107ca",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "切换效果库中的效果",
+        "expected": "点击“3D Rotate”“Cube”等效果卡片后，Live Demo 区域应切换为对应的 3D 动画效果",
+        "evidence": "JS 只给 effect-card 切换 .active 并给 demoCard 加一次 pulse 动画；代码注释明确“In a full implementation, this would change the demo”，实际 Demo 仍是同一个 flip-card，没有切换到所选效果",
+        "ok": 0
+      },
+      {
+        "name": "翻转卡片",
+        "expected": "点击“Flip Card”后卡片绕 Y 轴旋转 180°，展示卡片背面",
+        "evidence": "flipBtn 的 click 事件切换 .flipped 类，CSS transform: rotateY(180deg) 生效；探针报告 DOM 变化=有，且无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "重置卡片",
+        "expected": "点击“Reset”后卡片回到正面状态",
+        "evidence": "resetBtn 的 click 事件会移除 .flipped 类；探针在初始未翻转状态点击无 DOM 变化属正常，逻辑上可在翻转后完成重置",
+        "ok": 1
+      },
+      {
+        "name": "查看/参与设计挑战",
+        "expected": "点击挑战条目后能查看详情、跳转或进入参与流程",
+        "evidence": ".challenge-item 仅有 hover 样式，没有 click 事件绑定，也没有链接或按钮；点击不会产生业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "分享自己的 CSS 作品",
+        "expected": "提供分享/提交入口，支持社区互动和分享 CSS 技巧",
+        "evidence": "页面没有分享输入框、提交按钮或社区跳转入口，footer 中仅出现文本“#CSSEffects”，需求中的分享功能未实现",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心 Live Demo 的翻卡和重置功能可用，但效果库卡片无法真正切换演示效果，设计挑战条目无点击交互，分享功能缺失，关键需求多处未完整实现，因此评为 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. 效果库是页面的核心入口，但点击不同效果卡片（如3D Rotate、3D Cube等）后，演示区始终显示同一个Card Flip效果，仅播放短暂脉冲动画，实际演示内容不切换，核心的“探索多种3D效果”操作无法完成。次要瑕疵：1. 设计挑战列表项有hover反馈但点击无任何反应，易让用户误以为可交互；2. 统计数字“24+ Effects”与页面实际展示的6个效果不符，信息准确性不足；3. 缺少效果说明或图例，用户难以理解每个效果的特性和差异；4. 背景为50个随机彩色立方体浮动，视觉上略显杂乱，对主内容有一定干扰。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强。采用深蓝渐变背景搭配珊瑚红与青色渐变文字，色彩对比鲜明且现代感十足，符合3D设计类平台的科技调性。布局采用三栏面板结构，利用flex和grid实现均衡的模块划分，响应式规则合理。面板应用了毛玻璃（backdrop-filter）、圆角、半透明边框和柔和阴影，符合当前流行的玻璃态设计趋势。标题渐变色、卡片hover浮动效果、按钮圆角渐变以及3D卡片翻转演示均展现了专业的CSS设计功底。字体使用Segoe UI等系统无衬线字体保证可读性，代码块则用等宽字体清晰展示。页面内嵌Three.js生成的浮动粒子背景增添了动态层次感，且无控制台错误或网络失败，交互探针验证按钮和canvas拖拽均正常工作。扣分项：效果库卡片点击后仅播放脉冲动画而未真正切换3D效果，功能上有些单薄；Emoji图标（如📐🔄）略显随意，缺乏统一精致的图标设计；部分区块内容填充较满，可能造成轻微视觉拥挤。整体不失为一个美观且专业的现代CSS 3D展示页面。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.8,
+  "baseline_overall": 5.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_002043.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Flip Card",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "row_id": "04_010308",
+  "shard": 4,
+  "id": 10308,
+  "category": "Website",
+  "prompt": "esign a virtual gallery where physics concepts defy convention. Visitors experiment with interactive exhibits that showcase altered laws of motion and gravity. Features include immersive VR experiences, real-time physics simulations, and educational content. Users engage in playful learning, sparking curiosity and deeper understanding of physics phenomena",
+  "html_len": 26188,
+  "html_sha256": "5536e26d23f002cff8a453b1b2db64eca6ca92a9bc7cb71a82bc11d67ec05c50",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_010308.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Exhibits",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "VR Experiences",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Learn",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Enter Gallery",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Virtual Tour",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Now",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

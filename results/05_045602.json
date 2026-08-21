@@ -1,0 +1,144 @@
+{
+  "row_id": "05_045602",
+  "shard": 5,
+  "id": 45602,
+  "category": "Website",
+  "prompt": "Create a platform where enthusiasts design, share, and exchange digital puzzle boxes. Users craft intricate challenges, unlock community-created mysteries, and trade designs. Features include a 3D puzzle editor, a global exchange marketplace, and a leaderboard tracking solver achievements, fostering a vibrant community of creativity and problem-solving.",
+  "html_len": 28531,
+  "html_sha256": "7ad97fbdf997c6ec4bc1b3a7fa36047ce4ccd058fe22182818255de1d3570075",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_045602.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Editor",
+      "href": "#editor",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Marketplace",
+      "href": "#marketplace",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Leaderboard",
+      "href": "#leaderboard",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign Up",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Puzzles",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

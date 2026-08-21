@@ -1,0 +1,183 @@
+{
+  "row_id": "06_092227",
+  "shard": 6,
+  "id": 92227,
+  "category": "Website",
+  "prompt": "Design a virtual marketplace showcasing eco-friendly pet products. Highlight manufacturers' sustainability practices, materials, and carbon footprint. Users can filter products by eco-certifications, read impact stories, and engage with a community forum discussing green pet care solutions, driving awareness and responsible consumer choices.",
+  "html_len": 37162,
+  "html_sha256": "134d56e2aed5b25a39e71e67f7288be45c30b0a7c46b31d08e3f9b04376d2368",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "查看产品列表与可持续信息",
+        "expected": "产品卡片展示材料、碳足迹、生态认证等可持续信息",
+        "evidence": "HTML 中多个产品卡片完整渲染，如 Bamboo Cat Tower、Organic Hemp Dog Leash、Biodegradable Waste Bags，均包含材料标签、碳足迹条和认证徽章。",
+        "ok": 1
+      },
+      {
+        "name": "按生态认证筛选产品",
+        "expected": "点击 GOTS/FSC/Cradle to Cradle 等认证按钮后，产品列表按认证过滤更新",
+        "evidence": "页面有 5 个 .filter-btn 认证筛选按钮，但 HTML 中未发现筛选逻辑或事件绑定，产品卡片也没有可筛选的数据关联；点击不会改变产品列表。",
+        "ok": 0
+      },
+      {
+        "name": "通过导航访问 Marketplace/Community/Impact Stories",
+        "expected": "点击导航应切换到对应页面或滚动到对应内容区块",
+        "evidence": "导航链接均为 href=\"#\"，无路由、无锚点目标；探针虽显示有 DOM 变化/页面跳转，但只是占位跳转，并未进入对应内容区。",
+        "ok": 0
+      },
+      {
+        "name": "点击主按钮 Shop Eco Products",
+        "expected": "进入产品列表或跳转到市场区域",
+        "evidence": "探针点击该按钮后 DOM 变化=无，新增 JS 错误=0，新增网络请求=0；按钮没有实际业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "在社区论坛发帖参与讨论",
+        "expected": "输入内容并点击 Post 后，新讨论帖发布或出现提交反馈",
+        "evidence": "论坛区域有文本输入框和 Post 按钮，但页面没有 form、onsubmit 或事件绑定脚本；输入并点击不会产生发帖或任何页面变化。",
+        "ok": 0
+      },
+      {
+        "name": "将产品加入购物车",
+        "expected": "点击 Add to Cart 后购物车数量更新或出现添加成功反馈",
+        "evidence": "产品卡片上的 Add to Cart 按钮没有事件处理逻辑；探针点击购物车图标也无 DOM 变化，购物车功能未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面静态内容较完整，产品展示、材料与碳足迹信息、影响故事均可阅读；但按认证筛选、社区发帖、导航跳转、主 CTA 和加购等核心交互均无实际反馈，核心交互大面积失效，且关键需求入口有 2 个以上未实现，按规则不高于 4，综合评 3 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：1) 认证筛选按钮（GOTS、FSC、Cradle to Cradle、Carbon Neutral）点击后产品列表无任何变化，用户无法按生态认证筛选商品，核心需求不可用；2) 商品卡片的 Add to Cart 按钮点击无响应、购物车无反馈，购买流程是死路；3) 社区论坛的输入框虽然可输入，但 Post 按钮以及点赞/回复/分享均无效果，用户无法真正参与讨论；4) 顶部导航和 Hero 区主要按钮（Shop Eco Products、Learn Sustainability、Sign In、搜索、购物车图标）均为死链或点击无实际反馈，点击后不能到达对应内容。次要瑕疵：页面信息架构和视觉层级整体清晰，但有很多占位图标、缺少筛选结果/空状态说明、导航命名与实际行为不符，影响故事和社区模块缺少后续引导。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用绿色系与蓝色系搭配，符合环保生态主题，色彩协调自然。布局结构清晰，从头部导航、英雄区、数据统计、分类展示、认证筛选到产品卡片、影响故事和社区论坛，层次分明，信息组织合理。字体选用 Poppins，现代圆润，间距和圆角卡片设计舒适。CSS 专业，使用 Tailwind 与自定义样式结合，包含渐变背景、悬浮动画、过渡效果、毛玻璃卡片等，风格符合现代网页设计规范。产品卡片以图标和虚线框替代真实图片，略显抽象，但整体视觉完整度依然良好。交互按钮大多缺少实际功能，但不影响视觉评价。综合评分8分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_092227.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Marketplace",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Sustainability",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Impact Stories",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-search text-gray-",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-shopping-cart tex",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Shop Eco Products",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

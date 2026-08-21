@@ -1,0 +1,184 @@
+{
+  "row_id": "04_008223",
+  "shard": 4,
+  "id": 8223,
+  "category": "Website",
+  "prompt": "Create a platform that redefines workspaces by integrating virtual offices with real-world meeting hubs. Users can design hybrid schedules, access resources for remote collaboration, and explore interactive 3D office layouts. Key features include customizable work environments, seamless integration with productivity tools, and a community forum for sharing hybrid work experiences.",
+  "html_len": 31767,
+  "html_sha256": "b812b014c70c9c7bbfe10d5d825c87af9d8bbe11f7d6b359eb9ea410499c2118",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航 Features 锚点跳转",
+        "expected": "页面滚动到 Features 功能区块，展示混合办公功能卡片",
+        "evidence": "探针点击 <a href=\"#features\"> 后 DOM 变化=有、页面跳转、无 JS 错误；HTML 中 #features 区块存在。",
+        "ok": 1
+      },
+      {
+        "name": "点击导航 Demo 锚点跳转",
+        "expected": "滚动到 3D 虚拟办公室演示区",
+        "evidence": "探针点击 <a href=\"#demo\"> 后 DOM 变化=有、页面跳转、无 JS 错误；HTML 中 #demo 区块存在。",
+        "ok": 1
+      },
+      {
+        "name": "展开移动端导航菜单",
+        "expected": "点击汉堡按钮后显示移动端菜单",
+        "evidence": "HTML 中 #mobile-menu-button 绑定 click 切换 #mobile-menu 的 hidden class；运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 CTA 开始试用（Get Started / Start Free Trial）",
+        "expected": "进入注册/试用流程，或至少打开对应表单/弹窗",
+        "evidence": "探针点击 Get Started 后 DOM 无变化、无网络请求、无跳转；Start Free Trial 仅有强制 JS click 导致的 DOM 微变，无注册表单、无登录流程，按钮无 href/onclick。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Community 进入社区论坛",
+        "expected": "打开社区论坛或分享混合办公经验的交流页面",
+        "evidence": "footer 只有 <a href=\"#\">Community</a> 占位链接，无论坛路由、无对应页面或内容区块；需求声明的社区论坛未实现。",
+        "ok": 0
+      },
+      {
+        "name": "在 3D 演示区拖拽/旋转查看办公室",
+        "expected": "可旋转、缩放或切换视角浏览 3D 办公室布局",
+        "evidence": "页面用 Three.js 创建静态办公室模型，但未发现 OrbitControls、pointer/touch 事件或旋转/缩放控件；CSS 仅有 floating 动画，HTML 证据显示无可操作的 3D 交互。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面能完成基础锚点导航和移动端菜单，内容展示完整；但注册/试用 CTA 无实际动作，社区论坛为纯占位入口，3D 办公演示不具备用户可操作的交互，核心需求（社区、交互 3D、转化流程）未实现。关键占位入口超过 2 个，功能评分只能给 3。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 8.0,
+    "reason": "无核心可用性问题。页面是一个功能完善的落地页，导航链接（Features/Demo/Testimonials）均能实现锚点跳转，3D 场景通过 Three.js 正常渲染，CTA 按钮均有响应，无死路或卡死情况。\n\n次要瑕疵：\n1. 6 张功能卡片仅有 hover 效果，点击无任何反馈（卡片本身非主要入口，不构成核心问题）；\n2. 页脚 \"Pricing\" 链接指向 #，实际未实现定价页面；\n3. 3D 演示区缺少操作提示（如拖拽旋转、缩放引导），用户可能不知道可以交互；\n4. 统计数字（10K+ 用户、95% 效率提升）缺少来源引用或说明；\n5. \"Home\" 导航链接点击后返回顶部，但当前已在顶部时无视觉反馈；\n6. 核心功能（社区论坛、工具集成、会议室预定）仅有宣传描述，没有实际入口或演示，用户无法体验这些关键能力；\n7. 副标题中 \"Workspace\" 使用了斜体样式，与正文混排略显突兀。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面为现代暗色主题的SaaS落地页，整体视觉表现力强。色彩方面采用深色背景(#0f172a/#1e293b)搭配indigo/紫色/粉色渐变，对比鲜明且层次丰富，符合混合办公平台的科技定位。布局上使用网格系统和对称分区，Hero区、数据展示、特性卡片、团队评价、CTA和页脚结构清晰，节奏感良好。组件设计专业，feature-card具备毛玻璃效果和悬浮上移动效，glow-button带流光扫过特效，3D容器配合floating动画增强科技感。字体使用Inter，间距和节奏把握得当。整体设计风格与用户需求的混合办公平台方向高度对齐，视觉效果接近Stripe/Linear等一线现代SaaS产品水准。扣分点：部分通用套路（如随机头像、常规三列评价布局）偏模板化，个性化细节不够突出；3D场景实际运行效果未知，代码截断可能影响真实观感。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 6.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_008223.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Demo",
+      "href": "#demo",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Testimonials",
+      "href": "#testimonials",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Free Trial",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Watch Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Free Trial",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

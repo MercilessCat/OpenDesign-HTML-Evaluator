@@ -1,0 +1,66 @@
+{
+  "row_id": "03_022395",
+  "shard": 3,
+  "id": 22395,
+  "category": "Game dev",
+  "prompt": "Develop a mind-bending website where users shift between parallel dimensions to solve intricate puzzles. Users will navigate diverse realities, each with unique rules and physics. Key features include dimension-switching mechanics, complex puzzle design, and a narrative that intertwines the mysteries of these alternate worlds.",
+  "html_len": 21299,
+  "html_sha256": "6bbc8c9560dceb6e1c7fd55bbdb0c7e95c566be4881b3dd19401328d57745fa4",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_022395.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "BEGIN JOURNEY",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

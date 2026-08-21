@@ -1,0 +1,146 @@
+{
+  "row_id": "03_036014",
+  "shard": 3,
+  "id": 36014,
+  "category": "Game dev",
+  "prompt": "Create an interactive platform where users solve cryptographic puzzles, revealing hidden stories and secrets. Users collaborate to decode various text-based challenges, unlocking new levels of complexity. Features include community leaderboards, a sandbox mode for custom challenges, and historical mystery themes, enhancing educational and entertainment value.",
+  "html_len": 32114,
+  "html_sha256": "9afb3cb8087cf91c15850f7eb89d9f6c4f9f25f5daeec5084ffbbc3065a21479",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "开始游戏",
+        "expected": "点击 Begin Your Journey 按钮后从开始界面切换到游戏主界面并加载第一个谜题",
+        "evidence": "按钮存在，但探针点击后 DOM 无任何变化，界面未切换，谜题也未加载",
+        "ok": 0
+      },
+      {
+        "name": "Game 导航",
+        "expected": "点击底部 Game 导航按钮后切换到游戏玩法界面",
+        "evidence": "导航按钮存在，但探针点击后 DOM 无变化，未发生界面切换",
+        "ok": 0
+      },
+      {
+        "name": "Sandbox 导航",
+        "expected": "点击底部 Sandbox 导航按钮后进入沙盒模式，可创建自定义密码挑战",
+        "evidence": "按钮存在且沙盒界面 HTML 存在，但探针点击后 DOM 无变化，沙盒界面未显示",
+        "ok": 0
+      },
+      {
+        "name": "Leaderboard 导航",
+        "expected": "点击底部 Leaderboard 导航按钮后显示社区排行榜",
+        "evidence": "按钮存在，但页面中没有对应 id 为 leaderboard-screen 的目标，且探针点击后 DOM 无变化",
+        "ok": 0
+      },
+      {
+        "name": "提交解密答案",
+        "expected": "在解密输入框输入答案并提交后，判断正确/错误并显示隐藏故事或错误反馈",
+        "evidence": "提交按钮和解密输入框存在，但所有按钮点击均无 DOM 变化，核心事件未绑定，无法完成解密流程",
+        "ok": 0
+      },
+      {
+        "name": "沙盒加密消息",
+        "expected": "在沙盒输入明文并选择加密方法后，点击 Encrypt Message 输出加密结果",
+        "evidence": "沙盒页面有明文输入、加密方法和加密按钮，但探针显示所有交互均无反应，加密功能未生效",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上完整实现了启动页、游戏玩法、排行榜、沙盒模式等需求入口，但核心 JavaScript 事件未生效：所有按钮点击和导航操作均无 DOM 变化，玩家无法开始游戏、无法解密、无法查看排行榜、无法使用沙盒。主要交互全部失败，页面不可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 主入口按钮「Begin Your Journey」点击无任何反馈，无法进入游戏，核心流程直接卡死；2) 底部导航「Game/Sandbox/Leaderboard/About」全部点击无响应，且 Leaderboard/About 在 HTML 中缺少对应 screen 容器，即使事件修复也会白屏，模块切换完全不可用；3) 游戏内加密方式按钮（Caesar Shift 等）未绑定交互，属于核心控件无效。次要瑕疵：页面视觉与信息层级较好，但所有交互均为静态；提示用 alert 较突兀；Sandbox 的 challenge link/copy 并未真正生成；移动端菜单按钮也未生效。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面视觉设计具有强烈的主题感和沉浸感。深紫色到深蓝的渐变背景搭配霓虹蓝（#64c8ff）点缀，营造出神秘、解谜的暗色氛围，与'Cryptic Chronicles'的密码学解密游戏主题十分契合。字体选择专业：Cinzel衬线字体用于标题，传递历史古风与神秘感；Source Code Pro等宽字体用于正文和密码文本，强化终端/编码的科技感。布局使用卡片、圆角、阴影和光晕效果，层次分明，主次清晰，Tailwind CSS的栅格系统使响应式布局合理。细节上，hover动效、进度条渐变、浮动动画和提示光晕等CSS动效增强了交互感和精致度。配色以蓝色系为主，点缀金色、绿色、红色等强调色，既统一又不单调。整体符合现代暗色游戏UI设计规范，与用户需求的'历史谜团、协作、沙盒'等游戏元素风格高度统一。扣分点：部分界面元素（如alert提示）交互实现较为生硬，且大量使用透明的深色背景可能导致可读性略有下降，但视觉层面整体完成度和美观度较高。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_036014.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Your Journey",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Game",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sandbox",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Leaderboard",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "About",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

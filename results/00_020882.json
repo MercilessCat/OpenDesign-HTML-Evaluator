@@ -1,0 +1,168 @@
+{
+  "row_id": "00_020882",
+  "shard": 0,
+  "id": 20882,
+  "category": "3D design",
+  "prompt": "Develop an immersive website showcasing the power of 3D visualization in understanding personal genomics. Users can upload genetic data to generate dynamic 3D models, revealing intricate DNA structures. The platform integrates educational resources, interactive simulations, and a forum for sharing insights and discoveries in genomics.",
+  "html_len": 19556,
+  "html_sha256": "56ac2a60778c5e23833ea47b0cb3ea14159b4a89ca92e280c68462c5c7c138b6",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "3D DNA model drag rotation",
+        "expected": "拖拽旋转/缩放 3D DNA 模型，获得沉浸式可视化反馈",
+        "evidence": "Three.js 场景与 OrbitControls 已初始化，canvas 指针拖拽后无新增 JS 错误，requestAnimationFrame 动画循环运行中，DNA 双螺旋持续渲染。",
+        "ok": 1
+      },
+      {
+        "name": "Start Exploring Now CTA",
+        "expected": "点击后滚动到上传区或启动 3D 体验",
+        "evidence": "探针点击按钮后无任何 DOM 变化，HTML 中该按钮未绑定 click 事件处理器，属于死按钮。",
+        "ok": 0
+      },
+      {
+        "name": "Browse Files upload button",
+        "expected": "打开文件选择器，允许用户选择基因数据文件",
+        "evidence": "探针点击后无任何 DOM 变化；页面没有 <input type='file'>，按钮也未绑定 click 打开文件选择器。",
+        "ok": 0
+      },
+      {
+        "name": "Drag & drop genetic file into upload area",
+        "expected": "上传文件并生成动态 3D 基因组模型",
+        "evidence": "drop 事件处理器只弹窗提示 'In a real application, this would generate your 3D genomic visualization.'，实际未处理文件内容，也未生成任何 3D 模型，属于占位实现。",
+        "ok": 0
+      },
+      {
+        "name": "Features nav anchor",
+        "expected": "点击导航滚动到 Features 特性区域",
+        "evidence": "href='#features' 指向存在的 section 元素，探针点击后 DOM 变化并发生页面锚点跳转，导航可用。",
+        "ok": 1
+      },
+      {
+        "name": "Community nav / forum access",
+        "expected": "跳转到社区论坛，供用户分享基因组学见解",
+        "evidence": "导航链接 href='#forum'，但页面中不存在 id='forum' 的任何元素，论坛内容完全缺失，属于占位死链。",
+        "ok": 0
+      }
+    ],
+    "reason": "核心 3D 可视化可交互且主要锚点导航可用，但关键用户流程大面积失败：上传功能无真实文件输入（Browse Files 按钮无反应）、拖放只弹占位提示而不生成模型、Start Exploring CTA 是死按钮、Community/论坛入口指向不存在的 #forum 区域。需求声明的数据上传和论坛两大核心入口均未实现，另有死按钮，功能完整性严重不足。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 主CTA按钮“Start Exploring Now”点击后无任何反馈（无DOM变化、无跳转、无事件绑定），核心入口失效；\n2. “Browse Files”上传按钮点击无反应，且上传区域虽然支持拖拽，但drop仅弹出占位alert，不会真正处理文件或生成3D基因组模型，核心上传流程完全未实现。\n\n次要瑕疵：\n1. 导航“Community”链接跳转到#forum，但页面中不存在对应板块，为一个死链；\n2. 上传区无<input type=\"file\">控件，“Browse Files”按钮形同虚设；\n3. 社区/教育模块为纯占位内容，未实现实际交互；\n4. 3D模型虽自动旋转，但拖拽控制在探针测试中未见效果，交互可控性存疑。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，深色渐变背景（#0f0c29→#302b63→#24243e）营造出沉浸式的科技感，与3D基因组可视化主题高度契合。主色调采用青色（#00dbde）与品红（#fc00ff）渐变，色彩对比鲜明且具有现代生物科技氛围，搭配半透明玻璃态组件（backdrop-filter blur）和细边框，符合当前3D/科技类网页设计趋势。布局上：固定导航、全屏Hero、三卡片特性区、上传区、页脚结构清晰，flex与grid结合得当，间距与圆角处理协调。字体使用Segoe UI无衬线体系，字号层级明确，标题渐变文字和动画（fadeInUp、粒子浮动、卡片滚动出现）增强了视觉动感。Three.js实现的DNA双螺旋3D模型、粒子背景与“3D design”需求精准对齐，灯光和材质选择专业。扣分点在于：部分交互按钮（如Start Exploring Now、Browse Files）点击后无实际反馈或跳转，上传区仅为UI示意，功能完整性不足；但作为视觉评判，CSS设计质量较高，整体美感突出，符合现代网页设计规范。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_020882.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Upload Data",
+      "href": "#upload",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#forum",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Browse Files",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

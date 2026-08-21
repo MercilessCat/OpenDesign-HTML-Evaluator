@@ -1,0 +1,97 @@
+{
+  "row_id": "03_001553",
+  "shard": 3,
+  "id": 1553,
+  "category": "Game dev",
+  "prompt": "Design a simulation website where users become virtual hot air balloon pilots. The core functionality involves navigating realistic skies with changing weather conditions. Key features include a physics-based flight simulator, customizable balloons, and community-driven flight challenges.",
+  "html_len": 20185,
+  "html_sha256": "23700bc0cfad89a7b394b3ecbc564a682e1d65090399b5cc49704b3202116cd1",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "开始飞行",
+        "expected": "点击 Begin Your Journey 后从开始界面进入飞行界面，显示 HUD、控制面板并启动 Three.js 场景模拟。",
+        "evidence": "startBtn 绑定 initGame；showScreen('playing') 切换 hidden；探针点击后 DOM 有变化且无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "燃烧器加热/冷却控制",
+        "expected": "点击 Heat↑/Cool↓ 改变气球热量，后续物理循环中高度/温度/风速读数相应变化。",
+        "evidence": "heatBtn/coolBtn 均绑定 click，修改 gameState.balloon.heat；updateGame 与 updateUI 每帧更新 altitude/temperature/windSpeed。运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "定制气球（尺寸/颜色/图案）",
+        "expected": "拖动滑块或选择颜色后，3D 气球的外观/尺寸应实时改变。",
+        "evidence": "三个输入控件仅更新 gameState 和右侧标签文本；balloonColor 注释明确“in a real implementation ... would update the balloon mesh color”，Three.js 网格未做任何颜色/尺寸/图案更新。",
+        "ok": 0
+      },
+      {
+        "name": "参与飞行挑战",
+        "expected": "玩家可以点击/选择某个挑战、查看详情并参与，进度或结果应反馈到页面。",
+        "evidence": "challenge-card 仅静态展示，无按钮/事件绑定/点击处理；无任何社区挑战加入或提交逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "完成飞行并重新开始/返回主菜单",
+        "expected": "飞行结束后出现结算界面，可重新开始或返回主菜单。",
+        "evidence": "gameOverScreen 存在且 restart/menu 按钮绑定了事件，但代码中没有任何触发 gameOver 或调用 showScreen('gameOver') 的逻辑，该流程不可达。",
+        "ok": 0
+      }
+    ],
+    "reason": "核心飞行模拟（开始、燃烧器控制、天气与高度循环）可用且无 JS 错误；但气球定制并未应用到 3D 模型，挑战为静态占位，游戏结束/重开流程不可达，多个关键特性未真正实现，因此功能分偏低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：气球定制功能整体无效——颜色、篮子尺寸、图案三个控件修改后3D模型均无任何视觉变化，也没有反馈提示（代码注释明确写明'In a real implementation, this would update the balloon mesh color'），而定制是页面宣传的核心功能，用户操作后无法确认是否生效。次要瑕疵：1) 挑战卡片（Mountain Pass/Sunset Glide/Thermal Rider）仅为静态展示，没有接受/参与/完成任何交互，社区挑战功能未实现；2) gameOverScreen存在但没有任何代码触发游戏结束，'Flight Complete'永远不会出现，只能手动返回主菜单；3) 3D场景未绑定鼠标拖拽/相机旋转，玩家无法自由环视热气球与周围环境；4) 缺少新手指引，未解释Heat/Cool按钮对飞行的具体影响及操作逻辑；5) 动态天气仅改变文字数据，云层、光照、天空没有对应视觉变化，感知较弱。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉吸引力中等偏上。天空蓝背景配合白色文字和半透明面板营造了清爽的飞行氛围，符合热气球模拟器的主题。色彩搭配基本协调，但按钮颜色（绿色、蓝色、红色）较为基础，缺少层次感和现代感。布局上功能分区明确（控制面板、天气显示、定制器、挑战列表），但控件分布较散，右侧挑战列表可能遮挡主场景。字体使用Segoe UI等常见无衬线体，排版依靠Tailwind提供了基本对齐，但缺乏特别的设计细节。CSS圆角、阴影、过渡使用统一，组件风格一致，但缺少渐变、动效等高级视觉元素，整体设计尚可但不够惊艳。与Game dev类别的需求对齐，提供了完整的游戏UI，但视觉表现相对保守，仍有提升空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_001553.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Your Journey",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

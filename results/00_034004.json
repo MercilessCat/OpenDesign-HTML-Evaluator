@@ -1,0 +1,130 @@
+{
+  "row_id": "00_034004",
+  "shard": 0,
+  "id": 34004,
+  "category": "3D design",
+  "prompt": "Discover a web platform that visualizes reflections in virtual environments, offering real-time customization tools to enhance digital experiences. Core functionalities include interactive demos, reflection customization sliders, and tutorials for developers to implement dynamic reflections, elevating the realism and interactivity of web-based 3D graphics.",
+  "html_len": 19703,
+  "html_sha256": "ce1fb5757a3888a075b65e64bfee116a73a33e3aa0cceea31506452091bdb583",
+  "functional": {
+    "score": 7.0,
+    "raw_score": 7.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "拖拽旋转3D场景",
+        "expected": "视角随鼠标拖拽旋转，3D场景实时重绘",
+        "evidence": "代码初始化 THREE.OrbitControls(camera, renderer.domElement) 并启用阻尼，requestAnimationFrame 持续渲染；探针在 canvas 上拖拽无新增 JS 错误，控件已挂载",
+        "ok": 1
+      },
+      {
+        "name": "调整反射定制滑块",
+        "expected": "滑块数值实时更新，材质/环境参数随之改变",
+        "evidence": "四个 range 输入均绑定 input 事件，分别更新 value-display 并写入 reflectionMaterial.envMapIntensity/roughness/metalness 或 environmentMesh.rotation.y；运行时无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击材质预设",
+        "expected": "应用 Chrome/Gold/Copper/Matte 预设，材质参数和滑块数值同步更新",
+        "evidence": "探针点击四个 preset-btn 均产生 DOM 变化且无新增 JS 错误；click 事件调用 applyPreset 并执行 updateSliders",
+        "ok": 1
+      },
+      {
+        "name": "查看开发者教程",
+        "expected": "页面提供面向开发者的动态反射实现教程或入口",
+        "evidence": "HTML 中未发现教程模块、代码示例或相关链接；只有 About 信息卡片，需求中的 tutorials 缺失",
+        "ok": "NA"
+      }
+    ],
+    "reason": "3D 演示、反射定制滑块和材质预设均可正常交互，探针无 JS 错误，事件绑定完整；主要扣分点是需求中明确要求的开发者教程模块完全缺失，功能覆盖不完整。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 5.0,
+    "reason": "核心可用性问题：Reflection Intensity 滑块实际上不会对渲染产生可见影响——代码中只设置了 envMapIntensity，但材质和环境都没有加载/指定 envMap，因此调节该核心滑块时画面不会变化，用户无法确认操作是否生效，反射强度调节任务无法完成。\n\n次要瑕疵：3D 场景没有提示用户可拖拽旋转视角；开发者教程/代码示例入口缺失，与需求中的 tutorials 不完全对应；Environment Rotation 滑块会被动画循环中的自动旋转增量持续覆盖，导致显示值与实际旋转角度略有偏差；Gold/Copper 预设只调整了金属度和粗糙度，没有真正改变物体基础颜色，材质名称与显示效果略有出入。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面整体视觉吸引力强，采用深蓝紫渐变背景搭配主题蓝绿色渐变标题，营造出浓厚的科技感与沉浸式3D氛围，风格与用户需求中的'3D design'定位高度契合。色彩搭配专业且统一，主要使用#4facfe作为强调色，与暗色背景形成良好对比，同时通过半透明面板、毛玻璃效果和微妙的边框/阴影增强了层次感与精致度。布局上采用左右分栏（可视化面板+控制面板）及底部信息卡片网格，结构清晰、主次分明，响应式处理也合理。字体方面选用Segoe UI等现代字体，字号层级分明，间距适中，可读性良好。组件设计规范，滑块的样式、悬停按钮的动效等都体现了较高的CSS设计水准。整体评分8分，主要扣分点在于视觉上缺少一些更鲜明的品牌个性或动效点缀，且部分区域（如控制面板）略显常规，但整体已属现代网页设计中的优秀案例。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 7.0,
+  "baseline_overall": 6.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_034004.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Chrome",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Gold",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Copper",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Matte",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

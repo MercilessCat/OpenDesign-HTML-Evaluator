@@ -1,0 +1,183 @@
+{
+  "row_id": "06_093310",
+  "shard": 6,
+  "id": 93310,
+  "category": "Website",
+  "prompt": "Develop a niche platform showcasing underground comedy events and emerging talents. Include user-generated reviews, artist profiles, and a geo-located event map. Enable ticketing and live streaming to support performers and connect audiences with unique comedic experiences in unconventional venues.",
+  "html_len": 29863,
+  "html_sha256": "d24ef48740583320dc365c72e2f387b402d744dfbf5f06674e65d8070e7f250c",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航菜单切换（Events / Artists / Reviews / Venues / Stream）",
+        "expected": "点击导航后，页面应跳转到对应板块或切换视图，显示相应内容",
+        "evidence": "探针点击这些导航 <a href=\"#\"> 后报告 DOM 有变化，但新增网络请求为 0，且未发生页面跳转或区块滚动——这仅是 hover/focus 样式变化，并非真正的路线切换。所有导航均为 href=\"#\" 占位，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "活动门票购买（Tickets 按钮）",
+        "expected": "点击票务按钮后应弹出购票对话框或转入购票流程，支持完成订票",
+        "evidence": "事件卡片上的 'Tickets' 按钮被点击后 DOM 有变化，但无新增网络请求、无弹窗、无路由变化，判定为只有按钮样式反馈，实际购票功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "艺人关注（Follow Artist）",
+        "expected": "点击后应产生关注/取消关注的业务反馈（按钮状态变更、收藏列表更新等）",
+        "evidence": "点击 'Follow Artist' 按钮后 DOM 有变化、无 JS 错误，但按钮文本与状态未改变，仅触发 hover/click 样式变化，关注功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "核心页面入口完整性与跳转（CTA按钮、页脚链接）",
+        "expected": "CTA 按钮和页脚平台链接应能引导到对应真实页面或锚点",
+        "evidence": "CTA 'Find Events Near You' 按钮点击后有 JS 兜底但无实际内容变化；页脚 'Events/Artists/Venues' 等链接全部为 href=\"#\"，无对应页面，需求声明的入口多为占位死链",
+        "ok": 0
+      },
+      {
+        "name": "地理定位地图（可缩放/点击标记）",
+        "expected": "地图应能正常渲染并支持缩放/拖拽，点击标记可查看事件详情",
+        "evidence": "HTML 引用 Leaflet 并初始化了事件地图容器，地图瓦片请求全部失败无显示；探针拖拽后页面无像素变化，地图核心交互不可用",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉完成度高，但几乎所有核心功能均为占位：导航死链（href=\"#\"）、票务购买/艺人关注无实际业务逻辑、地理地图瓦片加载失败不可交互、直播入口缺失。需求声明的线上线下核心闭环均未实现，属于展示型静态稿，不可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 主导航和大量链接均为 href=\"#\" 占位，点击仅跳回页首，Events/Artists/Reviews/Venues/Stream 均无法到达对应板块；移动端汉堡菜单无 JS，菜单无法展开。2) 核心操作按钮无任何互动逻辑：Tickets/Details 不能购票或查看详情，Live Stream 不能观看直播，Sign In/Join Now/Follow Artist/Browse Events/Become a Member/订阅按钮均无反应，导致购票、直播、注册等主任务无法完成。3) 地理地图的 OSM 瓦片请求全部失败（net::ERR_ABORTED），地图区域无法显示地点信息，也无失败回退，'Find Shows Near You' 失去核心能力。4) 用户生成评论功能没有入口/表单，只有静态预置评论，无法提交新评论。次要瑕疵：地图无图例/说明；Artist Spotlight 图表无标题；多个模式命名（如 Stream/Live Stream）与行为不一致；footer 链接均为死链；视觉上 hover 动画丰富但无功能支撑。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，深灰蓝渐变背景搭配紫粉高饱和渐变点缀，营造出地下潮流感与暗夜氛围，契合'underground comedy'的主题定位。色彩搭配合理，主色紫#8B5CF6与粉#EC4899形成和谐对比，文字浅灰白在暗底上可读性良好，视觉层次清晰。布局采用标准Landing Page结构：导航、Hero、数据统计、活动卡片、地图、艺术家、评论、CTA、页脚，垂直流畅通顺，网格系统配合卡片圆角、阴影、毛玻璃效果，显得现代而精致。字体使用Poppins，圆润现代，字号层次分明，按钮间距与hover动画（上浮、缩放、渐变背景）增强了互动感。CSS设计专业，大量使用Tailwind自定义配置、CSS变量、渐变、backdrop-blur、动画脉冲等现代手法，整体达到行业成熟水平。\n\n扣分点：地图瓦片网络请求失败6条，导致地图区域在渲染后可能出现空白或残缺，削弱了'地理定位'板块的视觉完整性与专业感；此外地图容器仅设置高度，缺少加载占位或错误降级，视觉上容易出现破洞。综合而言，页面设计本身在同类网站中颇具水准，属于中上乘的视觉表现，因渲染瑕疵减去1分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://a.tile.openstreetmap.org/12/1208/1540.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/12/1203/1540.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/12/1203/1539.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/12/1207/1539.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/12/1206/1540.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/12/1206/1539.png -> net::ERR_ABORTED"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_093310.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Events",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Artists",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Reviews",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Venues",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 6,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Stream",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Find Events Near You",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    }
+  ]
+}

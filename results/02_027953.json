@@ -1,0 +1,181 @@
+{
+  "row_id": "02_027953",
+  "shard": 2,
+  "id": 27953,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Revolutionize material science with a platform showcasing automated discovery breakthroughs. Users can explore interactive datasets, visualize molecular structures, and simulate material properties. The site fosters collaboration between researchers, offering tools for hypothesis testing and accelerating the discovery of innovative materials for various industries.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12684,
+  "html_sha256": "bb61fce1eef39eb103e03f85b667d62f43b1b078ba52629a2ecf1b17742f9715",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "主导航点击（Dashboard/Datasets/Simulations/Collaborate）",
+        "expected": "点击导航应切换到对应板块或展示对应内容视图",
+        "evidence": "导航链接均为 href=\"#\"，未绑定任何路由或区块切换逻辑；探针显示的“页面跳转”只是默认锚点跳转，实际没有切换到任何目标内容，属于纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Datasets 按钮",
+        "expected": "应打开数据集浏览视图或展示可探索的数据集列表",
+        "evidence": "按钮在 HTML 中没有 onclick 或 addEventListener；探针点击后虽有 DOM 变化，但无网络请求、无 JS 错误，变化仅来自 hover/active 样式层，没有业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Run Simulation 按钮",
+        "expected": "应启动材料属性模拟并输出结果",
+        "evidence": "页面中两个“Run Simulation”按钮均未绑定事件处理；探针点击后无新增网络请求、无内容生成、无结果展示，属于无功能入口。",
+        "ok": 0
+      },
+      {
+        "name": "拖动温度/压力滑块",
+        "expected": "应实时更新当前温度和压力数值，并参与后续模拟",
+        "evidence": "两个 range input 没有 input/change 事件监听，HTML 中显示“300K”和“25”的静态文本不会随滑块变化；“Run Simulation”也没有消费这些参数。",
+        "ok": 0
+      },
+      {
+        "name": "点击分子可视化区域",
+        "expected": "应旋转、缩放或探索分子结构，提供 3D 可视化反馈",
+        "evidence": "HTML 中只对 .molecule-canvas 绑定了 click 事件，效果是切换 ring-4/ring-cyan-400 边框样式；页面没有任何 3D 分子结构或 OrbitControls/pointer 拖拽逻辑，与“Click to rotate and explore structures”不符。",
+        "ok": 0
+      },
+      {
+        "name": "查看 Material Property Trends 图表",
+        "expected": "应正确渲染数据趋势图，并支持悬停查看数据点",
+        "evidence": "Chart.js 已通过 CDN 加载，propertyChart 成功初始化并绘制双折线图；运行时无 JS 错误，图表是实际可用的数据可视化组件。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉完成度较高，Chart.js 图表真实渲染，但核心功能大面积未实现：主导航是 href=\"#\" 占位、Explore Datasets 和 Run Simulation 无事件绑定、滑块无法更新数值、分子可视化只是边框样式切换而非 3D 结构交互。用户无法完成“探索数据集、模拟材料属性、可视化分子结构”等主要任务，符合核心交互大面积失败和关键入口占位的低分判例。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题包括：1. 主导航链接（Dashboard、Datasets、Simulations、Collaborate）均为占位链接（href=\"#\"），点击后仅发生页面跳转，无实际内容切换或对应页面展示，属于主要导航无实际反馈；2. 核心操作按钮（Explore Datasets、Run Simulation）点击后没有任何实际功能或后续流程，无法完成用户预期的浏览数据集或运行模拟任务，且模拟器调节滑块后点击运行无结果输出，属于核心操作无法完成。次要瑕疵：缺少对图表的图例说明和模拟器参数含义的解释；分子可视化区域点击仅切换边框样式，未实现真正的旋转/交互；滑块无实时数值显示；部分社交链接为占位链接，不影响主流程。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面整体视觉设计优秀，风格现代且统一。色彩搭配合理，以蓝色系（#2563eb、#0ea5e9）为主，配合深色背景（#0f172a、#1e293b）和浅色内容区，层次分明，科技感强。布局采用左右两栏结构，信息组织清晰，卡片式设计配合阴影、圆角和悬停上浮动效，符合当代数据类平台的审美趋势。字体选用 Segoe UI 和系统字体，可读性好，标题与正文大小对比明确，间距疏密得当。组件质量较高，包含交互式图表（Chart.js）、分子可视化占位动画、模拟器滑块、粒子背景等，增强了页面的现代感和专业度。CSS 细节处理到位，如渐变按钮、hover 过渡、脉搏动画等，整体视觉吸引力强。稍有不足的是分子可视化区域较为简单，仅用圆形动画和图标示意，真实感稍弱；背景粒子可能对部分用户造成轻微分散注意力，但整体不影响评分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_027953.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Datasets",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Collaborate",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Datasets",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Run Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Run Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

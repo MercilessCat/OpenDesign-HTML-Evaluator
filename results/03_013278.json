@@ -1,0 +1,83 @@
+{
+  "row_id": "03_013278",
+  "shard": 3,
+  "id": 13278,
+  "category": "Game dev",
+  "prompt": "Embark on a linguistic adventure to decode ancient hieroglyphs. Users participate in translation quests, unlocking historical secrets. Features include interactive symbol libraries, community-driven deciphering projects, and virtual expeditions to ancient sites. Educational resources on archaeology and languages enhance the learning journey.",
+  "html_len": 28803,
+  "html_sha256": "fb02d77d7b36c5797d8401f15b6659df253c64ce878e823cbf99a733eff0c395",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "startGame is not defined",
+      "startGame is not defined",
+      "startGame is not defined"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_013278.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Quest",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Quest",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Quest",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "row_id": "03_022618",
+  "shard": 3,
+  "id": 22618,
+  "category": "Game dev",
+  "prompt": "Design an intricate horticulture hub for bonsai enthusiasts to shape and nurture virtual trees. Features include a detailed growth simulation engine, seasonal challenges, and a community-driven seed exchange. Users master the art of bonsai through interactive tutorials, sharing their curated collections and participating in global trimming competitions.",
+  "html_len": 29211,
+  "html_sha256": "6b4d6de25b93315f3e35a2d688a2c110ee01caae90863445cc65a06e784c49e7",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_022618.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Your Journey",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

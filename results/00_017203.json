@@ -1,0 +1,97 @@
+{
+  "row_id": "00_017203",
+  "shard": 0,
+  "id": 17203,
+  "category": "3D design",
+  "prompt": "Create a visually stunning website focused on advanced lighting techniques in 3D design. Users explore multi-light setups through interactive demos, experimenting with shadows and reflections. Featuring expert-led workshops and tutorials, the platform encourages innovation, empowering creators to harness lighting for immersive and captivating digital scenes.",
+  "html_len": 14894,
+  "html_sha256": "483e2040cf20e048ce92d4bca1f3b27c65bb41bd114b5a97eeee99dbfffa66f2",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Exploring 主按钮",
+        "expected": "页面应向下滚动到内容区/进入探索流程，至少出现可见反馈",
+        "evidence": "探针点击 button.Start Exploring 后无 DOM 变化、无跳转、无新增 JS 错误；HTML 中该 button 没有 onclick、href 或任何事件绑定，属于死按钮。",
+        "ok": 0
+      },
+      {
+        "name": "拖拽 3D 场景旋转视角",
+        "expected": "场景应随鼠标拖拽旋转，OrbitControls 生效",
+        "evidence": "HTML 中创建了 THREE.OrbitControls 并绑定到 canvas，启用 damping，且有 requestAnimationFrame 动画循环；运行时无 JS 错误。探针无法直接验证 WebGL 像素变化，但按规则应视为可交互。",
+        "ok": 1
+      },
+      {
+        "name": "调节环境光/平行光/点光/聚光灯滑杆",
+        "expected": "滑杆值变化应实时改变 3D 场景中对应灯光的强度或角度",
+        "evidence": "四个 range input 均绑定了 input 事件，分别更新 ambientLight.intensity、directionalLight.intensity、pointLight.intensity 和 spotLight.angle；动画循环持续渲染，应有实时视觉反馈。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Workshop 卡片查看工作坊详情",
+        "expected": "点击卡片应进入详情页/报名页或展开更多信息",
+        "evidence": "三个 .workshop-card 都是静态 div，没有 <a>、onclick 或任何事件绑定；HTML 中不存在跳转或内容展开逻辑，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "访问 Tutorials 教程入口",
+        "expected": "能查看专家教程列表或教程内容",
+        "evidence": "页面没有任何 tutorials/教程相关链接或区块，只有 workshops 卡片；用户需求中声明的教程功能缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "3D 场景和灯光滑杆可交互，核心的实时灯光调节可用；但 Start Exploring 主按钮无事件、Workshop 卡片全部为静态占位入口，且教程入口缺失。需求声明的关键入口至少有 2 个未实现，因此分数不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 主要入口'Start Exploring'按钮点击后无任何反馈，既不跳转也不展开内容，属于主要入口无实际反馈；2. 交互式灯光演示的滑块调节无可视化反馈，用户拖动滑块时3D场景中灯光强度/角度没有可见变化，且无数值显示，核心操作无法被感知，属于核心控件调节无效。次要瑕疵：无滑块数值提示，工作坊卡片不可点击（无详情页），页面滚动时3D背景持续消耗性能但无交互价值。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉吸引力良好，深色渐变背景配合橙红渐变主色调营造出符合3D设计主题的科技感与光影氛围。头部大标题使用渐变文字与呼吸发光动画，具有较强视觉冲击力，副标题和按钮层级清晰。色彩搭配和谐，主色与背景对比度适中，卡片半透明毛玻璃效果增强了现代感。布局采用Flex和Grid，结构规整，响应式调整合理，卡片悬浮动效流畅。字体使用Segoe UI等系统字体，可读性好，但缺少特色字体，个性化稍弱。CSS细节方面，渐变、圆角、阴影运用专业，但部分元素（如滑块、工作坊图片占位区）设计较简陋，缺乏真实图片内容；标题的text-shadow与透明文字组合可能存在渲染兼容性问题；emoji图标在渐变色文字下显示效果未必理想。交互区域（Three.js场景）为动态canvas，但从页面视觉特征看，其渲染效果未纳入静态评价。整体而言，这是一款符合现代网页设计规范、风格统一的页面，视觉完成度较高，但在精致度和原创性上还有提升空间。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 4.6,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_017203.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

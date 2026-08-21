@@ -1,0 +1,181 @@
+{
+  "row_id": "01_020310",
+  "shard": 1,
+  "id": 20310,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Design an intuitive platform for visualizing job offer letters in a dynamic, interactive format. Users can explore offer components using sliders and visual graphs, compare multiple offers side-by-side, and receive personalized insights and negotiation tips. This transforms the offer letter experience into a strategic career advancement tool.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13546,
+  "html_sha256": "8a84ebed88e4417d2f66f33dc51aa18393391a15fbd334c1ba20707afce83bc0",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "调整薪资滑块探索组件",
+        "expected": "拖动滑块后，右侧数值、图表和洞察随之更新",
+        "evidence": "三个 range input 未绑定任何事件；JS 仅有 chart 初始化和 offer-card 点击处理；数值显示为静态 span，图表数据硬编码为 [95000, 25000, 15000, 18000]，滑块无法联动任何可视化内容",
+        "ok": 0
+      },
+      {
+        "name": "点击录用卡片进行并排比较",
+        "expected": "选中的卡片高亮，并可能联动主面板展示该 offer 的明细",
+        "evidence": "JS 为 .offer-card 绑定 click，点击后移除其他卡片的选中类并添加 bg-blue-50/border-primary；存在可见的选中高亮反馈，但不更新主图表和滑块数据",
+        "ok": 1
+      },
+      {
+        "name": "切换 Annual/Monthly 显示",
+        "expected": "图表在年薪/月薪之间切换显示",
+        "evidence": "Annual/Monthly 按钮无事件绑定；探针点击后 DOM 变化=无，JS 错误=0，页面无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 New Offer 添加录用",
+        "expected": "打开添加表单或新增一张 offer 卡片",
+        "evidence": "按钮无事件绑定；探针点击后 DOM 变化=无，JS 错误=0，页面无任何反应",
+        "ok": 0
+      },
+      {
+        "name": "点击 Generate Full Report 生成报告",
+        "expected": "生成并展示个性化洞察或谈判报告",
+        "evidence": "按钮无事件绑定；探针点击后 DOM 变化=无，JS 错误=0，页面无任何反应",
+        "ok": 0
+      },
+      {
+        "name": "使用主导航链接",
+        "expected": "切换到 Dashboard/Compare/Insights/Tips 对应视图",
+        "evidence": "导航链接均为 href=\"#\"，无路由、无 JS 事件绑定；探针显示 hash 跳转但无实际内容切换，属于占位入口",
+        "ok": 0
+      }
+    ],
+    "reason": "核心交互大面积失败：滑块与图表无联动，动态探索录用组件的核心功能未实现；Annual/Monthly 切换、New Offer、Generate Full Report 均为无反应的占位按钮；导航链接为纯占位死链。仅 offer 卡片点击有选中高亮这类浅层反馈。页面基本为静态展示，无法完成动态探索、比较和获取个性化洞察的主要任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 主导航（Dashboard/Compare/Insights/Tips）均为占位链接，点击后无实际页面跳转或内容呈现，仅跳回页面顶部，未提供有效导航反馈。\n2. “New Offer”按钮点击后无任何响应，无法创建或添加新的offer条目。\n3. “Annual/Monthly”切换按钮点击后图表无变化，切换无效。\n4. 三个薪酬滑块（Base Salary、Equity、Bonus）拖动时不会更新显示金额，也不会更新图表或任何可视化结果，核心调节控件无效。\n5. “Generate Full Report”按钮点击后无任何操作，无反馈。\n\n次要瑕疵：\n- 页面缺少图例或帮助文字，比较面板中“+$12k vs. avg”等徽章含义未解释。\n- “Monthly/Annual”切换没有选中态视觉提示，用户无法判断当前处于哪种模式。\n- 交互控件缺少操作指引，用户不知道滑块能影响哪些内容。\n- 整体视觉美观，但交互功能多为静态展示，与“动态、交互式可视化offer”的目标不符。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面整体视觉吸引力良好，采用现代UI设计规范，配色以蓝色、绿色、紫色为主，辅助橙色，色彩搭配协调且具有层次感。布局通过三列网格（左宽右窄）合理呈现可视化图表、滑块控制、offer对比和洞察面板，信息层级清晰，符合仪表盘类工具页面的典型风格。字体使用Tailwind默认sans-serif，间距与圆角处理专业，卡片hover微交互和滑块渐变色背景提升了设计感。Chart.js图表能直观展示薪资构成，整体代码结构整洁，但导航链接点击会导致页面跳转（可能是href='#'默认行为或vue-router等机制干扰），部分按钮（New Offer、Annual/Monthly切换、Generate Full Report）无实际功能反馈，略微降低交互完整性。综合来看，页面设计精致、现代且贴合“offer可视化”主题，评分8/10。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_020310.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Compare",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Insights",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tips",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Offer",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Annual",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Monthly",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Generate Full Report",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "row_id": "00_016190",
+  "shard": 0,
+  "id": 16190,
+  "category": "3D design",
+  "prompt": "Create a futuristic platform where users can simulate and visualize robotic movements in a virtual space. The site will allow users to program and test robot actions in 3D environments, offering real-time feedback and analytics. Key features include customizable robot models, interactive simulations, and an AI-driven optimization engine.",
+  "html_len": 24748,
+  "html_sha256": "111022247787e39fa09e330698e32de14ca89f79ec480c1e5607abdf87c5f2c0",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "启动仿真",
+        "expected": "点击后机械臂在 3D 场景中开始运动，状态变为 Running，统计信息实时更新",
+        "evidence": "探针点击后 DOM 有变化，但新增 15 条 JS 错误：Cannot read properties of null (reading 'textContent')。原因是 animate 中 document.querySelector('.play-btn') 在按钮移除 play-btn 类后为 null，动画循环每帧抛错，renderer.render 不再执行，仿真实际无法运行。",
+        "ok": 0
+      },
+      {
+        "name": "暂停仿真",
+        "expected": "点击 Pause 后仿真暂停，状态变为 Paused",
+        "evidence": "独立 Pause 按钮在 HTML/JS 中没有任何事件绑定；探针点击后 DOM 无变化、无新增错误，是死按钮。",
+        "ok": 0
+      },
+      {
+        "name": "重置机器人位姿",
+        "expected": "关节滑杆回到默认值，机械臂恢复默认姿态，状态显示 Reset/Ready",
+        "evidence": "探针点击 Reset 后 DOM 有变化且无新增错误；代码将 shoulder/elbow/wrist 设为 45/90/30，调用 updateRobot()，状态置为 Reset 后 Ready。",
+        "ok": 1
+      },
+      {
+        "name": "调节关节角度滑杆",
+        "expected": "拖动 Shoulder/Elbow/Wrist 滑杆时角度数值更新，3D 机械臂对应关节转动",
+        "evidence": "三个 range 滑杆均绑定 input 事件到 updateRobot()，会更新角度文本并设置 robot.shoulder/elbow/wrist.rotation；Reset 探针无错也说明该函数可执行。",
+        "ok": 1
+      },
+      {
+        "name": "切换机器人模型",
+        "expected": "点击 Humanoid、Hexapod 等模型后，3D 场景应显示对应机器人模型",
+        "evidence": "四个 robot-option 的点击事件只切换 active 高亮类，代码中没有重建或更换 3D 机器人模型的逻辑，因此不会真正改变场景中的机械臂。",
+        "ok": 0
+      },
+      {
+        "name": "3D 场景拖拽旋转视角",
+        "expected": "在画布上拖拽可旋转/缩放 3D 视角",
+        "evidence": "init() 中创建了 OrbitControls(camera, renderer.domElement) 并启用阻尼；探针在 canvas 上拖拽有 DOM 变化且无 JS 错误，WebGL 像素变化不可测，按规则视为可交互。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面能渲染 3D 机械臂，拖拽视角、关节滑杆、复位可用；但启动仿真后动画循环每帧报错，仿真实际无法运行；独立 Pause 按钮无事件；机器人模型选择只改高亮不换模型；顶部导航 Program/Analytics 为占位，AI 优化引擎也无入口。核心仿真与可编程能力未实现，故 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 点击 Start Simulation 后，按钮移除了 .play-btn 类，而 animate() 每帧通过 document.querySelector('.play-btn').textContent 判断状态，导致 null 报错；探针显示点击后新增 15 条 JS 错误，渲染循环中断，机器人不能真正运动/画面冻结，主流程卡死。2) 顶部导航 Dashboard/Program/Analytics/Settings 均为占位按钮，点击无实际功能反馈，主入口不可用。3) 机器人模型选择只切换高亮，3D 场景中的模型不会变化（仍为机械臂），模型自定义核心功能无效。4) 独立 Pause 按钮无事件绑定、点击无效，且与 Start 按钮的 Pause 切换语义重复，核心暂停操作不可靠。次要瑕疵：缺少图例/操作说明，关节滑块统一用 rotation.y 驱动导致肩/肘/腕动作与真实机械臂略有出入，部分可选模块未实现且视觉粒子偏花哨。由于存在 2 个以上核心可用性问题，按锚定给 2 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "整体视觉设计非常符合“未来主义机器人模拟平台”的定位。深蓝紫色渐变背景搭配青色、荧光绿高亮，营造出强烈的科技感与沉浸感。页面采用玻璃拟态（backdrop-filter）风格，侧边栏、统计面板、按钮的半透明材质和发光边框质感统一，组件细节丰富，圆角、阴影、悬停动效运用专业。布局上采用经典的工具型界面：顶部导航、左侧控制面板、中央3D场景、底部操作区、右下角实时数据面板，信息层级清晰。字体使用现代无衬线体，字号与行距合理，面板间距舒适。CSS中使用了渐变、动画粒子、自定义滑块等，视觉语言现代且与需求对齐。扣分点：存在较多JavaScript运行时错误，可能导致3D场景或交互未能正常渲染，中央区域可能显得空荡；机器人模型使用Emoji图标代替SVG略欠精致；页面未做响应式适配，小屏幕设备上可能会出现问题。综合视觉质量仍是中上水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')",
+      "Cannot read properties of null (reading 'textContent')"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_016190.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Dashboard",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Program",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Analytics",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Settings",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "▶ Start Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 15,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "⏸ Pause",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "↺ Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

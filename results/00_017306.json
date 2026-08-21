@@ -1,0 +1,209 @@
+{
+  "row_id": "00_017306",
+  "shard": 0,
+  "id": 17306,
+  "category": "3D design",
+  "prompt": "Create a visually captivating website that explores the beauty of infinitely complex geometric patterns. Users can generate and manipulate fractal designs, experiencing the intersection of art and mathematics. The platform includes educational resources, artist showcases, and a collaborative space for sharing and evolving fractal creations.",
+  "html_len": 19593,
+  "html_sha256": "f7ba810d2038c7948bc70a337d398c7377f817a92af61b5d1bbb6c47692c1051",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "导航链接跳转到对应板块",
+        "expected": "点击导航后平滑滚动到 Home/Features/Gallery/Generator/Community 对应区块",
+        "evidence": "HTML 中 nav a 绑定了 click 事件，通过 window.scrollTo 平滑滚动到锚点；运行时无 JS 错误。探针未将滚动计为 DOM 变化，但锚点跳转逻辑真实存在。",
+        "ok": 1
+      },
+      {
+        "name": "Fractal Generator 滑杆调节",
+        "expected": "拖动 Complexity / Color Shift / Zoom / Rotation 滑杆后，生成器画布实时重绘分形图案",
+        "evidence": "4 个 range input 均绑定了 input 事件并调用 drawFractal()，drawFractal 会读取滑杆值并重绘 canvas；无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "Hero 3D 背景拖拽旋转",
+        "expected": "拖拽背景 canvas 时 3D 分形模型随 OrbitControls 旋转",
+        "evidence": "页面使用 THREE.OrbitControls 绑定到 renderer.domElement，并有 requestAnimationFrame 循环；运行时无 JS 错误，3D 交互已初始化。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Start Exploring 按钮",
+        "expected": "进入生成器或开始体验分形探索",
+        "evidence": "按钮只有 mouseenter/mouseleave 的 hover 背景变化，没有 click 事件监听；探针点击虽有 DOM 变化但只是样式层，没有实际业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Community 按钮",
+        "expected": "进入社区或触发加入/协作流程",
+        "evidence": "按钮无 click 事件监听；探针点击后无 DOM 变化、无跳转、无网络请求，属于纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "查看 Fractal Gallery 作品展示",
+        "expected": "画廊区域正常展示分形艺术家作品图片",
+        "evidence": "4 张 Unsplash 图片请求全部失败，错误为 ERR_BLOCKED_BY_ORB，图片无法显示；画廊展示功能实际未完成。",
+        "ok": 0
+      }
+    ],
+    "reason": "核心生成器滑杆实时重绘和 3D 背景交互可用，但多个关键需求未实现：Start Exploring 和 Join Community 是占位按钮，画廊图片加载失败，教育资源也仅停留在静态卡片、没有实际内容或入口。需求中的协作空间、艺术家展示、教育资源均未完整落地，因此功能分不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 主入口按钮“Start Exploring”点击后无实际功能，仅触发样式变化，未跳转到生成器或开始任何探索流程，用户无法通过该入口完成任务。\n2. “Join Community”按钮点击无任何反馈或操作，作为社区入口完全失效，且社区协同功能未实现，属于核心流程卡死。\n3. 底部社交链接点击后直接跳转页面顶部（href=\"#\"），产生误导性反馈。\n\n次要瑕疵：\n1. 画廊四张图片全部加载失败（ERR_BLOCKED_BY_ORB），画廊区域空白，影响内容展示。\n2. 生成器滑块没有当前数值显示，用户调节时无法精确了解参数值。\n3. 生成器画布无任何操作提示或说明，新手用户可能不清楚滑块与画面的关系。\n4. 页面视觉精美、配色和动画效果良好，但核心交互的缺失使整体可用性显著降低。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力高，采用深色渐变背景（#0f0c29→#302b63→#24243e）搭配粉色/蓝色霓虹渐变（#ff00cc→#3333ff）作为主色调，营造出科技感和艺术感，与分形几何主题高度契合。布局协调，导航、Hero区、特性卡片、画廊、生成器、社区、页脚等区块结构清晰，使用flex/grid实现响应式。字体和间距设计规范，标题使用渐变文字+动画效果，卡片有毛玻璃模糊和hover浮起效果，按钮有渐变和阴影，交互反馈细腻。CSS专业度较高，包括backdrop-filter、渐变文本、自定义滑块等现代技术。三.js背景动画增强了沉浸感，但画廊图片因网络阻塞加载失败，实际显示会缺失图片，略微影响视觉完整性。部分导航点击探针无DOM变化，可能为平滑滚动未捕捉，不影响观感。总体符合3D design类别的现代网页设计规范，得8分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1633287387306-f08b4b3671d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041072-57ddc4f9fc3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041068-7f8d5c6b0b3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1633287387306-f08b4b3671d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041072-57ddc4f9fc3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041068-7f8d5c6b0b3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1633287387306-f08b4b3671d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041072-57ddc4f9fc3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041068-7f8d5c6b0b3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1633287387306-f08b4b3671d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041072-57ddc4f9fc3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041068-7f8d5c6b0b3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1633287387306-f08b4b3671d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041072-57ddc4f9fc3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041068-7f8d5c6b0b3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1633287387306-f08b4b3671d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041072-57ddc4f9fc3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041068-7f8d5c6b0b3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1633287387306-f08b4b3671d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041072-57ddc4f9fc3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041068-7f8d5c6b0b3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1633287387306-f08b4b3671d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041072-57ddc4f9fc3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041068-7f8d5c6b0b3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1633287387306-f08b4b3671d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041072-57ddc4f9fc3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1635070041068-7f8d5c6b0b3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_017306.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#gallery",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Generator",
+      "href": "#generator",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "📘",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

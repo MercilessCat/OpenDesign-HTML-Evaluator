@@ -1,0 +1,124 @@
+{
+  "row_id": "01_027533",
+  "shard": 1,
+  "id": 27533,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Enhance communication with a next-gen platform for managing intercom systems. Users can configure multi-channel communication, schedule announcements, and integrate with IoT devices for seamless experiences. The interface supports voice recognition and AI-driven analytics, making it a cutting-edge solution for smart building management.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11278,
+  "html_sha256": "4f1d93a65795d1317345f8f6fbe9df7652e31c5a47f1691affa3c4e4301db6ae",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击 Settings 按钮",
+        "expected": "打开设置面板或显示设置选项",
+        "evidence": "探针点击后 DOM 无变化、无跳转、无新增 JS 错误；HTML 中按钮无 click 事件绑定，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Admin 按钮",
+        "expected": "进入管理员视图或显示用户菜单",
+        "evidence": "探针点击后 DOM 无变化、无跳转、无新增 JS 错误；HTML 中按钮无事件绑定，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Update Config 按钮",
+        "expected": "更新通信配置并给出成功反馈",
+        "evidence": "探针点击后 DOM 无变化、无网络请求；按钮未绑定任何处理逻辑，配置功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 New Schedule 按钮",
+        "expected": "创建新的定时公告（弹出表单或新增公告卡片）",
+        "evidence": "探针点击后 DOM 无变化，且点击被内部 <i> 图标覆盖；按钮无事件绑定，日程功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击语音控制麦克风图标",
+        "expected": "激活语音识别状态，状态文本变化",
+        "evidence": "HTML 中麦克风父级 div 绑定了 click 事件，实际会切换 #voice-status 文本为 Listening... 并延迟变为 Command received；运行时无 JS 错误，代码证据明确。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面完整展示了智能楼宇对讲管理平台的主题内容，视觉设计良好，无 JS 错误；但 Settings、Admin、Update Config、New Schedule 等关键功能按钮均为占位入口，点击无任何反馈，配置、日程、管理等功能未实现。唯一可交互的是语音控制图标的模拟状态切换，并非真正的语音识别。核心交互大面积失败，主要任务无法完成，因此评分偏低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. “Settings”入口按钮点击后DOM无变化、无提示、无跳转，入口失效；2. “Admin”入口按钮同上，无法进入管理功能；3. “Update Config”核心配置按钮点击后无任何反馈，配置无法保存/更新；4. “New Schedule”核心操作按钮点击后无反应，无法新建定时公告。多个主要操作均为死路，反馈缺失到无法判断操作是否成功。次要瑕疵：语音控制仅有模拟反馈，状态流转不完整（收到命令后不恢复）；无帮助/说明文字解释配置与AI分析含义；IoT离线设备无重连入口；整体视觉与信息层级尚可，但核心功能全部不可用，仅适合静态展示。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，是一款典型的现代SaaS仪表盘风格界面。色彩搭配以蓝色系渐变（#2563eb → #0ea5e9）为主导，配合灰白背景和不同语义的彩色标签，视觉统一且具有科技感，符合“智能楼宇对讲管理平台”的主题定位。布局采用居中卡片+三列网格结构，信息分区清晰（配置面板、语音控制、IoT设备、公告调度），层级明确，在常见桌面视口下可完整展示，符合单页无滚动要求。组件设计质量良好：圆角卡片、柔和阴影、状态标签（Connected/Offline）、进度条、悬停过渡等细节体现了专业水准，Tailwind CSS 的使用规范且代码整洁。不足之处在于：少量按钮（Settings、Update Config 等）为纯装饰性，缺少实际交互反馈；语音控制区域与其他卡片在高度上未完全对齐；字体采用系统默认栈，视觉个性稍弱。总体仍是一份完成度高、符合现代网页设计规范的作品。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_027533.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Settings",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Admin",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Update Config",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Schedule",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-plus-circle text-",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

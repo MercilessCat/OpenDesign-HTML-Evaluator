@@ -1,0 +1,145 @@
+{
+  "row_id": "06_083229",
+  "shard": 6,
+  "id": 83229,
+  "category": "Website",
+  "prompt": "Create a hub where users challenge their cognitive biases by collaboratively analyzing and debating diverse viewpoints. The platform offers tools for users to dissect arguments, rate evidence, and visualize thought patterns. Features include discussion threads, bias detection tools, and community-driven rating systems to foster open, analytical dialogues.",
+  "html_len": 29630,
+  "html_sha256": "caadb38c53e9e4b4954ecf9c1e0eeb8549225d938ec331840d536e376fbad0b9",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_083229.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Discussions",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Bias Detector",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Discussion",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "IMG.h-8 w-8 rounded-full",
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Start Analyzing",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "How It Works",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

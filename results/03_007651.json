@@ -1,0 +1,110 @@
+{
+  "row_id": "03_007651",
+  "shard": 3,
+  "id": 7651,
+  "category": "Game dev",
+  "prompt": "Create a competitive typing platform that tests and improves users' typing speed and accuracy through gamified challenges. The core focus is enhancing typing skills. Key features include personalized speed tests, real-time progress tracking, and multiplayer typing duels, making skill development both fun and rewarding.",
+  "html_len": 26827,
+  "html_sha256": "ab36e276b809128be7728d81fbfd68061db59f5c509de5101d84b25ba73e371a",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "开始打字挑战",
+        "expected": "点击后从开始界面切换到挑战界面，显示待输入文本、计时器和进度条，并聚焦输入框",
+        "evidence": "探针点击#start-btn后DOM有变化，无JS错误；JS中startGame()执行changeScreen('gameplay')、selectRandomQuote()、startTimer()并启用输入框",
+        "ok": 1
+      },
+      {
+        "name": "输入文字进行打字测试",
+        "expected": "输入时高亮正确/错误字符，实时更新WPM、准确率和进度条",
+        "evidence": "HTML中textarea#typing-input绑定input事件，updateGameState/updateDisplay会更新字符class、wpm、准确率和进度条；运行时无JS错误，逻辑完整",
+        "ok": 1
+      },
+      {
+        "name": "切换多人模式",
+        "expected": "点击Solo/Multiplayer按钮应进入真正的多人打字对战流程（匹配对手、实时对抗）",
+        "evidence": "探针点击后有DOM变化，但JS中toggleMode仅切换按钮文本和样式，无任何多人匹配、房间或对战逻辑；多人决斗核心功能未实现，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "查看统计信息（Stats）",
+        "expected": "点击Stats按钮应展示个人打字历史或进度统计面板",
+        "evidence": "探针点击#stats-btn后DOM无变化；HTML中无统计面板元素，也没有对应的事件处理逻辑或路由，属于死按钮/占位入口",
+        "ok": 0
+      },
+      {
+        "name": "重新开始挑战",
+        "expected": "点击Restart应重置当前挑战并重新计时、重新选择文本",
+        "evidence": "HTML中#restart-btn和#play-again-btn都绑定resetGame()，函数会清理计时器、清空输入框、重新调startGame()，逻辑完整且无JS错误",
+        "ok": 1
+      }
+    ],
+    "reason": "核心打字速度测试和实时进度跟踪已实现且可用；但需求明确声明的多人打字决斗仅有按钮文字切换而无实际多人逻辑，Stats按钮点击无任何反馈，属于2个及以上关键入口未实现，因此分数不超过4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) 顶部“Stats”按钮完全没有事件处理，点击无任何反馈，属于主要导航死路；2) “Solo Mode/Multiplayer Mode”切换只改变了按钮文字和样式，并没有改变游戏实际逻辑，切换后仍是同一个单人打字流程，核心控件调节无效。次要瑕疵：开始页三张功能卡（Speed Test/Multiplayer/Achievements）具有 cursor-pointer 但点击无实际响应，容易误导；结果页 Share Results 按钮也未实现；缺少对模式、规则、统计数据的说明或图例；若输入超过引用文本长度，会因找不到对应字符元素而报错。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面视觉设计优秀，整体风格现代且符合竞技打字平台的定位。深色渐变背景（#0f172a至#1e293b）搭配蓝色主色、绿色辅助色和橙色强调色，色彩搭配专业且具有科技感。布局采用响应式flex和grid结构，信息层级清晰，头部、主游戏区、结果展示区划分明确。使用Roboto Mono等宽字体，贴合打字场景，增强了专业感。卡片翻转动画、进度条、脉冲按钮、烟花特效等CSS动效丰富且流畅，提升了互动性和趣味性。组件设计（如指标卡片、进度条、模式切换按钮）细节到位，圆角和阴影运用得当。整体视觉吸引力强，符合现代网页设计规范，与用户需求中的游戏化挑战风格高度契合。扣分点主要在于个别交互（如Stats按钮无反馈）和代码中存在冗余div，但对视觉影响极小。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.5,
+  "baseline_overall": 5.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_007651.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Solo Mode",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Stats",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Typing Challenge",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

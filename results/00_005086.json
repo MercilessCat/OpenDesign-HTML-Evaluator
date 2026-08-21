@@ -1,0 +1,122 @@
+{
+  "row_id": "00_005086",
+  "shard": 0,
+  "id": 5086,
+  "category": "3D design",
+  "prompt": "Design a simulation platform for optimizing renewable energy systems in a virtual 3D environment. The core idea is to visualize and test energy setups, enhancing sustainability strategies. Users can simulate different scenarios, analyze energy outputs, and improve designs. Key features include an interactive dashboard, data analytics, and scenario comparisons.",
+  "html_len": 26774,
+  "html_sha256": "dfad3046f069533c016f91cf2db9fdbc57da19bb38608a598f51c34de9343e68",
+  "functional": {
+    "score": 5.0,
+    "raw_score": 5.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "切换场景（Scenario A/B/C）",
+        "expected": "切换到不同能源配置并显示对应数据与3D布局，实现场景对比",
+        "evidence": "HTML 中三个 .scenario-btn 均绑定 click 事件，但处理逻辑只移除/添加 active 类；场景数据、统计卡、3D 场景及图表均无任何更新。探针虽未直接点击场景按钮，但 JS 源码确认无场景数据切换逻辑，属于纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "拖动太阳能板角度滑块",
+        "expected": "角度标签值更新，3D 中太阳能板随之旋转",
+        "evidence": "滑块绑定 input 事件更新 #solar-angle-value 文本；animate() 循环每帧读取滑块值并执行 panel.rotation.x = angle - Math.PI/2，运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "拖动风速滑块",
+        "expected": "风速标签值更新，3D 风力发电机转速相应变化",
+        "evidence": "滑块绑定 input 事件更新 #wind-speed-value；animate() 循环根据滑块值计算 turbine.speed 并更新转子旋转，运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "拖动电池电量滑块",
+        "expected": "电量标签值更新，3D 电池组颜色随电量变化",
+        "evidence": "滑块绑定 input 事件更新 #battery-value；animate() 循环根据电量百分比改变电池材质 HSL 颜色，运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Optimize System 按钮",
+        "expected": "触发优化模拟，按钮状态变化并更新统计指标",
+        "evidence": "探针实测点击后 DOM 有变化、无 JS 错误。代码将按钮文本改为 'Optimizing...'，1.5 秒后恢复并将 Total Generation 更新为 15.2 MW、Efficiency 更新为 94%。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Reset 按钮",
+        "expected": "控制面板滑块及标签重置为默认值",
+        "evidence": "探针点击时各滑块已处于默认值，故 DOM 无变化属正常。代码将 solar-angle、wind-speed、battery-level 重置为 45/12/78 并同步标签文本。",
+        "ok": 1
+      },
+      {
+        "name": "在 3D 场景中拖拽旋转",
+        "expected": "通过 OrbitControls 旋转/缩放视角，查看 3D 能源设施",
+        "evidence": "页面初始化创建 THREE.OrbitControls 绑定到 canvas，启用阻尼并每帧调用 controls.update()；探针拖拽时无 JS 错误。WebGL 像素变化虽不可直接测量，但按规则视为可交互。",
+        "ok": 1
+      }
+    ],
+    "reason": "核心 3D 可视化与仪表盘交互基本可用：三个滑块均能实时驱动 3D 场景变化，Optimize 按钮有数据反馈，Reset 可重置控制项，OrbitControls 支持 3D 视角交互。但需求明确要求的场景对比功能未实现——点击 Scenario A/B/C 仅切换高亮，无任何场景数据、图表或 3D 布局变化；图表与分析功能也为静态展示，不随控制参数更新。整体体验完整度中等，因场景对比为核心功能缺失而扣分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. 场景选择器（Scenario A/B/C）点击后仅切换按钮高亮，3D场景和仪表盘数据完全不变，用户无法进行任何实际的场景比较，核心功能“场景对比”未实现，属于主要入口无实质反馈。次要瑕疵：1. “Optimize System”按钮仅模拟文本变化和更新两个统计数字，未真正改变3D场景或数据分析，优化功能深度不足；2. 能量输出图表为静态SVG，不随场景或滑块变化，数据可视化缺乏实时联动；3. 重置后虽滑块和文字恢复，但无额外的视觉确认（如提示动画）；4. 部分组件（如场景切换、图表）缺少帮助说明或图例，用户可能不清楚它们的功能范围。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，采用深蓝渐变背景与青绿色（#40e0d0）高亮搭配，科技感契合可再生能源主题。色彩搭配和谐，主辅色对比清晰，信息层级明确。布局上左右分栏（3D场景 + 控制面板）结构合理，统计卡片、滑块、按钮等组件间距均匀，圆角、阴影、毛玻璃效果提升质感。字体使用系统无衬线字体，易读性良好；CSS细节如渐变、过渡、动画（能量流动、卡片悬浮）展现出专业水准。3D场景包含太阳能板、风机、电池和能量流动画，符合虚拟仿真平台预期。扣分点：SVG图表实现相对简单，部分组件视觉深度（如阴影层次）可加强，但整体符合现代数据可视化仪表盘设计规范，与用户需求的风格对齐。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.9,
+  "baseline_overall": 5.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_005086.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Optimize System",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

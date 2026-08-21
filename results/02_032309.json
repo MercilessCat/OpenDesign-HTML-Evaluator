@@ -1,0 +1,189 @@
+{
+  "row_id": "02_032309",
+  "shard": 2,
+  "id": 32309,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Create interactive web apps effortlessly using R Shiny with a platform that offers templates, tutorials, and analytics tools. Users can publish, share, and collaborate on data-driven apps with real-time feedback. Key features include drag-and-drop UI design, code-free app creation, and seamless integration with data sources.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13274,
+  "html_sha256": "d8d8a110ed1b1e37fd99bb43c03555c70a6e8713eafaff42bc673dc1f036e69a",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航 Features",
+        "expected": "跳转到页面中的功能模块或切换至对应内容，展示功能详情",
+        "evidence": "探针点击后页面发生 hash 跳转（href=\"#\"），但页面无 id=\"features\" 等锚点内容区，也无 JS 路由处理，属于占位链接，未展示任何功能内容",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Templates",
+        "expected": "跳转到模板模块或展示模板列表",
+        "evidence": "探针点击后仅发生 hash 跳转（href=\"#\"），页面不存在模板模块或模板切换逻辑，反馈不符合预期",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started 按钮",
+        "expected": "进入注册/开始使用流程，或弹出引导弹窗",
+        "evidence": "探针点击后 DOM 无变化、无新增 JS 错误、无网络请求，按钮未绑定任何事件，点击无反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Building Now 按钮",
+        "expected": "进入应用构建器或引导用户创建可视化应用",
+        "evidence": "探针点击后 DOM 无变化、无新增网络请求，按钮仅有 hover 样式和渐变背景，无业务事件绑定，核心 CTA 失效",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Demo 按钮",
+        "expected": "展示产品演示或跳转到演示页面",
+        "evidence": "探针点击后 DOM 无变化、无新增网络请求，按钮无任何点击事件，无法查看演示，反馈错误",
+        "ok": 0
+      },
+      {
+        "name": "点击 Export Report 按钮",
+        "expected": "触发报告下载或导出功能",
+        "evidence": "探针点击后 DOM 无变化、无新增网络请求，仪表盘中的导出按钮是静态装饰，无事件绑定，导出功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整、内容覆盖了需求中的核心宣传点（拖拽式界面、免代码创建、数据源集成），整体结构符合单页展示需求；但所有导航链接均为 href=\"#\" 占位，无对应内容区或路由切换；全部 CTA 按钮（Get Started、Start Building Now、View Demo、Export Report）均无事件绑定，点击无任何反馈，核心业务入口全部失效，用户无法完成任何实质性操作，属于核心交互大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 主要CTA按钮（Get Started、Start Building Now、View Demo、Export Report）点击后均无任何DOM变化或反馈，核心操作流程卡死，用户无法注册、预览或导出，属于核心操作无法完成。2. 顶部导航（Features/Templates/Tutorials/Pricing）均为href=\"#\"占位链接，点击后仅滚动回页面顶部，并未定位到对应内容区块（且Templates/Tutorials/Pricing对应内容在页面中根本不存在），主要入口点击无实际价值，构成占位链接/死路。次要瑕疵：1. 3张用户头像图片因网络原因加载失败，出现破图，影响社交证明可信度。2. 演示仪表盘中的柱状图缺少横纵轴标签、图例和数值说明，图表的含义不明确。3. 页面实际内容超出单屏，需要滚动才能看到特性模块，与单页视口适配的预期不符。4. 图标和图片普遍缺少alt/aria标签，可访问性不足。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "整体视觉设计出色，具有现代SaaS产品的专业感和吸引力。\n\n【优点】\n1. 色彩搭配统一且符合数据可视化主题：以#2563eb/#0ea5e9蓝色系为主色，搭配浅蓝渐变背景（#f0f9ff→#e0f2fe），整体色调协调、清新，符合数据产品理性、专业的调性。\n2. 布局结构清晰：Header（Logo+导航+CTA）、Hero（左右两栏：宣传文案+模拟仪表板）、Features（三张卡片）、Footer，层级分明，信息组织有序。\n3. 组件设计精致：模拟仪表板卡片包含KPI指标、进度条、纯CSS柱状图，视觉上还原了数据产品的真实场景，增强了页面的主题相关性和展示效果。卡片圆角、阴影、渐变按钮和hover动效（translateY、shadow）都提升了质感。\n4. 字体排版专业：使用Inter字体，标题层级明显（h1大字号、h2次之），正文灰色对比度适中，间距（py、gap、mb）控制得当，整体节奏舒适。\n5. 视觉动效细节到位：卡片hover上浮、图标hover缩放、按钮渐变+阴影过渡，交互反馈自然，符合现代UI规范。\n\n【扣分点】\n1. 三张外部头像图片（randomuser.me）加载失败，实际渲染时会在社交证明区域出现破图，影响视觉完整性。\n2. 内容密度较高（Hero+Features），在常见1080p浏览器视口下可能无法完全“一屏展示”，稍显拥挤。\n3. 部分导航链接为#空链接，点击无实际跳转，交互闭环不足。\n\n总体来说，页面视觉风格现代、配色专业、组件设计质量高，是典型且优秀的数据分析类产品Landing Page设计，若修复图片加载和单屏适配问题，可接近满分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [
+      "Failed to load resource: net::ERR_SOCKET_NOT_CONNECTED",
+      "Failed to load resource: net::ERR_SOCKET_NOT_CONNECTED",
+      "Failed to load resource: net::ERR_SOCKET_NOT_CONNECTED"
+    ],
+    "failed_requests": [
+      "https://randomuser.me/api/portraits/women/44.jpg -> net::ERR_SOCKET_NOT_CONNECTED",
+      "https://randomuser.me/api/portraits/men/32.jpg -> net::ERR_SOCKET_NOT_CONNECTED",
+      "https://randomuser.me/api/portraits/women/68.jpg -> net::ERR_SOCKET_NOT_CONNECTED"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_032309.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Templates",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Pricing",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Building Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export Report",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

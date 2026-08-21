@@ -1,0 +1,53 @@
+{
+  "row_id": "03_022529",
+  "shard": 3,
+  "id": 22529,
+  "category": "Game dev",
+  "prompt": "Create a celestial exploration platform where users identify and map constellations in a virtual night sky. Featuring interactive star charts, educational resources, and a community forum for sharing astronomical findings, this site fosters curiosity and learning. Users engage in observation challenges, enhancing their knowledge of the cosmos and connecting with fellow stargazers.",
+  "html_len": 19808,
+  "html_sha256": "d50234ad9d46ce9fb1d19c514d8e39a5987f636895b6edbbfd2775c5834af50a",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_022529.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Exploration",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "row_id": "04_026557",
+  "shard": 4,
+  "id": 26557,
+  "category": "Website",
+  "prompt": "Design an ephemeral art trading archive where users can discover, trade, and archive fleeting art pieces. Features include artist profiles, time-limited exhibitions, and collaborative art creation spaces, cultivating a community that values the transient beauty and innovation of ephemeral art forms.",
+  "html_len": 29405,
+  "html_sha256": "73000f0c2fd769a9d7aead5c329e15fbc6a62be1db0e5585f0f4fe842a104107",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_026557.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Discover",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Trade",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Exhibitions",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Collaborate",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Connect Wallet",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-user text-gray-30",
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Artworks",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

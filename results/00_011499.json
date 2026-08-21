@@ -1,0 +1,129 @@
+{
+  "row_id": "00_011499",
+  "shard": 0,
+  "id": 11499,
+  "category": "3D design",
+  "prompt": "Immerse in a creative platform that showcases innovative use of CSS for creating stunning 3D perspective illusions. Users can explore, learn, and implement these techniques in web projects. Key features include a library of illusions, interactive tutorials, and a community forum for sharing and discussing design ideas.",
+  "html_len": 14095,
+  "html_sha256": "e4ca6afdd8bcc194c3dc1d767baf4af25416119975715cc1bb69b1e7a3e9c8c3",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击 Illusion 卡片查看详情",
+        "expected": "点击某个 illusion（如 Neon Cube）应打开详情、预览或进入对应展示",
+        "evidence": ".illusion-item 仅绑定 mousemove/mouseleave 实现倾斜效果，未绑定 click 事件，点击无任何业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Rotate Objects 按钮",
+        "expected": "3D 场景中的物体开始/停止旋转，按钮文字同步变化",
+        "evidence": "探针点击后 DOM 有变化（按钮文字切换），无 JS 错误，代码中 toggleRotation 控制 rotating 并由 animate 循环更新渲染",
+        "ok": 1
+      },
+      {
+        "name": "点击 Change Colors 按钮",
+        "expected": "3D 物体颜色改变",
+        "evidence": "探针报告 DOM 无变化，但代码中 changeColors 通过 cube/pyramid.material.color.setHex 修改材质颜色，属 WebGL 渲染变化，探针无法检测像素；无 JS 错误，事件绑定有效",
+        "ok": 1
+      },
+      {
+        "name": "点击 Reset View 按钮",
+        "expected": "视角和物体位置、旋转状态被重置",
+        "evidence": "探针报告 DOM 无变化，但代码中 resetView 重置 cube/pyramid 旋转和 camera 位置，并同步按钮状态；无 JS 错误，事件绑定有效",
+        "ok": 1
+      },
+      {
+        "name": "在 3D 场景中拖拽旋转视角",
+        "expected": "通过鼠标拖拽操作 3D 场景视角",
+        "evidence": "探针在 canvas 上指针拖拽后 DOM/像素均无变化；代码中未给 renderer.domElement 绑定 pointer/touch 事件，也未引入 OrbitControls，拖拽无反应",
+        "ok": 0
+      },
+      {
+        "name": "点击社区论坛帖子",
+        "expected": "打开帖子、查看讨论或进行互动",
+        "evidence": ".post 为静态 div，无链接、无点击事件绑定，点击无反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面成功渲染了 3D 场景且三个控制按钮（旋转、变色、复位）实现可用；但需求中的核心功能——Illusion 库条目点击无反应、社区论坛帖子纯静态不可互动、3D 场景不支持拖拽操作——均未实现，交互成功率低，核心需求完成度不足。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 5.0,
+    "reason": "核心可用性问题：1. 幻象库中4个卡片（Neon Cube、Floating Pyramid等）是页面主要探索入口，虽设置了cursor:pointer和悬停3D效果，但点击后没有任何响应或跳转，无法查看具体幻象详情、代码或教程，核心探索流程中断。次要瑕疵：1. 教程栏目只有概述性文字，没有可交互的代码示例或步骤引导，\"学习\"路径不完整；2. 社区论坛为静态示例帖子，无发帖、回复或查看详情等社区交互入口；3. Change Colors和Reset View按钮仅在canvas中改变渲染状态，无额外的DOM文本反馈，用户若未注意到场景颜色/视角变化可能误以为按钮无效；4. 3D场景不支持鼠标拖拽控制视角，只能依赖按钮操作。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉设计质量较高，符合“3D 设计创意平台”的定位。深蓝紫色渐变背景营造了沉浸式科技感，与青绿/珊瑚橙等强调色搭配协调；毛玻璃卡片、细边框和轻微阴影提升了层次感，符合现代设计趋势。标题使用渐变文字与柔和光晕，具有较强视觉吸引力。布局上采用侧边栏+主内容区的经典结构，信息分区明确，卡片圆角、间距和悬浮动效统一细腻。Three.js 交互场景和幻觉网格的 3D 悬停效果增强了页面的创意氛围。扣分点主要在于：实际幻觉单元以纯色渐变占位，缺少更丰富的 3D 视觉语言；字体使用系统字体栈，略显通用；部分半透明白色文字在低透明度背景上的对比度可进一步优化。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_011499.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Rotate Objects",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Change Colors",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset View",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

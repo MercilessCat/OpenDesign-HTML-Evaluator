@@ -1,0 +1,118 @@
+{
+  "row_id": "00_006522",
+  "shard": 0,
+  "id": 6522,
+  "category": "3D design",
+  "prompt": "Navigate a realm where conversational AI interfaces enhance 3D design processes. This website integrates smart assistants for intuitive 3D creation, allowing voice commands for model adjustment and rendering. Key features include AI-driven tutorials, user project showcases, and forums for discussing conversational design evolution.",
+  "html_len": 18535,
+  "html_sha256": "43b8a022d18eaad0d17f2fff2fdabfd730220ca8924fdcc64e12bbe281cf52c0",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "通过聊天文字命令创建3D物体",
+        "expected": "输入如'Create a red cube'并发送，AI应回复确认，且3D场景中新增对应颜色的立方体/球体",
+        "evidence": "探针在输入框输入'测试'并回车后DOM有变化（新增聊天消息），JS错误0；HTML中sendBtn点击与Enter事件均绑定processCommand，支持create cube/sphere等分支，消息机制可用",
+        "ok": 1
+      },
+      {
+        "name": "通过聊天命令旋转/清除物体",
+        "expected": "输入'Rotate the object'或'Clear scene'后，AI返回操作反馈并改变场景中物体状态",
+        "evidence": "processCommand中明确包含rotate和reset/clear分支，会对objects集合执行旋转/移除重建；聊天DOM更新机制已由探针验证可用，JS无错误",
+        "ok": 1
+      },
+      {
+        "name": "在3D场景中拖拽旋转视角",
+        "expected": "用户拖拽/旋转3D视口时，场景视角随鼠标/指针变化",
+        "evidence": "页面引入Three.js与OrbitControls，init()中创建controls并enableDamping，animate()循环调用controls.update()；canvas指针拖拽后JS错误0，符合可交互判定",
+        "ok": 1
+      },
+      {
+        "name": "点击AI Tutorials教程卡片",
+        "expected": "进入或弹出AI驱动的教程/引导内容",
+        "evidence": "AI Tutorials仅为静态div.feature-card，无href、无onclick及任何事件绑定，点击无任何DOM跳转或内容切换，属纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击Community Forum社区论坛卡片",
+        "expected": "进入讨论社区或论坛页面",
+        "evidence": "Community Forum同样为静态feature-card，无链接、无事件处理，点击无反应，未实现论坛功能",
+        "ok": 0
+      },
+      {
+        "name": "使用语音命令调整模型",
+        "expected": "提供麦克风/语音输入入口，支持语音指令控制3D模型",
+        "evidence": "页面无麦克风按钮、无Web Speech API、无任何语音输入相关实现；需求中的语音命令功能完全缺失，仅在卡片文案中提及",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心的3D场景（OrbitControls可拖拽）和文字版AI聊天命令（创建/旋转/清除物体）可正常工作，演示闭环成立；但需求中明确声明的关键功能——AI教程、社区论坛、语音命令均未实现（教程与论坛为纯静态占位卡片，语音无任何入口），且页面上缺少用户项目展示区域，存在3个以上核心功能缺失，按规则评分不高于4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 创建金字塔命令无效——createPyramid使用ConeGeometry(0,5,4)，半径设为0导致几何体不可见，AI却回复创建成功，反馈错误；2. 功能卡片引导的'Make it bigger'、'Change to metallic material'等核心调节命令未被processCommand处理，用户按提示操作后模型无任何变化，功能与实际不符，属于核心控件调节无效。次要瑕疵：Send按钮在输入框为空时可点击但无任何提示；三个功能卡片视觉上可点击但无实际链接；新建对象坐标为随机，可能出现在相机视野外；页面宣称支持语音命令但未实现语音输入。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力出色，深蓝太空渐变背景搭配蓝色系渐变文字和玻璃拟态卡片，风格现代且与3D设计/对话式AI主题高度一致。色彩搭配合理：主背景使用#1a2a3e→#16213e→#0f3460的渐进，配合#4cc9f0、#4361ee、#3a0ca3的强调色，层次丰富而协调，没有刺眼冲突。布局采用头部+主区域+特性网格+页脚的结构，左右分栏的3D画布与AI面板比例均衡，卡片间距、圆角、阴影统一有序，视觉动线流畅。字体方面，无衬线字体家族舒适现代，标题3.5rem配合渐变文字质感突出，副标题和正文行距适中。组件设计到位：AI头像圆形渐变、聊天消息左右对齐、按钮悬停上浮、输入框焦点反馈、特性卡片悬浮效果，交互细节完整。CSS整体专业，使用了flex/grid、backdrop-filter、渐变文本、过渡动画等现代技术，且包含响应式断点，符合现代网页设计规范。扣分点在于部分细节稍显常规：图标使用emoji而非定制SVG，backdrop-filter缺少降级处理，动态3D场景的简单几何模型本身视觉复杂度一般，但这些不足以影响整体优秀观感，综合评分8.5。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.5,
+  "baseline_overall": 5.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_006522.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Send",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "text",
+      "tag": "input",
+      "text": "",
+      "href": null,
+      "type": "text",
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "typed": "测试",
+      "fill_method": "playwright",
+      "enter_pressed": true,
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

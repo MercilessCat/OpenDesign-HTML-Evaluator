@@ -1,0 +1,187 @@
+{
+  "row_id": "00_022510",
+  "shard": 0,
+  "id": 22510,
+  "category": "3D design",
+  "prompt": "Create a browser-based 3D object manipulation tool that empowers users to interact with virtual models seamlessly. Users can transform, animate, and customize 3D objects, with intuitive controls and scriptable automation. The platform encourages creativity through community showcases, tutorials, and integration with popular 3D design software.",
+  "html_len": 22664,
+  "html_sha256": "e0d712c90ddf6a191862431731d30a1777cd4bab7e75420aa721220c0d1722da",
+  "functional": {
+    "score": 3.0,
+    "raw_score": 3.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "3D场景拖拽旋转视角",
+        "expected": "相机围绕物体旋转，场景视角随鼠标拖拽发生变化",
+        "evidence": "代码 init() 中创建了 THREE.OrbitControls(camera, renderer.domElement) 并启用阻尼，渲染循环 controls.update() 持续运行；运行时 0 条 JS 错误，探针未发现异常。",
+        "ok": 1
+      },
+      {
+        "name": "调整位置/旋转/缩放滑块",
+        "expected": "3D 物体在对应轴移动、旋转或缩放，右侧数值显示同步更新",
+        "evidence": "posX/posY/posZ、rotX/rotY、scale 滑块均有 'input' 事件监听器，会写入 currentObject 的 position/rotation/scale，并同步更新对应 valueDisplay 文本；无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "切换对象形状",
+        "expected": "点击库中的立方体/球体/圆柱/圆环图标后，3D 物体替换为新几何体",
+        "evidence": ".object-item 绑定了 click 事件，根据 data-type 调用 createObject() 创建不同几何体并重置控制值；运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "切换材质（Metallic/Rough/Smooth/Wireframe）",
+        "expected": "点击材质按钮后物体表面金属度、粗糙度或线框模式发生变化",
+        "evidence": "四个材质按钮均绑定了 click 事件，修改 currentObject.material 的 metalness/roughness/wireframe 属性；探针报告 DOM 无变化属于正常，因为渲染反馈只体现在 canvas 上，且运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "开始/停止动画与重置",
+        "expected": "点击动画按钮后物体自动旋转并上下浮动，按钮文字在 Start/Stop 间切换；点击重置后物体和控件值归零",
+        "evidence": "animateBtn 点击切换 animationActive 并更新按钮文字；resetBtn 点击重置 position/rotation/scale 并调用 updateControlValues()；animate() 循环中根据 animationActive 驱动物体运动。",
+        "ok": 1
+      },
+      {
+        "name": "访问 Tutorials/Community/Export 导航入口",
+        "expected": "进入对应教程、社区展示或导出功能页面",
+        "evidence": "Library/Tutorials/Community/Export 均为 href=\"#\" 的死链占位，无任何路由或内容切换逻辑；探针点击后仅发生页面跳转/刷新，没有任何业务功能呈现。需求中明确的教程、社区展示、软件集成等核心功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "脚本化自动化操作对象",
+        "expected": "提供脚本输入/执行/API 入口，可编程控制 3D 对象",
+        "evidence": "页面中不存在任何脚本编辑器、控制台、命令输入框或类似自动化入口；需求声明的 scriptable automation 完全缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心 3D 操作（视角拖拽、变换滑块、材质切换、形状切换、动画控制）均有真实事件绑定且运行时无 JS 错误，基础编辑器可用；但需求明确要求的教程、社区展示、导出、软件集成均为 href=\"#\" 占位死链，脚本自动化入口完全缺失，超过两个关键功能未实现，按规则上限为 4，综合判 3 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：顶部主导航 Library/Tutorials/Community/Export 全部为占位链接（href 为 #），点击后没有对应页面、面板或功能承接，只发生 hash 跳转，无法进入社区、教程、导出等承诺的功能，属于主要入口无实际反馈。次要瑕疵：1) 旋转控件没有 Z 轴，三维姿态控制不完整；2) 切换物体后颜色选择器不会同步为新物体实际颜色，新物体总是蓝色但颜色框仍保留上次值，状态反馈不一致；3) Metallic/Rough/Smooth 材质按钮点击后没有选中态或提示文字，只能靠 3D 表面观感判断是否生效；4) 对象库只有 emoji 图标、无文字标签，识别成本较高；5) 状态栏 FPS 和顶点数是静态假数据，不随场景变化；6) 页面缺少帮助/说明文字。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "整体视觉吸引力良好，深色渐变背景（#1a1a2e→#16213e）符合3D设计工具的主流风格，并与Three.js场景的背景色保持协调，视觉焦点自然落在画布区域。色彩搭配专业，以#4361ee与#4cc9f0为主色，辅以半透明白色和高光渐变，层次分明，符合设计工具类产品的品牌调性。布局采用顶栏+左侧画布+右侧控制面板+底栏的经典工作台结构，信息分区清晰，主次明确，响应式断点也考虑了窄屏场景。字体使用系统安全的'Segoe UI'系列，字号梯度（1.5rem标题、1.2rem面板标题、0.9rem辅助文本）合理；控制组间距宽松，交互元素（滑块、按钮、对象卡片）均定制了样式，圆角统一、hover反馈到位，体现了较高的CSS细腻度。整体上，页面与用户需求中“3D对象操控工具”所期待的现代、专业、可自定义的风格高度一致。轻微扣分点：部分按钮点击后缺少视觉激活状态反馈，会削弱操作确认感；图标依赖 emoji，风格一致性略弱于专业SVG方案；因HTML截断，底部状态栏部分代码缺失，但不影响整体判断。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.3,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_022510.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Studio",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Library",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Export",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Metallic",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Rough",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Smooth",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

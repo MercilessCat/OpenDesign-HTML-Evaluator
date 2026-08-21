@@ -1,0 +1,189 @@
+{
+  "row_id": "00_004285",
+  "shard": 0,
+  "id": 4285,
+  "category": "3D design",
+  "prompt": "Create an interactive platform for exploring virtual landscapes through user-generated 3D terrain models. Users can design, render, and share realistic environments using HTML-based tools. Key features include customizable terrain elements, real-time rendering, and collaborative projects, fostering a community of digital landscape artists.",
+  "html_len": 17914,
+  "html_sha256": "d9cb460509e42ffed240fb4561a1d36dc6fac8df6bfd7502475e326b9bb99e2f",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "在3D画布拖拽查看地形",
+        "expected": "鼠标/触摸拖拽后相机旋转、缩放、平移，地形可以从不同角度查看",
+        "evidence": "init() 创建了 WebGLRenderer 并绑定 THREE.OrbitControls(camera, renderer.domElement)，animate() 用 requestAnimationFrame 持续渲染；运行时 0 条 JS 错误，按规则视为可交互。",
+        "ok": 1
+      },
+      {
+        "name": "调整 Terrain Roughness/Height 滑块",
+        "expected": "地形起伏与整体高度实时变化，滑块右侧数值同步更新",
+        "evidence": "roughness/height 两个 input 均绑定 input 事件，更新 params 与标签后调用 generateTerrain()；generateTerrain() 中地形高度由 roughness*height 参与噪声计算，存在真实地形反馈。",
+        "ok": 1
+      },
+      {
+        "name": "调整 Smoothness 滑块",
+        "expected": "地形表面平滑度发生相应变化",
+        "evidence": "smoothness 有 input 监听并更新数值、调用 generateTerrain()，但 generateTerrain() 从未读取 params.smoothness，地形几何不会因该参数变化，实际无平滑效果。",
+        "ok": 0
+      },
+      {
+        "name": "点击地形预设按钮",
+        "expected": "地形切换为 Mountains/Valley/Plateau 等预设，滑块与数值同步更新",
+        "evidence": "探针点击 Mountains/Valley/Plateau/Canyon/Island/Plains 均报告 DOM 变化，新增 JS 错误 0；applyPreset() 会更新滑块并重新生成地形。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Generate New 生成新地形",
+        "expected": "生成一个不同形态的新随机地形",
+        "evidence": "探针点击后 DOM 变化=无；generateTerrain() 的噪声由 x/y 和固定常量确定，没有随机种子，相同参数下会重建完全相同的地形，用户看不到新地形。",
+        "ok": 0
+      },
+      {
+        "name": "分享/导出或协作项目",
+        "expected": "提供分享、导出或协作入口，能生成链接或邀请协作",
+        "evidence": "页面 HTML 中只有 header、controls-panel、info-panel，没有分享/导出/用户/协作相关按钮或入口，需求中的 share/collaborative projects 完全缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面 3D 场景可加载并可拖拽查看，Roughness/Height 滑块与预设按钮有真实反馈；但 Smoothness 滑块未参与地形计算、Generate New 只能重建相同地形，且分享/协作项目这一关键需求整体缺失，因此只能算部分可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) Smoothness 滑块会更新数值并触发重绘，但 smoothness 参数在 generateTerrain() 中完全未被使用，地形没有任何变化，属于核心调节无效/反馈错误；2) Generate New 按钮只按当前参数重新生成同一个确定性地形（无随机 seed，height/roughness 仅整体缩放高度，不产生新形状），单击后看不到新景观，核心操作无法产生预期结果。次要瑕疵：Roughness 与 Height 实际效果都是整体垂直缩放，命名和功能不完全一致；缺少保存/分享/协作入口；按钮点击后无成功/失败状态提示；loading 只首次出现，后续重生成无反馈；顶点/三角面数统计缺少说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉设计成熟，符合现代3D设计工具的风格。色彩搭配协调，深蓝色渐变背景与半透明玻璃拟态面板形成层次感，蓝色渐变（#4facfe→#00f2fe）作为强调色统一了标题、按钮和标签，视觉上具有科技感与专业感。布局清晰合理：顶部居中标题、左下控制面板、右侧信息面板，符合用户操作习惯；面板使用圆角、背模糊、半透明边框等设计，质感较好。字体选用Segoe UI等现代无衬线字体，标题使用渐变文字效果，组件（滑块、按钮、预设项）间距适中，交互状态（hover、active）有反馈。CSS细节专业，例如响应式媒体查询覆盖小屏，栅格按钮设计统一。信息面板的辅助文字颜色略偏暗（#aaa）稍影响可读性，但整体无碍。该界面与“3D地形设计平台”的用户需求高度契合，兼具功能清晰度与视觉吸引力。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.3,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_004285.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Generate New",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset View",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Mountains",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Valley",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Plateau",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Canyon",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Island",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Plains",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

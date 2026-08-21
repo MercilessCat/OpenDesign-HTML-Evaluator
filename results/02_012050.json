@@ -1,0 +1,181 @@
+{
+  "row_id": "02_012050",
+  "shard": 2,
+  "id": 12050,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Develop an educational platform showcasing indigenous land management practices through interactive visualizations. Users explore maps, historical data, and case studies. Features include collaborative spaces for indigenous communities, educational resources, and forums for discussing sustainable practices and sharing knowledge, promoting cultural understanding and environmental stewardship.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12981,
+  "html_sha256": "59290f5eeff74cce791a3f26b6f588979757dd5ed49ba295094f3f05a4b67ca3",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "主导航切换分区",
+        "expected": "点击导航链接后切换到对应内容区块（可视化/社区/资源）",
+        "evidence": "导航链接均为 href=\"#\"，页面中没有对应 section 或路由；探针显示点击后有 URL hash 变化和焦点样式，但主体内容无任何切换。",
+        "ok": 0
+      },
+      {
+        "name": "探索地图区域",
+        "expected": "点击 Explore Regions 后展示可交互的地图或区域数据",
+        "evidence": "地图区域只是带渐变色和装饰色块的静态 div，没有地图库、标记或交互逻辑；按钮无事件绑定，点击无业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "查看历史数据图表",
+        "expected": "看到历史数据可视化并能获得图表反馈",
+        "evidence": "两个 Chart.js 图表已成功初始化，canvas 正常渲染，页面无 JS 错误；图表具备 Chart.js 默认的悬停提示反馈，是页面中唯一可用的可视化交互。",
+        "ok": 1
+      },
+      {
+        "name": "添加数据",
+        "expected": "点击 Add Data 后出现添加入口或完成数据提交",
+        "evidence": "Add Data 按钮没有事件绑定，也没有表单、弹窗或数据上传界面；点击后无实质功能发生。",
+        "ok": 0
+      },
+      {
+        "name": "查看所有案例研究",
+        "expected": "点击 View All Studies 后展示完整案例列表或详情",
+        "evidence": "按钮无事件绑定，案例区域仅有三条静态条目；点击后没有展示更多案例或任何内容变化。",
+        "ok": 0
+      },
+      {
+        "name": "参与社区讨论 / 浏览教育资源",
+        "expected": "能够进入论坛讨论或打开教育资源库",
+        "evidence": "Join Community、Join Discussion、Browse Library 等按钮均无事件绑定；社区和资源区域只是静态卡片，没有论坛、评论或资源浏览功能。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上覆盖了地图、图表、案例、社区和教育资源，但绝大多数关键功能是占位入口：导航无实际路由，地图不可交互，多个按钮无事件绑定，论坛和资源库未实现。仅 Chart.js 图表渲染有效，因此核心任务——通过交互式可视化探索数据并参与社区——基本无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 导航链接（Home、Visualizations、Community、Resources）均为 # 占位链接，点击后仅跳转页面顶部，无法到达对应内容，主要入口无实际导航功能；2. 核心操作按钮（Explore Regions、Add Data、Join Community、View All Studies、Join Discussion、Browse Library）均未绑定任何事件，点击后无响应，用户无法完成探索地图、添加数据、加入社区等核心任务，核心流程卡死。次要瑕疵：地图区域无图例或可交互提示，用户会误以为地图本身可点击探索；图表缺少Y轴单位及图例说明，部分标签缩写（如Fire Mgmt、Water Cons）不够明确；尽管页面视觉设计整洁、信息分区清晰，但交互层的整体失效使页面沦为一个仅有展示功能的静态模板，无法支撑“教育平台”的核心目标。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面整体视觉效果良好，符合现代数据可视化教育平台的风格。色彩以绿色系为主，搭配灰色背景和白色卡片，营造出自然、生态、可信赖的氛围，与“原住民土地管理”主题高度契合。布局采用三栏网格结构，左侧地图和图表区域占比合理，右侧案例、社区讨论和资源卡片形成清晰的信息层级，整体排布协调，阅读顺序流畅。组件设计较为精致，圆角卡片、柔和阴影、悬停上浮动效以及渐变背景的运用提升了视觉质感，专业度较好。图表使用 Chart.js 渲染，色彩选择与整体风格统一，增强了数据展示的可读性。Typography 采用系统默认字体，虽清晰可用但缺少品牌个性；地图区域为抽象装饰背景而非真实可交互地图，视觉冲击力稍弱。总体而言，页面在美学设计、色彩搭配和布局规范方面表现出色，仅有少量细节可再打磨，评分 8 分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_012050.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Visualizations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Community",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Regions",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Data",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View All Studies →",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

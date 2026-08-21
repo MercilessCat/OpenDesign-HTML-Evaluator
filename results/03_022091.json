@@ -1,0 +1,84 @@
+{
+  "row_id": "03_022091",
+  "shard": 3,
+  "id": 22091,
+  "category": "Game dev",
+  "prompt": "Design an exploratory adventure game set in a magical forest. Provide interactive maps, enchanted puzzles, and a storyline that adapts to player choices. Encourage community collaboration for uncovering secrets and offer a reward system for discovering rare elements and hidden paths, ensuring an immersive experience.",
+  "html_len": 25906,
+  "html_sha256": "eb6acc9c65d685dda820f4492db3daec10f4566c36c76ac55fca3b7a9550788b",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击“Begin Your Quest”开始游戏",
+        "expected": "开始界面隐藏，进入游戏主界面，显示地图和探索区",
+        "evidence": "探针点击后DOM有变化且无JS错误；代码中startGame将startScreen置为none、gameScreen置为flex，并输出欢迎日志",
+        "ok": 1
+      },
+      {
+        "name": "点击地图上的地点（如Whispering Grove）",
+        "expected": "显示对应地点的名称、描述、可选行动按钮，记录日志并更新发现状态",
+        "evidence": "代码中.location有click监听，但visitLocation中clearActiveLocation后执行document.getElementById(locationId)，locationId来自data-location为'grove'等，而页面元素id为'whispering-grove'，匹配不到元素，会抛出TypeError，导致updateUI和logStory不执行，a",
+        "ok": 0
+      },
+      {
+        "name": "点击地点生成的选择按钮（如Follow the whispers）",
+        "expected": "执行对应冒险行动，更新日志、物品、魔法能量和发现点数",
+        "evidence": "choice-btn由JS动态创建并绑定action；各action函数会更新gameState并调用updateUI，逻辑完整且无JS错误，玩家可正常进行分支选择",
+        "ok": 1
+      },
+      {
+        "name": "点击“New Adventure”重新开始",
+        "expected": "重置游戏状态并返回开始屏幕",
+        "evidence": "restartBtn绑定resetGame，重置所有游戏状态，隐藏结束界面并显示开始界面，逻辑正确",
+        "ok": 1
+      },
+      {
+        "name": "社区协作/共享秘密入口",
+        "expected": "提供玩家协作发现秘密的机制（如聊天、论坛、共享标记）",
+        "evidence": "页面没有任何社区/协作相关入口或功能，需求中的社区协作未实现",
+        "ok": "NA"
+      }
+    ],
+    "reason": "游戏主流程部分可用：开始游戏、选择分支、重新开始均正常。但核心探索交互——点击地图地点存在JS缺陷（data-location与元素id不匹配），导致日志、统计和激活状态无法更新，控制台会报错，显著影响探索体验；同时社区协作功能完全缺失，未完全满足需求。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 8.0,
+    "reason": "核心可用性问题：无。主要入口、地图地点、选项按钮均有实际响应，开始→探索→收集→达成条件→结束可完整走通。次要瑕疵：1) 重置/开始新冒险后，旧故事日志、选项和地点高亮未清空，容易让人误以为没有真正重开；2) 收集水晶碎片一次+0.5，物品栏直接显示小数，和整数物品/胜利条件不一致；3) 同一地点选项可无限重复点击，重复同一操作即可刷满道具，缺少锁定或状态变化；4) 部分选项如“发现秘密通道”“激活传送门”仅输出文字，没有地图/奖励上的可感知结果；5) 首屏缺少玩法说明/图例，新手需要自行摸索；6) 社区协作功能未实现，但不影响单人主流程。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉设计优秀，成功营造出奇幻森林冒险游戏应有的神秘和沉浸感。主色调使用霓虹青光（#00ffcc）搭配深色半透明背景，配合发光效果、渐变字体和脉冲动画，视觉冲击力强，主题一致性较高。地图区域采用嵌入式SVG背景，五个地点按钮以渐变圆形的形态分布，既直观又富有游戏感。按钮设计和悬停动效（上浮、阴影加深）质量较好，物品栏和状态栏结构清晰，信息展示完整。故事日志区域增强了叙事沉浸体验。CSS变量使用、Flex布局、圆角、阴影、动画和响应式媒体查询均体现了专业水准。\n\n扣分点：整体背景渐变（深蓝+红色）与页面内部青绿色魔幻主题略有冲突，视觉上不够统一；游戏界面的绝对定位布局在窄屏下地图标记可能重叠；某些内联SVG和音频数据URI可读性较差，略显粗糙。但整体不影响其作为高品质游戏界面的视觉效果。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 7.0,
+  "baseline_overall": 6.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_022091.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Your Quest",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "row_id": "04_019043",
+  "shard": 4,
+  "id": 19043,
+  "category": "Website",
+  "prompt": "Design a virtual fairground for showcasing prototypes, featuring interactive exhibits, feedback sessions, and networking opportunities. Users can present innovations, engage with potential collaborators, and receive community input, accelerating the development and realization of new ideas.",
+  "html_len": 37043,
+  "html_sha256": "5a9413592225e10f6894b2a88443d2be6365a7c5aaff1de81f7d1464b951c8b3",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航到 Exhibits 区域",
+        "expected": "点击导航链接后页面滚动到展品区域",
+        "evidence": "探针点击 <a> \"Exhibits\" 后 DOM 变化=有，且页面跳转，无JS错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Explore Exhibits 按钮",
+        "expected": "浏览全部展品或滚动到展品区域",
+        "evidence": "探针点击 <button> \"Explore Exhibits\" 后 DOM 变化=无，新增JS错误=0，新增网络请求=0，无任何反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Present Your Idea 按钮",
+        "expected": "进入提交创新项目的流程或展示表单",
+        "evidence": "探针点击 <button> \"Present Your Idea\" 后 DOM 变化=无，新增JS错误=0，新增网络请求=0，无任何反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Fairground 按钮",
+        "expected": "加入展会/注册入口，触发相关流程",
+        "evidence": "探针点击 <button> \"Join Fairground\" 后 DOM 变化=无，新增JS错误=0，新增网络请求=0，无任何反馈。",
+        "ok": 0
+      },
+      {
+        "name": "提交反馈",
+        "expected": "输入反馈内容并点击提交后出现确认或内容更新",
+        "evidence": "反馈区域的 textarea 和 Submit Feedback 按钮没有 form 包裹，HTML 中按钮无事件绑定，全局无JS脚本来处理提交；同类按钮在探针中点击均无反应，功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "进入聊天室",
+        "expected": "点击 Enter Room 后进入聊天室或展开相关界面",
+        "evidence": "Networking 模块的 Enter Room 按钮无事件绑定，无跳转或路由逻辑，纯占位入口；探针测试同类按钮均无反应。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉完整，但核心功能大面积失效：导航锚点可用，但主要 CTA（Join Fairground、Explore Exhibits、Present Your Idea）点击无任何反馈，反馈提交和社交聊天入口均为占位无实现。用户无法完成展示创新、获得社区反馈或与潜在合作者互动等核心任务，仅能浏览静态内容。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在多个核心可用性问题：1. 主导航/CTA按钮（Join Fairground、Explore Exhibits、Present Your Idea）点击后无任何DOM变化、无反馈、无页面跳转，用户无法通过这些主要入口完成任务（如浏览展品、提交创意）。2. 反馈提交按钮（Submit Feedback）和项目提交表单按钮同样没有任何事件绑定，点击后不会提交内容，核心的“获取社区反馈”和“展示创新”流程无法完成。由于核心操作大量失效，页面虽然信息分层清晰、视觉设计精美，但本质上只能作为静态展示，无法支持用户完成虚拟博览会的主要目标，因此评分严重下调。次要瑕疵：部分图标按钮无文字标签，可访问性不足；反馈区缺少关于评分含义或如何参与互动的说明；在线状态和用户头像仅为占位渐变，未提供真实内容或引导；可选的社区功能未实现但并未影响核心静态浏览。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，采用暗色渐变背景与靛蓝/紫/粉高亮色搭配，营造出科技感与创新氛围，符合‘虚拟游乐场’的现代创意调性。色彩搭配协调统一，主色、辅助色与背景层次分明，渐变文字和渐变按钮增强了视觉焦点。布局结构清晰，导航、Hero、展品卡片、反馈区、社交区和提交区均采用网格或卡片式排布，间距均匀，节奏感良好。字体选用Poppins，圆润现代，与整体风格匹配；卡片圆角、毛玻璃效果、悬浮动效及脉冲动画提升了交互质感，CSS设计专业度高。组件设计细致，如状态进度条、星级评分、评论区等，功能指引明确。虽然未使用真实图片（以图标占位），略显抽象，但作为原型展示页面，其设计语言成熟、现代，整体美观度优秀。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_019043.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Exhibits",
+      "href": "#exhibits",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Feedback",
+      "href": "#feedback",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Networking",
+      "href": "#networking",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Present",
+      "href": "#present",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Fairground",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Exhibits",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Present Your Idea",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

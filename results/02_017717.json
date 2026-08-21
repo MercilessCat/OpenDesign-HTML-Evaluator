@@ -1,0 +1,176 @@
+{
+  "row_id": "02_017717",
+  "shard": 2,
+  "id": 17717,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Visualize solar panel efficiency impacted by dust accumulation in real-time. Users explore data models predicting cleaning schedules and efficiency gains. Features include interactive graphs, AI-driven cleaning forecasts, and a community forum for sharing innovative dust mitigation techniques.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14961,
+  "html_sha256": "36885af8fa6bc0d7a89ab5691cd2e0b6596740c006a02a589db131e8356562ee",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "切换图表时间范围（30天）",
+        "expected": "点击后效率图表应切换为30天数据展示",
+        "evidence": "探针点击“30 Days”按钮后DOM无变化；HTML中按钮无data-range属性，JS选择器querySelectorAll('[data-range]')未匹配到按钮，事件未绑定，图表数据不更新。",
+        "ok": 0
+      },
+      {
+        "name": "参与社区论坛（Join Discussion）",
+        "expected": "点击后应进入或展开社区讨论功能",
+        "evidence": "探针点击“Join Discussion”按钮后DOM无变化；按钮无事件监听，纯静态入口，需求中的社区分享功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "自定义预测模型（Customize Model）",
+        "expected": "点击后应打开模型配置界面或交互表单",
+        "evidence": "探针点击按钮后DOM无变化；按钮无事件绑定，无弹窗/表单，需求中的探索数据模型功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "导航至Community页面",
+        "expected": "点击导航应切换到社区板块或滚动到相应内容",
+        "evidence": "探针点击后仅URL发生变化（href=\"#\"），页面主体无内容切换；HTML中无对应锚点或路由逻辑，导航为占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "移动端展开菜单",
+        "expected": "点击汉堡图标应展开导航菜单",
+        "evidence": "探针点击无文本按钮后DOM无变化；按钮无事件绑定，移动端菜单功能未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉和静态内容完整，Chart.js图表正常渲染，但核心交互大面积失败：时间范围切换、社区论坛参与、预测模型定制均无响应，导航为占位死链，移动端菜单失效。需求中声明的交互式数据探索、AI预测定制和社区分享功能均未实现，仅能作为静态展示页使用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 顶部导航（Dashboard、Models、Community、Resources）均为 href=\"#\" 占位链接，点击后仅跳转至页面顶部，无法到达任何目标内容或视图，导航形同虚设。\n2. 图表时间范围切换按钮（7 Days、30 Days、90 Days）点击后仅切换按钮高亮样式，图表数据完全不变化，核心控件调节无效。\n\n次要瑕疵：\n1. “Join Discussion”和“Customize Model”按钮无任何点击反馈或功能，属未实现模块。\n2. 移动端汉堡菜单按钮点击无反应，无下拉菜单展示。\n3. 社区论坛箭头按钮点击无效果。\n4. 所有指标数据为静态模拟值，未体现“实时”可视化特性，但标题与交互暗示其为实时更新。\n5. 页面布局在桌面端无滚动，信息密度尚可，但核心交互全部失效导致整体“能用但不好用”。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用现代化卡片式布局与Tailwind CSS，结构清晰且信息层级分明。色彩以蓝色为主色调，橙色作为强调色，搭配灰色背景和白色卡片，对比度良好且符合光伏能源主题。图表（Chart.js）与进度条等数据可视化元素增强了专业感，卡片悬停效果和按钮状态反馈提升了交互精致度。header/footer设计简洁，字体和间距控制得当，整体符合现代数据可视化Dashboard的设计规范。主要扣分点在于页面信息密度较高，部分区域（如右侧栏目）略紧凑，且时间范围按钮的实际交互未同步更新图表，稍显功能与视觉不匹配，但整体美观度良好，评分8分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_017717.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Models",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "7 Days",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "30 Days",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "90 Days",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

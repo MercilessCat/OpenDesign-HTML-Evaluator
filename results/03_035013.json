@@ -1,0 +1,53 @@
+{
+  "row_id": "03_035013",
+  "shard": 3,
+  "id": 35013,
+  "category": "Game dev",
+  "prompt": "Develop a captivating platform for training virtual robot pets. Users teach tricks, customize appearances, and enter competitions. Features include a nurturing environment, skill progression, and a vibrant community for sharing experiences. A delightful blend of creativity and strategy, fostering connection with digital companions in an interactive, playful world.",
+  "html_len": 24814,
+  "html_sha256": "01d748c30fcdf9d46c82a46d002d277334d2fde1abf5d071501896a901b9723b",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_035013.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Training",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

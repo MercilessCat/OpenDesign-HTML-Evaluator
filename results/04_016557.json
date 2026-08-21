@@ -1,0 +1,181 @@
+{
+  "row_id": "04_016557",
+  "shard": 4,
+  "id": 16557,
+  "category": "Website",
+  "prompt": "Build an innovative platform mapping the global collective unconscious through user-contributed dreams, thoughts, and cultural symbols. Utilize AI to reveal patterns and connections, offering insights into shared human experiences. Inspire creativity with collaborative storytelling and visualizations, unlocking the mysteries of the collective mind.",
+  "html_len": 35123,
+  "html_sha256": "1b7f5a7b707f26f12dad126101f4467b015317575aa4fc076475bc4c7f332c94",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航链接跳转到对应板块",
+        "expected": "点击导航的 Explore/Contribute/Insights 后页面滚动到对应 section",
+        "evidence": "HTML 中导航链接 href=\"#explore\" 等与对应 section id 匹配，属于有效锚点跳转；探针点击后 DOM 无变化但锚点滚动不改变 DOM，且无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Explore MindMap 按钮",
+        "expected": "打开或跳转到全局思维导图可视化，或至少触发可见反馈",
+        "evidence": "按钮为无 href、无事件绑定的 <button>；探针点击后 DOM 无变化、无新增网络请求、无 JS 错误，纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Contribute Your Experience 按钮",
+        "expected": "进入贡献流程或滚动到贡献表单",
+        "evidence": "按钮无事件绑定；探针点击后 DOM 无变化；页面中部虽有贡献表单，但该按钮未关联任何跳转或展开逻辑，属占位。",
+        "ok": 0
+      },
+      {
+        "name": "提交快速贡献表单",
+        "expected": "梦境内容提交成功并显示确认/感谢反馈",
+        "evidence": "form 无 action、无 JavaScript submit 处理；Submit Dream 按钮仅触发默认 GET 提交，刷新页面但无数据入库或成功提示，核心贡献功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Recording / View Full Atlas 等探索按钮",
+        "expected": "打开记录工具或完整图集、模式浏览页",
+        "evidence": "这些按钮均为无事件 <button>；探针对 View Full Atlas 点击后 DOM 无变化，同类入口也未绑定任何交互逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Community 按钮",
+        "expected": "进入注册/加入社区流程",
+        "evidence": "按钮无 href、无事件绑定；探针点击后 DOM 无变化、无网络请求，无法开启任何社区加入流程。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面是一个视觉精美的静态落地页，导航锚点和 Three.js 3D 可视化能够正常展示，但需求核心的用户贡献、AI 模式探索、社区加入等关键功能均未实现：所有主要按钮（Explore MindMap、Contribute、Start Recording、View Full Atlas、Join Community）都是无事件占位，快速贡献表单提交无有效反馈，导致主要任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：1) 页面所有主要入口和导航点击无任何实际反馈——顶部导航（Home/Explore/Contribute/Insights）点击后DOM无变化、无网络请求，属于‘主要入口/导航点击无实际反馈’；2) 核心操作按钮（Explore MindMap、Contribute Your Experience、View Full Atlas等）全部点击无效，无法开始探索或提交内容，属于‘核心操作无法完成或流程卡死’；3) 页面所有交互（包括提交表单按钮）均未绑定任何点击逻辑，整个页面只渲染视觉效果而无可用的功能入口，用户无法完成任何目标任务。次要瑕疵：1) 图表区域缺少标题/图例说明，且Chart.js未初始化，用户难以理解其含义；2) 页面数据（如12.8M+ Dream Entries）无来源说明，易引发对真实性的疑感；3) 缺少帮助文字或引导流程，用户对‘Contribute’的具体步骤不明确；4) 页脚部分链接（如API Access、Research Papers）为占位符，在非主流程模块中未实现。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "该页面视觉设计专业且现代，整体呈现高品质的沉浸式体验。色彩搭配以深色渐变背景（#0f172a→#1e293b）结合紫色系（#6366f1→#8b5cf6→#ec4899）的霓虹渐变，既符合“潜意识映射”的神秘与科技感，又形成强烈视觉焦点。布局结构清晰，导航、Hero、统计、探索、贡献、洞察、页脚各区块层次分明，网格与卡片式设计兼顾信息展示与呼吸感。字体统一使用Inter，字重层次得当，标题与正文对比明确。卡片采用glass拟态、hover上浮及发光阴影，细节丰富，提升质感。动态元素（Three.js粒子网络、脉冲动画、浮动效果）强化了科技氛围，与平台定位高度契合。无明显设计缺陷，仅存在按钮交互无响应等非视觉问题，不影响外观评分。综合判断，该页面视觉吸引力强、色彩和谐、布局协调、CSS技法专业，符合现代网页设计规范，并精准呼应了用户关于“集体无意识映射平台”的创意愿景，属于上乘之作。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_016557.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore",
+      "href": "#explore",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Contribute",
+      "href": "#contribute",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Insights",
+      "href": "#insights",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore MindMap",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Contribute Your Experience",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Full Atlas",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

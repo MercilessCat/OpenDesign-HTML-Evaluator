@@ -1,0 +1,176 @@
+{
+  "row_id": "02_031680",
+  "shard": 2,
+  "id": 31680,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Preserve history digitally with a platform dedicated to visualizing artifact conservation techniques. Users explore animated restoration processes, compare methods across cultures, and engage with interactive timelines. Key features include expert interviews, case studies, and virtual conservation labs, fostering appreciation and knowledge of heritage preservation.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13621,
+  "html_sha256": "368a4bab7424f8883a0fafd1ce9340bce86cbec3110729adf6443c3a05ffd596",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航菜单切换（Home/Techniques/Timeline/Experts）",
+        "expected": "点击后应切换到对应内容区块或路由，展示对应数据可视化模块",
+        "evidence": "所有导航链接均为 href=\"#\" 占位；探针显示点击后虽有页面跳转（hash变化）但无实际内容切换，无新增网络请求/JS错误",
+        "ok": 0
+      },
+      {
+        "name": "Explore Now / Start Exploration 主按钮",
+        "expected": "点击后应启动探索流程或进入交互可视化，如展开动画、显示案例或切换到实验室",
+        "evidence": "探针点击“Explore Now”和“Start Exploration”后 DOM 无任何变化，新增JS错误=0，页面无反馈",
+        "ok": 0
+      },
+      {
+        "name": "View Case Studies 按钮",
+        "expected": "点击后应展示案例研究内容或切换至案例列表",
+        "evidence": "探针点击后 DOM 无变化，新增JS错误=0，新增网络请求=0，按钮无事件绑定效果",
+        "ok": 0
+      },
+      {
+        "name": "播放/暂停恢复动画按钮",
+        "expected": "点击播放应启动恢复过程动画，进度条/步骤应变化",
+        "evidence": "探针点击播放按钮后 DOM 无变化，页面没有 canvas/WebGL 或任何JS动画逻辑，仅静态占位图",
+        "ok": 0
+      },
+      {
+        "name": "Compare All Methods / Explore Full Timeline / Watch Full Interview 入口",
+        "expected": "点击后应展开方法对比、完整时间线或播放专家访谈",
+        "evidence": "这些按钮均为普通静态按钮，探针点击后 DOM 无变化，无路由、无弹窗、无内容加载；页面也未实现虚拟实验室或交互式时间线",
+        "ok": 0
+      }
+    ],
+    "reason": "页面上所有关键交互入口（导航、探索按钮、播放按钮、对比/时间线/访谈入口）均为占位或静态按钮，点击无任何内容反馈。用户需求中的核心功能——动画恢复过程、跨文化方法对比、交互式时间线、专家访谈、虚拟实验室——均未实现，仅有静态展示。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\\n1. 导航菜单（Home/Techniques/Timeline/Experts）均为纯占位链接，点击后仅发生页面跳转（URL#变化），无法导航到对应内容区块，用户无法通过导航找到预期信息。\\n2. 多个核心操作按钮（Explore Now、Start Exploration、View Case Studies、Compare All Methods、Explore Full Timeline、Watch Full Interview）点击后均无任何反馈或功能响应。\\n3. 修复过程可视化模块的播放/暂停按钮点击无效，交互模拟动画无法启动，进度条仅为静态装饰，核心可视化功能不可用。\\n\\n次要瑕疵：\\n- 页面缺少交互使用说明或引导，用户难以判断哪些元素可操作、操作后会发生什么。\\n- “Interactive Visualization”表述与页面的静态行为不符，存在模式命名与实际情况出入。\\n- 专家访谈、案例研究、虚拟实验室等模块仅有按钮入口，未提供实际深度内容。\\n- 卡片hover位移、脉冲动画等视觉细节正常，但属于锦上添花，不弥补核心交互缺失。\"",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "这是一个设计精良且具有现代感的单页网站，符合用户关于文化遗产保护数据可视化平台的主题需求。视觉呈现特点如下：\n\n1. **整体视觉吸引力**：采用清新的蓝白渐变背景搭配亮蓝色主色（#2563eb）和橙色点缀（#f97316），形成鲜明且专业的视觉对比，既营造出科技氛围，又不失文化机构的权威感。\n\n2. **色彩搭配合理**：主色、辅助色与中性色的使用平衡，各区块通过不同背景色（如蓝、橙、绿、紫）区分功能模块，同时保持整体色彩一致性，没有刺眼或冲突的配色。\n\n3. **布局协调**：栅格结构清晰，左侧主视觉区域（Hero和可视化模拟区）占三分之二宽度，右侧信息卡片列（方法对比、时间线、专家访谈）占三分之一，视觉层次分明，且内容在视口内完整呈现。\n\n4. **字体与间距**：使用Inter字体，标题与正文字号层级清晰，字重变化有节奏感；卡片内边距（p-6/p-8）、元素间距（space-y-8）及圆角（rounded-xl/rounded-2xl）统一且舒展，增强了页面的呼吸感和精致度。\n\n5. **CSS专业性**：基于Tailwind实现了流畅的悬停效果（卡片上移+阴影）、渐变Hero区、动画指示点（timeline-dot）、进度条及脉冲动画，虽然视觉表现仍是静态，但组件设计规范、交互反馈丰富。\n\n6. **现代规范与主题对齐**：整体设计符合当前主流SaaS/数字化平台美学，卡片式布局、图标搭配、渐变背景等手法契合“数据可视化”主题。唯一不足在于交互式可视化区域仅为占位模拟框，缺少真实图表或更具体的数据展示手法（如SVG/Canvas），使页面“数据可视化”这一核心功能的视觉表现力稍显单薄，但作为单页整体设计而言已相当出色。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_031680.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Techniques",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Timeline",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Experts",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploration",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Case Studies",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-play text-primary",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

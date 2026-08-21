@@ -1,0 +1,181 @@
+{
+  "row_id": "01_031171",
+  "shard": 1,
+  "id": 31171,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Develop an immersive platform for understanding and improving AI prediction interfaces. Users can explore interactive modules explaining prediction logic, engage with real-world application demos, and participate in discussions on ethical AI design and transparency in digital interfaces.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10780,
+  "html_sha256": "edaefb3e0b64735cb483c9a9f418ced9f88d460341767c37a41397fe4609d0d0",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（Modules/Demos/Ethics/Community）",
+        "expected": "跳转到对应的内容板块或触发页面切换",
+        "evidence": "所有导航链接 href=\"#\"，页面中无对应锚点或路由；探针显示点击仅发生 URL 变化/跳转顶部，无内容区切换，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Learning 按钮",
+        "expected": "进入学习模块或开始交互式学习流程",
+        "evidence": "探针点击后 DOM 无变化、无 JS 错误、无网络请求；HTML 中该按钮未绑定任何事件，点击无反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Demos 按钮",
+        "expected": "展示真实世界 AI 预测应用演示",
+        "evidence": "探针点击后 DOM 无变化、无 JS 错误、无网络请求；按钮无事件绑定，未实现任何演示功能",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Module 按钮",
+        "expected": "打开相应模块详情或启动交互式可视化",
+        "evidence": "探针点击后 DOM 有变化，但仅来自父级 .module-card 的 hover transform 样式；JS 只绑定了 mouseenter/mouseleave，未提供点击业务反馈，模块内容完全未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started 按钮",
+        "expected": "开始使用平台或进入下一步流程",
+        "evidence": "探针点击后 DOM 无变化、无 JS 错误、无网络请求；按钮无点击事件，是纯占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击社交媒体图标",
+        "expected": "跳转到对应社交平台主页",
+        "evidence": "所有社交图标链接均为 href=\"#\"，无有效外部地址；点击仅可能产生锚点变化，无实际外链反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面仅完成静态视觉展示，所有核心交互入口（导航、按钮、社交链接）均为占位或无事件绑定，未实现用户命令要求的交互模块、真实应用演示和伦理讨论功能；仅有的 JS 是卡片 hover 样式，整体功能性极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题，导致页面只能浏览、无法真正操作。首先，顶部导航（Modules/Demos/Ethics/Community）均为占位链接，点击后跳转到页面顶部，并未定位到对应内容或模块，属于主要入口无实质反馈。其次，“Get Started”“Start Learning”“View Demos”等主要按钮点击后没有任何响应或内容变化，核心操作无法完成。再者，“Explore Module”按钮点击也没有进入对应学习模块或展示任何新内容，交互流程处于死路。整体上，页面视觉和排版较清晰，信息结构也容易理解，但关键操作全部不可用，交互反馈缺失严重。次要瑕疵包括：页面实际内容可能超过一屏，未完全满足“无需滚动即可看到全部内容”的要求；社区、伦理讨论等模块只有入口占位，未实现实际功能；部分交互仅有悬停样式变化，缺少点击后的明确反馈。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "整体视觉是干净现代的科技类落地页，蓝紫渐变主色与灰白背景形成清晰对比，符合AI预测与透明化主题。布局层级清楚：头部导航、Hero区、功能卡片、模块卡片、页脚结构完整，间距和圆角统一，按钮与卡片hover过渡动效、Tailwind配置使CSS具备一定专业度。扣分点：页面缺少实际图片、插画或可视化示例，视觉信息维度偏单一，略偏模板化；导航链接为占位符，部分按钮点击无实际反馈，削弱了“沉浸式平台”的完整感；Hero与三个模块同屏内容量较大，在常见视口下可能无法严格保持单屏全览，整体略有拥挤感。总体达到现代UI中上水准，但未到惊艳。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_031171.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Modules",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Demos",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Ethics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Learning",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Demos",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Module",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

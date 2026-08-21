@@ -1,0 +1,136 @@
+{
+  "row_id": "03_002304",
+  "shard": 3,
+  "id": 2304,
+  "category": "Game dev",
+  "prompt": "Create a racing game website set on a lunar landscape, where users compete in gravity-defying races. Features include customizable rovers, real-time multiplayer modes, and dynamic track environments. Encourage creativity by allowing users to design their tracks and share them with the community, fostering competitive and cooperative play.",
+  "html_len": 23958,
+  "html_sha256": "da972d5dd32d137114094e7945b76f86cd6ed8baefb8f3d141764e21be9dc5e6",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "单人游戏",
+        "expected": "点击后进入漫游车选择界面",
+        "evidence": "探针点击 Single Player 后 DOM 变化=有，HTML 中事件绑定会 showScreen('roverSelect')，无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "多人模式",
+        "expected": "进入多人游戏大厅或匹配界面",
+        "evidence": "探针点击 Multiplayer 后 DOM 变化=无，代码中仅 alert('Multiplayer mode coming soon!')，为占位提示，未实现任何多人功能。",
+        "ok": 0
+      },
+      {
+        "name": "赛道设计器",
+        "expected": "打开赛道编辑器，允许用户设计并分享赛道",
+        "evidence": "探针点击 Track Builder 后 DOM 变化=无，代码中仅 alert('Track builder coming soon!')，无编辑器界面或分享功能，属占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "漫游车改装",
+        "expected": "进入车库并自定义漫游车部件/外观",
+        "evidence": "探针点击 Rover Garage 后 DOM 变化=有，但只跳转到预设车辆选择页，页面仅有 4 种固定配置，无自定义控件，未实现需求中的可定制漫游车。",
+        "ok": 0
+      },
+      {
+        "name": "开始比赛",
+        "expected": "选择赛道后开始比赛，显示 HUD、倒计时并启动计时",
+        "evidence": "代码中 confirmTrackBtn 绑定 startRace，startRace 会显示 HUD/速度表并执行倒计时，随后启动计时器；页面无 JS 错误，单人流程可基本闭环。",
+        "ok": 1
+      }
+    ],
+    "reason": "单人游戏基本流程可走通，但需求中的核心功能大面积未实现：多人模式、赛道设计器均为占位弹窗，漫游车自定义仅提供预设选择而无实际改装，且动态赛道环境缺失。按标准关键入口有2个以上未实现，评分不高于4，结合实际可用性给3分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：\n1. 核心玩法不可用：键盘控制代码为空，玩家无法驾驶漫游车，车辆始终自动旋转，输入操作无任何效果；\n2. 游戏流程卡死：比赛开始后没有任何终点/圈数检测机制，计时器无限运行，Game Over界面永远无法触发，玩家无法完成比赛或退出比赛；\n3. 用户需求明确要求的核心功能缺失：Multiplayer和Track Builder按钮点击仅弹出'coming soon'提示，没有实际的多人模式或赛道设计功能；\n4. 赛道选择无效：点击赛道卡片无任何选中反馈，确认按钮不关联所选赛道，玩家无法真正选择赛道；\n\n次要瑕疵：\n1. 缺少操作说明和帮助文字，用户不知道该用什么键控制游戏；\n2. Rover Garage与Single Player进入的是同一个选车界面，没有真正的'车库自定义'功能；\n3. 比赛过程中无暂停或退出机制；\n4. 赛道预览卡片无选中高亮状态，视觉反馈不足；\n5. alert弹窗实现方式与页面整体风格不协调。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 6.8,
+    "reason": "页面整体视觉风格基本契合“太空赛车”主题，深蓝渐变背景与橙色主点缀形成鲜明的太空竞技感，3D场景（月球表面、星空、赛道）的设置也为页面增添了沉浸氛围。按钮采用橙色渐变、圆角与悬停阴影，交互反馈到位；速度表和HUD的布局合理，信息层级清晰。\n\n不过，UI细节仍显粗糙：字体仅使用Arial，缺乏游戏感与个性；赛道预览仅用简单CSS形状粗略示意，精致度不足；菜单卡片信息展示较为朴素，星级符号缺乏设计感；画面切换与组件样式也偏传统，缺少现代化的动效、玻璃拟态或更丰富的视觉装饰。整体属于“风格正确但执行中规中矩”的水平，在游戏站点中能保证基本观感，但尚未达到专业级视觉设计的精良程度。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.92,
+  "baseline_overall": 3.6,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_002304.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Single Player",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Multiplayer",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Track Builder",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Rover Garage",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

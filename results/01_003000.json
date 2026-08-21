@@ -1,0 +1,175 @@
+{
+  "row_id": "01_003000",
+  "shard": 1,
+  "id": 3000,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Design an interactive platform for secure voice authentication systems. Users can explore cutting-edge technology, implement voice-based security, and test voice print recognition. Features include voice sample libraries, security analytics, integration guides, and a secure sandbox environment for testing and development.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11486,
+  "html_sha256": "0d4375efc825622b3dfe4c4a487fb44b5951d1f4520543680dc30535ef89c1ba",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航 Technology 链接",
+        "expected": "导航至尖端语音认证技术内容页或对应内容区块",
+        "evidence": "导航链接 href=\"#\" 未绑定真实路由/事件；探针点击后虽触发 URL hash 跳转，但页面内容无任何切换，仍停留在原页面",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Sandbox Demo 按钮",
+        "expected": "启动语音认证沙箱演示，进入可测试的声纹识别环境",
+        "evidence": "JS 中仅添加 scale-95 类并弹出 alert(\"Launching secure sandbox environment...\")，没有真实沙箱初始化或测试流程",
+        "ok": 0
+      },
+      {
+        "name": "点击 Launch Sandbox Environment 按钮",
+        "expected": "启动安全沙箱开发环境供用户测试开发",
+        "evidence": "该按钮同样只触发 alert + 缩放动画，无环境加载、无网络请求、无真实功能接入",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Documentation 按钮",
+        "expected": "展示集成指南或文档内容",
+        "evidence": "JS 中未绑定此按钮的文档展示逻辑，探针点击后仅产生 scale-95 视觉动画，无文档弹窗或页面跳转",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 按钮",
+        "expected": "进入登录/注册流程",
+        "evidence": "探针点击后 DOM 无变化、无网络请求，JS 中未对该按钮绑定任何业务事件，完全无响应",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计符合需求（Tailwind 深色科技风、卡片布局、内容模块完整），但作为交互式语音认证平台的核心功能全部未实现：导航链接 href=\"#\" 无路由内容切换，沙箱/演示按钮仅弹出 alert，文档按钮无实际文档展示，Sign In 无任何事件绑定。用户无法完成探索技术、测试声纹识别、查阅集成指南等主要任务，核心交互大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 主导航（Technology/Security/Sandbox/Docs）全部为 href='#' 占位链接，点击后仅 hash 跳转、页面无内容切换或滚动定位，主要入口无实际反馈。\n2. 核心操作无法真正完成：「Start Sandbox Demo」「Launch Sandbox Environment」仅弹出 alert，并未实际启动沙箱；「View Documentation」「View Full Documentation」也未打开任何文档，流程卡死。\n3. 「Sign In」按钮点击后 DOM 无变化、无任何视觉或业务反馈，用户无法判断是否成功登录。\n\n次要瑕疵：\n- 页面为 100vh 固定视口且 overflow:hidden，导航锚点无对应目标区块可跳转；\n- 代码示例区域展示的是静态代码片段，与沙箱交互缺乏衔接；\n- 安全分析部分缺少数据图表或说明文字，卡片信息偏弱；\n- 社交图标按钮无文字或 aria-label，可访问性不足。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，采用深色渐变背景（#0f172a→#1e293b）搭配蓝色主色（#2563eb）与绿色强调色（#10b981），营造出符合语音安全认证主题的科技感与信任感。色彩搭配专业，对比度充足，文字可读性良好。布局采用经典的三列网格结构，左侧主内容区与右侧集成/沙盒区域划分清晰，信息层级明确，符合现代后台型产品页面规范。字体使用Inter，圆角卡片、阴影、悬停上浮、脉冲按钮等细节增强了精致度与交互反馈。卡片内图标与排版统一，功能分区合理。扣分点：页面内容量较大，理论上可能超出视口高度，与“无需滚动”要求略有冲突；设计上全部依赖字体图标，缺乏图片或图形辅助，视觉丰富度稍显单一；部分动画（如wave）定义了但未使用，略显冗余。整体而言，这是一款专业、美观且符合主题风格的现代UI设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_003000.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Technology",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Security",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Sandbox",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Docs",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Sandbox Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Documentation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Full Documentation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

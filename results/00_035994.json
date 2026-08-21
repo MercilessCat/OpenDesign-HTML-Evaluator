@@ -1,0 +1,84 @@
+{
+  "row_id": "00_035994",
+  "shard": 0,
+  "id": 35994,
+  "category": "3D design",
+  "prompt": "Design an interactive playground for generating fractal terrains using WebGL, allowing users to create, explore, and manipulate complex landscapes. Incorporate AI-driven algorithms to dynamically visualize evolving terrains. Include educational modules to understand mathematical principles behind fractals, fostering a deep appreciation for nature-inspired geometry in digital spaces.",
+  "html_len": 17466,
+  "html_sha256": "0f7937ecb323c657ccea836b867240bdebef9d73d938f03113bc6ccdc0db6283",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Cannot read properties of undefined (reading '0')",
+      "Cannot read properties of undefined (reading '0')",
+      "Cannot read properties of undefined (reading '0')",
+      "Cannot read properties of undefined (reading '0')"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_035994.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Generate New Terrain",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Camera",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

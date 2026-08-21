@@ -1,0 +1,181 @@
+{
+  "row_id": "05_036508",
+  "shard": 5,
+  "id": 36508,
+  "category": "Website",
+  "prompt": "Revitalize retro gaming culture through a digital gathering space. Connect with enthusiasts to organize online and real-world LAN parties. Share vintage game reviews, host tournaments, and exchange setup tips. Offer forums for tech support and nostalgia-driven discussions, fostering a sense of community among classic gaming fans.",
+  "html_len": 25763,
+  "html_sha256": "2cdd52734f661226b39b2ee545c1a9a99078be4fde64f912a45eb84e573ec222",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航 'Forums'",
+        "expected": "跳转/切换到论坛页面，显示帖子列表或讨论区内容",
+        "evidence": "探针：点击后仅 DOM 变化（URL hash 变为 #）、无新增网络请求、无 JS 错误；HTML 中 href=\"#\"，无路由或事件绑定，属于占位死链",
+        "ok": 0
+      },
+      {
+        "name": "点击 'Join Community' 按钮",
+        "expected": "打开注册/加入社区的弹窗或跳转注册页",
+        "evidence": "探针：点击后 DOM 变化=无、无新增网络请求、无 JS 错误，按钮无任何事件处理",
+        "ok": 0
+      },
+      {
+        "name": "点击 'Explore Communities' 按钮",
+        "expected": "展示社区列表或进入社区浏览页",
+        "evidence": "探针：点击后 DOM 变化=无、无新增网络请求、无 JS 错误，按钮仅静态样式无业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 'Register Now' 报名锦标赛",
+        "expected": "进入报名流程（表单/确认）",
+        "evidence": "HTML 中按钮无 onclick 或表单包裹，探针虽未直接覆盖此按钮，但页面全局无任何事件监听器注册；同类 pixel-button 均无反馈，判定为占位入口",
+        "ok": 0
+      },
+      {
+        "name": "在新闻订阅输入邮箱并点击 Go",
+        "expected": "订阅成功提示或表单提交反馈",
+        "evidence": "HTML 中 input 无 form 包裹，Go 按钮无事件绑定；探针未报告输入回车导致任何 DOM 变化，无网络请求产生",
+        "ok": 0
+      },
+      {
+        "name": "点击 'Host a LAN Party' 按钮",
+        "expected": "进入创建/组织 LAN 聚会的功能流程",
+        "evidence": "按钮无 js 事件绑定，页面无相关路由或弹窗；该按钮与已测试的同类按钮一样点击无任何响应",
+        "ok": 0
+      }
+    ],
+    "reason": "页面是纯营销落地页，视觉与 Three.js 粒子动画完整，但需求声称的社区论坛、锦标赛报名、LAN 聚会组织、评论分享、技术支持等核心功能全部以静态卡片/按钮占位，无任何真实业务反馈。导航均为 href=\"#\" 死链，所有 CTA 按钮点击后无 DOM/网络/路由变化，订阅表单也未实现。核心交互大面积失败，主要任务完全无法完成，仅给 2 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部导航（Forums/Tournaments/Reviews/Setups/Community）和底部导航均为href=\"#\"占位链接，点击只是hash跳转，没有进入任何实际页面，主要入口失效；2. Join Community、Explore Communities、Host a LAN Party、Register Now、Get Tickets、Sign Up、View Gallery、Watch Tours、Create Account、Learn More等核心按钮均未绑定有效事件，点击无反馈，用户无法完成加入社区、报名赛事、发起活动等核心任务；3. 事件和社区展示区没有可继续操作的流程，形成死路。次要瑕疵：页面视觉风格和信息层级清晰，但缺少必要的说明/图例；社区展示的图片区域是灰色占位；邮件订阅输入框无label且Go按钮无提交反馈；glitch效果和霓虹文字对可读性略有影响；'Upcoming Events'的日期为2023年，与‘即将到来’不一致。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力很强，深色渐变背景配合霓虹粉、蓝、黄等高饱和点缀色，营造出强烈的复古游戏氛围，与用户需求的retro gaming文化高度契合。色彩搭配大胆且协调，暗底亮色形成良好层次感。布局上采用标准且清晰的导航栏、Hero区、功能卡片、事件列表、展示区、CTA和页脚，结构完整，节奏流畅。设计细节专业：像素字体（Press Start 2P）、glitch文字效果、粒子动画、渐变边框、悬浮卡片、像素按钮等元素统一且精致，既体现了复古风格又符合现代网页设计规范。CSS技能成熟，动画与交互反馈丰富。小幅扣分在于部分像素字体用于段落性标题时阅读性略受影响，且整体视觉元素较多（如霓虹、渐变、glitch叠加）可能让部分用户觉得稍显花哨，但作为复古游戏社区定位，这种风格是合理且出彩的。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_036508.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Forums",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tournaments",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Reviews",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Setups",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "JOIN COMMUNITY",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "EXPLORE COMMUNITIES",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "row_id": "03_010587",
+  "shard": 3,
+  "id": 10587,
+  "category": "Game dev",
+  "prompt": "Design a dynamic website where users experiment with directing river flows through virtual landscapes. The core functionality involves environmental management and strategic planning. Key features include customizable terrain maps, flow simulation tools, and ecological impact assessments, encouraging users to balance aesthetics with environmental sustainability.",
+  "html_len": 17781,
+  "html_sha256": "f62c9217378fca16c246f4912e436384749e517aca74a8c0b6f421b245602b32",
+  "functional": {
+    "score": 6.0,
+    "raw_score": 6.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "选择地形工具（Raise/Lower/Smooth）",
+        "expected": "点击后切换当前地形编辑工具，并高亮当前工具按钮",
+        "evidence": "HTML/JS 中 raiseBtn/lowerBtn/smoothBtn 都绑定了 click 监听，会修改 gameState.tool 并切换 .active 类；探针因覆盖层未观测到 DOM 变化，但运行时无 JS 错误，且初始 Raise 已高亮，判定功能存在。",
+        "ok": 1
+      },
+      {
+        "name": "重置地形（Reset）",
+        "expected": "点击后地形顶点恢复平坦",
+        "evidence": "resetBtn 绑定 click 监听，将 terrain 所有顶点 y 值置 0 并更新法线；这是 WebGL/Three.js 操作，探针无法通过 DOM 变化直接看到，但无 JS 错误，功能逻辑已初始化。",
+        "ok": 1
+      },
+      {
+        "name": "在画布上拖拽修改地形",
+        "expected": "按住鼠标拖拽使地形隆起、下陷或平滑",
+        "evidence": "脚本中注册了 mousedown/mousemove/mouseup，并在 mousemove 时调用 modifyTerrain() 更新地形顶点；requestAnimationFrame 循环持续运行，且运行时无 JS 错误，符合可交互 WebGL 场景特征。",
+        "ok": 1
+      },
+      {
+        "name": "调整 Brush Size / Flow Rate 滑块",
+        "expected": "滑块数值标签实时更新，并改变地形编辑范围/水流参数",
+        "evidence": "两个 range input 都绑定了 input 监听，会更新 gameState 和对应数值标签；brushSize 会被 modifyTerrain 使用。Flow Rate 主要更新状态和标签，对水流动画实际影响较弱。",
+        "ok": 1
+      },
+      {
+        "name": "运行模拟（Run Simulation）",
+        "expected": "点击后生态指标更新，并给出模拟进行的视觉反馈",
+        "evidence": "探针点击后 DOM 变化=有；simulateBtn 监听会随机更新 flow/biodiversity/sediment/habitat 四个统计值并刷新健康度条，同时添加 animate-pulse 动画。",
+        "ok": 1
+      },
+      {
+        "name": "选择预设场景（Mountain Valley / Coastal Plain / Flood Control）",
+        "expected": "点击场景卡后加载对应地形和场景配置",
+        "evidence": "探针点击三个场景按钮后 DOM 变化均为无；HTML/JS 中未给场景卡绑定任何事件监听，属于纯展示/占位入口，点击无反馈。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面能加载且无 JS 错误，地形编辑、重置、画布拖拽、滑块和 Run Simulation 基本可用，生态指标面板也有反馈。但三个预设场景按钮完全没有事件绑定，点击无任何反应，且 Flow Rate/模拟对真实水流的仿真较弱，属于明显功能缺失，因此不能给高分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 三个Scenario按钮（Mountain Valley、Coastal Plain、Flood Control）均未绑定任何事件，点击无任何响应，且这些按钮占主界面交互控件近半数，视觉上呈现为主要功能入口——属于主要入口点击无实际反馈，核心可用性问题。2. Flow Rate滑块仅更新数值显示，实际不影响水流或任何模拟行为（waterMaterial.map未设置，代码中的offset更新无效果）——属于核心控件调节无效，另一个核心可用性问题。次要瑕疵：Smooth工具实为轻微Raise而非平滑算法，与命名行为有出入；How to Play面板悬浮于场景中央，遮挡地形编辑的主要视线和操作区域；地形高度变化幅度小且缺乏网格/颜色辅助，用户难以感知修改效果是否生效；Run Simulation仅随机改变生态数值，与地形操作缺乏明确因果关联；工具按钮激活态视觉区分较弱；水流动画效果实际未生效。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用深色半透明玻璃面板搭配蓝绿生态色调，符合游戏开发和环境管理主题。色彩搭配合理，蓝色主色调辅以绿、黄、紫等状态色，信息层次清晰。布局以四角分布为主，左上标题、右上生态状态、左下工具、右下场景，结构逻辑明确。组件设计精致，按钮有悬停浮动效果和渐变背景，滑块、统计卡片、进度条具有统一的圆角和阴影风格。CSS运用了backdrop-filter、关键帧动画、渐变等现代技术，符合当代游戏UI设计规范。\n\n扣分点：左侧中部说明面板与左下工具面板存在空间重叠，实际会导致Raise/Lower等按钮被遮挡，影响操作和视觉整洁度；页面元素在绝对定位下缺少响应式考虑，不同屏幕下可能进一步错位。整体仍是专业水准的设计。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.9,
+  "baseline_overall": 5.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_010587.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Raise",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.absolute top-1/2 left-4 ",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Lower",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.absolute top-1/2 left-4 ",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Smooth",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.absolute top-1/2 left-4 ",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Run Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Mountain Valley\nHigh elevation with stee",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.terrain-preview",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Coastal Plain\nGentle terrain near ocean",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.terrain-preview",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Flood Control\nManage seasonal flooding",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.terrain-preview",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

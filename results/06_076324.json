@@ -1,0 +1,200 @@
+{
+  "row_id": "06_076324",
+  "shard": 6,
+  "id": 76324,
+  "category": "Website",
+  "prompt": "Develop a directory for independent magic shows worldwide. Offer detailed profiles of performers, event schedules, and ticket purchasing options. Include user reviews, behind-the-scenes content, and virtual magic experiences to connect audiences with emerging talent and foster a vibrant community of magic enthusiasts.",
+  "html_len": 35439,
+  "html_sha256": "e729b462f365be8fba09d3a8f2a1f464a145ec8857780eeca3db1cc411d03f83",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航 Performers 浏览表演者",
+        "expected": "跳转或滚动到表演者目录",
+        "evidence": "探针点击后仅 URL 变为 #，DOM 无实质内容切换；HTML 中导航链接均为 href=\"#\" 占位，无路由或锚点绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击 Browse Performers 按钮",
+        "expected": "进入表演者列表或对应页面",
+        "evidence": "探针点击后 DOM 无变化、无网络请求；HTML 中按钮未绑定任何事件，纯静态占位",
+        "ok": 0
+      },
+      {
+        "name": "点击表演者卡片 View Profile 查看详情",
+        "expected": "打开表演者详细资料页或详情弹窗",
+        "evidence": "HTML 中 View Profile 按钮无 onclick/事件绑定，页面也无相关 JS 初始化；同类按钮均无响应",
+        "ok": 0
+      },
+      {
+        "name": "点击活动 Get Tickets 购票",
+        "expected": "进入购票流程或跳转购票页面",
+        "evidence": "HTML 中 Get Tickets 按钮无事件绑定，且探针验证周边按钮均无反应；购票功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Virtual Experiences 体验虚拟魔术",
+        "expected": "打开虚拟体验列表或进入直播/课程页面",
+        "evidence": "探针点击后 DOM 无变化、无网络请求；按钮无事件绑定，虚拟体验功能仅为静态展示",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Community 加入社区",
+        "expected": "跳转到注册或社区页面",
+        "evidence": "探针点击后 DOM 无变化、无网络请求；HTML 中按钮未绑定事件，社区入口为纯占位",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为静态展示型单页，所有核心交互入口（导航、浏览表演者、查看详情、购票、虚拟体验、加入社区）均为占位或未绑定事件。需求中表演者详细资料、购票、虚拟魔术体验、社区连接等功能均未实现，仅有视觉内容和静态卡片，核心任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1）主导航“Performers/Events/Virtual Shows/Community/Reviews”均为 href=\"#\" 占位链接，点击后不能进入对应列表或详情页，主入口实际不可用；2）“Browse Performers”“Join Community”“View Profile”“Get Tickets”“Book Now”“Explore Virtual Experiences”“Join Session”等核心按钮点击后 DOM 无变化、无网络请求、无结果反馈，无法完成查看表演者、购票、加入社区、预约虚拟体验等主任务；3）演出卡片和票务入口全部是死路，购票流程完全卡死。次要瑕疵：页面信息层级和视觉风格较清楚，但多张远程图片因 ERR_BLOCKED_BY_ORB 加载失败，造成破图；部分按钮缺少 disabled 态或说明文字，容易让用户误以为可操作。整体核心操作大量失效，任务无法完成，属于严重不好用，因此打 2 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面整体视觉设计质量很高，与「全球独立魔术表演目录」的主题定位高度契合。色彩系统采用深邃的暗色渐变背景（#0f172a→#1e293b）搭配紫罗兰/洋红渐变的点缀色（#6366f1→#8b5cf6→#ec4899），既营造出神秘、迷幻的魔术氛围，又保持了色彩之间的和谐与对比度。布局结构清晰：Hero区、特色魔术师卡片网格、活动列表、虚拟体验区、社区评论区块层级分明，呼吸感和节奏感把控到位。字体搭配专业，Playfair Display衬线标题配合Poppins无衬线正文，营造出优雅与摩登并存的气质。组件设计精致——rounded-2xl半透明毛玻璃卡片、渐变胶囊按钮、星级评分徽章、hover上浮阴影动效等均符合现代网页设计潮流，细节打磨到位。内置Three.js星星背景、闪烁动画和魔术轨迹等交互性元素进一步强化了沉浸式氛围。扣分点主要为：所有Unsplash外链图片因CORS原因加载失败，实际渲染中人物照片区块为空白，仅靠渐变底衬支撑视觉，这会在一定程度上削弱真实观看体验；此外页面部分按钮缺乏实际跳转行为。但单从代码所体现的设计规范与审美水准来看，该页面属于高质量的现代Web设计案例。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542740348-395022bbf8ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_076324.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Performers",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Events",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Virtual Shows",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Reviews",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Browse Performers",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Virtual Experiences",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

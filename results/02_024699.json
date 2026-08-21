@@ -1,0 +1,181 @@
+{
+  "row_id": "02_024699",
+  "shard": 2,
+  "id": 24699,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Explore secure data applications through an interactive platform showcasing homomorphic encryption's potential. Users delve into animated visualizations, access educational resources, and participate in collaborative projects. Key features include encryption simulations, expert-led webinars, and a knowledge hub, empowering users with insights into cutting-edge privacy-preserving technologies reshaping data security.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12718,
+  "html_sha256": "5f7a2fc2314750d3c5eea1037e880079f12566c11f17ca4963986451d693e7b6",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航链接 Platform",
+        "expected": "点击后切换到 Platform 板块或展示相关内容",
+        "evidence": "探针显示点击后有 DOM 变化，但实为 href=\"#\" 改变 URL hash，页面内容未发生实际变化；无 JavaScript 事件绑定，无响应式反馈",
+        "ok": 0
+      },
+      {
+        "name": "导航链接 Simulations",
+        "expected": "点击后展示模拟功能或内容区",
+        "evidence": "探针显示点击后仅 hash 改变，无实际内容切换；导航链接均为占位入口，无路由或事件处理",
+        "ok": 0
+      },
+      {
+        "name": "Get Started 按钮",
+        "expected": "点击后触发注册/登录流程或打开主要功能",
+        "evidence": "探针显示点击后 DOM 无变化、无网络请求、无 JS 错误；按钮未绑定任何点击事件，纯静态占位",
+        "ok": 0
+      },
+      {
+        "name": "Live Demo 按钮",
+        "expected": "点击后打开加密演示或可视化交互",
+        "evidence": "探针显示点击后 DOM 无变化、无网络请求、无 JS 错误；按钮无事件，无法启动任何演示",
+        "ok": 0
+      },
+      {
+        "name": "Knowledge Hub 按钮",
+        "expected": "点击后访问教育资源或知识库",
+        "evidence": "探针显示点击后 DOM 无变化、无网络请求、无 JS 错误；按钮未实现跳转或弹窗，占位无功能",
+        "ok": 0
+      },
+      {
+        "name": "Explore Simulations / View Schedule / Access Resources 链接",
+        "expected": "点击后进入模拟、日程或资源页面",
+        "evidence": "页面中三个功能卡片内的链接均为 href=\"#\"，探针显示仅 hash 变化，无实际页面跳转或内容更新；核心功能入口全部未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整，但所有可交互元素均为占位入口：导航、按钮、卡片链接均无实际功能，点击无业务反馈或仅改变 URL hash。需求中提及的加密模拟、专家网络研讨会、知识库等关键功能入口全部未实现，主要交互任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 主导航链接（Platform、Simulations、Resources、Community）均为占位符（href=\"#\"），点击后仅跳转页面顶部或刷新hash，无法导航到任何实际页面/内容，无真实反馈；2. 核心操作按钮（Get Started、Live Demo、Knowledge Hub）点击后无任何DOM变化、无脚本反馈、无网络请求，完全无响应，导致主要功能如启动演示、进入知识库等无法完成；3. 功能卡片中的“Explore Simulations”链接同样为占位符，点击无实际作用。次要瑕疵：页面内容超出视口，无法一屏展示全部内容；可视化图表缺少图例和指标说明，用户难以理解数据含义；部分模式和指标名称缺乏上下文说明，可能造成误解。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用了天空蓝渐变背景与白色卡片相结合的现代风格，色彩搭配和谐统一，符合数据安全与隐私保护主题。布局采用左文右图对称结构，主视觉区域通过CSS模拟的数据图表和动态脉冲效果增强了科技感。字体使用Inter，字重层次分明，间距舒适，圆角与阴影设计细腻。导航、按钮、卡片等组件均符合现代网页设计规范，hover效果流畅。虽然数据可视化部分仅为CSS模拟而非真实图表，但视觉呈现完整且美观。功能上部分按钮缺少交互，但整体视觉效果优秀，与用户需求的‘现代、专业、简洁’风格对齐。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_024699.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Platform",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Live Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Knowledge Hub",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore Simulations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

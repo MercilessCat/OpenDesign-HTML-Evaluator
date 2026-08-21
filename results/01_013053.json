@@ -1,0 +1,191 @@
+{
+  "row_id": "01_013053",
+  "shard": 1,
+  "id": 13053,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Develop a sophisticated interface to resolve data conflicts effortlessly. Users visualize synchronization issues through interactive diagrams, allowing them to prioritize, merge, or discard data efficiently. Key features include conflict history logs, automated resolution suggestions, and customizable rules to tailor synchronization processes, ensuring seamless data integrity across platforms.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 15664,
+  "html_sha256": "bd561d22273d08507bd3776f6cfb96e54ad5d237048fd07db39b9456946ce24e",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Merge 合并冲突",
+        "expected": "按钮变为合并成功状态，冲突卡片变暗并禁用",
+        "evidence": "探针点击后 DOM 有变化；脚本中为 Merge 按钮绑定了点击事件，会添加绿色样式并最终将卡片置为半透明，符合预期",
+        "ok": 1
+      },
+      {
+        "name": "点击 Discard A 丢弃版本 A",
+        "expected": "丢弃该版本并更新冲突状态",
+        "evidence": "探针点击后 DOM 无变化；脚本中没有为 Discard 按钮绑定任何事件，纯占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击 Apply 应用自动解决建议",
+        "expected": "建议被采用，按钮变为已应用且禁用",
+        "evidence": "探针点击后 DOM 无变化；脚本中负责绑定 Apply 的代码因 null.addEventListener 报错（页面存在 9 条 JS 错误），事件未成功绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击 History 查看冲突历史日志",
+        "expected": "打开或展示冲突历史记录",
+        "evidence": "探针点击后 DOM 无变化；按钮没有绑定任何点击处理，需求中的冲突历史功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Add New Rule 添加自定义规则",
+        "expected": "弹出添加规则的界面或新增规则条目",
+        "evidence": "探针点击后 DOM 无变化；按钮没有绑定点击事件，无实际功能，纯占位",
+        "ok": 0
+      },
+      {
+        "name": "切换自定义规则开关",
+        "expected": "滑块随开关状态移动，规则启用/禁用",
+        "evidence": "脚本中 change 事件使用 this.nextElementSibling.querySelector('span')，但 span 并非 label 内部元素，取到 null 导致滑块不更新；视觉反馈错误",
+        "ok": 0
+      }
+    ],
+    "reason": "核心冲突解决功能仅 Merge 可正常反馈，Discard、Apply、History、Add New Rule 等关键入口均无响应或未实现，且页面存在多个 JS 错误导致事件绑定失败；大部分需求功能不可用，评分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. Settings/History/Export Log/Sync Now 等主要入口与操作按钮点击后无任何反馈或跳转，用户无法判断操作是否成功；2. Discard A/Discard B 等核心冲突解决操作无效，无法完成丢弃数据的关键流程；3. Apply 按钮因脚本错误（Cannot read properties of null）而点击无反应，自动解决建议无法应用；4. Add New Rule 无响应，无法新增自定义规则；5. 页面存在 9 条 JavaScript 错误，直接破坏了部分交互绑定。仅 Merge 按钮和 Toggle 开关可用，核心功能大部分不可用，不符合“轻松解决数据冲突”的页面目标。次要瑕疵：部分按钮缺少悬浮/点击状态提示，toggle 开关视觉反馈不完整。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉设计现代、专业，符合数据同步工具的预期风格。采用了 Tailwind CSS 与 Font Awesome 图标，色彩搭配合理：以蓝、绿、紫为主色调，结合红、黄状态色，语义清晰且对比度良好，背景灰白与白色卡片形成干净明快的层次。布局上使用三分栏（左宽右窄），主区域展示交互式节点冲突图，副区域堆叠冲突详情、自动建议和自定义规则卡片，结构均衡，间距和圆角阴影处理得体。字体大小层次分明，按钮、Toggle 开关、统计标签等组件设计统一，并含 hover 上浮、缩放等微交互。不足之处：页面内容略显饱满，可能超出视口高度；个别 Toggle 组件初始滑块位置与 checked 状态不一致，且存在少量 JS 空引用错误，稍影响交互完成的精致度，但整体视觉吸引力强，仍是高完成度的界面。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_013053.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Settings",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "History",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Merge",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Discard A",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Discard B",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Apply",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add New Rule",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export Log",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

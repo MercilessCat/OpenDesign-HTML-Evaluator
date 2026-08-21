@@ -1,0 +1,162 @@
+{
+  "row_id": "02_018986",
+  "shard": 2,
+  "id": 18986,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Develop a website focusing on emotional resilience capacity building through interactive visualizations and immersive storytelling. Users can explore resilience frameworks, access personalized self-assessment tools, and engage in virtual workshops. Integrate community support forums and expert insights to foster resilience growth.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12122,
+  "html_sha256": "ffc934d524cb33a006b86566f498093201871e3ddd803093426c35e1e0fc177a",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航 'Frameworks'",
+        "expected": "跳转到韧性框架内容或切换视图",
+        "evidence": "探针点击后虽有DOM变化和页面跳转，但href=\"#\"无路由、无新网络请求，仅跳转页顶，未展示任何框架内容",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 'Assessments'",
+        "expected": "跳转到自我评估模块或切换视图",
+        "evidence": "探针点击后页面跳转但无实际内容切换，href=\"#\"为占位链接，评估工具未真正导航",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 'Workshops'",
+        "expected": "进入虚拟工作坊相关页面或内容",
+        "evidence": "探针点击后无路由变化，无新增网络请求，href=\"#\"为纯占位入口，工作坊功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 'Community'",
+        "expected": "进入社区论坛支持模块",
+        "evidence": "探针点击后仅页面跳转无内容切换，href=\"#\"占位，社区论坛入口未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 'Generate Insights' 按钮",
+        "expected": "根据滑块输入生成个性化韧性评估洞察",
+        "evidence": "探针点击后DOM变化=无、无新增JS错误，按钮未绑定任何事件，点击无反馈，核心评估功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "拖动/悬停 Chart.js 可视化图表",
+        "expected": "图表对指针操作有tooltip或视觉反馈",
+        "evidence": "探针在canvas上拖拽后像素变化=有，Chart.js已正常初始化，无JS错误，可视化具交互反馈",
+        "ok": 1
+      },
+      {
+        "name": "调节自我评估滑块",
+        "expected": "滑块数值变化伴随视觉反馈",
+        "evidence": "HTML中滑块绑定了input事件，会动态更新背景渐变，属于有效输入反馈，但未联动生成业务结果",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉设计完整，Chart.js图表和滑块具备基本交互，但主导航4个入口均为href=\"#\"占位，无法探索框架、工作坊或社区；核心的Generate Insights按钮点击无任何反应，自我评估工具仅停留在滑块外观反馈，需求声明的关键功能大量缺失，按规则不高于4分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在多个核心可用性问题：1. 顶部导航（Frameworks/Assessments/Workshops/Community）均为占位链接，点击仅跳转页面顶部，未提供任何实际页面或内容反馈；2. “Generate Insights”按钮点击后无任何反应，自评工具的核心操作无法完成，用户无法获得评估结果或反馈。次要瑕疵：自评滑块虽然改变背景颜色，但未显示当前数值或结果说明；部分模块（社区论坛、虚拟工作坊）仅有静态描述，未实现实际功能；页面未提供操作说明或图例。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "页面整体视觉表现良好，能达到现代网页设计的及格线偏上水平，但仍有提升空间。\n\n【优点】\n1. 色彩搭配合理：主色靛蓝（#4f46e5）+ 辅助翠绿（#10b981）+ 强调琥珀（#f59e0b）构成统一且有情绪疗愈感的色彩系统，头部渐变（靛蓝→翠绿）视觉吸引力强，与数据可视化主题契合。\n2. 布局结构清晰：header / hero / 图表仪表盘 / 特性卡片 / 社区洞察 / footer 层级分明，网格布局得当，卡片圆角+阴影符合主流设计语言。\n3. 组件设计规范：卡片悬停上浮+阴影效果细腻，Font Awesome 图标运用得当，Chart.js 柱状图配色与主题一致，滑块初始状态有进度色填充，细节用心。\n4. 技术实现专业：Tailwind CSS 配置了自定义主题色，代码整洁，响应式断点合理，交互无 JS 错误。\n\n【不足】\n1. 字体缺乏个性：页面没有引入任何 Web 字体，全局使用默认 sans-serif，缺少品牌感和现代感，若改用 Inter 或 Poppins 等字体会显著提升质感。\n2. 英雄区过于平淡：只有居中标题和副标题，背景纯灰白，缺少视觉锚点（如图形、装饰或动效），与下方仪表盘的丰富度不匹配。\n3. 视口适配不佳：用户要求“无需滚动一屏展示所有内容”，但该页面内容高度远超常规视口（约1100px+），在多数 1080p 屏幕下仍需滚动，未完全满足需求。\n4. 部分组件细节粗糙：滑块使用浏览器默认样式（仅 accent-color 着色），未做自定义轨道/拇指美化；“Generate Insights”按钮点击无实际反馈，略显骨架感。\n5. 社区洞察区块布局简单，左右两栏仅用简单的 border-left 分隔，信息密度和视觉层次较弱。\n\n总体而言，该页面色彩统一、结构完整、卡片组件精致，符合“现代、干净”的基本要求，但在排版个性和视口适配方面存在短板，距离顶级视觉设计仍有距离。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_018986.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Frameworks",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Assessments",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Workshops",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Generate Insights",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

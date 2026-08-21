@@ -1,0 +1,181 @@
+{
+  "row_id": "00_029419",
+  "shard": 0,
+  "id": 29419,
+  "category": "3D design",
+  "prompt": "Design an interactive experience where users engage with emotionally responsive virtual beings. The platform offers customizable avatars that react to user emotions in real-time. Key features include mood analytics, emotion-driven storytelling, and a sandbox environment for testing emotional AI interactions in various scenarios.",
+  "html_len": 20885,
+  "html_sha256": "00d1f2f4c94116046d64856f149467620c890803ff4c48c37fa74a1d601658f7",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击情绪按钮（Joy/Sadness/Anger 等）",
+        "expected": "3D 虚拟生物的颜色/口型/动画发生对应变化，同时情绪分析文案和故事文本同步更新",
+        "evidence": "探针点击 Joy、Sadness、Anger、Fear、Disgust 后均产生 DOM 变化且无 JS 错误；代码中 updateEmotion() 会修改 body/head/mouth 材质并调用 updateAnalytics() 更新当前情绪和故事文本",
+        "ok": 1
+      },
+      {
+        "name": "在 3D 场景中拖拽/缩放查看虚拟生物",
+        "expected": "相机可旋转、缩放，场景持续实时渲染",
+        "evidence": "页面加载 Three.js、OrbitControls 且绑定到 canvas，存在 requestAnimationFrame 渲染循环，运行时无 JS 错误，符合可交互 3D 场景特征",
+        "ok": 1
+      },
+      {
+        "name": "点击 Avatar Customization 色块自定义虚拟形象",
+        "expected": "虚拟形象外观随之改变，体现可定制化",
+        "evidence": "代码中点击色块仅切换 .active 类，没有修改 virtualBeing 的材质或颜色，3D 模型外观不会变化，反馈不符合定制头像的预期",
+        "ok": 0
+      },
+      {
+        "name": "点击顶部 Scenarios 进入沙盒/场景测试",
+        "expected": "进入场景选择或沙盒环境，用于测试不同情感 AI 交互场景",
+        "evidence": "探针点击后 DOM 无变化、无 JS 错误、无网络请求；按钮没有绑定任何事件，是纯占位入口，需求中的沙盒环境未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击顶部 Analytics 查看情绪分析视图",
+        "expected": "切换到分析页面或展示更完整的情绪分析内容",
+        "evidence": "探针点击后 DOM 无变化、无 JS 错误、无网络请求；按钮无事件绑定，导航功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击顶部 Dashboard 返回主控制台",
+        "expected": "切换或刷新主面板视图状态",
+        "evidence": "探针点击后 DOM 无变化；按钮无事件绑定，无法完成任何导航反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "核心的情绪响应互动和 3D 场景浏览可用，情绪按钮能驱动虚拟生物、情绪分析和故事文本变化；但 Avatar Customization 只切换选中态、未改变 3D 模型，Scenarios/Analytics/Dashboard 导航按钮均为无事件占位，需求中的沙盒场景等关键入口未实现，因此评分上限为 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1）顶部导航 Dashboard/Scenarios/Analytics 三个按钮点击后均无任何响应（无页面切换、无内容更新、无提示），属占位链接，且用户需求中的 Scenario sandbox 核心功能未实现；2）Avatar Customization 面板的 6 个色块点击后仅切换选中态，不改变 3D 虚拟形象外观，定制功能完全无效。次要瑕疵：页面无操作说明/图例，用户难以了解色块含义与 3D 场景可拖拽旋转；Mood Analytics 中 Engagement 数值固定为 92% 不随情绪变化；情感按钮无当前选中状态指示；故事文本切换生硬、无过渡动画；虚拟形象初始位置无引导提示。\"",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面视觉设计优秀，符合现代网页设计规范。深色渐变背景（#1a1a2e→#16213e→#0f3460）营造出深邃的科技氛围，与3D虚拟存在的主题高度契合。主色调搭配青色（#4ecdc4）和珊瑚红（#ff6b6b），形成冷暖对比，既生动又和谐，情绪按钮使用渐变色（如joy的暖橙、sadness的蓝紫）直观映射情感意象，增强了情感化设计。布局采用典型的header+主内容+footer结构，主内容通过flex横向分割为场景区（flex:3）和侧边栏（flex:1），比例协调，场景区大画布给3D体验留出充分空间，侧边栏疏密有致。组件设计专业：玻璃态效果（backdrop-filter+半透明背景+细边框）贯穿面板、按钮、导航，圆角温和、阴影柔化，层次分明。字体使用Segoe UI等系统字体，标题1.5rem、正文0.9-1.3rem，字号梯度合理，渐变文字处理精致。所有交互元素均有过渡动画和悬停反馈（如按钮上浮、图标缩放），细节到位。响应式断点处理了移动端单列布局。唯一不足之处是部分导航按钮（Dashboard等）点击无实际交互反馈，视觉上稍显“静态”，但这不影响整体视觉品质。整体而言，页面视觉完整度、色彩和谐度、组件质感均属上乘，与3D情感AI互动平台的品牌调性高度一致。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_029419.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Dashboard",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Scenarios",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Analytics",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Joy",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sadness",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Anger",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Fear",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Disgust",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

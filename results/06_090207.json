@@ -1,0 +1,156 @@
+{
+  "row_id": "06_090207",
+  "shard": 6,
+  "id": 90207,
+  "category": "Website",
+  "prompt": "Launch a comprehensive resource hub dedicated to vertical farming practices. Users access step-by-step guides, expert consultations, and a marketplace for sustainable farming solutions. Features include interactive tutorials, community forums, and a knowledge base to promote innovative urban farming and sustainable food production.",
+  "html_len": 33799,
+  "html_sha256": "9c1dc28c9b99eb0ab38de51ead1ba001c314e560bcaa186da9a4d880c93e42ea",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1610397664733-b3b6d0b6e9d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1610397664733-b3b6d0b6e9d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1610397664733-b3b6d0b6e9d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1610397664733-b3b6d0b6e9d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1610397664733-b3b6d0b6e9d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1610397664733-b3b6d0b6e9d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1610397664733-b3b6d0b6e9d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1610397664733-b3b6d0b6e9d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1610397664733-b3b6d0b6e9d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_090207.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#tutorials",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Marketplace",
+      "href": "#marketplace",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Resources",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Watch Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "row_id": "00_006346",
+  "shard": 0,
+  "id": 6346,
+  "category": "3D design",
+  "prompt": "Design a cutting-edge platform for visualizing neural processes in a 3D space, enabling scientists and educators to explore complex networks interactively. Users can manipulate data, run simulations, and observe neural activities in real-time. Features include multi-layered visualization, customizable parameters, and collaborative tools for shared insights and hypothesis testing.",
+  "html_len": 20028,
+  "html_sha256": "c33512239fe55109cdd63493321eea8770d4fecebaa8c0e4668f6f96ce6649cc",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "拖拽旋转/缩放3D场景",
+        "expected": "通过鼠标拖拽旋转视角、缩放查看神经网络的三维结构",
+        "evidence": "HTML中引入了OrbitControls并绑定到canvas；但探针在canvas上执行指针操作时报告 Target crashed（渲染进程崩溃），页面无法完成3D交互",
+        "ok": 0
+      },
+      {
+        "name": "点击 Pause 暂停/恢复动画",
+        "expected": "动画暂停，按钮文字从Pause变为Play；再次点击恢复",
+        "evidence": "探针点击后DOM有变化（按钮文本切换），新增JS错误0，事件绑定正确（toggleAnimation切换isAnimating）",
+        "ok": 1
+      },
+      {
+        "name": "点击 Add Neuron 添加神经元",
+        "expected": "3D场景中新增一个神经元球体，Neurons统计数量增加",
+        "evidence": "探针点击后DOM有变化（neuronCount从150变为151），JS错误0，createNeuron()与updateStats()正确执行",
+        "ok": 1
+      },
+      {
+        "name": "点击 Simulate 运行模拟",
+        "expected": "生成10个信号沿连接传播，3D场景中出现移动光点，实时观察神经活动",
+        "evidence": "探针点击后DOM无变化，但信号是Three.js场景内的3D对象，不直接反映为DOM变化；JS函数明确循环创建10个signal并加入场景，事件绑定完整，无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "调整 Connection Density 滑块",
+        "expected": "连接密度改变，3D场景中的连接线数量随之重建并更新统计",
+        "evidence": "HTML中滑块绑定input事件，触发createNeuralNetwork()重建网络并更新connectionCount；代码逻辑完整",
+        "ok": 1
+      },
+      {
+        "name": "点击 Reset View 重置视角",
+        "expected": "相机视角恢复至初始位置",
+        "evidence": "探针点击后DOM无变化，但controls.reset()仅改变3D相机状态不操作DOM；事件绑定正确，无JS错误，属于探针无法观测的3D反馈",
+        "ok": 1
+      }
+    ],
+    "reason": "页面核心3D可视化已实现（Three.js场景、神经元/连接/信号动画），Pause、Add Neuron、Simulate、滑块等控制功能均有完整事件绑定且探针确认可用。但存在两个严重问题：1）探针在canvas拖拽时出现Target crashed，核心3D交互崩溃，直接影响主要使用方式；2）需求声明的多层可视化（multi-layered visualization）和协作工具（collaborative tools）完全未实现，且无任何入口。综合判定功能分为4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. Connection Density 滑块在已有活跃信号时重建网络，但没有清除 signals，旧信号仍引用旧 connection 索引；当新连接数变少或为 0 时，animate 中会访问 undefined，导致渲染中断/流程卡死。2. 自动交互中 canvas 定位出现 Target crashed，页面/渲染进程不稳定，用户可能直接遇到白屏或无响应。次要瑕疵：Simulate 点击后没有即时可见的 DOM/统计反馈，signalCount 延迟更新，难以确认操作成功；Signal Speed 只影响之后新生成的信号，已有信号速度不变；Add Neuron 新增的神经元孤立，不自动连入网络；缺少 multi-layered visualization / collaborative tools 的入口与说明；Reset View 在视角未改变时没有可感知反馈。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力较高，符合'前沿3D神经可视化平台'的定位。色彩搭配以深蓝紫渐变背景为基础，辅以青色（#00c9ff）和薄荷绿（#92fe9d）作为主色调，既呼应科技感又具有较高对比度，信号洋红色（#ff00ff）的运用增添了动态点缀。布局上，顶部半透明毛玻璃导航栏、右侧参数面板、左下统计面板和左上神经元信息面板分区明确，层次清晰，未抢占中央3D画布的主体地位。字体使用系统级'Segoe UI'，字号阶梯设计合理；按钮采用圆角胶囊样式，滑块自定义了青蓝色滑块头，配合背景模糊（backdrop-filter）、渐变、过渡动画和脉冲关键帧，组件设计具有现代感。CSS整体规范、专业，与'cutting-edge 3D design'的需求风格高度一致。扣分点：页面视觉上依赖深色背景，部分用户可能觉得整体偏暗；滑块样式仅针对Webkit内核，跨浏览器兼容性稍弱；交互探针显示canvas操作时出现崩溃，可能影响实际体验，但结合源码判断，视觉设计本身仍属上乘。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.5,
+  "baseline_overall": 5.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "http://127.0.0.1:31025/00_006346.html -> net::ERR_ABORTED"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_006346.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset View",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Pause",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Neuron",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Simulate",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_error": "Error: Locator.bounding_box: Target crashed \nCall log:\n  - waiting for locator(\"canvas\").first\n",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "row_id": "03_007624",
+  "shard": 3,
+  "id": 7624,
+  "category": "Game dev",
+  "prompt": "Inspire creativity with a smoothie simulator where users experiment with fruit combinations. The platform features a recipe creator, virtual taste tests, and health benefits insights. Users can share their creations, participate in smoothie-making challenges, and explore global smoothie trends through a vibrant community of health enthusiasts.",
+  "html_len": 30313,
+  "html_sha256": "6b95fc79fda31e8e746ee6d80a2249b0ea71c102bb79caf75b626ca2ae9fb951",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "switchTab is not defined",
+      "switchTab is not defined",
+      "switchTab is not defined",
+      "switchTab is not defined"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_007624.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Creator",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Recipes",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Challenges",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Blend Smoothie",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "text",
+      "tag": "input",
+      "text": "",
+      "href": null,
+      "type": "text",
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "typed": "测试",
+      "fill_method": "playwright",
+      "enter_pressed": true,
+      "pixels_changed": false
+    }
+  ]
+}

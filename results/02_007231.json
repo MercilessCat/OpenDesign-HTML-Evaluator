@@ -1,0 +1,187 @@
+{
+  "row_id": "02_007231",
+  "shard": 2,
+  "id": 7231,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Design an interactive portal illustrating social support networks' strength across demographics. Users can simulate network changes, analyze resilience in adversity, and compare cultural differences. Key features include network modeling tools, demographic overlays, and virtual workshops for enhancing social skills and community building.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13937,
+  "html_sha256": "debcd1be2dc2239a4d202b3dd5088ba554bab984d14d269dfc8570a32ca16237",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击Reset按钮重置网络",
+        "expected": "网络图重新启动力模拟，节点恢复初始布局",
+        "evidence": "HTML中resetBtn绑定了simulation.alpha(1).restart()，探针点击后DOM有变化且无JS错误，反馈符合预期",
+        "ok": 1
+      },
+      {
+        "name": "调节Network Resilience滑块",
+        "expected": "百分比数值随滑块变化实时更新",
+        "evidence": "HTML中resilienceSlider绑定了input事件，更新#resilienceValue文本，事件绑定存在且运行时无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "点击Economic Crisis Impact压力测试",
+        "expected": "网络节点变小并变为红色，模拟经济危机影响",
+        "evidence": "HTML中stressBtn1绑定了click事件，节点transition至红色并缩小，探针确认DOM有变化且无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "点击Natural Disaster Scenario压力测试",
+        "expected": "网络连线变粗并变为橙色，模拟灾害场景",
+        "evidence": "HTML中stressBtn2绑定了click事件，链接transition至橙色并加粗，探针确认DOM有变化且无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "拖拽网络图中的节点",
+        "expected": "节点跟随鼠标移动，松手后保留位置并继续模拟",
+        "evidence": "SVG节点通过d3.drag()绑定了dragstarted/dragged/dragended事件，运行时无JS错误，视为可交互",
+        "ok": 1
+      },
+      {
+        "name": "点击Demographic Focus人口统计按钮（如Urban）",
+        "expected": "按人口统计维度筛选/叠加网络数据，展示对应群体的网络特征",
+        "evidence": "Urban按钮在HTML中没有绑定任何事件处理程序，探针报告的DOM变化仅为hover/focus样式层变化，无实际业务反馈，人口统计叠加功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击Cultural Models文化对比按钮（如Western）",
+        "expected": "切换不同文化背景下的网络模型，进行对比分析",
+        "evidence": "Western按钮在HTML中没有绑定任何事件处理程序，探针报告的DOM变化仅为hover样式层变化，无实际业务反馈，文化对比功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "核心D3网络可视化、弹性滑块、Reset和两个压力测试按钮均可正常工作，节点拖拽也已初始化。但需求中明确声明的关键功能——人口统计叠加（Demographic Focus四个按钮）和文化差异对比（Cultural Models三个按钮）均为纯占位入口，未绑定任何事件，点击无业务反馈；虚拟工作坊也仅为静态展示卡片。存在2个及以上需求声明的关键入口未实现，按规则functional_score不高于4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) Demographic Focus按钮组（Urban/Rural/Youth/Elderly）点击无实际功能，网络图不随人口统计切换变化；2) Cultural Models按钮组（Western/Nordic/East Asian）点击无实际功能，文化对比无法完成；3) Resilience滑块只改变百分比数字文本，未作用于网络图，核心模拟工具调节无效。次要瑕疵：网络图节点颜色无图例说明，用户难以理解分组含义；压力测试效果无法通过Reset完整撤销（链接颜色残留）；工作坊卡片为静态内容，无进一步交互；页面在常见1080p屏幕下内容会超出视口，需滚动才能完全展示；按钮无选中/激活状态，用户无法感知当前生效的筛选模式。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面整体视觉设计现代、干净，采用了Tailwind CSS，符合当前主流UI风格。色彩搭配以柔和的蓝灰渐变为主背景，点缀多色按钮和渐变卡片，既统一又有层次感，契合数据可视化主题。布局采用三列网格，主次分明：左侧可视化区域占主导，右侧控制面板清晰组织交互工具，底部 workshops 卡片区也整齐有序。字体层级和间距处理得当，标题、说明、控制区文字可读性好。图形组件（如 D3 力导向图、图标按钮、滑块）具有流畅的过渡和悬停反馈，增强了专业感。虽然未使用自定义字体，但默认字体依然清晰；网络节点标签在动态布局中可能出现轻微重叠，略微影响美观。总体而言，页面在视觉吸引、配色协调、布局平衡和设计规范性方面表现出色，仅因细节优化空间未达满分。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.5,
+  "baseline_overall": 5.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_007231.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Urban",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Rural",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Youth",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Elderly",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Economic Crisis Impact",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Natural Disaster Scenario",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Western",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

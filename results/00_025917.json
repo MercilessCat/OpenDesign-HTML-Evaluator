@@ -1,0 +1,76 @@
+{
+  "row_id": "00_025917",
+  "shard": 0,
+  "id": 25917,
+  "category": "3D design",
+  "prompt": "An interactive learning hub focused on dynamic shadow rendering techniques. Users explore tutorials, real-world case studies, and interactive demos to understand the impact of lighting in 3D environments. Features include code snippets, expert webinars, and a community forum for sharing insights and troubleshooting challenges.",
+  "html_len": 23398,
+  "html_sha256": "139f64fe9e4c7151cb239d1f1ddbf7a1df0e90b6fc363e73aa66c3473804e27e",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "侧边栏切换学习模块",
+        "expected": "点击 Tutorials / Interactive Demos / Case Studies / Expert Webinars / Community Forum 后，主内容区切换到对应模块，导航项高亮",
+        "evidence": "HTML 中每个 .nav-item 都绑定了 click 事件，点击后会切换 .active 类并显示对应 .section；运行时无 JS 错误，导航切换可用。",
+        "ok": 1
+      },
+      {
+        "name": "3D 场景拖拽/旋转观察",
+        "expected": "在 Interactive Demos 中可以通过 OrbitControls 旋转缩放视角，查看 3D 阴影效果",
+        "evidence": "init() 创建了 THREE.WebGLRenderer 和 OrbitControls，animate() 使用 requestAnimationFrame 持续渲染；运行时无 JS 错误，按规则视为可交互。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Toggle Shadows 切换阴影",
+        "expected": "3D 场景中的阴影启用/禁用，产生视觉变化",
+        "evidence": "按钮绑定了 click 事件，点击后切换 renderer.shadowMap.enabled；无 JS 错误，功能已实现。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Change Light Type 切换灯光类型",
+        "expected": "在 directional / point / spot 等灯光类型之间切换，场景光照和阴影发生变化",
+        "evidence": "事件处理函数只 alert 了 'In a full implementation...'，并未真正实现灯光切换，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "Webinar 卡片点击 Register Now 报名",
+        "expected": "打开报名流程、弹窗或给出报名成功反馈",
+        "evidence": "所有 Register Now 按钮都没有绑定事件，也没有跳转或表单，点击无反应，属于未实现的功能入口。",
+        "ok": 0
+      },
+      {
+        "name": "论坛点击 New Topic 发帖",
+        "expected": "进入发帖界面或创建新主题，支持社区分享与讨论",
+        "evidence": "New Topic 和 My Posts 按钮均未绑定事件，点击无反应；论坛只能查看静态帖子，社区互动功能未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面主体导航和 3D 阴影演示交互可用，核心展示内容较完整；但 Change Light Type、Webinar 报名、论坛发帖等关键功能入口为占位/无事件，需求中的互动学习与社区分享能力未完整实现，关键入口未实现数量超过 2 个，因此按规则评分不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在多个核心可用性问题，导致页面虽然内容完整、导航可切换，但核心交互功能均无法正常使用：\n\n1. 3D交互演示场景完全不可见：页面加载时即调用 init()，但此时 demos 区块处于 display:none 状态，容器宽高为 0，导致 WebGL canvas 被创建为 0×0 尺寸，且 camera.aspect 为 NaN；点击“Interactive Demos”进入后渲染器已存在（if (!renderer) 不成立），不会重新初始化，用户永远看不到场景，也无法操作演示。\n2. “Change Light Type”按钮点击后仅弹出 alert 提示“完整实现中才会切换”，并未实际执行任何功能，属于明确的占位实现，核心控件调节无效。\n3. “Toggle Shadows”按钮切换后无任何视觉或文字反馈，且因场景不可见，用户无法感知操作是否生效。\n4. Webinars 模块中 3 个“Register Now”按钮、论坛模块中“New Topic”和“My Posts”按钮均未绑定任何事件，点击无响应，属于死路/占位按钮。\n\n次要瑕疵：\n- 教程代码块无复制按钮，不便于直接使用。\n- 部分卡片文字没有明确可点击的链接或“阅读更多”入口，用户只能被动阅读。\n- 副标题与正文在深色渐变背景上对比度一般。\n- 论坛帖子无“回复”或“查看详情”入口，浏览后无法进一步参与讨论。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉设计专业且契合3D设计主题。深蓝渐变背景（#1a2e → #0f3460）营造了科技感与沉浸感，与阴影渲染主题高度匹配；大面积半透明毛玻璃效果（backdrop-filter: blur）和细边框（rgba(255,255,255,0.1)）增强了层次感与精致度。色彩搭配以蓝青色渐变（#4facfe → #00f2fe）作为核心强调色，在暗色背景上对比鲜明，视觉冲击力强。布局采用侧边栏+主内容区结构，空间分配合理，卡片网格自适应，信息层级清晰。字体选择通用现代无衬线体系，标题使用渐变文字并带微光晕，符合现代网页设计规范。组件设计细节到位：导航项悬停有位移反馈，卡片hover有上浮和阴影，按钮采用圆润渐变胶囊造型，交互反馈丰富。虽然存在浏览器渲染证据中canvas=0、交互探针未识别元素的问题，但脚本已初始化Three.js场景，预期正常运行时会有3D可视化内容补充视觉亮点。整体设计质量优秀，仅因无法目视验证实际渲染效果，扣少量分数。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_025917.png",
+  "probe": []
+}

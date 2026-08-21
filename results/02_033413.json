@@ -1,0 +1,181 @@
+{
+  "row_id": "02_033413",
+  "shard": 2,
+  "id": 33413,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Create an insightful platform visualizing voter turnout changes across demographics using interactive maps and longitudinal studies. Users analyze trends, simulate policy impacts, and access community engagement tools. Key features include AI-driven predictions, real-time election data integration, and collaborative discussion forums.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13223,
+  "html_sha256": "28f7acb3965666115f47228bf8f9ae4578d5bd1281f50321d410db348a137581",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航点击（Dashboard/Analysis/Predictions/Community）",
+        "expected": "点击导航切换对应视图或内容区域",
+        "evidence": "所有 nav 链接均为 href=\"#\"，探针点击后仅有锚点跳转（DOM变化来自样式/焦点），页面内容未切换，无业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "地图年份切换（2020/2016/2012）",
+        "expected": "切换地图数据，展示对应年份的选民投票率",
+        "evidence": "探针点击三个年份按钮后 DOM 无变化；canvas#voterMap 未由 JS 初始化或绘制，仅有占位图标和提示文字，交互式地图未实现",
+        "ok": 0
+      },
+      {
+        "name": "政策模拟器滑块调节",
+        "expected": "拖动滑块实时更新预测的投票率影响数值",
+        "evidence": "三个 input[type=range] 没有绑定 oninput/change 事件，也没有对应更新逻辑，拖动后投影值不会变化",
+        "ok": 0
+      },
+      {
+        "name": "运行模拟按钮",
+        "expected": "点击后执行模拟并展示结果",
+        "evidence": "Run Simulation 按钮无任何 JS 事件绑定，点击无反应，属纯占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "加入讨论",
+        "expected": "进入社区论坛或展开讨论/回复",
+        "evidence": "Join Discussion 按钮无事件绑定，社区帖子均为静态列表，点击无响应",
+        "ok": 0
+      },
+      {
+        "name": "登录",
+        "expected": "打开登录表单或进入登录流程",
+        "evidence": "Sign In 按钮点击后 DOM 无变化、无网络请求、无 JS 错误，未实现任何登录交互",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计现代美观，且两个静态图表（趋势、预测）能正常渲染，但需求中声明的核心功能——交互式地图、地图年份切换、政策影响模拟、社区参与、登录均未实现或为占位入口，导航链接也仅是锚点跳转。用户无法完成任何关键任务，功能性极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 顶部导航 Dashboard/Analysis/Predictions/Community 为占位链接（href=\"#\"），点击后不指向任何内容区块，没有实际导航反馈；2. 交互式地图未实现，canvas 仅显示静态提示文案，hover 无任何状态数据，2020/2016/2012 年份切换按钮点击无效；3. Sign In 按钮点击无任何反馈，无登录表单或流程；4. Policy Impact Simulator 中三个滑块拖动无投影变化，Run Simulation 按钮点击无反应；5. Community Forum 的 Join Discussion 按钮点击无反馈。次要瑕疵：AI Predictions 图表缺少图例和单位说明；Real-time Data 无数据来源/更新说明；页面各功能分区缺少引导性文字，用户不清楚操作结果与用途；社区论坛仅展示静态主题列表，未实现讨论功能（作为可选模块不影响主流程判断）。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面整体视觉完成度较高，符合现代 DataViz 平台常见深色主题风格。深灰到蓝黑的渐变背景营造出专业、沉稳的数据分析氛围，蓝(#3b82f6)作为强调色与灰白文字对比清晰，色彩搭配和谐统一。布局采用 Header + 三列 Grid + Footer 结构，主内容区与侧边栏分配合理，同一屏内信息密度适中；卡片、圆角、阴影、间距均使用 Tailwind 统一规范，CSS 细节如 hover 上浮、图标缩放过渡处理细腻，具备专业感。Chart.js 两个图表（折线趋势、横向条形预测）真实渲染且颜色质感好，增强了数据可视化页面的可信度。整体视觉吸引力较强且与“数据分析洞察平台”的用户需求风格对齐。\n\n轻微扣分点：页面中最重要的“Interactive US Voter Turnout Map”区域仅使用地球图标+文字占位，canvas 未实际绘制地图，视觉上主区域显得空泛；导航链接点击后页面跳转（实际上跳转至相同页面），按钮点击无反馈，说明交互视觉反馈有待完善；部分文字说明冗长且层级不够突出，字体字号体系全依赖 Tailwind 默认值，缺少更精致的排版节奏。但以上不影响整体氛围与色彩布局的完成度，作为现代数据可视化单页设计仍属上乘。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_033413.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analysis",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Predictions",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "2020",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "2016",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "2012",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

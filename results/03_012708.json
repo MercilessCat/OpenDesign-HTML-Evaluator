@@ -1,0 +1,97 @@
+{
+  "row_id": "03_012708",
+  "shard": 3,
+  "id": 12708,
+  "category": "Game dev",
+  "prompt": "Create a city-building simulation focused on sustainability and eco-friendliness. Core idea: sustainable urban development. Core functionality: design eco-friendly cities. Key features: green technology integration, environmental impact assessments, community engagement tools, and challenges to achieve carbon neutrality and sustainable growth.",
+  "html_len": 26300,
+  "html_sha256": "e65cb291b9a3af1d806a631222153697a80fcb09784feb0aee58228aa0692881",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Building 开始游戏",
+        "expected": "开始画面隐藏，游戏 UI 出现，3D 场景初始化并进入运行状态。",
+        "evidence": "探针点击后 DOM 有变化，新增 JS 错误 0；resetGame() 切换开始屏/游戏 UI 的 hidden 状态并启动 Three.js 动画循环。",
+        "ok": 1
+      },
+      {
+        "name": "选择建筑类型",
+        "expected": "选中建筑卡片高亮，界面上“Selected”显示当前所选建筑。",
+        "evidence": ".building-card 绑定 click 事件，点击后设置 selectedBuilding，添加 ring-2 ring-green-400 高亮，并通过 updateUI() 更新选中名称。",
+        "ok": 1
+      },
+      {
+        "name": "在 3D 地图上放置建筑",
+        "expected": "点击地面后生成对应建筑模型，同时资金、人口、碳足迹、清洁能源等统计随之更新。",
+        "evidence": "核心逻辑失效：onMouseClick() 用 raycaster.intersectObjects(cityPlanes)，但 cityPlanes 从未被加入任何对象（ground 只 scene.add，未 push 到 cityPlanes），因此点击永远无法命中目标，建筑无法放置；探针在 canvas 上交互也无业务性 DOM 变化。",
+        "ok": 0
+      },
+      {
+        "name": "完成可持续目标并触发结算",
+        "expected": "通过放置建筑达成人口、碳减排、清洁能源目标后，进入“City Assessment Complete”结算界面。",
+        "evidence": "checkWinConditions() 会在 updateUI() 中检查目标并调用 endGame()，但因放置建筑失效，人口/能源无法增长、碳无法降低，正常游戏流程永远无法达成目标，结算界面不可自然触发。",
+        "ok": 0
+      },
+      {
+        "name": "使用社区参与工具",
+        "expected": "存在居民反馈、社区任务、社区满意度等交互入口，体现社区参与功能。",
+        "evidence": "HTML/JS 中没有社区参与工具相关按钮、面板或事件；该需求关键特性完全缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "开始游戏和选择建筑两个前置操作可用，但最核心的“在 3D 城市中放置建筑”因 cityPlanes 为空而完全失效，导致城市建造目标无法推进、可持续挑战无法完成；社区参与工具也缺失。页面只能停留在开始和选择阶段，主要任务无法完成，因此评分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 建筑无法放置：cityPlanes 数组始终为空，射线检测永远无法命中地面，玩家选择建筑后点击场景无任何建筑生成，核心玩法（建造城市）完全卡死。2. 3D 场景无法确认渲染：HTML 元素统计中 canvas=0，虽然代码调用 Three.js 创建了渲染器，但页面视觉核心（立体城市）可能完全空白，玩家只能看到 UI 面板和数据变化，无法获得建造的空间反馈。\n次要瑕疵：1. 建筑卡片点击后仅文字显示 Selected，场景中无放置预览或网格高亮，玩家不知点击何处、放置结果如何。2. 游戏无失败条件，碳足迹可无限增长但永远不会结束游戏。3. 结束页面无论成功与否都显示相同文案，存在误导。4. 建筑命名与效果略有出入：School 提供 +8 Education 但界面并无教育指标；Solar Farm 消耗碳和能源但命名暗示完全清洁。5. Eco-Score 圆环无图例或说明，用户难以理解其含义和变化原因。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力强，主题明确，聚焦可持续城市建设的环保氛围。色彩搭配专业，采用深蓝绿渐变背景与绿色点缀，既体现生态感又保持沉稳质感，符合现代游戏UI设计规范。布局协调，启动界面、顶部状态栏、建筑面板、目标面板等元素排列清晰，信息层级分明。字体使用现代无衬线体Segoe UI，间距得当，圆角、阴影、模糊等细节处理精致，卡片hover反馈顺畅。CSS实现专业，结合Tailwind和自定义样式，组件设计统一且具有良好交互性。作为城市建造游戏，视觉风格与用户需求高度对齐，传达了绿色科技、碳中和等核心理念。几乎没有明显减分项，仅因纯文本无法验证实际渲染效果，且界面信息密度较高略带紧凑，给予9分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_012708.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Building",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "row_id": "05_033752",
+  "shard": 5,
+  "id": 33752,
+  "category": "Website",
+  "prompt": "Transform urban landscapes with an interactive platform dedicated to public art installations. Users can explore global projects, submit ideas, and collaborate with artists and city planners. The site features augmented reality previews, community voting on proposals, and educational resources, inspiring creativity and engagement with public spaces.",
+  "html_len": 34170,
+  "html_sha256": "30e22094e6882706c3455d3d1a4c1eda4195810a34f555f7c504163a37fe68b4",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接跳转到对应区块",
+        "expected": "页面平滑滚动到 Home/Features/Projects/Community/Contact 区块",
+        "evidence": "探针点击 5 个导航链接均出现 DOM 变化（滚动），无新增 JS 错误；HTML 中为这些锚点绑定了平滑滚动事件",
+        "ok": 1
+      },
+      {
+        "name": "点击 Hero 的“Explore Projects”按钮",
+        "expected": "跳转或滚动到项目区域，查看全球项目",
+        "evidence": "按钮无 id/onclick/事件绑定，探针点击后仅有样式层 DOM 变化，无任何业务反馈；预期跳转项目区未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Hero 的“Submit Idea”按钮",
+        "expected": "进入提交创意/想法的流程或表单",
+        "evidence": "按钮无事件绑定，探针点击后无实际响应；需求中的“submit ideas”入口未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 AR Previews 功能卡片的“Learn more”",
+        "expected": "展开详情或跳转到 AR 预览相关页面",
+        "evidence": "链接为 href=\"#\" 占位；且运行时出现 THREE.OrbitControls is not a constructor 错误，Three.js/AR 交互未初始化，点击无内容变化",
+        "ok": 0
+      },
+      {
+        "name": "点击“View All Projects”按钮",
+        "expected": "展示所有项目列表或进入项目浏览页",
+        "evidence": "按钮无事件绑定，HTML 中无对应处理逻辑；探针点击无业务反馈，仅按钮样式变化",
+        "ok": 0
+      },
+      {
+        "name": "点击社区“Join Artists”按钮",
+        "expected": "加入艺术家网络，打开注册/申请流程",
+        "evidence": "按钮为静态元素，无 onclick 或关联脚本，点击后无功能响应；社区协作入口未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面实质为静态展示站，导航锚点滚动可用；但需求中的核心功能——探索项目、提交创意、AR 预览、社区投票、协作加入等均为纯占位入口（无事件或仅 href=\"#\"），且 Three.js 因 OrbitControls 加载失败报错，AR 交互无法工作。主要任务无法完成，故给 2 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 所有核心操作按钮（Get Started、Explore Projects、Submit Idea、Start a Project、Explore Gallery、Join Artists/Planners/Community、View All Projects）均为占位按钮，点击后无实际功能反馈，仅触发DOM显示变化，无法完成探索项目、提交创意、加入社区等核心任务。\n2. 页面核心的3D/AR可视化区域（Three.js容器）因OrbitControls加载失败且版本不兼容，渲染中断，导致Hero区3D视觉模块空白，AR预览这一核心特性完全不可用。\n3. 全站无任何表单元素（input=0），作为支持'提交想法'和'社区投票'的平台，无法进行任何实际输入、提交或交互操作，核心流程缺失。\n\n次要瑕疵：\n- 页脚中的社交媒体图标、Platform/Resources链接均为占位链接，点击无反应，社区论坛、教育中心等模块未实现。\n- 多个按钮（如Get Started、Explore Projects）视觉上是主按钮，但hover无反馈，点击后无任何提示或跳转，容易让用户困惑。\n- Projects卡片缺少可点击进入详情/投票的入口，仅静态展示。\n- 统计数字为静态文本，无数据来源，缺乏说服力。\n\n页面视觉设计美观、信息层级清晰、锚点导航流畅，但核心功能均为空壳，用户无法完成平台宣称的任何关键任务，存在多个核心可用性问题，故给予3分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力很高。主视觉采用靛蓝→紫→粉的渐变色，色彩搭配和谐且有艺术感，与“公共艺术”主题匹配；布局采用标准的导航栏、Hero、数据统计、功能卡片、项目展示、社区、CTA、页脚结构，层级清晰，节奏感良好。字体使用 Poppins，现代简洁；卡片圆角、阴影、hover上浮动效、背景毛玻璃等组件细节处理专业。CSS 基于 Tailwind 并配合自定义动画（浮动、发光边框、视差背景），整体符合现代网页设计规范。\n\n扣分点：Three.js 场景的 OrbitControls 加载失败产生 9 条 JS 错误，导致 Hero 区域 3D 视觉预览无法正常渲染（容器可能空白），在浏览时会造成 hero 区域视觉缺失；另外页面中图片数量为 0，项目卡片的封面全部依赖渐变+图标代替，视觉丰富度有所降低。但整体设计框架仍属于高质量的现代 Web 视觉方案。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://unpkg.com/three@0.185.1/examples/js/controls/OrbitControls.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://unpkg.com/three@0.185.1/examples/js/controls/OrbitControls.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://unpkg.com/three@0.185.1/examples/js/controls/OrbitControls.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://unpkg.com/three@0.185.1/examples/js/controls/OrbitControls.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://unpkg.com/three@0.185.1/examples/js/controls/OrbitControls.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://unpkg.com/three@0.185.1/examples/js/controls/OrbitControls.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://unpkg.com/three@0.185.1/examples/js/controls/OrbitControls.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://unpkg.com/three@0.185.1/examples/js/controls/OrbitControls.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://unpkg.com/three@0.185.1/examples/js/controls/OrbitControls.js -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [
+      "THREE.OrbitControls is not a constructor",
+      "THREE.OrbitControls is not a constructor",
+      "THREE.OrbitControls is not a constructor",
+      "THREE.OrbitControls is not a constructor",
+      "THREE.OrbitControls is not a constructor",
+      "THREE.OrbitControls is not a constructor",
+      "THREE.OrbitControls is not a constructor",
+      "THREE.OrbitControls is not a constructor",
+      "THREE.OrbitControls is not a constructor"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_033752.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Projects",
+      "href": "#projects",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Contact",
+      "href": "#contact",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Projects",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Submit Idea",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

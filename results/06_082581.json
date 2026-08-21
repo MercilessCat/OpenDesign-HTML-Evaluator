@@ -1,0 +1,181 @@
+{
+  "row_id": "06_082581",
+  "shard": 6,
+  "id": 82581,
+  "category": "Website",
+  "prompt": "Embark on a virtual journey showcasing eco-friendly travel through immersive trek vlogs. Users can follow adventurers exploring diverse landscapes while minimizing carbon footprints. The site includes interactive maps, personal stories, green travel tips, and a community forum for sharing sustainable travel hacks and experiences.",
+  "html_len": 35715,
+  "html_sha256": "7d0261a044ee3b0548db452fb1206399dd5c304c01acae47f5d08c0a6050ce6d",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航栏锚点跳转（Home/Adventures/Community/Tips）",
+        "expected": "点击导航链接后页面滚动/定位到对应内容区块",
+        "evidence": "探针点击 4 个导航链接均有 DOM 变化且发生页面内跳转，无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击 Start Exploring 按钮",
+        "expected": "进入探索内容页或浏览探险列表",
+        "evidence": "探针点击后 DOM 变化=无，无新请求，按钮无绑定逻辑，属死按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击 Watch Latest Vlog 按钮",
+        "expected": "播放最新徒步 vlog 或跳转至视频页",
+        "evidence": "探针点击后 DOM 变化=无，无新请求；需求强调沉浸式 vlog，入口未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击冒险卡片的 View Journey 按钮",
+        "expected": "打开对应旅程的详细内容或 vlog 页面",
+        "evidence": "探针点击后 DOM 变化=无，无新请求；3 张卡片均为无事件占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Community 按钮",
+        "expected": "跳转社区/注册入口或打开社区面板",
+        "evidence": "探针点击后 DOM 变化=无，无新请求；社区论坛核心入口未实现",
+        "ok": 0
+      },
+      {
+        "name": "交互式地图浏览",
+        "expected": "Leaflet 地图可拖动/缩放查看生态探险路线",
+        "evidence": "页面引入 Leaflet 并创建 #map 容器，运行时无 JS 错误，探针已确认加载正常",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉元素丰富，但大量核心功能入口为死按钮：Start Exploring、Watch Latest Vlog、View Journey、Join Community 点击均无任何反馈，vlog 播放/旅程详情/社区加入等需求关键交互未实现；仅导航锚点跳转和 Leaflet 地图可用，核心任务完成度很低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 多个核心CTA按钮点击无任何响应（Join Community、Start Exploring、Watch Latest Vlog、View Journey），这些是用户完成主要任务（开始探索、观看vlog、查看旅程）的关键入口，点击后无DOM变化、无网络请求、无JS错误，属于功能未实现，导致核心操作无法完成；2. 需求中明确要求的互动地图未实现——页面仅加载了Leaflet库和空容器，没有地图初始化代码，实际渲染为空白区域，属于核心功能缺失。次要瑕疵：1. 社区论坛搜索框无实际搜索行为，输入后点击搜索无反馈；2. 各导航锚点跳转正常，但无滚动平滑或当前状态高亮以外的视觉反馈；3. 页面中部分图标和贴士展示了装饰性内容，但无额外解释文字说明数据来源；4. 整体视觉设计和信息层级较清晰，但按钮失效让用户失去继续探索的动力；5. 统计数字（12K+、240T等）为静态文案，无动态验证或详情入口。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉表现非常优秀。以下为详细评价：\n\n1. **整体视觉吸引力**：Hero区（背景山景+深色渐变遮罩+白色文字+绿色强调按钮）形成了强烈的视觉焦点，能快速传达户外探险与可持续旅行的主题。后续的统计卡片、探险卡片、地图、影响图表、绿色旅行建议、社区论坛等模块层级分明，信息密度适当，整体观感舒适且富有感染力。\n\n2. **色彩搭配**：以生态绿色系（#2e7d32, #4caf50, #1b5e20）为核心，辅以蓝、黄、紫、红、青等淡彩色块用于区分不同信息区块，搭配白色和浅灰绿渐变背景，色彩和谐统一，既有自然感又不单调，符合“绿色环保”的品牌调性。\n\n3. **页面布局**：使用现代栅格（Tailwind grid / flex），各部分间距、内外边距和卡片对齐非常规整。每个 section 有清晰结构，内容先总述后分栏，引导用户流畅阅读。Hero、Stats、Adventures、Map、Impact、Tips、Forum 的顺序合理，叙事节奏好。\n\n4. **字体、间距、组件设计**：采用 Poppins 字体，整体现代圆润。标题层级明显（h1/h2/h3 大小粗细分明），正文行距合适。按钮、卡片、头像、图标、进度条、论坛帖等组件风格统一，均有圆角和柔和阴影，hover 反馈（上浮、变色）增强交互质感。\n\n5. **CSS 专业性**：自定义CSS变量、渐变、过渡、hover阴影、卡片圆角、背景叠加层等运用恰当，Tailwind与自定义样式结合自然。页面中的 Leaflet 地图容器和 Chart.js 图表也做了视觉适配（圆角、阴影、白色卡片），足见细节控制。\n\n6. **是否符合现代设计与用户需求**：高度契合“沉浸式徒步生态旅行vlog”的主题。自然风景图片、绿色徽章、森林/山川/水滴等图标、可持续旅行提示都强化了环保意识；社区论坛和地图板块又体现了互动性，符合现代网站设计规范。\n\n唯一的小问题是部分按钮缺少实际交互功能（如“Join Community”、“Start Exploring”点击后无变化），以及页面没有真正的视频内嵌元素，但在纯视觉评价中影响很小。总体来看，这是一份专业、精致、符合目标需求的网页设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_082581.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Adventures",
+      "href": "#adventures",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tips",
+      "href": "#tips",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Watch Latest Vlog",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Journey",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

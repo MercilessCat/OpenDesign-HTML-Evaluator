@@ -1,0 +1,182 @@
+{
+  "row_id": "02_019295",
+  "shard": 2,
+  "id": 19295,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Explore multiferroic materials through immersive datavis. Users study interactions between electric and magnetic properties, simulating real-world applications. Key features include interactive models, detailed coupling visualizations, and research collaboration spaces, fostering innovation in material science and advancing technological breakthroughs.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12449,
+  "html_sha256": "4f770a102916388a5cb819e17a208a4d610d0015903b7f1cb5b75f38a4cb17fe",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（Dashboard/Models/Research/Collaborate）",
+        "expected": "切换到对应内容视图或展示相关页面",
+        "evidence": "探针点击后无新增JS错误、无网络请求，只有URL添加#的页面跳转；HTML中导航链接href=\"#\"且无任何事件绑定，属于占位死链",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Data 按钮",
+        "expected": "启动数据探索或加载可视化内容",
+        "evidence": "探针显示DOM有变化但无新增JS错误和网络请求；HTML中该按钮无事件监听器，变化仅为CSS动画/悬停样式，无实际业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "调整 Electric Field Strength 滑块",
+        "expected": "更新模拟参数并反映到可视化中",
+        "evidence": "HTML中滑块无oninput/onchange事件绑定，JS中也没有相关监听；调整后不会触发任何数据更新或视觉变化",
+        "ok": 0
+      },
+      {
+        "name": "点击 Run Simulation 按钮",
+        "expected": "运行模拟并更新中心可视化为动态耦合效果",
+        "evidence": "探针显示点击后DOM无变化；JS中querySelector('.bg-primary')误选中了Explore Data按钮，而Run Simulation按钮无事件绑定，功能完全失效",
+        "ok": 0
+      },
+      {
+        "name": "点击 Reset 按钮",
+        "expected": "将中心可视化重置为初始状态",
+        "evidence": "探针显示点击后DOM有变化且无JS错误；JS中resetButton正确绑定事件，会重置graphContainer内容，反馈符合预期",
+        "ok": 1
+      },
+      {
+        "name": "点击底部社交图标按钮",
+        "expected": "跳转到对应社交页面或触发协作功能",
+        "evidence": "探针点击GitHub图标后DOM无变化、无网络请求、无跳转；HTML中按钮无事件绑定，纯占位入口",
+        "ok": 0
+      }
+    ],
+    "reason": "核心交互大面积失败：导航链接为href=\"#\"占位死链，Explore Data和Run Simulation按钮无有效事件（Run Simulation事件误绑定导致无反应），滑块无任何参数更新逻辑，社交图标纯占位。仅Reset按钮可用。需求中强调的交互模型、详细耦合可视化、研究协作等核心功能均未实现，页面基本不可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 仿真控制面板核心交互不可用——“Run Simulation”按钮点击完全无响应（JS中querySelector('.bg-primary')误选中头部“Explore Data”按钮，导致该按钮未绑定任何事件），用户无法运行仿真；同时“Explore Data”按钮被错误触发仿真流程，行为与按钮标签严重不符。滑块调节也无任何数据或可视化联动，调节后无实质效果。\n2. 顶部主导航（Dashboard/Models/Research/Collaborate）全部为占位链接（href=\"#\"），点击后无任何实际内容变化或页面区域切换，主要入口导航失效。\n\n次要瑕疵：\n- 滑块无数值显示与说明，用户调节时无法得知当前数值及含义。\n- footer社交按钮为纯装饰，点击无实际功能链接，可视为未实现的次要模块。\n- 页面缺少数据指标（Polarization/Magnetization/Coupling Factor）的图例或单位说明，专业信息对普通用户不友好。\n- “Explore Data”按钮与“Run Simulation”按钮视觉样式几乎相同（同为bg-primary），容易造成操作混淆。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面视觉表现出色，整体为现代深色科技风格，适合数据可视化主题。背景使用深蓝渐变（#0f172a → #1e293b），搭配天蓝（#0ea5e9）、蓝（#2563eb）、紫（#8b5cf6）等强调色，色彩协调且具有科学感和沉浸感。布局采用三栏网格，左侧控制区与信息卡片、中央可视化、右侧数据指标分布合理，层次分明，符合科研平台的使用逻辑。玻璃态卡片（backdrop-blur + 半透明背景）、细腻的1px描边、悬停上浮阴影、脉冲动画等CSS细节提升了专业质感，Tailwind + 自定义主题配置保证了风格统一、现代。字体使用Inter，字号、字重与间距的处理可读性强，信息层级清晰。交互组件（按钮、滑块、图标）风格一致，hover过渡平滑；模拟仿真点击后可视化图形更新，与主题功能呼应。唯一略欠的是中央主可视化区域仅为CSS动画圆形，视觉表达相对简单，未能完全展现'数据可视化'更复杂的图形层次，但作为单页单屏设计已足够优雅完整。总体而言，该页面高度符合现代设计规范，与用户需求的数据可视化、多铁性材料科研风格高度契合。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_019295.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Models",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Research",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Collaborate",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Data",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Run Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fab fa-github",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

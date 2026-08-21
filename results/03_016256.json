@@ -1,0 +1,83 @@
+{
+  "row_id": "03_016256",
+  "shard": 3,
+  "id": 16256,
+  "category": "Game dev",
+  "prompt": "Design an educational platform simulating the birth and evolution of stars. Implement realistic astrophysics simulations and interactive tutorials. Users can experiment with different cosmic conditions, participate in collaborative research projects, and engage in a community dedicated to exploring the universe.",
+  "html_len": 29544,
+  "html_sha256": "d7101f88e673c50c5ba2f8a413a1ef0e4066014633bd33bf3a4bc8c161d311b3",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "startGame is not defined",
+      "showTutorial is not defined",
+      "showResearch is not defined"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_016256.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Interactive Tutorial",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Research Projects",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

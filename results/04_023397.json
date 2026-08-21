@@ -1,0 +1,181 @@
+{
+  "row_id": "04_023397",
+  "shard": 4,
+  "id": 23397,
+  "category": "Website",
+  "prompt": "Imagine a platform where users can explore the potential of capturing energy from seismic activities. This site offers interactive simulations, expert collaborations, and community-driven research projects, aiming to harness natural earth movements for sustainable power. Key features include global seismic activity maps, a collaborative research forum, and virtual workshops.",
+  "html_len": 24001,
+  "html_sha256": "6327362cd3a528731f65560ec2ad8b0b4084461aa43858b7f6a58cf5d064e02a",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航锚点链接（Features/Simulations等）",
+        "expected": "页面滚动到对应内容区块",
+        "evidence": "探针点击后DOM有变化且发生页面跳转，无JS错误；这些链接href为#features/#simulations等，浏览器进行锚点滚动，反馈符合预期。",
+        "ok": 1
+      },
+      {
+        "name": "点击“Explore Maps”链接",
+        "expected": "打开或展示全球地震活动地图",
+        "evidence": "该链接href=\"#\"，探针未测到该链接点击但HTML显示为纯占位；点击不会产生任何地图内容或功能反馈，无网络请求。核心功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击“Join Community”链接",
+        "expected": "进入协作研究论坛或社区页面",
+        "evidence": "该链接href=\"#\"，纯占位入口；无任何实际社区/论坛功能，点击无业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击“View Schedule”链接",
+        "expected": "查看虚拟工作坊日程",
+        "evidence": "该链接href=\"#\"，同样为占位入口；虚拟工作坊日程功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击“Start Exploring”按钮",
+        "expected": "启动探索流程或进入核心工具",
+        "evidence": "探针点击后DOM变化无、新增网络请求0、JS错误0；按钮无绑定实际事件，点击无任何反应。",
+        "ok": 0
+      },
+      {
+        "name": "点击“Join Now”按钮",
+        "expected": "注册账号或进入登录流程",
+        "evidence": "探针点击后DOM变化无、新增网络请求0；按钮无实际交互功能，点击无反应。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为营销展示型单页，视觉完整且有Three.js粒子动画，但用户需求中的核心功能（全球地震地图、协作社区、虚拟工作坊、研究参与）全部为href=\"#\"占位入口或未绑定事件的按钮，点击无实际反馈。仅导航锚点滚动可用，核心交互大面积失败，功能分数低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 页面最主要的几个CTA按钮（Join Now、Start Exploring、View Simulations）点击后无任何交互反馈，无跳转、无弹窗、无状态变化，用户无法判断操作是否成功，属于主要入口点击无效；2. Features区块中的“Explore Maps”“Join Community”“View Schedule”均为占位链接（href=\"#\"），点击后仅跳回页面顶部，无法进入对应核心功能；3. 模拟器区域Three.js渲染异常（DOM中canvas数量为0），且“Start Wave”按钮事件绑定选择器与多个按钮匹配，存在绑定错位风险，核心控件调节可能无效。次要瑕疵：页面存在多处指向“#”的占位链接（页脚、社交链接等）；导航“Home”无对应锚点，点击无实际内容变化；模拟器区域无加载提示或空状态说明，用户难以理解空白区域含义；模拟器缺少操作说明和图例；部分装饰性动画在移动端被隐藏但无替代方案。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "该页面视觉设计整体优秀，符合现代科技型网站的高标准。色彩搭配专业：以深色背景（#0f172a、#1e293b）为基础，搭配青蓝色（#00d4ff）与蓝色（#1a56db）作为点缀，营造出科技感、未来感和能源主题氛围，渐变背景（径向、线性）增加了层次感，且与品牌定位高度吻合。布局结构清晰且协调：导航、Hero区、特性卡片、模拟区、社区研究、CTA到页脚一气呵成，网格使用合理，信息层级明确，各区块间距均匀。字体采用 Poppins，配合适当的字重和大小，使标题醒目、正文易读；按钮、卡片圆角、阴影、悬停动效等细节处理到位，提升了交互感和精致度。CSS 运用娴熟，包含自定义动画（seismic-wave 波纹、glow-text 辉光）、卡片 hover 上浮、图标缩放，以及响应式断点调整，体现了专业的视觉工程能力。虽然缺少真实图片，但通过图标、CSS 图形和 Three.js 模拟弥补了内容可视化，整体视觉语言统一，与现代网页设计规范（深色模式、玻璃态导航、渐变卡片）对齐。唯一小缺陷是部分按钮无实际交互反馈，可能影响体验，但纯视觉上无碍。综合评分 9/10。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_023397.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulations",
+      "href": "#simulations",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Research",
+      "href": "#research",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Simulations",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

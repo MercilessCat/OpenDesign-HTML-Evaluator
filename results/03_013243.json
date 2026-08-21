@@ -1,0 +1,182 @@
+{
+  "row_id": "03_013243",
+  "shard": 3,
+  "id": 13243,
+  "category": "Game dev",
+  "prompt": "Build an interactive aquascaping platform where users design and maintain virtual aquariums. The core idea is to offer a relaxing and educational experience in aquatic life management. Key features include fish species customization, ecosystem balancing challenges, a decorative item marketplace, and a community hub for sharing aquascapes.",
+  "html_len": 23837,
+  "html_sha256": "7fd311d9f6e38759157668a0b2326370353006cbd1b2a5d0c6ac660cd2b85b90",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "自定义鱼种",
+        "expected": "进入鱼种/外观选择界面，选择品种、颜色或体型并应用到鱼缸",
+        "evidence": "需求中的 fish species customization 无入口；页面只有通用 Add Fish 按钮，点击只会随机添加 🐠，没有鱼种选择控件或相关 JS 逻辑",
+        "ok": "NA"
+      },
+      {
+        "name": "添加鱼",
+        "expected": "水族箱中出现新鱼，余额减少、鱼数量增加、生态值变化并弹出提示",
+        "evidence": "Add Fish 按钮内联 onclick=addFish()，函数创建 .fish 元素、调用 updateStats/showNotification；探针点击后 DOM 有变化且无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "切换标签页",
+        "expected": "点击 Marketplace/Community/Challenges 等标签后对应面板显示，当前标签高亮",
+        "evidence": "脚本为所有 [id$=\"-tab\"] 绑定 click，隐藏全部 panel 后显示对应 panel；探针点击各标签 DOM 有变化且无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "在市场购买装饰品",
+        "expected": "点击 Buy 扣除水珠余额、添加对应物品或给出购买成功提示",
+        "evidence": "市场卡片中的 Buy 按钮没有 onclick/事件监听，脚本中也没有购买处理函数；点击只触发 hover 样式，交易未实现",
+        "ok": 0
+      },
+      {
+        "name": "查看社区作品",
+        "expected": "点击 View 展示作品详情或进入分享页面",
+        "evidence": "社区卡片的 View 按钮无事件绑定，无详情/路由逻辑，是纯展示占位入口",
+        "ok": 0
+      },
+      {
+        "name": "保存水族箱",
+        "expected": "点击 Save Aquarium 保存当前设计或提示保存成功",
+        "evidence": "Save Aquarium 按钮无 onclick/事件监听，脚本中没有保存逻辑；探针报 DOM 变化但结合 HTML 判断只可能是 hover/焦点样式层反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面核心的鱼缸设计操作（加鱼、加植物/装饰、清理）和标签页切换可用，且无 JS 运行时错误；但需求关键功能未完整实现：鱼种定制无入口，市场购买按钮和社区 View 按钮均为占位，保存按钮也无逻辑。关键入口未实现数量≥2，故功能分上限为 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在2个核心可用性问题：1) 'Save Aquarium' 按钮没有任何实际保存逻辑，点击后无功能反馈，用户无法保存设计进度；2) 市场中所有 'Buy' 按钮未绑定任何交互事件，点击后无反应，核心的购买流程完全不可用。次要瑕疵：添加鱼时不检查鱼缸容量上限（最大20条，但 addFish 无容量判断）；初始加载时自动调用 addFish 会重复扣除余额并增加鱼类计数，与预设的初始状态冲突；鱼缸内鱼、植物、装饰物点击后无任何操作（无点击事件），但光标仍提示可点击；社区页面的 'View' 按钮和挑战页面均无实际交互；缺少对各项操作（如购买、保存）的成功/失败状态说明；建议在余额不足时禁用按钮而非仅提示通知。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面整体视觉吸引力较强，深蓝到青色的主体渐变很好地契合了水族造景主题，营造出沉浸的水下氛围。白色卡片搭配圆角、阴影和轻量过渡，布局清晰且有层次，统计面板、鱼缸区域、标签页及内容面板的排列符合现代后台/游戏界面的常见结构。色彩搭配以蓝青色为主，辅以绿/粉/紫等强调色，和谐统一；生态条从红到绿的渐变更直观表达了健康状态。字体与间距使用合理，整体可读性良好。CSS方面体现了专业性：关键帧动画（波浪、气泡）增加动态细节，多组渐变、阴影和transition使得组件质感细腻。节流扣分点在于：大量使用Emoji作为资源图标（鱼类、植物等）略降低精致度；全局背景渐变的饱和度偏高，在长内容页面可能造成视觉疲劳；社区卡片的占位图仅用渐变块，完成度稍显不足。整体而言，这是一款视觉精美、风格明确且符合游戏分类的页面，但仍有精细化打磨的空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_013243.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save Aquarium",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Design",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Marketplace",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Community",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Challenges",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "🐟\nAdd Fish",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "🌿\nAdd Plant",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "🐚\nAdd Decoration",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

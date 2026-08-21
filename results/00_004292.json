@@ -1,0 +1,129 @@
+{
+  "row_id": "00_004292",
+  "shard": 0,
+  "id": 4292,
+  "category": "3D design",
+  "prompt": "Develop an educational platform for learning human anatomy through virtual reality experiences. The core idea is immersive, interactive learning. Users can explore detailed 3D models of the human body, engage with VR simulations, and participate in quizzes and collaborative study sessions, revolutionizing traditional anatomy education with cutting-edge technology.",
+  "html_len": 21655,
+  "html_sha256": "171a0edee3bffaa50cdbe7da95dd77e8ce5d0aee70417a03e00654d93d7c5f35",
+  "functional": {
+    "score": 5.0,
+    "raw_score": 5.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "探索 3D 模型（拖拽旋转/缩放）",
+        "expected": "用户拖拽/滚轮操作后，3D 人体模型视角应随之旋转、平移或缩放",
+        "evidence": "探针显示 canvas 指针拖拽后 DOM 有变化且无 JS 错误；HTML 中 OrbitControls 已绑定到 renderer.domElement，支持旋转/平移/缩放，运行时无脚本报错。",
+        "ok": 1
+      },
+      {
+        "name": "点击器官查看详情",
+        "expected": "点击心、脑、肺等器官后，右侧信息面板应显示该器官的名称和介绍",
+        "evidence": "renderer.domElement 绑定 click 事件，raycaster 检测 organs 交点并调用 showOrganInfo 替换 .info-panel 内容；各器官 userData 中已设名称与说明。",
+        "ok": 1
+      },
+      {
+        "name": "调整模型透明度滑块",
+        "expected": "拖动 Opacity 滑块后，3D 模型的透明度发生变化，且显示百分比同步更新",
+        "evidence": "opacitySlider 绑定 input 事件，updateOpacity 遍历场景中透明材质并修改 opacity，同时更新 #opacityValue 文本。",
+        "ok": 1
+      },
+      {
+        "name": "调整旋转速度滑块",
+        "expected": "拖动 Rotation Speed 滑块后，模型自转速度变化，且速度数值同步更新",
+        "evidence": "rotationSlider 绑定 input 事件，更新 #rotationValue；animate 循环中每帧读取该值控制器官旋转速度。",
+        "ok": 1
+      },
+      {
+        "name": "进入 VR 模式",
+        "expected": "点击 Enter VR Mode 后应进入 VR 场景或至少启动 VR 设备/渲染流程",
+        "evidence": "点击事件只执行 alert('VR mode would launch in a full implementation. This demo simulates the experience.')，没有 WebXR、VR 渲染或场景切换，属于占位实现。",
+        "ok": 0
+      },
+      {
+        "name": "参与测验和协作学习",
+        "expected": "页面应提供进入测验或协作学习模块的入口并可开始使用",
+        "evidence": "页面 info-panel 仅有“Complete quizzes and challenges”等静态文字描述，没有任何可点击入口、表单或对应功能组件。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "3D 人体模型的浏览、器官点击查看、透明度/旋转速度调节等核心学习交互可用且无 JS 错误；但 VR 按钮只是 alert 占位，未实现真正的 VR 体验，且测验与协作学习功能完全缺失，因此只能部分满足教育平台需求。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "存在 1 个核心可用性问题：核心功能 VR 模式未实现（点击 Enter VR Mode 仅弹出 alert，实际无法进入 VR 体验，而 VR 沉浸式学习是产品核心卖点）。次要瑕疵：1) 缺少操作引导/图例，用户不易发现“点击器官查看详情”的交互，信息面板未提示可点击；2) 交互式解剖模型过于简化（几何体拼合），与“详细 3D 人体模型”的目标有差距；3) 学习模块/小测验/协作功能仅有文案介绍，未实现但不影响主流程；4) 点击器官后的高亮反馈存在（emissive 高亮），但无弹窗/固定信息展示增强；5) 骨骼/循环/神经等系统缺乏可视化分层或标注，教育信息深度有限。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，深蓝渐变背景（#1a2a6c → #2c3e50）营造出沉浸式的科技感，与VR解剖教育的主题高度契合。主色调使用 #00c9ff 与 #92fe9d 的渐变，在暗色背景上形成了鲜明的视觉焦点，既现代又富有活力，符合3D设计类网站的审美趋势。布局方面，顶部居中的标题与副标题、左下控制面板、右下信息面板、左上操作指引按钮，区域划分清晰，虽然信息点较多但通过半透明毛玻璃（backdrop-filter: blur）和细边框（rgba(255,255,255,0.1)）进行了统一处理，保证了视觉的协调性。字体采用标准无衬线体，层级明确，标题用渐变文字和text-shadow增强了质感。组件设计圆润（大量圆角）、按钮采用渐变背景与悬停动效，滑条样式也进行了定制，整体CSS设计具有较高专业度。暗色背景下半透明面板不会干扰3D模型浏览，视觉重心明确。稍有不足的是左侧面板宽度固定，在窄屏上可能显得拥挤，另外右下信息面板最大高度限制可能造成长内容溢出，但整体不影响美观。综合来看，页面在视觉吸引力、色彩搭配、布局协调和组件打磨上都表现优秀，属于现代且专业的科技风设计。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 5.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_004292.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Enter VR Mode",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Camera",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Pause Rotation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

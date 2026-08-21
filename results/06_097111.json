@@ -1,0 +1,182 @@
+{
+  "row_id": "06_097111",
+  "shard": 6,
+  "id": 97111,
+  "category": "Website",
+  "prompt": "Delve into alternate histories with this expansive digital registry. Users explore and contribute to a timeline of parallel historical events. Features include interactive timelines, user-generated content, expert insights, and immersive virtual reality exhibits, providing a comprehensive view of what might have been in diverse historical contexts.",
+  "html_len": 26301,
+  "html_sha256": "2050a1482a9d3991a917ec06a03da42113b05da24dcc48e6472021f349d4c4fc",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航 Explore / Timeline / Community / VR Exhibits / Experts",
+        "expected": "点击后切换至对应内容视图或路由页面",
+        "evidence": "探针点击这些 <a href=\"#\"> 后 DOM 有变化但只是锚点跳转/滚动，无任何新内容渲染；无新增 JS 错误但也没有路由或内容切换逻辑。属纯占位死链，违反了需求中 Explore、Community、VR Exhibits 等核心导航功能。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 登录",
+        "expected": "出现登录弹窗/表单或跳转登录页",
+        "evidence": "探针点击 Sign In 按钮后 DOM 无变化、无网络请求、无 JS 错误，按钮无任何事件绑定，登录功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Exploring 开始探索",
+        "expected": "进入探索模式/跳转到时间线列表或相关内容",
+        "evidence": "探针点击后 DOM 无变化（JS click 兜底也未触发任何业务逻辑），无网络请求，按钮为纯占位，核心探索入口未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Community 加入社区",
+        "expected": "引导注册/加入或展示社区相关功能的交互",
+        "evidence": "探针点击后 DOM 无变化、无网络请求，按钮无事件绑定。需求中的用户生成内容/社区功能没有实际入口。",
+        "ok": 0
+      },
+      {
+        "name": "体验 3D VR 展览场景",
+        "expected": "3D 场景正常渲染并带有动画/交互反馈",
+        "evidence": "页面包含 Three.js 场景（TorusKnot 网格），使用 requestAnimationFrame 持续旋转渲染，运行时无 JS 错误。虽然缺少 OrbitControls 等手动交互，但 3D 展示真实生效，符合 VR 展览的可视化展示。",
+        "ok": 1
+      },
+      {
+        "name": "交互式时间线图表探索",
+        "expected": "时间线可点击/筛选，查看分支历史事件详情等交互",
+        "evidence": "Chart.js 渲染了一条静态折线图（Actual Events vs Alternative Paths），但未绑定任何点击/选择事件，用户无法与时间线进行交互式探索。需求核心功能“interactive timelines”仅为静态可视化，分支探索未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面主体为静态展示型落地页：三张特色时间线卡片仅展示，导航全部为 href=\"#\" 占位死链，Sign In / Start Exploring / Join Community 等核心功能按钮点击无任何反馈，用户生成内容、专家见解、VR 展览等需求的入口均未实现。唯一有效的是 Three.js 3D 模型自动旋转渲染与 Chart.js 静态图表，但无法支撑本页面声明的核心任务（探索、贡献、登录、交互时间线）。关键功能入口大面积占位，符合 0-3 分档。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 主导航所有链接（Explore、Timeline、Community、VR Exhibits、Experts）均为占位链接（href=\"#\"），点击后仅跳转页面顶部，无法进入任何对应功能页面；2. 主要操作按钮（Sign In、Start Exploring、Join Community、View All Timelines等）点击后均无任何内容或视觉反馈，核心任务（探索、注册、开始使用）无法完成；3. 页面宣称的交互式时间线仅为静态Chart.js图表，无分支选择或对比交互；VR展区仅为Three.js装饰模型，无法提供沉浸式体验；4. 移动端菜单按钮未绑定事件，无响应。次要瑕疵：缺少操作说明和图例，社区/专家等模块未实现但不支撑主流程，订阅表单提交无反馈，部分视觉动画与真实功能无关。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "从HTML/CSS源码来看，这是一个视觉设计质量很高的现代深色主题网站。整体采用深色渐变背景（#0f172a至#1e293b）配合靛蓝（#6366f1）与紫色（#8b5cf6）作为主色调，营造出神秘、科技感和历史探索氛围，与“ChronoVerse”替代历史平台的主题高度契合。色彩搭配合理：深色背景衬托亮色主体文字和渐变按钮，对比度适中，视觉层次分明。布局方面，页面使用max-w-7xl中心容器，导航、Hero区、Features网格、Timeline图表、卡片列表、CTA和Footer结构清晰，内容组织符合现代网站规范，网格间距均匀，视觉节奏流畅。字体使用Inter，并正确应用于全局，标题字号阶梯分明，行高舒适。组件设计专业：导航栏采用半透明模糊背景（backdrop-blur），卡片有圆角、边框和悬浮抬升阴影，按钮使用渐变和发光脉冲动画，特性图标有缩放过渡，VR区域叠加渐变遮罩并嵌入了Three.js生成的3D线框模型增强沉浸感，Chart.js绘制的动态时间线图表也经过暗色主题适配。CSS细节丰富但不杂乱，自定义动画仅有两个关键帧用于脉冲和浮动，过渡使用克制的transition，整体风格统一且具现代感。唯一的小扣分点是个别交互按钮（如Sign In和Join Community）没有实际功能，可能影响完整性预期，但在纯视觉层面不影响美观度。综合来看，该页面在视觉吸引力、色彩搭配、布局协调和设计质量上均达到较高水准，符合当代创意型网站的设计规范。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_097111.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Timeline",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "VR Exhibits",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Experts",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

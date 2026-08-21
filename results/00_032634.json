@@ -1,0 +1,162 @@
+{
+  "row_id": "00_032634",
+  "shard": 0,
+  "id": 32634,
+  "category": "3D design",
+  "prompt": "Build a resourceful site focused on texture compression techniques for web-based 3D graphics, featuring comprehensive guides and interactive tools. Users can experiment with various compression algorithms, compare results, and access case studies, empowering them to optimize 3D assets for efficient web delivery.",
+  "html_len": 21820,
+  "html_sha256": "8070346edf3e0e8167cc5f7ed88bd0e5ae4596174b811f8b89d2ff8a5daacc9c",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Exploring 进入交互实验室",
+        "expected": "页面滚动到 Interactive Compression Lab 区域",
+        "evidence": "CTA 锚点 href=\"#interactive\"，页面存在 id=\"interactive\" 的目标 section；探针点击后有 DOM 变化和跳转，无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "切换压缩算法 / 质量滑块 / 分辨率",
+        "expected": "下方的 Original Size、Compressed Size、Compression Ratio、Loading Time 统计数字实时更新",
+        "evidence": "algorithm、quality、resolution 控件均绑定了事件并调用 updateStats()；运行时无 JS 错误，统计逻辑可正常执行。",
+        "ok": 1
+      },
+      {
+        "name": "切换颜色格式",
+        "expected": "RGBA / RGB / Alpha 切换后，统计数字应随通道数变化",
+        "evidence": "format 选择框没有任何 addEventListener，updateStats() 中通道数恒为 4，切换颜色格式不会产生任何统计或视觉反馈。",
+        "ok": 0
+      },
+      {
+        "name": "拖拽 3D 立方体旋转",
+        "expected": "通过 OrbitControls 旋转查看 3D 纹理立方体",
+        "evidence": "页面初始化了 THREE.OrbitControls、requestAnimationFrame 动画循环并渲染场景；探针虽无法验证 WebGL 像素，但无 JS 错误，按规则视为可交互。",
+        "ok": 1
+      },
+      {
+        "name": "点击导航 Guides / Algorithms / Case Studies / Resources",
+        "expected": "跳转到对应的指南、算法、案例研究或资源页面/内容区",
+        "evidence": "四个导航链接均为 href=\"#\"，没有点击事件绑定，也没有对应目标内容区；探针只有 hash 变化/跳转标记，未展示任何实际对应内容，属于占位入口。",
+        "ok": 0
+      }
+    ],
+    "reason": "交互式压缩实验室的核心功能基本可用：CTA 锚点跳转、算法/质量/分辨率控件更新统计、3D 场景可旋转。但颜色格式切换完全无反馈，且 Guides/Algorithms/Case Studies/Resources 四个关键导航均为 href=\"#\" 的占位入口，无法满足需求中“综合指南和案例研究”的关键访问路径，多个关键入口未实现，按规则不高于 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 主导航全部为占位链接（Guides/Algorithms/Case Studies/Resources均href=\"#\"），点击后无实际内容加载，用户无法进入指南、算法库等主要板块，主要入口形同虚设。\n2. 核心交互工具“Compression Lab”反馈逻辑严重错误：选择“None (Uncompressed)”时压缩比不为1x，压缩后文件反而大于原始文件（约4.7MB vs 4.0MB），与“未压缩”语义冲突；Quality滑块方向反直觉——质量越低（1%）压缩后文件反而巨大，质量越高（100%）文件越小，用户无法信赖工具结果。\n3. Color Format选择器（RGBA/RGB/Alpha Only）切换后统计无任何变化，属于核心控件调节无效。\n\n次要瑕疵：\n1. 初始静态数值（1.2MB等）与JS动态计算结果不一致，页面加载后数字会突然跳变。\n2. 缺少压缩算法、质量水平、加载时间估算方法的说明或图例，用户难以理解计算依据。\n3. 3D纹理视图与压缩质量之间没有视觉对比反馈，页面宣称可观察画质影响但实际无法实现。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，深蓝渐变背景与亮蓝/青色（#4facfe、#00f2fe）形成鲜明的科技感对比，非常契合3D图形工具站点的主题定位。色彩搭配统一且有层次，主色在背景中突出，卡片和交互区域通过半透明层、backdrop-filter及细边框增强了玻璃/深空质感，符合现代Web设计趋势。\n\n布局方面，header粘性定位、导航圆角胶囊按钮、Hero大标题、三列卡片网格、交互实验室和统计卡片排列清晰，网格与flex配合合理，留白充足，页面节奏流畅。字体采用Segoe UI等系统字体，可读性好；标题使用渐变文字与下划线装饰，视觉重心明确。组件设计规范，按钮、卡片、选择器、滑块、统计卡片均有统一的圆角、阴影和hover动效，细节打磨到位。\n\nCSS专业度较高，使用了渐变、backdrop-filter、sticky、grid、响应式媒体查询等进阶技术，代码结构清晰，视觉一致性保持良好。与用户需求高度对齐——围绕纹理压缩提供了指南、算法卡片、可交互的工具（Three.js 3D场景）和真实案例，视觉风格和内容定位匹配。\n\n轻微扣分项：部分标题的text-shadow可能与background-clip: text叠加导致文字边缘略显模糊；页面大量使用backdrop-filter，在低性能设备上可能有渲染负担；整体设计相对常见，缺乏更具辨识度的个性化视觉记忆点。但总体上不失为一个精美、专业且可用的界面。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.5,
+  "baseline_overall": 5.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_032634.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Guides",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Algorithms",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Case Studies",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Start Exploring",
+      "href": "#interactive",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

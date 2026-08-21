@@ -1,0 +1,182 @@
+{
+  "row_id": "01_016267",
+  "shard": 1,
+  "id": 16267,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create a sophisticated interface for assigning couriers efficiently, integrating AI-driven route optimization and real-time tracking. The core idea revolves around seamless logistics management. Key features include interactive maps, priority scheduling, and predictive delivery time analytics to enhance operational efficiency and customer satisfaction.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14708,
+  "html_sha256": "5646c6393f890936230088fca8e5661e3134f12ae003b1f010b4783ce497dcf8",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 New Shipment 按钮",
+        "expected": "弹出新建发货表单或进入创建流程",
+        "evidence": "探针点击后 DOM 无变化，无JS错误，无网络请求；按钮无事件绑定（仅静态样式）",
+        "ok": 0
+      },
+      {
+        "name": "点击 Optimize Routes Now 按钮",
+        "expected": "触发AI路线优化，地图或状态更新",
+        "evidence": "探针点击后 DOM 无变化，无JS错误，无网络请求；按钮无实际逻辑",
+        "ok": 0
+      },
+      {
+        "name": "点击 Auto Assign 按钮",
+        "expected": "自动分配快递员并更新列表/状态",
+        "evidence": "探针点击后 DOM 无变化，无JS错误，无网络请求；按钮仅为高亮样式，无功能",
+        "ok": 0
+      },
+      {
+        "name": "点击 Manual 按钮",
+        "expected": "切换为手动分配模式，界面呈现可选快递员",
+        "evidence": "探针点击后 DOM 无变化，无JS错误，无网络请求；按钮无状态切换",
+        "ok": 0
+      },
+      {
+        "name": "点击 View All Shipments 按钮",
+        "expected": "展开全部发货列表或跳转查看",
+        "evidence": "探针点击后 DOM 无变化，无JS错误，无网络请求；按钮无响应",
+        "ok": 0
+      },
+      {
+        "name": "点击快递员旁的加号按钮",
+        "expected": "为该快递员分配新任务或弹出选择",
+        "evidence": "探针点击后 DOM 无变化，无JS错误，无网络请求；图标按钮无事件逻辑",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为纯静态展示，所有按钮（新建发货、优先级调度刷新、查看所有发货、优化路线、手动/自动分配、快递员添加）均无任何交互反馈。探针点击全部无DOM变化、无网络请求、无JS错误，说明核心功能完全未实现，仅剩视觉布局。需求声明的交互式地图、优先级调度、预测分析和分配功能均为占位，交互成功率0%，功能严重缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 页面所有可交互按钮（New Shipment、刷新、View All Shipments、Optimize Routes Now、Manual、Auto Assign、加号按钮等）点击后均无任何DOM变化、无JS反馈、无网络请求，属于典型的“主要入口点击无实际反馈”，核心操作如“新建发货”“优化路线”“自动分配”全部无法完成。\n2. Manual / Auto Assign 分段控件点击后无选中态切换，核心控件调节无效。\n3. 整个页面交互反馈缺失，用户无法判断任何操作是否成功，属于“能用但不好用”的降档情形，且问题数量达到2个以上。\n\n次要瑕疵：\n1. 地图区域为静态占位效果，未提供任何真实地图或交互能力，与“实时追踪/路线优化”的主功能声明不符。\n2. 缺少必要说明或图例（如优先级标签含义、地图符号含义等）。\n3. 按钮仅有hover样式变化，缺少点击反馈或禁用态提示，容易让用户误以为功能已触发。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面整体呈现专业、现代、干净的SaaS物流管理仪表板视觉风格。视觉吸引力较好：主色调蓝色（#2563eb和#0ea5e9）统一协调，背景浅灰与白色卡片形成良好层次，红/绿/黄状态色运用合理，符合物流管理的功能语义。布局上采用左侧2/3地图+统计卡片、右侧1/3控制面板的三列网格结构，主次分明，垂直空间利用充分，在单屏内有效组织了地图区、数据统计、优先级调度、预测分析和配送员分配等多个模块，结构紧凑且不显拥挤。排版使用Inter字体，字号层次清晰，卡片间距和圆角处理得当，阴影和hover上浮效果增强了交互感和精致度。CSS方面运用Tailwind框架加自定义动画（脉冲和悬停过渡），符合现代Web设计规范。扣分点：地图区域实际是占位渐变背景加图标，缺少真实地图呈现，视觉信息量较单薄；部分文案和区块细节深度不足，整体记忆点较弱；按钮交互无反馈但悬停效果已提供基本视觉反馈。总体属于中上水准的专业仪表板设计。",
+    "attempts": 2
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_016267.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Shipment",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-sync-alt",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View All Shipments",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Optimize Routes Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Manual",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Auto Assign",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

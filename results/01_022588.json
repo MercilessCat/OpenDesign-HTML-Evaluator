@@ -1,0 +1,175 @@
+{
+  "row_id": "01_022588",
+  "shard": 1,
+  "id": 22588,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Develop a service history log platform for vehicle enthusiasts and professionals, enabling detailed record-keeping of maintenance activities. Features include reminders for upcoming services, integration with IoT devices for real-time diagnostics, and a marketplace for finding trusted service providers.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10040,
+  "html_sha256": "68d3f83c2ad0caeddbb3d9f0f42488b4e56117a02fc901dc411e574063db330a",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航链接点击（Dashboard/History/Reminders/Marketplace）",
+        "expected": "切换到对应的服务历史、提醒或市场板块，显示相应内容",
+        "evidence": "所有导航链接均为 href=\"#\"，无路由或事件绑定；探针显示点击后仅有页面跳转（hash 变化），无实际内容切换，页面主区域不变",
+        "ok": 0
+      },
+      {
+        "name": "点击 Add Record 添加服务记录",
+        "expected": "弹出或展示添加服务记录的输入表单",
+        "evidence": "探针点击 Add Record 按钮后 DOM 无变化、无网络请求、无 JS 错误；HTML 中该按钮无事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 登录",
+        "expected": "显示登录表单或触发登录流程",
+        "evidence": "探针点击 Sign In 按钮后 DOM 无变化；按钮无 onclick 或监听器，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Full Report 查看完整诊断报告",
+        "expected": "展开或跳转到 IoT 诊断详细报告",
+        "evidence": "探针点击 View Full Report 按钮后 DOM 无变化；该按钮仅为静态样式，无事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击 Browse Marketplace 浏览服务商市场",
+        "expected": "进入服务商市场或显示附近的认证服务商列表",
+        "evidence": "探针点击 Browse Marketplace 按钮后 DOM 无变化、无跳转；按钮无点击事件，属于占位入口",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉结构完整，展示了服务历史、提醒、IoT 诊断和市场推广模块，但所有核心交互入口均不可用：导航链接为 href=\"#\" 无路由，四个按钮点击后均无任何反馈。用户无法添加记录、登录、查看报告或浏览市场，功能需求大面积未实现，交互成功率低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) “Add Record”点击后无任何变化或反馈，无法添加服务记录，核心功能不可用；2) “View Full Report”无响应，IoT诊断报告无法查看；3) “Browse Marketplace”无响应，服务商市场无法浏览；4) “Sign In”无响应，登录入口不可用；5) 顶部导航 Dashboard/History/Reminders/Marketplace 均为 href=\"#\" 占位链接，点击后没有实际页面切换或内容更新，只是页面跳转/置顶。页面存在多个核心可用性问题，属于“能用但不好用”的静态演示页。次要瑕疵：缺少表单输入与数据持久化；Reminders 不能新增或标记完成；社交链接为占位；缺少空状态说明和操作结果提示。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力良好，符合现代SaaS服务平台的设计范式。色彩方案以蓝色为主色、橙色为强调色，搭配灰色背景和白色卡片，层次清晰且对比度足够；蓝色渐变IoT卡片为页面增加了视觉亮点，避免整体过于平淡。布局采用典型的Dashboard结构：顶部导航、主内容区双栏栅格、侧边栏卡片、页脚，信息分区明确，阅读路径流畅，符合车辆服务记录平台的功能气质。元素间距、圆角、阴影和hover过渡使用统一，基于Tailwind CSS的实现使风格一致且专业，字体采用默认sans体系，清晰可读。不足之处在于整体设计比较模板化，缺少更独特的视觉记忆点，部分按钮和链接没有实际交互反馈，且内容密度较高，在部分屏幕下可能接近或超出视口高度。总体而言，页面是专业、干净、现代的UI组件级实现，视觉评分8/10。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_022588.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "History",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Reminders",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Marketplace",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Record",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Full Report",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Browse Marketplace",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

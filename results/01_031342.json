@@ -1,0 +1,185 @@
+{
+  "row_id": "01_031342",
+  "shard": 1,
+  "id": 31342,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Build an intuitive dashboard that simplifies device connectivity for smart home enthusiasts. Users can configure and manage their devices with guided setup wizards and real-time status updates. Key features include network diagnostics, device grouping, and remote access control.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12136,
+  "html_sha256": "06b7d98338fd57609c4955f2585bfb555f6c74fb2c702c72e9d108024209106b",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Add Device 添加设备",
+        "expected": "打开引导式设备添加向导或弹出表单",
+        "evidence": "探针点击按钮后 DOM 无变化、无新增 JS 错误、无网络请求；HTML 中该按钮无事件绑定，纯占位",
+        "ok": 0
+      },
+      {
+        "name": "点击 Run Diagnostics 运行网络诊断",
+        "expected": "执行诊断并展示网络状态结果",
+        "evidence": "探针点击后 DOM 无变化、无新增 JS 错误、无网络请求；按钮无任何交互逻辑",
+        "ok": 0
+      },
+      {
+        "name": "点击 Create Group 创建设备组",
+        "expected": "打开分组创建界面或弹窗",
+        "evidence": "探针点击后 DOM 无变化、无新增 JS 错误、无网络请求；按钮无事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击 Good Night / Good Morning / Away Mode / All Off 快捷场景",
+        "expected": "触发对应智能场景并更新页面状态",
+        "evidence": "探针点击多个快捷按钮后 DOM 均无变化、无新增 JS 错误；按钮仅为静态 hover 样式，无实际功能",
+        "ok": 0
+      },
+      {
+        "name": "点击 Refresh 刷新设备状态",
+        "expected": "重新加载设备列表并更新实时状态",
+        "evidence": "探针点击后 DOM 无变化、无新增 JS 错误、无网络请求；无刷新逻辑",
+        "ok": 0
+      },
+      {
+        "name": "使用远程访问控制功能",
+        "expected": "提供远程访问控制的入口或配置界面",
+        "evidence": "页面 HTML 中完全不存在远程访问控制相关的按钮、区域或文字入口，需求功能缺失",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面视觉上完整呈现了智能家居仪表盘，但所有核心交互按钮（Add Device、Run Diagnostics、Create Group、快捷场景、Refresh）经探针点击均无任何 DOM 变化或业务反馈，属于纯静态占位展示。需求中声明的设备添加向导、网络诊断、设备分组、场景控制、状态刷新均未实现，远程访问控制入口完全缺失，核心交互大面积失败，因此功能评分极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在 2 个及以上核心可用性问题。页面所有核心操作按钮（Add Device、Run Diagnostics、Create Group、Quick Actions 的 Good Night/Good Morning/Away Mode/All Off、Refresh）点击后均无任何 DOM 变化或功能反馈，既没有完成任务也没有错误提示，整个页面停留在静态展示层面；作为智能家居仪表板，添加设备、网络诊断、设备分组、场景控制和刷新设备列表等核心流程全部不可用，用户无法判断操作是否成功，整体属于“能用但不好用”以下的水平。次要瑕疵：页面缺少操作说明、图例或帮助文字；快速操作按钮点击后图标覆盖文字，存在视觉遮挡问题；无任何输入控件，无法真正配置设备或编辑分组信息。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力较高，采用现代智能家居仪表盘风格，布局清晰且层次分明。色彩搭配以蓝色主色调搭配绿色、黄色、紫色等辅助色，统一协调且对比度良好，符合智能家居产品清爽、专业的调性。布局采用头部、主内容区、底部结构，主内容区使用三列卡片网格加底部全宽表格，信息组织合理，在单屏内能较好展示核心功能。组件设计规范，按钮、状态标签、图标、表格等细节处理到位，圆角、阴影、间距和Hover过渡效果均体现了较高的CSS专业度。字体使用Tailwind默认字体栈，字号和字重层次清晰，可读性强。整体符合现代网页设计规范与用户需求中‘直观仪表盘’的定位。轻微扣分点：部分按钮没有实际交互反馈，视觉上略显静态；功能图标较多，存在一定的装饰性冗余。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_031342.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Device",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Run Diagnostics",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Create Group",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Good Night",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-moon text-blue-50",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Good Morning",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-sun text-yellow-5",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Away Mode",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-home text-green-5",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "All Off",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-power-off text-re",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Refresh",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "row_id": "03_023390",
+  "shard": 3,
+  "id": 23390,
+  "category": "Game dev",
+  "prompt": "Immerse users in a VR puzzle adventure platform where they solve intricate challenges within escape room environments. Users collaborate globally, unlocking new levels based on collective progress. Features include real-time hints, community leaderboards, and user-generated room creation tools, fostering a dynamic and ever-evolving puzzle-solving experience.",
+  "html_len": 23237,
+  "html_sha256": "da3256b4161957dc104f63c01596917641a7fc7d063277389bd3d99bb465eeee",
+  "functional": {
+    "score": 3.0,
+    "raw_score": 3.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 BEGIN ADVENTURE 开始游戏",
+        "expected": "从开始界面进入游戏界面，显示计分、计时、排行榜和 3D 场景。",
+        "evidence": "探针点击后 DOM 有变化；HTML 中 startBtn 绑定 showScreen('game')，隐藏 startScreen 并显示 gameScreen，无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "使用 WASD 在房间内移动",
+        "expected": "按 W/A/S/D 时摄像机位置随键位移动，视角发生变化。",
+        "evidence": "开始界面明确展示 W/A/S/D 为移动键，但 keydown 监听器只处理 h 和 e，没有 w/a/s/d 分支，也没有 camera.position 更新代码；按移动键无任何反馈。",
+        "ok": 0
+      },
+      {
+        "name": "按 E 与谜题对象交互",
+        "expected": "角色与环境互动，分数增加、进度条前进，或收到解谜反馈。",
+        "evidence": "keydown 中 case 'e' 会让 score 增加 50，更新 scoreDisplay，并将 progressFill 宽度增加 10%；虽然只是模拟交互，但有可见业务反馈。",
+        "ok": 1
+      },
+      {
+        "name": "按 H 获取实时提示",
+        "expected": "提示框显示提示内容，并在一段时间后消失。",
+        "evidence": "keydown 中 case 'h' 调用 showHint()，移除 hintBox 的 hidden 类，5 秒后重新隐藏；无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "按 R 重置谜题",
+        "expected": "重置当前谜题进度、分数或计时。",
+        "evidence": "开始界面 controls 区域标注 R=Reset Puzzle，但 keydown 监听器中没有 case 'r'，按 R 无任何处理，属于未实现的占位说明。",
+        "ok": 0
+      },
+      {
+        "name": "使用用户生成房间创建工具",
+        "expected": "进入房间编辑/创建界面，可以制作并分享自定义房间。",
+        "evidence": "HTML 中没有任何房间创建/编辑按钮、表单或相关模块；该需求完全缺失，页面没有此功能入口。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面能完成开始游戏、E 键交互、H 键提示等基础模拟反馈，但核心 VR 移动和 R 重置控制未实现，谜题只是计数器而非真实解谜；同时协作解锁、社区实时排行榜、用户生成房间等关键需求缺失，主要任务无法真正完成，整体可用性低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 进入游戏后 gameScreen 以 rgba(0,0,0,0.8) 的全屏遮罩覆盖 3D 场景，玩家几乎看不到房间与谜题道具，核心解谜环境不可见；2) 开始页明确列出 W/A/S/D 移动，但键盘处理只实现了 H 和 E，按 WASD 无任何移动/反馈，canvas 拖拽也无视角变化，玩家无法在房间中探索；3) R 键“Reset Puzzle”未实现，按下无任何效果；4) 通关后点击 NEXT CHALLENGE 不重置进度条，进度仍为 100%，新关卡按一次 E 就会再次通关，“继续挑战”流程断裂。次要瑕疵：游戏内缺少当前谜题目标和交互对象的说明，E 键可以脱离 3D 道具任意触发进度，解谜逻辑与场景没有关联；排行榜为静态示例，“You”的分数不随实际得分更新；社区协作、玩家自建房间、VR/WebXR 等功能未体现；结束页“New Rooms Unlocked”数值与实际解锁不一致。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉风格与VR解谜游戏主题高度契合。深蓝到暗红的渐变背景配合霓虹青蓝色的点缀，营造出强烈的科技感与沉浸式氛围，符合现代游戏UI的视觉规范。标题使用渐变文字和霓虹光晕，具有视觉冲击力；按钮采用蓝色渐变并带悬浮动画，交互反馈友好。布局上，游戏容器居中、圆角、投影，层次清晰；覆盖层使用深色半透明背景，保证了信息的可读性。字体采用无衬线类，字号层级分明（标题3.5rem，正文1.2rem），间距与留白基本合理，组件（统计栏、排行榜、提示气泡、进度条）风格统一，采用了圆角、半透明玻璃拟态效果，整体达到了不错的专业水准。扣分点：部分组件设计较为基础，排行榜和统计面板缺少更精致的视觉装饰；3.5rem标题在较小屏幕上可能溢出；暗色覆盖层rgba(0,0,0,0.8)几乎遮挡全部3D场景，削弱了canvas背景的沉浸意义；页面元素动态交互较少，视觉层次主要依靠静态布局，缺少更丰富的动效细节。综合来看，这是一款贴合需求、视觉达标且无明显硬伤的现代游戏页面设计。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 4.3,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_023390.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "BEGIN ADVENTURE",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

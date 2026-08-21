@@ -1,0 +1,175 @@
+{
+  "row_id": "03_001253",
+  "shard": 3,
+  "id": 1253,
+  "category": "Game dev",
+  "prompt": "Launch a virtual salon where users create stunning visual designs on digital canvases. Core functionality includes intricate design creation. Key features encompass advanced design tools, a gallery for sharing creations, and community challenges for inspiration, fostering a vibrant community of creators pushing the boundaries of digital artistry.",
+  "html_len": 27114,
+  "html_sha256": "ecab5cd4251c6385b1271bf80126dcb541c85ca239347a1290704df7e3869f8a",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "切换到画廊视图",
+        "expected": "点击 Gallery 按钮后，画廊视图显示，工作室视图隐藏",
+        "evidence": "探针点击 #galleryBtn 后 DOM 变化=无，新增JS错误=0，新增网络请求=0；HTML 中 galleryView 初始为 hidden，但点击后未发生任何可见切换",
+        "ok": 0
+      },
+      {
+        "name": "切换到挑战视图",
+        "expected": "点击 Challenges 按钮后，挑战视图显示，工作室视图隐藏",
+        "evidence": "探针点击 #challengesBtn 后 DOM 变化=无，新增JS错误=0，新增网络请求=0；HTML 中 challengesView 初始为 hidden，但点击后未发生任何可见切换",
+        "ok": 0
+      },
+      {
+        "name": "选择画笔工具",
+        "expected": "点击 Brush 按钮后，按钮高亮为 active，绘制工具切换为画笔",
+        "evidence": "探针点击 #brushTool 后 DOM 变化=无，新增JS错误=0，新增网络请求=0；预期 active 类切换未发生",
+        "ok": 0
+      },
+      {
+        "name": "选择橡皮擦工具",
+        "expected": "点击 Eraser 按钮后，按钮高亮为 active，绘制工具切换为橡皮擦",
+        "evidence": "探针点击 #eraserTool 后 DOM 变化=无，新增JS错误=0，新增网络请求=0；预期 active 类切换未发生",
+        "ok": 0
+      },
+      {
+        "name": "在画布上拖拽绘制",
+        "expected": "鼠标/触摸在画布拖拽后出现笔迹或图形",
+        "evidence": "canvas 元素存在且有 mousedown/mousemove 等事件监听代码，但所有已测按钮点击均无 DOM 反馈，说明脚本事件绑定整体未生效；探针未提供 canvas 像素变化结果，但依据整体交互失效推断绘制不可用",
+        "ok": 0
+      }
+    ],
+    "reason": "页面展示了数字艺术沙龙的完整结构与静态内容，但所有核心交互（导航切换、工具选择、画布绘制）均无有效反馈。探针点击多个按钮后 DOM 无任何变化，表明事件绑定或初始化失败，需求声明的核心创作功能无法完成，功能严重失效。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：主导航中的 Gallery、Challenges 点击后均无实际响应（交互探针确认 DOM 无变化），用户无法进入社区画廊、无法查看或参与挑战，主要入口形成死路，直接阻断“分享作品”和“参与社区挑战”这两个关键任务。其余主流程如画布绘制、清除、保存未发现明显阻断。次要瑕疵：画廊和挑战内容目前为静态占位，缺少真实上传/参与入口；部分操作缺少说明文字和状态提示；工具按钮的当前选中状态反馈不够强。由于存在 1 个核心可用性问题，按锚定给 4 分。",
+    "attempts": 2
+  },
+  "aesthetic": {
+    "score": 5.5,
+    "reason": "[raw] ```json\n{\n  \"score\": 5.5,\n  \"reason\": \"总体视觉表现力较强，但精致度和专业度不足，且存在明显功能失效风险，是一份'有热情但不够克制'的页面。\"\n\n  \"维度分项评价\": {\n    \"整体视觉吸引力\": {\n      \"得分\": 6,\n      \"评价\": \"页面采用了强烈的三段式线性渐变背景（深蓝→红→金黄），配合悬浮动画和丰富阴影，第一眼冲击力十足，符合游戏/创意类产品的活力调性。但视觉噪音较大，背景与前景内容缺乏明显的主次层级，容易让人注意力分散，看起来更像营销落地页而非专业创作工具。\"\n    },\n    \"色彩搭配\": {\n      \"得",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.4,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_001253.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Studio",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Gallery",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Challenges",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Brush",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Eraser",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Spray",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Line",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Circle",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

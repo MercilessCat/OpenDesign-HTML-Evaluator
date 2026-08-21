@@ -1,0 +1,182 @@
+{
+  "row_id": "05_038832",
+  "shard": 5,
+  "id": 38832,
+  "category": "Website",
+  "prompt": "Develop a dynamic portal for personalized career transitions. Users explore tailored pathways, utilizing AI-driven assessments and expert advice. Key features include interactive skill maps, job market forecasts, and community mentorship, empowering individuals to navigate career changes with confidence and clarity.",
+  "html_len": 35658,
+  "html_sha256": "f9b4134e0aa48c761b7215fabd650d3b80fc2ebc9067259e5a643f344268ecd5",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击顶部导航“Pathways”链接",
+        "expected": "页面平滑滚动到职业路径板块并展示对应内容",
+        "evidence": "探针报告点击后DOM变化有，页面发生锚点跳转，无JS错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击“Start Your Assessment”按钮",
+        "expected": "启动AI驱动的职业评估流程，如进入问卷或打开评估界面",
+        "evidence": "探针报告点击后DOM变化为无，即使JS click兜底也无变化，无新增网络请求；按钮未绑定业务事件。",
+        "ok": 0
+      },
+      {
+        "name": "点击“View Sample Pathways”按钮",
+        "expected": "展示示例职业路径或滚动到路径区域",
+        "evidence": "探针报告点击后DOM变化为无，无JS错误、无网络请求；按钮为纯静态样式，无交互反馈。",
+        "ok": 0
+      },
+      {
+        "name": "选择“Full Stack Developer”路径",
+        "expected": "右侧路径详情切换为对应职业的路线图和步骤",
+        "evidence": "探针点击该按钮后DOM变化为无，无JS错误、无网络请求；路径选项未实现切换逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "点击顶部“Get Started”按钮",
+        "expected": "进入注册/开始使用流程或触发下一步引导",
+        "evidence": "探针报告点击后DOM变化为无，无JS错误；按钮无事件绑定，点击无任何反馈。",
+        "ok": 0
+      },
+      {
+        "name": "交互式技能地图操作",
+        "expected": "地图节点可拖拽、点击或展示技能连接关系",
+        "evidence": "页面存在#skillMapContainer容器但内容为空，元素统计canvas=0，无Three.js/Chart.js初始化痕迹；交互入口实际缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面仅有锚点导航可用；核心交互（AI评估、查看示例路径、路径切换、Get Started）全部无响应，交互式技能地图为空壳未实现，就业市场预测等需求仅停留在静态宣传文案。整体无法完成用户所期望的动态职业转型门户的核心任务，更像一个静态展示页。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题如下：\n1. 核心功能入口全部无响应：\"Start Your Assessment\"、\"View Sample Pathways\"、\"Get Started\" 三个主要 CTA 按钮点击后均无任何 DOM 变化或网络请求，用户无法开始评估、查看路径，主要任务完全无法启动。\n2. 路径切换控件失效：\"Full Stack Developer\" 等推荐路径按钮点击无反应，用户无法查看其他路径（Data Scientist、UX Designer），所谓“个性化路径”实际不可操作。\n3. 交互式技能图谱（Interactive Skill Map）区域渲染为空白：skillMapContainer 仅为一个空 div，页面加载了 three.js 和 chart.js 但没有任何可视化内容输出，核心功能缺失。\n4. 社区模块按钮（如 Apply for Mentorship、Browse All Groups）同样无点击反馈，次要导航也存在无功能入口。\n\n次要瑕疵：\n- 技能图谱空白区域没有“加载中”“暂不可用”等说明或占位提示，用户易误以为页面出错。\n- 导航栏移动端菜单按钮仅有图标，无展开菜单交互。\n- 页面信息结构和视觉设计较完整，但静态展示属性过强，所有核心操作均停留在展示层，无法构成可用的产品体验。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，采用现代SaaS风格的设计语言，色彩搭配以靛蓝、紫色为主，辅以粉色点缀，协调统一且富有科技感，符合AI职业规划平台的气质。布局清晰：固定导航、Hero区左右分栏、特性卡片三列、路径左右结构、社区双栏，层级分明，间距合理。Poppins字体搭配Tailwind的圆角、阴影、渐变和微动画（浮动卡片、进度条动画），组件设计有细节，CCS整体专业。\n\n扣分点：Interactive Skill Map区域在HTML中只是一个空容器（无canvas渲染结果），视觉上形成大片空白，影响该板块的完整性和吸引力；部分按钮点击无反馈，交互上略显呆板。此外整体风格偏模板化，独特性稍弱，但作为门户类页面已足够美观。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_038832.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Pathways",
+      "href": "#pathways",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Your Assessment",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Sample Pathways",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Full Stack Developer\nHigh Demand\n\n85% ma",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

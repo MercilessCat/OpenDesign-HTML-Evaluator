@@ -1,0 +1,181 @@
+{
+  "row_id": "02_028293",
+  "shard": 2,
+  "id": 28293,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Delve into a platform focused on assessing social interventions' efficacy. Visualize the impact of initiatives through detailed analytics and success metrics. Users can explore case studies, contribute data, and collaborate on improving program strategies, fostering a community dedicated to sustainable development and poverty alleviation efforts.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14481,
+  "html_sha256": "a958cd73ad22761124f1505dc178bb45338705864da5bd5df5984db61e4cfad4",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "切换时间范围（Quarterly/Yearly）",
+        "expected": "点击后仪表盘指标和可视化图表应切换到对应季度/年度数据",
+        "evidence": "按钮存在但 HTML 中无任何事件绑定或数据更新逻辑；探针点击虽有 DOM 变化，但仅为 hover/focus 样式层，没有业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "导航切换（Dashboard/Analytics/Case Studies/Community）",
+        "expected": "点击导航应切换到对应页面或内容区块",
+        "evidence": "所有导航链接均为 href=\"#\"，无路由、无内容切换逻辑；探针显示跳转但只是页面顶部锚点行为，未显示对应内容",
+        "ok": 0
+      },
+      {
+        "name": "浏览案例研究详情",
+        "expected": "点击案例卡片应展示案例详情或进入详情页",
+        "evidence": "案例卡片只是带 hover 边框的 div，没有 href、onclick 或任何事件绑定，点击无法查看详情",
+        "ok": 0
+      },
+      {
+        "name": "贡献数据（Contribute / Add Contribution）",
+        "expected": "点击应打开提交表单或弹窗，允许用户贡献数据",
+        "evidence": "Contribute 按钮探针点击后 DOM 无变化；Add Contribution 无事件绑定，页面也没有表单或弹窗结构，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "查看交互式影响可视化",
+        "expected": "页面应渲染可交互的数据可视化图表，用户可探索项目效果数据",
+        "evidence": "可视化区域仅为静态占位 div，包含图标和提示文字，没有 canvas、SVG、图表库或数据渲染逻辑",
+        "ok": 0
+      },
+      {
+        "name": "加入社区（Get Started）",
+        "expected": "点击后应进入注册/加入流程或展示相关交互",
+        "evidence": "按钮存在但无事件绑定、无表单、无弹窗，点击不会有任何业务反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉完成度尚可，但核心功能几乎全是占位或死链：导航 href=\"#\" 无实际切换，时间筛选无数据更新，案例不可点开，可视化是静态占位，贡献数据和加入社区按钮均无业务反馈。这些正是数据可视化与社区协作平台的关键交互，因此页面基本不可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "存在1个核心可用性问题：顶部导航（Dashboard、Analytics、Case Studies、Community）点击后发生页面跳转（可能是#锚点或刷新），而非在当前页面平滑切换，导致用户离开当前数据仪表盘，无法在页面内完成导航查看，属于主要入口点击无有效反馈/流程中断。此外，核心操作“Contribute”按钮点击无任何反馈，属于核心操作无反馈；但该按钮可能触发未实现的弹出层，故按核心问题计入。次要瑕疵：图表区域为静态占位（非真实可视化）、季度/年度切换按钮无实际数据变化、Add Contribution按钮无明确反馈、导航链接为占位符。整体可用但存在明确核心流程阻断，故打4分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用现代感的仪表板布局，配色以蓝色、青色、紫色为主，搭配白色卡片和浅灰背景，色彩调和且对比度良好。卡片阴影、圆角、hover微动效（上浮、阴影变化）提升了精致度与交互感。信息层级清晰：顶部导航、核心指标区、案例卡片、社区动态与进度条区块排列有序，间距均匀，符合数据可视化平台的专业气质。字体使用Tailwind默认sans-serif，干净易读。不足之处在于主要可视化区域仅为占位图标和占位文案，并未呈现真正有说服力的数据图表，削弱了“数据可视化”主题的视觉冲击力；同时页面内容密度较高，在保持单屏展示方面可能超出视口。整体而言，设计规范、色彩与组件质量良好，是现代网页设计中的上乘水准，只因真实可视化缺位而略未达到满分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_028293.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Case Studies",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Contribute",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Quarterly",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Yearly",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Contribution",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

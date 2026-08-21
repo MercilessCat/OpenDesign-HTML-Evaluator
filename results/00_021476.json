@@ -1,0 +1,157 @@
+{
+  "row_id": "00_021476",
+  "shard": 0,
+  "id": 21476,
+  "category": "3D design",
+  "prompt": "Develop a site for visualizing GIS data in 3D, providing users with tools to manipulate and explore geospatial datasets. The platform will feature interactive maps, real-time data analytics, and customizable visualization options. Users can upload their data, apply visual effects, and share insights with stakeholders or the public.",
+  "html_len": 18886,
+  "html_sha256": "256f22c7e9baba4ac1c86135686be465635a4d2560b9b0da538d83a405ca8a33",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击 Browse Files 上传 GIS 数据",
+        "expected": "打开文件选择器并加载 GeoJSON/Shapefile/KML 数据",
+        "evidence": "HTML 中 upload-area 和 Browse Files 按钮均未绑定事件；探针点击后只有 DOM 样式层变化，没有任何业务反馈，也未触发文件选择。",
+        "ok": 0
+      },
+      {
+        "name": "拖动 Elevation Scale 滑块调整地形高程",
+        "expected": "右侧数值随滑块变化，地形 y 方向缩放对应更新",
+        "evidence": "滑块绑定 input 事件，会更新 #elevationValue 文本并设置 terrainMesh.scale.y，反馈明确。",
+        "ok": 1
+      },
+      {
+        "name": "切换 Show Wireframe 复选框",
+        "expected": "地形网格在线框/实体材质间切换",
+        "evidence": "复选框绑定 change 事件，会切换 terrainMesh.material.wireframe，符合预期。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Apply Settings 按钮应用设置",
+        "expected": "显式应用当前可视化设置，按钮有业务反馈",
+        "evidence": "按钮无任何 JS 事件监听，探针点击只有样式层 DOM 变化；实际设置由滑块/复选框即时生效，和该按钮无关，按钮为占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "使用 Measure Distance / Calculate Area / Export Visualization 分析及导出",
+        "expected": "启动距离测量、面积计算、导出可视化成果",
+        "evidence": "Analysis Tools 下三个按钮均无 addEventListener，纯占位；探针点击 Calculate Area、Export Visualization 时页面直接崩溃（TargetClosedError），无法完成任务。",
+        "ok": 0
+      },
+      {
+        "name": "在 3D 画布拖拽旋转/缩放场景",
+        "expected": "场景视角随 OrbitControls 旋转/平移/缩放",
+        "evidence": "初始化创建 THREE.WebGLRenderer 并挂载 canvas，绑定 THREE.OrbitControls 和 requestAnimationFrame 动画循环，初始运行时无 JS 错误；按规则判定可交互。探针 canvas 测试因页面先前的崩溃而无法执行。",
+        "ok": 1
+      }
+    ],
+    "reason": "3D 场景渲染、OrbitControls、高程/点大小/线框等可视化调节可用，但上传数据、Apply Settings、测量/计算面积/导出等核心入口大量为无事件占位按钮，且点击分析/导出按钮后页面崩溃，需求中的上传数据和分享分析功能基本未实现。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 上传数据功能无效，点击Browse Files和拖放区域无实际文件选择/上传行为；2. 分析工具Measure Distance/Calculate Area/Export Visualization按钮无事件绑定，点击无任何响应，且Calculate Area和Export Visualization导致页面崩溃；3. 核心流程无法完成，用户无法上传自己的GIS数据、无法进行分析或导出。次要瑕疵：Apply Settings按钮与滑块实时调节重复，冗余；缺少数据上传后的操作引导；图例为静态示例，不随数据变化；工具栏图标无文字标签。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面整体视觉设计专业且富有科技感，与“3D GIS数据可视化”的需求高度契合。色彩采用深蓝渐变背景（#1a2a6c→#2c3e50）搭配亮蓝色（#4facfe）与青色（#00f2fe）作为主强调色，形成清晰的光影层次，既沉稳又不失活力。侧边栏使用半透明玻璃拟态（backdrop-filter: blur）和细边框，营造出精致的深色UI质感，符合当前现代设计趋势。布局上，左侧300px固定侧边栏与右侧弹性3D画布区域分隔清晰，功能分区明确，上传区、控制面板、分析工具各司其职。字体层次分明，标题使用渐变文字，字号与字重搭配合理。组件细节丰富，如定制滑块的轨道与滑块、悬停反馈的圆形工具栏按钮、圆角面板与柔和阴影，均体现出较高的CSS设计水平。交互状态（如悬停、过渡）处理得当，增强了操作暗示。不足之处在于图例颜色过于直白（纯红黄蓝），复选框样式未定制，且部分按钮缺乏图标，略显普通。综合而言，页面在视觉吸引力、色彩协调、布局合理性和设计专业性上都达到优秀水准，符合用户对3D可视化平台的审美预期。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_021476.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Browse Files",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Apply Settings",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Measure Distance",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Calculate Area",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_error": "TargetClosedError: Page.wait_for_timeout: Page crashed",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export Visualization",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_error": "TargetClosedError: Page.wait_for_timeout: Page crashed",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_error": "Error: Locator.bounding_box: Target crashed \nCall log:\n  - waiting for locator(\"canvas\").first\n",
+      "pixels_changed": false
+    }
+  ]
+}

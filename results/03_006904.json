@@ -1,0 +1,88 @@
+{
+  "row_id": "03_006904",
+  "shard": 3,
+  "id": 6904,
+  "category": "Game dev",
+  "prompt": "Design an immersive escape room experience where players solve quick-time puzzles to flee a collapsing temple. Core functionality involves decision-making under pressure. Key features include a storyline-driven adventure, time-based challenges, and multiplayer modes for collaborative problem-solving, enhancing both individual and team play dynamics.",
+  "html_len": 16773,
+  "html_sha256": "733a096c131036b964633254af6127dcfbc70756e7a9e4e26de923e8f9037cbe",
+  "functional": {
+    "score": 6.0,
+    "raw_score": 6.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 BEGIN ESCAPE 开始游戏",
+        "expected": "页面切换到游戏场景，显示谜题、计时器和已解谜题数",
+        "evidence": "探针点击后 DOM 有变化且无 JS 错误；HTML 中 startGame() 调用 switchScreen('game')、loadPuzzle() 并启动倒计时",
+        "ok": 1
+      },
+      {
+        "name": "点击谜题选项答题",
+        "expected": "正确时进入下一题并增加已破解数、加时间；错误时扣时间并触发震动反馈",
+        "evidence": "loadPuzzle() 动态生成选项按钮并绑定 checkAnswer()，checkAnswer 中有正确/错误分支和对应的视觉反馈；运行时无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "观察倒计时变化",
+        "expected": "计时器每秒递减，低于 60 秒变红并闪烁",
+        "evidence": "startGame() 中 setInterval 每秒递减 timeLeft，updateTimer() 更新显示并切换低时间样式",
+        "ok": 1
+      },
+      {
+        "name": "游戏结束后点击 PLAY AGAIN 重玩",
+        "expected": "返回开始界面，可重新开始游戏",
+        "evidence": "endGame() 切换到结束界面，restartBtn 绑定 resetGame()，重置显示到 start-screen",
+        "ok": 1
+      },
+      {
+        "name": "使用多人协作模式",
+        "expected": "提供创建房间、邀请好友或协作解谜的可操作入口",
+        "evidence": "页面仅在开始界面有 'Multiplayer Mode: Invite friends...' 宣传文字，未实现任何多人功能按钮、房间系统或联机逻辑；需求声明的关键功能缺失",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心单人游戏流程完整可用：开始、限时答题、计时倒计时、结束重玩都能给出正确反馈且无 JS 错误。但需求中明确提到的多人协作模式仅有静态宣传文本，没有实际可操作入口或功能，属于关键特性未实现，因此扣分至 6/10。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 8.0,
+    "reason": "核心可用性问题：无。开始-游戏-结束-重开的主循环完整可玩，所有主要按钮点击均有真实响应，谜题作答/计时扣除/奖励/胜负判定反馈正确，无卡死或无法继续的流程。\n次要瑕疵：1) 开始屏宣称“多人游戏模式”，但无实际多人玩法或入口，仅为静态文字，与用户需求中的多人协作功能不符；2) 缺少对错误答案扣时惩罚的规则说明，新玩家需自行试错才能理解；3) 正确作答奖励的额外时间在顶部大计时器上有约1秒的同步延迟（底部状态区计时立即更新），两个计时显示短暂不一致；4) Unsplash 背景图被浏览器 ORB 拦截导致背景缺失，沉浸感打折；5) 屏幕切换未实际执行已定义的过渡渐变，切换较为生硬；6) 结束页的“分享时间”同样为纯文本，无实际分享功能。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉设计出色，符合密室逃脱游戏的主题。色彩搭配以深蓝、暗红和橙色为主，营造出紧张神秘的氛围，橙色（#ff8c00/#ff4500）作为主色调贯穿始终，与游戏核心机制（时间压力、火焰、古庙）高度契合。布局采用居中卡片式设计，游戏容器带圆角、阴影和橙色边框，屏幕间切换过渡平滑，层级清晰。按钮、计时器、选项框等组件设计规范，圆角、渐变、阴影和悬停动效（pulse、shake）提升了交互质感，符合现代游戏UI风格。字体选择通用且可读性强，标题的发光效果强化了视觉焦点。响应式媒体查询也考虑了移动端适配。但扣分点在于：外部背景图片加载失败（网络请求被ORB阻止），导致沉浸式背景缺失，实际视觉可能依赖纯色渐变，效果会打折扣；部分装饰元素（如🏛️🗿🔥🗝️）过于简单，在页面中略显突兀；游戏屏幕中背景图未加载时，黑色半透明容器与整体渐变背景的层次感会减弱。综合而言，CSS设计专业，视觉语言统一，但受外部资源失败影响，未能完全达到最初设想的沉浸效果。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 7.5,
+  "baseline_overall": 7.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1543857778-c4a1a569e7bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1543857778-c4a1a569e7bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_006904.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "BEGIN ESCAPE",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

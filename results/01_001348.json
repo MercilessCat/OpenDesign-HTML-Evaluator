@@ -1,0 +1,137 @@
+{
+  "row_id": "01_001348",
+  "shard": 1,
+  "id": 1348,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create an immersive ticketing experience that combines AR technology with purchase options. Users can explore event venues virtually, select seats, and visualize their view before purchasing. Key features include interactive seat maps, exclusive content previews, and personalized event recommendations.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 16105,
+  "html_sha256": "2c34684268cd70a5dcec9a5ceafdb8ce58f2aade372f7450fa00d0553cef4ab5",
+  "functional": {
+    "score": 5.0,
+    "raw_score": 5.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击可用座位选择",
+        "expected": "座位变为选中状态（蓝色高亮）",
+        "evidence": "JS 中为 .seat.available 绑定了 click 事件切换 .selected 类，探针未直接点击座位但事件绑定完整，无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击 Rotate View 按钮",
+        "expected": "按钮显示旋转中动画，并恢复原状",
+        "evidence": "探针点击后 DOM 变化=有，JS 事件设置 innerHTML 为 Rotating... 后 1.5 秒恢复，无报错",
+        "ok": 1
+      },
+      {
+        "name": "点击 Purchase Tickets 按钮",
+        "expected": "按钮显示处理中，随后购买完成并弹出确认",
+        "evidence": "探针点击后 DOM 变化=有，JS 事件按阶段修改按钮内容并弹窗，无报错",
+        "ok": 1
+      },
+      {
+        "name": "点击 Fullscreen AR View 按钮",
+        "expected": "进入全屏 AR 预览或展示增强内容",
+        "evidence": "探针点击后 DOM 变化=无，HTML 中该按钮无 click 事件绑定，属于纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击场馆列表切换场馆",
+        "expected": "切换当前场馆并更新 AR 视图内容",
+        "evidence": "场馆列表 div 仅有 hover 样式，无 click 事件绑定，点击不会产生任何业务反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "核心购票流程（选座、购买）和旋转视图可用，但 Fullscreen AR View 与场馆切换两个关键功能入口无事件绑定，未实现预期交互，沉浸式体验不完整，因此评分中等偏低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 头部 Sign In / Get Started 按钮点击无任何反馈，属于主要入口无效；2. 左侧 Venue 列表点击其他场馆无反应，无法切换或探索不同场馆；3. 右侧 Fullscreen AR View 按钮点击无反应，无法进入/预览 AR 全屏视角；4. 点击可选座位后，右侧已选座位信息和总价不更新，座位选择与购买摘要不一致。次要瑕疵：AR Rotate View 只有按钮文字变化，没有真正旋转视角；Exclusive Preview 与推荐内容均为灰色占位框，无实际内容；购买成功后未重置座位选择；日期文案“Tomorrow • June 12, 2023”存在逻辑不一致。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体设计具有现代感和专业感，深色渐变背景（#0f172a→#1e293b）搭配靛蓝/紫色（#6366f1/#8b5cf6）点缀，符合AR/科技主题，色彩搭配协调。毛玻璃卡片（backdrop-filter）、发光按钮、脉冲动画等细节提升了视觉层级与质感。布局采用经典的三列结构（3-6-3），信息分区清晰，符合主流网页设计规范。但存在较多灰色虚线占位框（如推荐图、预览图、AR视角圆形占位），显得内容未完成，整体视觉完整性受影响。字体选用Poppins，但字号层次不够丰富，部分区域间距稍显局促。交互反馈（座位选择、按钮加载）增加了体验感，但部分按钮（Sign In、Get Started）无实际功能。综合来看，基础设计扎实，但占位符和细节处理拉低了最终美感。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 4.9,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_001348.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Rotate View",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Fullscreen AR View",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Purchase Tickets",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

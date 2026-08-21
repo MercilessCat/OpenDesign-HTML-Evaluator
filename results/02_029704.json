@@ -1,0 +1,182 @@
+{
+  "row_id": "02_029704",
+  "shard": 2,
+  "id": 29704,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Discover an interactive atlas illustrating global climate migration patterns, resilience strategies, and adaptation resources. Users can explore data-driven maps, visualize projected impacts, and access community-driven solutions. Features include scenario simulations, resilience strategy libraries, and collaborative planning tools aimed at fostering global understanding and preparedness.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11409,
+  "html_sha256": "c4585424e77649d6d116895fef63df79beb8746759d5d023ec4e2ddbd098c4ae",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航菜单（Explore Maps / Data Stories / Resources / About）",
+        "expected": "切换到对应的数据视图或页面内容",
+        "evidence": "4个导航链接均为 href=\"#\"，无路由、无对应内容区域，点击后仅 URL 追加 # 发生默认锚点行为，页面并未展示任何新内容或切换视图。探针显示 DOM 变化仅为样式层，无业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started 按钮",
+        "expected": "进入应用、打开引导流程或跳转至主要功能页",
+        "evidence": "探针点击后 DOM 变化=无、无 JS 错误、无网络请求；HTML 中该 button 未绑定任何事件，纯静态按钮。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Exploring 按钮",
+        "expected": "启动交互式地图探索或加载数据可视化",
+        "evidence": "探针点击后 DOM 变化=无、无 JS 错误、无网络请求；按钮无事件绑定，点击无任何反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Reports 按钮",
+        "expected": "打开报告列表或下载相关数据报告",
+        "evidence": "探针点击后 DOM 变化=无、无 JS 错误、无网络请求；按钮无事件绑定，死按钮。",
+        "ok": 0
+      },
+      {
+        "name": "点击地图控制按钮（expand / reset）及地图交互",
+        "expected": "地图可缩放、全屏、切换图层或展示数据详情",
+        "evidence": "探针点击 expand 按钮后 DOM 变化=无；地图区域仅为静态圆形色块和 SVG 路径装饰，无 canvas/WebGL、无事件监听，不支持任何交互式数据探索。",
+        "ok": 0
+      },
+      {
+        "name": "点击功能卡片（Scenario Simulations / Strategy Library / Collaborative Planning）",
+        "expected": "打开情景模拟器、策略库或协作规划工具",
+        "evidence": "三个卡片仅为 div + cursor-pointer 样式，无 onclick 或事件绑定，点击不会触发任何功能；需求声明的核心工具均未实现，属于占位入口。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整、布局清晰，但核心交互大面积失败：所有按钮（Get Started、Start Exploring、View Reports、地图控制）点击均无反应；导航链接为 href=\"#\" 占位无内容切换；功能卡片无事件绑定。需求声明的交互式地图、情景模拟、策略库、协作规划工具全部未实现，用户无法完成任何核心任务，仅具备静态展示效果。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. 页面主要操作入口（Get Started、Start Exploring、View Reports）点击后无任何DOM变化或反馈，功能完全占位；2. 地图区域放大/刷新按钮点击无效果，核心可视化交互缺失；3. 顶部导航链接点击后虽然DOM有变化但实际是页面跳转到空锚点，属于占位的虚假交互。次要瑕疵：1. 缺少图例说明场景模拟等功能如何操作；2. 地图为简化发光圆点示意，非真实数据地图，与'data-driven maps'的承诺不符；3. 功能卡片可点击但无实际行为，存在误导；4. 社区图标（Twitter等）链接无有效目标；5. 首屏信息密度高但无任何引导性的'如何开始'说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用现代卡片式布局与蓝绿色系渐变，符合数据可视化主题。色彩搭配以蓝色为主，辅以绿色和琥珀色点缀，对比度良好且视觉统一。布局上采用双栏主区与下方三卡片特性区，结构清晰、层级分明，且能在视口内完整呈现。字体方面使用 Tailwind 默认字族，标题加粗、正文灰色，信息易读性良好。组件设计如圆角卡片、悬浮上移动效、图标动效等提升了交互质感，CSS 使用了 flex/grid、transition、阴影、渐变等专业手段，整体风格干净现代，与用户需求（交互式全球气候迁移图谱）的探索感和科技感相匹配。扣分点主要在于头部导航链接点击后会发生跳转，与单页交互预期不符；浏览器自动化信号显示页面跳转说明按钮的默认行为未被阻止，可能破坏单页体验；地图区域为简化的抽象点线装饰，与真正数据可视化地图相比仍显单薄。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_029704.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore Maps",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Data Stories",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "About",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Reports",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-expand-arrows-alt",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

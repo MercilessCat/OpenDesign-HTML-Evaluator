@@ -1,0 +1,187 @@
+{
+  "row_id": "03_014285",
+  "shard": 3,
+  "id": 14285,
+  "category": "Game dev",
+  "prompt": "Create a creative platform for designing pixel art RPG characters, focusing on simplicity and artistic expression. Offer tools for sprite creation, animation, and RPG story integration. Features include collaborative world-building, character galleries, and a marketplace for sharing creations, allowing users to engage in a vibrant community of pixel art enthusiasts.",
+  "html_len": 25177,
+  "html_sha256": "37bde6d0361827df59d82b0be18a85cdbe36b104c0979b1168068b6cdd2c498f",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "在画布上用铅笔绘制像素",
+        "expected": "鼠标点击/拖拽画布时，对应位置出现所选颜色的像素点",
+        "evidence": "canvas 绑定了 mousedown/mousemove/touchstart 事件，draw() 中 pencil 分支写入帧数据并调用 redrawCanvas() 刷新画布；运行时无 JS 错误，事件链路完整。",
+        "ok": 1
+      },
+      {
+        "name": "选择颜色并切换当前颜色",
+        "expected": "点击色块后该色块高亮，后续绘制使用该颜色",
+        "evidence": "每个 .color-picker 都绑定了 click 监听，点击会移除其他色块的 selected 并更新 gameState.currentColor；代码逻辑正确，无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "添加动画帧",
+        "expected": "点击 ADD FRAME 后帧时间轴新增一帧，并切换到新帧",
+        "evidence": "探针点击 ADD FRAME 后 DOM 变化=有，对应 addFrame() 中 push 新帧、renderFrames() 重绘时间轴；功能生效。",
+        "ok": 1
+      },
+      {
+        "name": "输入角色名并更新预览",
+        "expected": "在 Character Name 输入名称后，右侧角色卡名称同步更新",
+        "evidence": "charNameInput 绑定了 input 事件，updatePreview() 将输入值写入 #preview-name；无 JS 错误，输入链路完整。",
+        "ok": 1
+      },
+      {
+        "name": "浏览/点击社区画廊角色",
+        "expected": "点击画廊条目可查看角色详情或进入角色页",
+        "evidence": ".gallery-item 仅包含静态 div 和文本，没有任何事件绑定或链接，点击无任何反馈；画廊功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "分享到市场（Marketplace）",
+        "expected": "将角色发布到市场，供社区查看和分享",
+        "evidence": "SHARE TO MARKETPLACE 按钮仅触发 alert('Character shared to the marketplace!')，没有真实的市场发布、列表或社区逻辑，属于纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "协作世界构建（Collaborative World-building）",
+        "expected": "提供创建/加入世界等协作世界构建入口",
+        "evidence": "页面无论 UI 还是 JS 均无任何世界构建相关元素、按钮或逻辑，该需求完全缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面核心的像素画绘制、颜色选择、动画帧管理和角色信息预览可用，导出功能也已实现。但需求明确要求的社区画廊（点击无反应）、市场分享（仅 alert 占位）均未实现，且协作世界构建完全缺失；另有 MOVE、SELECT、CLEAR 等工具按钮无实际绘制逻辑，属于半成品占位。虽然主要创作流程可用，但多个需求声明的关键入口未落实，因此评分限制在 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. MOVE、SELECT、CLEAR 三个核心画布工具为无效功能，点击后仅有高亮反馈，实际在画布上操作无任何效果（draw函数中无对应case），属于核心控件调节无效。次要瑕疵：1. 画布在仅有单帧时点击 DELETE 无响应且无提示；2. 社区画廊为静态占位，无法点击查看或交互；3. 3D Preview 区域仅为文字提示，无实际3D渲染；4. 画布网格（16x16格）与角色预览采样（32x32）分辨率概念不统一，用户易困惑；5. 部分工具（如 MOVE/SELECT）选中后无操作指引或说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，像素风格统一且契合“像素艺术RPG角色创作”主题。使用Press Start 2P像素字体、深色背景、像素边框和硬阴影按钮，营造出浓厚的复古游戏氛围。色彩搭配合理，主背景色为深灰蓝(#1a202c)，辅以黄色标题、绿色面板标题和紫/蓝色点缀，既突出功能分区又保持视觉协调。布局采用三栏网格，左侧工具、中间画布、右侧预览和社区画廊，结构清晰、信息层级明确。组件设计细致，如按下按钮的位移阴影、悬浮画廊卡片、色彩选择高亮、帧动画预览等，均体现了专业CSS设计水准。交互反馈充分，动画过渡平滑。虽然存在少量如画布缩放可能超出容器等细节问题，但整体符合现代网页设计规范，与用户需求的像素艺术创作平台风格高度对齐。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.8,
+  "baseline_overall": 5.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_014285.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "PENCIL",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "ERASER",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "BUCKET",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "MOVE",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "SELECT",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "CLEAR",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "ADD FRAME",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "DELETE",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

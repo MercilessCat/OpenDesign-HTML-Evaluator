@@ -1,0 +1,191 @@
+{
+  "row_id": "01_015952",
+  "shard": 1,
+  "id": 15952,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Design a digital directory for trade shows, allowing exhibitors to showcase their booths with interactive maps, multimedia content, and engagement analytics. Users can explore event layouts, schedule meetings, and access exhibitor profiles. Include networking features like chat rooms and forum discussions to foster connections between attendees and exhibitors.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14026,
+  "html_sha256": "f18fae875ec88bb37c78abba2cc831b0da0648eb4b4056856734ef59c699dea3",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "通过导航栏切换/定位到 Map 地图视图",
+        "expected": "点击导航中的 Map 链接后，页面应切换到或定位到交互式地图区域",
+        "evidence": "探针显示点击后虽有 DOM 变化和 URL 跳转，但 HTML 中导航链接均为 href=\"#\"，无路由或锚点逻辑，实际未发生任何视图切换",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Exploring 开始探索地图",
+        "expected": "点击后应打开交互式地图、移除遮罩或进入可探索状态",
+        "evidence": "探针显示点击 Start Exploring 后 DOM 变化=无、无 JS 错误、无网络请求；HTML 中该按钮无事件绑定，点击无任何业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Zoom 缩放地图",
+        "expected": "地图应放大或缩小，提供缩放反馈",
+        "evidence": "探针显示点击 Zoom 后 DOM 变化=无，按钮无事件绑定，地图区域也无可用的缩放逻辑",
+        "ok": 0
+      },
+      {
+        "name": "点击参展商卡片查看详细资料",
+        "expected": "应打开参展商详情页或弹窗展示完整资料",
+        "evidence": "HTML 中 booth-card 绑定了 click 事件，但只弹出 alert('Opening exhibitor profile...')，未真正打开资料内容，属模拟占位反馈，不符合预期",
+        "ok": 0
+      },
+      {
+        "name": "点击 View All Exhibitors 查看全部参展商",
+        "expected": "应展示全部参展商列表或跳转到列表页",
+        "evidence": "HTML 中该按钮无任何事件绑定，探针未测试但静态代码显示点击不会产生业务响应",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Community 加入社区/聊天室",
+        "expected": "应进入聊天室、论坛或弹出登录/加入流程",
+        "evidence": "HTML 中该按钮无事件绑定，网络功能（聊天室、论坛、会议安排）仅以静态列表块展示，功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上呈现了数字展会目录的完整 UI，但核心功能大面积未实现：交互式地图不可交互、Zoom/PDF/Start Exploring 等地图按钮均为死按钮，参展商资料仅 alert 占位，会议安排/聊天室/论坛仅静态展示，Sign In、View All Exhibitors、Join Community 等关键入口无事件响应。主要用户任务均无法完成，因此判定为不可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：1. 顶部导航（Home/Map/Exhibitors/Networking）均为占位链接，点击后仅跳转页面顶部，无实际内容切换或反馈；2. 核心操作按钮（Sign In、Zoom、PDF、Start Exploring）点击后无任何DOM变化或视觉反馈，功能完全无效；3. 交互式地图仅静态展示，脉冲点位不可点击，无法实现探索展位、查看详情等核心流程；4. 背景图加载失败（ERR_BLOCKED_BY_ORB），地图区域视觉信息缺失，影响操作判断。次要瑕疵：展商资料图片为占位框无实际内容；统计数字为模拟随机增长，不反映真实数据；部分按钮缺少悬停说明文字；网络请求失败影响整体美观。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "该页面整体视觉设计现代、干净，采用主流的左右分栏布局（左侧交互地图，右侧功能卡片），符合贸易展数字目录的典型风格。色彩以蓝色系为基础（#2563eb、#0ea5e9、#0f172a），搭配淡蓝渐变背景，统一和谐。字体选用 Poppins，标题和正文层级清晰，具有较好的可读性。卡片设计使用圆角、阴影和边框点缀，悬停效果（booth-card 上浮、stat-card 背景变化）提升了交互质感，整体符合现代网页设计规范。\n\n主要扣分点：1）地图卡片的背景图片请求失败（ERR_BLOCKED_BY_ORB），导致该区域在运行时无法呈现预期的展厅图片，视觉效果削弱，变成灰白背景，失去了原设计中的视觉焦点；2）右侧功能卡片较多（展商、数据、网络），在限高的视口下内容略显拥挤；3）导航链接均为空链接，交互虽不直接影响外观，但作为产品演示缺乏完整性。\n\n总体而言，这是一个色彩搭配合理、布局协调、组件风格统一的页面，虽然地图图片缺失造成一定落差，但整体完成度较高，视觉表现达到中等偏上水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1612831197808-0ef0c0a8a7d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1612831197808-0ef0c0a8a7d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1612831197808-0ef0c0a8a7d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1612831197808-0ef0c0a8a7d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1612831197808-0ef0c0a8a7d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1612831197808-0ef0c0a8a7d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1612831197808-0ef0c0a8a7d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1612831197808-0ef0c0a8a7d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1612831197808-0ef0c0a8a7d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_015952.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Map",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Exhibitors",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Networking",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Zoom",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "PDF",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

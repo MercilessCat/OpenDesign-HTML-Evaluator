@@ -1,0 +1,184 @@
+{
+  "row_id": "05_057033",
+  "shard": 5,
+  "id": 57033,
+  "category": "Website",
+  "prompt": "esign a virtual sanctuary that simulates holographic wildlife refuges, allowing users to explore and interact with endangered species in their natural habitats. The core idea is conservation awareness. Features include 3D tours, educational content on species and ecosystems, and user-driven conservation initiatives, fostering an immersive experience",
+  "html_len": 33773,
+  "html_sha256": "f92f0706f627e15b212117c52681e4a7b6c7d1383f8bcfc75a5285d23305d335",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击主导航 Home/Explore/Species/Conservation 跳转",
+        "expected": "导航到对应页面区块，页面内容切换或定位到相应部分",
+        "evidence": "探针显示 4 个导航链接点击后均有 DOM 变化且未新增 JS 错误，但页面为单页且各链接为锚点或 '#'，实际未发生路由/区块内容切换；Explore/Species/Conservation 指向对应 section，Home 为 '#' 仅回到顶部，无真正内容跳转。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Join Conservation 按钮",
+        "expected": "进入用户驱动的保护行动流程（加入保护计划/报名/弹窗）",
+        "evidence": "探针点击后 DOM 变化=无、无网络请求、无 JS 错误，按钮未绑定任何事件或跳转，属于纯占位按钮。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Exploration 按钮",
+        "expected": "开始 3D 导览/进入虚拟保护区体验",
+        "evidence": "探针（JS click 兜底）显示 DOM 变化=无、无网络请求、无 JS 错误；按钮无事件绑定，也没有任何 3D 场景、canvas 或路由启动逻辑，核心功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Learn More 按钮",
+        "expected": "展示更多关于虚拟保护区/保护意识的教育内容",
+        "evidence": "探针显示点击后有 DOM 变化并发生页面跳转，实际是跳到页面其他位置/锚点滚动，并非展开教育内容；无新增 JS 错误和网络请求。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Enter Sanctuary 按钮（Amazon/African Savanna/Coral Reefs）",
+        "expected": "进入对应生态系统的 3D 虚拟保护区进行探索",
+        "evidence": "探针点击后 DOM 变化=有（JS click 兜底）并发生页面跳转，但无新增网络请求、无 canvas、无 three.js 场景初始化；页面仅有静态图标和文字，3D 沉浸游览功能并未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击物种卡片上的 info 图标查看物种详情",
+        "expected": "弹出/展示该濒危物种的详细信息、保护状态和介绍",
+        "evidence": "物种卡片中的 <i class='fa fa-info-circle'> 按钮未绑定任何点击事件，HTML 中无相关 JS 处理；探针未覆盖该元素，但源码可见为无事件占位，点击不会有内容反馈。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉呈现完整，但核心需求（3D 虚拟保护区游览、交互式物种体验、保护行动参与、教育内容展开）均未实现。主导航仅锚点滚动，Join Conservation、Start Exploration、Enter Sanctuary 等关键入口均为无事件占位按钮；物种详情按钮无绑定；探针证实核心按钮点击无业务反馈。页面为静态展示型落地页，仅可作为概念视觉稿，不能支撑用户实际探索与交互。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：1）主流程操作按钮全部失效——'Start Exploration'、'Join Conservation'、'Support Conservation Now'及所有'Enter Sanctuary'按钮点击后均无任何反应，用户无法开始探索、进入保护区或参与保护行动，核心任务路径完全堵塞。2）主打的3D沉浸式体验未实现——threejs-container为空容器，未渲染任何3D场景、canvas或模型，页面宣称全息保护区但用户看到的是空白区域，且无加载状态或提示说明。3）物种卡片上的详情图标（fa-info-circle）无绑定事件，用户无法查看任何物种的进一步信息，浏览详情的入口是死路。次要瑕疵：移动端菜单打开后无法通过再次点击按钮或手势关闭，缺少关闭按钮；3D容器无空状态说明，用户无法理解该区域用途；'Home'导航使用'#'占位，点击后仅跳转顶部，语义不清；整体视觉与信息层级优秀，导航锚点可正常滚动，但所有核心交互均无反馈，属于'好看但不可用'的典型情况。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "该页面视觉设计高质量完成了“全息野生动物庇护所”的主题表达。深蓝紫色渐变背景搭配青蓝色高亮，营造出科技感与自然生态融合的氛围，色彩搭配和谐且对比适度。布局上采用清晰的区块划分：固定导航、英雄区、统计展示、探索卡片、物种画廊、保护倡议及页脚，层级分明，网格系统工整，留白与间距舒适。字体选用 Poppins，现代圆润，字重与字号梯度合理，配合 Tailwind 的响应式体系，在移动端也有良好适配。组件设计精致：卡片使用半透明玻璃拟态、渐变边框、悬停上浮与辉光效果，按钮有渐变和按钮光晕，进度条、全息扫光、浮动动画等细节增强了沉浸感。CSS 实现专业，综合运用了渐变、backdrop-filter、动画、过渡、阴影及自定义滚动条，与现代深色科技风格网站规范高度一致。唯一不足是 Three.js 容器内没有实际 3D 渲染内容，且部分按钮交互未绑定动作，但不影响静态视觉评判。整体视觉吸引力强，十分契合用户需求中的 immersive and conservation-focused 定位。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_057033.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore",
+      "href": "#explore",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Species",
+      "href": "#species",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Conservation",
+      "href": "#conservation",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Conservation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploration",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Learn More",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Enter Sanctuary",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

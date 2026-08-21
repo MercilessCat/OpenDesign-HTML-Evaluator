@@ -1,0 +1,181 @@
+{
+  "row_id": "02_005770",
+  "shard": 2,
+  "id": 5770,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Develop an analytical hub visualizing the spread and impact of propaganda campaigns across regions and demographics. Users can track changes over time, dissect strategies, and engage with experts. Features include simulation tools, sentiment analysis, and case studies, enabling deep dives into information warfare.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14492,
+  "html_sha256": "68f929b189fca211d670642a473a4e64583d33db5fb11f2372dbd52b688f05eb",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航链接（Dashboard/Analytics/Simulations/Experts）",
+        "expected": "点击后应切换到对应分析视图或锚定到相应内容区块",
+        "evidence": "探针显示点击后有 DOM 变化并页面跳转，但 href 均为 \"#\"，没有实际路由或页面区块切换，只是回到顶部/改变 hash，内容未变",
+        "ok": 0
+      },
+      {
+        "name": "Start Analysis 按钮",
+        "expected": "进入或启动数据分析流程，展示分析结果",
+        "evidence": "探针点击后 DOM 无变化，无新增 JS 错误或网络请求，按钮未绑定实际业务逻辑",
+        "ok": 0
+      },
+      {
+        "name": "Case Studies 按钮",
+        "expected": "打开案例研究内容或跳转到案例列表",
+        "evidence": "探针点击后 DOM 无变化，无新增 JS 错误或网络请求，按钮仅有 hover 样式，无实际反馈",
+        "ok": 0
+      },
+      {
+        "name": "时间筛选 7D/30D/90D",
+        "expected": "按时间范围更新 Regional Spread Analysis 可视化数据",
+        "evidence": "探针点击 7D 后 DOM 无变化；HTML 中该组按钮没有事件绑定，可视化区域只是静态装饰圆环，没有任何图表更新逻辑",
+        "ok": 0
+      },
+      {
+        "name": "Access Portal 按钮",
+        "expected": "打开访问入口、登录弹窗或相关页面",
+        "evidence": "探针点击后 DOM 无变化，无弹窗、无跳转、无网络请求，按钮未绑定事件",
+        "ok": 0
+      },
+      {
+        "name": "分析工具卡片（Sentiment Analysis / Spread Simulation / Demographic Profiling / Strategy Dissector）",
+        "expected": "点击后应打开对应工具或进入详情页/模拟器",
+        "evidence": "HTML 中这些卡片只有 cursor-pointer 和 card-hover 类，没有 onClick 或任何 JS 事件绑定；点击不会产生业务反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉完成度较高，运行时无 JS 错误，但核心交互几乎全部为占位：导航 href=\"#\" 无真实路由，CTA 按钮、时间筛选、分析工具卡片均无事件响应或内容切换；所谓数据可视化区域也只是静态装饰，未实现需求声明的分析、模拟、案例研究等核心功能，主要任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 主导航（Dashboard/Analytics/Simulations/Experts）为占位链接，点击后仅跳转页面顶部，未实际导航到对应功能页；2. 核心按钮（Access Portal、Start Analysis、Case Studies）点击无任何反馈或功能；3. 时间范围切换按钮（7D/30D/90D）点击无效果，无法切换数据视图；4. 核心数据可视化区域为静态占位图，无实际交互或数据展示；5. Analytical Tools 四个工具卡片仅有 hover 效果，点击无实际操作或响应，无法完成模拟、分析、解剖策略等核心任务。次要瑕疵：1. 可视化区域缺少图例、数据说明和帮助文字，用户无法理解图表含义；2. 统计指标（如142+、87%）缺少来源或口径说明；3. 部分功能模块（如专家讨论、案例研究）未实现具体内容，仅作展示；4. 页面整体内容超出单屏高度，需要滚动才能浏览完整信息。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉设计专业且现代，深蓝色系（#0f172a / #1e293b）搭配青色高亮（#38bdf8 / #0ea5e9）营造出强烈的“情报分析中心”氛围，与信息战分析主题高度契合。色彩搭配协调，明暗对比良好，文本可读性强。布局采用三列网格（主区域+侧栏），信息层级清晰，卡片间距统一，整体节奏舒适；统计卡片、工具列表、活动流、专家面板等组件风格一致，圆角、边框、阴影和悬停动效细节到位，符合现代仪表盘设计规范。字体选用 Inter，字重和字号搭配合理，视觉质感良好。主要扣分点在于“数据可视化”页面核心的可视化区域仅为装饰性同心圆占位图，缺少真实图表或数据呈现，视觉上虽美观但内容深度不足；另外页面结构偏满，在常见桌面视口下很可能需要滚动，与“单屏可见”的需求存在偏差；少量按钮点击无实际反馈，削弱了交互完整性。整体观感仍是高水准的暗色系数据产品界面。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_005770.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Experts",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Access Portal",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Analysis",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Case Studies",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "7D",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

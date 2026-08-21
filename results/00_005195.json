@@ -1,0 +1,191 @@
+{
+  "row_id": "00_005195",
+  "shard": 0,
+  "id": 5195,
+  "category": "3D design",
+  "prompt": "Craft a virtual reality training hub that simulates medical emergencies in realistic 3D scenarios. Trainees navigate through lifelike simulations to practice critical decision-making skills. The platform includes real-time feedback, scenario customization, and multi-user training environments to enhance collaborative learning experiences.",
+  "html_len": 25032,
+  "html_sha256": "5bd50fd2bfc482e2695848f5cd2eb1bd2538c7d74ce18ee77afa2f44e1c6e2ae",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "选择紧急场景（如 Cardiac Arrest）",
+        "expected": "点击后切换到对应培训场景，显示场景提示、更新患者生命体征和警报",
+        "evidence": "探针点击后 DOM 有变化且无新增 JS 错误；loadScenario() 更新了 feedback、vitals 和 notification。但初始化时 createPatient() 抛出 THREE.CapsuleGeometry is not a constructor，3D 病人/设备未创建，因此仅文字层反馈有效。",
+        "ok": 1
+      },
+      {
+        "name": "在3D场景中拖拽观察/漫游",
+        "expected": "鼠标拖拽旋转/缩放视角，场景持续渲染并显示患者与设备",
+        "evidence": "页面包含 OrbitControls 和 animate()，但 init() 在 animate() 前因 CapsuleGeometry 构造错误中断；renderer.render 从未执行且有 9 条 JS 错误，3D 场景不可见/不可漫游。",
+        "ok": 0
+      },
+      {
+        "name": "点击右侧医疗操作按钮（除颤/呼吸机/药物/CPR/评估）",
+        "expected": "执行对应急救操作并给出实时操作反馈",
+        "evidence": "探针点击 ⚡/💨/💊 均无 DOM 变化；这些按钮在 HTML 上没有 onclick/事件绑定，且 document click 处理器因初始化异常未注册，操作完全无效。",
+        "ok": 0
+      },
+      {
+        "name": "点击3D场景中的医疗设备对象",
+        "expected": "通过射线拾取设备并触发提示/治疗反馈",
+        "evidence": "onMouseClick 和 equipment 创建都在 createPatient() 之后，createPatient() 抛错导致 createEquipment() 未执行、事件监听未绑定；场景中不存在设备可点击。",
+        "ok": 0
+      },
+      {
+        "name": "实时训练反馈（计时器/进度条/生命体征动态变化）",
+        "expected": "训练开始后计时器走动，进度条推进，生命体征随时间变化",
+        "evidence": "setInterval(updateTimer,1000) 和 animate 循环位于 createPatient() 之后，由于初始化抛错未执行；计时器停在 00:00，进度条 0%，生命体征不会动态更新。",
+        "ok": 0
+      },
+      {
+        "name": "进入多人训练环境",
+        "expected": "可查看、创建或加入多人训练房间",
+        "evidence": "页面仅有静态统计 Trainees: 12，没有多人房间列表、创建/加入按钮或相关路由/事件，入口缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "场景选择按钮的文字层反馈可用，但核心 3D 模拟因 THREE.CapsuleGeometry 构造错误未初始化，患者/设备/渲染循环均未创建；右侧操作按钮和3D设备点击无反馈，实时计时/生命体征更新与多人训练均未实现。主要 VR 训练任务无法完成，仅具备部分 UI 状态切换，功能严重不完整。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 3D场景核心元素无法显示：THREE.CapsuleGeometry在r128版本中不存在，导致createPatient()抛错，init()中断，患者、设备、环境三维物体全部未创建，3D训练场景完全失效。\n2. 右侧操作按钮（除颤、通气、用药、CPR、评估）均未绑定事件，点击无任何实际反馈（交互探针确认DOM无变化），核心医疗干预操作无法执行，训练流程形成死路。\n\n次要瑕疵：\n- 场景按钮无当前选中态，用户无法确认正在训练的场景。\n- 操作按钮仅有图标无文字或可见提示，图标语义不明确。\n- 控制提示\"Click Objects: Interact\"指向的3D物体未被创建，提示与实际不符。\n- 计时器在未选择场景时即开始计时，进度条自动增长，易误导用户。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面UI设计整体符合现代3D应用风格，深蓝色渐变背景与玻璃拟态面板（backdrop-filter blur）营造出科技感和沉浸感，色彩搭配协调（蓝色主调搭配粉色、绿色点缀），布局结构清晰：顶部状态栏、左侧场景选择、右侧患者信息与操作按钮、底部反馈面板和进度条，信息层级分明。组件设计统一，使用圆角、渐变、阴影和发光效果，具备专业质感。但存在关键运行时问题：THREE.CapsuleGeometry不是构造函数，导致3D场景中的患者模型无法创建，页面实际渲染时3D内容可能缺失，仅剩2D叠加UI，削弱了作为VR训练中心的视觉冲击力。整体视觉框架优秀，但技术缺陷降低了完整度和美观度，故扣分至7分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_005195.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Cardiac Arrest",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Trauma Injury",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Stroke Response",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Burn Treatment",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Respiratory Distress",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "⚡",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "💨",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "💊",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

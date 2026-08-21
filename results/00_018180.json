@@ -1,0 +1,97 @@
+{
+  "row_id": "00_018180",
+  "shard": 0,
+  "id": 18180,
+  "category": "3D design",
+  "prompt": "Unlock the potential of distributed AI learning in 3D environments. This platform provides tools and tutorials for implementing federated learning, enabling users to train AI models collaboratively without centralized data. The community-driven site fosters innovation and knowledge sharing among AI researchers and developers.",
+  "html_len": 15037,
+  "html_sha256": "af69f5ed6d2bd320e297570d6d2a6caa04d95ab06e4b3b2e80c9f5e1f39e7138",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "3D 场景拖拽旋转",
+        "expected": "视角随指针拖拽旋转，场景产生动态 3D 反馈",
+        "evidence": "Three.js 场景与 OrbitControls 已初始化，requestAnimationFrame 动画循环持续运行，探针在 canvas 上拖拽无 JS 错误，符合 WebGL 可交互判定规则",
+        "ok": 1
+      },
+      {
+        "name": "点击 Get Started Today 按钮",
+        "expected": "进入注册/开始使用流程或展示平台工具内容",
+        "evidence": "a 标签 href=\"#\" 为占位死链，探针点击后无新增网络请求、无实际页面跳转，仅有 DOM 样式级变化，按钮核心业务未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击功能卡片获取工具/教程",
+        "expected": "打开 AI 模型工具或联邦学习教程的详细内容",
+        "evidence": "feature-card 仅绑定 mouseenter/mouseleave 悬停样式，无 click 事件、无链接、无模态框或内容切换，工具/教程仅为静态文案，点击无任何业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "悬停功能卡片查看视觉反馈",
+        "expected": "卡片上浮并增强阴影，提供 hover 反馈",
+        "evidence": "CSS :hover 与 JS mouseenter/mouseleave 均设置 transform translateY(-10px) 及盒阴影，反馈符合预期",
+        "ok": 1
+      },
+      {
+        "name": "查找社区/教程导航入口",
+        "expected": "提供社区讨论或教程列表的导航入口",
+        "evidence": "页面无导航栏、菜单或 Tutorials/Community 相关链接，仅有三张静态介绍卡片，需求中声明的工具/教程/社区驱动功能无对应入口",
+        "ok": "NA"
+      }
+    ],
+    "reason": "3D 场景核心可视化可正常交互（OrbitControls + 动画无报错），但 Get Started 为 # 占位死链，功能卡片点击无业务反馈，工具/教程/社区入口缺失，需求声明的关键功能大部分未实现，核心任务（获取工具教程、开始使用）无法完成",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. 页面唯一的行动号召按钮“Get Started Today”是 href=\"#\" 的占位链接，点击后仅跳转页面顶部，无法完成“加入平台/开始使用”这一核心目标任务，属于核心操作无法完成。次要瑕疵：1. 3D场景虽可拖拽旋转，但无任何提示文字或引导，用户难以理解其操作方式及与页面的关系；2. 页面缺少导航菜单（如教程、工具、社区等入口），与描述中“提供工具和教程”的定位不符；3. 功能卡片仅支持悬停动效，点击无响应，易让用户误以为可点击进入详情；4. 无任何表单或联系方式，用户除浏览信息外无更多实际可操作路径。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力很强，符合“3D design”类别的风格定位。深色渐变背景（#0f0c29 → #302b63 → #24243e）营造出科技感与沉浸感，配合青色（#00dbde）和洋红（#fc00ff）的主色渐变，形成了鲜明的赛博朋克/未来AI氛围，色彩搭配既统一又有对比，视觉冲击力强。布局上，header、三维场景、特性卡片、CTA、footer 层次分明，间距均匀，内容结构清晰。卡片采用半透明毛玻璃效果（backdrop-filter: blur）、细边框、圆角与柔和阴影，符合现代玻璃拟态设计趋势；悬停上浮效果和渐变按钮提升了交互质感。字体选用 Segoe UI 系统字体栈，干净易读，标题使用渐变文本，具有品牌感。Three.js 场景整合了轨道控制、动态粒子、连接线、多重光源，增强了页面的三维立体感和动态表现，与用户需求中的“distributed AI learning in 3D environments”高度契合。略有不足的是标题文字缺乏动画或更细腻的动效，且部分装饰元素（如feature-icon的渐变色）仅依赖文本符号，略显单调；另外页面在可访问性（如aria标签）方面可进一步优化。但总体而言，该页面在视觉设计、CSS专业性和现代网页设计规范上均表现出色。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.8,
+  "baseline_overall": 5.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_018180.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Get Started Today",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "row_id": "03_031899",
+  "shard": 3,
+  "id": 31899,
+  "category": "Game dev",
+  "prompt": "Engage with a realistic simulation platform that lets users adjust satellite orbits. The primary action is strategic planning and execution. Features include mission scenarios, physics-based modeling, and visualization tools. Users can tackle challenges, compete in orbit design contests, and collaborate on space missions.",
+  "html_len": 19530,
+  "html_sha256": "848b1e630a0e0e661805b93431909e5dbec738afcf15d5ecb5985edcfbb6b101",
+  "functional": {
+    "score": 7.0,
+    "raw_score": 7.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 BEGIN MISSION 开始任务",
+        "expected": "隐藏开始界面，显示轨道控制和状态面板，游戏进入运行状态，卫星开始沿轨道运动",
+        "evidence": "探针点击 BEGIN MISSION 后 DOM 有变化，无新增 JS 错误；代码 startGame() 为 startScreen 添加 hidden，并显示 controlsPanel 和 statsPanel。",
+        "ok": 1
+      },
+      {
+        "name": "选择任务场景（LEO/GEO/Mars）",
+        "expected": "选中任务后加载对应的轨道参数，同步滑块数值，后续启动时使用该场景",
+        "evidence": "代码 selectMission(type) 会重置 orbitParams、更新滑块显示并重建轨道；探针点击 3 个 SELECT 中 2 个有 DOM 变化，1 个无变化，无 JS 错误；但页面缺少明显的“已选中”高亮反馈。",
+        "ok": 1
+      },
+      {
+        "name": "调整轨道参数滑块",
+        "expected": "拖动半长轴、偏心率、倾角滑块时，对应数值标签实时更新",
+        "evidence": "HTML 中三个 range 都绑定了 input 监听事件，调用 updateAxisDisplay / updateEccDisplay / updateIncDisplay 更新文本；运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 APPLY ORBIT 应用轨道",
+        "expected": "读取当前滑块值，重新计算并绘制轨道，更新卫星运动参数并消耗燃料",
+        "evidence": "applyOrbitChanges() 绑定在 applyBtn 上，会更新 orbitParams、调用 createOrbitPath() 重建轨道，并根据机动大小扣减燃料；无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "拖拽 3D 画面旋转/缩放视角",
+        "expected": "用户可通过鼠标拖拽旋转视角或缩放，以观察地球、卫星和轨道",
+        "evidence": "探针在 canvas 上指针拖拽后 DOM/像素无变化；页面没有引入 OrbitControls，也没有 pointer/touch/wheel 事件，动画循环只做地球自转和相机 lookAt 卫星。",
+        "ok": 0
+      },
+      {
+        "name": "参与挑战/竞赛/协作空间",
+        "expected": "提供轨道设计竞赛、挑战或多人协作入口",
+        "evidence": "页面只有单机任务开始、场景选择、轨道参数调整和结算界面，没有任何竞赛、排行榜、协作或多人功能入口，需求中该部分未实现。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心轨道模拟闭环可用：开始任务、选择场景、调整轨道参数、应用轨道、观察卫星状态均能工作且无 JS 错误；物理轨道计算和 3D 场景已实现。扣分点在于 3D 画面无法拖拽旋转/缩放视角，且需求中提到的挑战、竞赛、协作功能完全缺失，因此不是满分，但主要任务仍可完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在 2 个核心可用性问题：1）任务选择按钮（如第一个 SELECT）点击后无任何界面反馈，用户无法确认所选任务是否生效，属于主要入口点击无实际反馈；2）游戏结束后点击 NEW MISSION 重新开始，燃料等游戏状态未重置，新游戏可能因初始燃料为 0 而无法正常游玩，导致流程卡死。次要瑕疵：任务场景缺少明确目标和成功/失败条件，用户不清楚具体要做什么；缺少操作说明和帮助文字，参数调节后仅点击 APPLY 才更新轨道，容易让用户误以为滑块无效；任务选择后的参数变化在控制面板隐藏时不可见，进一步削弱反馈；分数计算逻辑简单，总分可能为 0 但无解释。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体符合太空主题，深蓝色背景与紫色/靛蓝色渐变按钮形成了统一、现代的视觉基调。标题使用渐变文字、按钮有圆角与悬浮动效、面板采用半透明毛玻璃风格，这些CSS细节体现出一定的设计专业度。三张任务卡片布局清晰，悬停缩放动效增强了交互感，整体结构协调，与游戏模拟平台的“策略、规划”定位相符。\n\n扣分原因：3D场景视觉较为简陋，地球仅有纯色球体、卫星为简单几何体、轨道线为细线，缺乏真实模拟平台的质感与细节；原生的 range 滑块与整体定制化UI风格不一致，略显粗糙；字体使用系统字体，缺少科技感；起始屏幕大面积纯色背景略显单调。整体视觉完成度属于中等偏上，作为游戏原型合格，但距离“真实模拟平台”的精美视觉仍有距离。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.8,
+  "baseline_overall": 5.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_031899.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "BEGIN MISSION",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "SELECT",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "SELECT",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "SELECT",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

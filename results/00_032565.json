@@ -1,0 +1,148 @@
+{
+  "row_id": "00_032565",
+  "shard": 0,
+  "id": 32565,
+  "category": "3D design",
+  "prompt": "Design an artistic platform showcasing creative 3D effects for web design. This site offers a gallery of CSS rotation effects, tutorials, and interactive demos, inspiring designers to elevate their projects. Key features include downloadable templates, customization tools, and a community of creators.",
+  "html_len": 14091,
+  "html_sha256": "5e5f5276f9e17277bd594c8ce26ecf999d8261282f67582943c42d501af9e203",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "悬停卡片查看 CSS 3D 翻转",
+        "expected": "卡片正面翻转到背面，展示教程/下载/编辑器入口",
+        "evidence": "CSS 中有 .card:hover .card-inner { transform: rotateY(180deg); transition: transform 0.8s }，三张卡片的正面/背面结构完整，悬停翻转机制已实现。",
+        "ok": 1
+      },
+      {
+        "name": "操作 WebGL 3D 演示",
+        "expected": "3D 几何体随鼠标移动旋转，场景持续动效",
+        "evidence": "Three.js 场景包含 requestAnimationFrame 动画循环，并在 document 上绑定 mousemove 改变 mesh 旋转；运行时无 JS 错误，探针无法验证 WebGL 像素但无异常。",
+        "ok": 1
+      },
+      {
+        "name": "查看教程（View Tutorial）",
+        "expected": "打开教程页或展示教程内容",
+        "evidence": "按钮为 <a href='#'>，探针点击无新增网络请求/实际路由变化，没有教程页面或内容容器，属于纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "下载模板（Download Template）",
+        "expected": "下载模板文件或跳转到下载页",
+        "evidence": "按钮为 <a href='#'>，页面无下载逻辑、无文件资源链接，点击无法触发下载。",
+        "ok": 0
+      },
+      {
+        "name": "使用自定义编辑器（Try Editor）",
+        "expected": "进入在线编辑器并实时调整效果",
+        "evidence": "按钮 href='#'，页面无编辑器 DOM 和 JS 初始化，没有自定义交互界面，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "加入社区（Join Now）",
+        "expected": "进入注册/加入流程或展示社区功能",
+        "evidence": "按钮 href='#'，无表单、无社区登录/注册逻辑，点击无实际功能。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉展示和 3D 效果本身可用：卡片 CSS 翻转和 Three.js 动画/鼠标响应均已实现。但需求中明确提到的教程查看、模板下载、自定义工具、加入社区全部为 href='#' 占位入口，点击无实际功能，导致核心任务大面积无法完成，因此按需求完成度仅给 3 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：页面主要操作入口全部为占位链接：View Tutorial、Download Template、Try Editor、Join Now 的 href 都是 \"#\"，点击后不会到达任何实际目标页，也没有弹窗或内容加载，用户无法完成查看教程、下载模板、使用定制工具、加入社区这些核心任务。这属于主要入口点击无实际反馈、核心操作无法完成。\n次要瑕疵：3D 卡片背面的按钮依赖 hover 翻转，在触摸设备上不够可靠，键盘用户也难以发现；WebGL 演示区没有操作说明，用户不知道可以交互；页面没有主导航或锚点，长页面只能靠滚动；社区数据为静态展示，缺少更多信息或跳转。整体视觉和首屏意图清晰，页面运行无报错，但核心 CTA 全部失效，因此评 4 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力强，深蓝渐变背景与珊瑚红/青绿色渐变形成鲜明对比，科技感与艺术感兼备。标题采用渐变文字和发光效果，卡片3D翻转动效富有创意，契合艺术平台主题。色彩搭配现代且协调，暗色基调突出内容。布局清晰，头部、卡片区、WebGL画布、功能特征、社区统计层次分明，间距合理。CSS运用了毛玻璃、渐变、3D透视、柔和阴影等现代技术，组件设计精致，符合当前网页设计规范。唯一小缺点是使用emoji作为图标略显随意，但整体视觉完成度很高。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_032565.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "View Tutorial",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "covered_by": "P.card-desc",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Download Template",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "covered_by": "H3.card-title",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Try Editor",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "covered_by": "H3.card-title",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Join Now",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

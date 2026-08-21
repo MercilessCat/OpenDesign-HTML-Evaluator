@@ -1,0 +1,53 @@
+{
+  "row_id": "03_018262",
+  "shard": 3,
+  "id": 18262,
+  "category": "Game dev",
+  "prompt": "Develop a fast-paced online arcade where players compete in bubble-popping challenges. The platform offers timed events, power-ups, and scoreboards to engage users. Features include customizable bubbles, global competitions, and daily challenges that encourage replayability and skill improvement, fostering an energetic and competitive atmosphere.",
+  "html_len": 18214,
+  "html_sha256": "7e06a4d7e3ad90832d11b48dc489da1a49daea4480b939e212300086e9e1b433",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_018262.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "START GAME",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "row_id": "02_015538",
+  "shard": 2,
+  "id": 15538,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Design an educational hub showcasing misleading data visualization examples. Users interact with case studies and simulations illustrating common pitfalls and deceptive practices. Key features include quizzes for testing knowledge, a community forum for discussing ethical visualization, and a toolkit for creating accurate, honest data graphics, promoting data literacy.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11497,
+  "html_sha256": "5fe590d41b68c45f94f31c4cecaa839452a143a994caa5c988d444802be4d22c",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "回答测验问题",
+        "expected": "点击选项后显示对错提示和解释",
+        "evidence": "探针点击三个测验按钮均产生 DOM 变化，quiz-result 元素显示对应消息，且无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "下载道德可视化指南",
+        "expected": "点击 Download Guidelines 触发下载或给出反馈",
+        "evidence": "探针点击后 DOM 无变化、无网络请求；HTML 中按钮无事件绑定，为死按钮",
+        "ok": 0
+      },
+      {
+        "name": "通过导航跳转到案例研究/工具包/社区",
+        "expected": "点击导航链接滚动到对应内容区块",
+        "evidence": "导航全部为 href=\"#\" 占位，点击仅产生 hash 跳转回顶部，无对应内容切换",
+        "ok": 0
+      },
+      {
+        "name": "参与社区讨论",
+        "expected": "点击 Join Discussion 进入论坛或展开讨论表单",
+        "evidence": "按钮无任何事件绑定，仅有样式，无法交互",
+        "ok": 0
+      },
+      {
+        "name": "运行误导性图表模拟",
+        "expected": "通过参数（如轴起点）调整图表并看到变化",
+        "evidence": "页面仅有一个静态 CSS 条形图，无模拟控件；仅 chart-bar 有 hover 变色，不构成需求中的模拟",
+        "ok": "NA"
+      }
+    ],
+    "reason": "测验功能可用，但多个关键需求未实现：模拟功能完全缺失、社区论坛无法参与、工具包下载按钮无反应、导航链接均为占位。核心交互大面积失败，主要任务无法完整完成，因此给 3 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在多个核心可用性问题：1) 顶部导航（Home/Case Studies/Toolkit/Community）均为\"#\"占位链接，点击无实际内容跳转或对应区域定位，属死路；2) \"Download Guidelines\"按钮点击后无任何反馈、无下载行为，核心操作完全失效；3) \"Join Discussion\"按钮及页脚社交图标同样无点击事件，均为无效入口；4) 除测验外，页面声称的\"案例研究互动、社区讨论、工具包\"均未提供实际功能，仅静态展示。次要瑕疵：测验B选项\"部分正确\"的判定缺乏解释依据，反馈信息不精确；误导性图表缺少轴标注和图例，视觉说明依赖覆盖文字；部分导航名称与页面实际区块内容不完全对应。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "页面整体采用现代主流的蓝紫渐变风格，配色统一且具有科技感，与数据可视化教育主题契合。布局使用三栏网格结构（左2右1），信息层次清晰，卡片圆角和阴影设计提升了质感，悬停动效增强了交互感。字体使用系统无衬线字体，可读性良好，间距和留白基本合理。页头与页脚同色渐变呼应，形成了很好的视觉闭环。\n\n不足在于：内容密度偏高，在'一屏显示'需求下容易超出视口；配色上蓝色、紫色、红色、橙色并存，色彩偏向功能化但略感生硬，缺乏细腻的层次变化；没有图片或图表示例支撑，视觉记忆点不足。整体属于合格以上的现代风格页面，但缺乏细节打磨和高阶设计感。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_015538.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Case Studies",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Toolkit",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "A) Bar chart with truncated y-axis",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "B) Pie chart with too many segments",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "C) Line graph with consistent scale",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Download Guidelines",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

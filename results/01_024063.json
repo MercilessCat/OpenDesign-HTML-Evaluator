@@ -1,0 +1,175 @@
+{
+  "row_id": "01_024063",
+  "shard": 1,
+  "id": 24063,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Design an AI-powered financial advisor platform, guiding users toward achieving savings goals. Users can input financial data to receive personalized savings plans and real-time progress tracking. Key features include predictive analytics, gamified milestones, and expert insights, fostering financial literacy and helping users make informed decisions for their futures.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14088,
+  "html_sha256": "a147f636cd5cc6acce32ee194efd8fe3bd2894ed383aca38a689e9e83c59eab4",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（Dashboard/Savings/Analytics/Insights）",
+        "expected": "切换到对应板块内容",
+        "evidence": "探针点击后尽管报告DOM变化/页面跳转，但HTML中链接均为href=\"#\"，无路由或内容切换逻辑，实际只是hash变化，没有板块切换反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击Sign In按钮",
+        "expected": "打开登录入口或给出反馈",
+        "evidence": "探针点击Sign In后DOM变化=无，新增JS错误=0，无语义反馈；按钮无事件绑定。",
+        "ok": 0
+      },
+      {
+        "name": "输入财务数据并点击Update Financials",
+        "expected": "更新储蓄计划、进度条或AI建议",
+        "evidence": "探针点击Update Financials后DOM变化=无，新增JS错误=0；HTML中按钮无事件绑定，核心需求“输入财务数据获得个性化计划”未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击Recalculate Plan",
+        "expected": "重新计算并更新计划/洞察",
+        "evidence": "探针点击后DOM变化=无，新增JS错误=0；按钮没有绑定任何业务逻辑，功能占位。",
+        "ok": 0
+      },
+      {
+        "name": "点击Export Report",
+        "expected": "导出报告或给出下载反馈",
+        "evidence": "探针点击后DOM变化=无，新增JS错误=0；按钮无事件处理，导出功能未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上完成了AI理财顾问的静态展示，但核心交互全部失效：Update Financials、Recalculate Plan、Export Report等关键按钮点击无任何反馈，导航链接仅为href=\"#\"占位，Sign In亦无响应。用户无法通过输入财务数据获得个性化储蓄计划或进度更新，需求声明的核心功能未实现。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 主导航 Dashboard/Savings/Analytics/Insights 均为 href=# 占位链接，点击只改变 hash 或回到顶部，没有实际内容切换或可见反馈，属主要导航无实际反馈。2. 用户输入财务数据后点击核心按钮 Update Financials，自动探测显示无 DOM 变化、无网络请求、无提示，财务数据与储蓄计划不会更新，核心流程卡死。3. Quick Actions 中的 Recalculate Plan、Export Report 以及 Contact Advisor 均无绑定行为，点击后无效果，属于死路。4. 顶部 Sign In 按钮同样无任何反馈。这些已构成 2 个以上核心可用性问题。次要瑕疵：页面缺少说明与图例，Savings Goal 的目标日期和目标金额不可编辑，AI Insights 为静态文案而非真实预测，页脚社交链接为占位符；整体视觉结构清楚，但核心交互不可用，因此评分低。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，采用现代金融科技风格，蓝色渐变背景与卡片式布局结合，色彩搭配专业（主色#2563eb、辅色#0ea5e9、强调色#f97316），对比度良好。布局采用三列网格，信息层次清晰，符合AI金融顾问平台的定位。字体使用Poppins，圆角、阴影和hover动效提升了组件质感，过渡动画细腻。代码基于Tailwind CSS，结构规范，符合现代网页设计规范。但页面内容较多，在典型视口高度下可能无法完全避免滚动，且部分按钮无实际交互反馈，轻微影响体验。整体设计专业且美观，略偏上乘。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_024063.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Savings",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Insights",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Update Financials",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Recalculate Plan",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export Report",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

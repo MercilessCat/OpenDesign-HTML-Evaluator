@@ -1,0 +1,181 @@
+{
+  "row_id": "05_042983",
+  "shard": 5,
+  "id": 42983,
+  "category": "Website",
+  "prompt": "Build a comprehensive monitoring system with real-time data visualization, predictive analytics, and interactive maps. Include a global network of sensors, user-customizable alert systems, and educational resources to enhance public awareness and preparedness for natural disasters.",
+  "html_len": 21928,
+  "html_sha256": "e389b68f2506c30737be4c9532afb5b6959f255870163d20c324b19eaf399226",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "顶部导航跳转板块",
+        "expected": "点击 Dashboard/Sensors/Alerts/Education/Resources 应切换到对应板块或路由",
+        "evidence": "探针点击后报告 DOM 变化/跳转，但 HTML 中链接均为 href='#' 且无路由或事件绑定，实际未切换内容，仅焦点/哈希变化",
+        "ok": 0
+      },
+      {
+        "name": "点击地图传感器标记",
+        "expected": "弹出窗口显示灾害类型与强度",
+        "evidence": "Leaflet 初始化正确，标记通过 bindPopup 绑定弹窗，无 JS 错误，地图可正常交互",
+        "ok": 1
+      },
+      {
+        "name": "点击 Create New Alert 创建警报",
+        "expected": "弹出创建警报的表单或对话框",
+        "evidence": "按钮无 onclick 或 JS 事件监听，点击仅触发 hover 样式，无业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "编辑/删除现有警报",
+        "expected": "点击 Edit 可修改警报，点击 Delete 可删除警报行",
+        "evidence": "表格操作按钮无事件绑定，点击无反应，仅静态样式",
+        "ok": 0
+      },
+      {
+        "name": "点击教育卡片 Read More",
+        "expected": "跳转或展开对应教育内容",
+        "evidence": "按钮无事件监听，是纯占位入口，点击无内容变化",
+        "ok": 0
+      },
+      {
+        "name": "地图事件类型筛选",
+        "expected": "点击 Earthquakes/Hurricanes/Floods 等按钮过滤地图标记",
+        "evidence": "筛选按钮无事件绑定，点击后地图标记无变化",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上实现了监控仪表板（地图、图表、统计卡片、教育资源），但绝大多数核心交互为死入口：导航链接 href='#' 无路由，Create New Alert、Edit/Delete、Read More、筛选按钮均无事件绑定；仅 Leaflet 地图标记弹窗功能通过代码验证可用。用户关键的'定制警报系统'和'导航浏览'任务无法完成，核心交互大面积失败，故功能评分较低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 顶部主导航（Dashboard/Sensors/Alerts/Education/Resources）均为 `href=\"#\"` 占位链接，点击后仅产生 hash 变化，页面内容无实际切换，主要入口无实际功能。\n2. 自定义告警系统的「Create New Alert」按钮未绑定任何事件，点击无反应，用户无法创建新告警，核心任务无法完成。\n3. 地图筛选按钮（Earthquakes/Hurricanes/Floods/All Events）未绑定事件，点击无反应，无法筛选地图上的传感器事件。\n4. 告警表格中的「Edit」「Delete」操作按钮无点击响应，无法对已有告警进行管理。\n5. 教育资源卡片的「Read More」按钮为占位符，点击无实际内容反馈。\n\n次要瑕疵：\n1. 「Disaster Trends (Last 30 Days)」图表 X 轴实际显示 12 个月（Jan–Dec），与标题“30天”不一致，命名不精确。\n2. Hero 区与顶部 Header 使用了同一渐变背景，视觉层次略混淆。\n3. 订阅邮件输入框的「Go」按钮无绑定事件，提交无反馈。\n4. 实时数据更新逻辑仅能更新当前打开的弹窗内容，未打开弹窗时无可见数据刷新效果。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力良好，符合现代监控系统Dashboards的专业风格。色彩搭配协调，以蓝色系（#0ea5e9/#0284c7）为主色调，搭配红、绿、黄等预警色，既统一又具有信息层级感。布局结构清晰，从上到下依次为头部导航、Hero横幅、数据统计卡片、交互地图、图表分析、预警表格、教育资源、页脚，节奏合理，间距一致。组件设计质量较高：统计卡片采用圆角+阴影，hover有轻微上浮动效，增强了交互反馈；地图使用Leaflet并自定义了渐变圆形marker，视觉效果精致；表格状态标签使用彩色圆角胶囊，识别度高。CSS方面使用Tailwind配合自定义配置，className语义化，响应式断点处理到位，字体引入Inter，整体风格现代。\n\n扣分点：教育资源卡片顶图仅为纯渐变背景，缺乏实际图片或复杂图形，略显单调；代码引入了Three.js但未实际使用，未发挥3D可视化潜力；整体设计偏向经典模板，缺乏独特记忆点。但考虑到页面功能完整、无任何JS或网络错误，且视觉完成度高，因此给8分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_042983.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Sensors",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Alerts",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Education",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Live Map",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Learn More",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

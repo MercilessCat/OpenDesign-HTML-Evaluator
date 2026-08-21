@@ -1,0 +1,199 @@
+{
+  "row_id": "03_024645",
+  "shard": 3,
+  "id": 24645,
+  "category": "Game dev",
+  "prompt": "Design a mystical online realm where users gather enchanted elements to craft powerful spells. Features include a dynamic alchemy lab, multipage lore library, and collaborative questing for rare ingredients. Users can trade, combine elements, and unlock magical abilities, all while exploring an expansive fantasy world rich with hidden secrets.",
+  "html_len": 28985,
+  "html_sha256": "3351d165090c0282ed0e97f1235ecb665d63a23f19187b779da6aa96eb780a79",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "通过导航切换到 Lore Library 页面",
+        "expected": "点击 Lore Library 按钮后，主内容区切换到图书馆页面",
+        "evidence": "探针点击按钮后 DOM 无变化，并新增 JS 错误 'showPage is not defined'；HTML 中按钮 onclick 调用 showPage('library')，但运行时该函数未定义",
+        "ok": 0
+      },
+      {
+        "name": "通过导航切换到 Quests 页面",
+        "expected": "点击 Quests 按钮后，主内容区切换到任务页面",
+        "evidence": "探针点击按钮后 DOM 无变化，并新增 JS 错误 'showPage is not defined'；页面未发生任何切换",
+        "ok": 0
+      },
+      {
+        "name": "收集 Fire Essence 元素",
+        "expected": "点击火焰精华卡片后，元素计数增加、库存出现火元素",
+        "evidence": "探针点击卡片后 DOM 无变化，并新增 JS 错误；运行时 collectElement 相关脚本未初始化，点击无任何业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "收集 Water Spirit 元素",
+        "expected": "点击水灵卡片后，元素计数增加、库存出现水元素",
+        "evidence": "探针点击后 DOM 无变化，并新增 JS 错误；收集逻辑未生效",
+        "ok": 0
+      },
+      {
+        "name": "点击 Craft Spell 制作法术",
+        "expected": "将元素放入炼金圆环后合成咒语并显示结果",
+        "evidence": "探针点击 Craft Spell 按钮后 DOM 无变化，并新增 JS 错误 'craftSpell is not defined'；制作功能完全不可用",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Quest 加入任务",
+        "expected": "加入任务并更新任务人数/进度",
+        "evidence": "HTML 中四个 Join Quest 按钮均无 onclick 或事件绑定，点击不会有任何反应，属于纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "在 Marketplace 进行元素交易",
+        "expected": "点击 Trade/Sell 按钮可交易元素并获得金币",
+        "evidence": "Trade 按钮无事件绑定；Sell 按钮虽调用 sellElement 但运行时函数未定义（与 collectElement 同批脚本未执行），点击无反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉层面完整呈现了炼金实验室、图书馆、任务、市场等界面，但所有核心交互全部失效：导航切换、元素收集、法术制作、任务加入、交易均因 JS 函数未定义或无事件绑定而毫无反应。运行时探针确认每次点击都新增 JS 错误且 DOM 零变化，页面本质上是不可操作的静态展示，主要任务无法完成，因此给出 2 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 主导航（Alchemy Lab/Lore Library/Quests/Marketplace）点击后均无页面切换，触发 showPage is not defined，用户无法进入图书馆、任务和市场等核心模块；2) 核心玩法操作全部失效：collectElement/craftSpell/sellElement 等关键函数未定义，点击收集元素、合成法术、出售元素均无 DOM 变化并报 JS 错误，收集→合成→解锁资源的主流程完全卡死；3) Quest 中的 Join Quest、Marketplace 中的 Trade 按钮没有实际交互反馈，协作任务与交易无法完成。次要瑕疵：视觉主题和布局较完整，但缺少操作失败提示，页面在点击无效时没有任何可理解的反馈；部分状态如知识进度、元素数量看起来未随操作更新。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "整体视觉设计成功营造了神秘的魔法炼金氛围，深紫色渐变背景搭配发光文字（.glow-text）与奇幻衬线字体（Cinzel / MedievalSharp）高度契合“Mystic Realms”主题，风格对齐度优秀。色彩体系以紫罗兰（#9d4edd、#7b2cbf）为绝对主导，辅以深紫黑背景，氛围统一、情感强烈；炼金圆环、元素卡片、进度条、发光按钮和 hover 上浮+光晕等组件设计均体现了明确的游戏化视觉语言，布局采用三栏网格与清晰的导航结构，信息层级分明，整体具有较好的视觉吸引力。\n\n不足之处在于：色彩对比度相对单一，大量紫色调容易产生视觉疲劳；元素图标使用 emoji，与整体精致度相比略显粗糙；炼金圆环的槽位定位（top/left 硬编码）在响应式下可能失衡，组件排布稍显随意；虽然使用了 Tailwind 和自定义 CSS，但某些视觉细节（如卡片纹理、背景装饰、图标体系）尚未打磨到专业级水准。此外运行时存在 JS 错误导致交互失效，虽不影响静态视觉，但会影响完整观感体验。综合评定为 7.5 分，属于视觉合格且主题鲜明、但与顶级游戏 UI 仍有一定差距的页面。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "showPage is not defined",
+      "showPage is not defined",
+      "showPage is not defined",
+      "showPage is not defined",
+      "craftSpell is not defined",
+      "collectElement is not defined",
+      "collectElement is not defined",
+      "collectElement is not defined"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_024645.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Alchemy Lab",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Lore Library",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Quests",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Marketplace",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Craft Spell",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "🔥\nFire Essence\n\nClick to collect",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.w-16 h-16 mx-auto bg-red",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "💧\nWater Spirit\n\nClick to collect",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.w-16 h-16 mx-auto bg-blu",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "🌿\nEarth Core\n\nClick to collect",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.w-16 h-16 mx-auto bg-gre",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

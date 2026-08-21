@@ -1,0 +1,201 @@
+{
+  "row_id": "04_026545",
+  "shard": 4,
+  "id": 26545,
+  "category": "Website",
+  "prompt": "Create a digital ecosystem connecting global agriculture enthusiasts, sharing innovative farming techniques, sustainability tips, and crop management solutions. Integrate forums, virtual workshops, and collaborative projects to foster global knowledge exchange. Highlight success stories, research advances, and community-driven initiatives for sustainable food production and environmental stewardship.",
+  "html_len": 26989,
+  "html_sha256": "054ab3d89d97c410c943b9066d95e3e58d33b1821ddb6ffbf670f7342d7eb6d0",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航Features锚点跳转",
+        "expected": "页面平滑滚动到Features区块，展示全球论坛、虚拟工作坊、合作项目等特性",
+        "evidence": "探针点击<a>Features后DOM变化=有，新增JS错误=0；HTML中href=\"#features\"，为有效锚点",
+        "ok": 1
+      },
+      {
+        "name": "点击搜索按钮",
+        "expected": "打开搜索框或跳转搜索页面",
+        "evidence": "探针点击搜索按钮后DOM变化=无，新增JS错误=0；该按钮为<i class=\"fas fa-search\">，无事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击导航Join Community按钮",
+        "expected": "进入注册/加入社区流程",
+        "evidence": "探针点击后DOM变化=无，无网络请求；按钮有hover样式但无click处理",
+        "ok": 0
+      },
+      {
+        "name": "点击Hero区Join Our Network主按钮",
+        "expected": "跳转注册页或弹出加入表单",
+        "evidence": "探针点击后DOM变化=无，无网络请求；按钮无事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击Explore Resources按钮",
+        "expected": "跳转到资源库/资源板块",
+        "evidence": "探针点击后DOM变化=无，无网络请求；按钮无事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击成功故事链接",
+        "expected": "打开具体成功案例文章",
+        "evidence": "HTML中成功故事链接href=\"#\"为占位死链，点击仅回到页面顶部，无实际文章；无探针数据但静态证据明确",
+        "ok": 0
+      }
+    ],
+    "reason": "页面是完整的营销着陆页，视觉上涵盖了论坛、工作坊、合作项目、成功案例、研究进展等需求板块，但核心交互大面积失败：所有加入社区/探索资源/搜索按钮均无事件绑定，点击无反应；成功故事链接为占位死链；仅有导航锚点跳转可用。作为数字生态系统，主要任务无法完成，功能不达标。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. 页面所有主要行动按钮（Join Community、Join Our Network、Explore Resources）点击后均无任何交互反馈，用户无法完成“加入社区/加入网络/探索资源”这一核心任务，转化路径完全卡死；搜索按钮同样无响应。次要瑕疵：1. Hero背景图及两张社区成功故事图片因网络请求被拦截而加载失败，视觉信息缺失，故事卡片只剩标题和文字；2. 移动端导航项被隐藏且无汉堡菜单替代，小屏用户无法访问Features/Community/Resources等区块；3. 图片缺少alt属性，加载失败时无文本替代说明。页面信息结构清晰、视觉设计良好，但核心操作不可用，严重拉低可用性评分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面整体视觉设计专业且现代，符合数字生态社区类网站的预期。色彩搭配以青绿（#0d9488）为主、琥珀色（#f59e0b）和紫色（#8b5cf6）为点缀，在农业主题下呈现自然、生机与科技感，配色和谐且具有层次。布局采用经典的单页营销结构：导航、Hero、数据统计、功能卡片、社区案例、证言、CTA、页脚，信息层级清晰，模块间间距均匀，页面叙事流畅。Typography使用Poppins，与品牌调性匹配，标题、正文、按钮的字号/字重搭配合理。CSS方面使用Tailwind配置自定义色板，结合渐变背景、卡片阴影、悬停上浮动效、浮动动画以及Three.js 3D地球，整体交互感和视觉丰富度较高，符合现代网页设计规范。扣分点在于：外部Unsplash图片因浏览器阻断可能无法显示，导致Hero背景退化为纯渐变、社区案例中的配图区域可能出现空白/破损，影响实际视觉完整性；此外按钮点击无实际响应（如Join Community等），虽然不影响静态美观，但削弱了交互完成度。综合来看代码质量优秀，设计成熟，在移除图片失败影响因素后具有很高的视觉吸引力。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1592997601840-f808b30bf431?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d5c1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1592997601840-f808b30bf431?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d5c1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d5c1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1592997601840-f808b30bf431?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1592997601840-f808b30bf431?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d5c1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1592997601840-f808b30bf431?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d5c1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1592997601840-f808b30bf431?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d5c1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1592997601840-f808b30bf431?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d5c1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1592997601840-f808b30bf431?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d5c1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1592997601840-f808b30bf431?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d5c1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_026545.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#resources",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-search",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Our Network",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Resources",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

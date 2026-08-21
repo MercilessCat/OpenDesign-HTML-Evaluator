@@ -1,0 +1,181 @@
+{
+  "row_id": "03_007481",
+  "shard": 3,
+  "id": 7481,
+  "category": "Game dev",
+  "prompt": "Create a digital art studio for designing intricate nail art. Users paint, share, and sell designs within a vibrant community. Key features include a vast palette, design tutorials, and a virtual nail salon for showcasing work. Social features include design challenges and a gallery for inspiration and collaboration.",
+  "html_len": 18218,
+  "html_sha256": "b25f4098496bbb4807d00472f8f8d7010bf61fb9ad16dd9386ba7395ce49ebcd",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "在画布上绘制美甲图案",
+        "expected": "画笔在画布上留下所选颜色的笔迹",
+        "evidence": "Fabric.js Canvas 初始化成功且 isDrawingMode=true，freeDrawingBrush 已配置；运行时 0 JS 错误、0 失败请求，绘制功能可用",
+        "ok": 1
+      },
+      {
+        "name": "选择调色板颜色并调整笔刷",
+        "expected": "选中颜色高亮且画笔颜色切换，笔刷宽度数值联动变化",
+        "evidence": "12 个 .color-option 均有 click 监听，更新 freeDrawingBrush.color 并切换 active 类；#brush-size 有 input 监听更新笔刷宽度与 #size-value 文本",
+        "ok": 1
+      },
+      {
+        "name": "清除画布",
+        "expected": "画布内容被清空",
+        "evidence": "#clear-btn 绑定 canvas.clear()，探针点击后无 JS 错误；fabric 清除不改变 DOM 结构，业务反馈由画布重绘体现",
+        "ok": 1
+      },
+      {
+        "name": "保存设计为 PNG",
+        "expected": "触发文件下载并提示保存成功",
+        "evidence": "save-btn 监听器生成 a[download] 并触发下载，随后 alert 提示；探针点击无 JS 错误、无失败网络请求，下载由浏览器处理故 DOM 不变",
+        "ok": 1
+      },
+      {
+        "name": "分享设计到社区画廊",
+        "expected": "当前设计图追加到 Community Gallery 的首位",
+        "evidence": "share-btn 非空检查后向 .gallery-grid 插入新 .gallery-item；探针点击后 DOM 变化=有，反馈确定生效",
+        "ok": 1
+      },
+      {
+        "name": "通过导航访问设计挑战/教程",
+        "expected": "点击导航后进入对应功能区块，并能参与挑战或浏览教程内容",
+        "evidence": "5 个 nav 链接全部是 href='#' 占位，无路由/锚点逻辑，探针点击后仅见 URL 追加 # 的默认行为，内容未切换；challenge-card 与 tutorial-card 均为静态 div，无任何事件绑定，属占位内容",
+        "ok": 0
+      }
+    ],
+    "reason": "核心绘画链路可用：用户能绘制、选色、调笔刷、清除、保存并分享到画廊，探针确认分享到画廊产生了 DOM 变化。但需求中的虚拟美甲沙龙完全缺失，设计挑战与教程仅为静态占位卡片（无法参与或打开内容），无出售设计功能，导航全部为 href='#' 占位（点击无内容切换），关键社区功能大面积未实现；按规则关键入口缺失≥2 个，记 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. 顶部主导航全部是占位链接（href=\"#\"），点击 Gallery/Challenges/Tutorials 只会回到页面顶部/改变 hash，并不会切换到对应内容，主要入口无有效反馈，用户会误以为页面坏了。次要瑕疵：1. 教程和挑战卡片只是静态展示，无法打开教程、报名或提交作品；2. 画布没有撤销/重做和橡皮擦，误画后只能全部清空；3. Clear Canvas 会把画布上的指甲底板和参考线也删掉，且无法恢复，重新开始不自然；4. 调色板只有 12 个固定色，没有自定义取色器，距离“vast palette”的目标有差距；5. 虚拟美甲沙龙未实现，分享只是把截图插入本地画廊 DOM，没有真实的社区互动、评论或售卖路径；6. 保存/分享的反馈只有 alert，提示突兀且没有持续的成功态展示。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，主题契合度强。背景采用粉红渐变（#ff9a9e → #fad0c4），配合白色半透明圆角卡片，营造出柔和、时尚、符合美甲艺术氛围的视觉风格。色彩搭配以珊瑚红、暖橙和粉色系为主，与美甲主题高度一致，调色板、按钮、标题等元素使用统一的渐变与阴影，视觉语言连贯。布局采用 flex 与 grid 结合，主工具区、画廊、社区模块分区清晰，间距和圆角处理规范，卡片阴影层次分明，组件（调色块、滑块、按钮）的 hover 动效流畅，体现了较专业的 CSS 设计水平。字体选用 Poppins，现代且易读，标题字号突出重点。扣分点主要在于：页面大量依赖纯色/渐变背景块代替真实图像素材，画廊内容略显单薄；部分白色文字在浅粉色背景上对比度可能不足；交互动效种类较少，缺少更深层的视觉层级。总体而言，页面美观度在同类工具社区类页面中属于中上水平，圆满完成与用户需求的风格对齐。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.6,
+  "baseline_overall": 5.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_007481.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Studio",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Challenges",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Clear Canvas",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save Design",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Share to Gallery",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

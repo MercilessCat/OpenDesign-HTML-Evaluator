@@ -1,0 +1,182 @@
+{
+  "row_id": "01_012086",
+  "shard": 1,
+  "id": 12086,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create an audio-centric platform that allows users to seamlessly manage and customize input devices. The core idea is to enhance audio experiences with intuitive selection tools, real-time feedback, and AI-driven recommendations. Key features include device prioritization, voice quality enhancement tools, and community-driven input configuration sharing.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 16194,
+  "html_sha256": "f5b54bd85232469aec515f0f71070d697133e7ea6910037ddc3ef357841afa11",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "选择/激活输入设备",
+        "expected": "点击非激活设备卡片后，该卡片应变为选中/激活状态（如主色高亮边框）",
+        "evidence": "JS 在 document.querySelectorAll('.device-card') 上绑定了 click 监听，点击会移除所有卡片的 border-l-4 border-primary 类并添加到当前卡片，事件绑定存在且交互逻辑正确",
+        "ok": 1
+      },
+      {
+        "name": "添加设备",
+        "expected": "点击 Add Device 按钮应打开添加设备表单/弹窗，或在设备列表新增设备",
+        "evidence": "交互探针点击按钮后 DOM 变化=无，新增JS错误=0；HTML 中该按钮未绑定任何点击事件，是纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "应用 AI 推荐",
+        "expected": "点击 Apply Recommendation 后应显示推荐已应用的反馈",
+        "evidence": "交互探针点击后 DOM 变化=有；页面 JS 将按钮文本改为 'Applied!' 并临时添加绿色样式，反馈符合预期",
+        "ok": 1
+      },
+      {
+        "name": "调整语音增强工具",
+        "expected": "点击 Noise Reduction/Equalizer 等工具卡片应能调整对应设置或切换启用状态",
+        "evidence": "四个工具卡片仅有 hover 样式，没有任何 click 事件绑定；HTML 证据显示这是静态展示区，核心功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "设备优先级排序",
+        "expected": "拖拽或点击优先级列表项应能改变设备的优先级顺序/设置",
+        "evidence": "优先级列表项仅设置了 cursor-move 样式，无 drag/drop 或任何排序事件绑定，设备优先级排序功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "浏览更多社区配置",
+        "expected": "点击 Browse More Configurations 应加载更多社区配置或跳转",
+        "evidence": "交互探针点击后 DOM 变化=无，该按钮和社区配置卡片均未绑定点击事件，是占位入口",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整美观，设备卡片选择和 AI 推荐应用两个交互有效；但需求声明的核心功能（设备优先级排序、语音增强工具调节、社区配置分享）大多只有 UI 展示而无事件绑定，Add Device、Browse More Configurations 等关键按钮点击无反应，核心任务无法完成，按锚定得分 3。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) 顶部主导航 Dashboard/Devices/Settings/Community 均为 href=\"#\" 占位链接，点击只改变 hash/跳到顶部，没有切换内容或视图，主要导航无实际反馈；2) Add Device 是核心管理操作，点击无任何反馈、也不会添加设备，流程卡死；3) Device Priority 是承诺的关键功能，但列表仅 cursor-move 样式，没有拖拽或上下调整能力，优先级无法修改；4) Voice Enhancement 的多个调节卡片没有实际调节控件，点击或操作不会改变任何数值。次要瑕疵：通知铃铛和 Browse More Configurations 点击无反馈；社区配置仅静态展示；设备选中后 Active/Standby 状态不随选择更新；页面缺少说明/图例，部分控件意图不明确。整体视觉和动效较好，但多个核心操作不可用，因此属于“能用但不好用”。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力强，采用深蓝紫色渐变背景与玻璃拟态卡片结合，营造出科技感、沉浸感，与音频管理平台“AudioZen”的主题高度契合。色彩搭配合理，主色（Indigo/Violet）与背景色对比鲜明，局部高亮和状态指示点（绿/黄/灰）使用恰当，信息层级清晰。布局协调，头部、主内容区（左二列、右一列）和页脚比例均衡，且内容基本控制在视口内，没有明显拥挤或空白失衡。字体选择 Inter，整体文字排版清晰，间距统一。组件设计质量较高，设备卡片悬浮动效、AI推荐渐变区块、进度条、优先级列表等细节丰富且专业。CSS 使用了 Tailwind 体系和自定义 glassmorphism、pulse 动画，符合现代网页设计规范，交互反馈到位。扣分原因：部分导航链接点击后会有页面跳转行为但未阻止，可能影响单页体验；个别按钮（如 Add Device）无实际交互反馈，略显空壳；AI 推荐按钮点击后的视觉变化简单。整体仍是高质量的现代 UI。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_012086.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Devices",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Settings",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-bell",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Device",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Apply Recommendation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Browse More Configurations",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

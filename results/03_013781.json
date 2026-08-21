@@ -1,0 +1,85 @@
+{
+  "row_id": "03_013781",
+  "shard": 3,
+  "id": 13781,
+  "category": "Game dev",
+  "prompt": "Engage in a platform that sharpens decision-making skills through fast-paced scenarios. Users navigate through timed challenges, making split-second choices to achieve goals. Features include scenario variety, progress tracking, and a community hub for sharing strategies and competing in decision-making tournaments.",
+  "html_len": 30776,
+  "html_sha256": "b114446dae07d54e275ba2769050c0b69a8887eb0a4d55b4ba8ab65217b4515f",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Challenge 开始游戏",
+        "expected": "开始界面隐藏，出现游戏界面，加载第一个情景并开始计时",
+        "evidence": "探针点击 #start-btn 后 DOM 变化=无，新增 JS 错误=0；按钮没有 inline onclick，事件绑定未生效，页面停留在开始界面，无法进入游戏",
+        "ok": 0
+      },
+      {
+        "name": "选择情景答案进行决策",
+        "expected": "点击选项后高亮正确/错误，更新分数、连击、生命，并显示下一关按钮",
+        "evidence": "选项中由 loadNextScenario() 动态生成并绑定 selectChoice，但依赖开始游戏成功；因 start 无反馈，选项从未出现在可交互 DOM 中，核心玩法不可用",
+        "ok": 0
+      },
+      {
+        "name": "计时与进度追踪",
+        "expected": "游戏过程中倒计时条、分数、连击、准确率实时变化",
+        "evidence": "HTML 中有 timer-bar、score、streak、accuracy 等元素及相关 JS 逻辑，但用户无法进入 gameplay 看到更新；且源码中 level 从不递增、time-bonus 也从未更新，进度追踪本身不完整",
+        "ok": 0
+      },
+      {
+        "name": "游戏结算与排行榜",
+        "expected": "完成 10 个场景或生命耗尽后显示最终分数、最佳连击、准确率、排名和排行榜",
+        "evidence": "endGame() 与 leaderboard 逻辑存在，但 game-over 屏幕初始隐藏且没有可到达路径；用户拿不到任何结算或排行榜反馈",
+        "ok": 0
+      },
+      {
+        "name": "进入社区中心/参加锦标赛",
+        "expected": "可进入社区中心分享策略、参与决策锦标赛",
+        "evidence": "页面只有 Community Hub 的静态功能描述卡片，没有按钮、链接、路由或赛事入口；该需求功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "核心的 Start Challenge 按钮点击后页面无任何变化，导致游戏无法开始，答题、计时、结算、排行榜等主要玩法均不可达；社区中心/锦标赛也仅为静态占位，需求未实现。虽然静态 HTML 中包含了较完整的场景数据和 JS 逻辑，但用户实际无法使用该页面完成任何核心任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：主入口按钮“Start Challenge”点击后 DOM 无变化，页面没有任何反馈，无法进入游戏主流程；这属于核心操作无法完成、主要入口无实际响应，直接导致“开始挑战”这一关键任务卡死。次要瑕疵：首页功能卡片（Scenario Variety / Progress Tracking / Community Hub）仅为展示，无对应可交互入口，尤其社区中心未实现；游戏说明有一定冗余但缺少“开始后如何操作”的即时引导；视觉风格统一、层级清楚，但交互反馈缺失使整体可用性大打折扣。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "这个页面的视觉设计整体非常专业，与游戏类产品的定位高度契合。具体评价如下：\n\n**优点：**\n1. **色彩搭配出色**：深蓝渐变背景(#0f172a→#1e293b)营造了沉浸式的科技/游戏氛围，搭配primary(#3b82f6)、secondary(#10b981)、accent(#f59e0b)三色点缀，色彩层次分明且统一。红(#ef4444)作为生命值/错误反馈色，绿(#10b981)作为正确反馈色，颜色语义明确。\n2. **布局结构清晰**：开始屏幕采用垂直居中布局，游戏玩法说明卡片与三大特性网格（场景多样性/进度追踪/社区中心）形成稳定的视觉层级；游戏屏幕的顶部信息栏、计时器、场景卡片、统计区域布局合理，节奏感好。\n3. **组件设计质量高**：应用了阴影、圆角、渐变等现代设计语言。卡片悬停有浮起+阴影加深的效果，按钮有呼吸动画(pulse)，排行榜前三名有金银铜专属渐变，这些细节体现出专业的设计打磨。\n4. **动效专业**：浮动动画、渐变计时条（红→黄→绿）、正确/错误选择的色彩反馈，让交互反馈直观且具备游戏趣味性。\n5. **字体选择**：Poppins 字体作为现代几何无衬线体，在游戏/科技类产品中应用广泛，风格契合。\n\n**瑕疵：**\n1. 场景卡片中的选项按钮在未悬停时视觉差异性不够，四个选项的静态状态略显呆板。\n2. 开始屏幕的三个特性卡片信息密度偏低，在宽屏下可能稍显空旷。\n3. 颜色使用上略有饱和度过高之处（如蓝色按钮与灰色背景对比稍显突兀），但不影响整体美观。\n\n综合来看，该页面视觉设计完成度高，风格统一，符合现代游戏类网页的设计标准，但在细节上仍有微调空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_013781.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Challenge",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

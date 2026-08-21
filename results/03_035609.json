@@ -1,0 +1,85 @@
+{
+  "row_id": "03_035609",
+  "shard": 3,
+  "id": 35609,
+  "category": "Game dev",
+  "prompt": "Launch a mystery-solving game where users track Bigfoot through various terrains. Use forensic clues and environmental analysis to deduce the creature's path. Key features include an interactive map, real-time weather effects, community discussions for sharing theories, and rewards for accurate tracking.",
+  "html_len": 25685,
+  "html_sha256": "0b8a2603ed7d7534db5abebe490889bca07abf64f203c3f25c9e7dae505b38aa",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Begin Investigation 开始游戏",
+        "expected": "隐藏 start-screen，显示 game-screen，进入可玩的调查界面",
+        "evidence": "探针点击该按钮后 DOM 无任何变化、无新增 JS 错误；HTML 中 start-screen/game-screen 的 hidden 类没有切换，脚本里也没有可用的 click 绑定/调用链，按钮只是静态元素",
+        "ok": 0
+      },
+      {
+        "name": "点击/拖拽交互地图查看大脚怪路径",
+        "expected": "地图响应点击/拖拽，显示线索标记、路径或地形信息",
+        "evidence": "map-canvas 在 setupMap 中仅绘制静态背景、路径点和时间标签，未绑定点击/拖拽/pointer 事件；且开始按钮失效使地图不可达",
+        "ok": 0
+      },
+      {
+        "name": "选择地形卡（森林/山地/沼泽/沙漠）切换地形",
+        "expected": "currentTerrain 更新、地图重绘、地形标签和线索/天气变化",
+        "evidence": ".terrain-card 只有 CSS hover 样式，没有 onclick/addEventListener；drawMap 只在 setupMap 初始化时调用，未与地形卡绑定，属于无反馈入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Analyze / Predict Path / Previous / Next 推进调查",
+        "expected": "触发分析动画、路径预测或地形切换，更新分数/线索",
+        "evidence": "这些按钮无 id 或无事件绑定（Analyze/Predict Path 连 id 都没有），脚本中无对应 handler；探针也未观察到任何游戏状态更新",
+        "ok": 0
+      },
+      {
+        "name": "在 Researcher Discussions 输入理论并发送",
+        "expected": "新消息追加到讨论区并更新社区内容",
+        "evidence": "存在 message-input 和 send-message 按钮，但脚本中无发送/提交事件处理；游戏未启动时该区域 hidden，无法完成社区讨论交互",
+        "ok": 0
+      }
+    ],
+    "reason": "核心开始按钮点击后页面无任何 DOM 变化，游戏无法进入主界面；地图、地形切换、分析/预测、社区讨论均无事件绑定或不可达，需求声明的核心玩法（追踪、线索、天气、讨论、奖励）全部未实现，页面仅为一个静态壳。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：点击“Begin Investigation”后页面无任何 DOM 变化，游戏无法从开始界面进入主流程，导致地图追踪、线索收集、地形切换、社区讨论等核心功能均无法使用。这是阻断级入口失效，属于 1 个核心可用性问题。次要瑕疵：页面标题和任务简报能清楚说明游戏目的，信息分区（统计栏、地图、线索、讨论、进度）结构清晰；但“Analyze / Predict Path”等按钮在现有代码中未看到明确交互绑定，社区留言发送也缺少成功反馈；若启动问题修复后，需补齐这些操作的响应与状态提示。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉设计优秀，完美契合神秘探索游戏的主题氛围。色彩搭配专业：深蓝至墨绿的渐变背景营造出神秘深邃的户外感，配合绿色与蓝色的高亮强调色（如进度条渐变、按钮渐变）形成鲜明对比，视觉层次清晰。布局协调合理：采用居中容器和12列网格系统，游戏界面分区明确（统计栏、地图、证据栏、地形选择、讨论区、进度条），各组件的间距和对齐规范，卡片圆角、阴影和悬停动效（上浮、投影）提升了交互质感。字体方面使用无衬线的Segoe UI族，保证可读性，标题采用渐变文字（绿到蓝）成为视觉焦点。CSS技术应用熟练：backdrop-blur的玻璃拟态卡片、CSS动画（fadeIn、pulse、slideIn）、transition过渡等均符合现代网页设计规范。元素细节丰富（SVG图标、Canvas地图、地形卡片、讨论消息动画），整体观感专业且具有沉浸感。唯一小瑕疵是部分文本字号未明确，但整体不影响视觉美感。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_035609.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Investigation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

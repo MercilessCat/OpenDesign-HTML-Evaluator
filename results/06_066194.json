@@ -1,0 +1,183 @@
+{
+  "row_id": "06_066194",
+  "shard": 6,
+  "id": 66194,
+  "category": "Website",
+  "prompt": "Launch an educational site demystifying blockchain with interactive use case scenarios, expert insights, and community discussions. Core features include animated explainer videos, industry case studies, and a blockchain simulator for hands-on learning experiences.",
+  "html_len": 36269,
+  "html_sha256": "2b8a137bcbd7397a4fd07ce626d8c00f00a4462679c675c12d235e58202ae5c8",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接切换到对应章节",
+        "expected": "页面平滑滚动到 Home/Features/Simulator/Case Studies/Community 对应区块，并高亮当前导航",
+        "evidence": "探针依次点击 Home、Features、Simulator、Case Studies、Community 五个导航链接，均报告 DOM 变化且页面跳转，无 JS 错误，锚点导航生效。",
+        "ok": 1
+      },
+      {
+        "name": "点击“Start Learning Now”开始学习",
+        "expected": "进入课程列表、打开学习模块或至少跳转到相关功能区",
+        "evidence": "探针点击“Start Learning Now”后 DOM 变化为无，无网络请求，无 JS 错误；HTML 中该按钮无 onclick 或 href，纯静态占位按钮。",
+        "ok": 0
+      },
+      {
+        "name": "点击“Watch Demo”观看动画讲解视频",
+        "expected": "播放弹出的演示视频，或进入视频课程页面",
+        "evidence": "探针报告点击后 DOM 有变化且页面跳转，但 HTML 中无 <video> 元素、无播放相关脚本，按钮未绑定任何事件；实际并无视频内容，与“animated explainer videos”需求不符。",
+        "ok": 0
+      },
+      {
+        "name": "在模拟器输入交易并提交",
+        "expected": "提交后交易状态更新、交易流程区域新增记录、网络可视化发生变化",
+        "evidence": "“From/To/Amount”三个输入框存在，但 Submit Transaction 按钮无绑定事件，区块可视化容器为空；探针未测到任何表单处理逻辑，输入提交不会有反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击“Add Node”增加区块链节点",
+        "expected": " Network Visualization 区域新增节点，节点数与统计更新",
+        "evidence": "Add Node 按钮无 onclick 或事件监听，network container 内没有动态生成内容；HTML 中仅静态占位文本，点击不会产生任何变化。",
+        "ok": 0
+      },
+      {
+        "name": "点击案例研究卡片查看详情",
+        "expected": "展开案例细节、打开专题页或至少展示更多信息",
+        "evidence": "案例卡片只是静态 div，没有链接或 onclick；“View Examples”/“Watch Preview”等也是装饰性元素，无任何交互反馈，与行业案例研究的深入浏览需求不符。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面仅有导航锚点跳转可用，核心需求大面积未实现：模拟器按钮无事件、交易表单无提交逻辑、视频为纯占位、案例卡片不可交互，社区讨论功能也未真实落地。探针确认多个主要入口点击无反馈，属于核心功能失效，因此评分很低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 主 CTA 按钮 Get Started 和 Start Learning Now 点击后无任何反馈（DOM 无变化、无跳转、无网络请求），用户无法进入学习流程，核心引导操作失败；2. 区块链模拟器是页面核心功能，但 Add Node、Run Simulation、Submit Transaction 等控件均未绑定实际逻辑，可视化区域为空白占位，用户无法完成任何模拟交互，功能形同虚设；3. Features 区域的 Watch Preview / View Examples / Try It Live 仅为 div 装饰，点击无反应，多个功能入口不可用。次要瑕疵：1. 模拟器统计数字（Nodes/Blocks/Transactions）为静态写死，不随操作变化；2. 引入了 Three.js 和 Chart.js 但未初始化使用，资源冗余；3. 缺少操作说明或引导，用户不理解模拟器如何使用；4. 部分按钮有悬停效果但点击无实际功能，容易误导用户。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉设计专业且现代，符合区块链教育类网站的科技感气质。暗色渐变背景（#0f172a → #1e293b）搭配靛蓝（#6366f1）与紫罗兰（#8b5cf6）的高光点缀，色彩统一且有层次，营造出理性、深邃、可信赖的氛围。\n\n布局方面，Hero区左右分栏清晰，主标题醒目，CTA按钮采用渐变+悬停浮起效果，右侧代码演示窗通过 mac 风格点、语法高亮和玻璃拟态卡片增强了产品的技术属性。统计区、特性区、模拟器区、案例区均有清晰的视觉节奏，卡片圆角、内边距、阴影和边框风格一致，组件品质较高。Inter 字体的应用保证了文字的可读性，字号层级与留白比例合理。\n\nCSS 细节展现了专业水准：使用径向渐变、backdrop-filter 模糊、动画（floating、pulse、slide-in）、悬停缩放与扫光效果，动效克制而精致。Tailwind 配置扩展色板也保持了设计令牌的一致性。\n\n扣分点主要在于部分视觉区块内容偏空：区块链模拟器的网络可视化容器为空，三个特性卡片的预览区域仅用渐变叠加图标，案例研究也以纯色块+图标代替真实图片，可能在实际渲染中略显单薄。社区部分代码被截断，未呈现完整信息。但整体色彩、布局和组件设计已非常接近现代高端 SaaS 教育产品的标准，视觉效果值得肯定。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_066194.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulator",
+      "href": "#simulator",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Case Studies",
+      "href": "#case-studies",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Learning Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Watch Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

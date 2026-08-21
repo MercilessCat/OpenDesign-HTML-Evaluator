@@ -1,0 +1,175 @@
+{
+  "row_id": "01_013168",
+  "shard": 1,
+  "id": 13168,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Design a captivating site showcasing innovative page turn animations in digital reading applications. Users can explore animation styles, test transitions, and customize reading experiences. Features include user feedback integration, community sharing, and creative design challenges to inspire new storytelling techniques.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10294,
+  "html_sha256": "3a2b99996a384d15fa475213c82b3c57a32510b465c8b74d7d4e4362c621bd26",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击 Test Animation Now 触发翻页动画",
+        "expected": "预览区的书页应产生翻转动画，并在短暂停留后恢复",
+        "evidence": "探针点击按钮后 DOM 变化=有、无 JS 错误；HTML 中该按钮绑定了 #page 的 flipped 类添加/移除，反馈符合预期",
+        "ok": 1
+      },
+      {
+        "name": "点击书页手动翻页",
+        "expected": "点击 Story Page 时页面在正面和背面之间切换",
+        "evidence": "#page 绑定了 click 事件切换 flipped 类，且页面设计为 cursor-pointer，具备可点击反馈",
+        "ok": 1
+      },
+      {
+        "name": "通过导航探索动画风格 / 自定义阅读体验",
+        "expected": "点击 Animations 或 Customize 应进入对应页面或展示动画样式和自定义控件",
+        "evidence": "导航链接全部为 href='#'，没有对应锚点、路由或 JS 事件；探针点击后只有默认 hash 跳转，页面没有呈现实际业务内容",
+        "ok": 0
+      },
+      {
+        "name": "进入社区分享与创意挑战",
+        "expected": "点击 Community / Challenges 或页脚相关链接应展示社区作品、分享功能或挑战活动",
+        "evidence": "Community、Challenges、Community Hub、Challenge Center 等均为 href='#' 占位链接，无事件绑定，没有对应内容或功能",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started 开始使用",
+        "expected": "点击后应进入产品、打开演示或产生下一步操作反馈",
+        "evidence": "探针点击后 DOM 变化=无、无网络请求、无 JS 错误；HTML 中该按钮未绑定任何事件，属于无反应占位按钮",
+        "ok": 0
+      }
+    ],
+    "reason": "页面只实现了书页翻转预览这一项核心演示，Test Animation Now 和点击书页均能产生正确动画反馈。但导航 Animations/Customize/Community/Challenges、页脚功能链接以及 Get Started 按钮均为 href='#' 或无事件监听，无法实现用户探索动画风格、自定义阅读体验、社区分享和创意挑战等需求；需求声明的关键功能大量缺失，因此功能性得分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 顶部导航（Animations/Customize/Community/Challenges）及底部全部功能链接均为 \"#\" 占位符，点击后仅改变URL锚点，页面内容无任何实际变化，属于主要入口无有效反馈。\n2. “Get Started”按钮点击后完全无响应（无DOM变化、无事件绑定），操作死路。\n3. 页面要求单屏展示且设置 overflow:hidden，但实际内容（header+四卡片+预览+多列footer）远超视口高度，footer及订阅、资源等核心功能区域被截断，用户无法滚动或跳转访问，存在不可达的死路径。\n4. 订阅区邮箱输入框与“Join”按钮无交互反馈，输入内容后点击不会触发任何效果。\n\n次要瑕疵：\n- 四个功能卡片仅作静态展示，不可点击，但作为装饰性宣传可接受。\n- 动画预览区域无提示文字，用户需自行发现“点击翻页”的交互方式。\n- 無無障礙標記與鍵盤操作支持，部分交互僅能通過滑鼠點擊觸發。\n- 單頁無滾動設計下，頁面信息密度過高，視覺重點分散。\n\n唯一有效操作是“Test Animation Now”按鈕與預覽區域的翻頁動畫，功能正常且視覺設計現代，但整体导航和主要操作大量失效，体验严重受损，因此按锚定规则评为2分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，采用深色渐变背景（深蓝至靛蓝）搭配品牌紫色（#6366f1）作为主色，色彩对比鲜明且协调，符合现代SaaS/工具类网站的设计调性。布局为单页左右分栏，左侧信息展示清晰，右侧通过可交互的翻页动画模拟器增强主题契合度，视觉层次分明。字体使用Poppins，圆润现代，标题、正文、按钮的字号与字重梯度合理，间距控制得当。组件设计精致，卡片使用半透明毛玻璃效果、圆角边框和阴影，按钮有渐变和悬停缩放效果，体现专业CSS设计水准。导航、功能卡片、CTA按钮、页脚等元素齐全，整体符合现代网页设计规范。扣分点在于页面缺乏实际图片或插图，视觉元素偏抽象图标，信息密度较高，单屏展示时稍显拥挤，另外部分链接点击无实际交互行为，但作为纯展示页影响不大。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_013168.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Animations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Customize",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Challenges",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Test Animation Now",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Animation Gallery",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Customization Tools",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

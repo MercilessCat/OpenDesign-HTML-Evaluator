@@ -1,0 +1,181 @@
+{
+  "row_id": "00_008929",
+  "shard": 0,
+  "id": 8929,
+  "category": "3D design",
+  "prompt": "Design a platform for simulating and visualizing crowd dynamics in interactive 3D environments. Users can create scenarios, analyze movement patterns, and optimize layouts for events or urban planning. Key features include scenario building tools, real-time analytics, and AI-driven crowd behavior simulations for enhanced planning and decision-making.",
+  "html_len": 23760,
+  "html_sha256": "2644157576fa378c6434fb4337607f449f809adc08aaf828de953dd417862883",
+  "functional": {
+    "score": 5.0,
+    "raw_score": 5.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Add Entrance 添加入口",
+        "expected": "3D 场景中出现一个绿色圆柱体入口，统计面板 Active Entrances 增加",
+        "evidence": "探针点击后 DOM 有变化且无 JS 错误；HTML 中 addEntrance() 创建 CylinderGeometry 网格加入 scene，并调用 updateStats() 更新统计，符合预期",
+        "ok": 1
+      },
+      {
+        "name": "点击 Add Exit 添加出口",
+        "expected": "3D 场景中出现一个红色锥体出口，统计面板同步更新",
+        "evidence": "探针点击后 DOM 有变化且无 JS 错误；addExit() 创建 ConeGeometry 网格加入 scene，并更新统计，符合预期",
+        "ok": 1
+      },
+      {
+        "name": "点击 Add Obstacle 添加障碍物",
+        "expected": "3D 场景中出现一个橙色立方体障碍物，统计更新",
+        "evidence": "探针点击后 DOM 有变化且无 JS 错误；addObstacle() 创建 BoxGeometry 网格加入 scene，符合预期",
+        "ok": 1
+      },
+      {
+        "name": "点击 Start Simulation 启动模拟",
+        "expected": "模拟开始运行，人群从入口生成并走向出口，统计面板 Total People 等数值变化",
+        "evidence": "探针点击后 DOM 有变化且无 JS 错误；事件监听设置 simulationRunning = true，animate() 循环中 updateCrowd() 会生成和移动人群，符合预期",
+        "ok": 1
+      },
+      {
+        "name": "拖动 Crowd Density 滑块调整人群密度",
+        "expected": "滑块数值标签变化，并且模拟中的人群密度或生成速率随之改变",
+        "evidence": "HTML 中滑块只更新 #densityValue 文本内容，没有将值用于任何模拟参数（如生成概率、人群数量），调整密度不会影响实际模拟，反馈不符合预期",
+        "ok": 0
+      },
+      {
+        "name": "使用 Move 工具移动场景对象",
+        "expected": "激活后可点击并拖动场景中的入口/出口/障碍物以改变位置",
+        "evidence": "按钮点击仅切换 .active 类和 selectedTool 变量；代码中没有任何 raycast 或鼠标交互逻辑使用 selectedTool 来移动对象，功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "场景构建（添加入口/出口/障碍物、清除）、模拟启停和实时统计等核心功能可用并有正确反馈；但移动/删除工具和仿真参数滑块（密度/速度/焦虑）只更新 UI 状态，未真正影响场景或模拟，属于部分核心交互未实现，因此评分中等偏低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. Move/Delete 工具点击后无实际功能，场景中已添加的入口、出口、障碍物无法被选择、移动或删除，场景构建流程不完整；2. Crowd Density、Movement Speed、Anxiety Level 三个滑块仅更新文字显示，不改变模拟行为（人群生成速率、移动速度、行为模式均无变化），核心控件调节无效。次要瑕疵：移动/删除工具缺乏使用说明或提示；人群到达出口后直接消失无到达反馈；模拟暂停后统计值仍维持原状；AI 驱动行为未体现，仅为随机移动。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "整体视觉设计非常专业且符合用户需求。页面采用深色科技风格，背景渐变与半透明毛玻璃面板形成协调的层次感，细节上具备现代设计风格。色彩搭配合理，蓝色/青色为主色调，搭配入口绿、出口红、障碍橙等语义色，有效传达功能含义。布局分区清晰，标题区、场景构建面板、控制面板和实时统计面板位置合理，响应式处理也覆盖了小屏场景。组件设计质量较高，按钮渐变、悬停浮动效果、滑块自定义、圆角与阴影搭配均提升了视觉质感和交互反馈。字体使用系统字体栈，标题采用渐变文字效果，整体视觉印象稳重、现代，符合3D模拟/规划类工具的设计定位。不足之处在于：系统字体略显常规，缺少品牌感；渐变文字依赖-webkit-前缀，存在极少数浏览器兼容隐患；部分面板层级较多，屏幕较窄时可能局促。总体评分8/10。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.3,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_008929.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Entrance",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Exit",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Obstacle",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Clear All",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Select",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Move",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Delete",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

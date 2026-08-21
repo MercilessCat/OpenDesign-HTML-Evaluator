@@ -1,0 +1,193 @@
+{
+  "row_id": "01_023461",
+  "shard": 1,
+  "id": 23461,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Revolutionize network management with an intuitive editor that simplifies router configurations. Users can easily navigate settings through a user-friendly interface, employing templates and guided wizards. Key features include real-time diagnostics, security alerts, and a community-driven knowledge base for troubleshooting and optimization tips.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11611,
+  "html_sha256": "f2579825898fd6b39a9e3ce6309606182019515f9cb99a6b38a153ca4eed8f0e",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航链接 Features",
+        "expected": "页面切换到 Features 相关内容或展示对应区域",
+        "evidence": "探针显示点击后 DOM 有变化、页面跳转（href=\"#\"），但页面为单页无路由，无对应内容展示，属于占位死链",
+        "ok": 0
+      },
+      {
+        "name": "点击导航链接 Templates",
+        "expected": "页面切换到模板相关内容",
+        "evidence": "同 Features，href=\"#\" 无实际路由，页面无模板内容响应",
+        "ok": 0
+      },
+      {
+        "name": "点击导航链接 Community",
+        "expected": "跳转到社区或显示社区内容",
+        "evidence": "href=\"#\" 占位链接，点击后页面无实际内容切换，需求中社区功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击导航链接 Support",
+        "expected": "跳转到支持页面或显示帮助内容",
+        "evidence": "href=\"#\" 占位，无实际功能",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started 按钮",
+        "expected": "开始使用或进入向导流程",
+        "evidence": "探针显示 DOM 无变化，无 JS 错误，但无任何业务反馈，按钮无事件绑定，纯占位",
+        "ok": 0
+      },
+      {
+        "name": "点击 Live Demo 按钮",
+        "expected": "打开实时演示或触发演示交互",
+        "evidence": "探针显示 DOM 无变化，按钮无事件绑定，无演示启动反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Documentation 按钮",
+        "expected": "查看文档内容",
+        "evidence": "探针显示 DOM 无变化，按钮无响应，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join the community 按钮",
+        "expected": "跳转到社区或弹出加入入口",
+        "evidence": "探针显示 DOM 无变化，按钮无事件绑定，无响应",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整，内容覆盖需求中的产品描述，但所有导航链接均为 href=\"#\" 占位死链，5 个按钮点击均无任何业务反馈，核心交互（导航、按钮）大面积失败，需求声明的编辑器、模板、向导、社区等关键功能入口均未实现，仅静态展示，功能评分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. 页面主要行动按钮（Get Started、Live Demo、View Documentation、Join the community）点击后均无任何实际响应或反馈，用户无法完成“开始使用/查看演示/查看文档”等核心任务；2. 导航栏链接（Features、Templates、Community、Support）均指向“#”，点击后仅跳回页面顶部，无法定位到对应内容区块，导航功能实际无效。\n次要瑕疵：页面为纯静态展示，模板库、向导、实时诊断、社区知识库等模块仅有文字/图标介绍，缺少可交互的预览；部分按钮只有 hover 变色，没有明确的可点击暗示；整体视觉风格统一、布局清晰，但交互深度不足，更像一个高保真概念稿而非可用的产品页面。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，采用现代主流的渐变背景（浅蓝至淡蓝）与白色卡片形成清爽对比，符合网络管理工具的专业与科技感。色彩搭配以蓝色系为主，辅以深色仪表盘区域（#0f172a）作为视觉重心，层次分明且对比度良好。布局结构清晰，顶部导航、主视觉、三列功能卡片、仪表盘预览、社区与诊断双区块以及底部深色页脚依次排列，符合单页展示逻辑且节奏舒适。字体使用 Inter 并与 Tailwind 配置联动，字号与字重层级合理，间距（padding/margin）统一，视觉密度适中。组件设计上，卡片悬停有轻微上浮与阴影过渡，特性图标有缩放与变色反馈，增加了精致感和交互感。CSS 通过 Tailwind 与少量自定义样式结合，符合现代网页设计规范。小小扣分点：导航链接点击后会跳转刷新（无实际页面），部分按钮无实际交互反馈，但作为视觉设计稿不影响美观评价。整体达到专业级 UI 组件展示页面的视觉水准。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_023461.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Templates",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Support",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Live Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Documentation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join the community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

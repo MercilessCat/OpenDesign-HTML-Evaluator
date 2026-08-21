@@ -1,0 +1,162 @@
+{
+  "row_id": "00_030140",
+  "shard": 0,
+  "id": 30140,
+  "category": "3D design",
+  "prompt": "Create a futuristic site integrating 3D visualization with extended reality experiences on the web. Users design and explore immersive environments using intuitive tools. Key features include cross-platform compatibility, intuitive drag-and-drop scene creation, and a community forum for sharing tips and virtual tours.",
+  "html_len": 17304,
+  "html_sha256": "a16f4fe600c3ad032437498e33be03851e9d7f9f956df67498b2e825a0a6b572",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "浏览/旋转 3D 可视化场景",
+        "expected": "拖动 canvas 时 3D 视角可旋转/缩放，场景持续渲染",
+        "evidence": "HTML 引入 Three.js、OrbitControls 并有 requestAnimationFrame 循环；探针在 canvas 拖拽无新增 JS 错误，WebGL 像素不可测但按规则视为可交互",
+        "ok": 1
+      },
+      {
+        "name": "点击「Start Creating Free」开始创作",
+        "expected": "进入设计工作台/注册流程，至少出现业务反馈",
+        "evidence": "探针点击按钮后 DOM 无变化、无网络请求、无跳转；HTML 中 button 无 onclick 或路由绑定，属于死入口",
+        "ok": 0
+      },
+      {
+        "name": "拖拽组件进行场景搭建",
+        "expected": "将素材拖入 3D 场景并生成/摆放对象",
+        "evidence": "script 只监听 .tool-item 的 mousedown/mousemove 来改 left/top，拖动的 emoji 与 Three.js 场景无关联，不能创建或改变 3D 内容",
+        "ok": 0
+      },
+      {
+        "name": "点击导航「Design Studio/Community」等功能页",
+        "expected": "路由切换到对应页面/视图",
+        "evidence": "nav 链接全部 href=\"#\"，无路由、无 section id、无事件处理；探针显示仅 URL 片段变化/回到页顶，无实际功能页面",
+        "ok": 0
+      },
+      {
+        "name": "点击社区帖子查看分享/导览",
+        "expected": "打开帖子详情或虚拟导览",
+        "evidence": ".post 卡片无 href 和 onclick，论坛区为静态预览，点击不会产生业务反馈；页面也没有发帖/分享表单入口",
+        "ok": 0
+      }
+    ],
+    "reason": "页面具备可用的 Three.js 3D 展示/旋转（无 JS 错误），但核心功能大多停留在占位：CTA 无反应、导航 href=#、工具拖动不接入 3D 场景、社区仅为静态卡片，无法真正完成“设计场景/分享虚拟导览”等关键任务，因此功能评分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 主按钮“Start Creating Free”点击无任何反应，无法进入编辑器/注册流程，核心任务直接卡死；2. 主导航 Home/Design Studio/Community/Tutorials/Pricing 均为 href=\"#\" 占位链接，点击只会回到页首/改变 hash，不能进入对应功能页，主要入口无效；3. 宣传的“拖拽式场景创建”未真正实现，工具区只能拖动 emoji 图标，无法将资产添加进 3D 场景或编辑场景，核心功能不可用。次要瑕疵：3D 画布缺少“拖动旋转/缩放”等操作提示，交互可发现性弱；社区帖子只是静态卡片，不可点击进入详情；工具拖拽只支持鼠标，缺少触屏支持，与跨平台定位不符；页面没有实际可用的账号/教程/定价落地内容。由于存在多个核心可用性问题，按锚定规则只能给 2-3 分；3D 可视化本身能运行、信息分区和视觉完成度尚可，因此给 3 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，深色渐变背景（#0f0c29→#302b63→#24243e）营造出未来科技感，搭配青色（#00dbde）与品红（#fc00ff）的渐变强调色，色彩对比鲜明且和谐，符合3D设计平台的沉浸式氛围。布局结构清晰，hero区、功能卡片、工具展示、社区预览各模块层次分明，flex/grid使用得当，间距与留白处理良好。组件设计细致，按钮、卡片、导航均有圆角、阴影、悬停动效，且运用了backdrop-filter玻璃拟态效果，增强了现代感。Three.js 3D场景（TorusKnot、Icosahedron、粒子系统）实时渲染并支持拖拽交互，与主题高度契合。CSS整体专业规范，响应式断点覆盖移动端。扣分点主要在于：字体采用系统默认Segoe UI，缺乏定制化Web字体，视觉个性稍弱；部分图示使用emoji（🧱🌳🏠）略显简易，与高精3D定位存在落差；工具预览区的拖拽交互没有视觉反馈或边界限制，略显粗糙。但整体完成度很高，是典型且好看的未来主义风格页面。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_030140.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Design Studio",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Pricing",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating Free",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

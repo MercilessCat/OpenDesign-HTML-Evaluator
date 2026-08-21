@@ -1,0 +1,142 @@
+{
+  "row_id": "00_024588",
+  "shard": 0,
+  "id": 24588,
+  "category": "3D design",
+  "prompt": "Design a website that transforms complex protein folding processes into interactive 3D visualizations for educational and research purposes. Users can manipulate and explore protein structures in detail. Key features include dynamic folding simulations, educational modules on protein science, and collaborative tools for researchers to share and discuss findings.",
+  "html_len": 21145,
+  "html_sha256": "1a1a3a2d3e34d05a3a7dd95e108e7e6eff528cea6a900f1a7c9dde816815019a",
+  "functional": {
+    "score": 5.0,
+    "raw_score": 5.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "拖动折叠进度滑块调整蛋白质折叠状态",
+        "expected": "蛋白质结构随折叠进度动态缩放/重排，折叠百分比数值同步更新",
+        "evidence": "foldSlider 的 input 事件监听器调用 updateProteinStructure()，通过修改骨架缩放和侧链位置/缩放来实现折叠反馈，同时更新 #foldValue 文本；该逻辑在 HTML 脚本中完整实现，运行时无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "在 3D 场景中拖拽旋转/缩放视角",
+        "expected": "摄像机围绕蛋白质模型旋转、缩放，实现 3D 结构自由探索",
+        "evidence": "页面使用 THREE.OrbitControls 绑定 #proteinCanvas 渲染区域，探针对 canvas 指针拖拽后无 JS 错误、DOM 有变化；WebGL 像素不可测但轨道控制已正确初始化",
+        "ok": 1
+      },
+      {
+        "name": "点击“Animate Folding”播放折叠动画",
+        "expected": "蛋白质开始动态折叠，按钮文字切换为“Stop Animation”，进度值随动画递增",
+        "evidence": "探针点击该按钮后 DOM 有变化、0 条新增 JS 错误、无网络请求；代码中 animateFolding() 使用 requestAnimationFrame 持续更新折叠进度并更新滑条和数值",
+        "ok": 1
+      },
+      {
+        "name": "点击“Reset View”重置视角与折叠状态",
+        "expected": "折叠进度恢复为 0、滑条与数值归零、摄像机位置复位、轨道控制器重置",
+        "evidence": "探针点击后 DOM 有变化、无 JS 错误；代码中 resetBtn 的 click 监听器会重置 foldProgress、滑条、数值和 camera.position 并调用 controls.reset()",
+        "ok": 1
+      },
+      {
+        "name": "点击“Toggle Wireframe”切换线框模式",
+        "expected": "蛋白质主链在线框与实体渲染之间切换，按钮文字同步变化",
+        "evidence": "探针点击后 DOM 有变化、无 JS 错误；代码中监听器切换 backbone.material.wireframe，并更新按钮文本为“Solid View”或“Toggle Wireframe”",
+        "ok": 1
+      },
+      {
+        "name": "点击“Show Labels”显示/隐藏蛋白质标签",
+        "expected": "3D 结构中显示或隐藏氨基酸/结构标签",
+        "evidence": "探针点击后 DOM 仅有按钮文字变化；代码只切换 showLabels 布尔值并修改按钮文字，没有任何标签创建/显示/隐藏逻辑（注释明确写着“In a full implementation, this would toggle labels”），属于占位功能",
+        "ok": 0
+      }
+    ],
+    "reason": "核心 3D 可视化与折叠控制功能可正常使用：折叠滑块、轨道控制、动画播放、重置、线框切换均已实现且无 JS 错误。但“Show Labels”按钮只有状态切换没有实际标签渲染，是未实现的功能入口；需求中“研究者共享、讨论发现”的协作工具仅有静态宣传文案，页面上不存在任何评论、分享或讨论入口，属于关键功能缺失。故扣分至 5。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 8.0,
+    "reason": "无核心可用性问题。页面目的明确（标题、副标题清楚说明了蛋白质折叠3D可视化工具），信息结构清晰（左侧可视化、右侧控制面板、下方说明卡片），核心操作可用：3D场景可拖拽旋转，折叠进度/旋转速度/蛋白质类型滑块均能实时驱动模型变化，Animate/Rotate/Reset/Wireframe按钮点击均有实际反馈且无JS错误。次要瑕疵包括：1) “Show Labels”按钮仅切换文本，3D场景中并未真正显示标签；2) 蛋白质类型用滑杆（0-3）而非分段选择器，不太符合设置类型的习惯；3) 信息卡片声称支持分享、标注和协作，但页面未提供任何协作入口；4) 缺少“拖拽旋转/滚轮缩放”等基本3D操作提示，首次使用可能需摸索。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "该页面在视觉设计上非常出色，高度契合“3D高科技/生物技术”类别的预期。它采用了现代深色主题，以深海渐变（#0f2027 至 #2c5364）为基底，搭配霓虹蓝/青色（#4facfe、#00f2fe）点缀，营造出强烈的科技感和科学氛围，非常符合蛋白质研究的教育/科研定位。布局上，使用 CSS Grid 构建的“3D 可视化 + 控制面板”非对称分栏高度协调，信息卡片区域采用响应式网格，整体疏密有致。组件质量突出：自定义滑块、渐变按钮、玻璃态（backdrop-filter: blur）面板和微妙的边框阴影均体现了较高的 CSS 工艺水平。交互反馈（悬停浮动、点击按压）流畅自然。扣分点主要在于：字体使用了较为通用的 Segoe UI，缺乏更具辨识度的现代字体（如 Inter 或 Space Grotesk）；部分功能按钮（如“Show Labels”）仅更新了文本状态，并未实际上屏显示标签，存在视觉与功能的割裂感；同时，蛋白质侧链的随机多彩球体虽视觉华丽，但在教育场景中可能缺乏生物结构上的严谨性。总体而言，这是一个在现代网页设计规范和执行上均属上乘的页面。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 7.75,
+  "baseline_overall": 7.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_024588.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Animate Folding",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset View",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Toggle Wireframe",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Show Labels",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

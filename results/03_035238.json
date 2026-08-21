@@ -1,0 +1,103 @@
+{
+  "row_id": "03_035238",
+  "shard": 3,
+  "id": 35238,
+  "category": "Game dev",
+  "prompt": "Embark on a virtual safari adventure where users become wildlife photographers, capturing vibrant photos of exotic animals in their natural habitats. The platform offers a dynamic ecosystem simulation, real-time weather effects, and a photo-sharing gallery. Users can unlock new locations and photography gear, fostering an interactive and educational experience.",
+  "html_len": 24016,
+  "html_sha256": "f895f1c28b69ae8b07135b2e7a222abcaefc202bde87b3fe0a9d5245383bb5d4",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Safari 开始游戏",
+        "expected": "开始界面隐藏，进入 3D 游戏场景，显示分数/照片数/天气 HUD，并生成动物与启动天气系统",
+        "evidence": "探针点击后 DOM 有变化且无 JS 错误；代码中 startButton 绑定 startGame()，会切换 screen 的 hidden 类、启动天气定时器、调用 spawnAnimals() 生成动物。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Capture Photo 拍摄照片",
+        "expected": "出现快门白闪动画，分数增加、照片计数增加、场景动物重新生成",
+        "evidence": "captureButton 绑定 takePhoto()，内部有 shutterEffect 的 pulse 动画、updateDisplays() 更新分数/照片数、photos 数组新增照片、spawnAnimals() 刷新场景；相机音效代码有 createOaser 拼写错误被 try-catch 吞掉，声音不会播放，但视觉反馈完整。",
+        "ok": 1
+      },
+      {
+        "name": "主动查看照片画廊（含分享）",
+        "expected": "有入口可随时打开照片画廊查看已拍照片并进行分享",
+        "evidence": "页面没有任何可点击的按钮/链接能主动打开 galleryScreen；画廊只在 photosTaken >= 10 时由 takePhoto() 自动弹出；无分享按钮或社交入口，photo-sharing 功能未实现。",
+        "ok": "NA"
+      },
+      {
+        "name": "解锁新地点（雨林/苔原）",
+        "expected": "有地点选择或解锁入口，可切换/解锁 Amazon Rainforest、Arctic Tundra",
+        "evidence": "开始页的三个 animal-card 是纯展示（无 click 事件），游戏 HUD 的 Location 仅为静态文本显示，页面没有任何地点切换/解锁控件；需求声明的解锁新地点功能完全没有入口。",
+        "ok": "NA"
+      },
+      {
+        "name": "解锁/升级摄影装备",
+        "expected": "有装备升级入口（如商店/升级按钮），可提升 Camera 等级",
+        "evidence": "Camera 等级在 HUD 中只显示为 'Basic' 文本，无升级按钮、无商店、无购买交互；需求声明的解锁摄影装备功能未实现。",
+        "ok": "NA"
+      },
+      {
+        "name": "画廊内 Continue Safari / New Safari 按钮",
+        "expected": "点击 Continue Safari 返回游戏继续，点击 New Safari 重置并回到开始界面",
+        "evidence": "backToGame 绑定 continueGame()，newSafari 绑定 resetGame()，均会切换 screen 的 hidden 类并更新 DOM；continueGame 将 photosTaken 重置为 0（设计稍怪但反馈存在）。",
+        "ok": 1
+      }
+    ],
+    "reason": "开始游戏、拍照、天气变化等核心游玩循环可用，探针确认 Start Safari 点击后有 DOM 反馈，拍照逻辑完整。但用户需求中两个关键功能（解锁新地点、解锁/升级摄影装备）完全没有 UI 入口，照片画廊也无主动入口且缺少分享功能，属于核心需求缺失，按锚定规则最高不高于 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）开始界面明确承诺“解锁新地点、升级摄影装备”，但游戏内完全没有对应入口或交互，三个地点卡片也不可点击，玩家只能停留在非洲稀树草原和基础相机，核心成长目标无法完成；2）“拍摄照片”的结果反馈失真：画廊里没有真实照片或缩略图，只有按动物名生成的色块，用户看不到自己实际拍到的画面，摄影这个核心行为的成果无法被确认。次要瑕疵：游戏界面缺少操作提示/图例，用户不清楚天气、稀有度对计分的影响；没有在游戏中主动打开 Gallery 的入口，只能等拍满 10 张自动弹出；“Continue Safari”会把照片数清零，与“继续”的语义略有出入；3D 场景拖拽无视角变化，探索感弱，进一步削弱了 safari 摄影的沉浸体验。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体是一个功能完整的游戏UI原型，具备清晰的屏幕切换结构（开始页、游戏页、画廊页）、Three.js 3D 场景、玻璃拟态卡片、动画与过渡效果，布局方面使用Flex/Grid，各区块位置与间距较协调，组件圆角、阴影、HUD面板风格基本统一，体现了一定的现代设计意识。\n\n但作为“野生动物摄影冒险”风格的页面，视觉主题适配度一般：背景使用深蓝+暗红渐变，整体偏暗沉，与自然生态所需的明快、鲜艳感不太匹配；动物以简单几何体展示，相册照片用纯色块替代，导致实际画面丰富度和感染力不足；颜色系统上黄、绿、蓝、红并存，缺少统一的主色与辅助色规划；字体层级较单一，标题与正文之间的视觉节奏不够强。整体更像一个可运行的交互原型，而非经过打磨的高完成度视觉作品。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 4.9,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_035238.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Safari",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

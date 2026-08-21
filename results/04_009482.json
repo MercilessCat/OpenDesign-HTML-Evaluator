@@ -1,0 +1,181 @@
+{
+  "row_id": "04_009482",
+  "shard": 4,
+  "id": 9482,
+  "category": "Website",
+  "prompt": "Craft a whimsical exchange for post-human etiquette. Users contribute and rate etiquette guides for futuristic scenarios, exploring AI-human interactions, space travel manners, and more. Participate in etiquette challenges, earn badges, and join discussions on evolving social norms, creating a playful yet insightful repository for future societies.",
+  "html_len": 29131,
+  "html_sha256": "bac43cd8c03fd142b90cf1266e660ade937f9de55fa462ed1ab5cb8c8baf3746",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接切换到 Guides 页面",
+        "expected": "导航到指南列表页并显示内容",
+        "evidence": "探针显示点击 Guides 后 DOM 有变化且页面跳转，但 HTML 中所有导航链接均为 href=\"#\"，无任何路由或内容切换逻辑；变化仅为 URL 加锚点/滚动，不构成业务导航。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Add Guide 贡献新礼仪指南",
+        "expected": "弹出表单或跳转到投稿页面",
+        "evidence": "探针点击 Add Guide 按钮后 DOM 变化=无，新增JS错误=0，新增网络请求=0；按钮无任何事件绑定，核心投稿功能完全未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Save Guide 保存指南",
+        "expected": "收藏指南并给出保存成功反馈",
+        "evidence": "探针点击 Save Guide 按钮后 DOM 变化=无，新增JS错误=0，新增网络请求=0；按钮无事件绑定，收藏功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Etiquette Guides 探索指南",
+        "expected": "跳转到指南列表或展示更多内容",
+        "evidence": "探针点击 Explore Etiquette Guides 按钮后 DOM 变化=无，新增JS错误=0，新增网络请求=0；按钮无任何交互逻辑，探索入口为死按钮。",
+        "ok": 0
+      },
+      {
+        "name": "点击指南上的星级图标进行评分",
+        "expected": "选中星级并提交评分",
+        "evidence": "HTML 中不存在 class=\"star-rating\" 的可交互评分组件，指南卡片上的 fa-star 仅为静态显示分数图标；rating JS 代码中的选择器无匹配元素，评分功能入口缺失。",
+        "ok": 0
+      },
+      {
+        "name": "参与礼仪挑战（View All Challenges）",
+        "expected": "跳转到挑战列表，加入挑战任务",
+        "evidence": "HTML 中 View All Challenges 按钮仅在挑战展示区出现，无任何事件绑定逻辑；与已测同类渐变按钮（Add Guide/Explore）一致无响应，挑战参与功能未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面是一个视觉完整的静态展示页：涵盖了指南卡片、徽章、讨论区等内容的渲染，Three.js 星空背景动画正常运行，但需求声明的核心参与功能（贡献指南、评分、保存、浏览指南、参与挑战、加入讨论）全部未实现。所有导航链接为 href=\"#\" 占位符，无路由切换；所有主要操作按钮点击后均无 DOM 变化、无网络请求、无 JS 反馈。评分系统在 HTML 中根本没有可交互控件。核心任务完全无法完成，功能分数为 2。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 顶部导航 Home/Guides/Challenges/Discussions/Profile 均为 # 占位链接，点击不会进入对应页面或区块，无法真正浏览指南、挑战、讨论或个人资料；2) 主要操作按钮如“Add Guide”“Explore Etiquette Guides”“Save Guide”等点击后无任何反馈，且不触发跳转或请求，用户无法完成投稿、浏览指南、保存指南等核心任务；“View All Challenges”“Join Discussion”等同样未实现。次要瑕疵：页面主题、视觉风格和分类信息清晰，但缺少对贡献/评分流程的说明，社区、挑战、徽章等模块仅为卡片占位，评级组件不可见或不可用，整体更像视觉演示页而非可用的功能网站。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面设计风格高度统一，采用深色宇宙渐变背景（#0f0c29 → #302b63 → #24243e）搭配紫罗兰至粉色的渐变强调色，营造出未来感与奇幻氛围，与『后人类礼仪』的主题非常契合。玻璃拟态卡片（glass-card）的毛玻璃效果、柔和的阴影与渐变边框线提升了整体质感，悬停时的上浮和阴影加深也增强了交互反馈。字体选用 Poppins，圆润现代，与活泼俏皮的品牌调性一致。布局结构清晰：粘性导航、英雄区域、特色指南卡片、徽章展示、社区讨论、行动号召和页脚，信息层级分明，栅格使用合理。渐变文字、徽章图标、头像叠放等细节处理考究，展现了较高的Css设计水平。虽然 Three.js 星星背景可能初看有像素噪点，但整体视觉吸引力强，符合现代深色主题UI潮流，也精准贴合用户需求的 playful yet insightful 风格。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_009482.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Guides",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Challenges",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Discussions",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Profile",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Guide",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Etiquette Guides",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save Guide",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

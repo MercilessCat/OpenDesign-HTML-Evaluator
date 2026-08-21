@@ -1,0 +1,181 @@
+{
+  "row_id": "02_014176",
+  "shard": 2,
+  "id": 14176,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Create a dynamic marketplace for digital assets, showcasing real-time trading data with immersive 3D interfaces. Users engage in buying, selling, and monitoring virtual goods across various metaverse platforms. Features include trend analytics, AI-powered investment insights, and community forums for asset valuation discussions and trade strategies.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10301,
+  "html_sha256": "54eb5a68841991e6921582a3d9a2dbe4d422fa80a41353afed9b2e4b5b61f7fa",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（Marketplace/Analytics/Community/Portfolio）",
+        "expected": "切换到对应的市场、分析、社区或资产视图",
+        "evidence": "四个导航均为 href=\"#\"，没有路由或视图切换逻辑；探针记录到的只是 hash 跳转/滚动，页面内容没有切换，属于占位死链。",
+        "ok": 0
+      },
+      {
+        "name": "点击时间周期按钮（24H/7D/30D）",
+        "expected": "图表按所选周期重新绘制并更新趋势数据",
+        "evidence": "探针点击后 DOM 无有效变化；JS 只对按钮做瞬时 glow 样式切换，没有修改图表数据或重绘逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Buy Now / Sell Now 进行交易",
+        "expected": "提交订单并给出交易成功/失败或确认反馈",
+        "evidence": "按钮只绑定通用 click 做 glow 动画，没有交易、订单、余额或任何业务反馈逻辑，无法完成买卖。",
+        "ok": 0
+      },
+      {
+        "name": "点击资产卡片查看详情或 3D 预览",
+        "expected": "打开资产详情、加载 3D 模型或展示更丰富的信息",
+        "evidence": "资产卡片只有 cursor-pointer 和 hover 样式，无事件监听；卡片内“3D Preview”是灰色占位文字，Three.js 虽被引入但未实际创建 3D 场景。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Connect Wallet 连接钱包",
+        "expected": "触发钱包连接流程或弹出钱包选择窗口",
+        "evidence": "探针显示点击后 DOM 无变化；没有钱包连接逻辑或弹窗，只有可能发生的瞬时样式动画，无实际业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Discussion 参与社区讨论",
+        "expected": "打开论坛、讨论区或进入发帖/回帖流程",
+        "evidence": "按钮无跳转、无弹窗、无论坛相关逻辑；社区内容为静态列表，用户无法实际参与讨论或发布内容。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面整体是一个视觉完整的静态壳：自动绘制的 2D 图表能更新，但作为数字资产市场核心的交易、时间周期分析、3D 预览、钱包连接、社区论坛均未实现，导航也是 href=\"#\" 占位入口。主要用户任务无法完成，仅有少量样式动画和图表自动刷新，因此功能评分很低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部主导航“Marketplace / Analytics / Community / Portfolio”均为 href=\"#\" 占位链接，点击后仅修改 URL hash，页面内容无任何实际变化，用户无法通过导航达成目标；2. “Buy Now / Sell Now”核心交易按钮未实现任何交易逻辑，点击后仅闪烁高亮，交易流程无法完成；3. “24H / 7D / 30D”时间范围切换按钮点击无任何效果，图表数据不变化，核心控件调节无效；4. “Connect Wallet”按钮点击无任何反馈或功能，属于主要操作无响应。次要瑕疵：Community Feed 和 “Join Discussion” 为静态占位，未能真正参与社区讨论；资产卡片的“3D Preview”仅为灰色文字占位，没有实际 3D 预览；AI Investment Insights 为静态文本，缺乏交互或数据支撑；图表缺少坐标轴图例和单位说明。页面视觉设计较现代美观，信息结构基本清晰，但多个核心操作均不可用，严重影响整体使用。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较强，深色渐变背景（gray-900 到 indigo-900）配合霓虹蓝紫渐变标题和半透明玻璃拟态卡片，营造出了符合“元宇宙数字资产市场”主题的沉浸式科技感。色彩搭配合理，主色以 indigo/cyan/purple 为主，辅以绿、红等信号色区分涨跌和交易操作，对比度足够，信息层次清晰。布局采用三列网格，主图表区、交易面板、资产卡片和社区动态区域组织有序，虽内容较多但视觉重心明确；卡片 hover 上浮动效和按钮 glow 效果增强了交互质感。字体使用 Segoe UI 等系统字体，清晰可读；圆角、边框、阴影等细节处理统一，符合现代网页设计规范。扣分项：一是 Three.js 已引入但并未真正实现 3D 展示，资产卡片中仅以“3D Preview”占位，削弱了“沉浸式 3D 界面”的视觉承诺；二是 canvas 模拟图表用随机抖动绘制，视觉上不够稳定精致，且在元素统计中未体现初始画布，可能影响首屏渲染；三是页面内容密度偏高，在部分视口下可能需要滚动，与“单屏可见”的需求略有出入。总体而言，该页面在视觉设计上专业、协调、有吸引力，属于中上水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_014176.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Marketplace",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Portfolio",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Connect Wallet",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "24H",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "7D",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "30D",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

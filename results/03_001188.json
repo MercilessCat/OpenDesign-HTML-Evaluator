@@ -1,0 +1,103 @@
+{
+  "row_id": "03_001188",
+  "shard": 3,
+  "id": 1188,
+  "category": "Game dev",
+  "prompt": "Design an enchanting mobile game where players tap to spread magical dust and transform dull landscapes into vibrant fantasy worlds. The primary action involves using touch gestures to create patterns. Key features include collectible fairy species, customizable dust colors, and an evolving environment that changes with user interactions.",
+  "html_len": 25361,
+  "html_sha256": "42ca25a2a86aeca59eec88efd8b9a30dd530c891be11e89bfce0483da34b1316",
+  "functional": {
+    "score": 3.0,
+    "raw_score": 3.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "开始游戏",
+        "expected": "点击 Begin Magic 后隐藏标题屏，显示游戏界面并启动动画循环",
+        "evidence": "探针点击后 DOM 变化=有、JS 错误=0；startBtn 绑定 startGame，startScreen 加 hidden、gameScreen 移除 hidden",
+        "ok": 1
+      },
+      {
+        "name": "触摸/拖拽画布撒魔尘",
+        "expected": "在画布上触摸或拖拽生成魔尘粒子，dustCount 增加、环境进度条更新、画布像素变化",
+        "evidence": "探针在 canvas 上拖拽后 DOM 变化=无、像素无/不可测、JS 错误=0；canvas 虽绑定了 touch/mouse 事件并创建 DustParticle/调用 updateUI，但 gameScreen 覆盖层 z-index:10 完全位于 canvas 之上且无 pointer-events:none，真实指针事件被覆盖层拦截，handleStart/handleMove 不会触",
+        "ok": 0
+      },
+      {
+        "name": "切换魔尘颜色",
+        "expected": "点击颜色圆点后该点高亮，并成为后续撒尘的颜色",
+        "evidence": "四个 .color-option 均绑定 click，切换 active 类与 currentColor；选择器自身高亮反馈正常，但因画布不可达，新颜色无法实际作用于场景",
+        "ok": 1
+      },
+      {
+        "name": "收集精灵",
+        "expected": "触碰画布上的精灵可收集，fairyCount 增加、对应卡片高亮、dustCount +100",
+        "evidence": "Fairy/checkCollection/collectFairy 逻辑完整，但精灵只存在于 canvas 绘制世界，玩家无法穿透 gameScreen 覆盖层触摸画布，该交互实际不可达",
+        "ok": 0
+      },
+      {
+        "name": "暂停/恢复",
+        "expected": "点击 Pause 显示暂停界面并停止动画，点击 Resume 返回游戏继续动画",
+        "evidence": "pauseBtn/resumeBtn 均绑定事件，切换 hidden 并 cancel/restart requestAnimationFrame，无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "重新开始",
+        "expected": "点击 Restart 或 Play Again 重置 dustCount、fairies、UI 并重新进入游戏",
+        "evidence": "restartBtn 与 playAgainBtn 均绑定 restartGame，内部调用 startGame 重置全部状态",
+        "ok": 1
+      }
+    ],
+    "reason": "游戏主体玩法不可用：开始游戏后 gameScreen 覆盖层（z-index:10、全屏尺寸、无 pointer-events:none）始终盖在 canvas 之上，拦截所有真实触摸/鼠标事件。探针对 canvas 拖拽后 DOM 无变化、粒子未生成、dustCount 未增加，撒魔尘与收集精灵两个核心交互均不可达，环境演化也因无法产生魔尘而完全失效。仅开始、暂停/恢复、重开、颜色选择器自身高亮等按钮级交互正常，但主要游戏任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：开始游戏后 gameScreen 作为全屏遮罩层覆盖在 canvas 上（z-index:10，100% 宽高，半透明背景），canvas 无法收到 touch/mouse 事件，点击拖拽不能生成魔法灰尘颗粒；自动交互探针也显示 canvas 拖拽后无像素变化。因此核心玩法完全不可操作，属于主流程卡死。次要瑕疵：游戏画面没有明确提示当前区域实际不可拖动；颜色选择器虽然可点击但效果无法反馈到游戏世界；fairy 收集卡片在未收集时缺少明确的锁定/待收集说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力强，采用了深邃的蓝紫色渐变背景与霓虹粉、蓝、紫色高亮搭配，营造出梦幻魔法氛围，符合‘enchanting mobile game’的需求。标题使用动态渐变文字与发光阴影，视觉焦点突出；按钮采用圆角渐变胶囊设计，带悬停反馈，交互感良好。布局在移动端限制最大宽度500px，居中显示，各游戏状态（开始、游玩、暂停、结束）通过清晰的覆盖层切换，信息层级明确。色彩搭配协调，主色蓝、粉、紫互相关联，辅助白色和半透明背景保证可读性。字体使用系统字体虽略普通，但通过大小、粗细和渐变弥补。组件如颜色选择器、仙女收集卡、进度条均采用圆角、半透明模糊、阴影等现代设计手法，风格统一。整体符合现代移动游戏UI设计规范，视觉完成度高。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.7,
+  "baseline_overall": 5.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_001188.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Magic",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "row_id": "00_019202",
+  "shard": 0,
+  "id": 19202,
+  "category": "3D design",
+  "prompt": "Create mesmerizing digital starfields with procedural generation tools. This website offers tutorials, live demos, and a community gallery for sharing creations. Users can tweak parameters to simulate star density, color, and motion, resulting in unique cosmic landscapes for games or artistic projects.",
+  "html_len": 13669,
+  "html_sha256": "c64962374441613416cb0e8a879138899466245c6f0da1b019d0eff1b4581218",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "调整Star Density滑块",
+        "expected": "拖动滑块后，星场中星星数量变化，密度数值显示更新",
+        "evidence": "HTML中#density滑块绑定input事件，更新#density-value文本并调用createStars()重建星场；运行时无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "调整Motion Speed滑块",
+        "expected": "拖动滑块后，星场旋转速度变化，速度数值更新",
+        "evidence": "HTML中#speed滑块绑定input事件，更新#speed-value并修改motionSpeed，动画循环使用该变量；无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "调整Star Size滑块",
+        "expected": "拖动滑块后，星星大小变化，尺寸数值更新",
+        "evidence": "HTML中#size滑块绑定input事件，更新#size-value并调用createStars()重建星场；无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "调整Color Variation滑块",
+        "expected": "拖动滑块后，星星颜色变化，百分比数值更新",
+        "evidence": "HTML中#color滑块绑定input事件，更新#color-value并调用createStars()重建星场；无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "点击Tutorials链接",
+        "expected": "进入教程页面或展示教程内容",
+        "evidence": "点击事件仅执行alert('Tutorials section would open here...')，无实际页面跳转或内容展示，属纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击Community Gallery链接",
+        "expected": "进入社区画廊或展示用户作品",
+        "evidence": "点击事件仅执行alert('Community gallery would open here...')，无实际画廊内容，属纯占位入口",
+        "ok": 0
+      }
+    ],
+    "reason": "参数调节（密度/速度/大小/颜色）均通过input事件绑定并重建星场，功能正常可用；页面动画和渲染无JS错误。但Tutorials和Community Gallery这两个需求声明的关键入口仅弹出占位alert，未实现实际功能；探针显示canvas拖拽无反馈（无视角控制）。按规则两个及以上关键入口未实现，整体评分不高于4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. “Star Size”滑块无效——createStars() 中虽然生成了 sizes 属性，但 Three.js 的 PointsMaterial 固定为 size: 1，并未按逐点 size 属性渲染；用户拖动 Star Size 滑块只会重新随机生成整个星域，单个星星的实际渲染尺寸始终不变，核心控件“改了没效果/反馈错误”。\n\n次要瑕疵：Tutorials 和 Community Gallery 点击后仅弹出 alert 占位提示，没有实际页面或流程；Color Variation 效果很微弱，且即使设为 0 颜色仍存在随机色差；任意滑块调整都会整场重建星域，视觉上打断当前画面；缺少将作品保存或分享到社区画廊的实际操作说明/流程。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.3,
+    "reason": "页面整体视觉吸引力很强。暗色深邃太空渐变背景（#0f0c29→#302b63→#24243e）与星尘主题高度契合，营造出沉浸式的宇宙氛围。色彩搭配专业：冷色深空底 + 白色文字 + 暖橙渐变（#ff7e5f→#feb47b）点缀，形成清晰视觉重心，对比度舒适，符合3D设计类工具的视觉预期。\n\n布局协调合理：顶部居中标题区、左右浮动的功能入口、左下信息面板、底部居中控制条，层级分明，且各面板均采用半透明玻璃拟态（backdrop-filter: blur + rgba黑色底 + 细白描边），现代感强，且不会遮挡背后的Three.js星场画布。响应式断点处理了移动端布局（小屏时控制条纵向堆叠、隐藏信息面板），考虑周到。\n\n组件设计质量较高：自绘的滑块轨道与珊瑚色发光圆点手柄统一风格；胶囊形链接按钮带hover上浮和背景染色过渡，交互反馈明确；标题使用background-clip: text渐变文字 + 光晕，精致有质感。间距系统一致（padding 1.5rem/2rem，gap 1rem），视觉节奏舒适。\n\n不足之处：字体使用系统字体栈（Segoe UI），略显保守，若引入一款现代无衬线或等宽字体（如Inter、Space Grotesk）可进一步提升调性；滑块仅定制了WebKit内核样式，未覆盖Firefox等浏览器的thumb样式；info-panel在中等高度屏幕上有被底部控制条遮挡的风险。但总体而言，该页面的CSS技术运用（渐变、模糊、玻璃态、渐变文字）专业且符合2020年代现代网页设计规范，与用户所要求的'mesmerizing digital starfields'和3D设计类别风格对齐，属于视觉完成度较高的作品。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.72,
+  "baseline_overall": 5.43,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_019202.png",
+  "probe": [
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

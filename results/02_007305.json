@@ -1,0 +1,181 @@
+{
+  "row_id": "02_007305",
+  "shard": 2,
+  "id": 7305,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Discover a cutting-edge platform evaluating cloud seeding's impact through visual data storytelling. Users can compare weather patterns pre- and post-seeding, assess effectiveness, and explore environmental data correlations. Features include interactive weather maps, seeding outcome simulations, and expert commentary, providing a holistic view of cloud seeding practices.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13155,
+  "html_sha256": "a8c5db3935b6a614648ca6abc0a724f07757ae1af124f60fb380264e41d2e4d0",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（Dashboard/Analysis/Simulations/Experts）",
+        "expected": "切换视图或跳转到对应内容区域",
+        "evidence": "四个导航链接均为 href=\"#\" 且无路由/事件绑定；探针显示点击后 DOM 变化仅来自 hover/focus 样式层，页面结构和内容未切换，属于纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Data 按钮",
+        "expected": "进入数据探索视图或触发地图/数据更新",
+        "evidence": "探针点击后无网络请求、无 JS 错误，仅样式 hover 变化；源码中按钮未绑定任何点击事件，无业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "地图 Pre-Seeding / Post-Seeding 切换",
+        "expected": "切换前后天气模式对比视图",
+        "evidence": "页面仅有静态地图卡片（图标+文字装饰），无真实地图组件；\"Pre-Seeding / Post-Seeding\" 为纯标签样式，未绑定点击事件，无法切换。需求中的 interactive weather maps 未实现。",
+        "ok": 0
+      },
+      {
+        "name": "查看 Precipitation / Effectiveness 数据图表",
+        "expected": "图表正常渲染并可悬停查看数据",
+        "evidence": "两个 Chart.js 图表成功渲染，探针在 canvas 指针拖拽后出现 DOM 变化和像素变化，无 JS 错误，Chart.js tooltip 交互有效，数据可视化功能正常。",
+        "ok": 1
+      },
+      {
+        "name": "调整模拟参数并点击 Run Simulation",
+        "expected": "根据播种强度和区域生成模拟结果/更新图表",
+        "evidence": "滑杆和下拉框为原生控件可改变自身值，但 \"Run Simulation\" 按钮无事件绑定；探针点击后仅 hover/焦点样式变化，无任何模拟结果输出或数据更新，seeding outcome simulations 功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Full Report 按钮",
+        "expected": "打开完整专家报告或展示更多内容",
+        "evidence": "探针点击后无网络请求、无新增内容、无 JS 错误，按钮无点击事件绑定，仅有 hover 样式变化，属于占位入口。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉风格完整，两个 Chart.js 图表渲染有效，但核心需求大面积未实现：导航链接全部为 href=\"#\" 占位，Explore Data、Run Simulation、View Full Report 等按钮均无实际事件，交互式天气地图仅为静态卡片，播种仿真功能缺失。仅图表查看可用，主要任务（地图探索、模拟运行）无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 顶部导航（Dashboard、Analysis、Simulations、Experts）均为href=\"#\"占位链接，点击后无实质内容切换或页面生效，导航点击无实际反馈；2) 核心操作“Run Simulation”无对应逻辑，点击后不产生模拟结果，流程中断；“Seeding Intensity”滑块与“Region Focus”下拉框无联动效果，调节无效；3) 标注为“Interactive Cloud Seeding Impact Map”的地图实际为静态占位内容，不可交互，无法查看天气模式变化；4) “Explore Data”和“View Full Report”按钮点击后无实际功能，仅产生视觉反馈，用户无法判断操作是否成功。次要瑕疵：模拟器缺少参数说明和结果反馈文字；专家头像使用灰色占位框；图表缺少单位和明确图例；导航命名与实际单页行为略有出入。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.8,
+    "reason": "整体为深色科技风数据可视化仪表盘，背景使用深蓝灰渐变，搭配半透明磨砂玻璃卡片与蓝色主调，色彩统一且现代感强，符合‘cutting-edge’数据平台气质。布局采用经典的左主右辅三列结构，信息层级清晰；折线图与柱状图配色协调，与主题一致。细节上，渐变按钮、hover上浮阴影、脉冲动画等增强了交互感和精致度。主要扣分点：交互地图实为占位图标与文字，缺少真实地图信息，视觉上偏空；专家卡片中头像为空白虚线框，明显未完成，拉低整体完成度；部分按钮（如View Full Report）与背景对比度不够；页面依赖overflow:hidden保证单屏，右侧内容量较大，实际可能发生裁切，影响完整显示。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.93,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_007305.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analysis",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Experts",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Data",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Full Report",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Run Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

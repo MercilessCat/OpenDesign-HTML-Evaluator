@@ -1,0 +1,182 @@
+{
+  "row_id": "06_063809",
+  "shard": 6,
+  "id": 63809,
+  "category": "Website",
+  "prompt": "Develop an emotional AI platform that enhances affective computing, personalizing user interactions. Integrate sentiment analysis and adaptive feedback loops for real-time emotional support. Users can engage in mood-based content curation and participate in wellness programs tailored to their emotional states, fostering deeper digital empathy and connection.",
+  "html_len": 33389,
+  "html_sha256": "be808e6c966c5f00aa6c1958b59b85ebc00a74689bb6a6986450eaee56f6e149",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航链接（Dashboard/Wellness/Analytics/Community）",
+        "expected": "切换视图或跳转到对应功能模块（仪表盘、健康计划、分析、社区）",
+        "evidence": "探针显示点击后 DOM 有变化但无任何实际业务更新；HTML 中导航链接均为 href=\"#\"，无路由或事件绑定，点击仅触发锚点行为，未切换任何内容",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 登录",
+        "expected": "打开登录/注册流程或弹窗",
+        "evidence": "探针点击后 DOM 变化=无，新增JS错误=0，新增网络请求=0；按钮无事件绑定，点击无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Your Journey 开始使用",
+        "expected": "进入注册引导、询问情绪状态或打开平台核心功能",
+        "evidence": "探针点击后 DOM 变化=无（JS兜底也无变化），按钮未绑定任何交互逻辑，完全无响应",
+        "ok": 0
+      },
+      {
+        "name": "点击 See How It Works 查看演示",
+        "expected": "播放演示视频、弹窗介绍或跳转到说明页",
+        "evidence": "探针点击后 DOM 变化=无，无网络请求，无JS错误；按钮无事件绑定，点击无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Customize Preferences 自定义偏好",
+        "expected": "打开偏好设置界面，允许用户调整情绪/内容偏好",
+        "evidence": "探针点击后 DOM 变化=无；HTML 中该按钮无 onclick 等事件处理器，占位入口，核心功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击推荐内容中的操作按钮（Play Now/Read Now/Join Group）",
+        "expected": "播放音乐、打开文章或加入社区小组",
+        "evidence": "这些按钮在 HTML 中只有样式类（bg-gray-700 hover:bg-gray-600），无任何事件绑定；探针虽未逐个测试，但结构与已测按钮一致，纯粹是 UI 展示，无功能响应",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉完成度高，完整展示了情感状态条、心情卡片、推荐内容和分析图表等界面元素，但核心交互几乎全部失败：导航为 href=\"#\" 占位死链，Sign In、Start Your Journey、See How It Works、Customize Preferences 等关键 CTA 均无事件绑定、点击无反馈；需求声明的情绪分析、个性化反馈、健康计划等核心功能没有任何可操作的实现入口，用户无法完成任何实质性任务，属于典型的高保真静态营销页，功能性严重缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在多个核心可用性问题：1) 主导航（Dashboard/Wellness/Analytics/Community）均为占位链接（href=\"#\"），点击仅有滚动/锚点变化，没有跳转到实际功能页，属于主要入口无实际反馈；2) 核心操作按钮（Sign In、Start Your Journey、See How It Works、Customize Preferences）点击后无任何DOM变化或网络请求，核心流程完全卡死；3) 内容区的“Play Now / Read Now / Join Group”等操作按钮同样未绑定真实功能，无法完成任务。次要瑕疵：部分图标仅靠颜色和文字含义表达，缺少说明性文案；有情感图表但未明确数据来源/图例；Community和第三方链接未实现，不影响主流程但暴露未完成状态；视觉与信息层级较清晰，页面目的易于理解，但交互实质缺失导致整体可用性差。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力强，深色渐变背景搭配靛蓝/紫/粉高亮渐变，营造出科技感与情感温度融合的氛围，符合情感AI平台定位。色彩搭配协调，主色系统（#6366f1、#8b5cf6、#ec4899）与暗色背景形成良好对比，可读性与层次感俱佳。布局结构清晰，Hero区、功能卡片、情绪策展、分析仪表盘、用户评价、CTA和页脚层层递进，信息组织合理。字体选用Inter，现代且易读；间距、圆角、阴影和悬停动效处理专业，卡片hover上浮、浮动元素动画等细节提升了精致度。整体设计遵循现代网页设计规范（Tailwind + 自定义CSS配合得当），且内容与用户需求深度契合，涵盖了情绪分析、自适应反馈、情绪内容策展和健康计划。未发现明显的视觉或代码缺陷，仅部分按钮无实际交互反馈，但不影响页面本身的美观度。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_063809.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Wellness",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Your Journey",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "See How It Works",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Customize Preferences",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

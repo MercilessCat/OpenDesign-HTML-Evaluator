@@ -1,0 +1,181 @@
+{
+  "row_id": "01_010722",
+  "shard": 1,
+  "id": 10722,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Develop a widget management site that simplifies exporting and customizing digital tools. Users can personalize widget styles, test functionality, and integrate them seamlessly into various platforms. Core features include a drag-and-drop interface, real-time previews, and a community marketplace for sharing and discovering new widget designs.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13372,
+  "html_sha256": "dbb77d7b6d8f23afd96162a34d0cd07149c91bfc822578834010e6e194fadc52",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接 Marketplace",
+        "expected": "跳转到市场页面或滚动到市场区域，展示对应内容",
+        "evidence": "探针点击 Dashboard/Marketplace/Documentation 均无实际路由或内容切换；HTML 中 href=\"#\"，未绑定业务事件，属于占位链接",
+        "ok": 0
+      },
+      {
+        "name": "切换左侧 Widget Type 下拉框",
+        "expected": "预览区组件类型随选择实时变化",
+        "evidence": "select 元素没有 onchange 或监听事件，HTML 中无任何 JS 处理；切换后预览区不会变化",
+        "ok": 0
+      },
+      {
+        "name": "使用颜色/尺寸/圆角控件并点击 Apply",
+        "expected": "预览区组件样式实时更新并应用",
+        "evidence": "探针点击 Small/Medium/Large/Reset 均无 DOM 变化；颜色色块无 click 事件，JS 中 querySelectorAll('[type=color]') 匹配不到元素；range 无监听；Apply 只是把按钮文字改成 Applied! 1.5 秒，预览样式未改变",
+        "ok": 0
+      },
+      {
+        "name": "拖拽组件到预览区",
+        "expected": "组件可被拖放到预览画布中并生成对应控件",
+        "evidence": "drag-item 只绑定了 mousedown/mouseup 切换 opacity，没有 draggable、拖拽逻辑或放置目标；无法真正拖入预览区",
+        "ok": 0
+      },
+      {
+        "name": "点击 Export Widget",
+        "expected": "触发导出组件或给出导出反馈",
+        "evidence": "探针点击 Export Widget 后 DOM 变化=无，新增网络请求=0，JS 错误=0；按钮无任何事件处理器，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Marketplace 的 Import Widget",
+        "expected": "将市场组件导入工作区/预览区",
+        "evidence": "Import Widget 按钮仅有样式类，没有 onclick 或事件绑定；点击后不会有导入动作",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉结构完整，但核心交互大面积不可用：导航是占位链接，自定义控件不驱动预览，拖拽未实现，导出/导入按钮无响应。需求声明的 drag-and-drop、实时预览、社区市场导入分享等主要功能均未实现，因此得分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：1) Export Widget按钮点击无任何反应，无法导出/集成；2) 尺寸按钮（Small/Medium/Large）调节无效，预览无变化；3) Reset按钮无效；4) 拖放组件无实际拖拽功能，仅透明度变化；5) 颜色选择器色块无点击交互；6) Apply按钮仅临时改变按钮文字，未应用任何样式，属于虚假反馈。次要瑕疵：导航链接为占位链接，点击无实际页面内容；缺少操作说明和图例；社区市场导入按钮及提交按钮未实现功能。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力较高，采用了现代仪表盘风格，以白色卡片搭配浅灰背景，干净利落。色彩以蓝色为主、绿色为辅，对比清晰且和谐，符合工具类产品的视觉语言。三栏布局（自定义、预览、市场）结构对称，间距与留白控制得当，信息层级分明，在单屏内完整呈现所有内容。组件设计统一，圆角、阴影、hover微动效（如widget-preview上浮、按钮变色）增强了精致感和交互反馈。使用Tailwind CSS，样式规范专业，响应式处理合理。扣分点在于视觉个性稍弱，字体未做特殊定制，整体偏向模板化；此外预览区的bg-grid-pattern类未定义，背景装饰未生效，略减沉浸感，但瑕不掩瑜。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_010722.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Marketplace",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Documentation",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export Widget",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Small",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Medium",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Large",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

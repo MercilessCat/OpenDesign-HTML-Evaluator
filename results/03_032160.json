@@ -1,0 +1,136 @@
+{
+  "row_id": "03_032160",
+  "shard": 3,
+  "id": 32160,
+  "category": "Game dev",
+  "prompt": "Launch an engaging digital hub for billiards enthusiasts to master pool techniques through detailed tutorials and challenges. The core purpose is to improve players' skills in a virtual pool setting. Key features include skill-based mini-games, a competitive leaderboard, and a social forum for sharing tips and strategies.",
+  "html_len": 26232,
+  "html_sha256": "829612d794b004ab67ffcceb5af4215d8e7217d379a818c6fee54cf68a7efa7e",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航切换页面（Tutorials/Challenges/Leaderboard/Forum）",
+        "expected": "点击导航按钮后，主内容区域切换到对应的功能页面（显示教程列表、挑战、排行榜或论坛）",
+        "evidence": "HTML 中每个导航按钮都绑定了 click 事件，showScreen() 会移除目标 screen 的 hidden 类、给其他 screen 添加 hidden 类；探针报告显示 DOM 无变化，可能是探针仅检测文本/子节点变化而未检测 class 属性变化。代码逻辑上路由切换功能真实存在，页面无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击教程卡片的 Start Tutorial 按钮",
+        "expected": "进入对应教程的学习页面或教程内容展示",
+        "evidence": "6 个 Start Tutorial 按钮的 HTML 中没有任何 onClick 或事件监听绑定，探针点击此类按钮也不会产生任何 DOM 变化；教程卡片是纯静态展示，教程功能实际未实现，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击挑战的 Play Now 按钮",
+        "expected": "启动对应技能小游戏（瞄准、计时进球、9球等），进入可操作的虚拟台球游戏界面",
+        "evidence": "唯一的可玩挑战（Precision Aim）的 Play Now 按钮没有绑定任何事件；其余挑战均为 Locked 状态且按钮为 cursor-not-allowed 的灰色占位。skill-based mini-games 这一需求核心未实现，探针无任何响应。",
+        "ok": 0
+      },
+      {
+        "name": "在论坛输入标题和内容后点击 Post Topic 发布帖子",
+        "expected": "帖子发布成功并出现在论坛列表中",
+        "evidence": "论坛的 input 和 textarea 没有绑定 input/键盘事件，Post Topic 按钮也无任何 click 事件处理函数；页面仅有静态帖子数据，发帖功能完全未实现，属于死按钮。",
+        "ok": 0
+      },
+      {
+        "name": "切换排行榜时间筛选下拉框",
+        "expected": "下拉框切换周期（This Week/Month/All Time）后排行榜列表内容刷新",
+        "evidence": "排行榜的 select 元素没有绑定 change 事件，HTML 中其后的列表数据是固定静态内容；切换下拉框不会改变任何排行榜条目，该筛选功能无效。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面具备完整的视觉布局和可用的导航路由切换，但需求声明的核心功能大面积未实现：技能小游戏（Play Now）、教程学习（Start Tutorial）、论坛发帖（Post Topic）、排行榜筛选均为无事件绑定的占位入口，点击无任何业务反馈。关键入口中至少 3 个为死链/占位，主要任务（练习、游玩、互动）无法完成，按评分标准核心交互大面积失败，给予 3 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 主导航按钮（Home/Tutorials/Challenges/Leaderboard/Forum）点击后无任何DOM变化或视觉反馈，用户无法在页面模块间切换，只能停留在首页；2) 教程卡片“Start Tutorial”、挑战“Play Now”、论坛“Post Topic”等核心操作按钮均未绑定实际逻辑，点击无效果，无法完成学习、挑战或交流的核心任务。次要瑕疵：页面缺少如何开始训练的说明/图例；排行榜与论坛内容为静态占位；主球拖拽瞄准交互不完整，没有击球结果反馈，整体更像展示型原型而非可用的台球训练工具。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "页面整体视觉吸引力良好，主题明确，采用台球桌常见的深绿色与木棕色搭配，色彩和谐且符合台球运动氛围。布局结构清晰，导航栏、主内容区、卡片式组件排列有序，网格系统运用得当，各功能模块（教程、挑战、排行榜、论坛）层次分明。CSS设计较为专业，使用了渐变背景、圆角卡片、阴影、悬停动效和关键帧动画，增强了页面的现代感和互动性。球桌的视觉模拟（口袋、球、球杆线条）具有创意，能传达游戏特质。扣分点：部分交互按钮点击后DOM无变化（可能为JS逻辑问题，但不影响静态视觉），页面元素较多但缺少图标/图片资源，整体以纯色块和文本为主，视觉层次稍显单调；个别按钮颜色过多（红黄蓝绿紫）略显花哨，但仍在可接受范围。综合来看，该页面在视觉设计上符合现代网页规范，风格与台球游戏训练主题匹配，属于中等偏上的设计水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_032160.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Home",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Tutorials",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Challenges",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Leaderboard",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Forum",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

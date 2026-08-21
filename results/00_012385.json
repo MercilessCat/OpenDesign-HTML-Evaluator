@@ -1,0 +1,181 @@
+{
+  "row_id": "00_012385",
+  "shard": 0,
+  "id": 12385,
+  "category": "3D design",
+  "prompt": "Build a comprehensive resource for visualizing scientific data in 3D, offering tools for researchers to explore complex datasets interactively. Users can manipulate data models, create animations, and share findings. Core features include compatibility with various data formats, customizable visualization options, and collaborative workspaces for joint exploration.",
+  "html_len": 18558,
+  "html_sha256": "e44cd0c4c91901bf1e7bfa3296862d9954f404871348839648beb196f0582a68",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "旋转/缩放3D可视化",
+        "expected": "用户拖拽视角后，3D场景随操作旋转/缩放，实现交互式探索",
+        "evidence": "页面初始化了 THREE.OrbitControls 并调用 controls.update()，存在 requestAnimationFrame 渲染循环；探针在 canvas 上指针拖拽后无新增 JS 错误，按探针规则视为可交互",
+        "ok": 1
+      },
+      {
+        "name": "点击 Generate Sample Data 重新生成数据",
+        "expected": "重新生成 500 个随机数据点并刷新 3D 场景和状态栏",
+        "evidence": "按钮绑定 generateSampleData()，逻辑会清除旧点、生成新数据并重建可视化；探针点击后 DOM 有变化、无 JS 错误、无网络请求",
+        "ok": 1
+      },
+      {
+        "name": "切换 Dataset Type 选择不同数据格式",
+        "expected": "切换 Molecular/Geospatial/Time Series/Network 后，数据模型呈现对应的格式结构",
+        "evidence": "select#dataset-type 没有任何 change/input 事件绑定，generateSampleData() 始终用 Math.random() 生成同一种随机点云；切换下拉选项不会产生任何业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "拖动 Point Size 滑块调整点大小",
+        "expected": "数据点尺寸随滑块实时变化，旁侧数值同步更新",
+        "evidence": "滑块绑定了 input 事件，会更新 pointSize 并修改 points.material.size，同时更新 #size-value 文本",
+        "ok": 1
+      },
+      {
+        "name": "切换 Render Mode 渲染模式",
+        "expected": "在 Points/Lines/Surface/Volume 模式间切换时，3D 场景采用对应的渲染方式",
+        "evidence": "select#render-mode 没有任何 change 监听，createVisualization() 中只创建 THREE.Points，从未根据选项创建 Line/Surface/Volume，切换无效果",
+        "ok": 0
+      },
+      {
+        "name": "点击 Pause/Resume Animation 控制动画",
+        "expected": "点击后动画暂停或恢复，按钮文字同步切换",
+        "evidence": "按钮绑定事件切换 isAnimating，并更新按钮文本；探针点击后 DOM 有变化、无 JS 错误",
+        "ok": 1
+      }
+    ],
+    "reason": "页面实现了基础 3D 可视化、示例数据生成、点大小调节和动画暂停/恢复，满足交互式探索的核心体验。但需求明确声明的『多种数据格式兼容』（Dataset Type 下拉无事件绑定）和『可定制渲染模式』（Render Mode 下拉无事件绑定）均为死控件；『分享发现/协作工作区』完全没有入口；工具栏 Toggle Grid、Add Marker、Reset Camera 按钮也未绑定任何事件。存在 3 个以上宣称功能的占位/未实现项，按评分规则上限为 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) 'Dataset Type' 下拉框未绑定任何事件，切换数据类型（分子结构/地理空间/时间序列/网络图）不会改变数据或渲染结果；2) 'Render Mode' 下拉框未绑定任何事件，选择 Lines/Surface/Volume 后仍以 Points 方式渲染，核心控件调节无效；3) 工具栏中的 'Reset Camera'、'Toggle Grid'、'Add Marker' 三个按钮均未绑定 JS 事件，点击无实际功能，属于主要入口无反馈；4) 用户需求中的关键能力（兼容多种数据格式导入、协作工作空间、分享发现）在页面中完全没有实现。次要瑕疵：1) 页面缺少帮助文字和控件说明，新用户对'Render Mode'等选项的用途缺乏引导；2) 示例数据列表仅展示前8个点，没有完整数据浏览或搜索能力；3) 动画效果较为简单，仅让点沿 Y 轴浮动，与'创建动画'的专业预期有差距；4) 视觉风格统一、配色专业，但仍需完善功能闭环才能支撑'可视化研究工具'的定位。由于存在 2 个以上核心可用性问题，页面属于'能用但不好用'的降档区间，综合给 3 分。\"",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用深蓝紫色渐变背景搭配青色/绿色高亮，营造出适合科学可视化工具的科技感与沉浸感。色彩搭配协调，主次分明，透明度与毛玻璃效果（backdrop-filter）增强了现代感。布局为典型的侧边栏+主内容区结构，侧边栏组织清晰，控制面板分组合理，主区为3D场景占满剩余空间，工具栏和状态栏悬浮于主区，层次分明。字体使用Segoe UI等现代无衬线体，字号层级适度，间距与圆角处理统一，按钮、输入控件与滑块有hover反馈，交互状态明确。CSS设计专业，包含渐变、阴影、边框透明、响应式媒体查询等元素，符合现代网页设计规范。页面运行无JS错误，所有交互按钮可正常工作，进一步印证了视觉与交互的一致性。扣分项：主区3D场景在初始HTML中为空白容器，依赖脚本动态生成canvas，且部分视觉特效（如数据点动画）在静态视图中不可见；此外，某些细节如数据点网格中的数字文本密度与整体间距稍显紧凑，但不足以影响整体美感。综合评分8分。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.3,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_012385.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Generate Sample Data",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset View",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Pause Animation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export Image",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Camera",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Toggle Grid",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Marker",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

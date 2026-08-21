@@ -1,0 +1,181 @@
+{
+  "row_id": "01_028672",
+  "shard": 1,
+  "id": 28672,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create a comprehensive tool for visualizing and managing relational data, offering intuitive visual queries, schema exploration, and data manipulation capabilities. The platform supports collaborative features, version control, and interactive tutorials, empowering users to effectively handle complex datasets with ease and precision.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11493,
+  "html_sha256": "7d4d38dabdec51c94edaf01aff081ed7b207af5353e34364f8c915d3c4344539",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Live Demo 启动可视化演示",
+        "expected": "进入可交互的在线演示，展示数据可视化与查询能力",
+        "evidence": "探针点击 Live Demo 按钮后 DOM 无变化、无网络请求、无 JS 错误；按钮无事件绑定，仅静态样式。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started 开始使用产品",
+        "expected": "进入应用界面、注册流程或至少产生业务反馈",
+        "evidence": "探针点击 Get Started 按钮后 DOM 无变化、无网络请求、无 JS 错误，按钮未绑定任何事件。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Documentation 查看文档",
+        "expected": "打开文档页面或相关帮助内容",
+        "evidence": "探针点击 Documentation 按钮后 DOM 无变化、无网络请求、无 JS 错误，按钮为纯占位。",
+        "ok": 0
+      },
+      {
+        "name": "点击导航链接 Features/Solutions/Pricing/Docs",
+        "expected": "跳转到对应内容区块或切换视图",
+        "evidence": "四个导航链接均 href=\"#\"，点击只有锚点/hover 级 DOM 微变化，页面无对应内容区块或路由切换，属于占位导航。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Refresh 刷新数据面板",
+        "expected": "重新加载或刷新右侧数据库可视化卡片中的模拟数据",
+        "evidence": "探针点击 Refresh 按钮后 DOM 无变化、无网络请求、无 JS 错误；按钮无实际刷新逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "进行可视化查询/schema 探索",
+        "expected": "进入查询构建器或 schema 浏览界面，可拖拽、点击查看表关系",
+        "evidence": "页面没有提供查询构建器、schema 画布或任何对应的交互入口，仅有静态描述卡片和占位图标；核心工具功能未实现。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面仅是一个视觉完整的营销落地页，所有 CTA、导航和刷新按钮均为占位或死链，点击无任何真实业务反馈；需求核心的视觉查询、schema 探索、数据操作、协作、版本控制和交互式教程均未实现，仅有静态宣传卡片。主要任务完全无法完成，因此功能得分极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 顶部导航（Features/Solutions/Pricing/Docs）为#占位链接，点击后无实际页面跳转或内容定位反馈；2. 主要行动按钮（Get Started、Live Demo、Documentation、Refresh）全部无点击处理，用户无法进入产品演示、查看文档或完成任何下一步操作；3. 页面核心目标'可视化并管理关系数据'尚未实现，UI中的数据面板、关系图仅为静态示意，无法开展数据浏览或操作。次要瑕疵：1. 所有功能卡片缺少可交互示例或工具提示；2. 页脚社交/法律链接均为占位死链；3. 整体无操作反馈状态（如toast、加载动画），用户难以确认操作是否生效。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "整体视觉吸引力良好，采用了现代、干净的 SaaS 风格设计。色彩搭配以蓝色为主色调，绿色点缀，灰白背景，对比度合适，符合数据管理工具的科技感与专业感。布局层次清晰：顶部导航、Hero 区、六宫格特性卡片、页脚，结构完整且对齐良好。使用 Tailwind CSS 和 Font Awesome 图标，组件风格统一，卡片 hover 有轻微上浮和阴影过渡，细节到位。字体采用系统 sans-serif 栈，虽然没有引入自定义字体，但通过字号、粗细和间距保证了可读性。唯一不足是页面内容较为充实，在严格视口下可能无法完全一屏显示，与“fits within the viewport”的要求略有冲突；此外背景纯灰白略显平淡，若增加轻微渐变或纹理会更出彩。但综合来看，代码专业、视觉规范，是一份高质量的现代单页设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_028672.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Solutions",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Pricing",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Docs",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Live Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Documentation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Refresh",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

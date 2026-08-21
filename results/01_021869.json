@@ -1,0 +1,142 @@
+{
+  "row_id": "01_021869",
+  "shard": 1,
+  "id": 21869,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Conceptualize a debugger designed to streamline communication by analyzing message channels. Users can troubleshoot, optimize, and visualize data flow across messaging platforms. Key features include live error tracking, performance metrics, and integration support, ensuring efficient and effective messaging without technical hiccups.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12794,
+  "html_sha256": "9c0c19237c09a7046f444824e729d57a083fb874feeb352953d7c0e2908683cf",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击 Refresh 刷新数据",
+        "expected": "重新拉取/刷新消息流、错误和性能指标，并反映到界面",
+        "evidence": "探针点击该按钮后 DOM 无变化、无新增网络请求、无 JS 错误；HTML 中按钮也没有绑定 onclick 或事件监听，属于占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击 Settings 打开设置",
+        "expected": "弹出/展示集成或调试配置项",
+        "evidence": "探针点击后 DOM 无变化、无新增网络请求、无 JS 错误；按钮无事件绑定，是死按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击页脚帮助按钮",
+        "expected": "打开帮助/文档入口",
+        "evidence": "探针点击无文本按钮后无任何页面变化、无跳转、无 JS 错误；按钮只有 hover 样式，无实际功能",
+        "ok": 0
+      },
+      {
+        "name": "点击页脚下载按钮",
+        "expected": "触发下载或下载引导",
+        "evidence": "探针点击后无 DOM 变化、无网络请求、无跳转；无事件处理",
+        "ok": 0
+      },
+      {
+        "name": "点击页脚图表按钮",
+        "expected": "打开数据分析/报表视图",
+        "evidence": "探针点击后无 DOM 变化、无网络请求、无跳转；按钮无实际功能",
+        "ok": 0
+      },
+      {
+        "name": "悬停卡片查看高亮反馈",
+        "expected": "卡片浮起并加深阴影",
+        "evidence": "HTML 含 .card-hover:hover 与 JS mouseenter/mouseleave 添加 shadow-lg，属于有效的轻量反馈",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉完成度和静态内容较好，无 JS 报错，悬停反馈生效；但作为 MessageFlow Debugger，用户会尝试的 Refresh、Settings、帮助、下载、图表等按钮全部是占位/死按钮，点击无任何反馈，核心调试任务无法完成。因此功能分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) Refresh按钮点击无实际反馈，无法刷新数据；2) Settings按钮点击无反馈，无法进入设置；3) 底部帮助、下载、报表等图标按钮均无响应，交互流程存在死路。次要瑕疵：错误跟踪区同时列出具体错误与‘All Clear’状态，语义相互矛盾；页面缺少指标图例/帮助说明；Live Message Flow区域仅为静态占位图，并非实时可视化；部分集成品牌图标可能因Font Awesome free图标缺失而显示异常。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用现代主流的渐变蓝紫配色（primary #2563eb 与 secondary #7c3aed），背景为浅蓝灰渐变，色彩搭配和谐且对比度良好。布局结构清晰，header、主内容区域和footer层次分明，卡片和指标区域排列整齐，符合单页dashboard的视觉规范。Typography（字体）虽未显式定义，但依赖Tailwind默认字体栈，字号层级（标题、正文、小标签）使用合理，信息可读性强。组件设计精致，卡片带悬停上浮和阴影过渡效果，状态标签使用脉冲动画，性能指标卡片有进度条和图标，视觉反馈丰富，提升了专业感。整体CSS设计专业，使用了Tailwind工具类、自定义颜色扩展和关键帧动画，风格与“消息流调试器（MessageFlow Debugger）”这一技术主题高度对齐，呈现出现代SaaS/运维工具应有的清爽、可靠、数据可视化的视觉气质。扣分原因：部分按钮（Refresh、Settings）点击后无实际功能或视觉反馈，交互深度稍有不足；页面内容较多，严格限制单屏时可能出现轻微拥挤；但整体视觉效果已达到专业水准，故给予8分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_021869.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Refresh",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Settings",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

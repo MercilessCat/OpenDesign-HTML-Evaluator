@@ -1,0 +1,77 @@
+{
+  "row_id": "04_027033",
+  "shard": 4,
+  "id": 27033,
+  "category": "Website",
+  "prompt": "Explore a digital art gallery where interactive algorithms generate haunting visual experiences. Users curate their own exhibits, tweaking algorithmic parameters to reveal unsettling, beautiful patterns. Key features include user-generated galleries, algorithm customization, and immersive virtual reality tours that transform algorithmic logic into ethereal art.",
+  "html_len": 31630,
+  "html_sha256": "2e7f41d3aea9b32924b55dcc239399189f30708f712568e93deac5d311513b52",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航菜单点击（Gallery/Features/Generator/VR Tour）",
+        "expected": "点击导航链接应滚动到对应板块或切换页面视图",
+        "evidence": "HTML中所有导航链接href均为\"#\"，无路由或锚点绑定对应内容的JS事件；探针未探测到可操作元素，页面加载超时且Three.js未成功初始化，点击无任何DOM变化",
+        "ok": 0
+      },
+      {
+        "name": "Enter Gallery / Start Creating / View Gallery 按钮",
+        "expected": "点击按钮应进入画廊或创建流程",
+        "evidence": "导航栏和Hero区的按钮均为纯静态button，无onclick事件绑定；探针报告页面无可操作元素，说明这些按钮未挂载任何交互逻辑，点击无响应",
+        "ok": 0
+      },
+      {
+        "name": "生成器参数滑块调整（Complexity/Color/Symmetry/Speed）",
+        "expected": "拖动滑块应实时改变canvas中的算法生成图案",
+        "evidence": "HTML存在4个range输入及对应值显示span，但JS代码被截断，未显示任何滑块事件监听；运行时无canvas元素（元素统计canvas=0），Three.js场景未成功创建，滑块无法产生视觉反馈",
+        "ok": 0
+      },
+      {
+        "name": "Randomize / Save Exhibit 按钮",
+        "expected": "点击Randomize随机生成新图案，点击Save保存当前作品",
+        "evidence": "按钮无onclick或事件绑定；探针未检测到点击后任何DOM/画布变化，且canvas不存在，功能完全未实现",
+        "ok": 0
+      },
+      {
+        "name": "Enter VR Gallery 按钮",
+        "expected": "点击进入VR沉浸式展览",
+        "evidence": "按钮无事件绑定，VR canvas容器为空（无canvas元素）；页面加载超时，Three.js VR场景初始化失败，核心VR功能缺失",
+        "ok": 0
+      },
+      {
+        "name": "画廊作品点赞/浏览按钮",
+        "expected": "点击作品卡片或点赞按钮应有反馈（如进入详情、点赞数+1）",
+        "evidence": "作品卡片无点击事件，点赞按钮仅含图标无JS逻辑；卡片为纯静态div，点击无任何变化",
+        "ok": 0
+      }
+    ],
+    "reason": "页面加载超时，Three.js场景全部未初始化（canvas=0），所有核心交互（导航、按钮、滑块、VR入口）均无事件绑定或路由，功能完全未实现；大量占位链接（href=\"#\"）和静态按钮，不符合需求中\"交互式算法生成、用户策展、参数调节、VR导览\"的核心诉求。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 页面所有主要入口均无实际功能：导航栏的 Gallery 链接为 href=\"#\" 占位链接，点击无任何跳转或反馈；Enter Gallery 按钮无事件绑定，点击无响应。\n2. 核心操作流程完全卡死：Generator 区域的 Randomize 和 Save Exhibit 按钮均未绑定任何事件，用户无法随机生成或保存自己的展品；Enter VR Gallery 按钮同样无事件绑定，VR 体验无法进入。\n3. 核心控件调节无效：4 个算法参数滑块（Complexity、Color Intensity、Symmetry、Movement Speed）虽然渲染为可拖动的 range 输入，但没有任何事件监听，拖动后数值显示不更新、画布内容不变化，调节完全没有效果。\n4. 反馈缺失到无法判断操作是否成功：所有按钮（View Gallery、Browse Full Gallery、Learn more、Customize now、Enter VR、点赞按钮、页脚链接、订阅按钮）均无事件处理或跳转目标，用户点击后无任何视觉状态变化、页面跳转或成功提示，无法得知操作是否生效。\n\n次要瑕疵：\n1. 部分命名与行为不符：如 \"Enter Gallery\" 按钮看似主 CTA，实际无法进入任何画廊页面；\"Customize now\" 暗示可立即调整参数，但实际不可用。\n2. 缺少说明性文字：滑块缺少具体参数含义解释，VR 部分未说明支持设备和浏览器要求。\n3. 可选模块未实现：页脚中的 Parameter Library、API Access 等链接均为占位，社区/API 模块不存在，但不影响主流程判断。\n4. 视觉上动画和渐变设计精致，但部分细节（如 glitch 动画）在未提供实际内容时略显炫技，对理解页面目的无帮助。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面在视觉设计上达到了专业级别，与“算法生成数字艺术画廊”这一用户需求高度契合。整体采用深色未来主义风格（#0a0a0f 底、紫色/蓝色/青色/橙色点缀），科技感与神秘感并存，符合“令人难忘的视觉体验”的调性。色彩搭配协调，渐变、毛玻璃、发光、故障（glitch）等效果统一且营造出层次感；布局上各区块（导航、Hero、特性、生成器、VR、画廊、页脚）结构清晰，间距与圆角、阴影细节处理成熟；字体选用 Orbitron 搭配 Raleway，科技与可读性兼顾。CSS 设计具备较高的专业度，包含自定义动画关键帧、卡片悬停、粒子系统（Three.js）等交互视觉亮点。不过页面运行信号显示加载超时且截图失败，存在运行时不确定性；画廊示例区块使用纯渐变代替真实作品，视觉深度略显单薄。综合以上，页面在静态视觉与代码设计维度上表现优秀，小幅扣分源于运行环境和内容充实度上的不完备。",
+    "attempts": 1
+  },
+  "regime": "DEAD",
+  "overall_score": 2.0,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": true,
+    "render_error": "screenshot failed: TargetClosedError: Page.screenshot: Target page, context or browser has been closed",
+    "load_error": "TargetClosedError: Page.goto: Target page, context or browser has been closed\nCall log:\n  - navigating to \"http://127.0.0.1:31025/04_027033.html\", waiting until \"load\"\n"
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_027033.png",
+  "probe": []
+}

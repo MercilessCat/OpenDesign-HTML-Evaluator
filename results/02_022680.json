@@ -1,0 +1,143 @@
+{
+  "row_id": "02_022680",
+  "shard": 2,
+  "id": 22680,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Develop a platform exploring mythological narratives through interactive storytelling. Users create adaptive stories, visualize character relationships, and explore cultural contexts. Features include story creation tools, character mapping, and community forums, blending traditional narrative exploration with modern, dynamic visual storytelling techniques.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11368,
+  "html_sha256": "23f18b57224842d92d7e6078b8900160b75908fa6a60602d28a6617aab49e67e",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击主导航链接（Home/Explore/Create/Community）",
+        "expected": "导航切换到对应板块或内容视图",
+        "evidence": "探针点击四个导航链接后，均显示‘页面跳转’但无新增网络请求；HTML 中链接均为 href=\"#\"，未绑定路由或内容切换逻辑，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Creating 按钮",
+        "expected": "进入故事创作工具或打开相关流程",
+        "evidence": "探针点击后 DOM 变化=无、新增JS错误=0、新增网络请求=0；按钮无 click 事件绑定，点击无任何业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Cultures 按钮",
+        "expected": "展示文化背景可视化或切换对应视图",
+        "evidence": "探针点击后 DOM 变化=无、新增JS错误=0、新增网络请求=0；按钮无事件绑定，点击无效。",
+        "ok": 0
+      },
+      {
+        "name": "点击功能卡片（Story Creation / Character Mapping / Community Forums）",
+        "expected": "进入对应功能页面或展示可交互工具",
+        "evidence": "三个功能卡片均为静态 div，无 href、无 button、无 click 事件绑定，仅 CSS hover 效果；需求声明的核心功能（故事创建、角色映射、社区论坛）未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计符合“数据可视化+神话叙事”主题，内容展示完整且无 JS 错误，但所有核心交互均为占位：导航 href=\"#\" 无路由，两个按钮点击无反应，三个功能卡片无事件绑定，故事创建、角色映射、文化探索、社区论坛等关键功能均未实现，主要任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 主导航 Home/Explore/Create/Community 均为 `href=\"#\"` 占位链接，点击没有进入任何对应内容或视图，仅跳回页面顶部，主要入口无实际反馈。2. “Start Creating”和“Explore Cultures”两个核心按钮点击后 DOM 无变化、无提示、无跳转，核心 CTA 操作无法完成。次要瑕疵：功能卡片只是静态说明，Story Creation Tools、Character Mapping、Community Forums 均没有实际可操作控件；页面缺少图例/说明文字，背景关系线仅为装饰，用户不知道其含义。建议为导航和按钮增加有效交互，或在未实现功能上明确“即将上线”状态。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面整体视觉吸引力高，采用深蓝渐变背景搭配金色、紫色点缀，营造出神秘而高级的神话氛围，符合‘神话叙事+数据可视化’主题。色彩搭配和谐，深底浅字对比度充足，金色作为强调色使用恰当。排版上，衬线标题与非衬线正文形成有层次的对比，字距和行距自然。布局采用单屏设计，header、主内容、footer结构清晰，三张特性卡片对称排布，底部文化区块通过抽象同心圆和散点图形补充视觉内容，富现代感。CSS细节专业：使用Tailwind框架，包含玻璃拟态背景、卡片悬浮上移投影、按钮脉冲动画、背景网络节点连线等，增强了页面活力和科技感。不足在于网络连接线空间关系略显随机，文化展示区图形较简单，部分按钮点击无实际反馈，但整体视觉完成度很高。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_022680.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Create",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Cultures",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

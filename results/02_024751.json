@@ -1,0 +1,181 @@
+{
+  "row_id": "02_024751",
+  "shard": 2,
+  "id": 24751,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Connect with an innovative platform that visualizes social connections through dynamic network graphs. Users can map personal or organizational networks, discover hidden relationships, and analyze social dynamics, enhancing networking opportunities and strategic planning through interactive visualization and data-driven insights.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11880,
+  "html_sha256": "4848f1a417053fae0bf24c28cd11a6811568c160ee404e152517ce1a458a21cd",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 5.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "查看网络图",
+        "expected": "页面加载后出现带节点和连线的动态网络图",
+        "evidence": "D3 脚本在 #network-graph 中动态创建 SVG 并运行 forceSimulation；运行时无 JS 错误、无失败网络请求，说明 D3 CDN 加载成功且图已渲染",
+        "ok": 1
+      },
+      {
+        "name": "拖拽网络图节点",
+        "expected": "拖动节点时节点跟随鼠标移动，力导向布局重排",
+        "evidence": "每个 circle 节点绑定了 d3.drag()（dragstarted/dragged/dragended），事件链完整且无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击 Get Started 按钮",
+        "expected": "触发开始使用的引导流程（跳转/弹窗/切换视图）",
+        "evidence": "探针点击后 DOM 无变化、无网络请求、无跳转；HTML 中按钮无任何事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Mapping 按钮",
+        "expected": "进入映射网络或至少页面有内容变化",
+        "evidence": "探针点击后 DOM 无变化、无网络请求；按钮无事件处理程序",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Demo 按钮",
+        "expected": "展示/切换示例数据视图",
+        "evidence": "探针点击后仅 DOM 有通用变化（样式层 focus/hover），无网络请求、无跳转，未绑定业务事件，非真正反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击导航链接 Features",
+        "expected": "跳转到 Features 对应内容区",
+        "evidence": "导航链接均为 href=\"#\" 占位，无路由或滚动目标；探针显示页面跳转仅为 hash 变更，内容不变",
+        "ok": 0
+      }
+    ],
+    "reason": "核心数据可视化功能可用：D3 动态网络图正常渲染，节点可拖拽，运行时无 JS 错误。但页面主要行动点全部未实现：Get Started 和 Start Mapping 点击无反应、View Demo 无业务反馈、导航链接是 # 占位无内容切换，且内容超出单屏视口，违反了需求中‘无需滚动完整可见’的约束，核心引导流程缺失，故评分 5。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 主导航（Home/Features/Examples/Contact）均为基础占位链接（href=\"#\"），点击后仅跳转至页面顶部，无对应内容区块或任何实际功能，用户点击后无所获。\n2. 核心操作按钮（Get Started、Start Mapping）点击后无任何DOM变化、无提示、无跳转，属于典型的按钮无反馈死路；仅View Demo有反馈（但仅触发锚点跳转）。\n\n次要瑕疵：\n1. 网络图缺少数值图例/颜色说明，用户无法理解不同颜色节点的含义（group 1-4）。\n2. Footer 年份为 2023 年，与当前时间不符，降低可信度。\n3. 导航项（Features、Examples等）无对应锚点或内容滚动效果，仅停留在视觉装饰层面。\n4. D3网络图容器高度较小，默认显示时节点密集、标签相互重叠，影响信息可读性。\n5. 页面视觉美观度较好，但整体交互仅停留在hover效果层面，产品核心价值（数据分析、洞察）缺乏实际可操作的演示入口。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用现代主流设计风格。色彩搭配以蓝色系为主，配合浅灰和白色背景，层次清晰且符合数据可视化主题。布局采用头部导航、主内容区、卡片网格和步骤说明的结构，区块划分明确，视觉重心均衡。字体使用 Segoe UI 系列，干净易读；间距疏密得当。卡片阴影、悬浮上移动效、按钮脉冲动效等增强交互感，体现专业 CSS 设计。D3.js 绘制的动态网络关系图与主题高度契合，增加了页面技术感和视觉亮点。整体符合现代网页设计规范，与用户需求中的“创新平台、动态社交网络可视化”风格对齐。扣分点在于：部分导航链接点击后为页面跳转行为，与单页应用要求略有出入；右下角小区域缺少背景覆盖细节；社交图标链接为占位符，功能可进一步优化。但视觉呈现本身是优秀的。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_024751.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Examples",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Contact",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Mapping",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

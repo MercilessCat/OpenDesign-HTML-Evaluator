@@ -1,0 +1,182 @@
+{
+  "row_id": "02_013504",
+  "shard": 2,
+  "id": 13504,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Discover a digital hub that visualizes election audit methodologies through interactive timelines and data charts. Users can explore various auditing techniques and their effectiveness. Key features include case studies, a glossary of terms, and tools for comparing different methods to promote transparency and trust in electoral processes.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10380,
+  "html_sha256": "b46fd9a2d5adc1de85abb3d20762f779ff014e3d40eea41d0dc82835de766ed5",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "主导航 Methods 跳转方法浏览页",
+        "expected": "点击导航 Methods 后应切换到审计方法相关内容或至少滚动到方法展示区域",
+        "evidence": "探针点击 <a> \"Methods\" 后仅 URL hash 变为 #（页面跳转），无任何内容切换；HTML 中该链接 href=\"#\"，无路由或锚点目标，属纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Methods 按钮",
+        "expected": "应跳转到方法浏览、滚动到图表区或触发某种方法展示交互",
+        "evidence": "探针点击 <button> \"Explore Methods\" 后 DOM 变化=无，JS 兜底点击也无效；按钮无事件绑定，点击完全无反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Case Studies 按钮",
+        "expected": "应展示案例研究列表或跳转到案例内容",
+        "evidence": "探针点击 <button> \"View Case Studies\" 后 DOM 变化=无，无 JS 错误无网络请求；按钮无任何事件监听，案例研究功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "切换 Method Comparison 下拉（Accuracy/Cost/Time）",
+        "expected": "选择不同维度后图表数据应相应更新",
+        "evidence": "HTML 中 <select> 仅有三个 <option>，无 onchange 事件；JS 只初始化静态 Chart 柱状图，没有任何数据更新逻辑，切换下拉图表不会变化",
+        "ok": 0
+      },
+      {
+        "name": "点击 Case Studies 功能卡片",
+        "expected": "应打开案例研究详情或进入案例浏览界面",
+        "evidence": "Case Studies 卡片为纯 div 结构，无 href、无 onclick、无事件绑定；探针点击同类 href=\"#\" 链接无任何 DOM 变化，属于需求声明的核心功能占位未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Glossary 术语表卡片",
+        "expected": "应打开术语表弹层或展示术语定义列表",
+        "evidence": "Glossary 卡片同样为纯 div + 文字描述，无任何可交互行为；需求声明的术语表（Glossary）功能未实现，仅为静态占位",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉布局和 Chart.js 柱状图渲染正常（无 JS 错误），但需求声明的核心功能几乎全部未实现：交互式时间线仅为静态列表、案例研究和术语表只是无事件的占位卡片、Method Comparison 下拉无数据更新逻辑、所有导航链接和 Hero 按钮均为 href=\"#\" 或空按钮占位。关键入口存在 4 个以上未实现，用户无法完成任何核心任务，仅能查看静态图表和文字，功能严重缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "【核心可用性问题】1. 核心入口无实际反馈：导航（Home/Methods/Case Studies/Glossary）均为 href='#' 占位链接，点击后实际不会跳转到对应模块或加载内容，属于主要入口无实际反馈；2. 核心操作无法完成：'Explore Methods' 和 'View Case Studies' 两个行动按钮点击后无任何行为，用户无法从页面入口继续探索方法论或查看案例研究数据，流程卡死；3. 核心控件调节无效：方法对比下拉框切换 'By Accuracy / Cost / Time' 后图表及数据完全不变，没有任何响应或错误反馈，属于核心控件失效。 【次要瑕疵】移动端汉堡菜单无交互功能；时间线为纯静态文字和圆点展示，不符合需求中“交互式时间线”的预期；案例研究和术语表仅有卡片占位说明，实际内容模块未实现；统计卡与图表数据（92%、78%等）缺少口径说明和单位注释，用户难以判断数据来源和含义。页面视觉风格现代、布局清晰，Chart.js 图表能正常渲染，静态内容具有一定可读性，但由于导航、按钮、筛选等核心交互链路均未打通，用户无法完成“探索/比较/查看案例”等主要任务，因此存在至少 2 个以上核心可用性问题，评分较低。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 6.2,
+    "reason": "页面整体属于“标准工业级”的数据可视化仪表盘风格，质量中等偏上。\n\n【整体视觉】布局清晰，信息层级分明，采用蓝橙商务配色，视觉引导好，但设计语言较为常见，缺少独特记忆点，属于安全但不出彩的模板化设计。\n\n【色彩搭配】主色#2563eb搭配#f97316与#0f172a，对比度良好，数据卡片用蓝、橙、绿、紫区分不同统计项，色彩区分度高。但配色逻辑略显随意（如绿色和紫色缺少语义呼应），且Hero区的蓝色渐变面积较大，视觉重心偏左，右侧统计卡略显拥挤。\n\n【布局协调】采用12栅格体系，逻辑清晰。Hero+stats+chart+timeline+features的排列方式有效利用视口，信息密度适中，但右上角统计卡的四个数据块之间有拥挤感，Chart.js图表尺寸偏矮（200px），字体数据标签显示偏小，可能与标题拥挤。\n\n【字体/间距】系统字体Segoe UI+system-ui，可用但无设计感，缺乏更强的排版节奏来形成专业化印象。间距整体一致，但各卡片内或卡片间间距略显紧凑，footer内部的留白不够舒适，顶部导航与主内容间距也偏小。\n\n【CSS专业性】应用了Tailwind但嵌入方式偏简单，过度使用工具类堆叠，缺少对样式进行有意识的抽象与统一管理（如变量或组件类）。没有使用现代布局能力中的grid命名区域、container query等特性，只有基础的grid/flex。样式实现中规中矩，未出现较大的CSS问题，但也没有展示出精细化的UI打磨细节。\n\n【现代规范与风格对齐】符合现代简洁的卡片式设计潮流，但更接近通用管理后台模板的视觉输出，和“数字中心/交互式数据可视化”高感知度、沉浸、可探索的定位相差较大。页面的视觉冲击力、设计独特性、精致度都不足，和“premium data visualization hub”这类需求有一定距离。\n\n综合而言，页面结构合理、逻辑清晰、无明显硬伤，但视觉设计深度不够，属于中规中矩的通用Web UI，不是令人眼前一亮的高质量设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.68,
+  "baseline_overall": 3.73,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_013504.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Methods",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Case Studies",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Glossary",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Methods",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Case Studies",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

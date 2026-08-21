@@ -1,0 +1,155 @@
+{
+  "row_id": "00_027319",
+  "shard": 0,
+  "id": 27319,
+  "category": "3D design",
+  "prompt": "Unlock the magic of optical illusions in web design with 3D transformations. This platform provides designers with tools to create captivating illusions using CSS. Users can explore a gallery of illusions, access step-by-step guides, and participate in community challenges to showcase their creativity.",
+  "html_len": 16656,
+  "html_sha256": "c03f15a45b92ff5c73a421b5819ca4f4d8e7e1bf7ff6d068fec44f47e5007056",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "浏览3D错觉画廊",
+        "expected": "四个 canvas 分别展示 Impossible Cube、Penrose Triangle、Floating Cubes、Necker Cube，并自动旋转",
+        "evidence": "HTML 中为 4 个 canvas 初始化了 Three.js 场景，animate() 使用 requestAnimationFrame 持续渲染；运行时 0 条 JS 错误。画廊展示本身可用。",
+        "ok": 1
+      },
+      {
+        "name": "调节设计工具滑块",
+        "expected": "拖动 Rotation Speed / Perspective Depth / Color Shift 滑块会改变旋转速度、透视深度或颜色",
+        "evidence": "rotationSpeed 与 perspective 的监听器只解析了值并留有“更复杂实现才会生效”的注释，未实际操作场景；colorShift 完全没有绑定事件。滑块无实际反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Randomize Illusion 随机化",
+        "expected": "点击后错觉效果的颜色/位置被随机化",
+        "evidence": "探针点击后 DOM 无变化；代码只对 mesh.material 直接存在的 cube 执行 setHex，group/line 类型的画布未处理，未能有效随机化整个画廊的错觉效果。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Export Design 导出设计",
+        "expected": "导出当前设计或触发下载等反馈",
+        "evidence": "exportBtn 在脚本中未绑定任何事件；探针点击后 DOM 无变化、无网络请求，是占位按钮。",
+        "ok": 0
+      },
+      {
+        "name": "访问分步指南",
+        "expected": "提供 step-by-step 指南入口并可查看教程",
+        "evidence": "页面中没有任何“指南/教程”区块或链接，需求声明的入口完全缺失。",
+        "ok": "NA"
+      },
+      {
+        "name": "参与社区挑战",
+        "expected": "点击挑战卡片可查看详情、加入挑战或提交作品",
+        "evidence": "challenge-card 均为纯 div，没有 href 或 click 事件；用户点击卡片不会有任何反馈，无法真正参与社区挑战。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面只有画廊展示可用；设计工具滑块全部无实际效果，随机化/导出按钮无效，社区挑战卡片不可交互，且缺少分步指南入口。整体接近静态展示页，核心设计、导出、教程、社区参与任务均无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 工具面板中的三个滑块（Rotation Speed、Perspective Depth、Color Shift）均无实际效果——代码只注册了 input 事件监听，没有将值应用到动画、相机或材质，用户调节后画面无任何变化。\n2. Export Design 按钮完全无响应——按钮未绑定任何逻辑，点击后无导出行为、无提示反馈，核心操作无法完成。\n3. Randomize Illusion 按钮反馈不完整——仅对部分画布材质颜色生效（对 Group/复杂对象如 Penrose、Floating 无效），且无明确视觉或文字反馈，用户无法判断是否成功。\n4. 画廊中的 4 个 canvas 无法交互——OrbitControls 未初始化，鼠标拖拽无反应，用户无法自主旋转/观察 3D 对象，浏览体验停留在被动观看。\n\n次要瑕疵：\n- 滑块缺少当前值显示和操作说明，用户不清楚调节范围与作用。\n- 页面标题声称使用 CSS 3D 变换，实际使用 Three.js，描述与实现不一致。\n- 各幻觉卡片缺少图例或简要说明，用户难以理解每个错觉的原理。\n- Community Challenges 为纯静态卡片，无法展开查看详情或参与，但属于可选模块，不影响主流程。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "页面整体视觉风格明确，深蓝渐变背景配合珊瑚红/青色渐变点缀，科技感与神秘感兼备，比较契合“3D光学幻象”主题。色彩搭配大胆且统一，红青互补在暗色背景上形成强对比，视觉冲击力尚可。布局采用常规的单页结构：标题区、画廊+工具区、社区挑战区、页脚，层次清晰；画廊用grid自适应，工具面板用flex侧栏，符合现代响应式设计规范。字体方面，大标题3rem配合渐变文字效果醒目，section-title使用底部渐变色条装饰，细节用心；卡片和面板采用毛玻璃、圆角、半透明边框及hover悬浮阴影，组件设计有质感。CSS技术使用较为专业，包含backdrop-filter、渐变、transition、grid/flex和媒体查询，整体具备现代网页设计感。\n\n但仍有提升空间：页面整体偏暗，卡片背景透明度极低（0.05），在部分屏幕上可能显得对比度不足、略显‘脏’；canvas区域统一固定200px高度，对某些3D物体展示略显局促；页面缺少‘step-by-step guides’模块，且‘Export Design’等按钮没有实际功能，视觉上的完整度略受影响。另外，页面动态效果主要依赖Three.js自动旋转，缺乏背景动效或更丰富的交互反馈，视觉惊艳度尚未达到顶尖水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_027319.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Randomize Illusion",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export Design",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

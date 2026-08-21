@@ -1,0 +1,117 @@
+{
+  "row_id": "00_034876",
+  "shard": 0,
+  "id": 34876,
+  "category": "3D design",
+  "prompt": "Optimize your 3D applications with smart load balancing solutions designed for seamless server performance. This platform provides tools to distribute workloads efficiently across multiple servers, ensuring smooth, lag-free experiences. Users can monitor server health, adjust resources dynamically, and analyze performance metrics, making it ideal for developers managing large-scale 3D environments.",
+  "html_len": 15184,
+  "html_sha256": "40cc2102df360f9ed15ba848f8445ed39767c6d2db1ff1c1d4fadff23e5519f7",
+  "functional": {
+    "score": 9.0,
+    "raw_score": 9.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Add Load 按钮添加负载",
+        "expected": "生成新的请求球体并飞向服务器，同时服务器CPU数字和负载条更新",
+        "evidence": "探针点击后DOM有变化，无JS错误；HTML中addLoad()会创建球体、更新loadDistribution并调用updateServerStats()更新CPU显示",
+        "ok": 1
+      },
+      {
+        "name": "点击 Reset System 按钮重置系统",
+        "expected": "清除所有请求球体，将各服务器负载归零，CPU显示和条形恢复为0%",
+        "evidence": "探针点击后DOM有变化，无JS错误；HTML中resetSystem()移除requests、重置负载数组并更新统计显示",
+        "ok": 1
+      },
+      {
+        "name": "点击 Auto Balance 按钮切换自动均衡模式",
+        "expected": "按钮文本在“Auto Balance”和“Manual Mode”之间切换，并影响新增负载的目标服务器选择",
+        "evidence": "探针点击后DOM有变化，无JS错误；HTML中toggleAutoBalance()切换autoBalanceMode并修改按钮文本",
+        "ok": 1
+      },
+      {
+        "name": "拖拽3D场景旋转视角",
+        "expected": "相机围绕场景旋转，画面视角变化",
+        "evidence": "探针在canvas上拖拽后像素有变化，新增JS错误0；页面引入了OrbitControls并绑定到renderer.domElement，controls.update()在动画循环中执行",
+        "ok": 1
+      }
+    ],
+    "reason": "所有核心交互均可用：三个控制按钮都有真实的业务反馈，3D场景支持拖拽旋转且无JS错误；页面实现了负载监控、动态添加负载、重置和自动均衡的完整功能。仅因缺少更细粒度的性能分析图表等次要功能，扣1分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. 点击“Add Load”后，CPU 百分比显示与内部状态不一致——初始显示为 42%、68% 等，但点击后某台服务器 CPU 直接变为 10%（内部 loadDistribution 覆盖了初始值），用户看到点击“增加负载”后负载反而下降，反馈明显错误，导致无法判断操作是否成功。\n\n次要瑕疵：1. 页面缺少操作说明或图例，用户难以理解“Add Load”“Auto Balance”的具体作用和状态（如切换后按钮文本变为“Manual Mode”，但无解释）。2. “CPU”命名不精确，实际展示的是负载分布/使用率，并非严格 CPU 占用。3. Auto Balance 模式切换后无额外视觉或状态提示，用户无法直观看出当前分配策略。4. 初始服务器负载数据与内部状态（loadDistribution 全为 0）不匹配，容易造成初始展示与实际行为矛盾。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，采用深色渐变背景（#1a1a2e → #16213e）与霓虹色调（青色#4cc9f0、粉色#f72585、紫色#7209b7）搭配，营造出科技感和未来感，契合3D可视化主题。布局上，左上信息面板、右上标题卡与底部控制按钮分区明确，3D场景居中占用主体，层次清晰，符合监控仪表盘的设计预期。CSS细节专业，使用了半透明背景、backdrop-filter 毛玻璃效果、圆角边框、过渡动画等现代设计手法，组件（按钮、状态条）具有交互反馈。字体采用常见的 Segoe UI 无衬线体系，可读性良好，间距与字号安排合理。整体设计符合当前3D可视化工具和开发者工具的美学趋势，与用户需求中“智能负载均衡、3D环境监控”的风格高度对齐。扣分原因：信息面板中多个服务器仅通过简单的 server-stats 堆叠，缺乏独立的分组卡片或分区背景，视觉层次稍显单一；并且界面中的文字信息量较少，标题区域与主面板的功能区分不够鲜明。但这些均不影响其作为一款具有良好视觉品质的3D交互动效页面。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 7.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_034876.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Load",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset System",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Auto Balance",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

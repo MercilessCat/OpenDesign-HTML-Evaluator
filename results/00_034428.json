@@ -1,0 +1,129 @@
+{
+  "row_id": "00_034428",
+  "shard": 0,
+  "id": 34428,
+  "category": "3D design",
+  "prompt": "Envision a platform where healthcare professionals explore intricate 3D medical visualizations, enhancing diagnostic capabilities. Users can rotate and dissect 3D models of human anatomy, engaging in collaborative analysis. Features include real-time data integration, AI-driven insights, and interactive case studies, revolutionizing medical education and practice through immersive technology.",
+  "html_len": 22088,
+  "html_sha256": "605ed9e13c81882d0f2d50e445831990b2e8dea6d7c93d9b67bb0926535c4baf",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "拖拽旋转 3D 模型",
+        "expected": "模型随鼠标拖拽旋转/缩放，视角变化",
+        "evidence": "Three.js 动态创建 canvas，并绑定 new THREE.OrbitControls(camera, renderer.domElement)， animate() 中持续调用 controls.update()；探针拖拽无 JS 错误，WebGL 像素虽不可测，但交互已初始化",
+        "ok": 1
+      },
+      {
+        "name": "点击侧边栏解剖系统切换模型",
+        "expected": "切换显示对应人体系统（骨骼/神经/呼吸/消化等）",
+        "evidence": "JS 中 anatomyItems 均绑定 click 事件，switchAnatomy() 会隐藏全部 group 并显示选中系统，同步切换 active 样式；无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击 AI Analysis 按钮",
+        "expected": "触发 AI 分析或更新洞察面板",
+        "evidence": "探针点击后 DOM 无变化、无网络请求、无 JS 错误；HTML 中 .control-btn 未绑定任何事件，纯占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击 Collaborate 按钮",
+        "expected": "进入协作分析/共享会话，或至少给出界面反馈",
+        "evidence": "探针点击后 DOM 无变化、无网络请求；.control-btn 无事件绑定，纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Export 按钮",
+        "expected": "导出当前 3D 模型或给出导出反馈",
+        "evidence": "探针点击后 DOM 无变化、无网络请求；.control-btn 无事件绑定，纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "解剖/切割 3D 模型",
+        "expected": "提供切割平面、分层解剖或分解视图",
+        "evidence": "页面没有任何 slice/dissect/layer/切割相关控件或事件绑定，只有侧边栏系统切换和 OrbitControls；交互入口缺失",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心 3D 可视化查看与解剖系统切换可用，旋转拖拽正常；但 AI Analysis、Collaborate、Export 三个控制按钮均为无事件占位入口，且缺少需求中明确的“解剖/切割”功能。关键入口存在 2 个及以上未实现，按规则功能分不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在 3 个核心可用性问题：1）顶部 AI Analysis、Collaborate、Export 三个按钮点击后完全无实际响应，属于占位按钮，是主要入口的交互死路；2）切换解剖系统后，左侧列表选中态与 3D 模型切换了，但下方信息面板仍固定显示 Cardiovascular System 的描述，右下角 AI 洞察也未随系统切换更新，页面信息与实际 3D 内容不一致，用户无法获得正确的参考信息；3）非心血管系统（如骨骼、神经、消化）的 3D 模型创建在离相机初始视野较远的位置，切换后没有自动聚焦或相机复位，用户可能看不到模型，误以为切换失败。次要瑕疵：实时数据面板为静态数值，并非真正的实时更新；AI 洞察内容是随机替换的模拟文本而非真实的 AI 分析；3D 模型为高度简化的几何体组合，与真实解剖结构差异较大；心血管系统切换时主动脉、肺动脉等血管未随 heart 一起隐藏，导致切换后残留血管物体；缺少对模型切割/分层查看等核心交互入口；信息面板与 AI 面板无关闭/折叠功能，在较小屏幕上会遮挡 3D 场景。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉效果出色，符合现代医疗科技类设计预期。色彩搭配以深蓝绿渐变背景为主体，青色与薄荷绿作为高亮点缀，不仅形成清晰的视觉层次，也强化了科技与医疗的融合感。布局结构合理，顶部导航、左侧解剖列表、中央3D视口以及右侧数据面板分工明确，玻璃拟态（backdrop-filter）与半透明卡片的使用提升了页面的精致感和现代感。字体采用无衬线体系，字号层级适中，按钮和组件的圆角设计统一，过渡动画自然。CSS技术运用专业，包括渐变、模糊效果、响应式媒体查询等，符合当代网页设计规范。不足之处在于：3D模型为简化的几何体，视觉真实感和精细度有欠缺；信息面板较多，可能对3D主场景造成一定遮挡；部分交互按钮仅为视觉存在，缺少实际功能反馈。总体而言，这是一个高完成度的界面设计，在视觉吸引力与主题契合度上表现优秀。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_034428.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "AI Analysis",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Collaborate",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

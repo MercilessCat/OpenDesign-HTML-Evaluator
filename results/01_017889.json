@@ -1,0 +1,183 @@
+{
+  "row_id": "01_017889",
+  "shard": 1,
+  "id": 17889,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Build an interface for managing cryptographic keys securely and efficiently. Users can generate, store, and share keys with robust encryption. Key features include a user-friendly dashboard, access audit trails, and integration with security protocols, empowering organizations to maintain data integrity and security.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10757,
+  "html_sha256": "8106ea0cdbf3f65e615b79dd82719ba372e8a758c1d72179cfff9923406c6d1f",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击生成新密钥",
+        "expected": "生成新密钥并添加到密钥列表，或至少更新密钥统计",
+        "evidence": "探针显示点击按钮后 DOM 有变化（按钮文本变为加载中并出现成功提示），但表格与统计数字均未更新，未真正生成密钥记录",
+        "ok": 0
+      },
+      {
+        "name": "点击共享密钥按钮",
+        "expected": "触发密钥共享流程或给出共享反馈",
+        "evidence": "探针点击多个 share 图标按钮后 DOM 均无变化，无 JS 错误，说明按钮未绑定任何有效事件",
+        "ok": 0
+      },
+      {
+        "name": "点击删除密钥按钮",
+        "expected": "删除对应密钥或给出确认操作",
+        "evidence": "探针点击多个 trash 图标按钮后 DOM 均无变化，无任何交互反馈，删除功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "在搜索框输入关键词并回车",
+        "expected": "筛选密钥列表或显示搜索结果",
+        "evidence": "探针在搜索输入框中输入'测试'并回车后 DOM 无变化，无 JS 错误，搜索功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "查看访问审计轨迹",
+        "expected": "页面提供访问审计记录区域或入口",
+        "evidence": "页面中完全没有访问审计轨迹相关内容或入口，需求中的关键功能缺失",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心交互大面积失败：生成密钥只模拟了加载和提示但未真正新增密钥；共享、删除按钮点击无反应；搜索无筛选行为；访问审计轨迹完全缺失。页面仅有静态展示和单个按钮的视觉反馈，无法完成需求中的密钥管理主要任务。",
+    "attempts": 2
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) “Generate New Key”点击后只短暂显示生成中并弹出成功提示，但密钥列表并未新增任何密钥，核心生成操作实际未完成，且反馈误导用户；2) 列表中的“分享”和“删除”按钮点击后无任何DOM变化、无提示、无功能，核心密钥管理操作不可用；3) 搜索框输入内容后无过滤或反馈，搜索功能无效。这些已构成2个以上核心可用性问题。次要瑕疵：页面缺少审计跟踪模块，未完整覆盖需求中的审计功能；删除操作无二次确认，有误删风险；密钥类型选择不会影响生成行为，缺少必要说明；整体视觉结构清晰，但交互完成度不足。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉专业且现代，符合加密密钥管理后台的主题。色彩搭配以蓝色系为主，深蓝背景与白色卡片形成良好对比，视觉层级清晰。布局采用标准后台风格：头部、主要内容区（生成表单、安全概览、密钥表格）、底部，结构协调，信息密度适中。组件设计质量较高，卡片圆角、阴影、渐变背景、图标按钮等细节处理得当，Tailwind CSS 使用规范，简洁干净。可交互按钮（如生成密钥）有加载反馈和通知提示，提升了现代感与体验。小幅扣分点：字体使用系统默认，缺乏品牌感；部分操作按钮无 hover 提示文案；表格与卡片设计偏常规，缺少独特视觉亮点。总体属于美观、专业的 UI 组件页面。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_017889.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Generate New Key",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-share-alt",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-trash",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-share-alt",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-trash",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-share-alt",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-trash",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "text",
+      "tag": "input",
+      "text": "",
+      "href": null,
+      "type": "text",
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "typed": "测试",
+      "fill_method": "playwright",
+      "enter_pressed": true,
+      "pixels_changed": false
+    }
+  ]
+}

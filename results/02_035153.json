@@ -1,0 +1,181 @@
+{
+  "row_id": "02_035153",
+  "shard": 2,
+  "id": 35153,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Engage with a participatory budgeting visualization hub that showcases community-driven financial decisions. This platform allows users to explore budget allocations, evaluate project outcomes, and share feedback. Key features include interactive budget sliders, outcome impact assessments, and collaborative forums, empowering users to participate in transparent civic engagement processes.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11771,
+  "html_sha256": "b80749763a91eb4711ec3ad0cfca981013945de73cb17d1241e2b3aac6ba6ae4",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "调整预算滑块",
+        "expected": "拖动滑块后，对应分类的金额数字应实时更新",
+        "evidence": "HTML中为4个range输入绑定了input事件，会更新.container内span.font-bold的金额文本；探针未直接测滑块，但静态事件绑定明确，无JS错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击年份切换（2023/2024）",
+        "expected": "切换年份后预算数据、滑块值和图表应更新",
+        "evidence": "探针点击2023和2024按钮后DOM无变化、无网络请求，无JS错误；HTML中按钮无任何事件绑定，属于占位按钮。",
+        "ok": 0
+      },
+      {
+        "name": "点击Forum进入协作论坛",
+        "expected": "应打开论坛页面/弹窗或展示社区讨论内容",
+        "evidence": "探针点击Forum按钮后DOM无变化，无网络请求，无JS错误；HTML中按钮无事件绑定，属于死链占位。",
+        "ok": 0
+      },
+      {
+        "name": "点击Feedback提交反馈",
+        "expected": "应弹出反馈表单或进入反馈流程",
+        "evidence": "HTML中Feedback按钮与Forum同级，无任何事件监听；探针未单独点击，但代码结构一致，无反馈入口实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击导航Dashboard/Projects/Community/Resources",
+        "expected": "应切换到对应内容视图或滚动到相关区域",
+        "evidence": "探针点击后页面发生跳转（URL变为#），但无内容切换或路由变化；所有链接均为href=\"#\"占位，属于未实现的功能入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击Sign In登录",
+        "expected": "应打开登录弹窗或跳转登录页",
+        "evidence": "探针点击Sign In后DOM无变化，无网络请求，无JS错误；HTML中按钮未绑定任何事件，纯占位。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面核心可视化（滑块与Chart.js图表）有基本展示，预算滑块可更新金额，但需求声明的关键功能如年份切换、协作论坛、反馈、导航等均为占位死链，点击无任何业务反馈；且预算滑块调整后不联动更新图表，整体交互完成度很低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 预算滑块是页面核心交互，但拖动后只更新金额文字，饼图数据不更新，无法真正探索预算分配；2) 2023/2024 年份切换按钮点击无任何反馈，数据不变化；3) 顶部 Dashboard/Projects/Community/Resources 导航均为 # 占位链接，点击只跳页首，无实际内容切换，Sign In 按钮点击也无反应；4) Forum/Feedback 按钮无绑定逻辑，协作讨论和反馈功能不可用。次要瑕疵：四个滑块可独立拉至 5M 且无总预算/剩余预算提示，容易产生不合理分配；按钮点击缺少选中态/禁用态等视觉反馈；社区卡片只有入口但没有任何说明或后续内容。页面视觉结构和信息层级较好，但核心操作存在多处死路，用户无法完成探索预算、参与讨论和反馈的任务，因此打 2 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较好，采用现代 Dashboard 风格设计，色彩搭配协调（蓝、紫、绿、琥珀色系），层次清晰。布局上采用了三栏网格结构，主内容区与侧边栏比例合理，符合参与式预算数据的展示场景。卡片组件带有阴影和圆角，悬停有轻微上浮和阴影增强效果，交互反馈自然。图表使用 Chart.js 环形图，与预算滑块数据形成呼应，增强数据可视化表达。字体和间距使用 Tailwind 工具类，阅读舒适。整体风格统一，符合“数据可视化”主题的现代网页设计规范。不足之处在于部分导航链接点击后没有实际页面内容，按钮交互较简单，且滑块数值变化未同步更新图表，但作为单页视觉稿已足够专业。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_035153.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Projects",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "2023",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "2024",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Forum",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

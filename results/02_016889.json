@@ -1,0 +1,181 @@
+{
+  "row_id": "02_016889",
+  "shard": 2,
+  "id": 16889,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Develop a futuristic platform visualizing interstellar travel feasibility. Users can explore interactive models of spacecraft designs, propulsion technologies, and mission timelines. The site features expert interviews, community forums, and collaborative tools for enthusiasts and researchers to contribute ideas, advancing the dream of interstellar exploration.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13305,
+  "html_sha256": "aa18c17af980c7199aae2dde37b4e952afc717aa7acbad843b8227a6a47fd50b",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "探索3D模型视图",
+        "expected": "点击3D View按钮后，航天器模型切换为3D交互视图",
+        "evidence": "探针点击后DOM变化=无；HTML中按钮无任何JS事件绑定，仅hover样式",
+        "ok": 0
+      },
+      {
+        "name": "查看模型数据",
+        "expected": "点击Data按钮后，显示模型相关数据指标视图",
+        "evidence": "探针点击后DOM变化=无；HTML中按钮无任何JS事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "使用顶部导航切换板块",
+        "expected": "点击Models/Propulsion/Timeline/Community链接后切换到对应内容区",
+        "evidence": "所有导航链接均为href=\"#\"，无路由/无事件绑定；探针记录的页面跳转仅为hash变化，无实质内容切换",
+        "ok": 0
+      },
+      {
+        "name": "查看全部专家访谈",
+        "expected": "点击View All Interviews后展开/展示完整专家访谈列表",
+        "evidence": "探针点击后DOM变化=无；HTML中按钮无事件绑定，纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "加入研究计划",
+        "expected": "点击Join Research后触发注册/加入流程或反馈",
+        "evidence": "探针点击后虽有DOM变化，但HTML中按钮无click事件绑定，变化仅来自hover/focus样式层，无业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "提交创意想法",
+        "expected": "点击Contribute Ideas后打开提交表单或模态框",
+        "evidence": "HTML中按钮无任何点击事件绑定，无业务反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计与数据可视化呈现完整（Chart.js图、轨道动画），但需求中声明的核心交互几乎全部未实现：3D模型视图按钮无反应、数据视图按钮无反应、导航链接为#占位、访谈入口死链、加入研究和贡献想法均无事件绑定。页面仅可观看，无法完成任务，属于核心交互大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 顶部主导航 Models/Propulsion/Timeline/Community 均为 '#' 占位链接，点击只改变 URL hash，没有切换到对应模块，也没有展示新内容，导航无实际反馈；2) 中央可视化卡片的 '3D View' 和 'Data' 按钮点击后无任何 DOM/网络/JS 响应，核心的“交互模型探索”功能无法进行；3) 'View All Interviews' 按钮点击无响应，专家访谈内容无法展开，形成死路；4) 从代码看 'Contribute Ideas'、'Collaboration Hub' 等社区/协作入口均无事件绑定，用户无法完成贡献想法或协作任务。次要瑕疵：图表缺少图例和说明文字，用户只能猜测 doughnut 图各颜色含义；'Interactive Propulsion Model' 实际只是静态动画，与按钮和命名暗示的“交互”行为不符；页面信息密度较高，在较小视口下可能溢出。整体信息结构和视觉主题尚清晰，但多个核心交互均为占位或无效，导致页面严重不好用。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较强：深空蓝紫渐变色背景配合同色系自定义 Tailwind 色调，营造出统一且符合‘星际可视化’主题的沉浸感。玻璃拟态卡片（backdrop-filter + 半透明背景 + 微光边框）与现代暗色 UI 风格对齐，卡片 hover 浮起和 glow 阴影增强了精致度。布局采用典型的三列栅格（左主右副），信息层次清晰，头部导航、主内容区、底部版权区结构完整，符合现代仪表盘/数据平台范式。字体使用 Segoe UI 系统字体，可读性好，间距与圆角处理专业。交互细节如轨道动画、脉冲图标、Chart.js 甜甜圈图、按钮 hover 状态、导航点击反馈均提升了体验稳重感。微小的不足：页面内容在 100vh 内可能需要严格压缩才能完全一屏展示，部分按钮（如 3D View / Data）无实际行为反馈，且随机头像存在加载不确定性，但整体设计仍达到专业水准，无明显视觉缺陷。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_016889.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Models",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Propulsion",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Timeline",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Research",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "3D View",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Data",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View All Interviews",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

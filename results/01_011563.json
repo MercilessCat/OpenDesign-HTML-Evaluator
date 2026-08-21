@@ -1,0 +1,106 @@
+{
+  "row_id": "01_011563",
+  "shard": 1,
+  "id": 11563,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Develop a user-friendly site for creating and managing monitoring rules. The core idea is to streamline regulatory oversight. Features include intuitive rule-building interfaces, real-time alerts, and comprehensive dashboards, allowing users to efficiently design, implement, and track compliance activities with ease and precision.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10027,
+  "html_sha256": "816fadae84a645141c6f9e8058a4021328c9cd1bfec3a10a59d9ae3a104588ba",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "创建新规则（点击 New Rule 按钮）",
+        "expected": "打开新规则创建界面或弹出创建向导",
+        "evidence": "探针点击后 DOM 无变化、无 JS 错误、无网络请求；按钮未绑定有效事件",
+        "ok": 0
+      },
+      {
+        "name": "输入规则名称并回车提交",
+        "expected": "触发规则创建或搜索，页面产生反馈",
+        "evidence": "探针在输入框输入“测试”并回车后 DOM 无变化、无 JS 错误、无网络请求",
+        "ok": 0
+      },
+      {
+        "name": "提交规则构建表单（点击 Create Rule）",
+        "expected": "创建规则并更新页面，如显示成功提示或新增规则",
+        "evidence": "探针点击 Create Rule 后 DOM 无变化、无 JS 错误、无网络请求；表单无提交逻辑",
+        "ok": 0
+      },
+      {
+        "name": "查看实时警报",
+        "expected": "警报区能动态刷新或提供可交互的警报详情",
+        "evidence": "页面仅展示静态警报列表，无定时刷新、WebSocket 或点击事件绑定，实时功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面 UI 呈现完整，但所有核心交互均无响应：新建规则、提交规则表单、实时警报均未实现，仅为一个静态仪表盘展示。需求中创建和管理监控规则的核心功能不可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "该页面存在多个核心可用性问题，导致核心任务——创建、管理监控规则——无法完成：\n1. “Create Rule”按钮点击后无任何DOM变化、无反馈、无流程推进，用户无法判断规则是否创建成功，核心操作流程中断；\n2. “New Rule”按钮作为主要入口，点击后同样无任何反应，用户无法从该入口新建或重置规则；\n3. 表单填写后回车提交也无反馈，整个规则构建流程存在死路；\n4. 页面中没有任何规则列表或管理入口，用户无法查看、编辑、删除已建规则，这与页面“管理监控规则”的目标严重不符。\n\n次要瑕疵：\n- 标有“Live”的实时警报列表实为静态数据，无动态更新；\n- 合规趋势图使用静态高度色块充当图表，无坐标轴、数值标签，用户无法读取具体数值含义；\n- 用户头像、页脚等元素无可交互性，用户导航意图无处落实；\n- 页面缺少必要的说明文字（如规则字段含义、警报类型说明等），降低了自解释性。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "整体视觉设计采用现代仪表板风格，配色以蓝色系为主、浅灰背景为辅，搭配红/黄/绿状态色，色彩协调且符合合规监控场景。布局结构清晰：页头、三栏主内容、页脚层次分明；规则构建器、KPI统计卡、实时警报列表和趋势图模块组织合理。组件细节较专业，卡片圆角、阴影、输入框焦点环和按钮悬停效果均符合Tailwind设计规范，视觉上具备一定的精致感。\n\n扣分点：1) Compliance Trend 的条形图实现存在 CSS 高度塌陷风险——柱条内部使用百分比高度，但父容器没有确定高度，可能无法正确渲染出可视柱体，影响核心数据图表的呈现；2) 字体未自定义，默认字体略显普通，缺少品牌个性；3) 按钮“New Rule”和“Create Rule”点击无实际交互，虽然是可选项，但作为监控工具页面会削弱完成度。总体上距离高质量现代界面还有提升空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_011563.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Rule",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Create Rule",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "text",
+      "tag": "input",
+      "text": "",
+      "href": null,
+      "type": "text",
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "typed": "测试",
+      "fill_method": "playwright",
+      "enter_pressed": true,
+      "pixels_changed": false
+    }
+  ]
+}

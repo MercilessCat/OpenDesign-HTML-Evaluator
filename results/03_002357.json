@@ -1,0 +1,90 @@
+{
+  "row_id": "03_002357",
+  "shard": 3,
+  "id": 2357,
+  "category": "Game dev",
+  "prompt": "Create a celestial exploration game platform where players adjust virtual telescopes to reveal hidden cosmic wonders. Users compete in challenges to achieve the clearest view of distant galaxies, unlocking educational insights and earning rewards for accuracy. Features include real-time star charts, community leaderboards, and collaborative astronomy missions.",
+  "html_len": 18623,
+  "html_sha256": "8395664470b6f616e907fc4f99d2b41311346145948e54bdcffde410b16ced74",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击BEGIN EXPLORATION开始探索",
+        "expected": "开始屏幕隐藏，进入挑战设置界面",
+        "evidence": "探针点击该按钮后DOM有变化且无新增JS错误；HTML/JS中startBtn监听器会隐藏startScreen并显示gameScreen，反馈正确",
+        "ok": 1
+      },
+      {
+        "name": "点击START CHALLENGE开始挑战",
+        "expected": "进入望远镜操作视图，显示星空、控制面板、排行榜，并启动60秒倒计时",
+        "evidence": "playBtn绑定startGameplay()，会切换视图、重置滑块、启动setInterval计时器并更新分数展示，事件绑定和函数逻辑完整",
+        "ok": 1
+      },
+      {
+        "name": "调整FOCUS/ALIGNMENT滑块",
+        "expected": "望远镜视图中的星星亮度和星系可见度随滑块输入实时变化",
+        "evidence": "focusSlider和alignSlider均绑定input事件调用updateTelescopeView()，函数根据焦点/对齐值修改star和galaxy的opacity，有真实视觉反馈",
+        "ok": 1
+      },
+      {
+        "name": "点击CAPTURE IMAGE捕获图像",
+        "expected": "根据当前对焦和校准质量计算得分，弹出加分通知并重新生成星系",
+        "evidence": "captureBtn绑定captureImage()，计算距离/质量分并更新scoreDisplay，showNotification创建浮动通知，generateGalaxies刷新目标并调用updateTelescopeView()更新视图",
+        "ok": 1
+      },
+      {
+        "name": "完成游戏后查看结果并重新开始",
+        "expected": "倒计时归零后显示最终得分、成就评价和宇宙知识；点击EXPLORE AGAIN可重置回挑战设置界面",
+        "evidence": "startGameplay中的setInterval在timeLeft=0时调用endGame()，显示gameOverScreen并填充finalScore和discoveryInfo；restartBtn绑定重置逻辑，流程完整",
+        "ok": 1
+      },
+      {
+        "name": "查看社区排行榜/参与合作任务",
+        "expected": "展示可交互的社区实时排行榜，或提供合作天文任务的进入入口",
+        "evidence": "leaderboard仅为三行静态写死的HTML条目（AstroExplorer/StarGazer/GalaxyHunter），无数据刷新、提交或排名交互逻辑；合作天文任务没有任何UI入口或相关事件绑定",
+        "ok": 0
+      }
+    ],
+    "reason": "核心单机游戏循环（开始→挑战→调滑块→捕获→结算→重开）5个关键交互全部可用，反馈正确；但需求明确的\"社区排行榜\"仅为静态占位数据、无真实排行榜功能，\"合作天文任务\"完全无入口，构成2个关键需求功能未实现，按评分规则不高于4分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 游戏进行中分数与倒计时显示在隐藏的 gameScreen 中，play 后用户看不到当前得分和剩余时间，无法判断游戏进度与操作结果，反馈严重缺失；2. 目标星系仅以文字名称提示，视野中无任何视觉标记或名称对应关系来指出哪个星团是当前目标，且 targetGalaxy 与 targetGalaxyName 为独立随机选取，名称和实际目标可能不一致，导致用户无法可靠地完成核心任务（瞄准正确星系）。次要瑕疵：滑块无数值/推荐档位提示，用户只能盲目尝试；排行榜为静态数据，协作任务与实时星图等同生态功能未实现；游戏中触发多次 capture 后目标名称与视觉星系匹配混乱，加剧理解负担；缺少操作说明/帮助文字，首次上手不直观。\"",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉吸引力中等偏上。色彩搭配以深蓝紫渐变为主调，符合太空探索主题，背景的线性渐变和三处渐变按钮（如标题的紫蓝渐变）营造了较好的氛围感。布局上，开始屏幕、游戏屏幕、望远镜视野、控制面板和排行榜的定位清晰，主次分明，圆形望远镜视野配合阴影和十字准星具有不错的沉浸感。组件方面，按钮设计有渐变和 hover 发光效果，圆角处理到位；但字体使用了较通用的 Arial，缺少更现代、更具科技感的字体选择，滑块和排行榜样式较为朴素，缺乏细节装饰。CSS 整体功能性较强，但动效较少，层次不丰富，与现代网页设计的精细度还有差距。综合来看，页面视觉完成度较好，主题明确，但在设计专业性和视觉层次上仍有提升空间。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 4.9,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_002357.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "BEGIN EXPLORATION",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

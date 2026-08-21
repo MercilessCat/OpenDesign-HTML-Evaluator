@@ -1,0 +1,161 @@
+{
+  "row_id": "00_034545",
+  "shard": 0,
+  "id": 34545,
+  "category": "3D design",
+  "prompt": "Embark on virtual journeys to cultural heritage sites with an interactive platform that combines 3D tours with historical storytelling. Users can explore sites in detail and engage in augmented reality challenges to learn about history. Features include voice-guided tours, educational quizzes, and a community space for sharing travel stories.",
+  "html_len": 20173,
+  "html_sha256": "19f29497ede38dd486b6ef981a469c10391e4848b6cfc536496c24726d8c9e51",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "3D 场景拖拽旋转",
+        "expected": "用户拖拽后 3D 遗址模型视角应随之旋转/缩放",
+        "evidence": "探针在 canvas 上拖拽后 DOM 有变化、canvas 像素有变化，无 JS 错误；JS 中创建了 Three.js 场景和 OrbitControls 并运行 requestAnimationFrame，3D 交互生效。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Guided Tour 开启导览",
+        "expected": "展示遗址历史信息面板并更新探索进度",
+        "evidence": "tour-btn 绑定 click 事件，点击后 .info-panel 添加 .active，并调用 updateProgress(30)；探针点击后 DOM 变化且无错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Historical Quiz 打开测验",
+        "expected": "弹出历史测验题与选项",
+        "evidence": "quiz-btn 绑定 click 事件，点击后 #quiz-container 添加 .active；探针点击后 DOM 变化且无错误。",
+        "ok": 1
+      },
+      {
+        "name": "选择并提交测验答案",
+        "expected": "提交后应显示对错、得分或下一题",
+        "evidence": "选项点击仅修改背景色；Submit Answer 按钮在源码中没有绑定任何事件，点击后无业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 AR Challenge 开始增强现实挑战",
+        "expected": "进入可交互的 AR 寻宝/收集流程，进度能动态更新",
+        "evidence": "ar-btn 只执行 alert('AR Challenge started! Look around to find hidden artifacts.')；无相机、寻物或收集逻辑，AR 进度条为静态 30%，并非真正实现的 AR 挑战。",
+        "ok": 0
+      },
+      {
+        "name": "使用语音导览",
+        "expected": "点击语音按钮应开始/停止语音讲解",
+        "evidence": ".voice-btn 无 addEventListener，也没有 audio 或 speechSynthesis 调用；页面上只有静态文本 'Voice Guide Active'。",
+        "ok": 0
+      },
+      {
+        "name": "在社区分享旅行故事",
+        "expected": "用户可以输入并发布故事到社区空间",
+        "evidence": "页面仅有静态的 .feed-item 展示两条故事，没有发布框、输入框或分享按钮，该交互入口缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "3D 漫游、信息面板和打开测验等基础交互可用；但语音导览按钮无事件、测验提交无反应、AR 挑战仅弹窗无实际玩法、社区无法发布故事，需求声明的关键功能有 2 项以上未真正实现，按规则不高于 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在 3 个核心可用性问题：\n1. 语音导览按钮（🔊）点击后无任何实际反馈，JS 中未绑定事件，作为页面核心功能之一的语音导览完全不可用。\n2. 历史测验的“Submit Answer”按钮未绑定任何事件，用户选择答案后无法提交，也没有对错反馈，测验流程卡死。\n3. AR 挑战按钮仅弹出 alert 提示“挑战开始”，但场景中并没有可互动的隐藏元素，AR 挑战无法真正进行，属于核心操作无法完成。\n\n次要瑕疵：\n- “guided Tour”按钮文案不规范（首字母小写、前导空格），且导览只是打开已有信息面板，并非真正的分步导览。\n- 探索进度条固定为 30%，不会随用户实际探索动态变化，易误导用户。\n- 社区故事区为静态展示，缺少发布、互动等社区功能（但属于可选模块，不影响主流程）。\n- 加载动画仅按 2 秒延迟隐藏，未真实检测 3D 资源是否加载完成。\n- 3D 场景由简单几何体构成，与“历史故事讲述”的沉浸感预期有差距，整体视觉和动画细节较为粗糙。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较强，采用了深色半透明玻璃拟态（glassmorphism）UI叠加在Three.js 3D场景之上，科技感与沉浸感兼备。色彩搭配以深蓝渐变背景、蓝色（#3498db）和紫色（#9b59b6）为主，辅以半透明黑色面板，整体色调统一且符合文化遗址探索的现代数字产品调性。布局方面，顶部居中标题、底部中央控制栏、右侧信息面板、左侧语音与AR挑战、右下社区动态，元素虽多但分区明确，体量相对均衡，未出现明显错位。字体使用Segoe UI系统字体，层级清晰，标题、正文、按钮字号区分明显，间距合理。CSS设计专业：大量使用圆角、渐变、阴影、透明度过渡，backdrop-filter实现毛玻璃效果，按钮悬停有微动效，进度条渐变填充，细节处理到位。3D场景包含简化斗兽场模型、柱子、树木、云朵，具备阴影和光照，与UI风格基本协调。交互探针显示所有按钮可正常响应，无报错。主要扣分点：同时屏幕上展示的元素过多（标题、三个浮层、控制栏、社区feed、弹窗），在较小屏幕上可能显得拥挤；3D场景的浅蓝天空色与UI深色主题存在轻微割裂感；部分控件（如小型图标按钮）缺乏明确可访问性样式。但整体符合现代网页设计规范，与用户需求的3D设计方向一致。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_034545.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "ⓘ",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "🔊",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "guided Tour",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Historical Quiz",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "AR Challenge",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

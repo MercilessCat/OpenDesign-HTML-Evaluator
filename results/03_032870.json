@@ -1,0 +1,103 @@
+{
+  "row_id": "03_032870",
+  "shard": 3,
+  "id": 32870,
+  "category": "Game dev",
+  "prompt": "Create a mystical navigation game where users guide spirits through an astral projection maze. The site features stunning ethereal landscapes, puzzle-solving challenges, and a narrative-driven experience. Players can unlock new abilities, explore cosmic lore, and connect with a community of astral adventurers.",
+  "html_len": 23400,
+  "html_sha256": "f1ba0562f993b60be66ef32b0c0dcacab77c56819ab452460518580fa9647c4b",
+  "functional": {
+    "score": 5.0,
+    "raw_score": 5.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Begin Astral Journey 开始游戏",
+        "expected": "起始页隐藏，进入游戏界面，出现精灵、障碍、收集物、传送门，HUD 更新",
+        "evidence": "探针点击按钮后 DOM 有变化且无 JS 错误；代码中 startBtn click -> startGame()，隐藏 startScreen、显示 gameScreen，并调用 initGameElements() 创建 .spirit/.obstacle/.collectible/.portal，updateHUD() 更新分数、能力、维度。",
+        "ok": 1
+      },
+      {
+        "name": "用方向键/WASD 移动精灵",
+        "expected": "按住方向键或 WASD 时，精灵在画面中移动并产生粒子拖尾",
+        "evidence": "setupControls() 绑定了 window keydown/keyup，gameLoop 根据按键计算 dx/dy 并调用 moveSpirit()，更新 #playerSpirit 的 style.left/top；createParticleTrail() 生成粒子。代码路径完整，无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "收集灵魂光点",
+        "expected": "精灵靠近黄色光点时，光点消失、得分 +10、HUD 更新并出现收集特效",
+        "evidence": "checkCollisions() 中检测与 .collectible 距离 <25 时执行 element.remove()、score+=10、updateHUD()、createCollectionEffect()，逻辑完整。",
+        "ok": 1
+      },
+      {
+        "name": "到达传送门进入下一维度",
+        "expected": "精灵靠近传送门后等级提升、得分 +50，并重置生成新的迷宫关卡",
+        "evidence": "portal 碰撞分支执行 level++、score+=50、initGameElements()，但 initGameElements() 每次都会再次调用 setupControls()，新增 keydown 监听并启动新的 gameLoop；同时 gameState.portals/obstacles/collectibles 数组没有清理，旧传送门仍被碰撞检测。多个 gameLoop 会",
+        "ok": 0
+      },
+      {
+        "name": "游戏结束后重新开始",
+        "expected": "游戏结束页隐藏，分数/等级/能力重置并重新开局",
+        "evidence": "restartBtn click -> restartGame()，将 score、level、abilities、spiritPosition 重置，隐藏 gameOverScreen 并调用 startGame()，代码路径完整。",
+        "ok": 1
+      },
+      {
+        "name": "分享成就",
+        "expected": "点击 Share Achievement 后弹出分享成功提示",
+        "evidence": "shareBtn click -> alert('Achievement shared to astral community!')，有明确反馈。",
+        "ok": 1
+      }
+    ],
+    "reason": "开局、移动、收集、重开和分享均可工作，但到达传送门升级这一核心进度交互会因重复绑定、多个 gameLoop 叠加且状态数组未清理而失控，属于核心交互失败。另外能力解锁、社区连接、解谜等内容仅静态展示，没有真正交互，因此整体只能算部分可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 1.5,
+  "baseline_overall": 1.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_032870.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Astral Journey",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

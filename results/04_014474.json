@@ -1,0 +1,182 @@
+{
+  "row_id": "04_014474",
+  "shard": 4,
+  "id": 14474,
+  "category": "Website",
+  "prompt": "Enter a visionary platform where users exchange and visualize their karma holographically. This digital forum allows exploration of personal growth, offering mindfulness resources and community interactions. Users can track and share their karmic journey, fostering a sense of collective enlightenment and personal development.",
+  "html_len": 25083,
+  "html_sha256": "4d7e38e6fc4ca591898b7f80384fd3c1139db902f39fe7240cd81565edf7fb0b",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接 Dashboard",
+        "expected": "切换到 Dashboard 板或对应内容视图",
+        "evidence": "链接 href=\"#\"，探针点击后虽有 DOM 变化但无新增网络请求、无路由跳转，页面内容未切换，属纯占位死链",
+        "ok": 0
+      },
+      {
+        "name": "点击导航链接 Community",
+        "expected": "跳转到社区页面或展示社区内容",
+        "evidence": "链接 href=\"#\"，无路由关联，点击仅产生样式层变化，未加载任何社区内容，需求声明的社区互动入口未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 登录按钮",
+        "expected": "打开登录表单或进入登录流程",
+        "evidence": "按钮无任何事件绑定，探针点击后 DOM 无变化、无网络请求，完全无反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Your Journey 主 CTA 按钮",
+        "expected": "进入核心的业力追踪/可视化旅程流程",
+        "evidence": "按钮无 onclick 或事件监听，探针点击（含 JS click 兜底）后 DOM 无变化、无反馈，核心功能入口未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Community 按钮",
+        "expected": "展示社区成员/互动内容",
+        "evidence": "按钮未绑定任何事件，探针点击后 DOM 无变化，无内容出现，需求中的社区交互完全缺失",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Full Hologram 按钮",
+        "expected": "展开全息业力可视化界面（3D 交互）",
+        "evidence": "按钮无事件绑定，HTML 中无对应处理逻辑；karma-visualizer 仅由 JS 生成静态 CSS 动画占位，无可交互的 3D/全息功能",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为纯静态展示落地页：所有主导航均为 href=\"#\" 死链，Sign In、Start Your Journey、Explore Community、View Full Hologram 等关键按钮均无事件绑定，点击零反馈；需求声明的业力可视化、社区互动、个人成长追踪等核心功能全部未实现，仅剩静态宣传文案与 CSS 动画。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在多个核心可用性问题：页面主要入口均无实际功能——'Sign In'无任何反馈；'Start Your Journey'和'Create Free Account'作为核心转化按钮点击后既无跳转也无表单/弹窗，无法完成注册或开始旅程；'Explore Community'、'View Full Hologram'、'Watch Demo'以及多个'Learn more →'链接同样无实际响应；导航中的Dashboard/Community/Resources/Explore仅是可点击占位，未通向真正内容。核心操作无法完成，页面只能浏览不能使用。次要瑕疵：所谓'全息可视化'实际为静态CSS动画，无可交互的数据可视化；'Karma'数据来源与计算方式缺少说明；移动端汉堡菜单未实现展开逻辑；落地的视觉与信息层级是加分项，但救不了根本性的交互失效。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面在视觉设计上具有很高的专业水准，整体风格与现代深色系科技产品高度契合，完美贴合了用户关于“全息业力交换平台”的愿景。色彩搭配以深空蓝紫渐变为主体，辅以青蓝与紫罗兰的渐变点缀，营造出神秘、宁静且充满未来感的氛围。布局上层次分明：导航栏简洁清晰，Hero区居中突出核心信息，统计卡片、功能卡片、可视化区和用户评价均采用玻璃态卡片设计，配合全息渐变边框，视觉统一性强。字体选用Inter，通过粗细与透明度控制层级，严谨舒适。CSS细节到位，包括发光效果、悬浮动画、渐变文字、交互动效等，同时用Three.js生成粒子背景和动态可视化，虽为占位实现，但展现了较强的开发与美学功底。主要扣分点在于页面缺少真实图像素材，图标和渐变占据主导，显得略显单一；且部分交互按钮无明确反馈（如导航链接跳转空白页），在实际设计中会略影响体验。但整体视觉远超一般模板水平，符合现代网页设计规范。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_014474.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Your Journey",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Learn more →",
+      "href": "#",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

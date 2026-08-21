@@ -1,0 +1,91 @@
+{
+  "row_id": "02_031140",
+  "shard": 2,
+  "id": 31140,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Explore a website offering interactive visual tools to analyze and reduce DDoS vulnerabilities. Users can simulate attacks, assess network defenses, and explore heat maps of risk areas. The site provides real-time threat monitoring and personalized security strategies, fostering a comprehensive understanding of DDoS mitigation techniques.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 6295,
+  "html_sha256": "57cae453bf3b6d07c564bea87fdb954fa2b0b1be022735ec3c388c181debe3cf",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Simulate Attack 按钮",
+        "expected": "触发攻击模拟，威胁列表、策略、热图、防御指标同步更新",
+        "evidence": "探针点击后 DOM 有变化，且无新增 JS 错误；HTML 中 simulateBtn 绑定了 click 事件，会更新 threatList、strategyList、heatmap 内文字及进度条宽度",
+        "ok": 1
+      },
+      {
+        "name": "点击 Reset 按钮",
+        "expected": "恢复初始状态，清空威胁、重置策略、热图和防御指标，滑块回到默认值",
+        "evidence": "探针点击后 DOM 有变化；resetBtn 的 click 监听会将各区域恢复为初始内容，并将滑块重置为 30",
+        "ok": 1
+      },
+      {
+        "name": "拖动 Attack Intensity 滑块",
+        "expected": "调整攻击强度并影响模拟结果、热力图或防御指标",
+        "evidence": "HTML 中 intensitySlider 只有输入框原生属性，没有绑定 input/change 事件，也没有任何代码读取其值；拖动只会改变滑块自身位置，不会产生业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "探索风险热力图",
+        "expected": "提供可交互的热力图，展示风险区域并允许用户查看/探索",
+        "evidence": "heatmap 只是一个带渐变背景的 div，初始显示占位文字“Interactive heatmap display”；没有 canvas、WebGL、鼠标或触摸事件，Simulate 后也只是替换成文字描述，不具备真正的热力图交互能力",
+        "ok": 0
+      }
+    ],
+    "reason": "Simulate Attack 和 Reset 两个核心按钮均能正确更新页面，但攻击强度滑块无任何事件绑定，调整后不影响模拟；风险热力图仅为文字占位，不是可交互的可视化图表。需求中关键交互存在 2 项未实现，因此功能分不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：攻击强度滑块（intensitySlider）调节完全无效——拖动滑块时页面无任何反馈，且点击『Simulate Attack』后模拟结果与滑块取值无关，不同攻击强度下防御条、威胁列表、策略内容均完全一致，导致核心模拟控制不可用。\n次要瑕疵：1）热力图区域仅显示占位文本『Interactive heatmap display』，并非真正的交互式热力图，模拟攻击后也只是文字描述，缺少实际的数据可视化呈现；2）页面宣称『Real-Time Threat Monitoring』，但威胁列表只在点击按钮时更新，没有实时自动更新机制；3）缺少图例和帮助文字，如进度条颜色含义、威胁等级、滑块当前数值等不明确；4）『Interactive heatmap display』文案暗示可交互但实际无任何交互能力；5）个性化策略并未根据攻击强度或用户操作动态生成，仅是预设列表切换。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉风格现代且专业，采用深色主题（灰色-900背景）搭配蓝红渐变热力图区域，与“DDoS防御可视化”的网络安全主题高度契合。色彩搭配协调：主色为深蓝、红色与灰色，辅以绿/黄/蓝进度条，对比度适中，信息清晰。布局为典型的三栏卡片式结构，顶部页头、中部主内容、底部页脚，层级分明，符合单页仪表盘设计模式。字体使用系统字体栈（Segoe UI等），可读性好；卡片圆角、阴影和悬停上浮效果增强了精致感。HTML/CSS使用了Tailwind CSS框架，代码规范，组件样式统一，具备现代UI设计特征。不过，页面视觉丰富度有限：所谓的“热力图”区域仅显示文本，没有真正的可视化图表；整体元素偏静态，缺少数据可视化常见的图表、动画或SVG图形，视觉冲击力一般。进度条作为核心可视化元素略显单薄。因此整体美观度良好，但未达到顶级数据可视化作品的视觉效果。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.2,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_031140.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Simulate Attack",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

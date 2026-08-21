@@ -1,0 +1,105 @@
+{
+  "row_id": "01_024615",
+  "shard": 1,
+  "id": 24615,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create a seamless authentication interface that enhances security while prioritizing user experience. Users navigate through adaptive security challenges, biometric options, and personalized prompts. The platform ensures secure access with minimal friction, balancing robust protection with user-friendly design.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12629,
+  "html_sha256": "0591e6025e1a24c3d97f8c4ccec96f4fb95dca77f69179c8b97f31f885002d69",
+  "functional": {
+    "score": 9.0,
+    "raw_score": 9.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Continue Securely 继续认证",
+        "expected": "从账号密码步骤切换到自适应安全挑战步骤",
+        "evidence": "探针点击该按钮后 DOM 有变化，无 JS 错误；HTML 中 onclick 调用 nextStep(2)，函数隐藏当前步骤并显示 step2",
+        "ok": 1
+      },
+      {
+        "name": "选择自适应挑战方式（Pattern Lock / Security Question）",
+        "expected": "选中的挑战卡片高亮显示",
+        "evidence": "HTML 中两个挑战按钮均绑定 onclick=\"selectChallenge(...)\"，函数会切换 border-primary 和 bg-blue-50 类；运行时无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击 Proceed to Biometrics",
+        "expected": "从安全挑战步骤进入生物识别步骤",
+        "evidence": "按钮绑定 onclick=\"nextStep(3)\"，nextStep 正确切换隐藏类并更新安全等级；无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "选择生物识别方式（指纹 / 人脸）",
+        "expected": "选中项高亮，并短暂显示加载动画模拟认证",
+        "evidence": "两个生物识别按钮绑定 onclick=\"authenticate(...)\"，函数会切换高亮类并将图标替换为 spinner 后再恢复；无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击 Complete Authentication 完成认证",
+        "expected": "显示 Access Granted 成功界面，安全等级达到 100%",
+        "evidence": "按钮绑定 onclick=\"completeAuth()\"，函数隐藏当前步骤并显示 success 区块，同时更新安全进度条；无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击 Authenticate Again 重置流程",
+        "expected": "从成功界面重置回第一步账号密码输入",
+        "evidence": "按钮绑定 onclick=\"resetAuth()\"，函数隐藏成功界面、显示 step1，并清除所有选中高亮和重置安全等级；无 JS 错误",
+        "ok": 1
+      }
+    ],
+    "reason": "页面的多步骤认证流程完整可交互：从凭据输入、自适应挑战、生物识别到成功完成，所有关键按钮均有正确反馈且无 JS 错误。仅邮箱输入框直接回车无提交行为，属于轻微键盘体验瑕疵，不影响核心流程，因此扣 1 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）核心验证可被跳过：Step 1 邮箱/密码为空或格式错误时，“Continue Securely”仍直接进入下一步；Step 2 不选任何挑战也可“Proceed to Biometrics”；Step 3 不选生物识别也可“Complete Authentication”进入成功页，导致认证流程形同虚设。2）缺少输入校验与错误反馈：用户输入非法内容后点击继续无任何提示，输入框回车也无响应，用户无法判断操作是否被接受。3）安全等级进度条反馈失真：进度条仅随步骤切换机械增加，与用户是否完成挑战/生物识别无关，未做选择也会变绿，给用户错误的安全感。次要瑕疵：流程中没有返回上一步的入口，中途无法回退修改信息；挑战/生物识别选项仅高亮，未说明选中状态；生物识别模拟只有加载动画，没有明确成功/失败反馈。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "整体视觉吸引力较好：页面采用现代简洁的居中卡片式布局，蓝色渐变头部搭配浅蓝背景，在视觉上营造出安全、可信赖的科技感；色彩以蓝、白、灰为主，辅以绿色/黄色安全进度反馈，配色和谐统一，符合认证类界面的行业惯例。\n\n布局方面，卡片内部分为头部、安全等级进度条、分步内容区域和页脚信息条，层级清晰，垂直方向留白与间距舒适；输入框、按钮、可点击的挑战/生物识别选项在尺寸、圆角、图标和悬浮态上都保持了良好的一致性，组件打磨较完整。\n\n排版使用 Inter 字体，标题、说明和辅助信息字号层级合理，可读性强；输入框带有图标、按钮带后缀图标、进度条动态切换颜色等细节都增加了界面的专业感和精致度。\n\n不过，步骤切换虽然定义了 transition，但由于直接用 hidden 切换 display，实际切换动画不会生效，稍显生硬；整体风格偏向主流但较模板化，视觉记忆点略弱。若在背景微交互或步骤过渡中加入更细腻的动效，会更有高级感。",
+    "attempts": 2
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_024615.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Continue Securely",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "text",
+      "tag": "input",
+      "text": "",
+      "href": null,
+      "type": "email",
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "typed": "测试",
+      "fill_method": "playwright",
+      "enter_pressed": true,
+      "pixels_changed": false
+    }
+  ]
+}

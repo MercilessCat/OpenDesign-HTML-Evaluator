@@ -1,0 +1,176 @@
+{
+  "row_id": "01_015221",
+  "shard": 1,
+  "id": 15221,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Develop an interactive visualization tool for mapping device networks. The site enables users to explore connectivity patterns, identify bottlenecks, and optimize performance through data-driven insights. It serves IT professionals by offering real-time network monitoring, predictive diagnostics, and collaborative dashboards for streamlined operations.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14162,
+  "html_sha256": "6a34650b7100e8c61b781a8b0e3668c41849ff0e1cf6ac195390cbfbd7888559",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击网络拓扑节点",
+        "expected": "节点被选中/高亮，便于查看设备信息",
+        "evidence": "HTML 中 .network-node 绑定了 click 事件，点击会切换 ring-4/ring-white 高亮样式；运行时无 JS 错误，节点点击有视觉反馈。",
+        "ok": 1
+      },
+      {
+        "name": "顶部导航 Dashboard/Analytics/Alerts/Settings",
+        "expected": "切换到对应板块或页面",
+        "evidence": "探针点击后虽然出现页面跳转，但所有导航链接均为 href=\"#\"，无实际路由或内容切换，属于纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Refresh 刷新按钮",
+        "expected": "刷新网络监控数据并产生反馈",
+        "evidence": "探针点击 Refresh 后 DOM 变化=无，新增网络请求=0，JS 错误=0；按钮没有绑定点击处理逻辑，点击无实际刷新功能。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Real-time / Predictive 模式切换按钮",
+        "expected": "切换实时监控/预测诊断模式",
+        "evidence": "探针点击后 DOM 变化=无，新增 JS 错误=0；代码中也没有任何模式切换逻辑，两个按钮只是静态标签。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Quick Actions 中的 Optimize/Analyze/Alerts/Settings",
+        "expected": "执行优化、分析、告警或设置操作",
+        "evidence": "探针点击 Optimize 后 DOM 变化=无，其余按钮也无事件绑定；Quick Actions 只呈现按钮外观，未实现任何实际功能。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上完成了网络仪表盘的静态展示，但作为“交互式可视化工具”，核心交互大面积失效：导航为 href=\"#\" 占位，Refresh、Real-time/Predictive、Quick Actions 等关键操作按钮均无事件或点击无反馈，仅有拓扑节点点击高亮可用。主要任务（刷新数据、切换模式、执行优化/分析）无法完成，因此功能性评分较低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 顶部导航（Dashboard/Analytics/Alerts/Settings）为占位链接（href=\"#\"），点击后仅回到页面顶部，无法切换到任何目标视图或内容，属于主要入口无实际反馈。\n2. Refresh 按钮点击后无任何视觉/功能反馈，用户无法判断刷新是否成功。\n3. Real-time / Predictive 模式切换按钮点击后无任何响应，无法切换实时监控或预测诊断模式，也没有当前模式选中态。\n4. Quick Actions 中的 Optimize 等核心操作按钮无点击事件，点击后不执行任何动作，优化/分析等核心流程是死路。\n\n次要瑕疵：\n1. 网络图中节点只有图标，没有可见文本标签，快速识别设备主要依赖 title 悬停提示。\n2. 点击节点后的高亮（白圈）效果缺少说明，用户可能不理解其含义。\n3. Bottlenecks 指标只显示数字，没有在拓扑图上可视化定位或提供进一步操作入口。\n4. 页脚写“Data refreshes every 30 seconds”但脚本实际每 5 秒更新一次，信息不一致。\n5. 图标类按钮缺少 aria-label 等可访问性标注。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，采用深色调与蓝色系渐变背景，符合现代网络运维工具的专业定位。色彩搭配合理：主题蓝、辅助紫/绿/黄在暗底上对比清晰，节点状态与类型可辨识度高。布局协调：左右两栏网格结构，左侧大篇幅网络拓扑图与右侧三块性能卡片保持视觉平衡，信息层级分明。组件设计质量较好：卡片圆角、阴影、悬停微动效、节点呼吸动画、图例等细节提升了精致感。CSS基于Tailwind框架，类名语义化，整体规范专业，符合现代暗色Dashboard设计趋势。扣分点：网络拓扑中的连接线为静态SVG直线，视觉上略显简陋；未自定义字体，导致文字表现力一般；部分按钮无实际交互反馈，但影响较小。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_015221.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Alerts",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Settings",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Refresh",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Real-time",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Predictive",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Optimize",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-bolt text-xl mb-1",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "row_id": "00_024775",
+  "shard": 0,
+  "id": 24775,
+  "category": "3D design",
+  "prompt": "Create an intuitive platform transforming complex data into interactive visuals for financial analysis. Users can customize graphs, apply filters, and explore data trends in 3D space. Include integration with financial databases, real-time updates, and collaborative tools for team analysis. Provide insights through expert-led webinars on data visualization.",
+  "html_len": 19806,
+  "html_sha256": "9cfea751cefb91b152421ec92c7198a9acdcd73bef0460275da31105d52b76ae",
+  "functional": {
+    "score": 3.0,
+    "raw_score": 3.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击“Start Free Trial”开始试用",
+        "expected": "进入注册/试用流程，如弹出表单、跳转或产生反馈",
+        "evidence": "探针点击后 DOM 无变化、无新增网络请求；HTML 中该 button 无事件绑定，属于纯展示占位。",
+        "ok": 0
+      },
+      {
+        "name": "使用 3D 可视化控件（旋转/缩放）",
+        "expected": "3D 场景中数据立方体旋转、镜头缩放/复位",
+        "evidence": "JS 为 rotateBtn/zoomInBtn/zoomOutBtn/resetBtn 绑定了操作 scene/camera 的事件；运行时无 JS 错误；探针无法直接验证 WebGL 像素，但依据 requestAnimationFrame + 事件绑定规则视为可交互。",
+        "ok": 1
+      },
+      {
+        "name": "自定义图表或应用数据筛选",
+        "expected": "图表类型、指标或数据范围可调整并实时更新",
+        "evidence": "页面无任何输入框、下拉筛选或图表配置控件（input=0），Chart.js 图表为静态初始化，无法自定义或筛选。",
+        "ok": "NA"
+      },
+      {
+        "name": "连接金融数据库/实时更新",
+        "expected": "接入数据源后图表随市场数据实时刷新",
+        "evidence": "仅有 feature-card 中的宣传文案，未实现任何数据库连接、WebSocket、轮询或实时数据更新逻辑。",
+        "ok": "NA"
+      },
+      {
+        "name": "使用协作工具进行团队分析",
+        "expected": "可分享可视化、添加评论/标注或协作编辑",
+        "evidence": "页面没有分享、邀请、评论、标注等协作入口，仅有“Collaborative Tools”的功能卡片，无实际功能。",
+        "ok": "NA"
+      },
+      {
+        "name": "报名专家网络研讨会",
+        "expected": "可查看详情或注册/预约研讨会",
+        "evidence": "webinar-card 均为普通 div，没有注册按钮或链接，也没有点击事件处理，无法完成报名。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面仅实现了 3D 演示旋转/缩放和两个静态 Chart.js 图表，3D 探索可用；但“自定义图表/筛选、金融数据库实时集成、协作工具、研讨会注册”等需求均未实现，且 Start Free Trial 为死按钮。主要任务无法完成，整体更像静态展示页，功能分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 5.0,
+    "reason": "核心可用性问题（1个）：\n- “Start Free Trial”是页面的主要转化操作按钮，但点击后完全没有反馈（无事件处理、无页面变化、无网络请求），用户无法完成注册或试用流程，属于主要入口点击无实际反馈。\n\n次要瑕疵：\n- 3D可视化中的“Rotate View”按钮语义与效果不符：点击后只是给各个立方体增加一次旋转角度，而立方体本身一直在自动旋转，用户很难感知点击是否生效；并且没有提供拖拽/轨道控制，无法真正自由探索3D视图。\n- 3D场景中的立方体是随机颜色和随机大小，没有图例、标签或数据含义说明，用户无法理解这些立方体代表什么财务指标，信息可读性不足。\n- 页面展示了“自定义图表、筛选器、实时数据集成”等能力文案，但页面上没有任何筛选、选择或自定义控件，功能仅停留在营销描述层面。\n- 导航栏“Home”链接指向不存在的 #home 锚点，虽然页面在顶部时无实际影响，但锚点目标缺失是明显细节问题。\n- 网络研讨会卡片仅为静态信息展示，没有注册/报名入口，属于可优化项。\n\n页面整体结构清晰、视觉风格统一，导航锚点跳转正常，2D图表（Chart.js）渲染正常，但如果用户以“先体验平台”为目标，最终会卡在无法注册试用这一步，因此判定为“能用但不好用”。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面整体视觉设计专业且富有现代感。色彩搭配上，采用深蓝灰色渐变背景（#0f2027→#2c5364）营造出沉稳的金融科技氛围，主色调蓝绿渐变（#00c9ff→#92fe9d）作为强调色，醒目且统一，符合金融数据可视化平台的定位。布局结构清晰，依次为导航、Hero区、功能卡片、3D可视化区、图表区、Webinar区和页脚，信息层级分明，视觉重心合理。字体使用Segoe UI等无衬线字体，可读性好，标题与正文的字号、字重区分明显。组件设计上，卡片采用半透明背景、毛玻璃效果（backdrop-filter）和悬停上浮阴影，细节精致；按钮、导航均有圆角和过渡动画，交互反馈自然。CSS运用了渐变、阴影、圆角、Flex/Grid布局、响应式媒体查询等现代设计手段，整体设计规范且成熟。3D场景（Three.js立方体阵列）与Chart.js图表嵌入页面，增强了视觉丰富度，符合用户要求的3D设计风格。扣分点在于部分按钮（如“Start Free Trial”）点击无实际响应，且3D立方体颜色随机导致视觉稍显杂乱，但瑕不掩瑜，整体视觉吸引力与设计质量较高。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 6.0,
+  "baseline_overall": 5.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_024775.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Visualizations",
+      "href": "#visualizations",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Webinars",
+      "href": "#webinars",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Contact",
+      "href": "#contact",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Free Trial",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Rotate View",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Zoom In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

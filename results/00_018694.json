@@ -1,0 +1,181 @@
+{
+  "row_id": "00_018694",
+  "shard": 0,
+  "id": 18694,
+  "category": "3D design",
+  "prompt": "Create a user-friendly interface for navigating complex 3D scenes on the web. Implement intuitive controls, customizable views, and collaborative tools for scene editing. Offer a tutorial section and user community for sharing tips and techniques, enhancing the accessibility of 3D content creation.",
+  "html_len": 19511,
+  "html_sha256": "d86a0183933e812f3ff4f67a69a9a420e5f83ee85568670d18210dee211c6705",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "3D 场景导航（拖拽旋转/滚轮缩放）",
+        "expected": "视角随鼠标操作变换，场景可交互浏览",
+        "evidence": "HTML 中引入了 three.js r128 与 OrbitControls，并通过 init() 创建 Scene/Camera/Renderer，controls 绑定到 canvas；运行时无 JS 错误、无资源加载失败，动画循环正常启动，符合可交互 3D 场景判定条件。",
+        "ok": 1
+      },
+      {
+        "name": "点击 ☰ 折叠/展开侧边栏",
+        "expected": "侧边栏收起或展开",
+        "evidence": "探针点击后 DOM 发生变化，HTML 中 menuToggle 绑定了 sidebar.classList.toggle('collapsed') 事件，反馈符合预期。",
+        "ok": 1
+      },
+      {
+        "name": "点击 ? 打开/关闭教程面板",
+        "expected": "教程面板滑入/滑出显示",
+        "evidence": "探针点击后 DOM 发生变化，HTML 中 tutorialToggle 绑定了 tutorialPanel.classList.toggle('visible')，教程步骤内容完整，反馈正确。",
+        "ok": 1
+      },
+      {
+        "name": "点击 👥 打开/关闭社区面板",
+        "expected": "社区技巧面板滑入/滑出显示",
+        "evidence": "探针点击后 DOM 发生变化，HTML 中 communityToggle 绑定了 communityPanel.classList.toggle('visible')，面板含三条社区技巧，反馈正确。",
+        "ok": 1
+      },
+      {
+        "name": "点击工具栏编辑按钮（添加对象/编辑模式/保存场景/导出）",
+        "expected": "触发对应编辑或保存功能，例如新增 3D 对象、切换编辑模式或触发导出流程",
+        "evidence": "探针依次点击 Add Object、Edit Mode、Visibility、Save Scene、Export 后 DOM 均无变化、无新增 JS 错误；HTML 中也未给这些 button 绑定任何事件监听器，属于纯占位按钮，核心编辑功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "切换视图选项（透视/正交/自定义相机）",
+        "expected": "相机投影或视角随之切换，体现可自定义视图",
+        "evidence": "HTML 中这些导航项仅绑定 classList 的 active 切换，探针未覆盖点击，但代码层面没有任何 camera 类型切换或视图更新逻辑；点击后仅高亮样式变化，实际视图不会改变，属于占位入口。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面真实渲染了可用的 Three.js 3D 场景，并支持 OrbitControls 交互；侧边栏、教程面板、社区面板三个切换功能均正常。但需求中关键的场景编辑功能（添加对象、编辑模式、保存、导出）均为无事件绑定的死按钮；透视/正交/自定义相机等视图定制入口也只是样式高亮占位；协作工具（共享场景、实时聊天、版本控制）同样无实际功能。多个核心入口未实现，符合'需求声明的关键入口≥2个未实现'，故总分不超过4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 工具栏核心操作按钮（Add Object、Edit Mode、Visibility、Save Scene、Export）点击后均无任何响应和反馈，核心编辑/保存/导出流程无法完成；2. 侧边栏导航项（Mouse Controls、Keyboard Shortcuts、Touch Gestures、Perspective View、Orthographic View、Custom Cameras、Share Scene、Live Chat、Version Control）点击后仅切换高亮状态，不改变页面内容、不打开对应面板，主要导航入口是死路；3. 自定义视图、协作分享等关键功能实际未实现，用户无法完成任务目标。次要瑕疵：教程面板和社区面板可以开关，但内容为静态展示，无法真正参与社区互动；保存/导出按钮无成功或失败提示，用户无法判断操作是否生效；缺少键盘快捷键等帮助内容的实际展示；响应式小屏下侧边栏折叠体验不够完善。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力较高，采用了深蓝渐变背景搭配青色与绿色高亮，符合3D设计工具的专业科技感。色彩搭配合理，主色（#00c9ff、#92fe9d）与深色背景形成良好对比，视觉层次分明。布局上，侧边栏、工具栏、场景画布和状态栏的结构清晰，主次分明；浮动的教程和社区面板通过玻璃拟态效果和圆角设计提升了现代感。字体使用Segoe UI系列，间距和组件圆角统一，按钮和导航项都有细腻的悬停过渡，交互反馈明确。CSS运用了flex布局、backdrop-filter、渐变等现代技术，整体设计风格与用户需求的3D场景编辑工具对齐。扣分点：部分按钮（如Add Object、Save Scene）点击后无实际视觉或功能反馈，且使用emoji作为图标在不同平台上渲染效果不一致，略微影响专业度；侧边栏折叠时位移与宽度差1像素，可能产生细微边缘可见问题。但整体视觉质量优秀，符合现代网页设计规范。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.5,
+  "baseline_overall": 5.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_018694.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "➕\nAdd Object",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "✏️\nEdit Mode",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "👁️\nVisibility",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "💾\nSave Scene",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "📤\nExport",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "☰",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "?",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "👥",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "row_id": "05_044973",
+  "shard": 5,
+  "id": 44973,
+  "category": "Website",
+  "prompt": "Empower critical thinking with a platform dedicated to unraveling misinformation. Users can explore fact-checked articles, watch educational videos, and participate in discussions with experts. The site includes a myth-busting toolkit and an interactive timeline of historical conspiracies, fostering a community committed to promoting truth and informed discourse.",
+  "html_len": 27693,
+  "html_sha256": "2932160d4e4ed6af5015043daf3cd51717d16eeddb7824f9094eb2d345abc68b",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1586769852044-697e72d198a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1586769852044-697e72d198a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1586769852044-697e72d198a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1586769852044-697e72d198a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1586769852044-697e72d198a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1586769852044-697e72d198a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1586769852044-697e72d198a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1586769852044-697e72d198a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1586769852044-697e72d198a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [
+      "Failed to execute 'querySelector' on 'Document': '#' is not a valid selector."
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_044973.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "TruthLens",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "SPAN.text-xl font-bold",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#resources",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Contact",
+      "href": "#contact",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Community",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Resources",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

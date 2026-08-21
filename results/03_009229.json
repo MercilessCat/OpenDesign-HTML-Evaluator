@@ -1,0 +1,181 @@
+{
+  "row_id": "03_009229",
+  "shard": 3,
+  "id": 9229,
+  "category": "Game dev",
+  "prompt": "Unleash your creativity by combining mythical creature DNA to design unique hybrids. Use an interactive DNA lab, creature habitat simulator, and a global hybrid showcase. Users can evolve their creatures, engage in community challenges, and even trade DNA strands for rare species discoveries.",
+  "html_len": 24586,
+  "html_sha256": "f6e4caeaf84d67a17680f4189a6623a5c2c2f66c90fbd154c6c547688779aea9",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Combine DNA 组合DNA",
+        "expected": "消耗能量，增加得分和已合成数量，触发粒子/动画反馈，更新统计面板",
+        "evidence": "探针点击后 DOM 变化=有，新增 JS 错误=0；HTML 中 combineBtn 绑定 combineDNA()，会更新 score/hybrids/energy 并调用 animateCreature/createParticles。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Evolve Creature 进化",
+        "expected": "消耗能量，增加得分，随机提升四维属性并刷新属性条，产生粒子效果",
+        "evidence": "探针点击后 DOM 变化=有，无 JS 错误；HTML 中 evolveBtn 绑定 evolveCreature()，逻辑完整，属性条和能量会更新。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Trade DNA 交易DNA",
+        "expected": "消耗能量，增加得分，重新生成 DNA 序列并给出粒子反馈",
+        "evidence": "探针点击后 DOM 变化=有，无 JS 错误；HTML 中 tradeBtn 绑定 tradeDNA()，会重置 dnaSequence 并重新初始化 DNA 链。",
+        "ok": 1
+      },
+      {
+        "name": "点击 DNA 碱基修改序列",
+        "expected": "碱基文字和颜色在 A/T/G/C 间循环切换，并出现缩放动画",
+        "evidence": "HTML 中每个 .base 元素绑定了 click 事件，调用 cycleBase() 修改文本、背景色并做 scale 动画；未发现 JS 报错。",
+        "ok": 1
+      },
+      {
+        "name": "切换栖息地环境（Forest/Ocean/Desert/Sky）",
+        "expected": "点击后栖息地背景/氛围发生变化，模拟对应环境",
+        "evidence": "HTML 中四个环境按钮没有任何 addEventListener 或业务绑定；探针捕获的 DOM 变化来自页面定时生成的栖息地粒子等异步效果，而非按钮反馈。栖息地实际不会切换到对应环境。",
+        "ok": 0
+      },
+      {
+        "name": "加入社区挑战（Join）",
+        "expected": "点击 Join 后加入挑战，显示参与状态或领取奖励",
+        "evidence": "两个 Join 按钮没有事件绑定和后续逻辑，点击不会产生任何业务反馈；探针的 DOM 变化只是 hover/focus 样式层或页面其他异步粒子效果。",
+        "ok": 0
+      }
+    ],
+    "reason": "DNA 实验室核心玩法（组合、进化、交易、碱基编辑）均正常实现且可响应；但栖息地环境切换按钮和社区挑战 Join 按钮均为无事件绑定的死入口，需求中明确提到的 habitat simulator 和 community challenges 两部分关键功能未真正实现，因此按评分规则扣至 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. DNA 组合核心操作未真正实现——用户点击 DNA 碱基后，Combine DNA 只随机增加分数/数量，不读取所选序列，3D 生物外形与属性也不会因此改变，无法完成“设计独特杂交生物”的核心目标；2. 栖息地模拟器的 Forest/Ocean/Desert/Sky 四个环境按钮没有绑定任何事件，点击无实际效果，核心控件调节无效；3. Community Challenges 中 Join 按钮也无实际响应，形成死路。次要瑕疵：Global Hybrid Showcase 为静态展示，不能查看/点赞/分享；缺少 DNA 组合规则和能量消耗说明；Evolve/Trade DNA 的命名与行为略有出入（进化不改变外观、交易只是随机重置序列）；视觉效果（粒子、呼吸动画）良好，但不能弥补核心交互缺失。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "页面整体呈现了强烈的'科幻基因实验室'气质，与游戏开发的需求主题高度契合。主背景采用深蓝与红色的斜向渐变为基底，配合青色发光文字、半透明毛玻璃卡片、彩色DNA碱基粒子、Three.js 3D生物模型等元素，构建了完整的沉浸式视觉体系。信息层级清晰：标题区→四格统计面板→核心操作台（DNA组合+生物展示+属性条）→栖息地模拟器→全球展示与社区挑战，布局符合游戏仪表盘的逻辑，用户可快速定位功能。组件设计统一，卡片圆角、阴影、悬浮动效均保持一致的风格，按钮使用渐变+发光效果，交互反馈丰富；DNA碱基点击缩放的过渡、粒子飞散、环境背景粒子等细节提升了页面的活力。\n\n但视觉上仍有提升空间：1) 主背景的红蓝纯色渐变过渡较为生硬，缺乏中间调和色，大片高饱和红蓝对置在长时间使用后易产生视觉疲劳，精致感不足；2) 部分小字（如text-blue-200）在暗色背景上对比度偏低，可读性一般；3) 全球展示与社区挑战卡片使用了纯#8080灰色背景，与页面整体的深色渐变/毛玻璃风格存在割裂感；4) 粒子动画引用了未定义的float关键帧（代码中实际为floating），导致部分粒子未按预期漂浮，属CSS细节瑕疵；5) DNA链使用绝对定位硬编码间距，扩展性或响应式下可能出现错位。\n\n总体而言，这是一个功能完整、风格统一、动效丰富的科幻游戏页面，达到了现代Web游戏界面的良好水准，但在色彩调和、细节打磨与可读性上仍需精益求精。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 4.8,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_009229.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Combine DNA",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Evolve Creature",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Trade DNA",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Forest",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Ocean",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Desert",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sky",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

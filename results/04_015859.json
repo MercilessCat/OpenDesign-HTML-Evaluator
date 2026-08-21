@@ -1,0 +1,154 @@
+{
+  "row_id": "04_015859",
+  "shard": 4,
+  "id": 15859,
+  "category": "Website",
+  "prompt": "Create an immersive platform where paranormal enthusiasts connect, share findings, and watch live investigations. Users can join virtual ghost hunts, access a database of haunted locations, and participate in community forums. The site features interactive maps, expert interviews, and a user-generated content section for sharing personal ghost stories.",
+  "html_len": 34089,
+  "html_sha256": "bffcab763c2569d51f62f86511118b199bdaf3a18942a99751f68f2c4beec1c6",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1531826138867-0d9c7b0e7a3f?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1531826138867-0d9c7b0e7a3f?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1531826138867-0d9c7b0e7a3f?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1531826138867-0d9c7b0e7a3f?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1531826138867-0d9c7b0e7a3f?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1531826138867-0d9c7b0e7a3f?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1531826138867-0d9c7b0e7a3f?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1531826138867-0d9c7b0e7a3f?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1531826138867-0d9c7b0e7a3f?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_015859.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Investigations",
+      "href": "#investigations",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Locations",
+      "href": "#locations",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Stories",
+      "href": "#stories",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Hunt",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Virtual Hunt",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

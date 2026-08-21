@@ -1,0 +1,103 @@
+{
+  "row_id": "03_017121",
+  "shard": 3,
+  "id": 17121,
+  "category": "Game dev",
+  "prompt": "Build an engaging educational website focused on shape matching games for children. Utilize vibrant graphics, animations, and levels of increasing difficulty. Include parental controls and progress tracking to aid learning. Encourage exploration and creativity with a gallery for kids to showcase their completed puzzles.",
+  "html_len": 17697,
+  "html_sha256": "96febe88510b994a46cd3b53c448e32905176359bef0c4facc4d230a89d598cc",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "游戏初始化（生成可拖拽形状与目标槽）",
+        "expected": "页面加载后，shapes-container 中生成可拖拽的形状元素，target-container 中生成对应的目标槽，玩家才能开始匹配游戏",
+        "evidence": "运行时元素统计显示 div 总数仅 24，与静态 HTML 的静态 div 数量接近，shapes-container 与 target-container 为空，没有生成任何 .shape 或 .target-slot 元素；JS 未实际创建游戏对象",
+        "ok": 0
+      },
+      {
+        "name": "拖拽形状到匹配目标槽",
+        "expected": "用户可将形状拖到目标槽，匹配正确时得分增加、进度更新并播放成功反馈",
+        "evidence": "页面没有生成任何形状或目标槽，用户无元素可拖拽；CSS 虽定义了 .shape.dragging 和 .target-slot.highlight 等拖拽样式，但对应 DOM 不存在，核心玩法未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Next Level 进入下一关",
+        "expected": "关卡数增加，重新生成更高难度的形状与目标，界面反馈新关卡",
+        "evidence": "交互探针点击「Next Level」后 DOM 变化=无，新增 JS 错误=0，新增网络请求=0；按钮无任何业务反馈，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Reset Level 重置当前关卡",
+        "expected": "当前关卡的形状与目标复位，游戏状态重置",
+        "evidence": "交互探针点击「Reset Level」后 DOM 变化=无，新增 JS 错误=0，新增网络请求=0；按钮无任何业务反馈，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "家长控制设置",
+        "expected": "提供可操作的家长控制选项（如难度锁定、时间限制、进度开关等）以辅助学习",
+        "evidence": "页面只有 Parental Dashboard 静态展示进度进度条和关卡指示，没有任何 input/select/button 等控制控件（页面 input=0），无法进行任何控制操作，需求功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "画廊展示完成的拼图",
+        "expected": "在 My Shape Gallery 中展示儿童完成的拼图作品",
+        "evidence": "gallery-grid 为空，没有生成任何 gallery-item；由于游戏核心玩法不可用，永远不会产生可展示的完成拼图，画廊功能形同虚设",
+        "ok": 0
+      }
+    ],
+    "reason": "页面虽然具有完整的界面骨架和活泼的视觉样式，但核心游戏内容完全没有生成：形状和目标槽为空，拖拽匹配无法进行；两个控制按钮点击后均无任何 DOM 变化，家长控制仅有静态展示无实际操作，画廊也无法积累内容。整体为一个不可玩游戏的空壳页面，功能需求大面积未实现。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：\n1. “Next Level”按钮点击后无任何实际反馈，无法进入下一关卡，游戏流程卡死在 Level 1，难度递增的核心目标无法达成。\n\n次要瑕疵：\n- “Reset Level”按钮在初始状态下点击无变化，容易让用户困惑；\n- 缺少操作引导/图例，幼儿可能不清楚如何拖动形状进行匹配；\n- 家长仪表盘仅为静态进度展示，没有实际的家长控制功能（如难度调节、时间限制等）；\n- 画廊区域为空，未显示任何已完成拼图作品；\n- 界面为英文，对部分低龄儿童理解稍显不友好。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强：明快的蓝白渐变背景，搭配红、黄、绿等暖色系组件，符合儿童游戏网站的活泼氛围。色彩搭配和谐，主色与辅色对比清晰，卡片和按钮的圆角、阴影风格统一。布局协调：头部居中，游戏区用flex+grid组织，响应式设计良好，画廊和家长控制面板分区明确。字体选用Comic Sans贴合儿童主题，字号层级合理，间距舒适。CSS设计较专业：使用了transform、transition、animation等增强交互感，按钮悬停有上浮效果，进度条、动画提示等细节提升体验。整体与用户需求“vibrant graphics, animations, engaging”高度对齐。扣分点：部分装饰元素（如云、彩纸）定义但未实际渲染，图形主要依赖emoji，精致度略欠；Comic Sans略显传统，现代感稍弱。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_017121.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Next Level",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Level",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

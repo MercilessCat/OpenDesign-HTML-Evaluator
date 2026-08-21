@@ -1,0 +1,181 @@
+{
+  "row_id": "02_010408",
+  "shard": 2,
+  "id": 10408,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Design a digital toolkit for crafting intuitive dashboard layouts with CSS Grid. Users can explore interactive examples, access expert tutorials, and engage in collaborative design projects. Integrate AI-driven layout suggestions and real-time preview functionality to enhance user experience and streamline the creation of visually compelling, data-driven dashboards.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12626,
+  "html_sha256": "828ac30b55377623f4fd7698cdbae304eb2a53a5b020482a20bb7584ad81ba2f",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "通过导航访问 Examples 示例",
+        "expected": "切换到交互示例页面或展示可探索的示例合集",
+        "evidence": "导航链接 href=\"#\"，无路由或内容切换逻辑；探针点击后仅产生 hash 变化，页面未展示任何示例内容。",
+        "ok": 0
+      },
+      {
+        "name": "点击 AI Assistant 按钮",
+        "expected": "打开 AI 助手面板或触发 AI 布局建议交互",
+        "evidence": "按钮无事件绑定；探针点击后 DOM 无变化、无新增网络请求，功能完全未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Creating 开始创建",
+        "expected": "进入仪表盘编辑界面或激活实时预览编辑器",
+        "evidence": "按钮未绑定点击逻辑；探针点击后页面无任何变化，未出现编辑器或创建流程。",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Examples 查看示例",
+        "expected": "展示可交互的仪表盘布局示例",
+        "evidence": "按钮无事件处理；探针点击后 DOM 无变化，未加载或显示任何示例。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Collaboration Space 进入协作",
+        "expected": "进入协作设计空间或弹出协作相关交互",
+        "evidence": "按钮无事件绑定；探针点击后无反应，协作项目功能仅为静态占位。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Apply All Suggestions 应用 AI 建议",
+        "expected": "将 AI 布局建议应用到实时预览或更新网格布局",
+        "evidence": "按钮无点击逻辑；无 JS 事件绑定，点击不会对预览面板产生任何布局变化。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整、主题相关，但所有核心功能均为占位：导航是 href=\"#\" 死链，AI助手、开始创建、查看示例、协作空间、导出代码、应用建议等按钮均无实际交互或业务反馈。需求声明的交互示例、教程、协作、AI建议、实时预览等功能全部未实现，属于核心交互大面积失败，因此评分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：1. 顶部导航（Dashboard/Examples/Tutorials/Community）均为占位链接，点击后无实际页面内容或功能反馈；2. 核心操作按钮（AI Assistant、Start Creating、View Examples、Join Collaboration Space）点击后均无任何响应，无法完成用户预期的核心任务；3. “Live Dashboard Preview”不是真正的实时预览，网格布局不可编辑、不可调节，与页面宣传的“交互式示例、实时预览”严重不符；4. 整个页面作为“数字工具包”的核心功能（如编辑布局、AI建议应用、协作入口）均未实现，导致页面只能浏览不能使用。次要瑕疵：页面内容实际超出视口需要滚动，并非真正单屏；功能卡片中承诺的“可编辑网格配置”未实现；教程、社区等模块仅有入口文案但无实质内容；部分按钮仅有 hover 视觉反馈，无功能逻辑。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面视觉表现优秀且专业。色彩搭配协调统一，以浅蓝渐变背景为基调，主色（蓝）、辅色（紫）、强调色（青）与深色文字形成良好的对比和层次感，符合数据可视化工具所需的清新、科技感。布局采用左右两栏结构，左上角品牌区、右上角导航与CTA按钮形成经典仪表盘布局，主内容区卡片（Hero、功能、社区、实时预览、AI建议）间距均匀、对齐整齐，视觉重心平衡。字体选用Inter，字形清晰现代，标题字号层次分明，行高与字重搭配合理。卡片圆角、阴影、悬停上浮与渐变过渡等CSS细节处理专业，Tailwind配置和自定义样式结合流畅，整体符合现代网页设计规范，并准确呼应了“DataViz Dashboard Toolkit”这一产品定位。仅因页面结构偏常规、缺少更独特的视觉记忆点，未给满分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_010408.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Examples",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "AI Assistant",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Examples",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Collaboration Space",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "row_id": "00_021075",
+  "shard": 0,
+  "id": 21075,
+  "category": "3D design",
+  "prompt": "Design an interactive website that allows users to manipulate 3D objects directly in their browsers. Users can rotate, scale, and apply textures to pre-defined models, enhancing their understanding of 3D design principles. Features include drag-and-drop interface, instant rendering, and a library of customizable 3D assets.",
+  "html_len": 16929,
+  "html_sha256": "a611fb3fc19b177dca49aaa82f6529c02feccaa5f477da27ca3fd8880c26b567",
+  "functional": {
+    "score": 8.0,
+    "raw_score": 8.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "从模型库选择模型（立方体/球体/圆环/圆锥）",
+        "expected": "点击模型条目后，3D场景中的物体切换为对应几何体，且滑块值重置",
+        "evidence": "HTML 中 .model-item 均有 click 事件绑定，调用 createObject()，切换时移除旧物体、创建新几何体并重置旋转/缩放滑块；运行时无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "使用旋转滑块（X/Y/Z）控制物体角度",
+        "expected": "拖动滑块后，3D 物体围绕对应轴旋转到指定角度",
+        "evidence": "三个 range 输入框均绑定了 input 事件，实时设置 currentObject.rotation 的对应轴；运行时无 JS 错误。次要瑕疵：动画循环中的自动旋转会叠加偏移，影响角度精确定位",
+        "ok": 1
+      },
+      {
+        "name": "使用缩放滑块控制物体大小",
+        "expected": "拖动滑块后，3D 物体整体缩放并实时反映在画布中",
+        "evidence": "#scaleAll 绑定了 input 事件，将 currentObject.scale 在最小 0.1 到最大 3 之间等比设置；运行时无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击纹理按钮（Metal/Wood/Glass/Default）",
+        "expected": "点击后当前物体材质更新为对应的金属、木质、玻璃或默认材质",
+        "evidence": "探针逐个点击 4 个纹理按钮，均报告 DOM 变化且新增 JS 错误为 0；代码中 click 事件用 MeshStandardMaterial 替换 currentObject.material，材质参数符合各纹理类型",
+        "ok": 1
+      },
+      {
+        "name": "在 3D 画布上拖拽旋转/平移视角",
+        "expected": "按住鼠标拖拽时，OrbitControls 使相机围绕物体旋转，右键拖拽平移，滚轮缩放",
+        "evidence": "探针对 canvas 执行指针拖拽后 DOM 有变化、无新增 JS 错误、无新增网络请求；HTML 中 OrbitControls 已绑定到 renderer.domElement 并启用了阻尼，场景动画循环持续渲染",
+        "ok": 1
+      }
+    ],
+    "reason": "页面完整实现了 3D 设计工作室的核心功能：模型库切换、旋转/缩放滑块、四种纹理材质切换以及基于 OrbitControls 的画布拖拽操控均可用，运行时无 JS 错误。需求声明的交互入口全部存在且有效。仅有的瑕疵是动画循环中的自动旋转会与用户通过滑块设置的精确旋转角度产生叠加干扰，属于次要体验问题，不影响整体可用性。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：旋转滑块控制被自动旋转动画覆盖——在 animate() 中每帧对 currentObject.rotation.x/y 执行 += 0.005，用户通过旋转滑块设定的角度会在下一帧开始持续漂移，对象无法停在用户指定的角度，旋转控制反馈与滑块显示不一致，导致“旋转”这一核心任务无法可靠完成。次要瑕疵：纹理按钮缺少当前选中状态的视觉指示，用户无法从 UI 中直观判断当前应用了哪种纹理；没有暂停自动旋转或重置姿态的按钮；模型库仅以文本列表呈现，缺少缩略图预览；窄屏响应式下侧边栏空间局促，没有滚动或折叠优化。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面整体视觉设计优秀，符合现代3D设计工具的风格定位。\n\n1. 整体视觉吸引力：深色渐变背景（#1a1a2e → #16213e）营造出科技感与沉浸感，搭配淡淡的蓝紫色渐变标题和青色辅助色，视觉上非常贴合3D设计场景。\n2. 色彩搭配：主色为#4361ee（蓝紫）和#4cc9f0（青），辅助色为半透明白与深黑，色彩对比明确，层次清晰，没有刺眼或混乱的颜色冲突。\n3. 布局协调：header + sidebar + main的经典工具型布局，边栏宽度250px合理，主区画布自适应填充，底部操作提示和右上角状态栏位置得当，整体结构平衡。\n4. 字体、间距、组件设计：采用Segoe UI系统字体，字号层级（2.5rem标题、1.1rem副标题、0.9rem辅助文字）清晰；各模块间距均匀，按钮、卡片、滑杆均有圆角和hover/active过渡效果，交互反馈明显。\n5. CSS设计专业：使用了backdrop-filter实现的玻璃拟态效果、渐变文字、自定义range滑块、flex/grid布局、响应式媒体查询，整体技术手法现代且执行到位。\n6. 与需求风格对齐：页面的深色科技风完美契合“interactive 3D design”主题，功能列表（模型库、变换控件、纹理按钮）视觉组织清晰，符合用户对3D编辑工具的预期。\n\n扣分点：页面整体缺少图标装饰，模型库仅有文字项略显单调；少量阴影的使用不足，视觉层次和立体感还可以加强；自定义滑块只针对WebKit，跨浏览器兼容性可能受影响。但整体无重大缺陷，视觉效果和设计质量在同类页面中属上乘。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_021075.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Metal",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Wood",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Glass",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Default",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

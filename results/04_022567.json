@@ -1,0 +1,181 @@
+{
+  "row_id": "04_022567",
+  "shard": 4,
+  "id": 22567,
+  "category": "Website",
+  "prompt": "Design an innovative simulator exploring post-ego consciousness through virtual experiences. Users can engage in guided meditations, explore altered states, and connect with a like-minded community. Key features include personalized consciousness journeys, an interactive journal for tracking experiences, and expert-led workshops on ego transcendence.",
+  "html_len": 32426,
+  "html_sha256": "16a4ee37b40108de239816991c769343e5e550ad3ee076ca5f5a52e4fddf926c",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接进行页面内跳转",
+        "expected": "平滑滚动到对应内容区块（Home/Journeys/Meditation/Community/Journal）",
+        "evidence": "探针显示 5 个导航链接点击后均有 DOM 变化且无 JS 错误；HTML 中锚点 href 指向对应 section id，跳转正常。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Begin Your Journey 进入个性化意识旅程",
+        "expected": "进入/启动个性化旅程，或展示旅程生成流程",
+        "evidence": "探针点击 Hero 区 'Begin Your Journey' 后 DOM 无变化、无网络请求；HTML 中该按钮无任何事件绑定或业务逻辑，纯静态按钮。",
+        "ok": 0
+      },
+      {
+        "name": "点击冥想圆盘开始引导冥想",
+        "expected": "启动冥想会话，播放引导、开始计时或产生呼吸动画反馈",
+        "evidence": "HTML 中 .meditation-circle 仅有 hover CSS 过渡和 active 呼吸 keyframes，无 onclick/事件监听；探针未覆盖该按钮，但页面无内联业务 JS，播放按钮无任何绑定逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "通过社区按钮参与论坛/集体会话/工作坊",
+        "expected": "进入对应社群功能页面或展示详细列表",
+        "evidence": "三个社区卡片按钮（Join Discussions、View Schedule、Browse Workshops）均为纯文本按钮，无事件绑定；需求要求的专家工作坊（expert-led workshops）入口无任何实现。",
+        "ok": 0
+      },
+      {
+        "name": "在日记中输入内容并保存新条目",
+        "expected": "将文本保存为新的日记条目，出现在 Recent Entries 中",
+        "evidence": "textarea 和 Save Entry 按钮均无事件绑定或 JS 逻辑，输入回车无任何反馈（页面无业务脚本），无法保存条目。Recent Entries 为静态内容。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 登录账号",
+        "expected": "打开登录对话框或跳转到登录/注册流程",
+        "evidence": "探针点击 Sign In 后 DOM 无变化、无网络请求、无跳转；按钮无事件绑定，属占位入口。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉精美，但仅导航锚点可用。Hero 区两个核心 CTA、Sign In、冥想播放、社区/工作坊入口、日记保存共 5 类关键交互全部无事件绑定，需求中的个性化旅程、引导冥想、社区连接、交互式日记、专家工作坊均未实现。功能层面接近静态展示页，大量需求声明功能缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 主要入口按钮（Sign In、Begin Your Journey、Explore Features）点击后均无任何反馈，不执行任何操作，核心操作无法完成，导致用户无法开始旅程或登录。\n2. 其他主要操作按钮（如 Join Discussions、View Schedule、Browse Workshops、Save Entry）也未绑定任何事件，点击无效。\n3. 冥想模拟器的核心开始控件（play 按钮）无点击处理，无法启动核心功能，流程存在死路。\n\n次要瑕疵：\n- Journey 步骤为静态展示，无交互或引导说明。\n- 社区活动与日志条目均不可点击，无详情展示。\n- 缺少必要的说明文字（如 Journeys 路径如何进度跟踪、社区统计、用户体验引导等）。\n- 页面存在大量空白即可视装饰元素，未实现的 promise 影响整体可用性感知。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉表现力很强，评分8.5/10。设计采用了深色星空渐变背景（#0f172a至#1e293b）搭配紫色与粉红色渐变点缀，营造出符合「意识探索、超越自我」主题的沉浸式氛围，色彩搭配协调且现代感十足。布局结构清晰，Hero区、旅程路径、冥想模拟器、社区和日志等板块分区合理，信息层级分明；主标题使用Space Grotesk字体并运用渐变文字，搭配Inter字体，标题与正文对比恰当。CSS细节专业，包含呼吸动画、浮动效果、光晕、卡片悬停阴影、半透明玻璃态背景、SVG波浪背景等，增强了视觉层次与交互感，完全符合现代网页设计规范。导航栏固定且带模糊过渡，增加了沉浸感。扣分点在于：页面没有真实图片或可交互的三维内容（Three.js容器未初始化），视觉丰富度稍显依赖图标和静态色块；部分按钮（如Sign In、Begin Your Journey）点击无实际行为反馈，但仅从视觉角度不影响美观。整体而言，这是一款风格统一、视觉吸引力强且贴合用户需求的现代暗色系网页。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_022567.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Journeys",
+      "href": "#journeys",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Meditation",
+      "href": "#meditation",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Journal",
+      "href": "#journal",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Your Journey",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Features",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

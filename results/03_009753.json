@@ -1,0 +1,109 @@
+{
+  "row_id": "03_009753",
+  "shard": 3,
+  "id": 9753,
+  "category": "Game dev",
+  "prompt": "Unleash imagination by crafting fantastical creatures by combining animal parts. Users design chimeras, explore mythical worlds, and participate in creature battles. The platform offers creative tools, narrative adventures, and a community for sharing designs, fostering a vibrant ecosystem where art, storytelling, and strategy intertwine.",
+  "html_len": 23237,
+  "html_sha256": "991a82b173ae8559d76be910cd73bfc81320b6a858b6c5101cddca4ebac82489",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Begin Creation 进入创作界面",
+        "expected": "从开始页切换到 Chimera 组装界面",
+        "evidence": "探针点击后 DOM 变化=有，新增 JS 错误=0；HTML 中 start-btn 绑定 switchScreen('creation')，反馈正确。",
+        "ok": 1
+      },
+      {
+        "name": "选择头/身/腿动物部位",
+        "expected": "部位高亮，并在预览区组合显示 Chimera",
+        "evidence": "每个 .creature-part 绑定 click，会设置 gameState.playerChimera[type] 并调用 updatePreview()；无 JS 错误。外部 emoji 图片被 ORB 拦截会显示裂图，但点击选择事件在父 div 上，核心选择功能仍可用。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Create Chimera 进入战斗",
+        "expected": "校验部位已选全后切换到战斗竞技场，并初始化敌我血条",
+        "evidence": "create-btn 检查 head/body/legs 是否完整；完整则 switchScreen('battle') 并 initBattle()，不全则 alert 提示。事件绑定完整，无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "战斗中点击 Attack / Special 攻击",
+        "expected": "敌方血量下降、血条更新、战斗日志新增记录、粒子特效出现并触发敌人反击",
+        "evidence": "attack-btn 和 special-btn 分别绑定 playerAttack/playerSpecialAttack；内部调用 updateHealthBars、updateBattleLog、createParticles，逻辑完整。无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "探索神话世界 / 叙事冒险",
+        "expected": "进入世界探索或剧情冒险内容",
+        "evidence": "开始页虽有“🌍 Explore”卡片，但它是普通 div，没有 onClick/role/链接，点击无任何反馈；页面也没有探索/冒险界面。属于需求关键入口未实现。",
+        "ok": 0
+      },
+      {
+        "name": "分享设计到社区",
+        "expected": "进入社区分享页/生成分享链接，或在社区展示设计",
+        "evidence": "game-over 页的 share-btn 只执行 alert('Your chimera has been shared with the community!')，没有社区页面、链接或数据导出，属于纯占位反馈。",
+        "ok": 0
+      }
+    ],
+    "reason": "核心创作和战斗主循环可用：开始、选部位、创建、攻击反馈均能正常执行。但需求中明确提到的探索神话世界/叙事冒险没有可用入口，社区分享也只是 alert 占位，2 个关键功能未实现，按规则分数不高于 4；外部 emoji 图片被拦截是次要视觉降级，不额外降分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 5.0,
+    "reason": "核心可用性问题：创作页中所有动物部件图片均因外部资源被拦截而加载失败（ERR_BLOCKED_BY_ORB，18 个失败请求），导致选择区只剩破图/alt 文字，用户无法直观看到狮头、鹰头、马身等部件形象，核心的视觉创作体验严重受损；虽然点击选择和高亮反馈仍可用，但整体从“好用”降为“能用但不好用”。次要瑕疵：开始页的 Explore/社区入口未实现，卡片不可点击；Share Creation 仅弹出提示并未真正分享；流程缺少返回首页的入口；小屏下内容可能因 overflow:hidden 被裁切；战斗中可连续点击攻击，缺少回合锁定，节奏和反馈容易混乱。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 4.0,
+    "reason": "页面整体视觉吸引力偏弱，主要原因：外部Emoji图片资源大量加载失败（ERR_BLOCKED_BY_ORB），创建界面的9个部件选择图片全部无法显示，会呈现破损或空白区域，严重破坏界面完整度。背景使用深蓝到暗红的线性渐变加上半透明黑色遮罩，色调偏沉重压抑，缺乏奇幻游戏应有的轻盈感和幻想氛围。布局结构基本合理，开始、创建、战斗等屏幕切换清晰，但组件设计粗糙：选择卡片仅有简单的hover边框和缩放，无背景、无阴影，缺乏质感；按钮虽然加了渐变和圆角，但和整体风格融合度不高。字体排印中规中矩，标题发光效果有一定神秘感，但副文本和卡片文字缺乏层次。CSS方面虽然使用了Tailwind和自定义动画/过渡，但整体专业度不足，Three.js库被引入却没有实际用于渲染，页面大量依赖静态表情符号和简单div，未达到现代游戏页面应有的视觉精致度。整体说是功能优先的Demo级页面，距离美观、沉浸的奇幻生物创作平台体验有明显差距。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 4.25,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/eagle_1f985.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/lion_1f981.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/dragon-face_1f432.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/horse-face_1f434.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/snake_1f40d.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/bear_1f43b.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/goat_1f410.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/tiger-face_1f42f.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/person-running_1f3c3.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/lion_1f981.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/dragon-face_1f432.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/eagle_1f985.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/snake_1f40d.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/bear_1f43b.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/horse-face_1f434.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/tiger-face_1f42f.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/goat_1f410.png -> net::ERR_BLOCKED_BY_ORB",
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/person-running_1f3c3.png -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_009753.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Creation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

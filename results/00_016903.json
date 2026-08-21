@@ -1,0 +1,168 @@
+{
+  "row_id": "00_016903",
+  "shard": 0,
+  "id": 16903,
+  "category": "3D design",
+  "prompt": "Create a digital art platform that simulates the mesmerizing aurora borealis in 3D. Users craft personalized light shows with dynamic effects. Core features include customizable color palettes, atmospheric controls, and an interactive gallery to share creations, blending art and technology for a captivating visual experience.",
+  "html_len": 25323,
+  "html_sha256": "04ebd5c90f1df242cf065f17a17d8c19a562204d2bf4e0101cd32d71bb311848",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "选择调色板颜色",
+        "expected": "3D 极光颜色切换为所选配色",
+        "evidence": "HTML 中 .color-option 绑定 click 事件，JS 更新 uniforms.u_color1/u_color2；页面无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "拖动大气效果滑块（强度/速度/湍流）",
+        "expected": "参数值改变并实时影响极光效果",
+        "evidence": "input 元素绑定 input 事件，JS 更新对应 uniform 和右侧数值显示；无运行时错误",
+        "ok": 1
+      },
+      {
+        "name": "点击预设按钮",
+        "expected": "应用预设配色和参数，极光视觉效果变化",
+        "evidence": "探针点击 4 个预设按钮后 DOM 无变化但无 JS 错误；代码中存在 applyPreset 并更新 uniforms，属于 WebGL 视觉反馈，探针无法捕获像素变化",
+        "ok": 1
+      },
+      {
+        "name": "点击 Save Creation 保存作品",
+        "expected": "作品被保存并出现在画廊中",
+        "evidence": "按钮点击后仅调用 alert('...saved to the gallery!')，并未真正向 .gallery-grid 添加任何内容；探针显示 DOM 无变化，保存为占位实现",
+        "ok": 0
+      },
+      {
+        "name": "点击画廊作品查看/分享",
+        "expected": "打开作品详情或分享入口",
+        "evidence": ".gallery-item 仅设置了 hover 样式，无任何 click 事件绑定，点击无业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "在画布上拖拽旋转 3D 视角",
+        "expected": "3D 场景随鼠标拖拽旋转",
+        "evidence": "场景使用 THREE.OrbitControls（enableZoom=true，enableDamping=true），探针拖拽 canvas 后无 JS 错误；按 WebGL 交互判定规则视为可交互",
+        "ok": 1
+      }
+    ],
+    "reason": "核心视觉创作（配色、滑块、预设、3D视角）可正常使用，但保存作品与画廊交互完全未实现：Save Creation 仅为 alert 占位，gallery-item 无点击事件。需求关键入口 2 处未实现，故分数不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：保存功能是核心操作，但点击“Save Creation”仅弹出提示“已保存到画廊”，并未真正将作品存入社区画廊，画廊内容也不会更新，属于核心操作无法完成、反馈与实际情况不符。次要瑕疵：预设按钮点击后未同步更新颜色选择器的选中状态和滑块数值显示，界面状态与视觉效果不一致；社区画廊中的作品卡片设置了可点击样式但点击无任何响应，缺少交互反馈；部分模块（如分享机制）未实现，但不影响主要调整操作。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面在视觉上非常有吸引力，成功营造出极光数字艺术平台的沉浸感与梦幻气质。色彩搭配高度匹配主题：深蓝紫背景（#0c1445 → #1a237e）与冰蓝、霓虹绿、紫罗兰等极光渐变形成强对比，视觉层次清晰，统一而富有张力。标题使用渐变文字与柔和光晕，增强了科技艺术氛围。布局协调：中央3D画布与右侧半透明毛玻璃控制面板的比例、间距均恰当，控制面板采用backdrop-filter和细边框，部件精致、现代。组件设计质量高：色板、滑块、预设按钮、主/次按钮均有清晰的圆角、渐变、阴影与悬停反馈，交互暗示明确。字体层级合理（h1/副标题/面板标题），间距透气，符合现代网页设计规范。若无明显减分点：仅在小范围内（如gallery用渐变div代替真实作品图）视觉丰富度稍有折扣，但整体视觉表达远超平均水平，设计成熟、风格统一。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 5.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_016903.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Northern Lights",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Cosmic Waves",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Nebula Dreams",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Electric Storm",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save Creation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

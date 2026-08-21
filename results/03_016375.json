@@ -1,0 +1,146 @@
+{
+  "row_id": "03_016375",
+  "shard": 3,
+  "id": 16375,
+  "category": "Game dev",
+  "prompt": "Create a text-based space survival game website where users navigate scenarios through strategic decisions. Feature interactive storytelling, a community for sharing strategies, and leaderboards for survival scores. Include a section for user-generated scenarios and challenges to expand gameplay.",
+  "html_len": 27900,
+  "html_sha256": "b6df5eb292cfc3968af17f9b5b050a09068a24f76aa692cc2f46fca604a3ed1c",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "[raw] ```json\n{\n  \"interactions\": [\n    {\n      \"name\": \"点击 Start Survival Mission 开始游戏\",\n      \"expected\": \"游戏界面（#gameInterface）从隐藏变为显示，并展示第一个场景及决策选项，氧气/健康/分数等面板更新\",\n      \"evidence\": \"探针点击后\"DOM 变化=无\"，即便使用 JS click 兜底也未触发任何变化；HTML 中存在 #gameInterface 及其游戏逻辑代码（scenarios、initGame、displayScenario），但未发现 start",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 点击“Start Survival Mission”按钮后游戏界面无任何变化，游戏无法启动，交互式叙事核心功能完全不可用。\n2. “Browse Scenarios”和“Create New Scenario”按钮点击无任何反馈，场景库中的卡片也不可点击进入，用户无法从场景库开始游戏，主要流程存在死路。\n3. 页脚所有链接均指向“#”占位，点击仅回到页顶或无效跳转，反馈缺失。\n\n次要瑕疵（在核心问题基础上补充）：\n- 移动端汉堡菜单按钮无功能，点击无反应。\n- 社区讨论区的“喜欢”“回复”等交互元素无实际功能。\n- 排行榜为静态数据，无更新或查看详情入口。\n- 场景卡片缺“开始游玩”引导按钮，用户不知道如何从卡片进入对应游戏。\n- 整体配色和视觉风格符合太空主题，但“User-Created Scenarios”仅展示不可操作，与用户需求中的“创建/扩展场景”目标不符。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉设计专业且契合主题。深空紫色调（#0f0f23 → #1a1a3a 渐变）搭配星空粒子背景，营造出强烈的太空氛围；主色靛蓝（#6366f1）与文字灰色（#e2e8f0）形成良好对比，信息可读性高。布局结构清晰：导航、Hero、游戏界面、场景库、社区、排行榜、页脚层层递进，卡片、圆角、悬停阴影等组件设计统一且现代。终端字体（Courier New）的运用强化了文字冒险游戏的感觉，难度标签、社区头像、排行榜徽章等细节丰富且视觉层次分明。响应式栅格和交互状态（hover/transition）也符合现代网页设计规范。略有不足的是字号缺少显式定义，依赖默认系统字体（Segoe UI）略显保守，且个别按钮/功能交互（如移动端菜单、创建场景）未提供完整视觉反馈，但整体美观度在游戏类网站中属于上乘水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_016375.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Scenarios",
+      "href": "#scenarios",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Leaderboard",
+      "href": "#leaderboard",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Survival Mission",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Browse Scenarios",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Create New Scenario",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Scenarios",
+      "href": "#",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

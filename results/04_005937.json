@@ -1,0 +1,184 @@
+{
+  "row_id": "04_005937",
+  "shard": 4,
+  "id": 5937,
+  "category": "Website",
+  "prompt": "Join a global network dedicated to rescuing stranded pets. Use advanced mapping tools to report lost pets, view nearby rescue operations, and coordinate volunteer efforts. Engage with resources on pet care, adoption, and community-driven rescue missions.",
+  "html_len": 24830,
+  "html_sha256": "41556f53c5f8b9f7f8faeb61a8fea8e9c14a0b4087871958169a850c619af82e",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击锚点导航（Features/Map/Resources）",
+        "expected": "页面平滑滚动到对应章节",
+        "evidence": "HTML 中对 a[href^='#'] 绑定了 click 滚动逻辑，探针点击 Features/Map/Resources 均产生 DOM 变化且无新增 JS 错误，对应 section 存在。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Home 导航",
+        "expected": "返回顶部或正常切换，不应报错",
+        "evidence": "Home 的 href='#'，平滑滚动代码执行 querySelector('#') 抛出 invalid selector，探针点击新增 1 条 JS 错误，无有效跳转或滚动。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Report Lost Pet 按钮",
+        "expected": "打开上报表单、弹窗或跳转到上报页面",
+        "evidence": "按钮无 href、无 click 事件绑定，DOM 中也没有上报表单或弹窗；探针点击仅有样式层 DOM 变化，无业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Rescue Map / Find Missions / View Dashboard",
+        "expected": "展示或筛选附近救援行动，进入地图工具",
+        "evidence": "这些 button 均未绑定事件，只是静态文本；点击后无业务性反馈，无法完成查看或筛选救援任务。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Now / Sign Up as Volunteer",
+        "expected": "进入注册或志愿者报名流程",
+        "evidence": "按钮无事件绑定，无表单或弹窗；探针点击无 JS 错误但没有实际流程，属于纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "地图查看救援标记",
+        "expected": "地图可缩放平移，标记可弹出救援信息",
+        "evidence": "Leaflet 初始化了 #rescue-map，加载 OSM 图层并添加 4 个带 popup 的标记；运行时无地图相关 JS 错误，地图本身可交互。",
+        "ok": 1
+      }
+    ],
+    "reason": "核心业务（报告走失宠物、加入志愿者网络、协调救援、查看救援任务）均未真正实现，主要 CTA 为无事件按钮或 href='#' 占位，点击 Home/Learn more 还会产生 JS 错误；仅锚点导航和 Leaflet 地图展示可用，整体功能严重缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 主要功能按钮（Report Lost Pet、Join Now、Report Now、Find Missions、Sign Up as Volunteer等）均为静态按钮，未绑定任何事件逻辑，点击后无实际功能，用户无法完成报告宠物、注册参与或协调救援等核心任务；2. 导航中“Home”链接使用 href=\"#\"，点击时触发 querySelector('#') 无效选择器错误，平滑滚动失效，且页面加载过程中已存在相同 JS 错误，影响基础导航稳定性。次要瑕疵：大量“Learn more”“Read Guide”等占位链接无实际内容或点击报错；地图侧边栏 Active Rescues 列表与地图标记不对应，信息不一致；缺少操作引导说明，用户不知如何开始报告或参与；页脚订阅表单无提交处理，点击无反应。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面整体视觉设计专业且现代，符合宠物救援网络的品牌调性。色彩搭配协调，以靛蓝(#4F46E5)为主色、翠绿(#10B981)为辅、琥珀黄(#F59E0B)作点缀，与救助、希望、温暖的语义相符；Hero区使用深色叠加背景图，配合白色文字与强调色，对比清晰。布局结构清晰，导航、Hero、统计、功能卡片、地图、推荐、资源、CTA、页脚一应俱全，信息层级分明，间距适中，卡片圆角与阴影运用得当，具有现代UI质感。字体采用Poppins，整体统一舒适。CSS使用Tailwind和自定义动画（如脉冲按钮、卡片悬停上移），细节处理到位。地图集成Leaflet增强了功能感。扣分点：JS存在无效选择器错误（#选择器），虽然不影响渲染，但影响交互稳健性；部分按钮缺乏实质交互；推荐用户图为随机头像，可能降低真实感。总体而言，页面视觉质量高，接近现代营销型网站精品水准。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Failed to execute 'querySelector' on 'Document': '#' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '#' is not a valid selector."
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_005937.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Map",
+      "href": "#map",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#resources",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Report Lost Pet",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Rescue Map",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Learn more",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

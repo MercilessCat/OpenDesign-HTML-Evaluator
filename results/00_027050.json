@@ -1,0 +1,156 @@
+{
+  "row_id": "00_027050",
+  "shard": 0,
+  "id": 27050,
+  "category": "3D design",
+  "prompt": "Design a website offering immersive 3D infographics, allowing users to interact with data layers through intuitive gestures. The site’s core is transforming complex data into engaging visuals. Features include customizable data sets, interactive animations, and real-time data updates for dynamic exploration.",
+  "html_len": 19966,
+  "html_sha256": "3d07fee59a47faf16b9ff6cb0cde26c7f31d7687a632f4cafaa08272a0fc4e8f",
+  "functional": {
+    "score": 5.0,
+    "raw_score": 5.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "在 3D canvas 上拖拽旋转/缩放",
+        "expected": "通过 OrbitControls 旋转和缩放 3D 数据可视化场景",
+        "evidence": "init() 中创建 THREE.OrbitControls 并绑定到 webgl-canvas；探针在 canvas 上拖拽无新增 JS 错误，无网络失败，3D 场景正常渲染，可判定可交互。",
+        "ok": 1
+      },
+      {
+        "name": "调整 Data Density 滑块",
+        "expected": "更新密度百分比并让 3D 数据点的数量/密度随滑块变化",
+        "evidence": "input 事件会更新 #density-value 并调用 createDataVisualization()，但旧 group 未从 scene 中移除，多次调节会不断叠加数据点，密度不能按滑块方向正确增减，反馈不符合预期。",
+        "ok": 0
+      },
+      {
+        "name": "调整 Animation Speed 滑块",
+        "expected": "更新动画速度百分比，并影响激活后的数据点动画速度",
+        "evidence": "滑块 input 更新 #speed-value，animate() 在 isAnimating 时读取该值控制数据点运动速率，点击 Animate 后该控制生效。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Animate/Pause 动画开关",
+        "expected": "开始或暂停数据点动画，并切换按钮文字",
+        "evidence": "按钮点击会切换 isAnimating 并将文字在 Animate/Pause 间变化；探针点击后 DOM 有变化，无新增 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Reset View 重置视角",
+        "expected": "相机回到初始位置/视角",
+        "evidence": "按钮绑定 controls.reset()，OrbitControls 已初始化，探针点击无 JS 错误；虽无法通过 DOM 直接看到相机变化，但该控制逻辑完整。",
+        "ok": 1
+      },
+      {
+        "name": "点击数据图层按钮（Sales/User/Revenue）",
+        "expected": "切换对应的 3D 数据层显示/隐藏或高亮",
+        "evidence": "三个 toggle 按钮的事件只切换 button.style.background 样式，没有触达 scene、dataPoints 或任何材质/可见性控制；探针点击后 DOM 变化仅为按钮自身背景色，3D 数据层无实际变化。",
+        "ok": 0
+      }
+    ],
+    "reason": "3D 场景能正常渲染并支持拖拽旋转/缩放，Animate、速度滑块和 Reset View 基本可用；但数据图层切换按钮只改样式未改变 3D 层，密度滑块因旧 group 未清理而无法正确控制密度，且实时数据更新未真正实现，核心的“可交互数据层”需求部分落空。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. 数据层切换按钮（Sales Data / User Metrics / Revenue）点击后仅改变按钮自身背景色，并不在3D可视化场景中切换或显示任何对应数据层，核心操作“可定制数据层”未实现，场景内容无实际变化，用户预期落空。2. 页面宣称支持实时数据更新与动态探索，但实际未实现任何实时数据更新机制，该宣传性功能缺失，影响用户对核心价值判断。次要瑕疵：缺少操作说明/图例，用户难以理解3D画布可旋转缩放及数据层语义；部分按钮状态切换视觉反馈不够明确（切换后无选中态提示）；Resize 时 canvas 尺寸与相机 aspect 计算依赖容器尺寸，窄屏下布局稳定性一般。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "整体视觉设计优秀，高度契合3D数据可视化主题。色彩搭配专业，采用深紫蓝渐变背景营造沉浸式科技感，并以青色（#00dbde）与品红（#fc00ff）作为强调色，形成鲜明的视觉对比，符合现代数字产品设计趋势。布局合理，通过弹性布局与栅格网格组织内容，视觉层次清晰：头部、可视化区、数据卡片、统计区依次展开，主次分明。组件设计精致，按钮采用同款渐变色、圆角胶囊造型，悬停有上浮与发光效果；卡片使用半透明背景+backdrop-filter玻璃拟态，搭配细边框和柔和阴影，提升质感和空间感。标题文字使用渐变裁切，配合微光晕，突出品牌记忆点。字体方面采用Segoe UI系统字体，字号层级分明，标题3rem、副标题1.2rem、统计数值2.5rem，可读性好。动效方面，3D场景支持OrbitControls旋转缩放，按钮有过渡动画，交互反馈明确。响应式设计也考虑了移动端断点。整体风格与用户需求的“沉浸式3D信息图”高度对齐，视觉吸引力强，几乎无明显缺陷，只在小细节上如按钮激活态区分度略弱，但不影响整体美观度。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_027050.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sales Data",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "User Metrics",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Revenue",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Animate",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset View",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

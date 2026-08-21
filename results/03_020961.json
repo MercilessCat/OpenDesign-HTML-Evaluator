@@ -1,0 +1,97 @@
+{
+  "row_id": "03_020961",
+  "shard": 3,
+  "id": 20961,
+  "category": "Game dev",
+  "prompt": "Build a celestial-themed platform where users count and track virtual meteor showers. Include interactive sky maps, real-time meteor tracking, and educational resources about astronomy, promoting an engaging and informative stargazing experience.",
+  "html_len": 21698,
+  "html_sha256": "d5026a875bf2ba22e7597095d1a402dde4404ea217b7894c7edf0df6efc95047",
+  "functional": {
+    "score": 8.0,
+    "raw_score": 8.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击“Begin Observation”开始观测",
+        "expected": "隐藏开始画面，显示游戏画面，星空和流星开始动画",
+        "evidence": "探针点击后 DOM 有变化、无 JS 错误；HTML 中 startBtn 绑定 startGame()，切换 start-screen/game-screen 并调用 gameLoop()",
+        "ok": 1
+      },
+      {
+        "name": "点击流星进行计数",
+        "expected": "流星数量 +1，计数器更新，进度条和等级随之变化",
+        "evidence": "skyCanvas 绑定 click 事件 handleMeteorClick，命中流星后更新 #meteor-count、进度条和等级；探针未测点击但事件已正确注册且无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击“Pause”暂停/恢复游戏",
+        "expected": "按钮文本在 Pause/Resume 间切换，流星动画停止或继续",
+        "evidence": "pauseBtn 绑定 togglePause()，切换 gameState.paused 并控制 gameLoop；运行时无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击“Observe Again”重新开始",
+        "expected": "隐藏结算画面并重新进入游戏，计数和等级重置",
+        "evidence": "restartBtn 绑定点击事件，隐藏 end-screen 并调用 startGame() 重置状态",
+        "ok": 1
+      },
+      {
+        "name": "拖拽星空探索星图",
+        "expected": "星空视角随拖拽移动/旋转，体现 interactive sky map",
+        "evidence": "探针在 canvas 上拖拽后 DOM 和像素均无变化；HTML 无 pointer/touch 事件或 OrbitControls，星图不可拖拽，未实现可交互星图",
+        "ok": 0
+      }
+    ],
+    "reason": "核心游戏流程完整可用：开始、点击流星计数、暂停/恢复、重新开始均正常，流星动画和等级进度实现良好，星座事实与天文知识作为教育内容已展示。但“interactive sky map”仅表现为自动动画画布，拖拽无任何响应，未达到真正的星图交互要求，因此扣分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 暂停/恢复后流星生成链中断：createMeteor在暂停时直接return且不安排下一次生成，若暂停跨越原定生成时间，恢复后不会再产生新流星，已存在流星飞出屏幕后游戏无目标可点击，核心玩法卡死；2) 自动结束计时器使用全局setInterval且不随游戏会话重置，玩家重新开始后可能被立刻强制结束（如第一次结束后立即重开，下一次定时器触发在短时间内到来），导致重开流程无法正常进行。次要瑕疵：未提示游戏时长2分钟，玩家会被突然结束困惑；暂停时无覆盖层，仅按钮文字变化不够醒目；流星点击反馈较简单，无声音/更明显视觉反馈；星座地图为静态线条，缺少交互性，与“交互式天空地图”需求有差距；教育内容仅结束页随机事实和固定星座文本，深度不足。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面整体视觉设计出色，高度契合“宇宙/流星观测”主题。色彩搭配以深蓝紫渐变背景（#0c1445→#1a237e→#4a148c）为主，辅以白色、天蓝和亮蓝色（#87ceeb、#1e90ff）的流星与发光效果，营造出沉浸式夜空氛围，符合现代天文类产品的视觉调性。布局采用全屏游戏容器，通过半透明玻璃感面板（rgba(0,0,30,0.7)）和紫色边框光晕（box-shadow）分层展示计数器、星座信息和操作按钮，层次分明且重点突出。字体使用Arial，虽然不算独特，但配合字号对比（标题5xl、数字4xl）和间距控制，保证了可读性。按钮采用紫色渐变、大圆角、悬停上浮与阴影过渡，交互反馈明显；进度条、脉冲动画、闪烁星星等动效增强了页面的鲜活感和游戏感。Canvas动态星空与星座线进一步丰富了视觉层次。CSS技术运用专业，渐变、阴影、圆角、动画、Flex布局等使用合理，整体设计规范且与用户需求中的“educational, interactive, engaging”风格完全对齐。唯一小扣分点是字体系统较为通用，缺少个性化字体带来的高级感，且部分元素（如pause按钮）位置略显简单，但整体视觉完成度和吸引力很高。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_020961.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Observation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

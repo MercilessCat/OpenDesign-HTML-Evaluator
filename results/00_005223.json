@@ -1,0 +1,170 @@
+{
+  "row_id": "00_005223",
+  "shard": 0,
+  "id": 5223,
+  "category": "3D design",
+  "prompt": "Craft a compelling digital space that explores the ecological footprint of blockchain technologies, focusing on sustainable practices. Users can engage in discussions, access research, and visualize data-driven impacts through 3D models. Key features include an interactive carbon calculator, educational resources, and an advocacy platform for green initiatives.",
+  "html_len": 21451,
+  "html_sha256": "1f46fc3cc7a3487cd371faac3be423f33b7e1c1ed3b10e17c32ccdd64ea10639",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "3D动画暂停/播放",
+        "expected": "点击后动画暂停或恢复，按钮文字实时切换",
+        "evidence": "探针点击后DOM有变化且无JS错误；HTML中#animToggle绑定click事件，切换animationActive并更新textContent为Pause/Play。",
+        "ok": 1
+      },
+      {
+        "name": "3D视角切换/重置",
+        "expected": "点击Change View或Reset Camera后相机位置改变，场景视角产生视觉变化",
+        "evidence": "探针点击DOM无变化但WebGL像素不可测；HTML中#viewToggle/#resetView均绑定click事件，修改camera.position并调用controls.update()/reset()，运行时无JS错误，符合WebGL可交互判定。",
+        "ok": 1
+      },
+      {
+        "name": "碳足迹计算",
+        "expected": "设置参数后点击Calculate Impact，结果区域显示能耗、CO₂排放等信息",
+        "evidence": "探针点击后DOM有变化；HTML中#calculateBtn绑定click事件，根据区块链类型、交易量、能源、天数计算并更新#calcResult的innerHTML。",
+        "ok": 1
+      },
+      {
+        "name": "发布社区评论",
+        "expected": "在评论框输入内容后点击Post Comment，新评论出现在评论列表",
+        "evidence": "探针在输入框为空时点击按钮所以DOM无变化，但HTML中#postComment绑定click事件，非空输入会insertAdjacentHTML插入评论并清空输入框；真实用户流程可用。",
+        "ok": 1
+      },
+      {
+        "name": "教育资源访问",
+        "expected": "点击资源卡片或研究论文能查看详细内容或跳转链接",
+        "evidence": "HTML中.resource-card无href、无click事件，只有hover视觉样式；属于不可点击的占位入口，无法满足“access research”的需求。",
+        "ok": 0
+      },
+      {
+        "name": "绿色倡议/倡导平台入口",
+        "expected": "页面提供可操作入口，如加入倡议、签名、参与绿色项目等",
+        "evidence": "页面没有与advocacy platform相关的按钮、链接或表单，footer仅有两行宣传文字，无任何可交互入口，该关键功能缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心交互可用：3D控制、碳足迹计算、社区评论均能实现预期反馈。但教育资源卡片不可点击，无法真正访问研究内容；绿色倡议倡导平台完全没有入口。两个需求关键功能未实现，按规则总分不高于4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 3D可视化暂停动画后渲染循环停止，视角切换/重置/拖拽交互无任何视觉反馈，用户无法判断操作是否生效，核心可视化控件失效。\n2. 教育资源卡片（含\"Access latest academic research\"等描述）均为纯静态占位，点击无任何响应，无法实际访问研究或查看更多内容，且hover效果暗示可点击，属于典型占位链接。\n\n次要瑕疵：\n- 评论为空时点击\"Post Comment\"无任何提示。\n- \"Change View\"切换视角无当前视角状态说明。\n- 页面缺少\"advocacy platform\"实际功能入口，仅页脚有一句口号。\n- 统计数字（如120M Tons CO₂/year）无数据来源说明。\n- 教育资源卡片无\"了解更多\"链接或展开行为。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面在视觉设计上表现出较高的专业水准。整体采用深色渐变背景（#0f2027 → #203a43 → #2c5364）搭配青蓝色系（#00b4db / #0083b0），营造出科技、环保、可持续的视觉氛围，与区块链+生态主题高度契合。主标题使用渐变文字（background-clip: text），3.5rem大字号极具视觉冲击力，副标题排版简洁且信息传达清晰。\n\n页面布局采用12列grid两栏结构，卡片有毛玻璃效果（backdrop-filter: blur）、圆角、细腻边框和阴影，层次感丰富；hover时产生上浮与阴影变化，交互反馈流畅。按钮采用胶囊形渐变设计，hover缩放与光晕效果增强了可点击性。输入框、下拉框、文本域等控件样式统一，均为深色半透明背景，聚焦时边框高亮，体验良好。\n\n生态统计卡片（120M、40%、15K）用大数字和标签形式直观呈现数据，视觉节奏感强。3D可视化区域（Three.js容器）嵌入主卡片中，与整体深色色调融合，场景背景、灯光（环境光+方向光+点光）和带有浮动的旋转方块动画，增强了页面的动态活力和数据可视化表现力。教育资源区与社区讨论区的卡片设计也保持了一致的视觉语言，资源卡片hover变色并微上移，提升了互动趣味。\n\n不足之处主要在于：页面大量使用同一种青蓝色，缺乏更多色彩对比，长时间浏览可能略显单调；功能图标依赖emoji，不够精致统一；底部footer较朴素，与上方丰富视觉形成一定落差。但整体仍符合现代网页设计规范，尤其适合科技/环保类3D展示平台，设计质量较高，视觉吸引力强。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.5,
+  "baseline_overall": 5.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_005223.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Pause Animation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Change View",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Camera",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Calculate Impact",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Post Comment",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "text",
+      "tag": "textarea",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "typed": "测试",
+      "fill_method": "playwright",
+      "enter_pressed": true,
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

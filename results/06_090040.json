@@ -1,0 +1,175 @@
+{
+  "row_id": "06_090040",
+  "shard": 6,
+  "id": 90040,
+  "category": "Website",
+  "prompt": "An innovative simulator creating dynamic city maps influenced by real-time user mood data. Users contribute emotional inputs to transform cityscapes, explore emotion-driven pathways, and discover mood-specific destinations. Key features comprise emotional geotagging, mood-based event recommendations, and communal mood monitoring to foster a connected urban experience.",
+  "html_len": 25785,
+  "html_sha256": "28522e267b4d4d256171293df7f97c2bf72f5cc9c39241df729402dcbd624868",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击情绪按钮（如 Calm）",
+        "expected": "选择情绪后，城市地图/景观应发生对应变化（如区域颜色、路径调整）",
+        "evidence": "探针点击 Calm 后仅 DOM 变化为按钮自身添加 ring-2 ring-white 高亮，地图及其 marker 无任何变化；脚本只绑定了按钮样式切换，无业务逻辑",
+        "ok": 0
+      },
+      {
+        "name": "输入想法并点击 Share Mood 分享情绪",
+        "expected": "提交情绪/想法后应反馈并影响城市动态或至少显示提交成功",
+        "evidence": "HTML 中的 input 与 Share Mood 按钮均无事件绑定（页面脚本仅绑定 .mood-btn 按钮），点击 Share Mood 不会产生任何反馈，输入回车也不会有城市变化",
+        "ok": 0
+      },
+      {
+        "name": "点击地图上的情绪标记（emotion-marker）",
+        "expected": "应展示该位置的详细情绪信息或完成情绪地理标注",
+        "evidence": "地图标记仅有 CSS hover 样式和 pulse 动画，JS 未绑定任何 click 事件；点击不会出现弹窗、面板或地图变化",
+        "ok": 0
+      },
+      {
+        "name": "点击“Explore Mood Map”进入互动模拟器",
+        "expected": "应进入可操作的实时情绪城市地图/模拟器",
+        "evidence": "探针点击该按钮后 DOM 无变化、无 JS 错误、无网络请求，按钮未绑定点击处理，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击导航链接（Home/Explore/Community/Events）",
+        "expected": "应切换到对应功能页面",
+        "evidence": "所有导航链接 href=\"#\"，探针点击后仅发生页面内锚点跳转（DOM 变化为滚动位置），无路由、无新页面加载，是占位链接",
+        "ok": 0
+      }
+    ],
+    "reason": "页面核心功能全部未实现：情绪分享无法影响城市地图，情绪按钮只有样式高亮，地图标记不可点击，探索入口和导航均为占位链接。该页面本质是静态展示页，不能满足实时城市情绪模拟器的核心交互需求。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 多个主要CTA按钮（Explore Mood Map、How It Works、Join Now、View Global Mood Map、Get Started Free、Download App）点击后无任何反馈，无跳转、无事件处理，核心入口全部失效；2. 核心操作\"Share Mood\"无法完成——选择情绪并输入文字后点击分享按钮无响应，地图不会更新，用户无法贡献情绪，主流程卡死；3. 情绪地图上的标记（emotion-marker）仅hover放大，点击无反应，无法查看情绪详情或探索路径，探索功能形同虚设。次要瑕疵：导航链接（Home/Explore/Community/Events）为href=\"#\"占位链接，点击仅锚点跳动，无法进入实际页面；地图缺少操作引导和图例说明，用户不知道可交互元素如何使用；页面数据为静态模拟，易让用户误以为已连接到真实情绪数据。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面整体视觉设计完成度很高，采用了深色渐变背景搭配紫色、粉色、黄色的高饱和渐变色，营造出科技感与情绪化氛围，与‘情绪城市模拟器’的产品定位高度契合。色彩体系统一且富有层次，Tailwind自定义颜色与自定义样式的结合合理，玻璃态卡片、渐变文字、动态路径和呼吸光晕等细节增强了页面的精致感。布局上，从上到下依次为导航、Hero区、统计卡片、交互地图、情绪输入、功能特性、社区展示、CTA和页脚，结构清晰，信息层级明确，区块间留白充足，视觉节奏舒适。字体使用Poppins，现代圆润，与整体风格匹配；按钮、卡片、标记点的圆角、阴影和悬停动效都经过精心设计，符合现代网页设计规范。不过，地图部分仅为模拟的色点与路径，缺乏真实可视化动态效果，略显单薄；部分按钮点击无实际反馈，作为展示页面尚可，但若作为产品原型，交互深度稍显不足。总体来说，这是一款视觉吸引力强、设计语言统一、风格鲜明的优质网页。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_090040.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Events",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Mood Map",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "How It Works",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Calm",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

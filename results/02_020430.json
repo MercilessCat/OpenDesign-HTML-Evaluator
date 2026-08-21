@@ -1,0 +1,181 @@
+{
+  "row_id": "02_020430",
+  "shard": 2,
+  "id": 20430,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Build a developer-centric site that offers data visualization hooks for modern web applications. Users can access a library of customizable hooks, view live demos, and integrate them into their projects, streamlining the process of creating interactive visualizations and enhancing the user experience with cutting-edge technology.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10072,
+  "html_sha256": "1a05cd8c52855833df2c9d328bd0025134694fde77c51b60b97bede403c05232",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航 Library",
+        "expected": "跳转到 hook 库或显示可用的 hooks 列表",
+        "evidence": "探针点击 Library 后无新网络请求，DOM 变化仅来自 href=\"#\" 的锚点跳转，没有加载任何库内容或路由切换，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Documentation",
+        "expected": "打开文档页面或展示文档内容",
+        "evidence": "探针点击 Documentation 后无新网络请求，href=\"#\" 未产生实际文档内容，页面没有显示文档区，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started 按钮",
+        "expected": "进入集成指南、开始使用流程或跳转到相关页面",
+        "evidence": "探针点击后 DOM 变化为无、新增 JS 错误为 0、新增网络请求为 0，按钮没有任何点击响应。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Hero 区 Documentation 按钮",
+        "expected": "打开文档或跳转到文档页面",
+        "evidence": "探针点击后 DOM 变化为无、新增网络请求为 0，按钮没有绑定有效业务动作，属于无反馈按钮。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Hero 区 GitHub 按钮",
+        "expected": "跳转到 GitHub 仓库",
+        "evidence": "探针点击后 DOM 变化为无、新增网络请求为 0，页面未跳转，按钮没有实际功能。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Live Demo 卡片中的 Try it now",
+        "expected": "打开或展示可交互的实时数据可视化 demo",
+        "evidence": "探针点击后 DOM 变化为无、新增网络请求为 0，页面没有任何反馈，Live Demo 实际只是静态代码截图，不可交互。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上是一个完整的数据可视化 hooks 推广页，但核心功能入口几乎全部未实现：所有导航链接都是 href=\"#\" 占位，Get Started、Documentation、GitHub、Try it now 等按钮点击后均无反馈，Live Demo 也不是可交互示例。用户无法访问 hook 库、查看文档、运行 demo 或完成集成，主要任务无法完成，仅静态展示可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 导航链接（Library、Documentation、Examples、GitHub）点击后无实际页面跳转或内容更新，属于占位链接，主要入口无效；2. 主要操作按钮（Get Started、Documentation、GitHub、Try it now）点击后均无任何反馈或跳转，核心流程无法完成，用户无法访问文档、代码库或演示。次要瑕疵：页面承诺提供可访问的库和实时演示，但实际未实现；缺少对功能的进一步说明和图例，开发者无法获得实质性帮助。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力高，采用现代蓝白配色，渐变背景营造清爽科技感。布局结构清晰（Header/Hero/Features/Footer），层次分明，间距与圆角处理专业。字体选用Inter，配合代码块等宽字体，符合开发者工具类网站的审美标准。卡片悬停动效和按钮交互细节增强现代感，Tailwind CSS使用规范。内容与主题高度契合，展示代码示例和功能卖点，视觉传达精准。扣分点在于部分按钮无实际交互反馈，视觉上功能指向性稍弱，但整体设计专业、美观，符合现代网页设计规范。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_020430.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Library",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Documentation",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Examples",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "GitHub",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Documentation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "GitHub",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Try it now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

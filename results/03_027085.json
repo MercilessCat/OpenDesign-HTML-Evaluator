@@ -1,0 +1,103 @@
+{
+  "row_id": "03_027085",
+  "shard": 3,
+  "id": 27085,
+  "category": "Game dev",
+  "prompt": "Build an interactive game where players manipulate weather elements to create cloud formations. Core idea: Weather control and creativity. Functionality: Shape clouds creatively. Features: Real-time weather simulation, elemental tools, artistic challenges, and community gallery for showcasing cloud masterpieces.",
+  "html_len": 19841,
+  "html_sha256": "03982e40d62de50831a9715a275323c58791d73e550137945505eca34b980485",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Create Clouds 开始游戏",
+        "expected": "进入游戏主界面，显示工具/挑战/底部按钮并启动 3D 场景动画",
+        "evidence": "探针点击后 DOM 变化=有，新增 JS 错误=0；代码中 startGame() 隐藏开始屏并显示 gameUI 且调用 animate()",
+        "ok": 1
+      },
+      {
+        "name": "选择天气工具（水/热/风/清除）",
+        "expected": "切换当前工具并高亮激活状态，影响后续点击创建云的特效类型",
+        "evidence": "四个工具按钮均绑定 click，selectTool() 会更新 active 类，无 JS 错误；CSS 中 .active 有可见的描边/缩放效果",
+        "ok": 1
+      },
+      {
+        "name": "在画布上创建云朵",
+        "expected": "点击画布后出现粒子特效、能量减少、云朵计数增加，并在场景中形成云",
+        "evidence": "canvasContainer 绑定了 click 事件，handleCanvasClick() 会创建 .particle-effect 并更新 energy/cloudCount；探针测试指针拖拽未触发 click，因此无反馈，但点击路径代码完整且无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "保存创作到社区画廊",
+        "expected": "将当前云朵作品真正保存到画廊，并在社区画廊中展示",
+        "evidence": "saveBtn 仅触发 alert('saved')，没有任何数据存储或 DOM 追加逻辑，画廊中仍只有静态占位作品，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "查看社区画廊并返回",
+        "expected": "打开画廊界面展示云朵作品，并可返回游戏主界面",
+        "evidence": "galleryBtn 和 closeGallery 均绑定事件，showGallery()/hideGallery() 切换 hidden 类，界面可正常打开关闭",
+        "ok": 1
+      },
+      {
+        "name": "点击艺术挑战卡片",
+        "expected": "开始相应挑战任务并给出反馈，例如切换挑战模式或目标提示",
+        "evidence": "HTML 中挑战卡片（.challenge-card）没有任何 click 事件绑定，点击无任何响应，属于需求声明功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面具备基本游戏流程：开始游戏、切换工具、点击画布有粒子特效和计数反馈，画廊可打开关闭；但需求中的艺术挑战卡片无任何交互（点击无反应），保存创建仅弹 alert 而未真正写入社区画廊，属于关键功能占位；实时天气模拟也极为薄弱，探针显示 canvas 拖拽无反馈。核心玩法能运行但多个需求特性未实现，因此得分为 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 核心玩法无效——点击画布使用工具时，仅产生一个短暂的小粒子动画和计数器变化，3D场景中的云朵形态并不会随之改变（场景预置的粒子系统只是自动旋转，与用户操作无关）。用户反复点击后无法看到自己“创造”的云，无法判断操作对结果的影响。\n2. 保存/图库流程不通——点击“Save Creation”仅弹出虚构的提示，作品并未真正保存到图库；进入“Gallery”后所展示的均为静态占位图，无法查看自己或他人的真实作品。\n\n次要瑕疵：\n1. 挑战卡片（如Rainbow Cloud、Storm Cloud）仅为展示，没有说明如何开始挑战，也没有完成状态或奖励反馈。\n2. 切换工具时没有文字或说明提示当前工具的作用，用户需自行猜测工具与云形态之间的因果关系。\n3. “清除”工具选择后点击画布，云朵计数和能量照常更新，但云朵视觉上无任何清除效果。\n4. 能量耗尽的边界情况无提示（未设置最低0的钳制，可变为负数）。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较强，采用了深蓝→青绿的渐变背景，营造出天空与云海的梦幻氛围，契合“天气操控”的游戏主题。色彩搭配合理，主背景、半透明卡片与高饱和工具按钮（蓝、红、灰、紫）形成了清晰的信息层级，同时保持了和谐统一。布局协调：开始界面居中卡片、游戏内顶部状态栏、左侧工具栏、右侧挑战面板、底部操作按钮，区域划分明确，符合游戏UI的常规规范。字体选用现代无衬线体（Segoe UI），配合半透明毛玻璃效果、圆角按钮、阴影和hover动效，整体质感较为精致，符合现代网页与游戏界面设计趋势。设计细节上，工具按钮的选中发光效果、挑战卡片悬停上移、画廊卡片缩放等微交互增强了使用体验。扣分点在于：部分视觉元素略显基础（如开始界面的图标仅用纯色圆形色块），且缺少关键帧动画等更丰富的动态表现；画廊占位图使用灰色虚线边框，视觉完成度稍欠。但整体仍是一款视觉出色、风格统一的游戏页面。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.3,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_027085.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Create Clouds",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

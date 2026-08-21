@@ -1,0 +1,181 @@
+{
+  "row_id": "02_005189",
+  "shard": 2,
+  "id": 5189,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Craft a transformative online space aimed at reducing mental health stigma through data storytelling. The site visualizes statistics on mental health perceptions, showcases personal stories, and offers educational resources. Features include interactive surveys, a stigma reduction toolkit, and a community support forum to foster understanding and advocacy.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11372,
+  "html_sha256": "347674e15fc4282b36e47d72bd1584eb357ec4ce4b29875971d63e8b3a2f3e56",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "查看全球心理健康污名指数图表",
+        "expected": "图表正常渲染，并能通过悬停查看数据提示",
+        "evidence": "页面包含 <canvas id=\"mentalHealthChart\">，Chart.js 在 DOMContentLoaded 中创建了柱状图，运行时无 JS 错误，Chart.js 自带悬停 tooltip 交互",
+        "ok": 1
+      },
+      {
+        "name": "顶部导航切换 Dashboard/Stories/Resources/Community",
+        "expected": "点击导航后切换到对应内容板块",
+        "evidence": "4 个导航链接均为 href=\"#\"，没有绑定路由或内容切换逻辑；探针仅检测到 hash/页面跳转，页面内容未发生业务变化",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Data 探索数据",
+        "expected": "进入数据展示区域或展示更多可视化信息",
+        "evidence": "按钮无事件绑定，探针点击后 DOM 无变化、无网络请求、无跳转，属于占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击 2023/2022 年份切换图表数据",
+        "expected": "图表数据随年份选择更新",
+        "evidence": "两个年份按钮没有绑定点击事件，Chart 实例也未提供切换逻辑；探针点击后 DOM 无变化",
+        "ok": 0
+      },
+      {
+        "name": "点击 Share Story 分享个人故事",
+        "expected": "打开分享故事的表单或引导流程",
+        "evidence": "按钮无 onclick、无 modal、无跳转；探针点击后 DOM 无变化、无网络请求，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "参与互动调查问卷",
+        "expected": "页面提供问卷表单，用户可填写并提交",
+        "evidence": "HTML 中没有 input、textarea 或 form 元素，完全缺少互动调查入口，需求声明的功能未实现",
+        "ok": "NA"
+      }
+    ],
+    "reason": "唯一有效交互是 Chart.js 数据图表的渲染与悬停提示；顶部导航、Explore Data、年份切换、Share Story、互动调查等关键功能均为占位、无事件或缺失，核心交互大面积不可用，页面整体更像静态展示页。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 主导航（Dashboard/Stories/Resources/Community）点击后仅发生hash跳转，没有实际内容切换或页面更新，属于主要入口无实际反馈；\n2. 主CTA按钮“Join Movement”点击后无任何DOM变化、无请求、无提示，核心操作无法完成；\n3. “Explore Data”按钮点击后无任何反馈，用户无法进入数据探索流程；\n4. “Share Story”和“Share Your Voice”按钮均无绑定行为，用户无法提交或分享故事；\n5. 数据可视化年份切换按钮（2023/2022）点击后图表数据不更新，核心控件调节无效；\n6. “Download Toolkit”按钮无事件处理，点击无反馈。\n\n次要瑕疵：\n1. 图表缺少图例，橙色柱状区域无额外说明；\n2. 导航无当前状态/激活指示，用户难以感知当前位置；\n3. 页面将社区论坛、交互式调查等以静态占位呈现，无实际功能入口；\n4. 部分按钮视觉层级接近，缺少明确的主行动引导。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用了现代主流的Tailwind CSS框架，色彩搭配以Indigo紫色为主、辅以橙色和绿色点缀，色彩心理学上契合心理健康主题，既传递专业冷静又带有温暖和支持感。布局采用左右分栏与网格系统，信息层级清晰，卡片式设计配合圆角、阴影和渐变背景，使页面显得精致且富有质感。Hero区域使用点状背景纹理和渐变，增加了视觉变化而不显杂乱。字体选用Inter（但未实际引入字体库，可能存在回退），字号和间距总体协调，按钮和hover动效符合现代交互规范。Chart.js嵌入的柱状图有效地支撑了数据可视化主题，统计卡片和板块划分也增强了内容可读性。不足之处在于部分细节如辅助图案重复使用可能略显单调，且按钮的交互反馈较弱（点击无状态变化），但整体不影响视觉美感。综合来看，该页面符合现代网页设计规范，与用户所需的数据可视化心理健康倡导风格高度对齐。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_005189.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Stories",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Movement",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Data",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Share Story",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "2023",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "row_id": "02_029676",
+  "shard": 2,
+  "id": 29676,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Navigate an educational platform that visualizes predictors of school dropout rates using interactive dashboards. Users can explore data by demographics, region, and risk factors, with predictive modeling tools to identify at-risk students. The platform supports educators and policymakers in developing targeted interventions to reduce dropout rates.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10497,
+  "html_sha256": "3c687d148783ecab70724b8373296e38cb202cee231a19cf8ee336974bd3ffba",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "页面加载时渲染三个图表",
+        "expected": "页面加载后显示柱状图、折线图、雷达图，呈现不同维度的辍学风险数据",
+        "evidence": "运行时JS错误 'Chart is not defined'，且 chart.js CDN 加载失败（ERR_CERT_DATABASE_CHANGED），三个 canvas 均无法绘制图表，页面视觉为空白的 canvas 区域",
+        "ok": 0
+      },
+      {
+        "name": "点击导航链接（Dashboard / Data Explorer / Resources）",
+        "expected": "导航应切换或展示对应视图/内容，实现平台内导航",
+        "evidence": "三个链接 href=\"#\"，点击仅产生 URL hash 变化，无任何内容切换或路由视图更新，属于纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Refresh 按钮",
+        "expected": "重新加载或刷新图表数据，更新下拉筛选对应的统计结果",
+        "evidence": "按钮无任何 click 事件绑定，点击仅触发 hover/focus 样式层 DOM 变化，无数据刷新或图表重绘",
+        "ok": 0
+      },
+      {
+        "name": "调整 Attendance / Behavior 滑块",
+        "expected": "滑块移动后实时更新百分比数值及风险等级",
+        "evidence": "因脚本在 new Chart 处抛错中断，后续 addEventListener 从未执行，滑块无事件监听，调整无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Run Prediction Model 按钮",
+        "expected": "运行预测模型并展示新的风险等级评估结果",
+        "evidence": "按钮未绑定任何事件，点击无业务反馈；且由于脚本提前中断，即使有绑定也无效，风险等级仍为静态文本",
+        "ok": 0
+      }
+    ],
+    "reason": "核心数据可视化功能完全失败：chart.js 加载失败导致所有图表无法渲染，JS 异常中断使后续所有交互（滑块、预测按钮、刷新）均未绑定事件。导航为纯锚点占位，无实际内容切换。页面仅剩静态文本和样式，无法完成任何用户需求中的核心任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. Chart.js CDN 加载失败（net::ERR_CERT_DATABASE_CHANGED），导致 Chart is not defined，三个图表全部空白，页面核心的数据可视化功能完全不可用。2. 顶部导航（Dashboard、Data Explorer、Resources）均为 # 占位链接，点击不切换内容，仅跳回页首，主要入口无实际反馈。3. 筛选下拉框与 Refresh 按钮没有绑定任何事件，选择或点击无实际效果，数据不能筛选或刷新，核心控件调节无效。4. “Run Prediction Model”按钮没有绑定点击逻辑，无法执行预测操作，核心操作无法完成。次要瑕疵：图表缺少轴标签、图例和数据说明，且加载失败时无降级提示；页面内容超出视口需要滚动，不符合无需滚动的需求；页脚社交图标为占位链接，但不影响主流程。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 6.0,
+    "reason": "该页面采用现代仪表盘布局，充分使用了 Tailwind CSS：深靛蓝页眉、浅灰背景、白色圆角卡片，以及蓝/绿/紫点缀色，整体配色与数据可视化平台调性相符。字体层级、间距和卡片悬浮微交互也显示出较高的 UI 工程水平。然而，关键图表库 Chart.js 加载失败，导致三个 canvas 图表区域全部空白，页面出现大块未填充面板，使“数据可视化”这一核心视觉内容严重缺失，观感像未完成的半成品。此外，多个导航链接仅为 # 占位、刷新按钮没有实际功能，也削弱了整体专业感。综合来看，结构设计较好，但实际渲染效果因关键内容缺失而明显打折。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.0,
+  "baseline_overall": 3.0,
+  "signals": {
+    "console_errors": [
+      "Failed to load resource: net::ERR_CERT_DATABASE_CHANGED"
+    ],
+    "failed_requests": [
+      "https://cdn.jsdelivr.net/npm/chart.js -> net::ERR_CERT_DATABASE_CHANGED"
+    ],
+    "page_errors": [
+      "Chart is not defined"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_029676.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Data Explorer",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Refresh",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Run Prediction Model",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    }
+  ]
+}

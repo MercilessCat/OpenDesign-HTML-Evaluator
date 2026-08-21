@@ -1,0 +1,181 @@
+{
+  "row_id": "00_018878",
+  "shard": 0,
+  "id": 18878,
+  "category": "3D design",
+  "prompt": "Build a vibrant community site focused on CSS-driven 3D card stack effects. Users can browse creative card designs, learn animation techniques, and contribute their own. Key features include a showcase gallery, interactive tutorials, and a sandbox for testing CSS effects in real-time with community feedback.",
+  "html_len": 16502,
+  "html_sha256": "9b3ffa279b908ae7be308624e78f932d610844f7e67b3b11d1e64b76836fef49",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "浏览作品画廊并悬停翻转卡片",
+        "expected": "鼠标悬停卡片时卡片 3D 翻转，展示设计详情",
+        "evidence": "HTML/CSS 中有 .card:hover .card-inner { transform: rotateY(180deg); }，且 JS 绑定了 mousemove/mouseleave 动态旋转；运行时无 JS 错误，卡片翻转反馈存在",
+        "ok": 1
+      },
+      {
+        "name": "点击导航链接切换到 Gallery/Tutorials/Sandbox/Community",
+        "expected": "导航到对应内容区块或页面并展示相应功能",
+        "evidence": "探针显示点击后有 DOM 变化/跳转，但所有导航均为 href=\"#\"，无路由、无对应锚点切换，新增网络请求=0，属于纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击“Start Creating”进入创作流程",
+        "expected": "跳转到沙箱、编辑器或创作引导流程",
+        "evidence": "探针点击按钮后 DOM 变化=无、新增网络请求=0、无 JS 错误；按钮没有任何事件绑定，无效",
+        "ok": 0
+      },
+      {
+        "name": "打开交互式教程学习 CSS 3D 动画",
+        "expected": "教程卡片可点击并展示可交互的分步教学内容",
+        "evidence": "教程区域只是静态 div，无链接、无按钮、无点击事件；仅有 hover 位移样式，没有可学习的交互内容",
+        "ok": 0
+      },
+      {
+        "name": "在沙箱中编辑 CSS 并实时预览",
+        "expected": "提供可编辑代码区，修改后预览实时更新",
+        "evidence": "“代码编辑器”只是 <pre><code> 静态文本，无 textarea/contenteditable，无输入探针可操作入口；预览区也是固定 div，无法实时响应代码变更",
+        "ok": 0
+      },
+      {
+        "name": "贡献作品或参与社区反馈",
+        "expected": "有上传作品、评论、点赞或社区讨论入口",
+        "evidence": "页面没有表单、上传、评论或点赞控件；社区导航和社交图标均为 href=\"#\" 占位链接，无法贡献或反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉完整，Three.js 背景与作品卡片翻转可正常呈现，但导航、CTA、交互式教程、CSS 沙箱和社区贡献等核心功能均为占位或无事件实现，用户无法完成学习、测试和贡献作品等主要任务，属于核心功能大面积缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 顶部导航5个链接（Home/Gallery/Tutorials/Sandbox/Community）全部是href=\"#\"占位链接，点击仅滚动到页面顶部，没有任何页面切换或内容加载，用户无法访问画廊、教程、社区等核心模块；2. “Start Creating”按钮点击后无任何DOM变化、无跳转、无反馈，主操作流程走不通；3. 沙盒区宣称“Edit the code below and see your changes instantly”，但代码区是静态<pre>展示、不可编辑，预览区也不随任何操作改变，核心试验功能完全失效。次要瑕疵：1. 社交链接均为占位符，无法跳转社区平台；2. 卡片hover的CSS翻转与JS鼠标跟随旋转冲突，实际交互与预期翻转效果不符；3. 教程卡片不可点击，无详细内容入口；4. 无“贡献作品”入口，用户无法上传自己的创意；5. 页面无任何错误提示或引导说明，用户进行无效点击后得不到任何解释。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "该页面视觉设计非常出色，整体风格与3D创意社区主题高度契合。色彩搭配以深蓝色渐变背景（#1a1a2e → #0f3460）为主，配合珊瑚红、青绿、金黄等明快的渐变色点缀，形成强烈的视觉对比，既沉稳又富有活力，符合现代创意社区的气质。布局结构清晰：sticky玻璃拟态导航、80vh Hero区域配合Three.js动态线框背景、响应式卡片网格、教程卡片组、左右分栏代码沙盒，信息层级分明，节奏感良好。字体选用Segoe UI等系统字体，字号比例协调，标题的渐变色文字和底部装饰线增强了品牌感。组件细节到位：圆角、阴影、backdrop-filter模糊、3D翻转卡片、hover微动效等，均体现了较高的CSS设计专业水准。交互方面，卡片鼠标跟随3D旋转提升了沉浸感，沙盒预览区设计直观。唯一不足是缺少实际图片而使用emoji图标，以及字体选择略显常规，但对整体视觉效果影响不大。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_018878.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Sandbox",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "📘",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "🐦",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

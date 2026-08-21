@@ -1,0 +1,174 @@
+{
+  "row_id": "00_029908",
+  "shard": 0,
+  "id": 29908,
+  "category": "3D design",
+  "prompt": "Establish a site for conducting fluid dynamics experiments interactively. Use real-time simulations to demonstrate principles of fluidity and motion. Users can modify variables to see effects, and educators can create guided lessons to explain fluid dynamics concepts with interactive visuals.",
+  "html_len": 23537,
+  "html_sha256": "2b54bcb63e451b440ac58a33692a2b077a52b574f7d49495fc97400fafcba6f4",
+  "functional": {
+    "score": 6.0,
+    "raw_score": 6.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "拖拽旋转 3D 场景",
+        "expected": "用户拖拽 canvas 后视角应发生旋转/平移，模拟场景可环绕观察",
+        "evidence": "代码中创建了 THREE.OrbitControls，绑定到 canvas 并启用 damping；运行时无 JS 错误。探针无法直接验证 WebGL 像素，但按规则视为可交互。",
+        "ok": 1
+      },
+      {
+        "name": "调节粘度/流速/湍流滑块",
+        "expected": "滑块数值显示更新，且粒子运动随参数变化（粘度降低速度、湍流增加扰动、流速改变移动速度）",
+        "evidence": "HTML 绑定了 input 事件，updateParticles 中使用了 params.viscosity、params.velocity、params.turbulence；运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "调节密度滑块",
+        "expected": "密度值影响流体行为，用户能看到物理效果变化",
+        "evidence": "页面有 #density 滑块和 #density-value 数值显示，也会更新 params.density，但 updateParticles 及仿真逻辑从未读取 params.density，因此该变量对仿真无实际效果。",
+        "ok": 0
+      },
+      {
+        "name": "点击预设按钮（Water/Honey/Oil/Air）",
+        "expected": "滑块与数值显示切换为对应流体预设参数",
+        "evidence": "探针点击 Water-like、Honey-like、Oil-like、Air-like 后均有 DOM 变化，且无 JS 错误；代码中 applyPreset 会同步更新滑杆和显示值。",
+        "ok": 1
+      },
+      {
+        "name": "暂停/继续仿真",
+        "expected": "按钮文字在 Pause/Resume 间切换，仿真粒子运动暂停或继续",
+        "evidence": "探针点击 Pause 后 DOM 变化=有；代码中 isPaused 切换并更新按钮文本，无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "重置仿真",
+        "expected": "参数恢复默认值，粒子重新分布，仿真回到初始状态",
+        "evidence": "探针在初始默认状态下点击 Reset 未观察到 DOM 变化，符合此时参数未改变的预期；代码中 resetBtn 会恢复默认参数并调用 resetParticles() 重置粒子，无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "创建引导课程（educator 入口）",
+        "expected": "应有入口或界面让教育者创建、编辑引导式流体力学课程",
+        "evidence": "页面中没有任何课程创建/编辑入口或相关模块，只有关于流体动力学的说明文字；该需求核心功能缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面主体是可用且较完整的 3D 流体仿真：3D 视角、参数调节、预设、暂停/重置均正常；但密度滑块未接入物理仿真，且教育者创建引导课程的核心入口完全缺失，导致需求未完整实现，故给 6 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 5.0,
+    "reason": "核心可用性问题：Density（密度）滑块调整后虽然更新了数值显示，但模拟更新函数中未读取 params.density，因此流体运动完全不变，属于核心控件调节无效，用户无法通过该变量看到任何效果，违背了“修改变量观察效果”的核心目标。次要瑕疵：未提供教育者创建引导课程/教案的入口，与需求中的 educator 场景不符，但可作为后续模块补全；粒子颜色没有图例或说明，用户难以解读；滑块缺少单位/量纲说明；预设按钮没有选中态提示；暂停后点击 Reset 不会自动恢复运行。除此之外，页面结构清晰，粘度/流速/湍流、预设切换、暂停/继续、重置等主流程均可正常操作且无 JS 错误，因此按 1 个核心可用性问题计 5 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉设计优秀，符合3D设计类别的现代深色科技风格。色彩搭配以深蓝色渐变背景为基底，辅以青色系（#00b4d8、#90e0ef）作为强调色，形成清晰、和谐的视觉层次，营造出流体与科技感。布局采用flex结构，模拟画布与右侧控制面板比例协调，卡片式面板搭配半透明背景、圆角、阴影和细边框，质感专业。标题使用渐变文字，按钮和滑块均统一为青色系并带有hover动效，组件设计精致。字体采用Segoe UI，大小层级分明，间距舒适。CSS中运用了flex/grid、渐变、阴影、自定义控件等现代设计手法，整体风格与交互式流体动力学教育工具的需求高度对齐。扣分项主要是个别细节（如header纯黑背景与整体渐变衔接不够自然）以及实际渲染效果无法直接验证，但基于源码表达，视觉质量上乘。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 6.75,
+  "baseline_overall": 6.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_029908.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Pause",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Water-like",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Honey-like",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Oil-like",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Air-like",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

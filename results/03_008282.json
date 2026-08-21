@@ -1,0 +1,181 @@
+{
+  "row_id": "03_008282",
+  "shard": 3,
+  "id": 8282,
+  "category": "Game dev",
+  "prompt": "Launch a site for aspiring fountain designers, offering a 3D canvas to experiment with water flow and pattern creation. Users can simulate various materials and environmental conditions. Include a feature for sharing designs, a library of famous fountains for inspiration, and a tool for simulating nighttime lighting effects.",
+  "html_len": 24808,
+  "html_sha256": "7ceac4072febdcf8e29e793af305bef8db6f0d59708dd3dc5e0fa25e0617e59d",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "3D画布旋转/缩放与参数调整",
+        "expected": "用户拖拽旋转/缩放视角，并修改高度/图案/喷嘴后，3D喷泉应随之重绘",
+        "evidence": "HTML 中 init() 创建了 THREE.WebGLRenderer 和 OrbitControls，并由 requestAnimationFrame 持续渲染；heightSlider/patternSelect/nozzleSlider 均绑定了调用 createFountain() 的监听。探针在 canvas 上拖拽无 JS 错误，WebGL 像素无法探针验证，但控件已初始化。",
+        "ok": 1
+      },
+      {
+        "name": "调节水流流量",
+        "expected": "拖动 Flow Rate 滑块应看到水流速度/喷射强度变化",
+        "evidence": "flowSlider 的 input 监听被绑定为空函数 `addEventListener('input', () => {})`；createWaterParticles 仅把粒子写入数组，未创建任何 Three.js 或 DOM 粒子，renderer 不渲染这些数据，因此没有可见水流反馈。",
+        "ok": 0
+      },
+      {
+        "name": "模拟材料/表面纹理",
+        "expected": "切换 Basin Material、Surface Texture、Water Clarity 应改变喷泉材质/外观",
+        "evidence": "Materials 标签页的 basinMaterial、surfaceTexture、claritySlider 在 setupEventListeners 中均无 change/input 绑定；源码中也没有更新场景材质的相关逻辑，选择后不会有视觉变化。",
+        "ok": 0
+      },
+      {
+        "name": "夜间灯光模拟",
+        "expected": "切换到 Night 并开启 Dynamic Lighting 后，场景变暗并出现彩色动态点光源",
+        "evidence": "timeOfDay 的 change 监听会修改 scene.background；lightingToggle 的 change 监听调用 createLightingEffects()，且 animate() 中会旋转 PointLight；运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "从名泉库加载灵感设计",
+        "expected": "点击 Trevi/Versailles/Bellagio 卡片应载入对应喷泉配置到 3D 场景",
+        "evidence": "fountainCards 点击后调用 loadFamousFountain()，但该函数只有 alert(`Loading ${name} fountain design...`)，注释也标明真实实现才会加载；场景未发生任何配置变化，纯占位。",
+        "ok": 0
+      },
+      {
+        "name": "分享设计",
+        "expected": "分享应生成包含当前设计状态的链接或导出内容",
+        "evidence": "Share 点击后分享弹窗出现（探针确认 DOM 变化），但 copyLinkBtn 复制的是 window.location.href，不包含任何设计参数；保存也只是 alert，未持久化设计数据，因此属于占位分享。",
+        "ok": 0
+      }
+    ],
+    "reason": "3D 渲染、视角控制、高度/图案/喷嘴参数调整以及夜间灯光可用；但材料模拟、名泉库加载、设计分享均为占位，流量滑块无可见效果，Add Custom Nozzle 和 Reset Design 也没有事件绑定。多个需求声明功能未实现，故功能分偏低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 多个核心控件调节无效：Flow Rate滑块的事件监听为空函数，调节后无任何效果；Materials整个Tab中的Basin Material/Water Clarity/Surface Texture均无事件绑定，切换无任何反馈；Environment Tab中Weather、Surroundings两个下拉框也无事件绑定，修改后场景无变化。\n2. 核心操作按钮失效：Add Custom Nozzle按钮没有任何事件监听，点击无反应；Reset Design按钮同样无事件监听，无法重置设计。\n3. 保存/分享为虚假实现：Save Design仅弹出alert提示保存成功，实际无持久化；Share弹窗中复制链接仅是当前页面URL，并非设计分享链接，无法真正分享设计。\n4. 水流粒子系统未实际渲染：createWaterParticles仅维护内存数据，未创建任何Three.js对象添加到场景，用户看不到水流粒子效果，Flow Rate的调节在视觉上完全无反馈。\n\n次要瑕疵：\n- 3D画布缺少操作引导（如旋转/缩放提示），用户不知道可拖拽视角。\n- 滑块控件没有数值显示，无法精确调节或感知当前值。\n- 点击著名喷泉卡片仅弹出alert，并未实际加载对应设计，与用户预期不符。\n- 分享弹窗文案“Your fountain design has been saved”具有误导性。\n- 喷泉库卡片使用纯色渐变占位，无真实设计预览图。\n- 部分界面按钮使用alert作为反馈方式，体验生硬；整体视觉风格统一，信息布局清晰，但核心功能缺失严重，不可称为‘好用’。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "整体视觉设计在该类别中表现良好，但仍有明显提升空间。\n\n【优点】\n1. 深色半透明面板+蓝色渐变主色调，贴合“水/喷泉”主题，视觉语言统一，符合现代3D设计工具的审美趋势。\n2. 面板使用了backdrop-filter模糊、圆角、阴影和细边框，层次清晰，组件有不错的精致度。\n3. 按钮和标签页具有渐变、悬停抬升和阴影反馈，交互状态有一定质量。\n4. 喷泉卡片的悬停动画和颜色渐变占位图增加了趣味性。\n5. 参考库卡片（Trevi、Versailles、Bellagio）的内容组织简洁，语义明确。\n\n【不足】\n1. 库卡片没有真实喷泉图片，仅用渐变色块+文字占位，视觉冲击力和信息含量不足，降低了“灵感库”功能的说服力。\n2. 页面顶部和侧边栏布局中规中矩，缺少视觉焦点或品牌个性——标题虽用了渐变文字，但没有logo、图标或更多装饰元素来强化“游戏/创意工具”感。\n3. 字体仅用系统字体Segoe UI，缺少特色标题字体或更精细的字重层级，观感普通。\n4. 灯光效果仅用基础RGB五色旋转点光源，且没有可见的光晕/辉光叠加层，夜间模式的表现力较弱。\n5. 控件密度较低，滑块、下拉框样式较千篇一律，对高端设计工具的“精致感”支撑不足。\n6. 面板最大高度80vh且可滚动，但未做折叠/最小化处理，长时间编辑时可能遮挡3D画布。\n\n总体而言，该页面达到了合格偏上的水准，色彩和组件风格一致性不错，但视觉深度、内容丰富度和品牌个性方面还有较大提升空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_008282.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save Design",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Share",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Design",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Materials",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Environment",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Custom Nozzle",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Design",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

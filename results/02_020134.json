@@ -1,0 +1,181 @@
+{
+  "row_id": "02_020134",
+  "shard": 2,
+  "id": 20134,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Predict and visualize the spread of forest fires with a platform simulating dynamic fire scenarios. Users analyze risk factors, simulate containment strategies, and collaborate on prevention efforts. Key features include real-time fire spread maps, risk analysis tools, and collaborative firefighting strategy forums for ecologists and emergency responders.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13026,
+  "html_sha256": "ef4015b9d90e764f637c23d6a48a68f8383e75096418f141bf88ea0a06bc349f",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "查看实时火势地图",
+        "expected": "显示火势蔓延/风险区域的地图视图，并随时间或策略有动态反馈",
+        "evidence": "页面只有 .fire-map 的 CSS 条纹背景和居中静态文本/图标，图例为纯装饰；没有地图数据、Canvas/WebGL 渲染或 update 逻辑，无法反映实时火情",
+        "ok": 0
+      },
+      {
+        "name": "风险预测图表",
+        "expected": "加载后展示未来 12 小时风险指数折线图",
+        "evidence": "Chart.js 通过 CDN 引入，canvas#riskChart 初始化成功，运行时无 JS 错误，折线/背景渲染可见",
+        "ok": 1
+      },
+      {
+        "name": "模拟遏制策略",
+        "expected": "点击 Create Firebreaks / Deploy Firefighters / Aerial Water Drops / Evacuate Zone 后执行策略并在地图/遏制状态上更新",
+        "evidence": "按钮没有 .strategy-btn 类，脚本 querySelectorAll('.strategy-btn') 匹配不到任何按钮；探针点击仅有样式层 DOM 变化，没有业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "协作讨论/加入论坛",
+        "expected": "点击 Join Discussion 进入协作论坛或可发布/查看讨论",
+        "evidence": "Join Discussion 按钮没有绑定事件，协作面板只是静态联系人/状态文本，点击不会打开讨论或发送消息",
+        "ok": 0
+      },
+      {
+        "name": "顶部导航切换",
+        "expected": "点击 Dashboard/Simulations/Risk Analysis/Collaboration 应切换到对应页面/内容区块",
+        "evidence": "四个导航均为 href='#'，没有路由或视图切换逻辑；探针点击后页面内容未变化，仅可能的 # 锚点/样式变化",
+        "ok": 0
+      },
+      {
+        "name": "Sign In 登录",
+        "expected": "点击 Sign In 应弹出登录/身份认证界面",
+        "evidence": "按钮无 onclick/事件监听，也没有对应 modal；探针点击只有 hover/active 样式层 DOM 变化",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上完成了火灾监测仪表盘的静态呈现，风险图表可正常渲染；但核心功能如实时火势模拟、遏制策略模拟、协作论坛、导航切换和登录均是无事件/纯占位入口，用户无法完成任务，因此功能性很低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 顶部导航 Dashboard/Simulations/Risk Analysis/Collaboration 均为 href=\"#\" 占位链接，点击只改变 hash/回到顶部，没有对应页面或内容反馈；\n2. Containment Strategies 中的模拟按钮（Create Firebreaks/Deploy Firefighters/Aerial Water Drops/Evacuate Zone）没有绑定有效事件，JS 选择器 .strategy-btn 与实际按钮 class 不匹配，点击无法启动或修改任何模拟结果；\n3. Join Discussion、Sign In 等按钮点击无后续流程/提示，协作与登录操作不可完成。\n次要瑕疵：信息层级和视觉风格较清晰，但风险图缺少操作说明、导航缺少当前激活态、按钮点击后缺少成功/失败反馈；部分模块（论坛、风险分析工具）仅为静态占位。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，使用了深青色到青绿色的渐变背景配合半透明玻璃拟态卡片，营造出科技感与专业气象平台的氛围，符合森林火灾数据可视化主题。色彩搭配以青、橙、红为主，既体现火灾风险警告，又保持整体协调统一，对比度合理。布局采用左侧主地图模拟区与右侧策略控制/风险图表/协作面板的经典三列结构，层次清晰，信息密度适中；圆角、阴影和悬浮微动效增强了现代感与交互质感。字体采用 Poppins，搭配 Tailwind 排版，间距规范。Chart.js 图表虽简单但风格一致。主要不足是核心地图区域用 CSS 条纹模拟代替真实地图，视觉上略显抽象和重复，缺少细节纹理；顶部导航链接点击导致页面跳转（实际为 '#', 可能产生滚动到顶部的行为）在单页场景中体验稍不完整。但整体设计专业、干净，且与现代数据可视化平台的风格对齐。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_020134.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Risk Analysis",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Collaboration",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Create Firebreaks",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Deploy Firefighters",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Aerial Water Drops",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "row_id": "02_011844",
+  "shard": 2,
+  "id": 11844,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Create an interactive site visualizing quantum superposition through animated graphs and simulations. Users explore quantum mechanics concepts, engage in virtual experiments, and connect with a community of enthusiasts. Features include educational resources, expert-led discussions, and collaborative projects, fostering a deeper understanding of quantum phenomena and their applications.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 7637,
+  "html_sha256": "5f2516b07b259ab785ce9d9a2f86bdd182818198cac1091650d8d5b88ef17865",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击 Start Simulation 启动模拟",
+        "expected": "页面生成/动画展示量子叠加态波形图，按钮文字变为 Restart Simulation",
+        "evidence": "按钮绑定 click 事件，调用 createWaveFunction()，D3 会绘制面积图和波浪曲线并生成粒子动画；探针点击后 DOM 有变化，无 JS 错误，无网络请求",
+        "ok": 1
+      },
+      {
+        "name": "点击 Reset 重置模拟",
+        "expected": "清除量子可视化内容，按钮文字恢复为 Start Simulation",
+        "evidence": "按钮绑定 click 事件，执行 svg.selectAll('*').remove() 并修改按钮文本；探针点击后 DOM 有变化，无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击导航栏 Experiments",
+        "expected": "切换到实验/模拟相关页面或展示对应内容",
+        "evidence": "该 button 未绑定任何 click 事件、无 href、无路由逻辑；页面也没有对应内容区块。探针检测到的 DOM 变化只可能来自 hover/focus 样式层，业务内容无切换",
+        "ok": 0
+      },
+      {
+        "name": "点击导航栏 Community",
+        "expected": "进入社区或展示社区讨论/项目内容",
+        "evidence": "该 button 无事件绑定、无对应页面或内容容器；点击后没有业务反馈，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击底部 Educational Resources",
+        "expected": "展示或跳转到教育资源内容",
+        "evidence": "该 button 无事件绑定、无链接、无内容切换逻辑；探针 DOM 变化不构成实际业务反馈，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击底部 Join Community",
+        "expected": "加入社区或展示社区入口信息",
+        "evidence": "该 button 无事件绑定、无表单、无跳转、无内容变化；用户无法完成“连接社区”的操作",
+        "ok": 0
+      }
+    ],
+    "reason": "核心量子叠加模拟的 Start/Reset 交互可用，且页面初始能自动展示 D3 动画。但导航栏 Experiments/Community/Resources 以及底部 Educational Resources/Expert Discussions/Join Community 等多个需求关键入口均为未实现占位按钮，没有事件绑定或内容切换。需求声明的关键入口有 2 个及以上未实现，因此功能分不高于 4，综合评为 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 5.0,
+    "reason": "【核心可用性问题】1. 主页导航与页脚中的“Experiments / Community / Resources / Educational Resources / Expert Discussions / Join Community”均为占位入口，点击后没有任何实质内容跳转或功能反馈，用户期待进入对应模块却落空，导致“教育资源、专家讨论、加入社区”等核心目标无法完成。这属于主要入口点击无实际反馈，判定为1个核心可用性问题。\n\n【次要瑕疵】1. 模拟器仅有“开始/重置”两个按钮，缺少振幅、频率、相位、测量坍缩等可调参数，交互探索深度不足；2. 页面虽名为“Quantum Superposition Simulator”，但没有演示“测量坍缩”这一关键概念，内容覆盖面不完整；3. Community Projects 列表为纯展示，点击无后续；4. 在小高度视口下内容有轻微超出首屏的可能，无法严格保证“无需滚动全部可见”。\n\n整体视觉与模拟器主体功能可用，但主要导航入口缺失真实功能，因此评为“能用但不好用”档位。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，采用深色主题（slate-900背景配合indigo/purple渐变），营造出科技感与量子主题高度契合。色彩搭配合理，主色为深蓝灰与靛蓝、紫色点缀，对比鲜明且不刺眼，符合现代数据可视化页面的审美。布局协调，header、主内容区（左侧图表+右侧信息面板）、footer三段式结构清晰，主次分明。字体使用Segoe UI，可读性好；间距利用Tailwind的体系化设计，卡片圆角、阴影（glow效果）等组件细节扎实，质感专业。图表区域通过渐变背景和动态粒子动画增强了视觉吸引力，但动态SVG可能因初始加载等原因未在静态特征中体现。部分按钮（如导航、footer链接）仅有hover效果而无实际功能，略显功能冗余，但不影响视觉评价。整体符合现代网页设计规范，与用户需求（数据可视化、量子主题）风格对齐。扣分项：页面内容偏模板化，布局常规，个性化元素不足，右侧面板信息密度一般。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_011844.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Experiments",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Community",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Resources",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Educational Resources",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Expert Discussions",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Community",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

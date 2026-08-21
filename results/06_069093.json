@@ -1,0 +1,192 @@
+{
+  "row_id": "06_069093",
+  "shard": 6,
+  "id": 69093,
+  "category": "Website",
+  "prompt": "A comprehensive digital hub for comparing various coverage options, featuring user-friendly tools for personalized recommendations. Users can filter by needs, view side-by-side comparisons, and access expert advice. Interactive calculators and a dynamic FAQ section enhance understanding, while a blog offers insights into emerging industry trends.",
+  "html_len": 30599,
+  "html_sha256": "b6e9a82d4b0a214b8dcf762a0aad766f39f3662c5dc1be4b87fc34720d5d4c09",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航跳转到各区域",
+        "expected": "点击导航链接平滑滚动到 Features/Compare/Calculator/FAQ/Blog 对应区块",
+        "evidence": "探针点击 5 个导航链接时 DOM 无变化、无新增 JS 错误/网络请求；HTML 中为 a[href^='#'] 锚点且存在平滑滚动脚本，滚动本身不改变 DOM，故视为导航有效",
+        "ok": 1
+      },
+      {
+        "name": "展开FAQ手风琴",
+        "expected": "点击问题后展开/收起答案，图标随状态翻转",
+        "evidence": "HTML 中 .faq-question 绑定了 click 事件，切换 .faq-item.active 并切换 fa-chevron-down/up 图标，.faq-answer 有 max-height 过渡；运行时无相关 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "使用储蓄计算器计算",
+        "expected": "修改输入并点击 Calculate Savings 后更新 Estimated Annual Savings 金额",
+        "evidence": "计算器按钮无任何事件绑定（无 onclick/监听器），HTML 中也没有计算逻辑脚本，页面显示的 $600 为静态写死的默认值，无法触发计算",
+        "ok": 0
+      },
+      {
+        "name": "点击 Compare Plans Now CTA",
+        "expected": "跳转或滚动到比较区，或打开比较工具",
+        "evidence": "探针点击该按钮后 DOM 无变化、无新增 JS 错误和网络请求；按钮既无 href 也无事件绑定，完全没有业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "阅读博客文章",
+        "expected": "点击 Read More 打开文章详情或跳转到对应内容",
+        "evidence": "博客 Read More 链接均为 href='#'，会被平滑滚动脚本拦截并尝试 document.querySelector('#')，产生无效选择器错误；实际无法打开文章，属于占位死链",
+        "ok": 0
+      },
+      {
+        "name": "按需求筛选覆盖选项",
+        "expected": "提供筛选控件（预算、护理需求等）并更新比较结果",
+        "evidence": "页面仅有“Smart Filtering”功能描述卡片，没有实际的筛选表单、下拉框、滑块或任何筛选逻辑，需求声明中的核心筛选功能完全缺失",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面视觉完整，但核心交互大量失效：导航和 FAQ 手风琴可用；储蓄计算器按钮无事件、Compare Plans Now 等主 CTA 均无响应、博客 Read More 为占位死链，且按需筛选/个性化推荐工具完全缺失。主要任务无法完成，属于大面积功能未实现，仅少量静态内容可浏览。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1）主要入口/CTA无实际反馈：Get Started、Compare Plans Now、Watch Demo、Customize Your Comparison、View All Articles 等点击后均无响应，形成死路；2）Savings Calculator 不可用：修改输入后点击 Calculate Savings 不会重新计算，结果一直为静态 $600；3）移动端导航按钮因无效选择器 .md:hidden 导致 JS 报错，汉堡菜单无法打开，移动端导航失效；4）宣传的“按需求筛选/个性化推荐”没有对应交互控件，无法完成用户核心目标。次要瑕疵：博客 Read More 及页脚部分链接为占位 href='#'，FAQ 可折叠但缺少帮助性说明；页面视觉和信息结构较清晰，但这些只算锦上添花，不能弥补核心任务失败。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较强，采用蓝绿渐变主色调，搭配紫粉点缀，色彩和谐且有现代感。布局清晰，各区块（导航、Hero、特性、对比表、计算器、FAQ、博客、CTA、页脚）结构完整，层次分明。字体使用Poppins，搭配适中的间距与圆角卡片、柔和阴影，整体风格专业且符合保险科技类网站的气质。Tailwind CSS的应用较为规范，组件设计质量较高，hover动效与FAQ手风琴交互提升了体验。存在少量JS报错（如querySelector选择器语法问题）和锚点跳转失效，对视觉影响较小。综合看是一个视觉上专业、美观的现代网站页面。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Failed to execute 'querySelector' on 'Document': '.md:hidden' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '.md:hidden' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '.md:hidden' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '.md:hidden' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '.md:hidden' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '.md:hidden' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '.md:hidden' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '.md:hidden' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '.md:hidden' is not a valid selector."
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_069093.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Compare",
+      "href": "#compare",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Calculator",
+      "href": "#calculator",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "FAQ",
+      "href": "#faq",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Blog",
+      "href": "#blog",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Compare Plans Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Watch Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

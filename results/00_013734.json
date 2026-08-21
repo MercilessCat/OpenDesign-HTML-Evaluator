@@ -1,0 +1,113 @@
+{
+  "row_id": "00_013734",
+  "shard": 0,
+  "id": 13734,
+  "category": "3D design",
+  "prompt": "Develop a visually stunning platform for experimenting with light effects in 3D environments. Users will manipulate parameters like scattering, reflection, and refraction to create atmospheric scenes. Features include a real-time editor, shader tutorials, and a gallery of user-generated light experiments to inspire creativity.",
+  "html_len": 20679,
+  "html_sha256": "e89fc6ff1e66cc21eb26594582c7f6f00beabb9a645c5cdb3b514e98bcfbb461",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [
+      "THREE.WebGLProgram: shader error:  0 35715 false gl.getProgramInfoLog Fragment shader is not compiled.\n\u0000  THREE.WebGLShader: gl.getShaderInfoLog() fragment\nERROR: 0:109: 'reflect' : function name expected\nERROR: 0:109: '=' : dimension mismatch\nERROR: 0:109: '=' : cannot convert from 'const mediump float' to 'highp 3-component vector of float'\n\u00001: #version 300 es\n2: #define varying in\n3: out highp vec4 pc_fragColor;\n4: #define gl_FragColor pc_fragColor\n5: #define gl_FragDepthEXT gl_FragDepth\n6: #",
+      "THREE.WebGLProgram: shader error:  0 35715 false gl.getProgramInfoLog Fragment shader is not compiled.\n\u0000  THREE.WebGLShader: gl.getShaderInfoLog() fragment\nERROR: 0:109: 'reflect' : function name expected\nERROR: 0:109: '=' : dimension mismatch\nERROR: 0:109: '=' : cannot convert from 'const mediump float' to 'highp 3-component vector of float'\n\u00001: #version 300 es\n2: #define varying in\n3: out highp vec4 pc_fragColor;\n4: #define gl_FragColor pc_fragColor\n5: #define gl_FragDepthEXT gl_FragDepth\n6: #",
+      "THREE.WebGLProgram: shader error:  0 35715 false gl.getProgramInfoLog Fragment shader is not compiled.\n\u0000  THREE.WebGLShader: gl.getShaderInfoLog() fragment\nERROR: 0:109: 'reflect' : function name expected\nERROR: 0:109: '=' : dimension mismatch\nERROR: 0:109: '=' : cannot convert from 'const mediump float' to 'highp 3-component vector of float'\n\u00001: #version 300 es\n2: #define varying in\n3: out highp vec4 pc_fragColor;\n4: #define gl_FragColor pc_fragColor\n5: #define gl_FragDepthEXT gl_FragDepth\n6: #",
+      "THREE.WebGLProgram: shader error:  0 35715 false gl.getProgramInfoLog Fragment shader is not compiled.\n\u0000  THREE.WebGLShader: gl.getShaderInfoLog() fragment\nERROR: 0:109: 'reflect' : function name expected\nERROR: 0:109: '=' : dimension mismatch\nERROR: 0:109: '=' : cannot convert from 'const mediump float' to 'highp 3-component vector of float'\n\u00001: #version 300 es\n2: #define varying in\n3: out highp vec4 pc_fragColor;\n4: #define gl_FragColor pc_fragColor\n5: #define gl_FragDepthEXT gl_FragDepth\n6: #",
+      "THREE.WebGLProgram: shader error:  0 35715 false gl.getProgramInfoLog Fragment shader is not compiled.\n\u0000  THREE.WebGLShader: gl.getShaderInfoLog() fragment\nERROR: 0:109: 'reflect' : function name expected\nERROR: 0:109: '=' : dimension mismatch\nERROR: 0:109: '=' : cannot convert from 'const mediump float' to 'highp 3-component vector of float'\n\u00001: #version 300 es\n2: #define varying in\n3: out highp vec4 pc_fragColor;\n4: #define gl_FragColor pc_fragColor\n5: #define gl_FragDepthEXT gl_FragDepth\n6: #",
+      "THREE.WebGLProgram: shader error:  0 35715 false gl.getProgramInfoLog Fragment shader is not compiled.\n\u0000  THREE.WebGLShader: gl.getShaderInfoLog() fragment\nERROR: 0:109: 'reflect' : function name expected\nERROR: 0:109: '=' : dimension mismatch\nERROR: 0:109: '=' : cannot convert from 'const mediump float' to 'highp 3-component vector of float'\n\u00001: #version 300 es\n2: #define varying in\n3: out highp vec4 pc_fragColor;\n4: #define gl_FragColor pc_fragColor\n5: #define gl_FragDepthEXT gl_FragDepth\n6: #"
+    ],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_013734.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sunset Glow",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Aurora Borealis",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Ocean Depths",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Neon City",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

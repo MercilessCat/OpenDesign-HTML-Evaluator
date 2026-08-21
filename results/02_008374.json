@@ -1,0 +1,181 @@
+{
+  "row_id": "02_008374",
+  "shard": 2,
+  "id": 8374,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Build a data visualization hub that evaluates ethical consumerism through brand performance metrics. Users can compare brands based on sustainability, labor practices, and ethical sourcing. Key features include interactive charts, consumer feedback integration, and trend analysis to empower informed purchasing decisions and promote transparency in consumer markets.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14495,
+  "html_sha256": "282049e2aa08e58d69a1b42f7d24c31be371117a9005a30e04c2ee1bcc17c7d2",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "切换雷达图指标",
+        "expected": "点击 Sustainability / Labor Practices / Ethical Sourcing 后，雷达图应切换或更新对应指标，并高亮当前选中项。",
+        "evidence": "探针点击 Sustainability 后 DOM 无变化；点击 Labor Practices / Ethical Sourcing 虽有 DOM 变化，但 HTML 中这三个按钮均无事件绑定，也没有图表更新逻辑；变化仅来自按钮样式层。",
+        "ok": 0
+      },
+      {
+        "name": "刷新数据",
+        "expected": "点击 Refresh Data 后，应重新加载或更新数据，或至少显示刷新中的状态。",
+        "evidence": "探针点击后 DOM 无变化、无新增网络请求、无 JS 错误；按钮没有任何事件监听器或刷新逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "导出数据 / 查看完整报告",
+        "expected": "点击 Export 或 View Full Report 应触发下载、打开报告页或展示更多内容。",
+        "evidence": "探针点击 Export 和 View Full Report 均无 DOM 变化、无网络请求；两个按钮均为占位入口，无对应功能。",
+        "ok": 0
+      },
+      {
+        "name": "启动品牌比较",
+        "expected": "点击 Compare Brands 应进入品牌比较流程，弹出对比视图或跳转到比较页面。",
+        "evidence": "探针点击后仅有样式层 DOM 变化，页面无弹窗、无跳转、无新内容；HTML 中按钮没有事件绑定，比较功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "查看图表数据点/趋势",
+        "expected": "鼠标悬停图表应显示 tooltip，点击图例可切换数据集。",
+        "evidence": "Chart.js 成功初始化两个 canvas 图表，运行时无 JS 错误；Chart.js 默认启用了 tooltip 和图例交互，图表本身可交互。",
+        "ok": 1
+      },
+      {
+        "name": "点击品牌指标徽章",
+        "expected": "点击指标徽章应高亮该指标，给出选中反馈。",
+        "evidence": "HTML 中每个 .metric-badge 绑定了 click 事件，切换 ring-2 和 ring-primary 样式；点击能产生明确的视觉反馈。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面图表渲染成功，Chart.js 默认交互和指标徽章点击有反馈；但刷新、导出、查看报告、品牌比较、雷达图指标切换等关键交互均为无事件占位，核心需求（品牌比较、交互式指标切换、报告导出）大面积未实现，功能性很低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1）雷达图上方筛选按钮（Sustainability、Labor Practices、Ethical Sourcing）未绑定实际交互，点击后无法切换/筛选图表指标维度，核心控件调节无效；2）头部主要操作按钮 Refresh Data 和 Export 点击后无任何 DOM 变化、无反馈、无功能，属于无效占位按钮；3）Take Action 区域 View Full Report 点击无任何反馈，Compare Brands 点击仅有细微样式变化但无实际比较流程，核心操作无法完成；4）技术指标显示多个主要按钮均为死路，用户无法通过页面提供的操作完成数据刷新、导出或报告查看。次要瑕疵：图表缺少操作说明/图例；社交链接（Twitter/LinkedIn/GitHub）指向 #，点击后页面跳转至锚点但无有效内容；雷达图中 FairTrade Co 在品牌卡片区域缺失，信息不对齐；仅有 hover 微动画但缺乏全局交互反馈，整体易用性严重受损。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉表现优秀，符合现代数据可视化仪表盘设计规范。采用Tailwind CSS，蓝/绿/紫三色搭配协调且有科技感；白色卡片配浅灰底，阴影和圆角增强了精致度。布局为左侧主内容（雷达图+品牌卡）、右侧辅助信息（消费者情绪条+趋势图+行动按钮），信息层级清晰，左右间距与对齐良好。字体使用Tailwind默认sans，标题与正文大小对比明确，卡片内边距充足，组件质感专业。Chart.js雷达图/折线图和自定义进度条有效支撑数据可视化主题。轻微不足：信息密度偏高，单屏无滚动的视口要求下可能略显拥挤；部分交互按钮（如Refresh、Export）只提供视觉反馈而无实际功能；字体个性稍弱。但整体视觉完成度高，达到专业级仪表盘水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_008374.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Refresh Data",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sustainability",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Labor Practices",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Ethical Sourcing",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Compare Brands",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Full Report",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

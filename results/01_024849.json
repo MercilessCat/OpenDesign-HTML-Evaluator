@@ -1,0 +1,191 @@
+{
+  "row_id": "01_024849",
+  "shard": 1,
+  "id": 24849,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create a robust scheduler for compliance scans across systems. Users automate scan schedules, receive detailed reports, and access dashboards for compliance status. The site offers predictive analytics, real-time alerts for non-compliance risks, and integration with compliance frameworks, ensuring proactive and efficient regulatory adherence.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 16435,
+  "html_sha256": "86132b4593e6e0fd871806f76ce1a14ee9b0d502aa0a27e59a09e7c41873f4da",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "保存扫描计划",
+        "expected": "点击 Save Schedule 后显示保存中/已保存的反馈，并提交或更新扫描计划",
+        "evidence": "探针点击按钮后 DOM 无变化；页面 JS 报错 'Cannot read properties of null (reading addEventListener)'，导致保存事件未成功绑定；按钮无表单提交，也无自定义反馈效果。",
+        "ok": 0
+      },
+      {
+        "name": "新建扫描",
+        "expected": "点击 New Scan 打开新建扫描弹窗或切换到新建扫描界面",
+        "evidence": "按钮无事件绑定；探针点击后 DOM 无变化、无新增网络请求；页面中也没有对应的弹窗或新建视图。",
+        "ok": 0
+      },
+      {
+        "name": "导航切换",
+        "expected": "点击 Dashboard/Schedules/Reports/Analytics 切换到对应内容或路由页面",
+        "evidence": "四个导航链接均为 href='#'，无路由、无视图切换逻辑；探针显示点击后没有实质业务内容变化，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "配置自动扫描",
+        "expected": "点击 Configure 打开调度配置面板或设置界面",
+        "evidence": "按钮无事件绑定；探针点击后 DOM 无变化，没有出现配置面板或设置内容。",
+        "ok": 0
+      },
+      {
+        "name": "查看详细报告",
+        "expected": "点击 View Detailed Report 展示详细报告或跳转到报告页面",
+        "evidence": "按钮无事件绑定；探针点击后 DOM 无变化，页面中没有详细报告内容或跳转行为。",
+        "ok": 0
+      },
+      {
+        "name": "修改调度表单选项",
+        "expected": "选择 Schedule Type、Target Systems、Frequency 和 Time 时，控件显示当前选中值",
+        "evidence": "这些是原生 select/radio/time 控件，用户可以选择并看到选中值变化；但 JS 中为 select 添加的 change 高亮监听因空引用报错未生效，不影响原生选中显示。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉完整，但核心交互大面积失效：JS 初始化报错导致 Save Schedule 无反馈，New Scan、Configure、View Detailed Report 以及顶部导航均为占位入口，无法完成需求中的自动化调度、报告查看和导航访问；仅原生表单控件可进行基础选择。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 保存调度（Save Schedule）点击无任何反应，核心操作无法完成，且原设计的成功反馈因 JS 报错（null.addEventListener）未生效；2. New Scan、Configure、View Detailed Report 等主要按钮均为静态按钮，点击无 DOM 变化/反馈，功能不可用；3. 顶部导航 Dashboard/Schedules/Reports/Analytics 均为 href=\"#\" 占位链接，无对应页面或内容，主要入口无真实反馈；4. 页面 JS 运行时报错导致脚本交互中断，Schedule Type、Target Systems、Frequency 等控件可改但不会产生任何调度结果。次要瑕疵：调度表单缺少说明/图例，Target Systems 多选缺少操作提示；页面完整内容未做到单屏无滚动展示；社交/报告链接为占位且无实际目标。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉设计较为专业，色彩搭配以蓝色为主、绿色和黄色为辅，符合合规扫描工具的安全、科技感定位。布局采用三列网格，状态卡片、调度器、实时警报和预测分析模块分区清晰，卡片圆角、阴影和进度条等元素提升了现代感。字体采用无衬线体，间距合理，按钮和交互状态有 hover 效果，整体符合主流 Dashboard 设计规范。但存在明显扣分项：JS 代码中多个 querySelector 匹配到多个元素或选择器不准确，导致运行时出现 9 条 null addEventListener 错误，保存按钮的交互逻辑也可能未正确绑定；导航链接点击后无实际平滑滚动或内容变化，部分按钮（如 Configure、New Scan）无实际功能反馈；页面在 viewport 内需滚动才能看到全部内容，不完全符合单屏展示要求。视觉上缺少少量更精细的层次（如背景渐变、图标细节、数据可视化元素），但整体仍属中上水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_024849.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Schedules",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Reports",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Scan",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Configure",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save Schedule",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Detailed Report",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

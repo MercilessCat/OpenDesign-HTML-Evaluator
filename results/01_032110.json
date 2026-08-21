@@ -1,0 +1,177 @@
+{
+  "row_id": "01_032110",
+  "shard": 1,
+  "id": 32110,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Imagine a website that transforms how users interact with media by allowing seamless switching between fullscreen experiences. The platform empowers users to create custom toggles that redefine digital immersion. Key features include intuitive drag-and-drop interfaces, real-time preview modes, and community-driven toggle designs to enhance user engagement and creativity.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14708,
+  "html_sha256": "ce026f8a263579b4c47eb9bf263a21e7f5eaef32802085dcd4e24e42fc2687a1",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "拖拽/选择媒体文件并预览",
+        "expected": "预览区显示上传的图片/视频/文件名",
+        "evidence": "HTML 中 dropZone 绑定了 drag/drop 事件，fileInput change 调用 handleFiles，通过 FileReader 更新 .preview-container；运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击社区切换器卡片",
+        "expected": "预览区切换为该社区 toggle 的设计效果",
+        "evidence": "JS 为 .toggle-card 绑定 click 监听，点击后更新预览区内容并高亮选中卡片；未发现阻断脚本错误。",
+        "ok": 1
+      },
+      {
+        "name": "创建自定义切换器（输入名称/选择过渡样式）",
+        "expected": "输入名称或选择样式后，预览区生成对应的自定义 toggle",
+        "evidence": "Toggle Name 输入框和 Transition Style 下拉框没有绑定 input/change 事件，也没有对应逻辑；自定义创建功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "全屏预览切换",
+        "expected": "点击全屏按钮后预览区进入/退出全屏，或至少给出状态反馈",
+        "evidence": "探针点击 expand 和 cog 按钮均无 DOM 变化；JS 中没有 Fullscreen API 调用或任何相关事件处理。",
+        "ok": 0
+      },
+      {
+        "name": "保存/分享/导出切换器",
+        "expected": "点击后完成保存、分享或导出，或给出可感知的反馈",
+        "evidence": "探针分别点击 Save、Share、Export 按钮，DOM 均无变化，也无新增网络请求；三个按钮都没有绑定业务逻辑，属于占位按钮。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉完整，拖拽上传和社区卡片预览可用；但核心的自定义创建、全屏切换、保存/分享/导出均无事件绑定，多个按钮为纯占位，社交链接也是 href=\"#\"，导致主要任务无法完整完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) 预览区的 expand、cog 按钮以及 Save/Share/Export 等主要操作按钮点击后均无反馈、无结果，核心操作无法完成；2) “Create Your Toggle”中的名称输入和过渡样式选择不会影响实时预览，用户无法真正自定义 toggle，核心配置控件无效；3) 社区卡片点击后预览显示的是随机图标，而不是所选卡片对应的内容，选择反馈错误。次要瑕疵：底部社交媒体链接使用“#”，点击会跳回页面顶部，无实际外链；缺少文件类型/大小说明；保存/分享/导出成功后没有任何提示；状态栏文字是静态的，不反映真实状态；部分图标按钮无文字或 tooltip，可理解性不足。整体视觉清晰、结构合理，但关键定制与导出/保存链路不可用，用户只能浏览，无法完成主要任务。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高：使用深色渐变背景搭配紫/靛蓝主色调，营造出科技感与沉浸感，符合“UI component / media toggle”主题。色彩搭配协调，主色（#6366f1, #8b5cf6）与深色背景对比鲜明，辅助色块（社区画廊）多样但不杂乱，视觉层次清晰。布局上采用左右两栏结构，左侧控制面板、右侧预览区，内容分区合理，信息密度适中，符合现代 SaaS 风格。但社区画廊的彩色卡片、预览区占位与状态栏在视觉上略显常规，创意点缀不足。字体使用 Inter，字号层级较清晰，间距均匀，圆角、边框和阴影应用得比较专业。CSS 基于 Tailwind + 少量自定义过渡，整体规范，未发现明显设计缺陷。按钮点击无反馈、链接跳转空白是功能问题，但作为纯视觉页面不会严重扣分。考虑主题契合度、现代感和完成度，给出 8 分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_032110.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-expand text-slate",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-cog text-slate-30",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Share",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

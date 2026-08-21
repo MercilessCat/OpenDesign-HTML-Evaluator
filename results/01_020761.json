@@ -1,0 +1,177 @@
+{
+  "row_id": "01_020761",
+  "shard": 1,
+  "id": 20761,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Develop a collaborative online space for real-time error log analysis and debugging sessions. Users track, share, and resolve error logs through an integrated console. Key features include live collaboration tools, error visualization graphs, and AI-driven suggestions for error resolution, fostering a community-driven approach to problem-solving.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10444,
+  "html_sha256": "e78780326d0e0cc75b8a78f0fc45d8f499fcbd6f89c9edb9428d41a0b31e8626",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "新建会话",
+        "expected": "点击 New Session 后应创建/开始一个新的调试会话，页面有相应反馈（如重置日志、跳转新会话界面）",
+        "evidence": "探针点击 'New Session' 后 DOM 变化=无，新增JS错误=0，新增网络请求=0；HTML/JS 中未绑定任何事件处理，按钮为纯静态占位",
+        "ok": 0
+      },
+      {
+        "name": "应用AI修复建议",
+        "expected": "点击 Apply Fix 后应执行修复操作，例如替换错误代码、更新日志或弹窗确认",
+        "evidence": "探针点击 'Apply Fix' 后 DOM 变化=无，新增JS错误=0，新增网络请求=0；脚本中无该按钮的事件绑定，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "邀请团队成员",
+        "expected": "点击 Invite Team 后应弹出邀请界面或发送邀请链接，页面有反馈",
+        "evidence": "探针点击 'Invite Team' 后 DOM 变化=无，新增JS错误=0，新增网络请求=0；按钮无任何点击逻辑，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "分享日志",
+        "expected": "点击 Share Log 后应生成分享链接或提供分享方式",
+        "evidence": "探针点击 'Share Log' 后 DOM 变化=无，新增JS错误=0，新增网络请求=0；无事件绑定，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "控制台输入命令",
+        "expected": "在控制台命令输入框键入内容并回车后，应执行命令并在日志区显示输出",
+        "evidence": "页面存在输入框但未绑定 form 或 keydown 事件，JS 仅包含 canvas 绘制逻辑；输入回车不会触发任何业务反馈，该交互入口无实际功能",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉结构完整，展示了错误日志、协作者列表、趋势图和快速操作，但所有核心交互（新建会话、AI修复、邀请、分享日志、控制台命令）均为静态占位，点击无任何反馈或事件绑定，主要任务完全无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 页面所有主要功能按钮（New Session、Apply Fix、Invite Team、Share Log、Export、History、刷新/清空）点击后均无任何DOM变化或反馈，交互探针确认为纯占位按钮，核心操作流程全部卡死；2. 控制台输入框无法提交命令，实时调试功能完全不可用；3. 所有按钮均无可感知的操作反馈，用户无法判断操作是否成功。存在2个及以上核心可用性问题，属严重功能缺失。次要瑕疵：错误趋势图表被绝对定位的提示文字覆盖，可能影响数据图形可读性；页面数据全部为静态示例，无真实协作交互；AI建议和会话信息区域缺乏操作指引说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 6.0,
+    "reason": "页面整体采用现代简洁的卡片式布局，配色以蓝、绿为主，辅以红黄警示色，符合调试工具的主题氛围。使用Tailwind CSS框架，头部、主区域和底部结构清晰，功能分区明确（错误控制台、协作者列表、趋势图、快捷操作），视觉上具有专业感。但存在明显问题：canvas图表被绝对定位的占位内容覆盖，无法真正展示图形效果；所有按钮均无实际交互反馈，仅停留在UI展示层面；字体仅默认系统字体加一个等宽体用于控制台，缺乏层次感；部分间距和尺寸（如console高度、graph高度）偏小，在标准桌面视口中略显局促；整体视觉冲击力不足，缺乏品牌个性，与‘AI驱动、实时协作’的现代感诉求尚有差距。综合评定为6分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.6,
+  "baseline_overall": 3.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_020761.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Session",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-sync-alt",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-trash",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Apply Fix",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Invite Team",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Share Log",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "History",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

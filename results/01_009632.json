@@ -1,0 +1,181 @@
+{
+  "row_id": "01_009632",
+  "shard": 1,
+  "id": 9632,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create an innovative digital interface for visualizing hierarchical structures. Users can effortlessly explore and manipulate complex data through dynamic tree views. Main features include drag-and-drop editing, real-time collaboration, and customizable views, enabling seamless navigation and analysis of intricate organizational or data hierarchies.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13329,
+  "html_sha256": "cf7342962f147de4214d2ba2915d63ef49d4453eef31f7c7a3572fdee82a3430",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Add Node 添加节点",
+        "expected": "树视图中新增一个节点或打开添加节点的输入界面",
+        "evidence": "探针点击 Add Node 按钮后 DOM 无变化，新增 JS 错误为 0；HTML 中该按钮没有绑定点击事件或动态插入节点的逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "拖拽树节点进行拖放编辑",
+        "expected": "节点可被拖动并更新层级或位置关系",
+        "evidence": "树节点仅有 cursor-move 样式，未绑定 pointer/touch/dragstart/dragover 等事件；没有任何拖拽相关 JS 逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "点击布局按钮切换视图（Tree/Network/Indented 等）",
+        "expected": "切换后树形视图布局随所选样式变化",
+        "evidence": "探针点击 Tree、Network、Indented 后 DOM 均无变化，新增 JS 错误为 0；按钮没有切换布局的事件处理。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Expand All / Collapse All 展开或折叠节点",
+        "expected": "子节点显示或隐藏，连线同步更新",
+        "evidence": "探针点击 Expand All 和 Collapse All 后 DOM 无变化；按钮只有 hover 样式，没有实际展开/折叠逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "切换视图选项复选框（Show Labels / Connections / Collaborators）",
+        "expected": "对应标签、连线或协作者指示器显示/隐藏",
+        "evidence": "页面有 3 个复选框，但 HTML/JS 中没有为它们绑定 change 或 click 事件，无法控制对应元素显隐。",
+        "ok": 0
+      },
+      {
+        "name": "查看实时协作状态",
+        "expected": "能实时看到其他协作者的编辑动作或状态更新",
+        "evidence": "页面只有静态协作者列表和 collaborator-badge 的 setInterval 透明度闪烁，没有真实协作数据或事件通道，属于模拟占位。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉结构完整，但需求声明的核心交互（添加节点、拖拽编辑、切换布局、展开折叠、视图自定义、实时协作）均无实际功能：多个按钮点击无 DOM 变化，拖拽和复选框没有事件绑定，实时协作仅为静态模拟。核心功能大面积未实现，因此分数低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 所有主要操作按钮（Refresh、Add Node、Expand All、Collapse All、Export）点击后均无任何DOM变化或反馈，为纯装饰占位按钮；2. 布局切换控件（Tree/Network/Indented/Radial）点击后无任何效果，核心控件调节完全无效；3. 拖放编辑功能未实现，树节点虽显示cursor:move但无法拖放；4. 实时协作、自定义视图等核心宣传功能均未实现，仅提供静态展示。次要瑕疵：协作指示器仅为视觉脉冲动画，无实际数据支撑；缺少操作提示/引导文案；树节点点击仅有边框颜色切换，无业务意义。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "整体视觉表现良好，达到现代专业 UI 设计水准。具体分析如下：\n\n1. **整体吸引力**：页面围绕“层级数据可视化”主题构建，采用蓝绿灰的色彩体系，视觉风格统一且具有一定科技感。左侧树状可视化区域与右侧控制面板形成清晰的功能分区，信息层级分明，作为 UI 组件展示页具备较好的专业气质。\n\n2. **色彩搭配**：主色(#3b82f6蓝色)与辅助色(#10b981绿色)的搭配符合数据可视化产品习惯，背景用浅灰(#f9fafb)与白色卡片形成柔和对比，文字用深色(#1e293b)保证可读性。黄色在线协作徽章在蓝绿体系中起到了有效的点睛作用。整体色彩平衡，没有刺眼或不协调的配色。\n\n3. **布局协调**：头部、两栏主体、底部页脚的三段式结构清晰。左侧可视化区域占2/3，右侧控制区占1/3，符合该类产品“内容为主、控制为辅”的使用逻辑。树状节点用绝对定位排布，分层清晰，SVG连线与节点位置对应，结构呈现合理。\n\n4. **字体与间距**：标题、副标题、正文文字大小层级明确，空白间距均匀（如面板内边距均为p-6，区块间距合理）。卡片圆角、边框、阴影的运用成熟，组件边缘柔和而不突兀。\n\n5. **CSS专业性**：基于 Tailwind CSS 设计，配合少量自定义过渡与动画（节点悬停上浮、协作圆点脉冲呼吸），技术选型现代，代码整洁。悬停反馈细腻，卡片和按钮的过渡动画提升了交互质感。\n\n6. **风格对齐与不足**：页面与“层级结构可视化器”这一主题方向匹配，配色、图标（Font Awesome）、术语（Drag&Drop、Realtime Collaboration）等均体现了该领域的设计习惯。扣分点在于：树状图的连线为简单直线SVG，视觉上稍显单调；页面未做响应式断点处理，窄屏下三栏布局可能拥挤；部分按钮（如Refresh、Add Node）点击无实际反馈，功能性上不完整，影响了作为交互组件的完整体验。\n\n综上，这是一个外观专业、结构清晰、设计规范的页面，虽在视觉细节和交互完成度上仍有提升空间，但整体属于高质量作品。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_009632.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Refresh",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Node",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Expand All",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Collapse All",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Tree",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Network",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Indented",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

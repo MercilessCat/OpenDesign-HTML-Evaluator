@@ -1,0 +1,181 @@
+{
+  "row_id": "02_000608",
+  "shard": 2,
+  "id": 608,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Revolutionize urban mobility with a smart interface visualizing traffic dynamics. Users engage with real-time congestion maps, optimizing travel routes. Features include predictive traffic modeling, integration with public transit schedules, and community-driven feedback loops to foster collaborative urban planning and sustainable transport solutions.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10673,
+  "html_sha256": "5918146d65ec793bf60c6a48f08d3617fa9d4233d7e4f572bb94515bcc2a8c53",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击主导航链接（Dashboard/Analytics/Community/Sustainability）",
+        "expected": "切换到对应内容视图或页面",
+        "evidence": "探针显示点击后虽URL发生hash跳转且无JS错误，但HTML中所有链接均为href=\"#\"占位，无路由逻辑、无事件绑定、无对应内容面板，属于死链。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Optimize Route 按钮",
+        "expected": "触发路线优化功能，显示优化后的路线或相关反馈",
+        "evidence": "探针点击后DOM变化=无、无JS错误、无网络请求；HTML中按钮无事件监听、无功能逻辑，为核心功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Feedback 按钮",
+        "expected": "打开社区反馈入口/表单，或给出功能反馈",
+        "evidence": "探针点击后DOM变化=无、无JS错误、无网络请求；按钮无事件绑定，需求中的社区反馈循环未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击时间范围切换按钮（Live/1hr/24hr）",
+        "expected": "切换交通数据的时间范围并更新可视化地图",
+        "evidence": "探针点击Live后DOM变化=无、无JS错误、无网络请求；三个按钮均无事件绑定，无法切换任何视图。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Login 按钮",
+        "expected": "打开登录界面或至少有可感知的交互反馈",
+        "evidence": "探针点击后DOM变化=无、无JS错误、无网络请求；HTML中无对应登录逻辑或弹窗，按钮无实际功能。",
+        "ok": 0
+      },
+      {
+        "name": "与实时交通地图交互（查看/操作拥堵可视化）",
+        "expected": "展示可交互的实时拥堵地图，支持点击/拖拽等操作",
+        "evidence": "页面无canvas/WebGL，地图区域为静态CSS占位图（虚线边框+模拟圆点），无pointer/touch事件、无requestAnimationFrame，无任何真实数据可视化或交互能力。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计符合现代UI要求，但所有关键交互均为占位或死链：导航href=\"#\"无路由，Optimize Route、Feedback、Login、时间切换按钮点击均无任何反馈，核心实时拥堵地图仅为静态CSS模拟而非真实数据可视化。需求声明的路线优化、社区反馈、预测建模等主要用户任务均无法完成，属于核心交互大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 导航（Dashboard/Analytics/Community/Sustainability）均为占位链接，点击后仅触发页面锚点跳转，无法切换到对应功能模块；2. 核心操作按钮“Optimize Route”和“Feedback”点击后无任何响应，无法完成路线优化与反馈提交流程；3. 地图时间切换控件“Live/1hr/24hr”点击无效，无法切换实时/预测/历史视图，核心控件调节不起作用；4. 地图本身为静态模拟占位，没有可交互的实时路况数据展示，用户无法查看或操作任何实际交通信息。次要瑕疵：页面视觉设计美观、信息层级清晰，但“实时”标签与静态模拟内容不符，可能误导用户；Login按钮同样无实际功能，整体交互反馈缺失严重。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体采用现代仪表盘风格，配色以蓝色系为主（#2563eb、#0ea5e9），搭配白色和浅灰背景，清爽且符合数据可视化主题。布局合理：顶部导航、左侧功能卡片与统计面板、右侧地图可视化区域，结构清晰，主次分明。使用Tailwind CSS统一了组件样式，卡片圆角、阴影、hover上浮效果增加了精致感；渐变背景和脉冲动画提升了视觉活力。字体使用系统无衬线字体，可读性好。不足之处在于地图区域仅为占位图，缺少真实数据可视化元素，略显简单；整体视觉冲击力中等，但作为单页原型已具备专业度和美感。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_000608.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Sustainability",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Login",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Optimize Route",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Feedback",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Live",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

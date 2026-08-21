@@ -1,0 +1,90 @@
+{
+  "row_id": "03_022268",
+  "shard": 3,
+  "id": 22268,
+  "category": "Game dev",
+  "prompt": "Embrace the cosmic chill in an interactive platform where users sculpt intricate designs on Pluto's icy terrain. This site blends art and science, offering a unique 3D carving experience. Features include virtual reality integrations, user-generated galleries, and collaborations with scientists to explore Pluto's mysteries, turning scientific data into artistic masterpieces.",
+  "html_len": 17474,
+  "html_sha256": "0d2f132a58ad7fbf660d37827cc6abac4794acda124fe372c3087cc85156b032",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 BEGIN CARVING 开始创作",
+        "expected": "从开始页切换到 3D 创作场景，显示 Pluto 球体与工具/分数 UI",
+        "evidence": "探针点击后 DOM 有变化；HTML 中 startBtn 调用 switchScreen('game')，隐藏 startScreen 并创建 Three.js 场景。运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "在 Pluto 表面拖拽雕刻",
+        "expected": "拖拽产生雕刻粒子效果，并更新复杂度/美感分数",
+        "evidence": "canvasContainer 绑定了 mousedown/mousemove/mouseup 和 touch 事件；carve 中调用 createCarvingEffect 生成粒子并增加 score。动画循环运行且无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "切换雕刻工具",
+        "expected": "点击工具按钮后高亮切换，当前工具改变",
+        "evidence": "toolButtons 均有 click listener，点击后会移除/添加 active class，并更新 gameState.currentTool。",
+        "ok": 1
+      },
+      {
+        "name": "移动鼠标旋转观察 Pluto",
+        "expected": "3D 球体随鼠标平滑旋转",
+        "evidence": "document mousemove 更新 mouseX/mouseY，animate() 中使 plutoMesh.rotation 插值旋转；requestAnimationFrame 运行且无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "完成创作并查看结算/科学价值",
+        "expected": "可结束雕刻，进入 endScreen 显示 finalComplexity/finalBeauty 与 scientificValue",
+        "evidence": "代码中没有调用 switchScreen('end') 的任何路径，也没有完成/结束按钮；endScreen 无法从正常流程到达，finalComplexity 等不会在游戏中被更新。",
+        "ok": 0
+      },
+      {
+        "name": "查看用户画廊/进入 VR 模式",
+        "expected": "展示用户生成画廊或 VR 体验入口",
+        "evidence": "galleryBtn 点击仅 alert('Gallery feature coming soon!')，是占位实现；页面未见 WebXR/VR 入口，需求中的画廊与 VR 功能未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "核心的 3D 雕刻、工具切换、视角旋转可用，基础交互正常；但创作完成流程不存在，画廊按钮为占位，VR/科学家协作等需求未实现，存在多个关键入口缺失/占位，因此功能分受限于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）雕刻核心操作无效：用户点击/拖动时，Pluto 球体表面没有任何几何或纹理变化，只有临时粒子效果和分数增长；smooth、detail、erase 工具切换后也无实际效果，无法真正完成“雕刻”这一核心目标。2）流程无法结束/卡死：游戏界面没有“完成/保存/分享”入口，endScreen 没有任何触发路径，用户无法到达最终评分、重开或查看画廊，主要任务链断裂。次要瑕疵：开始页宣传的分享、画廊功能未实现，点击“View Gallery”仅弹窗提示 coming soon；缺少工具说明与鼠标旋转/雕刻的交互提示；粒子特效无持久性，容易让用户误以为雕刻已经生效。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，深蓝色渐变背景（#0f2027 → #2c5364）营造出宇宙太空的沉浸感，符合“Pluto”冰原主题。色彩搭配合理，以暗色为主调，紫蓝色渐变按钮（#4a00e0 → #8e2de2）作为视觉焦点，既有科技感又不刺眼，白色文字在高对比下清晰易读。布局协调，起始界面居中展示，标题采用大号加粗字体并带浮动动画，信息层级分明；游戏界面将得分区置于右上、工具条居下，干扰少且操作区域集中，符合游戏UI逻辑。组件设计专业，按钮的圆角、阴影和悬停上浮效果，工具按钮的圆形与active状态反馈均体现精细打磨。CSS方面使用了flex、渐变、过渡、动画、半透明面板等现代技术，粒子特效进一步增强了互动感。唯一不足是字体选用Arial略显普通，与艺术/科幻氛围的个性匹配度稍有欠缺，且工具图标采用emoji，精致度略低于整体水准。但综合来看，页面风格与用户需求的“cosmic chill”和“art and science”高度契合，属于优秀设计。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.3,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_022268.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "BEGIN CARVING",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

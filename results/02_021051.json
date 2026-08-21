@@ -1,0 +1,142 @@
+{
+  "row_id": "02_021051",
+  "shard": 2,
+  "id": 21051,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Develop a site that visualizes interactions within multi-agent systems, highlighting emergent behaviors and patterns. Users can simulate agent dynamics, adjust parameters, and visualize outcomes. Key features include customizable simulation environments, data-driven insights, and educational resources on complex system interactions and applications.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14009,
+  "html_sha256": "27e6a163a822ed2f8b3ec333158135e0820c9fa13482bc0e8d5dcb05a4b6bfb7",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "启动/暂停模拟",
+        "expected": "点击 Start 后启动 agent 动画，按钮变为 Pause；再次点击可暂停。",
+        "evidence": "探针点击 #startBtn 后 DOM 变化且无 JS 错误；HTML 中 click 监听切换 isRunning 并调用 animate()，按钮文本在 Start/Pause/Resume 间切换。",
+        "ok": 1
+      },
+      {
+        "name": "重置模拟",
+        "expected": "点击 Reset 后重新生成 agent，画布恢复初始状态，模拟停止。",
+        "evidence": "探针点击 #resetBtn 后 DOM 变化且无 JS 错误；HTML 中 click 监听调用 createAgents()/drawAgents()，并取消动画。",
+        "ok": 1
+      },
+      {
+        "name": "调整 Agent Count 滑块",
+        "expected": "拖动滑块后 agent 数量改变，画布中的节点数和标签值同步更新。",
+        "evidence": "HTML 中 #agentCount 绑定了 input 事件，更新 agentCount、显示值并调用 createAgents()/drawAgents()，交互入口和逻辑完整。",
+        "ok": 1
+      },
+      {
+        "name": "调整 Interaction Radius 滑块",
+        "expected": "拖动滑块后交互半径参数更新，并影响 agent 之间的邻居判断和聚合行为。",
+        "evidence": "HTML 中 #interactionRadius 绑定了 input 事件，同步更新 radiusValue 并修改 interactionRadius；运行时邻居计算使用该变量。",
+        "ok": 1
+      },
+      {
+        "name": "切换 Behavior Pattern 选择器",
+        "expected": "选择 Random Walk、Predator-Prey 等模式后，agent 的模拟行为应相应变化。",
+        "evidence": "change 监听只更新了 patternDescription 文本，没有改变 updatePositions() 中的运动逻辑；无论选择什么模式，模拟仍执行同一套 flocking 计算，行为与选项不符。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Resources 导航",
+        "expected": "应展示或跳转到关于复杂系统交互与应用的 educational resources 内容。",
+        "evidence": "该 <a> 仅有 href=\"#\"，探针点击产生的 DOM 变化只是锚点跳转，没有事件绑定，也没有出现任何教育资源区块，需求中的教育资源未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "核心模拟的启动、重置和参数滑块基本可用，D3 agent 可视化可运行；但 Behavior Pattern 选择不会真正改变模拟行为，Resources 教育资源仅剩导航占位且无内容，顶部多个导航均为 href=\"#\" 占位，属于关键需求未实现，按锚定不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "【核心可用性问题】1. 主导航3个链接（Simulation/Insights/Resources）均为href=\"#\"占位链接，点击后仅跳转页面顶部，无实际内容反馈；2. Behavior Pattern（行为模式）下拉框切换后仅更新描述文字，模拟运动逻辑完全不变（始终为Flocking行为），核心控件调节无效。\n【次要瑕疵】数据洞察面板的稳定性指数为随机数，与模拟数据不关联；页面加载后画布仅有静态散点、无初始动画，用户需点Start才能感知模拟效果；控制面板无图例/帮助文字，模式选择与行为不对应的现象难以被用户理解；导航锚点无对应内容区块定位，点击体验困惑。综合判定为能用但不好用，存在2个核心可用性问题，评分3分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力良好，采用现代Dashboard布局：顶部导航、中部左侧模拟画布与右侧控制面板、底部数据洞察面板，结构清晰且符合数据可视化平台的主流风格。色彩搭配以蓝白为主，浅灰背景与白色卡片形成柔和对比，蓝色渐变按钮和浅蓝渐变控制面板强化了科技感，整体色调统一且专业。Typography使用Segoe UI等无衬线字体，层级合理，标题、标签、数值均有适当字重与字号，可读性佳。间距与圆角、阴影等细节处理得当，卡片hover效果增加了轻量交互感。CSS基于Tailwind并搭配少量自定义类，设计规范、命名清晰，符合现代网页设计标准。交互功能（Start/Reset、滑杆、选择器）与D3可视化内容紧密匹配用户需求，体现了multi-agent系统的仿真与数据洞察。扣分点：底部Insights面板使用了绿、紫、琥珀、玫红四种不同色系，与整体蓝色调存在轻微割裂感；导航链接为占位符，点击会跳转页面顶部，缺乏实际单页锚点行为；页面内容在视口高度有限时可能超出，未能严格保证“不滚动可见”。总体而言，页面视觉完成度高，专业性强，是一份高质量的数据可视化单页设计。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.3,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_021051.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulation",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Insights",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

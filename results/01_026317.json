@@ -1,0 +1,181 @@
+{
+  "row_id": "01_026317",
+  "shard": 1,
+  "id": 26317,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Access an innovative corrective action plan portal where users can design, implement, and track remediation strategies. The platform offers a collaborative space with templates, progress tracking, and success metrics, facilitating effective resolutions and continuous improvement within organizational processes.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11925,
+  "html_sha256": "f4e586da62ed2c960458b82cb1f8a714385eca0c9a6435ced15190ce312e5986",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接 Dashboard",
+        "expected": "跳转到仪表盘页面或对应的内容区域",
+        "evidence": "导航链接 href=\"#\"，探针点击后仅产生 hash 跳转，无实际路由或内容切换，没有对应 dashboard 页面/区块；属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击导航链接 Templates",
+        "expected": "查看模板库或模板列表",
+        "evidence": "href=\"#\" 占位链接，探针点击后无实际内容变化，无模板列表或新页面出现；需求中的模板功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 New Plan 按钮",
+        "expected": "创建新的纠正行动计划，弹出表单或进入创建流程",
+        "evidence": "探针点击后 DOM 无变化，无新增网络请求和 JS 错误；HTML 中按钮无事件绑定，点击无任何反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started 按钮",
+        "expected": "开始使用门户，进入引导或注册流程",
+        "evidence": "探针点击后 DOM 无变化，无新增网络请求；按钮无 onclick 或路由逻辑，点击无响应。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Watch Demo 按钮",
+        "expected": "播放演示视频或展示产品演示弹窗",
+        "evidence": "探针点击后 DOM 无变化，无网络请求；按钮无任何 JavaScript 事件绑定，点击无效果。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Create New Plan 按钮",
+        "expected": "打开创建新计划的工作区或表单",
+        "evidence": "探针点击后 DOM 无变化，无新增 JS 错误和网络请求；按钮无事件监听，未实现创建计划功能。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上完整呈现了纠正行动计划门户的静态信息，但所有核心交互均失败：导航链接全部为 href=\"#\" 占位符，无法跳转到任何真实页面或内容区域；四个关键按钮（New Plan、Get Started、Watch Demo、Create New Plan）点击后均无任何 DOM 变化或业务反馈，说明未实现创建、跟踪、演示等核心功能。用户无法完成设计、实施或跟踪纠正行动计划等主要任务，因此页面基本不可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1）顶部主导航（Dashboard/Templates/Tracking/Reports）均为占位链接，点击后无对应内容或页面切换，属于主要入口无实际反馈；2）核心操作按钮（New Plan、Get Started、Create New Plan、Watch Demo）点击后无任何交互反应，无法新建计划或进入演示，核心流程无法完成。次要瑕疵：缺少功能说明/图例/帮助文案，模板、追踪、报告等模块未实际实现，视觉上虽有悬停和渐变效果，但掩盖不了主流程不可用的问题。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力良好，采用现代SaaS门户常见的蓝绿主色搭配灰白背景，色彩和谐、对比度充足。布局清晰，左侧主内容区与右侧状态区形成合理的信息层级，卡片、渐变Hero区、进度条、活动列表等组件风格统一，圆角、阴影和微交互（hover上移、阴影过渡）提升了精致度。Tailwind框架运用熟练，响应式网格和间距处理得当，符合现代网页设计规范。不足在于字体完全依赖系统默认，标题与正文的字号层次不够突出，右侧卡片排列略显平均，整体视觉冲击力中等，但作为企业内部工具类页面，美观度和专业度均属上乘。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_026317.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Templates",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tracking",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Reports",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Plan",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Watch Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Create New Plan",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

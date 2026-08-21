@@ -1,0 +1,143 @@
+{
+  "row_id": "01_000289",
+  "shard": 1,
+  "id": 289,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Develop an intuitive tool for navigating complex processes, with a focus on visualizing and tracking appeals. The platform offers a timeline view, personalized notifications, and progress indicators. Users can submit, review, and monitor appeal status, enhancing transparency and efficiency in procedural workflows.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 8010,
+  "html_sha256": "fc65bdf5278951decbd2dfdf69d5af8f93d3ad32ace69c7380384141229025ae",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "查看时间线与进度状态",
+        "expected": "页面加载后能看到申诉时间线、当前阶段和 65% 进度",
+        "evidence": "HTML 中渲染了 4 个时间线节点、当前状态卡片和 65% 进度条，静态展示完整；首次加载可见，无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击通知铃铛查看通知",
+        "expected": "展开通知下拉/面板或标记已读",
+        "evidence": "探针点击该 button 后 DOM 变化=无、新增 JS 错误=0，HTML 中未绑定事件，点击无反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 View All Notifications",
+        "expected": "查看全部通知列表或跳转通知页面",
+        "evidence": "探针点击后 DOM 变化=无，按钮无事件/无链接，仅为占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Submit Docs",
+        "expected": "打开上传材料/提交流程",
+        "evidence": "探针点击后 DOM 变化=无，页面上没有文件输入或弹窗，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Details",
+        "expected": "展示申诉详情或展开更多信息",
+        "evidence": "探针点击后 DOM 变化=无，按钮无事件，无详情区域，无反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Download Report",
+        "expected": "触发报告下载",
+        "evidence": "探针点击后 DOM 变化=无且无网络请求，按钮无下载逻辑，功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面作为静态 UI 展示完整，时间线和进度指示可见；但通知、查看详情、提交材料、下载报告等核心操作按钮全部是无事件的占位入口，点击均无任何 DOM 或网络反馈。用户命令要求的提交、审查、监控流程中，除被动查看进度外均不可用，核心交互大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 1.2,
+  "baseline_overall": 0.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_000289.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "3",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-bell text-xl",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View All Notifications",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Submit Docs",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Details",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Download Report",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

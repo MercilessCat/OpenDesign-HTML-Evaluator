@@ -1,0 +1,155 @@
+{
+  "row_id": "04_011421",
+  "shard": 4,
+  "id": 11421,
+  "category": "Website",
+  "prompt": "Establish an imaginative gallery for showcasing fictional weapon designs, encouraging creativity and storytelling. Users can submit and explore designs, integrating narrative elements and artistic styles. Include tools for collaborative creation, virtual exhibitions, and community discussions to celebrate the art of world-building and imaginative design.",
+  "html_len": 29770,
+  "html_sha256": "d0ebbe753e747043ba61355db218373bd0995f7c723080970d5ecd4f5485f2f2",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1543857778-c4a1a569e7bd?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1543857778-c4a1a569e7bd?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1543857778-c4a1a569e7bd?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1543857778-c4a1a569e7bd?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1543857778-c4a1a569e7bd?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1543857778-c4a1a569e7bd?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1543857778-c4a1a569e7bd?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1543857778-c4a1a569e7bd?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1543857778-c4a1a569e7bd?auto=format&fit=crop&w=1920 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_011421.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#gallery",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Submit Design",
+      "href": "#submit",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Exhibitions",
+      "href": "#exhibitions",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Gallery",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Submit Your Design",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

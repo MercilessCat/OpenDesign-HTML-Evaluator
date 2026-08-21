@@ -1,0 +1,157 @@
+{
+  "row_id": "03_033346",
+  "shard": 3,
+  "id": 33346,
+  "category": "Game dev",
+  "prompt": "Craft a detailed colony-building simulation set on Mars, where users navigate the challenges of establishing a sustainable settlement. Include features like resource management, terraforming, and community collaboration to create a vivid and educational exploration of life on Mars.",
+  "html_len": 24347,
+  "html_sha256": "66acfb805779a5b4549e5b424fee9d280a30ff5c63f18dbd6a8c5ba71ecadee3",
+  "functional": {
+    "score": 7.0,
+    "raw_score": 7.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "开始任务",
+        "expected": "点击 Begin Mission 后开始界面消失，资源条与建造面板可操作，游戏循环启动",
+        "evidence": "探针点击 Begin Mission 有 DOM 变化且无 JS 错误；startButton 绑定 initGame()，会隐藏 .screen、重置资源并调用 gameLoop()",
+        "ok": 1
+      },
+      {
+        "name": "建造资源建筑",
+        "expected": "点击 Habitat/Solar Panel/Greenhouse 后扣除对应能量，场景出现对应建筑，显示成功通知并更新资源",
+        "evidence": "三个按钮分别绑定 buildHabitat/buildSolarPanel/buildGreenhouse，均包含成本判断、创建建筑元素、通知与 updateResourceDisplay；探针点击三个按钮均有 DOM 变化、无 JS 错误（开始前因被 start-screen 遮挡走 JS 兜底，开始后可正常操作）",
+        "ok": 1
+      },
+      {
+        "name": "地形改造",
+        "expected": "点击 Terraform 后消耗能量和食物，terraform 进度增加 5%，出现视觉特效和进度/通知反馈",
+        "evidence": "terraformBtn 绑定 terraform()，代码会扣资源、更新进度、触发 terraform-effect 透明度动画并发送成功/资源不足通知；探针点击有 DOM 变化、无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "拖拽/旋转 3D 火星场景",
+        "expected": "在 canvas 上拖拽可旋转或缩放视角，观察火星",
+        "evidence": "探针在 canvas 指针拖拽后 DOM 无变化、像素无变化；HTML/JS 中只有 requestAnimationFrame 自动旋转，未绑定 OrbitControls、pointer/touch 或 mouse 事件，因此无法拖拽控制视角",
+        "ok": 0
+      },
+      {
+        "name": "社区协作/殖民者管理",
+        "expected": "存在社区协作入口，可分配任务、管理殖民者或进行协作决策",
+        "evidence": "页面没有相关按钮/面板；开始界面仅有 'Community Growth' 说明卡片，游戏内只有 population 数值自动增减和通知，没有主动社区协作或殖民者管理入口",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心玩法可用：开始游戏、建造三类建筑、地形改造均有正确反馈且无 JS 错误；但 3D 场景拖拽无视角控制，需求中的社区协作/殖民者管理没有实际入口，因此不能给满分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 5.0,
+    "reason": "核心可用性问题：1. 建造Habitat后仅消耗能量并显示建筑，但该建筑不参与任何资源生产或人口计算，玩家无法从结果中判断其功能，核心操作未产生实际效果，属于“核心控件调节无效”。次要瑕疵：1. 建造按钮使用'$'标价，与游戏资源'能量'不一致，易造成误解；2. 缺少新手引导，玩家可能不知道优先建造何种设施；3. Terraform达到100%后无胜利或完成界面，目标感不明确；4. 游戏无暂停功能；5. 未实现需求中提到的社区协作功能。",
+    "attempts": 2
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉方向明确，太空/火星主题统一：深蓝渐变背景、星空3D场景、火星球体与红褐色地面层，能有效营造殖民地氛围。资源栏、建筑面板等UI组件采用半透明深色底+高亮描边（红、青），层次分明，与科幻风格匹配。布局上，开始屏幕居中、游戏HUD分布合理，按钮有悬停与过渡效果，反馈清晰。但细节设计仍有提升空间：按钮色彩较多（蓝、黄、绿、紫）略杂乱，建筑图标为简单SVG，缺乏精致感；阴影和光泽感不足，整体像功能完备的原型而非打磨后的产品。综合而言，视觉基础良好，符合需求，但在精致度与专业细节上未达顶尖水平。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 6.5,
+  "baseline_overall": 6.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_033346.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Habitat ($20)",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.screen",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Solar Panel ($15)",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.screen",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Greenhouse ($25)",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.screen",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Terraform (+5%)",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.screen",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Mission",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

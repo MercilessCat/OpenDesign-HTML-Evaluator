@@ -1,0 +1,103 @@
+{
+  "row_id": "03_018770",
+  "shard": 3,
+  "id": 18770,
+  "category": "Game dev",
+  "prompt": "Experience the democratic process with an immersive voting simulation. Users will explore different voting systems, participate in mock elections, and learn about civic responsibilities. Key features include interactive tutorials, real-time election simulations, and educational resources on global voting practices.",
+  "html_len": 28816,
+  "html_sha256": "052750bfc8a30d9bec43d44f6260ae2b595e017cc3ab83850d20758ee2a1c137",
+  "functional": {
+    "score": 9.0,
+    "raw_score": 9.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Simulation 开始模拟",
+        "expected": "从开始界面切换到选票制度选择界面",
+        "evidence": "探针点击后 DOM 有变化、无 JS 错误；按钮 onclick=startGame()，JS 中 showScreen('game') 切换 .active 到 #game-screen",
+        "ok": 1
+      },
+      {
+        "name": "点击 Learn More 查看学习内容",
+        "expected": "切换到学习页面，展示投票制度介绍",
+        "evidence": "探针点击后 DOM 有变化、无 JS 错误；onclick=showScreen('learn')，页面存在三种投票制度卡片内容",
+        "ok": 1
+      },
+      {
+        "name": "选择一种投票制度",
+        "expected": "进入投票界面，显示对应制度名称并生成候选人列表",
+        "evidence": "HTML 中三个 .system-card 均绑定 onclick=selectVotingSystem(...)；JS 会设置 current-system、重置投票、showScreen('voting') 并 renderCandidates() 动态渲染候选人卡片",
+        "ok": 1
+      },
+      {
+        "name": "选择候选人并提交投票",
+        "expected": "选中候选人后点击 Submit Vote，投票数增加、进度条前进并显示提交通知",
+        "evidence": "候选人卡片动态绑定 click 事件并添加 selected 样式；submitVote() 校验选择后 push 投票、voterCount++、更新进度条、显示 notification；JS 逻辑完整",
+        "ok": 1
+      },
+      {
+        "name": "模拟剩余投票并生成结果",
+        "expected": "点击 Simulate Remaining Votes 后剩余票数被随机填满，随后进入结果页显示柱状图、统计和洞察",
+        "evidence": "simulateVotes() 循环补充随机票，voterCount 设为 totalVoters，调用 updateVoterProgress() 和 showResults()；showResults 调用 calculateResults/renderResults 生成图表与 insights",
+        "ok": 1
+      },
+      {
+        "name": "点击 New Election 开始新选举",
+        "expected": "重置投票数据并返回投票制度选择界面",
+        "evidence": "newElection() 调用 resetVoting() 和 showScreen('game')，运行时无 JS 错误",
+        "ok": 1
+      }
+    ],
+    "reason": "页面的核心模拟选举流程完整可用：开始、学习、选择制度、投票、模拟剩余票数、查看结果、重新选举均有真实交互反馈，且无 console 错误或无事件死链。少量扣分在于教程步骤是静态说明、学习资源仅覆盖三种制度，未进一步展开全球投票实践，但整体不影响核心功能使用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 8.0,
+    "reason": "无核心可用性问题。页面目的明确（模拟投票系统），信息结构清晰（首页教程步骤 → 选择系统 → 投票 → 结果），所有主流程操作均能正常完成，且交互反馈充分（选中状态、提交通知、进度条、结果图表）。次要瑕疵：1）Ranked Choice 模式未实现真正的排序逻辑，与模式名称存在行为出入；2）用户需求中的全球投票实践教育资源缺失，但属于可选模块；3）Learn 页面中 system-card 看起来可点击实则不可点，可能引发轻微困惑；4）部分文案如“Main Menu”可更改为“返回主菜单”等更符合中文用户习惯的措辞。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，风格现代且有沉浸感。深蓝至红的渐变背景配合半透明毛玻璃卡片，营造出层次与科技感；金色标题和橙色/蓝色/绿色渐变按钮形成良好对比，主题突出“民主/投票”的庄重与活力。布局采用卡片、网格和弹性布局，结构清晰，信息层次分明。字体使用 Segoe UI 等系统字体，标题3rem醒目，正文行距合理，整体可读性好。组件设计精细，包括圆角卡片、悬停动画、进度条、可交互柱状图、带数字步骤的教程等，交互反馈充分。CSS 运用了 backdrop-blur、渐变、阴影、transition 与 fadeIn 动画，符合现代网页设计规范，且与游戏开发类别的互动性、教学性需求高度对齐。略有不足的是缺少图片/图标（仅一个 emoji）和自定义品牌字体，整体视觉素材相对单一，但代码质量与视觉协调度已达到较高水准。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 8.25,
+  "baseline_overall": 8.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_018770.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Learn More",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

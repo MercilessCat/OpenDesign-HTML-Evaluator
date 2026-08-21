@@ -1,0 +1,103 @@
+{
+  "row_id": "03_016062",
+  "shard": 3,
+  "id": 16062,
+  "category": "Game dev",
+  "prompt": "Design an immersive experience where players manage bee colonies to collect honey, balancing ecosystem impacts. Integrate time management, resource collection, and AI-driven bee behaviors. Educate about pollination and environmental sustainability while offering engaging gameplay with leaderboards and challenges.",
+  "html_len": 28565,
+  "html_sha256": "8d83659e4fd18332ec1163eec9c15ea23ee2f6db6fb2098c1d577bb65cc36e55",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "开始游戏",
+        "expected": "点击 Start Game 后，开始界面隐藏、游戏界面显示，游戏循环启动，资源统计开始更新",
+        "evidence": "探针点击 #startButton 后 DOM 无任何变化，无 JS 错误；HTML 中 startScreen/gameScreen 的 hidden 类未切换，游戏循环未启动",
+        "ok": 0
+      },
+      {
+        "name": "添加蜜蜂",
+        "expected": "消耗 100 蜂蜜，蜜蜂数量增加，场景中生成新的蜜蜂模型，UI 同步更新",
+        "evidence": "按钮位于 #gameScreen 内，因游戏未启动而不可见不可达；即使手动触发，addBee 依赖游戏状态且无事件绑定证据，无法完成",
+        "ok": 0
+      },
+      {
+        "name": "种植花朵",
+        "expected": "消耗 50 蜂蜜，场景中生成新的花朵模型，UI 同步更新",
+        "evidence": "按钮同样位于隐藏的游戏界面，不可达；未验证到有效点击反馈",
+        "ok": 0
+      },
+      {
+        "name": "收获蜂蜜",
+        "expected": "将积累的蜂蜜收入资源栏，更新蜂蜜数量",
+        "evidence": "harvestBtn 存在，但截断代码中未见对应处理函数，且游戏未启动，无法进行任何收获操作",
+        "ok": 0
+      },
+      {
+        "name": "暂停游戏",
+        "expected": "暂停游戏循环与蜜蜂行为，并可能切换按钮状态",
+        "evidence": "pauseBtn 位于隐藏的游戏界面，不可达；未观察到事件绑定或状态切换",
+        "ok": 0
+      },
+      {
+        "name": "重新开始",
+        "expected": "游戏失败后可从结算界面重置状态并重新开始",
+        "evidence": "gameOverScreen 初始隐藏，只有游戏失败才显示；当前因游戏无法启动，该流程永远无法触发",
+        "ok": 0
+      }
+    ],
+    "reason": "核心的开始游戏按钮点击后无任何反馈，游戏无法启动，所有游戏内交互（添加蜜蜂、种植、收获、暂停、重开）均不可达。虽然页面包含完整的视觉资源和游戏逻辑代码，但关键入口失效，主要任务完全无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：点击“Start Game”按钮无任何反馈（交互探针确认DOM无变化），游戏无法从开始界面进入主游戏流程，导致核心任务目标（管理蜂群、收集蜂蜜等）完全无法开始。次要瑕疵：从代码看“Add Bee”“Plant Flower”“Harvest Honey”“Pause”等游戏内核心操作按钮也可能未绑定事件，存在点击无效风险；游戏缺少玩法说明/新手引导，玩家难以理解授粉、生态健康等数值的作用；排行榜和每日挑战为静态展示，未实现实际交互功能。",
+    "attempts": 2
+  },
+  "aesthetic": {
+    "score": 6.0,
+    "reason": "整体为功能完整的游戏原型风格，色彩以金色+黑色为主，符合蜜蜂/蜂蜜主题，标题渐变和金色发光按钮有不错的视觉记忆点；3D场景（蓝天、绿草、彩色花朵、黄黑条纹蜜蜂）的氛围布置也基本正确。但当前视觉精细度不足：1) 开始界面使用 rgba(0,0,0,0.8) 的高不透明黑色蒙层，几乎完全遮住背景 3D 花园，用户打开页面看到的是一块偏空洞的黑色面板；2) h1 同时使用渐变文字填充与 10px 金色 text-shadow，在透明文字上容易产生金色晕影干扰可读性；3) 顶部资源条、底部操作按钮等 HUD 都是简单的半透明黑底圆角卡片，缺少图标、层次和玻璃拟态等现代质感；4) body 背景用了 #1a2a6c→#b21f1f 的红色+深蓝渐变，与蜜蜂/自然的蓝天绿地主题并不协调；5) 字体采用通用 Segoe UI，按钮和卡片设计通用化，未形成独特风格。总体而言是一个能明确传达‘游戏中’状态、且结构合理的页面，但视觉精致度和现代感仅处于基础水平，距离‘沉浸式’的高品质美学体验还有明显差距。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.0,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_016062.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Game",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

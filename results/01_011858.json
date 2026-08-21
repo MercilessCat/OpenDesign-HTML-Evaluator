@@ -1,0 +1,183 @@
+{
+  "row_id": "01_011858",
+  "shard": 1,
+  "id": 11858,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Build an engaging platform for gamers and developers to analyze performance metrics. Offer customizable FPS counter overlays, detailed performance graphs, and a library of optimization tips. Encourage community contributions with user-uploaded game profiles and a leaderboard for top-performing setups.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14241,
+  "html_sha256": "8b1cf603aebfe350e2fe7a6ecbd6ff00895fd2428f70fd3818dcdf89b6b2266d",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "顶栏导航链接（Dashboard/Analytics/Community/Resources）",
+        "expected": "点击后应切换到对应内容区块或路由",
+        "evidence": "四个链接都是 href=\"#\" 占位链接，无路由、无目标锚点；探针点击后仅发生 hash 跳转，页面内容未切换到对应板块",
+        "ok": 0
+      },
+      {
+        "name": "Sign In 登录按钮",
+        "expected": "点击后应打开登录弹窗或执行登录流程",
+        "evidence": "探针点击后 DOM 无变化、无新增网络请求、无 JS 错误；HTML 中无弹窗结构，也没有绑定点击事件",
+        "ok": 0
+      },
+      {
+        "name": "FPS 面板播放/设置按钮",
+        "expected": "点击后应开始/停止 FPS 监控，或打开自定义 overlay 设置",
+        "evidence": "探针点击两个图标按钮后 DOM 均无变化；脚本只负责定时刷新 FPS 数字，没有给这些按钮绑定任何事件",
+        "ok": 0
+      },
+      {
+        "name": "性能图时间范围按钮（1H/24H/7D）",
+        "expected": "点击后应切换图表数据范围并更新统计图",
+        "evidence": "探针点击 1H 后 DOM 无变化；柱状图只是静态 div，24H/7D 按钮没有事件绑定，无法切换数据",
+        "ok": 0
+      },
+      {
+        "name": "View All Tips / View Full Leaderboard",
+        "expected": "点击后应展示全部优化建议或完整排行榜",
+        "evidence": "两个按钮均无 onclick 或 addEventListener，点击无任何反馈；需求中的扩展内容入口未实现",
+        "ok": 0
+      },
+      {
+        "name": "Upload Profile 上传配置",
+        "expected": "点击后应提供上传游戏配置的入口或弹窗",
+        "evidence": "按钮无事件处理，页面没有 file input、上传弹窗或提交流程；需求中的社区上传功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上是一个完整的高保真静态原型，FPS 数字会定时自动刷新，但导航、登录、FPS 控制、图表筛选、查看全部、排行榜以及上传配置等核心交互全部无真实反馈。需求中的可定制 FPS overlay、交互式性能图、社区上传和完整排行榜等关键功能均未实现，因此页面基本不可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在多个核心可用性问题：顶部导航 Dashboard/Analytics/Community/Resources 只是 '#' 占位链接，点击不进入对应内容；FPS 卡片上的设置和播放按钮点击无响应，自定义/控制浮层核心操作无效；性能图时间范围 1H/24H/7D 点击后图表与选中态均无变化，数据筛选控件无效；Upload Profile、View All Tips、View Full Leaderboard 等按钮均无实际功能，社区贡献和资源流程中断。次要瑕疵：图表缺少坐标/图例说明，FPS 数据为随机模拟而非真实指标，部分按钮缺少足够的状态反馈。页面视觉和信息层级清晰，但核心交互大面积不可用，因此只能给 3 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力强，暗色渐变背景（#0f172a → #1e293b）搭配靛蓝/紫色主色（#6366f1、#8b5cf6），非常符合游戏性能分析平台的科技感和专业调性。布局采用头部+主内容+页脚的单页结构，内容分为左右两栏，主次分明，信息密度适中。卡片设计统一使用圆角、边框和阴影，hover上浮效果细腻，组件质感专业。字体采用Inter，配合清晰的层级字号和足够的间距，可读性好。FPS计数器带有动态颜色变化和震动式数值更新，增强了现代互动感。性能图表用CSS柱状图模拟，虽简单但视觉上完整，且与整体渐变风格一致。色彩对比度良好，深色底浅色字保证对比度。整体符合现代网页设计规范，且完美契合用户需求的“游戏性能分析平台”主题。唯一小扣分项是图表数据为静态模拟，以及顶部导航在移动端无适配方案，但作为单页视觉展示来说已相当出色。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_011858.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-cog",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-play",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "1H",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "row_id": "03_003662",
+  "shard": 3,
+  "id": 3662,
+  "category": "Game dev",
+  "prompt": "Envision a simulation that challenges users to reverse deforestation by planting diverse tree species. Players manage resources, combat environmental threats, and restore ecosystems. Key features include virtual tree nurseries, real-time ecosystem impacts, and educational content on forest conservation, promoting environmental awareness through gamification.",
+  "html_len": 27910,
+  "html_sha256": "1b9810a36be2c59938f06c36f6a33a6fbbd03fefd230c639bde3320d018fa3ae",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "开始游戏",
+        "expected": "点击后从开始界面进入游戏主界面，显示资源面板与 3D 场景",
+        "evidence": "探针点击 #start-button 后 DOM 有变化且无 JS 错误；HTML 中监听器隐藏 start-screen 并移除 game-ui 的 hidden 类",
+        "ok": 1
+      },
+      {
+        "name": "选择树种",
+        "expected": "点击树种类卡片后高亮选中，并更新待种植的树种类型",
+        "evidence": "HTML 为所有 .tree-preview 绑定 click，切换 .selected 类并写入 gameState.selectedTreeType；运行时无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击地面种植树木",
+        "expected": "在点击的地面位置生成所选树种的 3D 树，并扣除相应资源、更新统计",
+        "evidence": "canvas-container 绑定 click，通过 Raycaster 检测 ground 并调用 addTree()；探针拖拽时 DOM 有更新且无 JS 错误（像素不可测），Three.js 场景循环正常运行",
+        "ok": 1
+      },
+      {
+        "name": "应对环境威胁（火灾/虫害/干旱）",
+        "expected": "玩家可对出现的威胁采取灭火/施药等行动以保护森林",
+        "evidence": "页面仅有 threat-indicator 被动显示威胁名称与进度，未提供任何应对按钮、事件或玩法入口；威胁自动出现自动消失，玩家无法干预",
+        "ok": "NA"
+      },
+      {
+        "name": "主动管理资源（补水/养分/阳光）",
+        "expected": "玩家能通过界面主动调节或补充水资源、养分、阳光",
+        "evidence": "桌面端资源面板只有数值显示，没有补水/施肥/调节按钮；唯一补给按钮 water-btn 被 CSS media query 限制在移动端才显示，且仅补水资源，养分与阳光毫无管理入口",
+        "ok": 0
+      }
+    ],
+    "reason": "核心可玩闭环（开始游戏、选择树种、点击种植）均可用，Three.js 场景与资源消耗循环无报错；但需求明确要求的“应对环境威胁”完全没有玩家可操作的入口，桌面端资源管理也基本缺失（仅移动端可补水），两项关键功能未实现，故给 4 分",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）金钱系统无任何UI显示，玩家完全看不到余额，无法判断自己是否支付得起、种树后剩多少钱；2）威胁（Fire/Pests/Drought等）只能被动观看，没有任何“对抗/应对”操作，宣传中的核心玩法缺失；3）经济系统不可持续——初始100元种几棵树后耗尽，且无任何收入来源，导致玩家无法继续种树达到50棵的胜利目标，流程实际卡死。次要瑕疵：开始界面未说明“点击地面可种树”这一核心操作；树种卡片只是绿色色块而非树形预览，物种识别不直观；移动端加号按钮固定在世界原点种树，位置不直观；胜利界面文案用红色主题色，容易误判为失败；生态系统健康与生物多样性计算机制未向玩家解释，反馈含义不明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉主题明确，采用深色半透明面板搭配绿色高亮，符合森林环保游戏的气质。布局清晰，开始界面、资源面板、树类选择、威胁指示器分区合理，层次分明。Three.js 生成的3D场景作为背景增加了沉浸感，颜色搭配协调（黑、绿、蓝、黄）。然而，树类选择卡片仅为纯色块加文字，缺少图标或纹理，显得简陋；部分控件样式较粗糙（如资源条和通知框），导致精致度不足。字体采用常见系统字体，间距统一，整体达到现代网页游戏UI的及格线，但缺乏更高阶的视觉打磨和细节装饰。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 4.9,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_003662.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Restoration",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

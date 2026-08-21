@@ -1,0 +1,183 @@
+{
+  "row_id": "02_024242",
+  "shard": 2,
+  "id": 24242,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Immerse users in the microscopic world with a platform visualizing nanoparticle assembly dynamics in 3D. This educational tool offers real-time simulations, user-driven experiments, and collaboration spaces for researchers. Key features include time-lapse animations, data annotations, and cross-disciplinary integration, expanding the frontier of nanotechnology education.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12378,
+  "html_sha256": "579318aa0d737ff8850ded3c3b69925f5773b8fc7579c5b027dcd94dd008b5da",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "3D模拟观察",
+        "expected": "页面显示3D纳米粒子运动模拟，粒子持续运动产生动态可视化效果",
+        "evidence": "Three.js场景已初始化，50个粒子在动画循环中运动（位置更新+旋转），requestAnimationFrame持续运行，无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "播放/暂停控制按钮",
+        "expected": "点击后切换模拟播放/暂停状态，动画应停止或继续",
+        "evidence": "探针点击播放按钮后DOM无变化、无JS错误、无网络请求，按钮无事件绑定，点击无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "截图/记录按钮",
+        "expected": "点击后截取当前模拟画面或触发记录功能",
+        "evidence": "探针点击截图按钮后DOM无变化、无JS错误、无网络请求，按钮无事件绑定，点击无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "导航链接（Simulation/Experiments/Collaboration/Resources）",
+        "expected": "点击后切换到对应功能视图或展示相关页面内容",
+        "evidence": "4个导航链接均为href=\"#\"，探针点击后仅URL添加#并跳转页面顶部，无实际路由或视图切换，属于纯占位入口，需求声明的实验/协作等关键功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "Sign In登录按钮",
+        "expected": "点击后触发登录流程或展示登录界面",
+        "evidence": "探针点击Sign In按钮后DOM无变化、无JS错误、无网络请求，按钮无事件绑定，点击无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "功能卡（实时模拟/数据注释/协作研究）",
+        "expected": "点击卡片可进入或操作对应功能模块（如添加注释、开始实验、加入协作）",
+        "evidence": "HTML中卡片仅绑定了mouseenter/mouseleave切换pulse样式，无click事件，点击无业务逻辑响应；需求声明的数据注释、用户驱动实验、协作空间等功能仅为文字宣传，未实现实际操作入口",
+        "ok": 0
+      }
+    ],
+    "reason": "页面通过Three.js实现了3D粒子自动动画，作为数据可视化展示具有一定效果。但核心交互大面积失效：所有导航链接为href=\"#\"占位，Sign In按钮、播放/暂停按钮、截图按钮均无事件绑定无反馈，功能卡仅有hover样式无实际功能。需求声明的用户驱动实验、协作空间、时间推移动画、数据注释等关键功能均未实现，属于重展示轻交互的占位页面，主要任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题（4个，导致整体体验显著降档）：\n1. 顶部主导航的'Simulation/Experiments/Collaboration/Resources'4个链接全部为占位跳转（href=\"#\"），点击后虽然URL变化、页面跳回顶部，但并未展示对应内容或功能，主要入口形同虚设，用户无法到达目标模块。\n2. 'Sign In'按钮点击后无任何DOM变化、无网络请求、无反馈，核心操作（登录/注册入口）完全无响应，属于死路。\n3. 3D模拟容器上方的播放/暂停、截图两个控制按钮点击后均无效果（无视觉反馈、无状态变化），核心可视化控件的调节完全无效。\n4. 3D场景画布指针拖拽后无任何像素变化，用户无法旋转或操作纳米粒子模拟，而页面宣传的'user-driven experiments'（用户驱动实验）这一关键交互流程被卡死，且无错误提示。\n\n次要瑕疵（在核心问题存在情况下进一步说明，不影响降档判定）：\n1. 3D模拟区域缺少操作指南、图例或帮助提示，用户不知道可以拖拽/缩放或如何交互；\n2. 底部统计栏'Accuracy Rate 99%'等数据无来源说明，缺乏可解释性；\n3. 页面声称具有'Experiments/Collaboration'等模块，但导航跳转无任何实现或落地页，属于未完成的占位功能；\n4. 播放/截图按钮图标语义模糊（截图图标为相机相关路径），且缺少悬停说明文本。\n\n页面视觉设计与结构本身基本清晰、无JS报错、动画正常，但由于存在多个核心可用性缺陷，无法提供有效的功能流程，故给予2分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力强，深色渐变背景（from-gray-900 to-blue-900）营造出科技感与沉浸感，契合纳米科技主题。色彩搭配专业，蓝、绿、紫、黄等点缀色在深色背景上对比度充足，既突出重点又不刺眼。布局协调，头部、主内容、页脚结构清晰，左侧3D模拟区域与右侧特性卡片形成均衡网格，底部统计数字进一步丰富信息层级，且整体通过overflow:hidden和flex布局保证了单屏显示。字体使用Segoe UI，字号层级分明，标题醒目，正文可读性良好。组件设计精致，卡片带圆角、半透明背景和柔和阴影，悬停时有上浮和脉冲效果，细节体现了专业UI功底。CSS基于Tailwind工具类，并结合自定义动画和过渡，符合现代设计规范。Three.js粒子模拟动态增强了视觉吸引力，且无任何运行错误，功能完整。唯一小不足是导航链接点击后仅跳转#，未实现真实页面跳转，但不影响视觉评分。整体上，这是一个兼具美学与功能的高质量数据可视化页面。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_024242.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulation",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Experiments",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Collaboration",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "svg.[object SVGAnimatedStrin",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "svg.[object SVGAnimatedStrin",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

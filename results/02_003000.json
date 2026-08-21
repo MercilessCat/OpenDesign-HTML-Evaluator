@@ -1,0 +1,155 @@
+{
+  "row_id": "02_003000",
+  "shard": 2,
+  "id": 3000,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Design an educational platform for visualizing Turing machine operations on tape. Users simulate machine processes, visualize state transitions, and solve algorithmic puzzles. Key features include step-by-step animation, interactive problem-solving challenges, and a community forum for sharing solutions and discussing computational theory, making complex concepts accessible and engaging.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11889,
+  "html_sha256": "862eade1a2020843d1c666ae26035c329bd2cfda7b6d5627c1124a38b39a1706",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Step 按钮单步执行",
+        "expected": "Turing 机前进一步：当前状态切换、纸带读写头位置高亮变化",
+        "evidence": "探针点击后 DOM 有变化且无 JS 错误；HTML 中 step-btn 绑定了更新 current-state 和 tape-cell active 类的事件，反馈符合预期。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Run 按钮自动运行",
+        "expected": "自动连续执行多步动画，状态和纸带持续变化",
+        "evidence": "探针点击后 DOM 有变化且无 JS 错误；HTML 用 setInterval 连续触发 step-btn 10 次，实现自动运行。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Reset 按钮重置",
+        "expected": "纸带和状态恢复到初始 q0，中心格子重新高亮",
+        "evidence": "探针点击后 DOM 有变化；HTML 中将状态重置为 q0、纸带内容恢复为默认值并重新激活中心单元格。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Clear 按钮清空纸带",
+        "expected": "所有纸带单元格内容变为空白符号 B，去掉高亮",
+        "evidence": "探针点击后 DOM 有变化；HTML 中遍历所有单元格将文本设为 'B' 并移除 active 类。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Solve Challenge 进入算法挑战",
+        "expected": "打开可交互的解题界面或编辑器，开始解决 Palindrome Checker 挑战",
+        "evidence": "按钮在 HTML 中没有任何事件绑定；探针捕捉到的 DOM 变化只是 hover/focus 样式层，没有业务反馈，属于纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Discussion 加入社区论坛",
+        "expected": "跳转或展开社区论坛，可查看/发布讨论",
+        "evidence": "按钮在 HTML 中没有任何事件绑定；点击后无实际论坛功能反馈，仅静态预览，属于未实现的占位入口。",
+        "ok": 0
+      }
+    ],
+    "reason": "核心纸带可视化控制（Step/Run/Reset/Clear）交互均正常，但需求中的交互式算法挑战和社区论坛两个关键功能入口（Solve Challenge / Join Discussion）均为无事件占位按钮，点击无业务反馈，核心功能缺失较多。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 'Solve Challenge' 与 'Join Discussion' 两个主要功能入口点击后没有任何实际行为或反馈，是典型占位死路；2. 核心模拟逻辑（Step/Run）执行的是随机状态与随机磁头跳转，不基于任何图灵机定义或转换规则，用户无法通过逐步操作理解机器过程，核心控件反馈错误，流程缺少真正的可推进逻辑。次要瑕疵：磁带单元不可编辑，用户无法自定义输入；Run 按钮内 'this.disabled' 未正确引用按钮，连续点击可能产生多定时器重叠；'Completed: 0/1' 进度标识为静态展示，无法真正完成挑战；状态转移图元素重叠且缺少图例说明；缺少对图灵机工作原理的说明或帮助文本。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体设计现代、专业，与数据可视化教育平台的主题高度契合。色彩搭配协调，深色渐变背景（#0f172a → #7c3aed）营造出科技感和沉浸感，主色蓝色（#2563eb）与紫色（#7c3aed）的渐变标题及组件点缀，既统一又富有层次。布局清晰，顶部标题区、中部主可视化面板（磁带部分+状态转换图）与右侧边栏（挑战+论坛）形成合理的三列结构，信息分区明确且符合教学场景需求。组件设计质量较高：按钮采用圆角、悬停缩放和渐变效果，磁带单元具有选中高亮和动画反馈，状态圆圈使用脉动动画，整体交互感强。CSS方面运用了Tailwind工具类和自定义过渡动画，专业度良好。字体层级分明，标题通过bg-clip-text实现渐变文字，对比度充足，可读性佳。仅因无法看到真实渲染细节，且部分元素（如状态转换图）的绝对定位可能在不同屏幕下略微影响布局稳定性，故扣2分。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.3,
+  "baseline_overall": 5.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_003000.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Step",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Run",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Clear",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Solve Challenge",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Discussion",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "row_id": "02_007571",
+  "shard": 2,
+  "id": 7571,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Navigate software complexity with intuitive code dependency graphs. Users can visualize and manage codebases, identify bottlenecks, and optimize workflows. Features include real-time collaboration, integration with popular development tools, and AI-driven recommendations for improving code efficiency and maintainability, empowering developers to create robust software solutions.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10040,
+  "html_sha256": "f5a2141663f459c316f7a9e5fb25493c534a96fc163481eea575687c9f31ae54",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "导航链接（Features/Solutions/Pricing/Docs）",
+        "expected": "点击后切换到对应页面或内容区块，给出实质反馈",
+        "evidence": "链接均为 href=\"#\"，无对应路由或锚点；探针点击后仅有 URL hash 变化，无内容更新，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "Get Started 按钮",
+        "expected": "点击后开始使用、注册或进入下一步流程",
+        "evidence": "探针点击后 DOM 变化=无、无 JS 错误、无网络请求；按钮没有绑定业务逻辑，点击无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "Live Demo 按钮",
+        "expected": "点击后打开可交互的数据可视化演示",
+        "evidence": "探针点击后 DOM 变化=无、无 JS 错误、无网络请求；没有演示逻辑，点击无反应",
+        "ok": 0
+      },
+      {
+        "name": "Documentation 按钮",
+        "expected": "点击后打开文档或展示说明内容",
+        "evidence": "探针点击后 DOM 变化=无、无 JS 错误、无网络请求；占位按钮，点击无反应",
+        "ok": 0
+      },
+      {
+        "name": "图节点悬停",
+        "expected": "节点和连接线高亮，产生视觉反馈",
+        "evidence": "SVG 节点绑定了 mouseenter/mouseleave，CSS .node:hover 有 transform 和 brightness 变化；运行时无 JS 错误，反馈有效",
+        "ok": 1
+      },
+      {
+        "name": "图节点点击",
+        "expected": "查看节点依赖详情或展开信息",
+        "evidence": "节点有 cursor-pointer 样式但只绑定了 mouseenter/mouseleave，没有 click 事件；点击不会产生任何业务反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面内容完整、视觉现代，数据可视化图形与悬停高亮可正常使用；但导航链接（href=\"#\"）以及 Get Started、Live Demo、Documentation 等多个关键交互入口为纯占位，点击均无实质响应，存在多个未实现功能，按规则评分不高于4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部导航（Features、Solutions、Pricing、Docs）均为占位链接，点击后仅产生hash跳转，无实际内容响应；2. “Get Started”“Live Demo”“Documentation”三个主要操作按钮点击后无任何反馈，既无跳转也无状态变化，核心操作无法完成。次要瑕疵：图表区域缺少图例和操作说明，可视化节点hover效果未体现信息展示；功能模块（实时协作、AI推荐等）仅有文案描述，缺乏可交互的演示入口。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "页面整体视觉表现良好，现代感强。色彩搭配采用深蓝底图形卡片与白色/浅灰背景结合，主色蓝色与紫色点缀清晰，对比度充足。布局左右分栏平衡，左侧文案排版清爽，右侧深色卡片配合SVG依赖图、悬停脉冲动画，形成突出的视觉焦点，契合数据可视化工具的产品气质。页头页脚配色干净，字体大小层级明确，间距合理；交互上节点悬停放大、连线透明度变化、随机节点脉冲等细节增添了动态感。扣分点主要在：导航和社交链接点击后默认跳转到 '#' 导致页面抖动，未做平滑处理或阻止默认行为，略显粗糙；左侧功能点留白较大，视觉密度偏低，四个栏目之间的信息层级不够紧凑；整体设计在同类SaaS官网中比较模板化，缺少令人印象深刻的个性化视觉亮点。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_007571.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Solutions",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Pricing",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Docs",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Live Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Documentation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "covered_by": "I.fab fa-github",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

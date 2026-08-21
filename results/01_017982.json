@@ -1,0 +1,181 @@
+{
+  "row_id": "01_017982",
+  "shard": 1,
+  "id": 17982,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Experience a mesmerizing digital realm where progress bars are transformed into artistic, animated experiences. Users customize loaders with themes and patterns, creating unique visuals that enhance waiting times with beauty and engagement. Unlock creativity with collaborative design spaces and community competitions for the most innovative progress bar designs.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13082,
+  "html_sha256": "4f06d3837537e577d301f84154ef8176a0e8c884194222c280860ff26aa392d3",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航 Gallery / Themes / Community",
+        "expected": "切换到对应内容区域或展示对应页面",
+        "evidence": "导航 href=\"#\"，点击后仅发生哈希跳转（探针报告页面跳转），无路由切换或内容变化，属于纯占位死链",
+        "ok": 0
+      },
+      {
+        "name": "点击主题色按钮（4 个圆形按钮）",
+        "expected": "进度条颜色切换为对应主题渐变",
+        "evidence": "探针点击无文本按钮后 DOM 有变化，JS 中绑定 click 事件并修改进度条 class 添加对应渐变类；无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击动画效果按钮（Glow / Wave / Pulse）",
+        "expected": "进度条切换对应的动画效果",
+        "evidence": "探针点击 Glow 按钮后 DOM 有变化，JS 中 effect1/2/3 均绑定事件，添加/移除 glow、wave、pulse 类；无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击 Start Demo 开始演示",
+        "expected": "三条进度条依次动画增长至 100%",
+        "evidence": "JS 中 startBtn 绑定 click 事件，使用 setInterval 逐帧更新宽度和百分比文本，逻辑完整，且无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击 Join Community 加入社区",
+        "expected": "进入社区或触发社区相关交互",
+        "evidence": "按钮无 id，HTML 中无事件绑定，点击不会产生任何业务反馈；需求中的社区协作/竞赛入口未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击主题预览卡片（Cosmic Gradient / Ocean Breeze）",
+        "expected": "应用对应主题或进入预览详情",
+        "evidence": "卡片只有 cursor-pointer 样式，无任何 JS 事件绑定，点击无功能反馈，属于占位入口",
+        "ok": 0
+      }
+    ],
+    "reason": "核心交互（主题选择、效果切换、Start Demo）可正常使用，但导航链接全部为 href=\"#\" 占位死链，Join Community 和主题预览卡片均无事件绑定，需求中声明的社区协作/竞赛入口有 2 个以上未实现，根据规则得分不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) 页面顶部导航链接（Gallery/Themes/Community）均为占位链接，点击后仅跳转至页面顶部，无实际内容或功能反馈，属于主要入口无实际响应；2) 主题/效果选择控件反馈缺失：点击后按钮无选中态指示，且当进度条宽度为0（初始状态）时，修改主题或效果无法看到任何可见变化，用户难以判断操作是否生效。次要瑕疵：Join Community按钮未绑定点击事件，点击无反应；主题预览卡片设置了cursor:pointer但无点击行为；选择新主题会重置已有的进度条宽度，可能打断用户观察；主题/效果按钮均缺少选中状态高亮；页面使用overflow:hidden在较小视口下可能截断内容且无法滚动。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，深色渐变背景（#0f172a→#1e293b）配合蓝紫粉渐变主色调，营造出带有科技感与艺术氛围的现代风格，与“艺术化进度条”主题契合。色彩搭配统一且协调，主色（indigo/purple/pink）在深色背景上对比鲜明，前景文字使用浅色（#f1f5f9）确保了较好的可读性。布局采用左文案右预览的两栏结构，主轴清晰，header/footer与主内容层次分明，间距得当，视觉重心均衡。字体使用Poppins，标题层级和粗细处理合理，信息传达清楚。组件设计在细节上体现出专业性：进度条具有glow、pulse、wave等质感效果，主题选择器采用圆形渐变按钮，卡片带hover上浮和阴影过渡，增强了交互感和精致度。CSS整体运用了rounded-2xl、backdrop-blur、渐变文本、内阴影等现代前沿技术，风格符合2023年前后的主流单页网站审美规范。\n\n扣分点在于：页面整体视觉略显模板化，缺少足够让人眼前一亮的“艺术”突破感；右侧预览区与下方主题卡片在空间上稍显单薄，页面下半部分存在轻微的空旷感；部分按钮的文本可读性（如slate-700上白字）在低亮度显示器上对比度一般。整体而言，这是一个成熟、干净且基本符合现代设计规范的界面，但在个性化和视觉冲击力上仍有一定提升空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_017982.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Themes",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Glow",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

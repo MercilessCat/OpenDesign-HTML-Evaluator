@@ -1,0 +1,181 @@
+{
+  "row_id": "00_028896",
+  "shard": 0,
+  "id": 28896,
+  "category": "3D design",
+  "prompt": "Develop an engaging portal for exploring shader development, featuring an interactive shader builder and an expansive library of visual examples. Users can experiment with code snippets, view real-time changes, and collaborate on projects, advancing their skills in crafting stunning HTML graphics.",
+  "html_len": 17544,
+  "html_sha256": "2dd70f735bc23c1622bce46b8aefef3d25ed92a9734e55e02eab0b3fb81f0a6d",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "选择库中的 Fire Effect 示例",
+        "expected": "代码编辑器填入火焰 shader 代码，并自动编译，预览画面更新为火焰效果",
+        "evidence": "HTML 中 .shader-item 均绑定 click，JS 中 loadShaderExample('fire') 有完整实现，会写入 textarea 并触发 #compile-btn；运行时无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "选择库中的 Procedural Terrain 示例",
+        "expected": "代码编辑器填入地形 shader 代码，预览更新",
+        "evidence": "HTML 存在 data-shader=\"terrain\" 的条目，但 JS 的 examples 对象中只有 fire/water/galaxy 三个分支，terrain/plasma/hologram 点击后无任何操作，属于无效示例",
+        "ok": 0
+      },
+      {
+        "name": "修改 shader 代码后点击 Compile",
+        "expected": "新编写的 fragment shader 被应用，预览画面实时变化",
+        "evidence": "#compile-btn 绑定 click，读取 textarea 值赋给 material.fragmentShader 并置 needsUpdate=true，Three.js 会自动重新编译；探针未介入但代码路径完整有效",
+        "ok": 1
+      },
+      {
+        "name": "点击 Pause / Play 控制动画",
+        "expected": "动画暂停 / 继续，canvas 画面运动状态切换",
+        "evidence": "play-btn/pause-btn 监听事件修改 isPlaying，animate() 根据 isPlaying 控制 time uniform 累加并用 requestAnimationFrame 持续渲染；探针未检测到 DOM 变化，但业务反馈发生在 canvas 上，符合预期",
+        "ok": 1
+      },
+      {
+        "name": "点击导航 Tutorials / Community 板块",
+        "expected": "跳转或切换到对应的教程 / 社区内容视图",
+        "evidence": "导航链接均为 href=\"#\" 占位，无路由绑定或内容切换逻辑；探针报告仅发生 hash 跳转、无实质页面变化，属于纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "寻找协作项目功能",
+        "expected": "页面提供协作/分享/团队入口，可参与项目协作",
+        "evidence": "HTML 中没有协作相关控件或入口，header 导航与 footer 链接均为占位；需求声明的 collaborate on projects 功能完全未实现",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心 shader 编辑器（修改代码 + Compile）和播放控制可用，但视觉示例库中 terrain/plasma/hologram 三个条目点击无响应，导航 Tutorials/Community/Profile 等全部为 href=\"#\" 占位，协作功能缺失；存在 2 个以上需求关键入口未实现，因此分数不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：主要导航（Editor/Library/Tutorials/Community/Profile）均为占位链接，点击后仅跳转到URL锚点（#），没有加载对应页面或更新任何内容，属于主要入口无实际反馈，导致用户无法通过导航完成切换功能。次要瑕疵：播放/暂停/重置按钮无状态指示，用户无法确认当前动画是否在播放；代码编辑器需手动点击Compile才能看到效果，不符合“实时更改”预期；着色器编译错误仅输出到console，页面无可视化错误提示；部分导航目标（如Tutorials/Community）没有对应实现，功能缺失；响应式布局下第二个侧边栏未显式分配网格位置，可能发生错位。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强。采用深色渐变背景（#1a1a2e → #16213e → #0f3460）搭配青色（#4ecdc4）与珊瑚色（#ff6b6b）作为强调色，色彩搭配和谐且符合3D/shader开发工具的专业气质。布局采用三栏网格结构，左侧着色器库、中间WebGL画布、右侧代码编辑器，信息层级清晰，符合开发者工具的应用场景。组件设计精致：毛玻璃效果（backdrop-filter）、细腻的边框和圆角、悬浮平滑过渡均体现了较高的CSS水准。字体使用Segoe UI和Courier New，代码区与界面文本区分明确。现代设计规范方面，渐变Logo、半透明面板、统一间距、响应式断点均考虑到位。尽管在交互细节上存在不足（如nav链接无实际页面、无图标装饰、shader-item选中状态反馈较弱），且整体风格偏‘深色仪表盘’而非‘3D设计门户’的华丽沉浸感，但就当前实现而言，已可称得上专业且美观。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.6,
+  "baseline_overall": 5.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_028896.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Editor",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Library",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Profile",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Play",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Pause",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

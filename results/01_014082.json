@@ -1,0 +1,181 @@
+{
+  "row_id": "01_014082",
+  "shard": 1,
+  "id": 14082,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Develop a strategic platform for audit management, prioritizing findings based on impact and urgency. Users can visualize audit data, collaborate on resolution strategies, and receive AI-driven prioritization insights. The site integrates with compliance tools, streamlining audit workflows and enhancing accountability.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13596,
+  "html_sha256": "65eddddb5732e6e595ba6917d6f0d8108403402569b6094d53320af81dbfbf20",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接(Dashboard/Findings/Reports/Integrations)",
+        "expected": "切换主内容区域到对应视图",
+        "evidence": "探针点击导航链接后虽然DOM有变化（hash跳转至#），但页面无任何内容切换，导航均为 href=\"#\" 占位，无路由或事件绑定。",
+        "ok": 0
+      },
+      {
+        "name": "点击New Audit按钮",
+        "expected": "创建新的审计条目或弹出新建表单",
+        "evidence": "探针点击后DOM无变化，按钮无onclick事件，未实现新建审计功能。",
+        "ok": 0
+      },
+      {
+        "name": "点击时间范围按钮(Week/Month/Quarter)",
+        "expected": "切换优先级仪表盘的数据时间范围",
+        "evidence": "探针分别点击Week/Month/Quarter后DOM均无变化，按钮无事件处理，仅样式切换。",
+        "ok": 0
+      },
+      {
+        "name": "在协作评论框输入并发送评论",
+        "expected": "提交评论并显示在协作区域",
+        "evidence": "输入框和发送按钮无表单、无事件绑定，页面无JS处理函数，点击发送无任何反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击Export Report按钮",
+        "expected": "触发报告下载或导出操作",
+        "evidence": "按钮无onclick或事件监听，探针类似按钮点击均无反应，为静态占位。",
+        "ok": 0
+      },
+      {
+        "name": "点击Refresh Data按钮",
+        "expected": "重新加载数据并更新工作流进度",
+        "evidence": "按钮无事件绑定，无数据更新逻辑，点击不会改变页面内容。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整，但所有核心交互均为占位实现：导航链接使用href=\"#\"无路由、New Audit/时间筛选/导出/刷新/评论等按钮均无事件绑定，点击无反馈。用户无法完成任何审计管理任务，功能性严重缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1）顶部导航（Dashboard/Findings/Reports/Integrations）为占位链接，点击后仅改变URL hash或滚动回页面顶部，没有对应内容切换或功能反馈，主要入口形同虚设；2）“New Audit”按钮点击后无任何反应，无法完成创建审计这一核心操作；3）Week/Month/Quarter时间范围切换按钮点击后视图无变化，核心控件调节无效。次要瑕疵：AI Insights和图表区域为静态占位，不是真实可视化；评论发送按钮无实际功能；Export Report/Refresh Data按钮可能无操作效果；工具集成列表仅展示状态、不可交互。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "从视觉特征分析，该页面整体质量较高。设计采用现代卡片式布局，以浅灰背景衬托白色内容卡片，层次清晰；主色为 Tailwind 自定义的蓝色(#2563eb)、深色(#0f172a)和橙色(#f97316)，搭配语义化的红/黄/绿优先级边框和徽章，既统一又符合审计场景的信息传达。标题、按钮、进度条、输入框等组件圆角适中、阴影轻微、hover 过渡自然，体现了专业的产品级 UI 设计。布局上基于 3 列栅格，左右不对称但视觉平衡，优先仪表板与工作流进度形成主次关系，没有拥挤或空洞感。字体使用系统无衬线栈，阅读性良好；间距体系由 Tailwind 类控制，整体留白充分。小瑕疵：部分按钮如时间筛选和 New Audit 无实际交互反馈，导航点击会跳转锚点，但这对静态视觉无影响；而且内容较多，在较小视口下可能无法完全做到一屏展示。总体而言，该页面符合现代网页设计规范，与审计管理的专业、稳重大气风格契合，视觉吸引力强。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_014082.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Findings",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Reports",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Integrations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Audit",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Week",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Month",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Quarter",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

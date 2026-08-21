@@ -1,0 +1,182 @@
+{
+  "row_id": "05_040092",
+  "shard": 5,
+  "id": 40092,
+  "category": "Website",
+  "prompt": "Build an advanced platform for detecting bio-signatures on exoplanets remotely, empowering users to explore potential signs of life beyond Earth. Core functionalities include interactive exoplanet databases, real-time detection alerts, and collaborative research tools for amateur and professional astronomers.",
+  "html_len": 23956,
+  "html_sha256": "5f4384ef2d6a7d6456ac624ebcb9c21ac0663b80f17d18d7e736e48db5462a42",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航 Dashboard 链接",
+        "expected": "跳转到仪表盘页面并显示数据看板内容",
+        "evidence": "探针点击后仅发生页面跳转（href=\"#\"），无路由、无新增网络请求，页面实际未切换到新内容，属于占位链接",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Database 链接",
+        "expected": "打开交互式系外行星数据库，可浏览/过滤系外行星数据",
+        "evidence": "探针点击后仅发生页面跳转（href=\"#\"），无新内容加载，数据库功能未实现，纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Alerts 链接",
+        "expected": "进入实时探测警报页面，查看或配置警报",
+        "evidence": "探针点击后仅发生页面跳转（href=\"#\"），无警报页面或配置界面，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Database 按钮（核心入口）",
+        "expected": "进入系外行星数据库，实现交互式查询/筛选",
+        "evidence": "探针点击后仅有 DOM 变化（JS click 兜底），无页面跳转、无弹窗、无数据库界面，核心功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 按钮",
+        "expected": "出现登录/注册界面",
+        "evidence": "探针点击后 DOM 有变化但无新增网络请求，页面无登录表单弹出，纯占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Research Network 按钮",
+        "expected": "进入协作研究网络，可注册或查看协作工具",
+        "evidence": "探针点击后 DOM 有变化但无实际功能，无注册流程、无协作工具界面，纯占位按钮",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上是一个精美的单页展示站，但核心功能（交互式系外行星数据库、实时探测警报、协作研究工具）全部未实现。所有导航链接均为 href=\"#\" 占位，主要按钮无实际业务反馈，没有搜索/过滤/表单等任何核心交互入口。仅有静态图表和内容卡片，无法完成用户需求中的任何主要任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1）顶部导航（Dashboard/Database/Alerts/Research/Community）及页脚链接均为 href=\"#\" 占位链接，点击后没有进入实际页面，仅跳到页面顶部，主要入口无有效反馈；2）核心操作按钮（Sign In、Explore Database、Join Research Network、Start Exploring、Research Resources、View All、移动端汉堡菜单）均无事件处理或业务逻辑，点击后无法完成登录、浏览数据库、加入研究网络等核心任务；3）平台宣称的交互式数据库、实时警报、协作研究等核心功能均未真正实现，缺少数据表、筛选器、警报配置和协作入口，核心操作流程中断。次要瑕疵：图表缺少数据来源/单位说明；可居住性评分等术语缺少图例或帮助文字；大量卡片被统一添加 pulse 动画，视觉上容易分散注意力；移动端菜单按钮无展开行为。由于存在多个核心可用性问题，页面整体可用性严重不足。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.7,
+    "reason": "页面整体视觉吸引力很强，主题高度契合太空/系外行星探测的科幻感。深蓝紫渐变背景+星尘粒子+紫色霓虹光晕营造出深邃的宇宙氛围，视觉风格统一且具有沉浸感。色彩搭配合理：深色底（#0f0f23、#1a1a3a）上使用淡紫色文字（#e0e0f2）和品牌紫（#8b5cf6）作为强调，对比清晰，没有刺眼或冲突的配色。布局结构层次分明——导航吸顶、Hero区、数据统计、功能卡片、图表、最近发现、CTA、页脚——信息架构清楚，节奏松弛有度。字体选用Orbitron（标题）与Exo 2（正文）的组合，符合科幻/科研气质，且标题的glow光效增强辨识度。组件设计质量较高：卡片有圆角、边框、悬停上浮+光晕扩散效果，按钮具备hover缩放和颜色过渡；Chart.js嵌入了折线图与环形图，让页面更专业、数据感更强。CSS方面使用了Tailwind自定义主题变量、backdrop-blur毛玻璃、keyframes动画（pulse/twinkle）、渐变背景，整体属于现代深色科技风。交互探针也显示按钮和链接均有反馈且无JS错误。扣分点：部分细节可优化——'pulse'动画应用于所有卡片可能造成视觉疲劳；parallax元素未实际绑定，是未完成的装饰；导航链接使用'#'占位符，真实项目应配置路由。但整体而言，这是一个完成度高、视觉风格统一、能达成用户需求中'advanced platform'定位的高质量页面设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.23,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_040092.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Database",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Alerts",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Research",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Database",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Research Network",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

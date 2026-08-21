@@ -1,0 +1,115 @@
+{
+  "row_id": "03_033467",
+  "shard": 3,
+  "id": 33467,
+  "category": "Game dev",
+  "prompt": "Balance skill and strategy in a physics-based simulation where players must keep a unicycle upright through varied terrains. The platform includes a leaderboard, customizable avatars, and user-generated challenges, promoting community engagement and competition in a fun, skill-testing experience.",
+  "html_len": 22184,
+  "html_sha256": "0545568d47bb0cc5ea01e45d02ce644033aca3ec0338339a20bf10ee56d33e3f",
+  "functional": {
+    "score": 6.0,
+    "raw_score": 6.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 START CHALLENGE 开始游戏",
+        "expected": "隐藏开始界面，显示游戏 HUD 和物理画布，独轮车与地形生成，游戏计时计分启动",
+        "evidence": "探针点击后 DOM 有变化，新增 JS 错误 0，新增网络请求 0。HTML 中 startBtn 绑定 startGame()，会隐藏 startScreen、显示 gameUI、创建地形和独轮车并运行 Matter.js Runner/Render。",
+        "ok": 1
+      },
+      {
+        "name": "选择头像（4 个渐变圆形色块）",
+        "expected": "点击色块后 selected 类切换，avatarType 更新，开始游戏时骑手颜色随之改变",
+        "evidence": "HTML 显示 4 个 .avatar-option 元素均绑定 click 事件，切换 selected 类并读取 data-avatar 设置 avatarType；createUnicycle() 中根据 avatarType 设置骑手 fillStyle。运行时无 JS 错误，逻辑完整。",
+        "ok": 1
+      },
+      {
+        "name": "选择地形（下拉菜单）",
+        "expected": "选择 Flat/Hills/Mountains/Obstacles 后 terrainType 更新，开始游戏时生成对应地形",
+        "evidence": "代码中 terrainSelect 绑定 change 事件，startGame() 按 terrainType 调用 createHillyTerrain/createMountainousTerrain/createObstacleCourse。事件绑定与逻辑均存在。",
+        "ok": 1
+      },
+      {
+        "name": "使用 ← → / A D 控制独轮车平衡",
+        "expected": "按下方向键或 A/D 时，独轮车收到水平力以调整倾斜，保持平衡",
+        "evidence": "document 上绑定 keydown/keyup 维护 keys 状态，Matter.js 的 beforeUpdate 事件中根据按键对 unicycle 调用 Body.applyForce。属于游戏核心控制逻辑，探针无法模拟键盘但无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 PLAY AGAIN 重新开始",
+        "expected": "重置分数/距离/计时，清空旧物理世界并重新生成地形和独轮车，回到游戏运行状态",
+        "evidence": "restartBtn 绑定 startGame()，函数内重置 gameActive、score、distance、gameTime，Composite.clear 后重新 createTerrain/createUnicycle，并重新 Runner.run。代码路径完整。",
+        "ok": 1
+      },
+      {
+        "name": "点击 MAIN MENU 返回主菜单",
+        "expected": "隐藏游戏结束界面和 HUD，显示开始菜单，可重新选择头像与地形",
+        "evidence": "menuBtn 绑定 showMenu()，隐藏 gameOverScreen 和 gameUI，移除 startScreen 的 hidden 类。事件与逻辑正确。",
+        "ok": 1
+      },
+      {
+        "name": "游戏结束后查看排行榜是否记录新成绩",
+        "expected": "玩家得分能写入或刷新排行榜，体现竞争与社区排名",
+        "evidence": "排行榜是 gameOverScreen 中的硬编码静态列表（Alex/Jordan/Sam 等），游戏中从未向该列表插入或更新数据，玩家分数不会上榜。属占位式静态展示。",
+        "ok": 0
+      },
+      {
+        "name": "用户生成挑战（UGC）入口",
+        "expected": "玩家能创建自定义地形/挑战并分享，满足需求中 user-generated challenges",
+        "evidence": "页面完全没有自定义挑战创建、编辑或分享的任何 UI 与逻辑，只有 4 个预设地形选项，该需求功能完全缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心玩法（开始、操控、重新开始、返回菜单）和头像/地形定制均可正常工作，物理模拟与键盘控制逻辑完整且运行时无 JS 错误。但排行榜为静态占位数据，玩家成绩无法写入更新；用户生成挑战功能完全缺失，需求声明的社区竞争板块未完整实现，故扣分至 6。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 7.0,
+    "reason": "核心可用性问题：未发现。主流程“开始游戏→选择角色/地形→游玩→结算→重玩/返回菜单”可走通，开始/重开按钮有效，游戏中分数、距离、时间均有实时反馈，无阻断性错误或死路。\n\n次要瑕疵：\n1. 排行榜为静态示例数据，玩家成绩不会写入/不更新，无法形成真实竞争反馈；\n2. 用户自制挑战未实现，但属于可选社区模块，不影响单机主流程；\n3. 桌面端只支持键盘操作，画布拖拽无响应，且游戏内缺少实时操作提示，首次进入后容易忘了按键；\n4. 移动端触控说明缺失，未在“How to Play”中告知触摸倾斜方式；\n5. 方向控制的物理反馈偏弱，玩家较难直观判断“倾斜”是否生效，缺少更明显的受控状态提示；\n6. 游戏中无暂停/中途返回主菜单，分数可能为负，音效和失败手感反馈也较单薄。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面整体视觉吸引力较强，符合“独轮车平衡挑战”这类游戏页面的风格定位。深蓝色与红色渐变的页面背景与游戏画布的蓝天上色形成鲜明对比，半透明深色遮罩层增强了层次感，让标题和核心内容更突出。主色 #00bfff 在标题、按钮、选中态、排行榜标题等元素中反复使用，形成统一的视觉线索，霓虹文字阴影与渐变按钮也为页面增添了现代动感。布局上通过 flex 居中、圆角容器、阴影浮层等方式营造了聚焦的游戏氛围，开始界面、游戏界面和结束界面的切换逻辑清晰。按钮的胶囊形状、hover 抬起动效、头像圆形渐变的选中发光效果，以及半透明信息面板的圆角处理，都体现出较高的 CSS 设计专业度。不足之处在于开始界面包含标题、说明、头像选择、地形选择和按钮，信息密度较大，在 90vh 高度下小屏幕可能显得拥挤或溢出；整体红蓝高饱和撞色风格略强烈，属于风格化取向而非克制型设计，可能不是所有玩家都喜欢。此外下拉选择器使用了浏览器原生样式，与整体自定义 UI 的融合略有差距。总体而言，视觉设计完成度高，与游戏开发类需求的“趣味、技能挑战、社区竞争”气质相符。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 7.25,
+  "baseline_overall": 7.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_033467.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "START CHALLENGE",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

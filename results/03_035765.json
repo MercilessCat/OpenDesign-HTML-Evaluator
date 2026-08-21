@@ -1,0 +1,84 @@
+{
+  "row_id": "03_035765",
+  "shard": 3,
+  "id": 35765,
+  "category": "Game dev",
+  "prompt": "Construct a casual exploration platform where users solve progressively challenging mazes. Users navigate through creative maze designs while collecting rewards and unlocking new levels. Features include a maze generator for endless play, a hint system for guidance, and a community leaderboard for competitive fun and social interaction.",
+  "html_len": 23137,
+  "html_sha256": "5593863b4af2e683084e4491fa7facf2a34977b4475a5b66fa08e815828b16d6",
+  "functional": {
+    "score": 8.0,
+    "raw_score": 8.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "开始游戏",
+        "expected": "点击 Start Adventure 按钮后，页面从开始界面切换到游戏界面，并生成迷宫、显示玩家和金币。",
+        "evidence": "探针点击 Start Adventure 后 DOM 有明显变化，且无新增 JS 错误或网络请求；HTML 中 start-btn 绑定 showScreen('game')，内部调用 startLevel() 和 renderMaze()。",
+        "ok": 1
+      },
+      {
+        "name": "使用键盘移动玩家",
+        "expected": "按方向键或 WASD 后，玩家在迷宫中移动到新位置，碰到金币时金币数增加，到达出口且金币收齐则触发过关。",
+        "evidence": "HTML 的 document 绑定了 keydown 事件，处理 WASD/方向键移动、越界检查、金币收集和过关判断；运行时无 JS 错误，事件初始化完整。",
+        "ok": 1
+      },
+      {
+        "name": "使用提示功能",
+        "expected": "点击 Hint (H) 按钮或按 H 后，迷宫中显示高亮路径，约 3 秒后消失。",
+        "evidence": "hint-btn 绑定 activateHint，该函数设置 hintActive 并在 renderMaze 中为路径格子添加 hint-path 类（黄色高亮），3 秒后自动渲染清除。逻辑完整且无报错。",
+        "ok": 1
+      },
+      {
+        "name": "暂停与恢复游戏",
+        "expected": "点击 Pause 按钮显示暂停界面，点击 Resume Game 恢复游戏，继续当前关卡。",
+        "evidence": "pause-btn 绑定 togglePause，切换 isPaused 并切换 showScreen('pause'/'game')；resume-btn 绑定显示 game 界面并重新渲染当前迷宫。事件绑定和状态切换完整。",
+        "ok": 1
+      },
+      {
+        "name": "查看排行榜",
+        "expected": "完成冒险后，游戏结束界面显示本地排行榜，包含玩家得分、关卡等信息。",
+        "evidence": "updateLeaderboard 函数将当前成绩写入 localStorage，排序并渲染到 leaderboard-list 中；显示入口在 game-over 界面，代码无缺失。",
+        "ok": 1
+      }
+    ],
+    "reason": "核心游戏流程完整可用：开始游戏、迷宫移动、金币收集、提示、暂停、关卡推进、排行榜均实现，没有占位或死链。虽存在主菜单重开未重置金币/分数等次要状态瑕疵，且排行榜为本地而非真正社区，但整体交互符合需求，可正常游玩。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：\n1. 硬币计数在跨关卡/跨新局时未重置，导致从第2关起按“收集全部硬币”规则累计数必然超过本关总币数，通关条件永不满足，游戏流程卡死。\n2. 点击Pause后再点Resume会触发showScreen('game')->startLevel()，迷宫重新随机生成、玩家位置和已收集硬币全部丢失，暂停恢复形同重置关卡。\n3. 关卡完成界面2秒自动进入下一关，同时“Next Level”按钮仍可点击，重复触发nextLevel()会使关卡号额外增加，玩家会直接跳过关卡（如从第1关跳到第3关）。\n\n次要瑕疵：\n- 提示功能（H）使用简化距离而非真实最短路径，高亮路线可能不准确。\n- 排行榜条目均使用占位名“Player”，无法区分玩家身份。\n- 通关界面“Level Reached”显示为11，与10关总数不符。\n- 开始界面说明“Collect all coins to unlock the exit”与实际因跨关累加导致的通关判定不一致，容易误导玩家。\n- 视觉配色和基础动效较统一，界面整体观感良好。",
+    "attempts": 2
+  },
+  "aesthetic": {
+    "score": 6.0,
+    "reason": "页面整体结构完整，功能交互正常，但视觉设计存在明显短板。色彩上，深蓝+大红的对角渐变背景冲击力过强，与'casual'（休闲）的游戏定位不够契合，且与界面中的黄、绿、紫等辅色缺乏统一协调，略显杂乱。布局上，各功能区块（开始界面、游戏HUD、暂停/结算弹窗）排列规整，但大量使用圆角卡片和居中布局，造型略显普通。组件设计方面，按钮使用渐变+发光阴影，虽然有一定现代感，但发光效果较为突兀；迷宫和收集物直接使用Emoji字符（🧍🪙🚪）作为核心视觉元素，显得简陋，缺乏精细的游戏美术水准。CSS基本功扎实（flex布局、动画、过渡均有使用），但缺少精致的视觉层次、细腻的微交互和统一的字体排版体系。整体属于可用但视觉品质中等偏下的水平，与高质量现代网页游戏设计相比仍有明显差距。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.4,
+  "baseline_overall": 5.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_035765.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Adventure",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

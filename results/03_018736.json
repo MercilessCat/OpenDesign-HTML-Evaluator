@@ -1,0 +1,90 @@
+{
+  "row_id": "03_018736",
+  "shard": 3,
+  "id": 18736,
+  "category": "Game dev",
+  "prompt": "Build a sorting game focused on educating users about composting. Core idea: Interactive composting education through gameplay. Core functionality: Sort waste into compost bins to maximize efficiency. Key features: Environmental impact tracking, educational modules, real-time challenges, and community leaderboard.",
+  "html_len": 20816,
+  "html_sha256": "571a6c981728551faf17b7003cbc6bcd39eacbb5fe50003140b3abd522a2aaff",
+  "functional": {
+    "score": 8.0,
+    "raw_score": 8.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "从开始页进入游戏",
+        "expected": "点击“Start Composting!”后从开始界面切换到游戏界面，初始化计时器、分数、进度条和第一个垃圾物品",
+        "evidence": "交互探针点击后 DOM 变化、0 条 JS 错误、0 条网络请求；HTML 中 startBtn 绑定了 click 处理，切换 screen 的 active 类并调用 initGame()，包括启动 setInterval 计时器与 createWasteItem()",
+        "ok": 1
+      },
+      {
+        "name": "将垃圾拖放到正确分类箱",
+        "expected": "正确分类时得分 +10、正确数 +1、CO₂ 影响 +0.5，垃圾物品播放绿色动画，1 秒后生成新的待分类物品",
+        "evidence": "代码实现了完整 HTML5 拖放事件链（dragstart→dragover→drop），checkAnswer 正确分支更新 score/correctCount/impact 并添加 correct 动画类，setTimeout 后重新生成物品；运行时零 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "将垃圾拖放到错误分类箱",
+        "expected": "错误分类时扣 5 分（最低为 0），垃圾物品播放红色抖动动画，并刷新新物品",
+        "evidence": "checkAnswer 的 else 分支执行 score = Math.max(0, score-5)，添加 incorrect 动画类，1 秒后调用 createWasteItem；逻辑完整，无报错",
+        "ok": 1
+      },
+      {
+        "name": "实时反馈：分数/正确数/CO₂ 环境影响",
+        "expected": "每次分类操作后游戏头部与进度条即时更新，展示当前得分、正确数量和 CO₂ 减排量",
+        "evidence": "updateUI() 在每次 checkAnswer 后同步更新 score、correct-count、impact、time 和 progress-bar 宽度；impact 通过 correctCount 累加 0.5kg，符合需求中的环境影响追踪",
+        "ok": 1
+      },
+      {
+        "name": "游戏计时结束并展示排行榜",
+        "expected": "60 秒倒计时结束后进入游戏结束页，显示最终得分、正确数、CO₂ 减排量和个人在排行榜中的名次",
+        "evidence": "updateTimer 每秒递减并更新 UI，timeLeft 归零时调用 endGame，填充 final-score/final-correct/final-impact/player-score 并切换到 game-over-screen；排行榜含 3 个预设生态战士条目和玩家动态条目",
+        "ok": 1
+      },
+      {
+        "name": "点击“Play Again”重新开始",
+        "expected": "重置全部游戏状态并返回游戏界面，开始新一局",
+        "evidence": "restartBtn 绑定了 click 事件，移除 gameOverScreen 的 active、显示 gameScreen、clearInterval 旧计时器并重新执行 initGame()，重置状态且生成新垃圾物品",
+        "ok": 1
+      }
+    ],
+    "reason": "核心垃圾分类堆肥玩法完整实现：开始按钮经探针验证有效；拖放分类、分数计算、环境影响追踪、60 秒倒计时、结算页面与重玩循环均有完整事件绑定和状态流转，运行时 0 条 JS 错误。教育模块（玩法说明、生态提示）和环境影响统计均落实。主要扣分点：社区排行榜为硬编码 mock 数据，无真实在线排名能力；触摸拖放事件链路存在移动端隐患，整体仍属桌面可用的高质量实现。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. 移动端触摸拖拽核心操作无法正常完成——touchstart 绑定在 waste-item 上，但 touchend 绑定在 bin 上，而触摸事件的 touchend 目标始终是 touchstart 时的元素，导致手指拖到桶上抬起时不会触发 bin 的 touchend，移动端用户实际上无法完成垃圾分类操作，且页面有移动端适配样式，说明移动端是目标平台。次要瑕疵：1. 垃圾物品只显示 emoji 无文字名称，且 🧴 同时被定义为 recycle（Glass Jar）和 hazardous（Cleaning Chemical），同一图标两种答案，易让用户困惑并误导学习；2. 同一 waste item 在 1 秒刷新延迟内可被重复拖拽重复计分，造成分数偏差；3. 排行榜为静态假数据，社区功能未实现；4. 音效仅 console.log 未实际播放；5. 移动端 touchmove 使用视口坐标直接赋值给 absolute 定位元素，与 transform 偏移叠加，拖拽位置不准；6. 无暂停按钮，倒计时中途无法暂停或退出。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力高，以绿色系渐变背景和白色卡片构建出清新、环保的界面氛围，贴合堆肥教育游戏的主题。色彩搭配合理，主辅色对比明确（垃圾桶使用绿、蓝、灰、橙红渐变，视觉上区分度高且符合分类直觉），同时大量使用圆角、阴影和过渡动画，使组件层次感强、交互反馈生动。布局采用居中卡片和flex弹性排列，间距均匀，信息区块（说明、统计、提示、排行榜）组织清晰，且有响应式断点适配移动端。字体为系统无衬线字体，可读性好；按钮、进度条、统计框等组件设计规范，悬停和点击效果细腻。CSS使用了渐变色、盒阴影、关键帧动画和拖拽动效，整体符合现代网页设计规范，与游戏开发类页面的娱乐化、教育化风格对齐。略扣分项是部分图标依赖emoji，视觉精细度有限，但整体完成度很高。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 7.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_018736.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Composting!",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

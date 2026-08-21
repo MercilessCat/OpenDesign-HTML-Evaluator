@@ -1,0 +1,192 @@
+{
+  "row_id": "04_014980",
+  "shard": 4,
+  "id": 14980,
+  "category": "Website",
+  "prompt": "Design an innovative platform transforming public services through gamification. Users engage in civic tasks, earn rewards, and contribute to community goals. The site offers educational content, leaderboards, and challenges to foster civic engagement. Key features include interactive missions, a reward system, and a community forum for idea exchange.",
+  "html_len": 30741,
+  "html_sha256": "f3cf035f17996fcbe48742d30ffe3f15dfaf96fd711cd7117ea472fa4414d4bc",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航到 Missions / Leaderboard / Community 页面",
+        "expected": "点击导航项后切换到对应板块内容",
+        "evidence": "探针点击 Dashboard/Missions/Leaderboard/Community 均报告 DOM 有变化但实为 href=\"#\" 页面跳转；HTML 中导航锚点均为 href=\"#\"，无路由或目标 id，属于纯占位入口，无真实内容切换。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Your Mission 主 CTA",
+        "expected": "进入任务流程、打开任务列表或触发注册/引导",
+        "evidence": "探针点击“.hero-bg”中的“Start Your Mission”按钮：DOM 变化=无，新增JS错误=0，新增网络请求=0，按钮无绑定事件，点击无任何业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Learn More 次要 CTA",
+        "expected": "展开更多介绍或滚动到详情区域",
+        "evidence": "探针点击“Learn More”按钮：DOM 变化=无，新增JS错误=0，新增网络请求=0，无任何滚动/展开/路由反馈。",
+        "ok": 0
+      },
+      {
+        "name": "查看全部任务 View All Missions",
+        "expected": "打开完整任务列表界面的入口",
+        "evidence": "探针点击“View All Missions”：DOM 变化=无，新增JS错误=0，新增网络请求=0，按钮无事件绑定，点击无效。",
+        "ok": 0
+      },
+      {
+        "name": "查看完整排行榜 View Full Leaderboard",
+        "expected": "跳转或展开完整排行榜",
+        "evidence": "HTML 中该按钮为 border 样式按钮，无 onclick 或路由链接；探针未覆盖但其结构与其余死按钮一致，无任何可触发的 JS 事件。",
+        "ok": 0
+      },
+      {
+        "name": "访问社区论坛（需求关键功能）",
+        "expected": "存在可浏览/发帖的论坛入口或内容板块",
+        "evidence": "导航中的 Community 链接 href=\"#\" 无实际路由；整个页面 HTML 中没有论坛帖子列表、发帖表单或论坛相关模块，需求声明的社区论坛未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为纯展示型落地页，但需求声明的关键功能几乎全部未实现：导航为 href=\"#\" 占位无路由切换，主要 CTA（Start Your Mission、Learn More、View All Missions、View Full Leaderboard）点击均无任何反馈，社区论坛完全缺失。唯一可用的视觉内容是 Chart.js 静态图表，但不构成核心业务交互。核心交互大面积失败，按锚定标准给 2 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1）主导航（Dashboard/Missions/Leaderboard/Community）均为 href=\"#\" 占位链接，点击后仅 URL 锚点变化，页面内容不切换，无法进入任何实际板块；2）Hero 区核心 CTA「Start Your Mission」「Learn More」点击后无任何 DOM 变化或反馈，任务无法启动；3）「View All Missions」及所有任务卡片的「Join Mission / Sign Up」按钮均未绑定事件，核心的“浏览任务→参与任务”流程完全卡死；4）通知铃铛按钮点击无效。以上多个核心交互链路全部断裂，导致页面只能作为静态展示页，用户无法完成任何实际的公民任务参与、奖励获取或社区互动。次要瑕疵：hero 背景图片请求被 ORB 拦截可能不显示，影响视觉完整性；排行榜第 4/5 名用户头像为空的灰色圆形占位，与前三名样式不一致；需求中的 Community Forum 模块未实际实现；页面缺少积分/奖励兑换规则的帮助或图例说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，采用现代流行的渐变背景、圆角卡片和柔和阴影，符合当代网页设计规范。色彩搭配以蓝、绿、紫为主，层次分明，与‘公共服务+游戏化’的主题契合。布局结构清晰，导航、英雄区、数据统计、功能说明、任务卡片、排行榜、影响图表、CTA和页脚等模块组织有序，信息层级明确。字体选用Poppins，整体统一且现代。卡片悬浮动效、进度条动画、排行榜前三名渐变色等细节提升设计质感。但Hero区域引用的Unsplash背景图片因网络请求被ORB拦截无法显示，导致该区域退化为纯渐变背景，视觉冲击力有所减弱；此外排行榜后两位头像为空div、图标使用略有模板化，原创性稍显不足。总体而言，页面设计专业且完成度较高，仅个别资源加载问题略微影响最终视觉表现。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_014980.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Missions",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Leaderboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-bell",
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Your Mission",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Learn More",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View All Missions",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

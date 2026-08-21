@@ -1,0 +1,181 @@
+{
+  "row_id": "04_014905",
+  "shard": 4,
+  "id": 14905,
+  "category": "Website",
+  "prompt": " resource hub for building-specific seismic mitigation strategies, providing tailored advice and real-time monitoring. Users input building data to receive customized reports, access expert guides, and track seismic activity. Features include interactive risk maps, mitigation tips, and a community forum for sharing experiences and solutions",
+  "html_len": 27523,
+  "html_sha256": "52a0b367fb31f12e67d46c85e267c1f3a14751bddaa529e7fa4597ac0e999d6c",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "提交建筑信息生成风险报告",
+        "expected": "点击“Generate Risk Assessment”后，基于输入的建筑数据生成个性化的风险评估报告",
+        "evidence": "探针点击提交按钮后 DOM 无变化、无网络请求；HTML 中表单 submit 事件仅调用 alert('Generating...') 并 preventDefault，没有生成任何报告内容，属于占位反馈。",
+        "ok": 0
+      },
+      {
+        "name": "获取定制报告（Get Customized Report）",
+        "expected": "点击主区域“Get Customized Report”按钮进入定制报告流程或展示报告",
+        "evidence": "探针点击该按钮后 DOM 无变化、无网络请求、无 JS 错误；HTML 中按钮无事件绑定，纯静态占位。",
+        "ok": 0
+      },
+      {
+        "name": "查看交互式风险地图",
+        "expected": "进入风险地图页面或地图可缩放、点击查看区域风险信息",
+        "evidence": "探针点击“View Risk Map”后 DOM 无变化、无网络请求；HTML 中地图区域仅为静态 div + 装饰性标记，无地图库、无交互事件，不符合“interactive risk maps”。导航“Risk Maps”也是 href=\"#\" 占位。",
+        "ok": 0
+      },
+      {
+        "name": "导航到 Risk Maps / Resources / Community 页面",
+        "expected": "点击导航菜单切换到对应内容页面",
+        "evidence": "探针点击 Dashboard、Risk Maps、Resources、Community 后虽有 DOM 变化但只是 href=\"#\" 锚点跳转（页面滚动/URL hash），无路由或内容切换；所有导航链接均为占位死链。",
+        "ok": 0
+      },
+      {
+        "name": "在社区论坛查看/参与讨论",
+        "expected": "点击论坛帖子可查看详情，或可发帖分享经验",
+        "evidence": "论坛帖子是静态 div（class=\"forum-post\"），HTML 中无 click 事件绑定；“View All Discussions”按钮也无事件绑定，探针未发现任何可交互反馈。社区功能仅为展示，无法分享或互动。",
+        "ok": 0
+      },
+      {
+        "name": "账户操作（My Account）",
+        "expected": "点击“My Account”进入个人账户或登录页面",
+        "evidence": "探针点击后 DOM 无变化、无网络请求、无 JS 错误；按钮无事件绑定，属于未实现的占位入口。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为纯静态展示，核心需求全部未实现：定制报告仅弹 alert 无实际结果，风险地图为静态占位图，导航链接均为 href=\"#\" 死链，社区论坛不可交互，账户/下载等按钮无事件。探针显示所有关键交互点击后均无业务反馈，主要任务无法完成，功能严重缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. Hero区两个主要CTA按钮“Get Customized Report”和“View Risk Map”点击后无任何反馈，核心入口失效；2. 表单提交“Generate Risk Assessment”仅弹出alert提示，未生成定制报告或跳转结果页，核心操作流程中断，用户无法完成任务；3. 导航链接（Dashboard/Risk Maps/Resources/Community）均为href=\"#\"占位链接，点击后无实际页面内容切换；4. “交互式地震风险图”实际为静态占位图，不可交互，核心控件无效；5. My Account、Download Full Mitigation Plan等按钮点击均无响应。次要瑕疵：页面视觉设计美观、信息结构清晰，但统计卡（如65%进度、1,248社区报告）无真实数据支撑，易让用户产生疑问；缺少说明文字说明为演示/原型；社区论坛与图表为静态展示；“Interactive Seismic Risk Map”命名与行为不符。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，采用现代蓝白配色，符合地震安全类工具的信任感和专业感。Hero 区配图和渐变叠加效果良好，统计卡片、表单、地图占位、推荐列表、论坛及图表等模块布局清晰、层次分明。使用 Tailwind 构建的组件风格统一，圆角、阴影、渐变和微交互（悬停上浮、脉冲动画）提升了质感。字体采用 Poppins，间距与对齐规整。局部不足：所谓‘交互式地震地图’实为静态占位图，缺少真实地图或可视化细节；底部区域内容丰富但相对常规；个别按钮无实际交互反馈。整体而言，页面视觉完成度较高，与用户需求的‘资源中心 + 实时监测 + 社区’定位匹配。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_014905.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Risk Maps",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "My Account",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Customized Report",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Risk Map",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Generate Risk Assessment",
+      "href": null,
+      "type": "submit",
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

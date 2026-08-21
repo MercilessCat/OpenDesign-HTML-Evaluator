@@ -1,0 +1,151 @@
+{
+  "row_id": "01_024184",
+  "shard": 1,
+  "id": 24184,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - magine a website where users create personalized data dashboards through intuitive drag-and-drop interfaces. The core idea is to allow users to visualize data as they prefer. Key features include customizable widgets, real-time data updates, and collaborative sharing options, enhancing the user's ability to tailor the display to their specific needs\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 15065,
+  "html_sha256": "217f1439140a31c808a19e30b4b2a099b39d3cd3c8ed37b90f01d2e6b025008b",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "拖拽 Widget 到仪表盘",
+        "expected": "组件从左侧 Widget 面板被拖入仪表盘后，仪表盘中新增对应的 widget 卡片",
+        "evidence": "HTML 中组件带 draggable=\"true\"，脚本绑定了 dragstart/dragover/drop 事件，drop 时会创建新 widget 并追加到 #dashboard；运行时无 JS 错误。探针虽未直接覆盖 HTML5 拖拽，但代码路径完整。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Share 分享",
+        "expected": "弹出分享选项、生成分享链接或进入协作分享流程",
+        "evidence": "探针点击 Share 后 DOM 变化=无，新增 JS 错误=0，新增网络请求=0；HTML 中该按钮未绑定任何点击事件，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Save 保存",
+        "expected": "保存当前仪表盘布局并给出保存成功的反馈",
+        "evidence": "探针点击 Save 后 DOM 变化=无，新增 JS 错误=0，新增网络请求=0；HTML 中该按钮未绑定 click 事件，无保存逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Add Collaborators 添加协作者",
+        "expected": "打开添加协作者弹窗/输入框或触发邀请流程",
+        "evidence": "探针点击 Add Collaborators 后 DOM 变化=无，新增 JS 错误=0，新增网络请求=0；按钮没有事件绑定，未实现协作功能。",
+        "ok": 0
+      },
+      {
+        "name": "切换 Real-time Updates 自动刷新开关",
+        "expected": "开启/关闭后仪表盘数据会按设定自动刷新，或至少产生真实的数据更新反馈",
+        "evidence": "开关本身有 Tailwind peer 视觉切换样式，但脚本中未绑定 change 事件，也没有 setInterval/fetch 等数据刷新逻辑；只能改变开关外观，无法实现实时数据更新。",
+        "ok": 0
+      }
+    ],
+    "reason": "核心的拖拽添加 widget 功能已实现且无 JS 错误；但 Share、Save、Add Collaborators 均为无事件占位入口，Real-time Updates 也只是静态开关，未实现真实数据刷新。需求中的协作分享、保存、实时更新等关键功能未完成，因此得分不超过 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) Share、Save、设置、同步、Add Collaborators共5个按钮点击后均无任何反馈（无DOM变化、无提示），保存、分享、协作等核心功能全部未实现；2) 实时更新开关仅切换UI样式，未触发任何数据刷新逻辑，核心控件调节无效；3) 拖放到仪表盘的组件无法删除、编辑、调整大小或重新排列，个性化定制流程不完整。次要瑕疵：图表均为静态占位图，无真实数据可视化；组件拖入后固定追加到末尾，无法指定位置；缺少使用说明/操作引导；实时更新文案与实际行为不符；设置和同步图标按钮无tooltip说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "整体设计现代且干净，是一个合格的UI组件风格仪表板页面。优点：1) 色彩搭配专业，主色蓝色#3b82f6与辅助绿色#10b981符合数据可视化场景，灰色背景与白色卡片层次分明；2) 布局采用左侧组件栏+右侧仪表板画布的两栏结构，符合拖拽式仪表板构建器的用户心智模型，卡片间距与留白均匀；3) 组件质量较好，卡片圆角、阴影、悬停微交互（translateY+shadow）符合现代设计规范，字体大小与字重层次清晰，图标与文字搭配简洁；4) Tailwind CSS使用熟练，自定义主题色配置合理，无排版或重叠类问题。\n\n扣分原因：1) 画布中的\"Revenue\"卡片只放了空白canvas，没有实际绘制图表，视觉上显得空洞，与成品化设计存在差距；2) 拖拽新增的组件只是简单占位，缺少图表真实渲染或更丰富的视觉反馈，削弱了产品完成度；3) 按钮（Share/Save/Add Collaborators）交互无反馈，点击后无DOM变化，在视觉上缺乏\"可操作\"的暗示；4) 整体设计偏模板化，虽整洁但缺乏记忆点或更具差异性的视觉风格，距离顶尖设计仍有提升空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_024184.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Share",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-cog",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-sync-alt",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Collaborators",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

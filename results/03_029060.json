@@ -1,0 +1,100 @@
+{
+  "row_id": "03_029060",
+  "shard": 3,
+  "id": 29060,
+  "category": "Game dev",
+  "prompt": "Create an artisan's hub where users design exquisite lacquerware art, layering virtual lacquer to craft unique patterns. The platform features an interactive design studio, tutorials on traditional techniques, and a gallery to showcase creations. Users can collaborate on projects and participate in virtual exhibitions to celebrate cultural artistry.",
+  "html_len": 27635,
+  "html_sha256": "72350fea722e66266df1d11b9169f0720862ce48dfa5fe48944a6d75939fbda3",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击Enter Studio进入设计工作室",
+        "expected": "隐藏开始界面，显示主工作区（游戏容器），用户可以开始创作漆器",
+        "evidence": "探针点击按钮后DOM无任何变化，并新增JS错误'startGame is not defined'；onclick引用了未定义函数，主工作区（#game-container）始终保持hidden状态，用户无法进入核心设计功能",
+        "ok": 0
+      },
+      {
+        "name": "点击Learn Techniques打开传统技法教程",
+        "expected": "显示教程模态框，呈现Maki-e等传统技法步骤和视频演示",
+        "evidence": "探针点击后DOM无变化，新增JS错误'showTutorials is not defined'；教程模态框（#tutorials-modal）带有hidden类且未显示，点击按钮无效",
+        "ok": 0
+      },
+      {
+        "name": "进入工作室后在画布上使用画笔/喷枪等工具绘画",
+        "expected": "选择工具后用鼠标在画布上涂抹，生成漆器图案图层",
+        "evidence": "由于Enter Studio入口失效，用户无法到达画布区域；且HTML中画布是一个div（#lacquer-canvas）而非canvas元素，绘制相关脚本代码被截断，实际绘画功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击Save Creation保存作品",
+        "expected": "保存当前漆器作品至画廊或本地",
+        "evidence": "保存按钮（#save-btn）在脚本中未绑定任何事件监听器（脚本截断处无save-btn相关处理），且主工作区不可达；该功能属于占位入口，未实现",
+        "ok": 0
+      },
+      {
+        "name": "查看画廊作品或进入虚拟展览",
+        "expected": "点击画廊条目可查看作品详情，点击Virtual Exhibitions可打开展览与协作界面",
+        "evidence": "画廊与展览区都在被隐藏的主工作区中，用户无法访问；gallery-item未绑定点击事件，showExhibitions函数在脚本中未定义，相关功能无法触发",
+        "ok": 0
+      }
+    ],
+    "reason": "页面启动流程完全失效：Enter Studio和Learn Techniques两个初始入口的onclick函数（startGame/showTutorials）均未定义，点击后报错且无任何DOM变化，用户被永久困在开始界面。设计工作室、绘画工具、教程、画廊、虚拟展览与协作功能全部不可达，核心需求无一可用，页面功能性近乎为零。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 开始界面两个主要入口按钮「Enter Studio」和「Learn Techniques」调用的 startGame()、showTutorials() 均未定义，点击后无任何 DOM 变化并产生 JS 错误，用户无法进入设计工作室或教程页。2. 主游戏容器初始为 hidden，且被开始屏幕全屏遮挡，没有任何替代入口或返回方式，导致核心设计流程完全不可达。次要瑕疵：页面视觉层级和装饰元素较丰富，但 gallery/exhibition/collaboration 中的按钮多为占位交互，若在可访问状态下也缺少实际反馈；开始屏幕缺少错误提示或禁用状态说明，进一步加剧用户困惑。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 6.5,
+    "reason": "页面整体视觉设计有一定方向性，采用深蓝与红色渐变背景搭配琥珀/金色系，符合漆器艺术的文化氛围，色调温暖且具有东方韵味。布局上使用网格系统，工具面板、画布区、画廊和模态框结构清晰，组件（按钮、色块、卡片）圆角与阴影运用统一，悬停动效（如3D翻转展览卡片）增加了趣味性。但设计存在明显不足：1）主背景渐变从深蓝到红再到深蓝对比强烈，视觉冲击过强，可能干扰内容阅读；2）大量使用Tailwind Utility类，但自定义样式较为简单，缺少精致的细节如纹理、渐变层次或装饰元素，整体略显模板化；3）画布区域仅有一个空白色块，未展现漆器层叠效果的视觉魅力，降低沉浸感；4）画廊和展览的占位图只有简单圆形色块，缺乏实际作品预览，视觉表达力不足；5）配色上红、黄、金为主调，虽然符合主题，但部分区域（如按钮、色块）颜色饱和度过高，缺乏细腻过渡。此外，页面存在JavaScript错误（startGame、showTutorials未定义），导致点击按钮无响应，虽然不影响静态视觉，但反映出组件与脚本集成不完整，交互体验受阻。综合而言，页面视觉方向正确，结构完整，但细节打磨和视觉精致度仍有提升空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.2,
+  "baseline_overall": 3.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "startGame is not defined",
+      "showTutorials is not defined"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_029060.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Enter Studio",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Learn Techniques",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

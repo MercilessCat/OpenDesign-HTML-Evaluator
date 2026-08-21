@@ -1,0 +1,194 @@
+{
+  "row_id": "04_012124",
+  "shard": 4,
+  "id": 12124,
+  "category": "Website",
+  "prompt": "Envision a gallery documenting cyberforest maintenance, where users explore digital ecosystems and conservation efforts. Features include interactive forest maps, maintenance logs, and user-generated content on digital biodiversity. This platform highlights the importance of virtual environments and encourages participation in digital ecological stewardship.",
+  "html_len": 26528,
+  "html_sha256": "283c51440613f72e69337615ca2633aa44e3512edc1dd99de42d9ff6b8efec92",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接 Explore/Maintenance/Contribute/About",
+        "expected": "切换到对应内容区域或路由",
+        "evidence": "探针显示点击后有 DOM 变化但 href 为 #，仅触发锚点跳转，无实际路由或内容切换",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Forests 按钮",
+        "expected": "进入森林探索视图/滚动到森林地图区域",
+        "evidence": "探针点击后 DOM 无变化，按钮无事件绑定，仅 hover 样式",
+        "ok": 0
+      },
+      {
+        "name": "点击 Submit Data 按钮",
+        "expected": "进入贡献表单区域或打开提交流程",
+        "evidence": "探针点击后无实质功能反馈，按钮无跳转/无表单聚焦，仅样式变化",
+        "ok": 0
+      },
+      {
+        "name": "点击森林卡片（如 Neo-Tokyo Grove）",
+        "expected": "查看森林详情或弹出互动地图信息",
+        "evidence": "卡片无任何 onclick/事件绑定，HTML 仅 hover 样式，点击无反应",
+        "ok": 0
+      },
+      {
+        "name": "选择观察类型（Species/Anomaly 等）",
+        "expected": "选中对应类型并高亮反馈",
+        "evidence": "探针点击 Species 仅触发 hover 样式，点击 Anomaly 无 DOM 变化，JS 中无选中状态逻辑",
+        "ok": 0
+      },
+      {
+        "name": "填写描述并提交观察表单",
+        "expected": "提交数据并显示成功/更新内容",
+        "evidence": "表单无 submit 事件处理，无后端/本地存储逻辑，提交会刷新页面或无效",
+        "ok": 0
+      },
+      {
+        "name": "拖拽/点击上传媒体区域",
+        "expected": "选择或上传文件用于贡献内容",
+        "evidence": "上传区域仅有拖拽事件的 alert，无 file input、无点击浏览逻辑，点击无反应",
+        "ok": 0
+      },
+      {
+        "name": "三维森林画布交互",
+        "expected": "可旋转/缩放/探索数字森林",
+        "evidence": "Three.js 仅自动旋转动画，无 OrbitControls、无 pointer/touch 用户交互绑定，探针无法验证像素变化，页面无 JS 错误",
+        "ok": 0
+      }
+    ],
+    "reason": "页面核心交互大面积失效：导航和 CTA 均为无实际功能的占位（href=\"#\"），森林卡片不可点击，观察类型无法选中，表单无法提交，上传区域不完整，3D 场景仅自动动画无用户控制。所有关键用户任务均无法完成，页面基本为静态展示。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) 顶部导航 Explore/Maintenance/Contribute/About 均为 href=\"#\" 占位链接，点击无法到达对应功能页，只有页面内部跳转反馈；2) Hero 区主按钮“Explore Forests”点击后无任何 DOM 变化、无跳转、无网络请求，是死按钮，“Submit Data”也无实际业务行为；3) 观察提交表单没有 action 或提交处理 JS，点击“Submit Observation”会刷新页面导致已填写内容丢失，核心贡献流程无法完成；4) “Interactive Forest Explorer”中的森林卡片均为不可点击的静态 div，3D 场景也仅自动旋转，没有提供点击进入森林详情的交互；5) 移动端汉堡菜单按钮未绑定展开逻辑，小屏导航不可用；6) 观察类型按钮（Species/Anomaly/Threat/Other）点击后无选中态视觉反馈，无法确认当前选择。次要瑕疵：上传区域仅用 alert 模拟，未实现真实文件处理；统计卡片和森林卡片 hover 效果具有可点击暗示但实际不可点，易造成误导；页面缺少必要的 ARIA 导航语义和表单标签关联。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "该页面具有高度统一的赛博朋克/数字生态主题，视觉冲击力强。色彩搭配专业，以深蓝黑为基底，辅以霓虹绿、青蓝和紫色高亮，形成了鲜明的科技感对比，且点缀色使用克制不杂乱。布局结构清晰：头部、Hero区、数据看板、3D森林展示、维护日志、用户贡献表单、页脚，层次分明，节奏感好。字体上，标题采用Orbitron体现未来感，正文使用Exo 2保证可读性，大小写与字距处理符合现代网页设计规范。组件设计细致，按钮带渐变与流光效果，卡片使用半透明玻璃效果、模糊和悬停浮起阴影，交互反馈丰富。Three.js 3D场景为页面增加了动态视觉和沉浸感，与主题高度契合。CSS使用了变量、渐变、关键帧动画、过渡、backdrop-filter等高级技术，代码专业度高。整体设计符合用户需求中的“cyberforest gallery”定位，将虚拟生态维护的概念视觉化得很到位。扣分点仅为部分文字对比度偏低，以及过度依赖视觉效果可能影响功能突出性，但整体完成度极高。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_012124.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Maintenance",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Contribute",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "About",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "EXPLORE FORESTS",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "SUBMIT DATA",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Species",
+      "href": null,
+      "type": "button",
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Anomaly",
+      "href": null,
+      "type": "button",
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "row_id": "05_041311",
+  "shard": 5,
+  "id": 41311,
+  "category": "Website",
+  "prompt": "Imagine a cosmic message board connecting beings across galaxies, enabling interstellar communication and cultural exchange. Users can post messages, share art, and engage in multilingual chats. Features include a universal translation engine, star maps, and a cultural archive. Encourage exploration of otherworldly ideas and connections.",
+  "html_len": 19825,
+  "html_sha256": "5b0cd9a4c90ce7381f3fb32e6b344b70756416a2023a91b6d77705cee0c94e13",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Create Message 发布消息",
+        "expected": "打开发布消息的表单或弹窗，允许用户输入内容并提交",
+        "evidence": "探针点击 Create Message 按钮后 DOM 变化=无，新增JS错误=0，新增网络请求=0；按钮无任何事件绑定，核心发布功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Messages 浏览消息",
+        "expected": "切换到消息列表页面或滚动到消息区域并展示内容",
+        "evidence": "探针点击后虽有 DOM 变化并产生页面跳转，但链接为 href=\"#\"，实际只是锚点跳转到页顶，没有路由或内容切换，导航为占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "在搜索框输入关键词搜索消息",
+        "expected": "根据关键词过滤或展示匹配的消息",
+        "evidence": "HTML 中搜索输入框无 oninput/onkeydown 或任何事件监听，也没有搜索结果容器和过滤逻辑，输入后页面不会变化。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Translate 按钮进行翻译",
+        "expected": "将输入文本翻译为目标语言并显示在输出区",
+        "evidence": "Translate 按钮无点击事件绑定，输出区始终显示占位文本“Translation will appear here...”，翻译引擎功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击文化档案卡片浏览档案",
+        "expected": "打开对应文化类别（艺术、音乐、文学、科学）的档案内容",
+        "evidence": "四个档案卡片仅有 cursor-pointer 和 hover 样式，没有 onclick 或路由，点击后无任何内容展示，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击消息卡片上的点赞按钮",
+        "expected": "点赞成功并给出视觉反馈（如数字变化、图标高亮）",
+        "evidence": "探针点击爱心按钮后 DOM 变化=无，新增JS错误=0，按钮无事件绑定，点赞功能无反馈。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉呈现完整，但核心功能几乎全部未实现：发布消息无反应、导航为占位锚点、搜索无逻辑、翻译引擎不可用、文化档案无内容、点赞无反馈。用户无法完成任何关键任务，仅能浏览静态内容，属于交互大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 顶部导航（Messages / Star Map / Archive / Translate）均为 href=\"#\" 占位链接，点击只发生页内跳转/回顶部，无法进入对应功能模块，主要入口无实际反馈。2) 核心操作按钮不可用：“Create Message”“Explore Messages”“Connect” 点击后无任何 DOM、网络或 JS 变化，用户无法发帖、无法浏览更多消息、无法连接账号，核心任务形成死路。3) 通用翻译引擎没有实际交互：选择语言、输入内容后点击翻译按钮无事件处理，复制、朗读按钮也无效，翻译功能不可用。4) 消息卡片的点赞/评论/分享按钮点击无反馈，辅助互动同样失效。次要瑕疵：搜索框没有过滤功能；文化档案分类卡片虽有 hover 效果但无落地内容；星图功能缺失；页面缺少操作说明和引导；整体视觉华丽但内容基本为静态展示。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面整体视觉吸引力强，主题一致性到位——深空渐变背景搭配动态星场、霓虹粉紫色点缀，很好地营造出'宇宙留言板'的沉浸感，与现代太空/科幻风格设计潮流吻合。配色方面以深蓝紫渐变为主基调，辅以 #ff2d75 作为强调色，对比明确且和谐，没有刺眼或冲突；布局上采用典型但有效的结构：顶部导航、Hero、消息卡片网格、翻译引擎、文化档案区、页脚，层次清晰、间距疏朗，卡片 hover 微交互、浮动光晕与打字指示器增加了细腻的动效质感；字体方面 Orbitron 用于标题、Exo 2 用于正文，符合科幻调性。扣分点：页面存在部分交互缺陷——没有任何 'Star Map' 真正渲染的天图，翻译引擎输出区仅为占位，'Create Message' 等按钮无实际行为，反馈缺失；搜索输入框样式较普通；部分按钮、卡片大量重复模板、缺少 distinct hover 的视觉层级；另外虽然引入了 Three.js 但未真正使用，星场由 DOM 星星实现，视觉上限稍受影响。整体美学完成度较高，属于现代深色科幻风格网站中的中上水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_041311.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Messages",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Star Map",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Archive",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Translate",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Connect",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Create Message",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Messages",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-heart",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

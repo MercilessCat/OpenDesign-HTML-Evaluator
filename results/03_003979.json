@@ -1,0 +1,100 @@
+{
+  "row_id": "03_003979",
+  "shard": 3,
+  "id": 3979,
+  "category": "Game dev",
+  "prompt": "Develop an interactive portal for inventing and testing miniature spy gadgets. The core function is to simulate gadget construction and usage. Key features include a virtual lab with design tools, a scenario-based testing ground, and a challenge mode for users to solve missions using their custom-built gadgets.",
+  "html_len": 30413,
+  "html_sha256": "30752ec4726d3fe0b5174bbebe682eaab0d353303a1bca2cf7c66312e5f4a258",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 ENTER LAB 进入实验室",
+        "expected": "主菜单隐藏，游戏界面显示并进入 Design Lab",
+        "evidence": "探针点击 <button>ENTER LAB</button> 后 DOM 无变化，新增 JS 错误 1 条（startGame is not defined）。HTML 中按钮 onclick=\"startGame('lab')\"，但运行时该函数未定义，导致入口完全失效。",
+        "ok": 0
+      },
+      {
+        "name": "点击 MISSION MODE 进入任务模式",
+        "expected": "主菜单隐藏，游戏界面显示并切换到 Missions 标签",
+        "evidence": "探针点击 <button>MISSION MODE</button> 后 DOM 无变化，新增 JS 错误 1 条（startGame is not defined）。同样因函数未定义导致入口死。",
+        "ok": 0
+      },
+      {
+        "name": "在游戏界面切换标签（如 Test Scenarios）",
+        "expected": "内容区域切换到对应标签页",
+        "evidence": "HTML 中按钮存在且绑定 switchTab('scenarios')，但游戏界面 id=\"gameInterface\" 初始为 hidden，主菜单 z-50 覆盖且无法通过 startGame 关闭，用户无法看到或点击该标签按钮，交互不可达，页面无反馈。",
+        "ok": 0
+      },
+      {
+        "name": "拖拽组件到 Construction Area 并组装 Gadget",
+        "expected": "组件填入槽位，点击 ASSEMBLE GADGET 后生成新 gadget 并更新列表/分数",
+        "evidence": "HTML 中存在可拖拽组件 (.gadget-part) 和槽位 (.part-slot) 及组装按钮，但这些交互全部位于被隐藏的游戏界面内，主菜单入口失效使该功能无法触达，实际未发生任何组装反馈。",
+        "ok": 0
+      },
+      {
+        "name": "在 Test Scenarios 点击 TEST GADGET 运行场景",
+        "expected": "执行场景测试并显示测试结果",
+        "evidence": "HTML 中场景卡片有 runScenario 按钮，但同样位于隐藏的游戏界面中，用户无法进入该标签页，点击按钮的交互不可发生，页面不会给出任何结果。",
+        "ok": 0
+      }
+    ],
+    "reason": "核心入口完全失效：主菜单两个按钮均调用未定义的 startGame，探针确认点击无 DOM 变化且产生 JS 错误，用户无法进入虚拟实验室或任务模式。所有后续核心功能（标签切换、组件拖拽组装、场景测试）均被隐藏在不可达的游戏界面中，需求声明的交互式模拟构建与测试核心完全无法使用。页面仅剩静态视觉展示，功能性极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：主界面两个主要入口按钮（ENTER LAB / MISSION MODE）点击均触发 startGame is not defined，新增 JS 错误且页面无任何 DOM 变化；用户无法进入实验室或任务模式，设计、测试、任务等核心流程全部不可用，属于入口/导航无反馈和核心操作卡死。次要瑕疵：主菜单下方的三个功能卡片仅作展示，没有与后续界面形成可点击引导；若主流程可进入，还需补充空状态说明和操作引导，但这些不是当前降档的主要原因。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较强，符合间谍实验室的游戏主题。色彩搭配以深蓝(#1a2a6c, #2c3e50)为基调，辅以蓝色(#3498db)和橙色(#f39c12)点缀，既营造出科技感与神秘感，又保持了视觉层次的一致性。布局结构清晰：主菜单采用居中排版，游戏界面采用头部+侧边栏+内容区的经典后台式框架，信息分区合理。字体使用Segoe UI等现代无衬线字体，标题的发光效果和卡片hover的抬升动效提升了精致度。CSS方面运用了渐变背景、毛玻璃效果(backdrop-filter)、悬浮阴影、脉冲动画等现代技术，风格统一，符合游戏开发类别下'虚拟实验室'的视觉预期。\n\n扣分点：主要依赖emoji作为组件图标，缺乏专业级icon或3D渲染元素（页面引入了three.js但未实际使用）；部分灰色文字与深色背景的对比度偏低，可能影响可读性；另外运行时JS错误导致按钮无反应，虽然不直接属于视觉评价，但削弱了整体体验的完整感。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "startGame is not defined",
+      "startGame is not defined"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_003979.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "ENTER LAB",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "MISSION MODE",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

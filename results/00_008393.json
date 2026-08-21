@@ -1,0 +1,116 @@
+{
+  "row_id": "00_008393",
+  "shard": 0,
+  "id": 8393,
+  "category": "3D design",
+  "prompt": "Create an online sanctuary offering personalized therapeutic 3D environments for relaxation and mindfulness. Users can customize virtual scenes with calming elements, track their mental wellness, and participate in guided sessions. Key features include mood-based environment selection, audio integration, and a personal progress dashboard for tracking mindfulness practices.",
+  "html_len": 19934,
+  "html_sha256": "e10d02b8eaf0da4a359cc2d679abe4f42433f927217ecbd98576fd34f1adb630",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "在 3D 场景中拖拽旋转视角",
+        "expected": "用户可以自由旋转/缩放 3D 疗愈场景，视角随操作变化",
+        "evidence": "探针在 canvas 拖拽后出现像素变化且无 JS 错误；代码初始化了 THREE.OrbitControls 并绑定 renderer.domElement，animate() 持续渲染。",
+        "ok": 1
+      },
+      {
+        "name": "选择心境（Calm/Focus/Peace/Energy）",
+        "expected": "点击 mood 卡后，3D 场景的环境/色调/元素会切换到对应心境",
+        "evidence": "JS 只给点击项切换 .active 类，并 console.log；注释明确 'In a real app, this would change the scene environment'，未改变任何 3D 场景参数。",
+        "ok": 0
+      },
+      {
+        "name": "开关场景元素（水景/浮光/微风/鸟鸣）",
+        "expected": "开关对应元素在 3D 场景中显示/隐藏或声音播放/停止",
+        "evidence": "这些 checkbox 没有绑定 JS 事件；水景和浮光在 init() 中无条件创建，微风/鸟鸣无对应 3D/音频对象；开关只改变自身 checked 状态。",
+        "ok": 0
+      },
+      {
+        "name": "调节环境音量",
+        "expected": "拖动音量滑块能调节正在播放的环境音",
+        "evidence": "range 没有 input/change 监听器，也没有 <audio> 或 AudioContext；滑块不会产生任何音频反馈。",
+        "ok": 0
+      },
+      {
+        "name": "打开/参与 Guided Sessions",
+        "expected": "点击后进入引导冥想列表或开始一段引导会话",
+        "evidence": "按钮 JS 中未绑定任何事件，不会打开弹窗、切换路由或改变场景；探针记录的 DOM 变化只是 hover/focus 样式层，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "查看个人进度仪表盘",
+        "expected": "显示并记录用户真实的冥想数据（次数、时长、心情等）",
+        "evidence": "统计卡片是硬编码的 12/4.2/8h/92%，没有 localStorage、数据写入或动态更新逻辑；只有 .timer 每秒走秒，无法追踪真实实践数据。",
+        "ok": 0
+      }
+    ],
+    "reason": "3D 场景渲染和 OrbitControls 可用，但核心的 mood 场景切换、元素定制、音频控制、引导会话、进度追踪均为占位或未接线；Save Sanctuary 按钮同样无事件。主要用户任务基本无法完成，因此功能评分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 顶部关键入口“Guided Sessions”和“Save Sanctuary”点击后均无任何业务反馈——没有页面跳转、弹窗、提示或状态变化，探针确认无JS逻辑触发，属于主要入口占位死路。\n2. 情绪选择器（Calm/Focus/Peace/Energy）点击后仅切换UI高亮，3D场景环境没有任何变化，选择不同情绪不会改变山水、光影或氛围，核心控件调节无效。\n3. 元素开关（Water Fountain、Floating Lights、Gentle Breeze、Bird Sounds）拨动后只有开关滑块本身的CSS状态变化，场景中对应元素和音频均无增减或状态改变，核心控件调节无效。\n4. 音量滑杆拖动时无任何音频被播放或调节，页面实际未加载音频资源，音频集成是空壳。\n5. 核心任务无法闭环：无法通过情绪选择个性化环境，无法保存自定义配置，无法进入引导课程，用户的“定制-保存-训练-追踪”主流程全部断裂。\n\n次要瑕疵：\n- 进度面板的数字（12、4.2、8h、92%）为硬编码静态数据，容易误认为实时数据。\n- 界面缺乏首次使用引导或说明文字，用户不清楚哪些操作是有效的。\n- 窄屏下侧边栏可能与进度面板重叠，响应式布局不完整。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "该页面视觉设计非常出色，整体呈现精致的玻璃拟态风格（Glassmorphism），与现代网页设计趋势高度契合。色彩搭配以深蓝紫渐变为主背景，辅以青色（#00c9ff）与绿色（#92fe9d）的渐变点缀，既营造出宁静、治愈的‘线上疗愈空间’氛围，又形成清晰的操作指引。布局方面，顶部导航、右侧定制面板、左下进度仪表盘三块区域分区明确，采用半透明模糊背景和圆角卡片，层次感强；卡片间距、内外边距、字体字号（标题24px、面板标题18px、数据12px等）均经过细致设计，整体节奏舒适。组件如按钮、开关、滑块、心情卡片等风格统一，交互状态（hover、active）有动效反馈，提升了页面质感和专业度。Three.js 3D场景与UI融合自然，粒子系统、水面、浮光等动态元素增强了沉浸感。运行时无JS错误、交互探针显示拖拽画布和点击按钮均有正常反馈，进一步验证了实现质量。唯一的轻微不足是左侧底部仪表盘在窄屏下可能与侧边栏重叠，但媒体查询已做基本适配，整体视觉完成度很高。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_008393.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Guided Sessions",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save Sanctuary",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

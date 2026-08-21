@@ -1,0 +1,182 @@
+{
+  "row_id": "01_033500",
+  "shard": 1,
+  "id": 33500,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Imagine a UI component library dedicated to floating action buttons, offering developers customizable and responsive button designs. This platform provides design inspiration, code snippets, and integration guidance for creating intuitive user interfaces. It empowers developers to enhance user interactions by seamlessly implementing dynamic, eye-catching action buttons.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 8275,
+  "html_sha256": "c300fc22847fdfeb75317b734ab933f35ce85bb591a6fa34a2e6af8bd8264b19",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航栏 Components/Documentation/Examples/Support",
+        "expected": "点击导航项后应切换到对应内容区块或跳转到对应页面/文档",
+        "evidence": "四个导航链接均为 href=\"#\"，无路由、无对应内容区；探针点击后仅触发默认锚点跳转，未展示任何对应页面/区块，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started 按钮",
+        "expected": "应进入快速上手/展示使用引导或至少给出反馈",
+        "evidence": "按钮未绑定 click 事件，也没有 JS 处理逻辑；探针点击后 DOM 无变化、无网络请求、无 JS 错误。",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Examples 按钮",
+        "expected": "应展示更多示例或跳转到示例区域",
+        "evidence": "按钮无事件绑定，探针点击后 DOM 无变化，未出现任何示例相关内容。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Copy Code 复制代码",
+        "expected": "应将代码片段复制到剪贴板或显示“已复制”反馈",
+        "evidence": "页面没有复制逻辑，无 Clipboard API 调用；探针点击后 DOM 无变化，复制功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击移动端汉堡菜单按钮",
+        "expected": "应展开/收起导航菜单",
+        "evidence": "按钮 class 为 md:hidden，但未绑定任何 JS 事件，页面也没有可展开的菜单面板，点击无反馈。",
+        "ok": 0
+      },
+      {
+        "name": "悬停 FAB 预览示例",
+        "expected": "悬停时应有缩放或视觉反馈",
+        "evidence": "CSS 中 .fab-example:hover 设置了 transform: scale(1.1)，并存在 pulse 动画，悬停可产生视觉反馈。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉与静态内容展示较完整，但导航、CTA、复制代码、移动端菜单等关键交互几乎全部为占位或死链，仅有 FAB 悬停缩放可用；用户获取代码、查看示例、切换文档等主要任务无法完成，核心功能大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 顶部导航链接（Components、Documentation、Examples、Support）均为占位链接，点击后无实际页面跳转或功能反馈，不符合文档站导航预期；2. “Get Started”和“View Examples”按钮点击无任何交互反馈，核心操作不可用；3. “Copy Code”按钮点击无复制行为，作为组件库页面获取代码的核心功能失效；4. 移动端汉堡菜单按钮无展开菜单功能，点击无反馈。次要瑕疵：页面缺少各FAB类型的说明文字和图例；导航链接命名宽泛但未链接到实际内容；页脚社交链接为占位符；FAB预览按钮本身不可点击，仅为静态展示。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉吸引力较好，采用蓝色渐变背景与白色卡片对比形成清新专业的风格，符合UI组件库的定位。色彩搭配以蓝为主、橙色作为强调色，和谐且突出了FAB的主题。布局采用两栏网格，左右内容分配均衡，header、main、footer结构完整，信息层次清晰。字体使用Poppins，现代感强，但正文与标题的字号区分不够明显。组件设计上，FAB预览展示了标准、强调和动画三种状态，细节到位，阴影和圆角应用统一，代码片段区域深色处理增强了视觉重点。CSS设计专业，使用了Tailwind配置和自定义动画（pulse），过渡效果流畅。不过交互性偏弱，多个按钮点击无实际反馈（如Copy Code未实现复制功能），且部分导航链接会空跳转，影响完整体验。单页内容密度适中，但严格看仍有少量滚动需求，与'无需滚动'的要求略有出入。整体符合现代网页设计规范，与用户需求的风格对齐，但在交互细节和内容充实度上可再提升。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_033500.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Components",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Documentation",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Examples",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Support",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Examples",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Copy Code",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

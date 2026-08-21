@@ -1,0 +1,184 @@
+{
+  "row_id": "01_007267",
+  "shard": 1,
+  "id": 7267,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Craft an innovative timeline editor for SVG animations, allowing users to orchestrate intricate motion sequences. Offer intuitive drag-and-drop functionality, real-time previews, and vector-based editing tools. Enhance creativity with interactive tutorials and community-driven animation galleries, expanding artistic possibilities with scalable vector graphics.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14773,
+  "html_sha256": "e4c87e1b8822335a0fe55aeb9ecb357b87428322cb20d4df9a511795d6e4c160",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航链接（Tutorials/Gallery/Community）",
+        "expected": "切换到对应的教程、画廊或社区视图，满足需求中的交互式教程与社区画廊功能",
+        "evidence": "探针显示点击后仅发生页面跳转（href=\"#\"锚点跳转），无实际内容切换；HTML中四个导航均为占位链接，无路由处理",
+        "ok": 0
+      },
+      {
+        "name": "点击 Preview 播放动画",
+        "expected": "播放 SVG 动画预览，元素产生运动且按钮图标切换",
+        "evidence": "探针显示 DOM 变化=有，无JS错误；代码中绑定了click事件，circle/rect执行变换并在2秒后恢复，图标在play/pause间切换",
+        "ok": 1
+      },
+      {
+        "name": "点击 Add Keyframe 添加关键帧",
+        "expected": "在时间线上新增一个关键帧节点",
+        "evidence": "探针显示点击后 DOM 变化=无；HTML中该按钮没有绑定任何 JavaScript 事件，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Move/Scale 切换矢量编辑工具",
+        "expected": "激活对应的编辑模式，让用户可拖拽/缩放SVG元素",
+        "evidence": "探针显示点击 Move 和 Scale 按钮后 DOM 变化均=无；代码中这些工具按钮无事件绑定，纯占位入口，矢量编辑功能缺失",
+        "ok": 0
+      },
+      {
+        "name": "拖动时间线上的关键帧",
+        "expected": "关键帧节点跟随鼠标在时间轴上移动",
+        "evidence": "HTML中关键帧绑定了mousedown，并在document上监听mousemove/mouseup来修改left位置；探针未覆盖此拖拽，但代码逻辑完整且无JS错误，应可交互",
+        "ok": 1
+      },
+      {
+        "name": "调整 Duration 滑块",
+        "expected": "改变动画时长并反映到预览播放中",
+        "evidence": "input range没有任何oninput/onchange事件绑定，JS播放逻辑固定使用2000ms，滑动滑块仅原生UI移动、无业务反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计现代完整，Preview按钮和关键帧拖拽具备基本交互；但核心时间线编辑功能大面积缺失：Add Keyframe、Move/Scale等工具按钮均为无事件占位入口，导航中的Tutorials/Gallery/Community也仅是href=\"#\"死链，需求声明的交互式教程、社区画廊、矢量编辑工具均未实现，用户无法完成编排动画序列的主要任务，因此评分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在多个核心可用性问题：1) 核心编辑工具（Add Keyframe、Move、Scale、Rotate、Easing、Layers）点击后均无任何效果或反馈，无法完成关键帧添加、元素变换等核心操作；2) Duration滑块和Easing下拉框调节无效，动画实际仍按固定逻辑执行；3) 顶部导航（Tutorials、Gallery、Community）均为占位链接，点击后仅跳转页面顶部，无法到达对应内容，属于主要入口的有效性缺失；4) 播放时Playhead不随动画移动，用户无法判断时间线进度。次要瑕疵：时间信息自相矛盾（时间标尺0-3s、播放器显示0:05/0:30、属性面板默认1000ms）；关键帧拖拽无边界限制，可拖出轨道；工具按钮无选中状态，无法感知当前模式；缺乏操作说明和帮助文字；全屏、重做、社交分享等图标按钮均为无效装饰。由于存在2个以上核心可用性问题，分数锚定为2-3分，考虑到页面布局清晰、视觉风格统一、Preview按钮有基本反馈，给予3分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力良好，采用现代设计工具常用的 indigo/violet 配色方案，主色 #6366f1 与 #8b5cf6 搭配和谐，辅以 slate 系背景和白色卡片，层次清晰。布局为经典的三栏网格（工具面板、预览区、时间线），结构紧凑合理，header、main、footer 分隔明确。组件设计专业，工具按钮、播放控制、关键帧圆点、时间标尺等细节均经过精心打磨，圆角、阴影、渐变和图标的使用提升了质感。CSS 基于 Tailwind，并添加自定义渐变轨道、过渡动效和 SVG 网格背景，符合现代网页设计规范，与 SVG 动画编辑器的主题风格高度契合。扣分点：部分按钮点击区域被文字遮挡（探针显示），可能影响交互体验；未引入自定义字体，标题和正文略欠个性；整体设计虽美观但稍显模板化，缺乏突破性创意。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_007267.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Editor",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Preview",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Keyframe",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "SPAN.text-xs",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Move",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "SPAN.text-xs",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Scale",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "SPAN.text-xs",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

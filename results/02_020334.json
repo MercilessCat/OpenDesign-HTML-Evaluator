@@ -1,0 +1,181 @@
+{
+  "row_id": "02_020334",
+  "shard": 2,
+  "id": 20334,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Design a secure platform visualizing collaborative computation. The core idea is multi-party data processing safety. Users can explore cryptographic methods, simulate secure computations, and engage in forums. Features include interactive tutorials on encryption, collaborative data projects, and expert insights into privacy-enhancing technologies.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11068,
+  "html_sha256": "bdceb024ff07ca2f01a9e5db1801e77e4485a6d2eb3fd6b928df0b0bb2f3cc36",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（Home/Tutorials/Projects/Community）",
+        "expected": "点击后应展示对应板块或页面内容",
+        "evidence": "探针结果显示点击后发生页面跳转，但 HTML 中所有导航链接均为 href=\"#\" 占位符；无路由或锚点对应内容，页面实际无业务反馈，属占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Simulation 按钮",
+        "expected": "启动安全计算模拟功能或展示模拟界面",
+        "evidence": "探针显示点击后 DOM 无变化、无网络请求；HTML 中按钮无绑定事件处理函数，功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Tutorials 按钮",
+        "expected": "跳转或展开交互式加密教程",
+        "evidence": "探针显示点击后 DOM 无变化、无网络请求；HTML 中按钮无事件绑定，教程功能缺失。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 按钮",
+        "expected": "打开登录/注册界面",
+        "evidence": "探针显示点击后 DOM 无变化、无网络请求；HTML 中按钮无事件绑定，登录功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "探索交互式教程卡片",
+        "expected": "点击卡片后进入教程详情或模拟练习",
+        "evidence": "特性卡片仅有 hover 样式类（.card-hover），点击无事件、无跳转，无教程内容实现。",
+        "ok": 0
+      },
+      {
+        "name": "参与论坛社区讨论",
+        "expected": "进入 Community 板块并查看/发布帖子",
+        "evidence": "导航 Community 为 href=\"#\" 占位，页面不存在论坛 DOM 结构或相关功能，完全缺失。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为纯展示型落地页，视觉设计符合主题，但所有关键交互（导航、模拟、教程、登录、论坛）均为占位入口或按钮无事件绑定，核心需求功能未实现，交互大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 主导航 Home/Tutorials/Projects/Community 均为 href=\"#\" 占位链接，点击没有真正进入对应栏目或切换页面，主要入口不可用；2) 核心 CTA 按钮 Start Simulation、View Tutorials 点击后 DOM 和网络均无变化，无法开始模拟计算或查看教程，核心操作流程卡死；3) Sign In 按钮同样无任何反馈。次要瑕疵：页面以静态卡片展示为主，缺少操作说明或帮助提示，用户不清楚哪些功能可交互；整体视觉、配色、信息分层较清晰，但内容在常见视口下需要滚动，未完全满足单屏展示要求。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉设计现代且干净，采用了 Tailwind CSS 与 Font Awesome 图标，色彩以蓝、紫、深灰为主，搭配浅色渐变背景，风格统一，符合数据可视化与隐私安全平台的主题。布局结构清晰：头部导航、Hero 区域、功能卡片、密码学技术展示、页脚，信息层级分明。卡片悬停动效和图标颜色过渡提升了精致感。Hero 中的“Secure MPC”示意图通过圆形虚线框和色块图标直观表达了多方计算概念，有一定设计巧思。字间距和卡片间距较为舒适，整体视觉吸引力良好。\n\n扣分点：1) 页面内容明显超过一屏，不符合“无需滚动、全部内容可见”的约束；2) 导航链接使用 `href=\"#\"` 导致点击时页面跳转到顶部，不符合单页应用的无跳转预期；3) 按钮均无实际交互状态，仅悬停变色，动态反馈较弱；4) 部分文字内容较长，在窄屏下可能换行影响视觉节奏；5) 未设置显式字体族，排版略显保守。综合来看，视觉完成度较高，但功能与页面适配存在短板，因此给出 7 分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_020334.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Projects",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Tutorials",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

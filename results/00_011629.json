@@ -1,0 +1,117 @@
+{
+  "row_id": "00_011629",
+  "shard": 0,
+  "id": 11629,
+  "category": "3D design",
+  "prompt": "Create a virtual reality platform where users can practice public speaking in immersive environments, complete with feedback on performance, tone, and audience engagement. Utilize AI-driven analytics to provide detailed insights, helping users improve their communication skills in diverse simulated scenarios, from board meetings to large conferences.",
+  "html_len": 21229,
+  "html_sha256": "3bd8653bc91d1e238c5101bf53d37bd48732c68e8cf2dfda83afadaedc179fc1",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')",
+      "Cannot set properties of null (setting 'textContent')"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_011629.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Pause Session",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 4,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Record New Take",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 4,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Analytics",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 4,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 6,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

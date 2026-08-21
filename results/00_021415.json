@@ -1,0 +1,181 @@
+{
+  "row_id": "00_021415",
+  "shard": 0,
+  "id": 21415,
+  "category": "3D design",
+  "prompt": "Design a creative hub where users can craft and interact with dynamic 3D card stacks using CSS. The platform offers a drag-and-drop interface, customizable templates, and a gallery showcasing user creations. Users can share designs, collaborate on projects, and participate in design challenges for recognition and rewards.",
+  "html_len": 17716,
+  "html_sha256": "4e4e9b0be87bfcbbb99c2b15eca22ec5cb24b8876e24da5cb9768b9a7b6ea97b",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击模板卡片加载模板",
+        "expected": "卡片堆内容更新为所选模板的设计（如 Business、Artistic 等）",
+        "evidence": "探针点击 Business/Artistic/Minimalist/Vintage 模板后，DOM 变化=有，新增JS错误=0；HTML 中 template-card 绑定 onclick=\"loadTemplate('...')\"，函数会清空并重建 #card-stack 卡片内容并更新 3D 位置。反馈符合预期。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Add Card 添加卡片",
+        "expected": "卡片堆中新增一张带随机渐变的卡片，并重新计算 3D 位置",
+        "evidence": "HTML 中 control-btn 绑定 onclick=\"addCard()\"，addCard() 使用 createElement 创建 .card 元素并 appendChild，随后调用 updateCardPositions()。代码逻辑完整，具备可见 DOM 变化。",
+        "ok": 1
+      },
+      {
+        "name": "拖拽卡片调整位置",
+        "expected": "卡片可被拖动并在放置位置产生位移/缩放反馈",
+        "evidence": "HTML 卡片设置 draggable=\"true\"，绑定 dragstart/dragover/drop 事件；drop 时通过 transform 设置位移和 scale(1.1) 动画反馈。拖拽事件已初始化，运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Share 分享设计",
+        "expected": "触发真实的分享流程（如生成链接、复制、跳转社交平台等）",
+        "evidence": "Share 按钮绑定 onclick=\"shareDesign()\"，但函数体只有 alert('Sharing your design... 🌟')，没有任何分享行为或输出，属于占位提示，未实现需求中的“share designs”。",
+        "ok": 0
+      },
+      {
+        "name": "参与设计挑战",
+        "expected": "提供报名/参与入口，允许用户提交作品或进入挑战流程",
+        "evidence": "页面仅有静态 challenge-card 展示挑战标题、描述和截止日期，没有“参与”“报名”“提交作品”等任何按钮或表单入口。该交互入口完全缺失。",
+        "ok": "NA"
+      },
+      {
+        "name": "协作项目",
+        "expected": "提供创建/加入协作项目、邀请成员或共同编辑的入口",
+        "evidence": "页面导航、侧栏、主内容区均无任何与协作相关的按钮、链接或模块，需求声明的“collaborate on projects”功能未实现。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面核心的 3D 卡片制作与交互（模板加载、添加卡片、拖拽）均能正常反馈，基本满足“craft and interact”；但分享仅弹窗占位未实现真实分享，设计挑战无参与入口，协作功能完全缺失，导航链接也为纯锚点占位。需求声明的关键能力有 3 项以上未落地，按锚定规则功能分不高于 4，综合判定为 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：1) 顶部导航（Home/Gallery/Challenges/Community）均为占位链接（href=\"#\"），点击后仅改变URL哈希，无任何实际内容反馈或页面切换；2) 拖放功能无效：卡片虽可拖拽，但放置后仅执行临时位移动画，随后恢复原状，无法真正调整卡片顺序或布局；3) 保存设计与分享功能仅为alert弹窗，没有持久化存储或真实分享渠道，用户设计无法保存，刷新后丢失，核心任务无法完成。次要瑕疵：模板加载后无命名反馈，用户不知当前应用了哪个模板；缺少操作说明/图例，3D拖拽与旋转的用法不明确；协作功能完全缺失；3D场景因缺少perspective属性导致深度感不足；鼠标移动事件不断追加transform属性，可能导致卡片旋转样式异常。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面整体视觉设计优秀，与“3D creative hub”定位高度契合。\n\n【色彩搭配】采用深蓝紫渐变背景（#1a1a2e→#16213e→#0f3460）营造沉浸式科技感，配合珊瑚红（#ff6b6b）与青绿（#4ecdc4）的互补配色，视觉对比鲜明且主次分明。卡片使用多组柔和渐变色（如667eea→764ba2、f093fb→f5576c），在深色底上显得活泼、丰富而不杂乱，符合创意平台的情感调性。\n\n【布局结构】Header/Sidebar/Main/Grid Gallery/Challenge Section层级清晰，信息架构合理。侧边栏模板选择、主内容3D交互区、画廊展示区依次展开，符合用户从创建到展示的操作流。flex+grid结合，响应式断点处理得当。\n\n【组件与CSS质量】胶囊形导航和按钮、毛玻璃锋线、卡片悬停上浮+阴影过渡，风格统一且现代。3D卡片堆叠使用preserve-3d与translateZ/rotateY真实呈现景深效果，加上浮动动画和鼠标跟随旋转，动态感强，贴合“3D”主题。渐变共14处、阴影7处、圆角8处，材质润度足够。字体层级分明，logo渐变文字是点睛之笔。\n\n【扣分原因】Three.js被引入但实际未参与渲染（纯CSS 3D实现），属于冗余；Gallery占位图仅用emoji，缺乏真实视觉内容，丰富度受限；个别细节如悬停时的transform累加逻辑存在隐患（但不影响静态观感）。整体距离顶级产品页仍有小幅差距。\n\n综合而言，该页面视觉吸引力强、色彩和谐、布局专业、动效出色，完全达到现代Web设计规范，能有效传达创意社区的氛围。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.2,
+  "baseline_overall": 4.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_021415.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Challenges",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "Business Cards\n\nProfessional designs",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "Artistic Stack\n\nCreative expressions",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "Minimalist\n\nClean & simple",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "Vintage Style\n\nRetro aesthetics",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

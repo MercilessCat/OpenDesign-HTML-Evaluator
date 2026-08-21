@@ -1,0 +1,182 @@
+{
+  "row_id": "06_096002",
+  "shard": 6,
+  "id": 96002,
+  "category": "Website",
+  "prompt": "Establish an online board game rental and exchange community, connecting players globally. Users browse a diverse catalog, arrange rentals or swaps, and review games. Key features include a wish list, user ratings, and a gamified system for earning rewards, promoting sustainable gaming and new experiences for enthusiasts.",
+  "html_len": 36560,
+  "html_sha256": "bd0197423fed7c246b62f1be892fcd87276df83fd89da3d64d26355d976cdcd3",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "浏览游戏目录",
+        "expected": "点击 Browse Catalog 按钮后进入游戏目录页面或展示更多游戏列表",
+        "evidence": "探针点击按钮后 DOM 无变化、无 JS 错误、无网络请求，按钮无事件绑定，页面保持原样",
+        "ok": 0
+      },
+      {
+        "name": "加入社区",
+        "expected": "点击 Join Community 后进入注册/加入流程或打开相关页面",
+        "evidence": "探针点击后 DOM 无变化、无网络请求，按钮无实际事件处理，仅静态样式",
+        "ok": 0
+      },
+      {
+        "name": "租赁桌游",
+        "expected": "点击 Rent 按钮后进入租赁流程，如选择租期、确认订单或跳转详情页",
+        "evidence": "探针点击 Rent 按钮后 DOM 无变化、无 JS 错误、无网络请求，按钮无事件绑定，核心功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "交换桌游",
+        "expected": "点击 Swap 按钮后进入交换流程，如匹配交换对象或提交交换申请",
+        "evidence": "页面存在多个 Swap 按钮，但与 Rent 同属静态按钮，无事件处理，探针未探测到任何反馈，核心功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "心愿单导航",
+        "expected": "点击 Wishlist 导航后展示用户心愿清单",
+        "evidence": "导航链接 href=\"#\"，探针点击后仅 URL 锚点变化（页面跳转到自身），无实际页面或内容切换，纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "查看全部游戏",
+        "expected": "点击 View All Games 后加载完整游戏列表或进入目录页",
+        "evidence": "页面底部 View All Games 按钮无事件绑定，探针点击无 DOM 变化，功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为纯静态展示型落地页：浏览目录、加入社区、租赁、交换、心愿单、查看全部游戏等全部核心交互均无事件绑定，点击后无任何反馈。需求声明的关键功能（租赁/交换流程、愿望清单、社区入口）全部未实现，仅有视觉呈现，用户无法完成任何实际任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 页面主要入口（导航栏 Browse/My Games/Wishlist/Community）均为 href=\"#\" 占位链接，点击后无实际内容变化或跳转，等于无效导航。2) 核心操作按钮（Browse Catalog、Join Community、Rent、Swap）点击后均无任何反馈，无法完成浏览、租赁、交换、加入社区等核心任务。3) 无搜索/筛选输入框，用户无法按条件查找游戏，核心浏览功能不可用。4) 通知铃铛按钮点击无反馈。次要瑕疵：缺少操作说明和帮助文本；部分状态标签（如 In Demand）含义不清晰；社区/教程等可选模块未实现；页面视觉较好但交互反馈缺失。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，采用深色渐变背景搭配靛蓝、紫色、粉色高亮渐变，符合现代网页设计潮流（类似大厂产品页风格）。色彩搭配合理，主次分明，强调语与按钮使用鲜明渐变，背景与文字对比度足够，可读性好。布局采用Hero、统计、卡片网格、流程区块等标准结构，主次清晰、层级分明，响应式网格设计（grid-cols-1/2/4）适配多端。字体采用 Poppins，圆润现代，标题加粗、正文留白充裕；间距与边距一致，节奏舒适。卡片组件使用毛玻璃（glass）、圆角、阴影、悬浮上移效果，细节到位；CSS 中自定义动画（pulse）和渐变背景增强了动态感。整体设计规范、专业性高，与‘桌游租赁交换社区’的活泼、社群、可持续理念高度对齐。扣分点：使用了占位图，真实图片质量未知；部分按钮如'Browse Catalog'、'Join Community'点击无实际交互，牺牲了体验完整度；页面稍长但无顶部进度提示，可能影响长滚动导航。总体而言，视觉质量优秀。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_096002.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Browse",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "My Games",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Wishlist",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "3",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-bell text-xl",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Browse Catalog",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Rent",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

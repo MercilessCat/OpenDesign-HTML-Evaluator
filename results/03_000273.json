@@ -1,0 +1,91 @@
+{
+  "row_id": "03_000273",
+  "shard": 3,
+  "id": 273,
+  "category": "Game dev",
+  "prompt": "Discover your artistic flair with a platform dedicated to intricate nail art design. Users can create and share digital masterpieces, explore tutorials, and participate in design challenges. Key features include a virtual nail salon, a gallery for inspiration, and a community forum for tips and tricks, nurturing creative expression.",
+  "html_len": 23135,
+  "html_sha256": "0a255deb262c19b55bbeb9d4b35ef3935267e1652d030030b71230d6baafeaa8",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Designing 开始设计",
+        "expected": "隐藏开始界面，显示游戏主界面/设计工作台",
+        "evidence": "探针点击 Start Designing 后 DOM 无变化；HTML 中脚本底部只调用了 selectTool('brush')，从未调用 setupEventListeners()，因此 startBtn 的 click 监听器根本没有注册，点击无效。",
+        "ok": 0
+      },
+      {
+        "name": "选择画刷/贴纸/闪粉等工具",
+        "expected": "点击工具按钮后切换当前工具并高亮激活状态",
+        "evidence": "工具按钮存在于 HTML，但 setupEventListeners 从未执行，所有 toolButtons 均未绑定 click 事件；页面在未进入主界面前点击也不会有 UI 反馈。",
+        "ok": 0
+      },
+      {
+        "name": "选择颜色并涂画指甲设计",
+        "expected": "选中颜色后画笔颜色更新，拖动鼠标在画布上产生可视笔迹",
+        "evidence": "页面没有 canvas 元素（canvas=0），drawLine 函数只执行 console.log，不会产生任何像素或视觉变化；同时 colorElements 和 document 的 mousedown/mousemove 监听器也未被注册。",
+        "ok": 0
+      },
+      {
+        "name": "撤销或清空设计",
+        "expected": "撤回上一步操作或清空画布，并扣减/更新分数",
+        "evidence": "undoBtn/clearBtn 存在，但未绑定 click 事件；且没有实际渲染画布，所谓撤销/清空没有可视对象。",
+        "ok": 0
+      },
+      {
+        "name": "完成设计并分享作品",
+        "expected": "结束后展示最终分数，并能分享/保存作品",
+        "evidence": "Share Masterpiece 按钮没有事件处理；endGame 依赖于 start 后 60 秒计时，但 start 已失效，无法进入完成流程；分享功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "浏览教程、画廊或社区论坛",
+        "expected": "提供教程、灵感画廊、社区论坛等入口并展示内容",
+        "evidence": "HTML 中完全没有这些入口或页面区块，未实现需求中声明的 tutorials/gallery/community forum 等关键功能。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面视觉上是一个美甲设计小游戏，但核心开始按钮因事件监听器从未注册而完全无效；所有工具、颜色、绘制、撤销、分享均无事件绑定，页面无法进入实际创作流程。需求中的教程、画廊、社区论坛、设计挑战等关键功能也完全缺失，整体不可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 点击“Start Designing”无任何DOM变化，主入口点击无反馈，用户无法进入游戏主流程（交互探针确定性证据）；2. 绘制操作仅有console.log模拟，画布上无任何视觉痕迹，核心创作流程用户完全感知不到操作结果；3. 颜色/工具选择只改变按钮高亮边框，实际绘制不随所选工具或颜色变化，核心控件调节无效。次要瑕疵：移动端按钮未绑定事件；分享按钮无功能；无教程或说明文字；图案工具行为不明确；游戏通过60秒计时自动结束而非用户主动完成，流程是否自然存疑。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力高，采用粉紫渐变背景与白色半透明卡片相结合，风格柔和、现代，贴合美甲艺术的创意与女性化主题。色彩搭配和谐，主色调粉色系（#ff69b4、#ec4899）与背景淡蓝灰渐变形成舒适对比，辅以多色圆形色板，视觉层次丰富。布局合理：开始界面居中卡片突出品牌，游戏界面顶部工具栏、左侧工具面板、右侧色板呈对称分布，移动端底部控制适配良好，整体结构均衡。字体使用Arial，字号层级清晰，但缺少特色字体，略显普通；间距和边距控制得当，组件圆角、阴影、悬停反馈及动画（脉冲、彩带）增强了精致感。CSS运用了Flex/grid布局、渐变、毛玻璃效果和过渡动画，专业性较强，符合现代Web设计规范。扣分点在于：画布部分缺少实际视觉内容展示，页面以UI框架为主，实际绘图区域未呈现，导致整体视觉丰富度稍欠；字体选择较基础，品牌感不够突出。综合评分8分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_000273.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Designing",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

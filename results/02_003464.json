@@ -1,0 +1,181 @@
+{
+  "row_id": "02_003464",
+  "shard": 2,
+  "id": 3464,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Develop a unique empathy network mapping tool allowing users to visualize and analyze connections between individuals or groups. Features include customizable relationship maps, emotion-driven analytics, and community spaces for empathy-driven discussions. Encourage users to contribute stories and insights to enrich the network.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13478,
+  "html_sha256": "27ad5331469dbcfeeded536b8dd5153e5dfe62792c86351e660c5aeeacd3ae32",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击 Create Map 创建共情地图",
+        "expected": "弹出创建/编辑关系图的界面，允许用户自定义关系映射",
+        "evidence": "探针点击 Create Map 按钮后 DOM 变化=无，新增JS错误=0，按钮无事件绑定，纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "切换 Relationships / Emotions 视图",
+        "expected": "网络图在关系视图与情绪视图之间切换内容",
+        "evidence": "探针分别点击 Relationships 和 Emotions 按钮，DOM 变化均=无，无视图切换逻辑",
+        "ok": 0
+      },
+      {
+        "name": "点击网络节点查看详情",
+        "expected": "节点被选中并高亮，展示相关连接信息",
+        "evidence": "HTML 代码中 network-node 绑定了 click 事件，点击会 toggle ring 高亮样式，有视觉反馈",
+        "ok": 1
+      },
+      {
+        "name": "点击导航 Dashboard / Networks / Analytics / Community",
+        "expected": "切换到对应功能模块页面",
+        "evidence": "导航链接均为 href=\"#\"，探针点击后仅产生 hash 跳转，无路由或内容切换，纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Zoom 缩放网络图",
+        "expected": "网络图能放大/缩小查看",
+        "evidence": "探针点击 Zoom 按钮后 DOM 变化=无，无事件绑定，缩放功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "贡献故事与见解",
+        "expected": "提供输入框或表单入口，用户可提交故事丰富共情网络",
+        "evidence": "页面无 input/textarea 或任何表单元素，仅静态展示社区故事卡片，无贡献入口",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面仅完成了静态视觉展示（节点连线图、情绪分析图表、故事卡片），核心交互大面积失败：Create Map、视图切换、导航、缩放均为占位无响应，故事贡献入口缺失；仅节点点击高亮可用。需求声明的自定义关系图、情绪驱动分析切换、社区贡献等主要功能均未实现。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部导航（Dashboard、Networks、Analytics、Community）为占位链接，点击仅改变URL hash，无落地内容或对应页面变化；2. “Create Map”按钮点击无任何反馈，核心功能（创建关系地图）无法启动；3. “Relationships/Emotions”模式切换按钮点击无响应，查看关系/情感视图的核心操作无效；4. “Zoom”按钮点击无效果，图表缩放功能不可用。多个核心操作失效，存在2个以上核心可用性问题。次要瑕疵：网络可视化缺少图例和节点关系说明，节点含义不清晰；情感分析图表缺少交互解释；社区故事区域展示内容有限，未标明贡献入口；部分按钮和链接无hover提示，视觉反馈不足。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力良好，采用现代UI设计语言，配色以靛蓝、紫为主，搭配柔和渐变色背景，视觉上和谐统一。布局清晰，header/main/footer层次分明，左侧为网络可视化区域，右侧为情感分析与社区故事卡片，结构比较平衡。使用Tailwind CSS使样式规范一致，卡片圆角、阴影、hover过渡等细节提升了界面质感。交互元素（节点点击、按钮hover）增加了活力。不足之处在于网络图部分仅有4个节点与简单连线，可视化表现力较弱，略显简单；部分按钮点击无实际功能反馈，稍显静态。不过整体符合现代网页设计规范，与数据可视化主题风格匹配，视觉效果专业。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_003464.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Networks",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Create Map",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Relationships",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Emotions",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Zoom",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

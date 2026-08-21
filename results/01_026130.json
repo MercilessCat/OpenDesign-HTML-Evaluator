@@ -1,0 +1,183 @@
+{
+  "row_id": "01_026130",
+  "shard": 1,
+  "id": 26130,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Develop an audio visualization platform that transforms sound into captivating visual art. Users can upload audio files, customize visualization styles, and share their creations. The site offers a gallery of user-generated content, community feedback, and tutorials on creating visually stunning audio experiences, blending art with technology.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10844,
+  "html_sha256": "9eaf5e6de1fccefa0dcfca00f7b9e8237cd6bae0a0a9d15c5b36e1cac4c52249",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "上传音频文件",
+        "expected": "选择音频文件后，页面读取音频数据并驱动可视化渲染",
+        "evidence": "页面有 hidden file input 和 label，但 JS 只在点击 label 时切换按钮文字；未绑定 input change 事件，也没有 FileReader/Web Audio API 处理音频，无法真正上传并可视化音频。",
+        "ok": 0
+      },
+      {
+        "name": "切换可视化样式",
+        "expected": "点击 Bars/Wave/Circle 切换不同的可视化效果",
+        "evidence": "探针点击 Bars 后无 DOM 变化；三个样式按钮均无事件绑定，canvas 始终绘制随机柱状图，没有 Wave/Circle 逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "播放/暂停控制",
+        "expected": "点击播放/暂停按钮控制音频或可视化动画的启停",
+        "evidence": "探针点击 Play/Pause 按钮均无 DOM 变化；按钮无事件处理，canvas 通过 requestAnimationFrame 独立持续绘制，不受控制。",
+        "ok": 0
+      },
+      {
+        "name": "浏览社区画廊",
+        "expected": "查看用户生成的作品、加载更多或进入作品详情",
+        "evidence": "Gallery 条目只是静态图标，View More 按钮无 onclick；导航 Gallery 也是 href=\"#\" 占位，无法展示真实用户内容或反馈。",
+        "ok": 0
+      },
+      {
+        "name": "查看教程",
+        "expected": "点击教程条目或 Tutorials 导航打开教程内容",
+        "evidence": "教程条目仅有 hover 样式和 cursor-pointer，无点击事件；导航 Tutorials 使用 href=\"#\"，点击后无对应内容切换。",
+        "ok": 0
+      },
+      {
+        "name": "分享作品",
+        "expected": "提供分享作品的入口并允许分享到社区或社交平台",
+        "evidence": "页面没有分享按钮或分享功能入口；底部社交图标只是 <i> 标签，无链接、无点击事件。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面视觉和布局完整，但核心交互大面积占位：音频上传不处理真实文件、样式切换与播放控制无效、画廊和教程均为静态/死链，分享功能缺失，用户无法完成主要任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部导航4个链接均为占位（href=\"#\"），点击仅跳转页面锚点，无实际页面或内容呈现；2. 核心操作上传音频仅有模拟反馈（Loading→File Loaded），但未真正加载/播放音频，画布始终播放随机模拟数据；3. 可视化样式切换按钮（Bars/Wave/Circle）点击无效，画面样式不发生任何变化；4. 播放/暂停按钮点击无任何响应或状态反馈；5. Sign In按钮点击无反馈、无功能。\n次要瑕疵：Community Gallery只有4个静态图标占位，View More按钮无功能；Tutorials条目点击无响应；上传成功后未显示文件名或音频时长等元信息；canvas动画与真实音频无关，误导用户以为已载入音频。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，深色渐变背景搭配紫靛蓝主色调，营造出科技感与艺术感融合的氛围，高度契合音频可视化平台的主题。色彩搭配合理，主色（#6366f1/#8b5cf6）与背景（#0f172a/#1e293b）对比清晰，霓虹渐变与玻璃拟态效果提升了现代感。布局采用上中下三段式与左右两栏结构，视觉器区域突出主功能，右侧画廊与教程栏辅助信息完整，层级分明、松紧有度。字体选用 Poppins，圆润现代，与整体风格统一；组件的圆角、阴影、hover 动效（上浮、缩放、渐变）处理细腻，按钮和卡片具有良好反馈，体现了专业 CSS 设计水平。Canvas 动画虽然只是随机模拟，但视觉上生动，满足了 UI 展示需求。扣分点：单一页内容密度较高，在小屏或 100vh 限制下可能略显拥挤；色彩体系侧重紫蓝，稍缺其他点缀色以增强层次。总体而言，页面符合现代网页设计规范，视觉完成度和专业度表现优秀。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_026130.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-play",
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-pause",
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Bars",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

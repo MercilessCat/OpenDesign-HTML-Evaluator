@@ -1,0 +1,91 @@
+{
+  "row_id": "01_010059",
+  "shard": 1,
+  "id": 10059,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create a platform that visualizes user engagement levels through dynamic indicators, offering insights into user behavior and trends. Users can track interactions, receive engagement scores, and adjust strategies accordingly. Features include customizable dashboards, historical data analysis, and AI-driven recommendations for improvement.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 9443,
+  "html_sha256": "8a23af4f0ba772fabc774d478b1615c763a95095ce1aca58691b84440ef61bcc",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Customize Dashboard 按钮",
+        "expected": "打开仪表盘定制面板或进入定制模式，可以对仪表盘进行配置",
+        "evidence": "探针点击后 DOM 无变化、无新增 JS 错误、无新增网络请求；HTML 中该按钮未绑定任何点击事件，仅有样式 hover，属于纯占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击 Refresh Recommendations 按钮",
+        "expected": "刷新 AI 推荐内容，产生新的建议或加载反馈",
+        "evidence": "探针点击后 DOM 无变化、无新增 JS 错误、无新增网络请求；按钮无 onclick 或事件绑定，点击后无任何业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "查看历史数据分析/趋势",
+        "expected": "提供历史数据图表、趋势或时间范围选择等分析入口",
+        "evidence": "页面仅展示当前静态指标卡和 AI 建议，没有历史数据图表、时间筛选器或相关导航入口，该需求功能缺失",
+        "ok": "NA"
+      },
+      {
+        "name": "悬停指标卡片查看反馈",
+        "expected": "卡片轻微上移并显示阴影增强，提供视觉反馈",
+        "evidence": "CSS 定义了 .metric-card:hover 的 transform 与 box-shadow，JS 也绑定了 mouseenter/mouseleave；该交互有明确反馈",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉结构完整、内容展示清晰、悬停反馈可用，但两个核心功能按钮（Customize Dashboard、Refresh Recommendations）点击后均无任何 DOM 或业务反馈，属于纯占位；历史数据分析功能缺失。核心交互大面积失败，功能性评分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. “Customize Dashboard”按钮点击后无任何DOM变化、无反馈、无网络请求，自定义仪表盘核心功能无法使用；2. “Refresh Recommendations”按钮点击后同样无任何变化，AI推荐刷新功能不可用。两个主要操作入口均无响应，核心流程卡死。次要瑕疵：页面缺少需求中提到的历史数据分析模块；推荐内容为静态占位，无实际数据更新机制；整体仅为数据展示，未实现用户可调整策略的交互路径。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力较好，采用现代仪表盘风格，以蓝色为主色调，辅以绿色、紫色等强调色，色彩搭配协调且符合数据分析类产品的专业感。布局采用三栏网格，主次分明，卡片式设计统一，间距合理，内容在视口内完整呈现。字体依赖Tailwind默认体系，虽然没有显式定义但整体可读性良好。组件（如进度环、指标卡片、推荐面板）设计精细，悬停动效增强了交互感。CSS运用了Tailwind工具类和少量自定义过渡/阴影，符合现代网页设计规范。按钮点击暂无实际功能，但对视觉评价影响不大。扣分点在于部分细节（如卡片内间距、颜色层次）仍有优化空间，整体缺乏更独特的视觉记忆点。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_010059.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Customize Dashboard",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Refresh Recommendations",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

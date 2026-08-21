@@ -1,0 +1,112 @@
+{
+  "row_id": "01_022809",
+  "shard": 1,
+  "id": 22809,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Unlock a dynamic platform where users craft personalized action plans. This tool analyzes data inputs and suggests optimal steps, visualizing paths to success. Core functionality includes goal-setting, real-time progress tracking, and adaptive advice. Key features involve interactive timelines, AI-driven insights, and customizable templates, all designed for intuitive navigation and user empowerment.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10599,
+  "html_sha256": "7db65308b717f336213c5739c0d1d656e521519bca4d4ad216f9557d4dd410ce",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "输入目标并回车",
+        "expected": "将用户输入的目标纳入行动方案，并生成相应建议或更新计划",
+        "evidence": "探针在输入框输入“测试”并回车后 DOM 无任何变化，新增 JS 错误 0、网络请求 0；HTML 中 input 无事件绑定或表单提交逻辑",
+        "ok": 0
+      },
+      {
+        "name": "选择时间周期",
+        "expected": "选择不同周期（1周/1月等）后，时间轴和里程碑应随周期更新",
+        "evidence": "select 只有静态 option，HTML 中无 onchange 或 JS 监听；改变选项不会驱动页面更新",
+        "ok": 0
+      },
+      {
+        "name": "点击 Save Plan 保存计划",
+        "expected": "保存计划并给出成功反馈，或至少写入本地存储",
+        "evidence": "探针点击“Save Plan”后 DOM 无变化、无网络请求、无 JS 错误；按钮无 onClick 或事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击 Export 导出计划",
+        "expected": "导出行动方案（下载文件/弹窗/提示）",
+        "evidence": "探针点击“Export”后 DOM 无变化、无网络请求；按钮无事件绑定，导出功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击交互时间轴节点",
+        "expected": "查看/切换里程碑详情或更新进度",
+        "evidence": "时间轴节点为纯 div，没有任何 click/touch 事件；标题声称 Interactive Timeline 但实际不可交互",
+        "ok": 0
+      }
+    ],
+    "reason": "页面是一个视觉完整的静态仪表盘，但所有核心交互（目标输入、周期选择、保存、导出、时间轴）均无事件绑定，探针点击/输入后页面无任何反馈；用户需求中的动态计划生成、实时进度追踪、自适应建议等功能未实现，主要任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. “Save Plan”和“Export”按钮点击后无任何 DOM 变化、无网络请求、无反馈，核心操作完全无效；2. 目标输入框输入后无任何响应，无法更新行动计划或触发任何逻辑，导致“创建个性化行动计划”的核心流程卡死；3. 页面声称支持实时进度跟踪和 AI 自适应建议，但进度条、完成率、AI 洞察均为静态硬编码，无法根据用户输入变化。以上问题导致用户无法完成主要任务，属于 2 个及以上核心可用性问题。次要瑕疵：页面缺少操作说明或图例，用户可能会误解为可交互；部分文案如“Interactive Timeline”与实际静态展示的进度条不完全匹配；视觉上分区清晰、配色和谐，但功能性不足。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，采用现代卡片式布局，白底卡片搭配灰白渐变背景，中央居中，视觉焦点清晰。头部蓝绿渐变配色与白色文字形成高对比度，品牌感突出。内容区通过蓝、绿、靛、琥珀四色卡片分区，色彩搭配和谐统一，既有层次又不杂乱。组件设计注重细节：输入框和选择框带聚焦环，按钮有悬停过渡，进度条、圆形进度显示、时间线等视觉元素直观且符合工具类产品调性。间距和圆角控制得当，符合现代网页设计规范。扣分项在于按钮点击无实际功能响应，且默认字体未自定义，略显模板化；但整体在UI组件展示这一类别中属于高质量设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_022809.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save Plan",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "text",
+      "tag": "input",
+      "text": "",
+      "href": null,
+      "type": "text",
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "typed": "测试",
+      "fill_method": "playwright",
+      "enter_pressed": true,
+      "pixels_changed": false
+    }
+  ]
+}

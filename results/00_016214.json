@@ -1,0 +1,184 @@
+{
+  "row_id": "00_016214",
+  "shard": 0,
+  "id": 16214,
+  "category": "3D design",
+  "prompt": "Design a vibrant platform for animators to create and showcase stunning 3D animations using modern web technologies. Users can access a library of templates, collaborate on projects, and share their work in a community gallery. The site offers tutorials and tools for mastering advanced animation techniques and effects.",
+  "html_len": 18131,
+  "html_sha256": "b1eb8ea178da33d01d612d94168efdb2da82d1dd0f53ebe6210a6940ed0efa63",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击锚点导航（Home/Features/Gallery）",
+        "expected": "页面平滑滚动到对应区域",
+        "evidence": "HTML 中这些锚点存在（#home/#features/#gallery），脚本绑定了平滑滚动；探针报告 DOM 无变化是预期的，因为滚动改变的是 scrollTop 而非 DOM 树，且未新增 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "点击导航 Templates（访问模板库）",
+        "expected": "进入或滚动到模板库区域",
+        "evidence": "链接 href=\"#templates\"，但页面中不存在 id=\"templates\" 的元素，querySelector 返回 null，点击后无任何滚动或内容变化；需求声明的模板库功能完全缺失",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Tutorials（访问教程）",
+        "expected": "进入或滚动到教程区域",
+        "evidence": "链接 href=\"#tutorials\"，但页面没有 id=\"tutorials\" 的区块，点击后无反应；需求声明的教程功能缺失",
+        "ok": 0
+      },
+      {
+        "name": "点击 CTA 按钮 Start Creating Free",
+        "expected": "触发注册/创建流程或跳转",
+        "evidence": "探针点击后 DOM 有变化，但代码中该按钮只绑定了 mouseenter/mouseleave（hover 样式），没有任何 click 事件或跳转逻辑，变化仅为样式层；创建入口是死的",
+        "ok": 0
+      },
+      {
+        "name": "查看/交互 3D Canvas 动画",
+        "expected": "页面展示可用的 3D 动画场景",
+        "evidence": "Three.js 场景成功初始化，requestAnimationFrame 驱动多面体自动旋转和脉动，渲染无 WebGL 报错；虽未初始化 OrbitControls 无法拖拽，但自动动画可视为有效视觉反馈",
+        "ok": 1
+      },
+      {
+        "name": "点击底部社交图标",
+        "expected": "跳转到对应社交平台",
+        "evidence": "社交链接 href=\"#\"，点击后触发 querySelector('#') 无效选择器错误（新增 JS 错误 1 条），无跳转无反馈，纯占位入口",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉呈现完整且有 Three.js 3D 自动动画运行，部分锚点导航可用；但需求核心的模板库和教程两大模块完全缺失（导航指向不存在的锚点），CTA 创建按钮无任何点击逻辑，社交/资源链接为占位且点击报 JS 错误，协作与分享功能仅停留在静态文案，核心业务几乎全部不可用，功能严重不足。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）导航中 Templates 和 Tutorials 链接指向不存在的区块，点击后页面完全无反馈、无滚动，主要入口失效；2）主 CTA 按钮“Start Creating Free”点击后仅触发 hover 样式，无跳转、无注册/创建流程、无网络请求，核心创建操作无法完成，形成死路。次要瑕疵：Footer 的 Resources 链接和社交图标 href=\"#\" 点击触发 JS 错误且被 preventDefault 拦截，交互异常；Gallery 项为纯渐变占位，无真实 3D 动画预览；页面缺少模板库和教程区的内容与引导说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，深色渐变背景搭配珊瑚红与青绿色的主色调，符合3D动画平台应有的科技感与活力。色彩搭配协调专业，明确的品牌色贯穿导航、按钮、标题、卡片与页脚，形成统一视觉体系。布局结构清晰，顶部固定导航、全屏Hero区、特性卡片网格、画廊与页脚层次分明，响应式断点也考虑周全。CSS细节到位：毛玻璃效果、渐变文字、悬停过渡、圆角阴影等均体现较高设计水准，与现代网页设计规范对齐。扣分点：画廊区域未展示实际3D作品或图片，仅用渐变背景占位，稍显空泛；社交图标用Emoji替代SVG图标，精致度不足；页面存在JS选择器错误（对'#'调用querySelector），虽不影响静态视觉，但会影响部分交互链路。整体仍是高质量、符合用户需求的创意型页面设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Failed to execute 'querySelector' on 'Document': '#' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '#' is not a valid selector."
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_016214.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Templates",
+      "href": "#templates",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#gallery",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#tutorials",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating Free",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "📱",
+      "href": "#",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "📘",
+      "href": "#",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

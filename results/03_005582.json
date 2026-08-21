@@ -1,0 +1,103 @@
+{
+  "row_id": "03_005582",
+  "shard": 3,
+  "id": 5582,
+  "category": "Game dev",
+  "prompt": "Build an exhilarating virtual paragliding experience that lets users soar through realistic 3D landscapes. The core functionality is skillful navigation and flight mastery. Key features include customizable equipment, real-time weather conditions, and multiplayer races, providing an adrenaline-pumping adventure for thrill-seekers and flight enthusiasts alike.",
+  "html_len": 22516,
+  "html_sha256": "5c850a82057ebb650cffaca6df59226eb963965ed941bac818fffe614c6ec2b7",
+  "functional": {
+    "score": 6.0,
+    "raw_score": 6.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "选择装备（Standard/Racing/Explorer）",
+        "expected": "点击装备卡片后，选中卡片高亮，且后续飞行使用对应装备属性",
+        "evidence": "HTML 中 .equip-item 绑定了 click 事件，点击后会切换 .selected 类并设置 selectedEquipment；运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "开始飞行（Take Flight）",
+        "expected": "点击按钮后从开始界面进入飞行界面，初始化 3D 场景并开始游戏循环",
+        "evidence": "探针点击 TAKE FLIGHT 后 DOM 有变化，新增 JS 错误 0；代码中 startGame() 会隐藏开始屏、显示游戏屏并调用 initScene()/animate()。",
+        "ok": 1
+      },
+      {
+        "name": "键盘操控滑翔伞飞行",
+        "expected": "使用 WASD/方向键/空格/Shift 控制滑翔伞移动、升降，并更新高度、速度、距离等状态",
+        "evidence": "window 上绑定了 keydown/keyup，updateGame() 读取 keys 并更新 paraglider.position、camera 和统计 UI；没有 JS 错误，飞行逻辑完整。",
+        "ok": 1
+      },
+      {
+        "name": "查看实时天气与飞行状态",
+        "expected": "飞行界面显示天气、风速、高度和分数，且天气影响飞行",
+        "evidence": "游戏屏幕上存在天气/风速/高度/速度/距离/分数面板；开始游戏时会随机设置天气，updateGame() 中 windSpeed 会影响滑翔机位移。",
+        "ok": 1
+      },
+      {
+        "name": "多人竞速（Multiplayer Race）",
+        "expected": "能够进入多人竞速模式并与其他玩家进行比赛",
+        "evidence": "页面只有静态排行榜，没有任何多人竞速按钮、模式选择或联机逻辑；需求中的多人竞速功能没有交互入口。",
+        "ok": "NA"
+      },
+      {
+        "name": "重新开始/返回主菜单",
+        "expected": "在结算界面点击 Fly Again 或 Main Menu 后能重新进入可正常渲染的飞行",
+        "evidence": "restartBtn/menuBtn 绑定了点击事件，但 initScene() 中如果 renderer 已存在会执行 renderer.domElement.remove()，随后用同一 canvas 新建 renderer 时不会重新插入 DOM，导致第二次飞行时 3D 画布被移除、画面不可见。",
+        "ok": 0
+      }
+    ],
+    "reason": "首次飞行的核心体验基本可用：装备选择、开始飞行、键盘操控和状态/天气显示均能工作；但多人竞速这一需求关键功能完全缺失，且重新开始/返回后再起飞会因 canvas 被移除而无法正常渲染，因此不能给予高分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1）游戏画面被完全遮挡：gameScreen复用了.screen的黑色半透明背景（rgba(0,0,0,0.8) + z-index:10），进入游戏后铺满全屏盖住canvas，玩家看不到3D场景、滑翔伞和地形，只看到HUD数值和控制说明，核心飞行操控失去视觉反馈，等同于无法游玩。2）重开游戏流程卡死：startGame()每次调用initScene()，其中会移除旧renderer的canvas并创建新canvas，但新canvas未重新插入DOM，导致点击'Fly Again'或从主菜单再次进入后画面丢失/空白，无法继续游戏。次要瑕疵：速度计算基于绝对位置而非帧间位移，停止时速度不会归零；设备选择对操控效果缺乏说明；天气随机生成但只有风偏移效果，缺少解释；排行榜为静态展示；控制方式未处理多键同按；resize监听随重开会重复累积。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 5.0,
+    "reason": "页面整体布局清晰，功能分区明确，标题和按钮的橙-洋红渐变赋予了页面的基础游戏氛围，圆角与阴影的处理也算到位。但从专业视觉设计角度看仍有明显不足：1) 字体全部使用通用系统字体，缺乏游戏所需的个性与冲击力；2) 几乎没有动画/过渡效果，按钮悬停仅有简单位移，整体缺乏动态感和沉浸感，不符合‘exhilarating virtual paragliding experience’所需的肾上腺素体验；3) 装备卡片、排行榜、状态面板等UI组件均为简单半透明矩形，缺少边框、发光、玻璃拟态或渐变层次等现代游戏界面常用细节，显得粗糙；4) 色彩上橙色+洋红与背景深蓝+红色渐变叠加，层次混乱，且与3D场景可能的天空蓝色产生冲突，削弱了品牌一致性；5) 页面元素垂直堆叠、留白处理平庸，缺乏视觉节奏和主次层级，更像是功能演示而非精致游戏界面。整体可正常使用，但视觉完成度和设计精致度未达到现代游戏web体验标准。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 4.4,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_005582.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "TAKE FLIGHT",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

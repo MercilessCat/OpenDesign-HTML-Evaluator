@@ -1,0 +1,175 @@
+{
+  "row_id": "02_024224",
+  "shard": 2,
+  "id": 24224,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Optimize urban deliveries with a dynamic platform visualizing last-mile efficiency. Users can analyze traffic data, simulate delivery routes, and propose sustainable solutions. Features include interactive dashboards, real-time tracking, and community feedback loops to enhance logistics and reduce environmental impact.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 15087,
+  "html_sha256": "88e8f51097f98e0b52ae236aa4b368bb74508c31794ea7a1f7a535263c932a5b",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "顶部导航切换（Routes/Analytics/Community）",
+        "expected": "点击后应切换视图或至少高亮当前页签，展示对应数据面板。",
+        "evidence": "探针点击这些导航按钮后 DOM 无变化、无新增网络请求、无 JS 错误；HTML 中只有统一的 scale-95 瞬时动画，没有路由或视图切换逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "地图模式切换（Real-time / Simulation）",
+        "expected": "点击后应切换实时/仿真模式，地图或相关数据应有状态变化。",
+        "evidence": "探针点击“Real-time”和“Simulation”后 DOM 无变化；地图区域只是静态 div + SVG 装饰，没有模式切换逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "Apply to Routes 按钮",
+        "expected": "点击后应将社区环保建议应用到路线规划，并产生可视化或数据反馈。",
+        "evidence": "探针点击后 DOM 无变化、无新增请求；按钮仅绑定通用 scale-95 动画，没有实际业务事件。",
+        "ok": 0
+      },
+      {
+        "name": "View All Feedback 按钮",
+        "expected": "点击后应展开全部社区反馈，或跳转/切换至完整反馈列表。",
+        "evidence": "探针点击后 DOM 无变化；按钮没有展开、路由或数据加载逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "Optimization Tools 中的 Simulate Route",
+        "expected": "点击后应启动路线仿真，更新地图、里程或效率指标。",
+        "evidence": "HTML 中该按钮没有专属事件绑定，只有通用 scale-95 样式反馈；无 canvas/WebGL/图表更新，仿真功能未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉结构完整，但核心交互大面积失效：探针点击 8 个按钮均无 DOM 变化，导航、模式切换、社区反馈、路线仿真等关键入口全部为占位。页面加载了 Chart.js 但未使用，地图与仪表盘均为静态展示，唯一动态是 setInterval 自动修改一个时间数字，不构成用户交互。因此主要功能未实现，仅能作为静态信息展示页；按锚定规则给 2 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 顶部主导航 Dashboard/Routes/Analytics/Community 点击后没有任何内容切换、选中态或跳转反馈，主要入口无实际响应；2) Real-time/Simulation 模式切换点击无状态变化，核心可视化模式无法切换；3) Apply to Routes、View All Feedback 以及 Optimization Tools 中的 Simulate Route/Feedback Loop/Eco Report/Historical Data 等按钮均无实际功能，核心操作无法完成；4) 页面宣称交互式数据可视化，但缺少真正可交互的图表实例，数据展示基本为静态占位。次要瑕疵：部分区域缺少图例与说明文字，地图/路线为简化示意，未注明数据来源；交互仅有轻微缩放动画，用户无法判断操作是否成功。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉设计专业且现代，采用蓝紫渐变主色调搭配浅灰背景，色彩协调，层次分明。布局采用经典仪表盘三栏结构，主次清楚，卡片圆角、阴影和hover浮起效果提升了质感。字体选用Segoe UI和系统字体，间距统一，标题与内容对比度良好。交互元素如按钮的按压反馈、交通脉冲动画增加了动态感，符合数据可视化平台的需求定位。扣分点在于：页面内容量较大，在视口内全部可见存在风险；地图区域为简化示意，实际的数据可视化深度不足；部分按钮点击无功能反馈，但与视觉评价关联不大。总体而言，是一版视觉吸引力良好、符合现代设计规范的数据仪表盘页面。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_024224.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Dashboard",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Routes",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Analytics",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Real-time",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Apply to Routes",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View All Feedback",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

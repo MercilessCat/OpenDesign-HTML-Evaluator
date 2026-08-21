@@ -1,0 +1,181 @@
+{
+  "row_id": "03_009931",
+  "shard": 3,
+  "id": 9931,
+  "category": "Game dev",
+  "prompt": "Design a user-friendly platform for creating simple yet elegant web pages through gamified lessons. Offer templates, drag-and-drop tools, and coding challenges that teach HTML and CSS basics. Encourage creativity with interactive tutorials and community feedback, transforming users into confident web designers while having fun.",
+  "html_len": 27152,
+  "html_sha256": "ebef20fc192ca976cf4333e435b94497fe497d249f7d95937f2209675d7398bf",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（Home/Courses/Templates/Community）",
+        "expected": "页面切换到对应的课程、模板或社区内容",
+        "evidence": "探针显示点击后 DOM 有变化且页面跳转，但所有链接 href 均为 '#'，属于纯占位锚点，没有路由或实际内容切换",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 登录按钮",
+        "expected": "弹出登录界面或跳转到登录页",
+        "evidence": "探针点击 Sign In 后 DOM 无变化、无网络请求、无 JS 错误，按钮无任何事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Learning Now 开始学习",
+        "expected": "进入课程列表或游戏化学习界面",
+        "evidence": "探针点击后 DOM 无变化、无网络请求，按钮仅为视觉元素，无事件处理",
+        "ok": 0
+      },
+      {
+        "name": "拖拽元素到 Live Preview 预览区",
+        "expected": "拖拽 Heading/Paragraph/Image/Button 后预览区新增对应元素",
+        "evidence": "HTML 中 drag-item 绑定了 dragstart，preview-frame 绑定了 dragover 和 drop，且 drop 函数会创建对应元素，功能可实现",
+        "ok": 1
+      },
+      {
+        "name": "点击课程卡片（如 HTML Fundamentals）",
+        "expected": "进入课程详情或开始课程",
+        "evidence": "课程卡片为纯静态 div，无点击事件、无链接，无法进入任何课程内容",
+        "ok": 0
+      },
+      {
+        "name": "进入编码挑战/模板库入口",
+        "expected": "提供课程教学和模板选择的实际功能入口",
+        "evidence": "页面仅有静态代码展示和模板导航占位链接，没有独立的编码挑战界面或模板库入口，需求功能未实现",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面视觉完整但核心交互大面积失败：导航链接为 # 占位、Sign In 和 Start Learning 等按钮无事件响应、课程卡片不可点击；仅拖拽工具具备实际功能。需求声明的模板库、编码挑战、社区反馈等关键入口均未实现，属于核心功能缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. 所有主要CTA按钮（Sign In、Start Learning Now、Explore Templates、View All Courses、Get Started Free等）点击后均无任何交互反馈或功能实现，用户无法开始学习、登录或浏览模板，核心操作流程完全断裂。次要瑕疵：代码编辑器为静态展示，无法实际输入；拖放元素只能添加不能编辑或删除；导航链接与页脚链接多为占位符（#）；社区反馈模块未实现真实交互；缺少模板预览与编码挑战的入口说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力高，采用了蓝紫渐变主背景，搭配白色、淡蓝、淡紫等分区背景，层次分明，符合现代 web 设计审美。色彩搭配和谐，主色为蓝紫系，点缀黄色 CTA 和绿色、粉色课程卡片，既保留教育平台的清爽感，又融入游戏化的活泼氛围。布局上，头部、Hero、功能卡片、编辑器演示、课程展示、成就墙、社区、CTA、页脚结构完整，网格和间距处理得当，卡片 hover 上浮、进度条渐变、浮动动画等细节增强了精致感。字体选用 Poppins，现代且圆润；代码编辑器风格专业，语法高亮，模拟了真实开发体验。交互元素如按钮、拖拽标签设计清晰。整体符合‘以游戏化方式学习网页设计’的品牌调性，属于高质量落地页。扣分原因：部分按钮（如 Sign In、Start Learning）点击无实际反馈，挂件与内容较多，视觉上稍显拥挤；个别图标（fa-button）写法不规范，但肉眼几乎不可见。综上，视觉表现优秀，打 8.5 分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_009931.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Courses",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Templates",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Learning Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Templates",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Button",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

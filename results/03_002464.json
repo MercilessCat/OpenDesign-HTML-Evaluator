@@ -1,0 +1,182 @@
+{
+  "row_id": "03_002464",
+  "shard": 3,
+  "id": 2464,
+  "category": "Game dev",
+  "prompt": "Create a virtual world where users nurture and evolve digital creatures through interactive feeding and environment management. Users collaborate in a community-driven ecosystem to share strategies. Key features include dynamic growth paths, resource management challenges, and a marketplace for trading unique creature traits and enhancements.",
+  "html_len": 24994,
+  "html_sha256": "c451f5a49afc33635711d7227d3c038ffe21512c297b17a8784b85b1ddb40b72",
+  "functional": {
+    "score": 8.0,
+    "raw_score": 8.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "打开Marketplace",
+        "expected": "点击Marketplace按钮后弹出市场模态框，展示可交易物品",
+        "evidence": "探针点击Marketplace按钮后DOM有变化，且HTML中renderMarketplace()会填充物品列表并移除hidden类，无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "喂食生物（Feed）",
+        "expected": "点击Feed按钮后消耗金币，降低饥饿值，增加快乐值，并更新UI显示",
+        "evidence": "探针多次点击Feed按钮后DOM均有变化，feedCreature()逻辑正确更新资源与生物状态并触发通知，无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "与生物玩耍（Play）",
+        "expected": "点击Play按钮后消耗金币，增加快乐和健康，并更新UI显示",
+        "evidence": "探针多次点击Play按钮后DOM均有变化，playWithCreature()逻辑正确更新资源与生物状态并触发通知，无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "添加树木（Add Tree）",
+        "expected": "点击Add Tree按钮后消耗金币，提升生态系统健康，并更新资源显示",
+        "evidence": "探针点击Add Tree按钮后DOM有变化，HTML中事件处理正确扣减金币、增加健康并显示通知，无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "在市场中购买物品",
+        "expected": "打开市场后点击Buy按钮，消耗金币并根据物品效果更新生物状态或资源",
+        "evidence": "HTML中buyItem()函数已实现，按钮事件绑定正确，市场物品渲染逻辑完整；探针未直接点击但代码路径无缺陷",
+        "ok": 1
+      },
+      {
+        "name": "社区策略分享",
+        "expected": "页面应提供社区或策略分享入口（如论坛、分享按钮）",
+        "evidence": "页面HTML中完全没有社区、分享、攻略等元素或入口，需求声明的社区协作功能未实现",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心游戏交互（喂食、玩耍、环境管理、市场交易）均可正常工作，探针验证了主要按钮点击后DOM均有响应且无JS错误。3D场景和资源更新运行正常。但需求中明确提到的社区驱动策略分享功能完全缺失，动态成长路径也仅以等级和阶段展示，缺少深度进化机制，因此扣分至8分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 环境管理按钮（Add Tree / Add Water / Clean / Upgrade）点击后仅改变资源数值和健康度，3D 场景中并没有实际添加树木、水源或发生视觉变化，操作结果与按钮名称不符，属于“核心控件调节无效”。\n2. 市场中的 Evolution Shard、Rainbow Dust、Energy Core 等商品购买后只扣除金币并弹出“购买成功”通知，但生物属性、等级或进化状态没有任何实际变化，物品效果未实现，属于“核心控件调节无效”。\n\n次要瑕疵：\n- Feed/Play 按钮上的“+🪙”图标容易让人误解为获得金币，实际为消费金币。\n- 生物卡片的 Stage 标签使用了动态 Tailwind 类名（如 bg-red-500），可能因 CDN 方式未预编译而样式不生效。\n- 水和食物资源在玩法中作用不明显，缺少说明或引导。\n- 3D 生物与 UI 卡片之间没有联动反馈（如喂养时 3D 生物无反应）。\n- 用户需求中的社区策略分享功能未实现，但不影响当前主流程。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力较高，采用半透明深色UI面板搭配鲜艳的Tailwind颜色组件，与Three.js渲染的3D场景结合，营造出沉浸式游戏界面氛围。色彩搭配上，背景的蓝天绿地和前景的深色面板形成对比，按钮及进度条使用了绿、蓝、黄、红、紫等颜色，功能区分明确且富有活力。布局方面，顶部资源栏、左侧生物列表、右侧环境控制面板分布均衡，配合模态框和通知，层次清晰。字体采用Segoe UI等现代无衬线体，字号和字重使用合理，信息可读性好。间距通过Tailwind工具类控制，组件圆角、阴影、模糊特效和动画过渡设计专业，符合现代游戏UI规范。整体与用户需求的‘虚拟世界养生物’风格高度契合，功能视觉映射直观。扣分点在于部分配色略显饱和度高、元素多样性不足（依赖emoji而非真实图标），但综合仍属优秀设计。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_002464.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Marketplace",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Feed (+🪙5)",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Play (+🪙3)",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Feed (+🪙5)",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Play (+🪙3)",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Feed (+🪙5)",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Play (+🪙3)",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "🌳\nAdd Tree (10🪙)",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "SPAN.",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

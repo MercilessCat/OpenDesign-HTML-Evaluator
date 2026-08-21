@@ -1,0 +1,129 @@
+{
+  "row_id": "00_031878",
+  "shard": 0,
+  "id": 31878,
+  "category": "3D design",
+  "prompt": "Step into a comprehensive resource for mastering texture atlasing. The platform offers tutorials, tools, and community-driven content to help users optimize 3D textures for performance. Key features include interactive demos, a texture atlas generator, and forums where creators can exchange tips and showcase projects.",
+  "html_len": 13154,
+  "html_sha256": "9ea2c70d510d910b3d67f346e154cebca478737afdd80abb9010b36dd54c5f60",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "旋转/缩放 3D 演示场景",
+        "expected": "用户可通过鼠标拖拽旋转视角、滚轮缩放，3D 场景实时响应",
+        "evidence": "HTML 中初始化了 THREE.Scene、OrbitControls、requestAnimationFrame 和 renderer.render 循环；探针在 canvas 上拖拽未产生 JS 错误，符合 WebGL 交互场景的可交互判断",
+        "ok": 1
+      },
+      {
+        "name": "点击 Atlas Calculator 的 Try Now",
+        "expected": "打开图集计算器，展示尺寸/打包效率计算或可操作界面",
+        "evidence": "探针点击按钮后 DOM 无变化、无新增网络请求、无 JS 错误；按钮没有绑定 onclick 或点击事件，属于死按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击 Performance Analyzer 的 Analyze",
+        "expected": "启动性能分析，显示纹理使用报告或优化建议",
+        "evidence": "探针点击后页面无任何变化，按钮无事件绑定、无跳转、无业务反馈，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Tutorials Library 的 Learn",
+        "expected": "进入教程库或展示教程列表",
+        "evidence": "探针点击后 DOM 无变化、无网络请求、无 JS 错误；按钮无事件绑定，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "访问 Community Forums",
+        "expected": "进入论坛，查看创作者分享、帖子或项目展示",
+        "evidence": "页面只有静态的 Community Forums 描述卡片，没有链接、按钮或路由入口，需求声明的论坛功能缺失",
+        "ok": "NA"
+      },
+      {
+        "name": "使用 Atlas Generator 生成纹理图集",
+        "expected": "提供上传素材并生成优化纹理图集的工具",
+        "evidence": "页面仅有 Atlas Generator 的宣传性描述，没有生成器入口、上传控件或可点击操作，核心功能未实现",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面视觉完整且 3D 演示场景可交互，但 Atlas Calculator、Performance Analyzer、Tutorials Library 三个核心工具按钮全部为死按钮，点击无任何反馈；Atlas Generator 和 Community Forums 也仅有静态描述、无实际功能入口。主要用户任务无法完成，属于核心功能大面积缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1）页面所有主要操作按钮（Try Now、Analyze、Learn）点击后均无任何响应，无DOM变化、无网络请求、无JS回调，属于主要入口/导航点击无实际反馈，用户无法进入任何工具或教程流程；2）三个工具（Atlas Calculator、Performance Analyzer、Tutorials Library）的核心功能完全不可用，操作流程卡死，无法完成“试用工具/分析性能/学习教程”等核心任务。次要瑕疵：页面没有导航菜单和面包屑，用户无法快速跳转；功能卡片缺少“开始使用”等文字说明，仅靠按钮名称可能导致理解偏差；3D演示虽然可旋转，但无操作提示或图例，用户可能不知道如何交互；footer版权年份为2023，与当前时间可能不符；社区论坛、教程库等仅在文字中提及，未提供任何可进入的入口。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力较强，采用深蓝渐变背景搭配霓虹蓝紫渐变文字，科技感与现代感突出，符合3D设计平台的主题定位。色彩搭配统一且和谐，主色为#4cc9f0、#4361ee等蓝色系，辅以半透明白色卡片，层次分明。布局上，头部大标题居中，主视觉区域采用flex双栏（3D画布+功能卡片），下方工具区域使用grid自适应网格，结构清晰、响应式良好。组件设计精致：卡片圆角、边框、hover浮动与阴影过渡细腻，按钮为渐变胶囊样式并带悬停缩放动效。CSS专业度较高，运用了渐变、backdrop-filter、动画关键帧、多种阴影和圆角。此外，内嵌Three.js实时3D演示增加了交互性和视觉亮点，强化了产品功能。稍显不足的是部分工具图标使用emoji，略欠精致，但无伤大雅。总体而言，页面在视觉设计上达到现代专业水准。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_031878.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Try Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Analyze",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Learn",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

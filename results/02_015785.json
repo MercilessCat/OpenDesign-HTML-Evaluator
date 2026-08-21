@@ -1,0 +1,172 @@
+{
+  "row_id": "02_015785",
+  "shard": 2,
+  "id": 15785,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Design a cosmic visualization platform simulating galactic mergers. Users can manipulate data to observe gravitational interactions and cosmic phenomena. The site offers educational resources, collaborative research tools, and virtual reality experiences, enabling enthusiasts and researchers to explore the mysteries of the universe through engaging simulations.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 9620,
+  "html_sha256": "f086877c64813facaf88d4dca2d4f98aabd39c5537c4e50256348780811e0a1d",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Simulation 启动模拟",
+        "expected": "启动银河合并模拟动画或进入可交互模拟界面",
+        "evidence": "探针点击按钮后 DOM 无变化，无 JS 错误，无网络请求；页面无 canvas 或模拟逻辑，仅有 CSS 动画占位块",
+        "ok": 0
+      },
+      {
+        "name": "点击 Parameters 操作数据参数",
+        "expected": "弹出参数面板，可调整质量/速度/距离等模拟参数",
+        "evidence": "探针点击按钮后 DOM 无变化，无任何反馈；HTML 中未绑定点击事件，参数调整功能完全缺失",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Education / Research / VR Labs",
+        "expected": "切换到教育资源、协作研究或虚拟现实体验等内容视图",
+        "evidence": "探针点击后仅产生 href=\"#\" 的哈希跳转，无实际内容切换；四个导航项均为纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 登录",
+        "expected": "出现登录界面或相关认证交互",
+        "evidence": "探针点击后 DOM 无变化，无反馈；按钮未绑定任何事件，登录功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "在可视化区域进行拖拽/操作模拟",
+        "expected": "用户可操纵星系观察引力交互",
+        "evidence": "页面没有 canvas、没有鼠标/触摸事件、没有数据操作控件，可视化仅为 CSS 动画占位，核心模拟交互入口缺失",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面仅有静态视觉框架和星星背景动画，需求核心的银河合并模拟、参数操作、教育资源、VR 体验等全部未实现。所有功能性按钮点击后均无业务反馈，四个导航项为 href=\"#\" 占位入口，无任何可用的数据操作或模拟交互。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 'Start Simulation' 按钮点击后无任何反馈，模拟从未启动，页面核心任务完全无法完成；2) 'Parameters' 按钮点击无效，用户无法调节任何数据或参数，核心功能卡死；3) 主导航（Simulator/Research/Education/VR Labs）均为占位链接，点击后无实际内容切换或页面跳转；4) 'Sign In'按钮、VR Experience/Collaboration/Educational三个特性卡片均点击无响应，视觉上可点击但实际无功能，存在大量死路。次要瑕疵：页面视觉设计美观、结构清晰，但所有数据（4.2B年/1.5M星）均为静态占位，无图例或操作指引；可视化区域显示'初始化中'却永远无法完成，与实际行动状态自相矛盾。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强：深空蓝紫渐变背景配合动态星点、发光元素和半透明毛玻璃卡片，营造出契合‘宇宙可视化平台’主题的沉浸感与科技感。色彩搭配合理：主色（#0b0c2a、#1a1c3d）与点缀色（#00f7ff、#c5a3ff）形成高对比且协调的宇宙色调，信息和导航均清晰可辨。布局协调：header、主内容区、footer通过flex/grid组织，视觉层次分明，信息块与统计卡片排布均衡，单屏内无拥挤感。字体间距虽采用系统字体，但通过字号、字重和行高保证了良好的可读性；组件设计精致，卡片圆角、阴影、悬浮效果均有体现。CSS手法专业：混合渐变背景、径向光晕、关键帧动画、Tailwind配置扩展色彩体系，并利用JS生成动态星空，增强了页面生命感。整体符合现代网页设计规范，与用户需求（天文模拟平台）风格高度对齐。扣分项：可视化核心区域仅为占位图案，未体现真正的‘数据可视化’交互；另外链接点击会跳转，影响单页沉浸体验，但美观度本身不受功能缺失过多影响。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_015785.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulator",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "covered_by": "DIV.absolute inset-0 overflo",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Research",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "covered_by": "DIV.absolute inset-0 overflo",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Education",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "covered_by": "DIV.absolute inset-0 overflo",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "VR Labs",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "covered_by": "DIV.absolute inset-0 overflo",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.absolute inset-0 overflo",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Parameters",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "row_id": "02_019214",
+  "shard": 2,
+  "id": 19214,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Build an immersive sales performance portal where users can visualize conversion rates across multiple channels. Utilize interactive funnel charts, predictive analytics, and customizable alerts. Provide AI-driven insights to optimize strategies and a community hub for sharing successful tactics and innovation stories.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 17782,
+  "html_sha256": "7b9b7ab1733b54fd1b96917af21ac643ff12192a2675dac1600b79bbaacb97c7",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击主导航切换视图",
+        "expected": "点击 Dashboard/Analytics/Reports/Community 应切换到对应内容视图或锚点区域",
+        "evidence": "四个导航链接 href 均为 \"#\"，无路由、无对应 section id、无 JS 事件绑定；探针点击虽有页面跳转记录，但只是 hash 变化，实际内容未切换",
+        "ok": 0
+      },
+      {
+        "name": "切换绩效图表时间范围",
+        "expected": "点击 Weekly/Monthly/Quarterly 后图表数据与标签随周期更新",
+        "evidence": "三个周期按钮无 onclick 或事件监听；探针分别点击后 DOM 变化均为“无”，Chart.js 数据未重新渲染",
+        "ok": 0
+      },
+      {
+        "name": "打开提醒/自定义警报",
+        "expected": "点击铃铛按钮应弹出通知列表或提醒设置面板",
+        "evidence": "铃铛按钮仅含图标，无任何事件绑定；探针点击后 DOM 无变化、无新增网络请求，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "查看详细预测",
+        "expected": "点击 View Detailed Forecast 应展示更详细的预测分析或跳转到预测视图",
+        "evidence": "按钮无 JS 事件绑定，属于静态展示；点击不会产生任何业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "自定义漏斗图视图",
+        "expected": "点击 Customize View 可调整漏斗图维度、渠道或显示方式",
+        "evidence": "该按钮无事件监听；漏斗图仅为静态 Chart.js 横向柱状图，点击不会改变图表配置或数据",
+        "ok": 0
+      },
+      {
+        "name": "在社区分享策略",
+        "expected": "点击 Share Your Insight 应打开分享表单或进入社区发帖流程",
+        "evidence": "按钮无事件绑定，未实现任何表单或跳转逻辑；社区内容为静态列表，分享入口为占位",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉完成度较高，Chart.js 图表能正常渲染且无运行时 JS 错误；但需求中的核心交互能力大面积缺失：导航、周期切换、提醒、预测详情、漏斗图自定义、社区分享等关键入口均为无事件占位，点击无业务反馈，用户无法完成主要任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在多个核心可用性问题：\n1. 核心筛选控件失效——Weekly/Monthly/Quarterly 三个时间粒度按钮点击后无任何 DOM/图表变化，用户无法切换查看不同时间范围的数据。\n2. 关键功能入口为死路——“View Detailed Forecast”“Customize View”“Share Your Insight”等按钮未绑定实际事件，点击后不执行任何操作，核心流程无法继续。\n3. 主导航为占位链接——Dashboard/Analytics/Reports/Community 点击后没有真实页面切换或内容更新，主要入口点击无实际功能。\n4. 需求中明确要求“可定制警报”，但页面仅有一个无反馈的铃铛图标，无法配置或管理警报，核心功能缺失。\n\n次要瑕疵：\n- 漏斗图用横向条形图代替真正漏斗形状，视觉语义略弱。\n- 页面要求不滚动展示全部内容，但多个卡片区域在较小视口下仍可能溢出滚动。\n- 时间切换按钮虽用背景色区分当前项，但交互后无状态变化或反馈。\n- 社区模块为静态内容，暂无发布/评论等真实互动能力。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉质量较高，符合现代数据可视化门户的设计水准。采用了以蓝、青、紫为主的协调配色，背景使用浅蓝渐变，搭配白色半透明卡片与毛玻璃效果，营造了清爽、专业的科技感。布局采用常见的三列栅格，左宽右窄，信息层级清晰，重点突出性能概览、漏斗图、预测分析和AI洞察。卡片圆角、阴影、悬停上浮等细节处理到位，字体统一使用Inter，保证可读性。图表使用Chart.js绘制，线条平滑、色彩透明，能够表现数据趋势。\n\n主要不足：页面内容密度较高，在非大屏视口下很可能需要滚动才能完整展示，与“一屏可见”的需求可能有偏差；顶部导航链接点击后会跳转至页面锚点而非切换内容，视觉上仍像占位符；部分按钮（如Weekly/Monthly/Quarterly）没有交互反馈，略显静态。但就纯视觉而言，色彩、排版、组件风格一致且精致，没有明显刺眼或不协调之处，整体属于专业且美观的现代UI设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_019214.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Reports",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-bell text-gray-60",
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Weekly",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Monthly",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Quarterly",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

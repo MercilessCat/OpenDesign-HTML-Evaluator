@@ -1,0 +1,187 @@
+{
+  "row_id": "04_028694",
+  "shard": 4,
+  "id": 28694,
+  "category": "Website",
+  "prompt": "Engage in collaborative storytelling through mind-linked experiences, narrative-building tools, and community workshops. Users create, share, and explore immersive tales, connecting through shared ideas and creativity. Key features include a narrative development platform, live storytelling events, and forums for collaborative brainstorming and feedback.",
+  "html_len": 32517,
+  "html_sha256": "06aec346ea4fa23db6c2168fd6fa7b95e3d1a914c0e4467824bcb9b5eee3db8a",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航 Features 链接",
+        "expected": "页面平滑滚动到 Features 功能区域",
+        "evidence": "HTML 中存在 id=\"features\" 的目标区块，锚点导航是浏览器原生行为；探针仅报告 DOM 结构无变化，未检测到滚动偏移，但页面存在有效目标 id",
+        "ok": 1
+      },
+      {
+        "name": "点击导航 Stories 链接",
+        "expected": "页面滚动到故事展示区域",
+        "evidence": "HTML 中没有任何 id=\"stories\" 的锚点目标，点击后页面不会发生滚动或内容切换，探针确认 DOM 无变化，属于失效导航",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 按钮",
+        "expected": "打开登录窗口或跳转登录页",
+        "evidence": "按钮在 HTML 中无 href、无 onclick 或任何事件绑定，探针点击后 DOM 无变化、无新请求、无 JS 错误，完全无反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Now 按钮",
+        "expected": "打开注册流程或注册页",
+        "evidence": "按钮无任何事件绑定或路由，探针点击后页面无任何变化，属于纯占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Creating Stories 按钮",
+        "expected": "进入叙事创作平台或开始创建流程",
+        "evidence": "主 CTA 按钮没有任何 JS 事件绑定，探针点击后 DOM 无变化、无网络请求，核心需求入口未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击活动卡片 Register / Join Event 按钮",
+        "expected": "完成活动报名或跳转报名页面",
+        "evidence": "HTML 中 Registe/Join Event 按钮均无事件绑定，点击无反馈；Live storytelling 活动报名功能是需求关键功能，但完全不可用",
+        "ok": 0
+      },
+      {
+        "name": "点击页脚链接（Pricing/Documentation 等）",
+        "expected": "跳转到对应的功能/文档页面",
+        "evidence": "页脚中所有资源、公司、平台链接均为 href=\"#\" 纯占位，无路由或事件处理，点击无任何反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面是一个静态展示型营销页，视觉和内容结构完整，但核心交互大面积失败：Sign In、Join Now、Start Creating Stories、活动报名等关键按钮全部为无事件绑定的占位按钮，需求声明的叙事创作平台、现场活动、协作论坛等核心功能均未实现；导航中也存在 Stories 锚点无目标的问题。仅 Features/Community/Events 等锚点导航可依赖浏览器原生滚动生效，整体功能不可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 页面主要操作按钮几乎全部无响应，包括 Sign In、Join Now、Start Creating Stories、Explore Community、Join Event、Register、Start Your Free Trial、Schedule Demo 等，点击后无 DOM 变化、无网络请求、无任何反馈，用户无法完成登录、注册、创建故事、加入活动等核心任务；2) 主导航 Stories 链接指向不存在的 #stories 锚点，点击后无实际内容或跳转反馈；3) 多个活动卡片与 CTA 看似可点击，但实际是死路，操作流程被卡死。次要瑕疵：页面视觉层级和信息分区较清晰，但大量按钮/链接仅有 hover 样式而无实际功能，容易误导用户；Footer 中多个链接均为占位 href='#'，点击无效；缺少对“Stories”板块缺失的说明或替代入口。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉设计优秀。深色渐变背景（#0f172a → #1e293b）搭配靛蓝、紫色、粉色高亮渐变，营造出沉浸式、富有创意的氛围，与故事创作平台的品牌调性高度契合。色彩搭配协调，主次分明，文字对比度良好。布局上，Hero 区左右分栏，右侧四张错落有致的玻璃拟态卡片配合浮动动画和粒子背景，视觉层次丰富且不失平衡；功能区块、社区统计、事件卡片和页脚均采用一致的圆角、边框、阴影风格，网格排列整齐，整体节奏感强。字体方面，Playfair Display 标题与 Inter 正文的组合兼顾了文学感与现代感，字号与字重层级清晰。组件设计精细，按钮渐变、卡片 hover 上浮、毛玻璃效果等细节体现了较高的 CSS 专业水准。虽然个别动画类名可能未完全定义、部分链接无实际跳转，但这不影响视觉呈现。整体符合现代 Web 设计规范，并较好地反映了用户对‘沉浸式、协作式故事体验’的风格需求。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_028694.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Stories",
+      "href": "#stories",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Events",
+      "href": "#events",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating Stories",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

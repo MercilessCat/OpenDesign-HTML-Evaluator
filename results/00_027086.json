@@ -1,0 +1,181 @@
+{
+  "row_id": "00_027086",
+  "shard": 0,
+  "id": 27086,
+  "category": "3D design",
+  "prompt": "Launch an interactive simulation hub for visualizing network topologies in 3D, providing users with tools to design, simulate, and analyze network structures. The site features a drag-and-drop topology builder, real-time data integration, and simulation playback. Users can collaborate on network projects and share insights in a knowledge exchange forum.",
+  "html_len": 24185,
+  "html_sha256": "3dc4700aea3411e0a0fbab2752aff3719a4021cd9931ce93a00aa35e4787e6ab",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击工具添加网络节点",
+        "expected": "在 3D 场景生成对应类型的球体节点，Nodes 数量增加",
+        "evidence": "HTML 中 .tool-item 均绑定 click 并调用 createNode(type)，createNode 会创建 THREE.Mesh 加入 scene 并 updateStatusBar()；运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "拖拽工具到场景构建拓扑",
+        "expected": "通过拖放将节点放置到 3D 场景中的指定位置",
+        "evidence": "页面没有 draggable 属性、dragstart/drop 事件处理或相关逻辑；工具项只有 click 事件，拖拽入口缺失。",
+        "ok": "NA"
+      },
+      {
+        "name": "连接两个节点",
+        "expected": "选择两个节点后生成连线并更新 Connections 计数",
+        "evidence": "addConnectionMode() 只把状态文字改为 'Select another node to connect'，并未进入连接模式；onMouseClick 只做选中/取消选中，未调用 connectNodes()，connectNodes 仅用于初始演示，因此用户无法实际创建连接。",
+        "ok": 0
+      },
+      {
+        "name": "仿真播放控制（启动/暂停/重置）",
+        "expected": "启动后状态为 Running、流量动态变化；暂停停止动画；重置恢复 Ready 与 0%",
+        "evidence": "探针点击 Start/Pause/Reset 后 DOM 均有变化且无 JS 错误；对应 startSimulation/pauseSimulation/resetSimulation 会切换状态并启停 animateSimulation，这是可用的核心仿真反馈。",
+        "ok": 1
+      },
+      {
+        "name": "分析网络",
+        "expected": "点击 Analyze 后展示节点数、连接数、带宽等分析结果",
+        "evidence": "analyzeNetworkBtn 绑定 analyzeNetwork()，会延时弹出 Network Analysis 信息并更新状态；HTML/运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "进入协作/论坛页面",
+        "expected": "从 Collaborate/Forum 导航进入项目协作与知识交流页面",
+        "evidence": "导航链接均为 href=\"#\"，没有路由或对应内容容器；探针点击只产生 hash/DOM 变化，无网络请求与实际页面切换，属于占位入口。",
+        "ok": 0
+      }
+    ],
+    "reason": "3D 场景、节点添加、仿真播放控制和分析功能基本可用；但拖拽构建拓扑入口缺失，连接节点功能失效，协作/论坛导航为纯占位，实时数据集成也未实现，属性面板输入同样未绑定到节点数据。需求声明的关键功能有多项未实现，因此按规则不高于 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部导航（Dashboard/Projects/Collaborate/Analytics/Forum）均为 href=\"#\" 占位链接，点击无实际页面或内容更新，主要入口无反馈；2. “Connect Nodes”连接流程卡死，点击后只提示“选择另一个节点”，但再次点击节点并不会真正创建连接，核心操作无法完成；3. 属性面板的节点名称/IP/带宽/状态等控件修改后不影响选中节点，没有事件绑定或提交逻辑，核心控件调节无效；4. 页面声称支持拖拽式拓扑构建，但节点只能通过点击工具随机生成，不能拖拽放置到指定位置，设计核心流程缺失。次要瑕疵：缺少图例和操作引导说明；连接模式的提示在右上角状态栏不够醒目；初始化自动创建的节点和连接可能与用户提前创建的节点错乱关联；协作、论坛等模块未实现。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力非常强，深色渐变背景配合霓虹青色与绿色高光，营造出强烈的科技感与3D设计氛围，高度契合“3D网络拓扑仿真”的产品定位。色彩搭配专业：主色为深蓝渐变（#1a2a6c→#2c3e50），辅助色为#00c9ff与#92fe9d，形成鲜明且协调的对比，同时半透明黑/白层叠创建了良好的纵深层次。布局结构清晰：固定顶部导航、左侧工具面板、右侧3D画布区域、底部浮动控制条、右上状态卡，信息层级分明，符合工具型应用范式。字体与间距规范：采用Segoe UI等现代无衬线字体，标题、面板标题、控件尺寸与内边距统一，视觉节奏舒适。组件设计质量高：工具卡片、属性面板、控制按钮均使用圆角、渐变、阴影与hover过渡，且具备玻璃拟态（backdrop-filter）效果，专业且美观；控制按钮的胶囊造型和渐变填充增强了交互感。CSS实现专业：灵活运用flex/grid布局、渐变、阴影、关键帧动画，代码结构清晰。唯一小瑕疵是3D画布的尺寸计算与CSS可能存在轻微不一致（宽度按window.innerWidth-250而非容器实际宽度），但整体不影响视觉观感。综合而言，页面视觉设计达到了现代3D工具类网站的一流水准。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.2,
+  "baseline_overall": 4.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_027086.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Projects",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Collaborate",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Forum",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Pause",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "row_id": "03_022405",
+  "shard": 3,
+  "id": 22405,
+  "category": "Game dev",
+  "prompt": "Design an interactive archaeology-themed puzzle platform where players unravel intricate bandage patterns on virtual mummies. Engage users with historical facts, time-based challenges, and unlockable artifacts. Features include a storyline mode, leaderboards, and educational content about ancient Egyptian culture and preservation techniques.",
+  "html_len": 26577,
+  "html_sha256": "b4dd965df46ea41b93ee373180f614c704f72d099457a7fe1a68e3eba85af85f",
+  "functional": {
+    "score": 9.0,
+    "raw_score": 9.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "开始考古挖掘",
+        "expected": "点击“Begin Excavation”后，开始屏幕隐藏，游戏区显示，并生成金字塔场景、绷带和计时器。",
+        "evidence": "探针点击该按钮后报DOM有变化；HTML中startBtn绑定了startGame，其中startScreen.classList.add('hidden')，并调用createBandages()和startTimer()。",
+        "ok": 1
+      },
+      {
+        "name": "解开木乃伊绷带",
+        "expected": "点击任意绷带块，绷带淡出消失，分数增加，绷带计数+1，并可能触发文物发现和粒子特效。",
+        "evidence": "createBandages中为每个.bandage元素添加click监听调用removeBandage；removeBandage中设置removed类、更新分数/计数，随机调用findArtifact和createParticles，CSS中.removed为opacity:0。",
+        "ok": 1
+      },
+      {
+        "name": "请求提示",
+        "expected": "游戏进行中点击“Request Hint”会弹出提示文字并扣除50分。",
+        "evidence": "hintBtn绑定了点击事件，若gameState.gameActive则alert提示并执行gameState.score = Math.max(0, gameState.score - 50)。探针测到DOM无变化是因为初始gameActive为false，按钮在未开始时忽略点击，符合逻辑。",
+        "ok": 1
+      },
+      {
+        "name": "重置木乃伊",
+        "expected": "游戏进行中点击“Reset Mummy”会清空当前绷带并重新生成25条，同时绷带计数归零。",
+        "evidence": "resetBtn绑定了点击事件，若gameActive则调用createBandages()重建绷带DOM，并设置bandagesRemoved=0。探针无DOM变化同样因为未开始游戏，游戏激活后功能有效。",
+        "ok": 1
+      },
+      {
+        "name": "完成解绷带并进入结算",
+        "expected": "移除20条绷带后，游戏自动结束，弹出“Excavation Complete”结算界面，显示最终得分和用时。",
+        "evidence": "removeBandage中当bandagesRemoved>=20时调用endGame()，endGame设置finalScore、finalTime和finalMessage，并移除gameOverScreen的hidden类。",
+        "ok": 1
+      },
+      {
+        "name": "重新开始新挖掘",
+        "expected": "在结算界面点击“New Excavation”后，结算界面隐藏，游戏重新开始，生成新绷带并启动计时器。",
+        "evidence": "restartBtn绑定resetGame，resetGame隐藏gameOverScreen并调用startGame()，startGame重新初始化状态并createBandages。",
+        "ok": 1
+      }
+    ],
+    "reason": "核心游戏循环完整可用：开始、解绷带、计分/计时、提示/重置、通关结算、重开全部有真实交互反馈。故事模式、历史知识、文物发现、排行榜等需求元素均有呈现。仅排行榜未随玩家成绩动态更新、故事线较浅、文物解锁机制简单，属于次要内容瑕疵，不影响核心可玩性。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 7.0,
+    "reason": "无核心可用性问题。核心玩法（点击解绷带、得分、发现文物、计时与结算）运行流畅，交互反馈丰富，视觉主题统一。次要瑕疵：1) 排行榜不随玩家成绩更新，完成后'You'仍显示0分，排行榜功能形同虚设；2) Reset Mummy只重建绷带并清零绷带计数，但分数和时间不清零，导致统计数据不一致且可反复刷分；3) 未说明游戏目标（移除20条绷带获胜），玩家需自行摸索；4) 文物仅有临时发现提示，无解锁收藏界面且刷新丢失，不满足'unlockable artifacts'预期；5) Historical Insight文本每10秒随机跳换，阅读易被打断；6) 引入Howler.js但未实际使用，音效仅为简易beep。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "整体设计有明确的埃及考古主题方向，色彩系统以金色（#d4af37）为核心，搭配深色半透明面板、米白文字，营造出与主题相符的神秘古典氛围。页面布局层次清晰：顶部标题区、故事模式、左主右辅的游戏区、底部排行榜，信息架构合理。组件风格统一，圆角、阴影、渐变和金色边框贯穿一致，按钮、统计卡、面板均保持了良好的视觉一致性。粒子反馈、hover光效和过渡动画增加了交互质感。\n\n主要扣分点：1）背景渐变色（深蓝#1a2a6c+红色#b21f1f）与金色主题形成高饱和碰撞，整体色调偏重且有些嘈杂，不够精致；2）木乃伊展示区初始状态仅是一个棕色矩形+白色绷带条，缺乏可辨识的角色造型或纹理细节，视觉吸引力较弱；3）大量使用emoji（🏺⚰️👁）代替专业图标，降低了设计质感；4）字体使用系统默认Segoe UI，缺少符合古埃及风格的特质；5）排行榜和故事模式区域的排版较朴素，分隔线、间距等细节打磨不够。整体上是一版合格且有主题感的游戏UI，但距离高水准视觉表现仍有明显差距。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 7.5,
+  "baseline_overall": 7.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_022405.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Request Hint",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Mummy",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Excavation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

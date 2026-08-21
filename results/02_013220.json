@@ -1,0 +1,107 @@
+{
+  "row_id": "02_013220",
+  "shard": 2,
+  "id": 13220,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Design an interactive platform for exploring hierarchical knowledge structures. Users navigate complex ontology diagrams, discovering relationships and layers of information. Features include customizable visualization options, collaborative curation tools, and educational resources on ontology design. This site empowers users to map and understand intricate knowledge architectures.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10386,
+  "html_sha256": "831590ec0336d1ceff694dc78e4dec4485c0787b9f1fb8c24f6dfc7a0bd4af2d",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "加载并浏览层级知识图谱",
+        "expected": "页面加载后显示可交互的 D3 树状图，用户能查看知识结构层级",
+        "evidence": "JS错误3条：Cannot access 'i' before initialization，导致update(root)执行失败，SVG未生成（元素统计svg=0），可视化容器空白，核心可视化功能完全不可用",
+        "ok": 0
+      },
+      {
+        "name": "点击树节点折叠/展开子层级",
+        "expected": "点击节点时子节点折叠或展开，树形图动态更新",
+        "evidence": "树节点未渲染（svg=0），click事件绑定因脚本中断而未生效，实际上不存在可点击的节点",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Exploring 按钮",
+        "expected": "按钮有视觉反馈或进入探索流程",
+        "evidence": "探针点击后DOM无变化，按钮事件绑定在脚本错误之后未执行，点击无任何反应",
+        "ok": 0
+      },
+      {
+        "name": "点击 Documentation 按钮",
+        "expected": "打开文档或给出反馈",
+        "evidence": "探针点击后DOM无变化，该按钮无事件绑定，属于纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "自定义可视化选项（布局/颜色调整）",
+        "expected": "提供布局、颜色等可调节控件并影响图表显示",
+        "evidence": "页面仅包含描述卡片，没有任何可自定义的控件或交互入口，功能未实现",
+        "ok": "NA"
+      },
+      {
+        "name": "使用协作策展与教育资源功能",
+        "expected": "提供协作工具或教育资源内容入口",
+        "evidence": "页面只展示四个功能卡片文字说明，没有具体链接、弹窗或交互入口，均为占位性描述",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面加载时JavaScript报错导致核心D3层级图完全未渲染，树节点交互不存在；两个按钮事件绑定因脚本中断而未生效，点击均无反馈。自定义可视化、协作策展、教育资源等需求均未实现，仅为占位描述。核心交互大面积失败，分数极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. D3可视化图表未渲染——代码在`let i`声明之前调用`update(root)`，触发`Cannot access 'i' before initialization`错误，导致右侧图表区域完全空白，页面最核心的知识图谱探索功能不可用。2. \"Start Exploring\"按钮点击无反馈——JS错误中断了后续事件监听器的绑定，点击后没有任何DOM变化或视觉反馈。3. \"Documentation\"按钮点击无反馈——未绑定任何交互行为，作为主要入口点击后无反应。次要瑕疵：1. 可视化区域无图例或提示文字，用户难以理解树图中不同颜色节点的含义；2. 页面声称支持\"customizable visualization options\"和\"collaborative curation\"，但实际仅有静态描述卡片，没有对应的操作控件或功能入口；3. \"Start Exploring\"的点击反馈流于表面，没有真正进入探索流程，只是改变了按钮文字。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 4.0,
+    "reason": "页面整体采用深色主题搭配蓝紫渐变，header标题和功能卡片的圆角、阴影与hover动效都体现出一定的现代感，布局栅格也较清晰，静态视觉基础尚可。但关键问题在于：主可视化区域依赖D3渲染的层级知识图谱，由于脚本存在变量初始化时序错误（'Cannot access i before initialization'），树形图完全未渲染，导致右侧大面积可视化容器空白，核心视觉内容缺失。元素统计中svg=0也证实了该区域为空。这使页面失去数据可视化网站最重要的视觉焦点，整体吸引力和完整度大打折扣。此外，按钮事件监听因脚本错误未能正常绑定，交互反馈缺失，进一步削弱了体验。色彩搭配本身合理，但核心内容缺失使得页面看起来像未完成的模板，因此评分较低。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 2.2,
+  "baseline_overall": 2.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Cannot access 'i' before initialization",
+      "Cannot access 'i' before initialization",
+      "Cannot access 'i' before initialization"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_013220.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Documentation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

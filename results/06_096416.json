@@ -1,0 +1,184 @@
+{
+  "row_id": "06_096416",
+  "shard": 6,
+  "id": 96416,
+  "category": "Website",
+  "prompt": "Create a platform for tech enthusiasts to design, share, and collaborate on customizable smart home kits. Users can explore interactive tutorials, contribute to a community-driven library of device blueprints, and showcase their projects. Integrate a marketplace for components and partnerships with eco-friendly tech providers for sustainable solutions.",
+  "html_len": 36688,
+  "html_sha256": "76e3ee62f04ba021ef69c6892c82bb574301c743539e7ce31f1f8f893d02e75f",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "主导航锚点跳转（Home/Features/Marketplace/Community）",
+        "expected": "点击导航链接后平滑滚动到对应页面区域",
+        "evidence": "探针点击后 DOM 有变化且发生页面跳转，无 JS 错误、无新增网络请求，锚点目标存在",
+        "ok": 1
+      },
+      {
+        "name": "点击 Start Designing 开始设计",
+        "expected": "进入设计工作室或展示设计工具入口",
+        "evidence": "探针点击后 DOM 无变化，无新增JS错误、无网络请求，按钮为无事件绑定的占位 CTA",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 登录",
+        "expected": "弹出登录窗口或跳转登录页",
+        "evidence": "探针点击后 DOM 无变化、无 JS 错误、无网络请求，登录按钮未实现任何功能",
+        "ok": 0
+      },
+      {
+        "name": "点击搜索按钮",
+        "expected": "打开搜索框或触发搜索界面",
+        "evidence": "探针点击后 DOM 无变化，按钮中心仅被图标覆盖，无事件反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击购物车按钮（角标3）",
+        "expected": "打开购物车或展示购物车内容",
+        "evidence": "探针点击后 DOM 无变化、无 JS 错误、无网络请求，购物车按钮为占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Browse All Components 浏览市场组件",
+        "expected": "加载/展示更多组件或进入市场页面",
+        "evidence": "按钮为无 onclick、无 href 的纯静态按钮，同类 CTA 点击均无反馈，市场功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉内容完整、锚点导航可用，但设计、登录、搜索、购物车、浏览市场组件等核心 CTA 全部为无响应的占位按钮，用户无法实际开展设计、协作、教程学习或市场购买等核心任务，主要需求功能均未实现。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 主要 CTA 无实际反馈：'Start Designing' 点击后无任何 DOM/网络/跳转变化，'Explore Marketplace'、'Browse All Components' 也未绑定实际流程，核心任务（进入设计/市场）直接卡死。\n2. 顶部核心入口失效：搜索、购物车（带角标 3）、Sign In 点击均无反馈，用户无法搜索、登录或查看购物车。\n3. 移动端导航不可用：汉堡菜单按钮无点击处理，小屏下主导航被隐藏，用户无法访问 Features/Marketplace/Community 等区块。\n4. 商品卡上加购按钮（+）均为占位，无法加入购物车或进入商品详情，采购流程无法完成。\n\n次要瑕疵：\n- 商品图和项目缩略图大量使用灰色虚线占位，缺少真实产品图，信息可信度低。\n- 社区 Activity 图表 canvas 未见初始化和图例，可能呈现空白或不可读；Top Contributors 缺少更完整的说明。\n- 页面更像营销落地页：设计工作台、教程、协作等仅以文案展示，没有实际可操作的模块入口；已实现导航主要是锚点跳转。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高：采用现代蓝色系渐变配色（主色#2563eb、辅色#0ea5e9、强调紫#8b5cf6），配合浅蓝渐变背景和径向光斑，营造出科技感与清新感。布局上使用标准导航栏、Hero区、数据统计、功能卡片、商城卡片、社区列表和CTA区，结构清晰、层级分明。卡片设计统一，带有悬停上浮和阴影过渡，细节专业。字体使用Inter，间距和圆角控制良好，符合现代网页设计规范。不足之处：商城和社区中的产品/项目图片均为灰色虚线占位框，视觉上显得空洞，降低了真实感和精致度；部分按钮交互没有实际行为响应（如Sign In、Start Designing），但视觉呈现已完成设计意图。整体是一个设计规范、视觉舒适且风格与智能家居科技社区需求对齐的页面。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_096416.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Marketplace",
+      "href": "#marketplace",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-search",
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "3",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-shopping-cart",
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Designing",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    }
+  ]
+}

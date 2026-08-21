@@ -1,0 +1,84 @@
+{
+  "row_id": "00_035646",
+  "shard": 0,
+  "id": 35646,
+  "category": "3D design",
+  "prompt": "Immerse in a dynamic hub for optimizing visual fidelity. Users explore and experiment with detail levels across objects in real-time 3D scenes. Key features include interactive models, adjustable LOD settings, and a community forum for sharing tips on maintaining performance without sacrificing quality.",
+  "html_len": 20001,
+  "html_sha256": "31af492d0a7f0d596a49edd96001fd3ed7f4a34d012918dfdd5a85660cddb66a",
+  "functional": {
+    "score": 8.0,
+    "raw_score": 8.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "拖拽旋转3D场景",
+        "expected": "视角随拖拽旋转，场景实时响应",
+        "evidence": "探针在canvas上拖拽后DOM有变化且无新增JS错误；HTML中绑定了THREE.OrbitControls，动画循环调用controls.update()和renderer.render()，真实3D交互已初始化",
+        "ok": 1
+      },
+      {
+        "name": "调整Level of Detail滑块",
+        "expected": "LOD值、多边形估算、当前LOD标签同步更新",
+        "evidence": "#lod-slider绑定了input事件，更新#lod-value文本并调用updateStats()；统计卡片显示对应估算值和LOD标签。注意：3D场景中实际网格LOD切换由相机距离经THREE.LOD自动驱动，该滑块仅改变统计显示，未直接影响场景细节——属轻微功能瑕疵",
+        "ok": 1
+      },
+      {
+        "name": "调整Scene Complexity滑块",
+        "expected": "场景中物体数量重建并刷新统计",
+        "evidence": "#complexity-slider绑定了input事件，更新#complexity-value文本并调用createObjects()；createObjects()清空旧objects并重新按网格生成指定数量的THREE.LOD球体，统计同步更新",
+        "ok": 1
+      },
+      {
+        "name": "调整Animation Speed滑块",
+        "expected": "速度值更新且物体旋转/浮动速度随之变化",
+        "evidence": "#speed-slider绑定了input事件，更新#speed-value文本和animationSpeed变量；动画循环中obj.rotation.y += 0.5*delta*animationSpeed、obj.position.y = 1+sin(...)*0.2*animationSpeed，滑块输入真实作用于场景动画",
+        "ok": 1
+      },
+      {
+        "name": "浏览社区论坛帖子",
+        "expected": "展示社区优化技巧内容，hover有交互反馈",
+        "evidence": "forum-section包含三篇完整帖子（标题、内容、作者），.post:hover设置了transform和box-shadow过渡效果；作为内容展示无JS错误。页面没有发帖/分享表单入口，属次要缺失，但浏览已满足核心需求",
+        "ok": 1
+      }
+    ],
+    "reason": "核心功能全部可用：3D场景基于Three.js+OrbitControls可拖拽交互，复杂度与动画速度滑块均真实驱动场景，社区内容完整展示，运行时0 JS错误、0失败请求。扣分点：LOD滑块只更新统计/标签显示，并未直接控制场景网格LOD（实际LOD由相机距离自动切换），造成调整反馈的部分失真；论坛缺少用户发帖入口。整体仍属高可用页面。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题（1个）：LOD滑块是页面的主要控制项，但调节它只改变数值和统计文本，没有作用到场景中的THREE.LOD对象，3D模型的细节分辨率不会变化；同时“Current LOD”统计不会根据相机距离更新，而是显示滑块值，反馈错误、误导用户。这使得页面核心目的（探索/调整LOD）无法达成，属于“能用但不好用”。\n次要瑕疵：场景缺少操作提示（如拖拽旋转、滚轮缩放），新手可能不知道如何观察；社区论坛为静态内容，没有发表/互动功能，但不影响主流程；相机初始aspect使用window尺寸而非场景容器尺寸，首屏可能轻微拉伸，直到窗口resize后才修正；LOD滑块与自动LOD切换的语义容易混淆。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面整体视觉吸引力强，采用深蓝渐变背景搭配霓虹蓝/紫色的高亮色，营造出强烈的科技感与3D设计氛围，风格与用户需求高度契合。色彩搭配专业且统一：背景渐变（#1a1a2e → #16213e → #0f3460）与强调色#4cc9f0、#4361ee形成鲜明对比，同时大量半透明白色面板和边框增强了层级感，没有出现刺眼或冲突的配色。布局协调：使用网格将3D场景与控制面板分列，清晰而不拥挤；统计卡片两列排布、社区帖子自适应栅格，符合现代仪表盘/工具站的排版规范。字体与间距处理良好：标题采用大号渐变文字，副标题字号适中、行距舒适，卡片内边距和间距统一。组件设计精致：自定义滑块带有发光滑块头，面板有圆角、边框、阴影和毛玻璃效果（backdrop-filter），帖子卡片在hover时轻微上浮并改变背景，交互反馈细腻。CSS整体专业：利用Grid/Flex布局、渐变、阴影、圆角、媒体查询等现代特性，风格统一且响应式处理完整。唯一小瑕疵是滑块样式仅针对WebKit内核做完整自定义，Firefox等浏览器下外观会退化；另外页面纯静态、缺少实际按钮等可操作元素，但作为以3D查看和滑块调节为主的控制界面，并不影响整体美观。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_035646.png",
+  "probe": [
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

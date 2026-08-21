@@ -1,0 +1,192 @@
+{
+  "row_id": "04_026849",
+  "shard": 4,
+  "id": 26849,
+  "category": "Website",
+  "prompt": "A digital archive preserving personal memories as interactive tapestries. Users can upload stories, photos, and videos to weave into multimedia tapestries. Features include customizable design templates, memory sharing, and collaborative projects where multiple users contribute to shared memory tapestries.",
+  "html_len": 19276,
+  "html_sha256": "d39ba5aa2e2a9544d0f7263bd66978fc5249b2098bf12299d39d73d7e77bef6b",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接 Home/My Tapestry/Explore/Collaborate",
+        "expected": "跳转到对应的记忆挂毯页面或板块",
+        "evidence": "探针点击 4 个导航链接后，均表现为 URL 添加 # 的锚点跳转，页面内容无实际切换；HTML 中所有导航 href=\"#\"，无路由实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Create New Tapestry 按钮",
+        "expected": "打开创建新挂毯的流程/表单/编辑器",
+        "evidence": "探针点击该按钮后 DOM 变化=无，新增 JS 错误=0；HTML 中按钮无事件绑定，点击无任何业务反馈，核心创建功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Gallery 按钮",
+        "expected": "进入可浏览的挂毯画廊/探索页",
+        "evidence": "探针点击后 DOM 变化=无，新增 JS 错误=0；按钮无事件处理，点击无反馈，探索画廊功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击卡片 View Tapestry 按钮",
+        "expected": "打开对应挂毯的交互式查看界面",
+        "evidence": "3 张卡片上的 View Tapestry 按钮在 HTML 中均无事件绑定，点击后页面无任何反应；该入口为纯占位。",
+        "ok": 0
+      },
+      {
+        "name": "上传故事/照片/视频",
+        "expected": "提供上传入口并能添加多媒体记忆",
+        "evidence": "需求核心功能是上传记忆，但页面 HTML 中不存在任何 upload-area / file input / 上传按钮；JS 中 querySelector('.upload-area') 取到 null 并抛出 addEventListener 错误，上传功能完全缺失。",
+        "ok": "NA"
+      },
+      {
+        "name": "自定义设计模板 / 协作项目 / 分享",
+        "expected": "有模板选择器、协作邀请入口和分享功能",
+        "evidence": "页面只有 \"Custom Templates\"、\"Collaborative Projects\" 等文字链接，点击 href=\"#\" 无实际功能；未发现模板选择器、协作成员管理或分享控件的任何实现。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面本质上是一个视觉完整的静态营销展示页，但需求声明的核心功能——上传记忆、创建/查看挂毯、模板定制、分享协作——均未实现或仅为占位入口。导航和按钮点击无真实业务反馈；初始化脚本因找不到 .upload-area 抛出 9 条 null addEventListener 错误导致脚本中断。用户无法完成任何核心任务，仅能浏览静态内容。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 页面两个核心入口按钮（Create New Tapestry / Explore Gallery）点击后均无任何功能响应，创建挂毯这一主要任务无法开始；2. 主导航（Home / My Tapestry / Explore / Collaborate）均为占位链接，点击后仅回到页面顶部，无法到达对应功能页面；3. 挂毯卡片的 View Tapestry 按钮无实际功能，无法查看任何挂毯内容；4. View All 同样是锚点占位，不能查看全部挂毯；5. 页面完全没有实现上传照片/视频/故事的入口，与用户核心需求直接冲突。次要瑕疵：页面信息结构清晰、视觉设计精致，但缺少对未实现功能的“即将上线”提示；页脚大量占位链接（Memory Upload、Custom Templates 等）；Subscribe 输入框点击按钮无反馈；页面 JS 存在对不存在元素 addEventListener 的报错，反映功能未完整接入。\"",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，贴合“数字记忆挂毯”的主题。色彩搭配专业：主色调采用柔和的蓝紫色渐变，配合白色卡片和浅灰背景，营造出温馨、优雅且富有情感的氛围。布局结构清晰，导航、Hero区、特色卡片、功能说明、CTA和页脚层次分明，网格与留白处理得当。字体选择讲究，标题使用Playfair Display衬线体，正文使用Poppins无衬线体，形成优雅对比。组件设计精致，卡片圆角、阴影、悬停上浮效果和渐变图标都体现了较高的设计水准。CSS使用Tailwind加自定义样式，整体符合现代网页设计规范。但存在少量JS错误（uploadArea为空引用），影响交互完整性，且页面中未出现upload-area元素，稍有疏漏，扣分以示区分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')",
+      "Cannot read properties of null (reading 'addEventListener')"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_026849.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "My Tapestry",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Collaborate",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-bell text-gray-60",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Create New Tapestry",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Gallery",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "View All",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

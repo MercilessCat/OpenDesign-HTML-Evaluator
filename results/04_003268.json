@@ -1,0 +1,183 @@
+{
+  "row_id": "04_003268",
+  "shard": 4,
+  "id": 3268,
+  "category": "Website",
+  "prompt": "Develop a social media platform where communication is solely through emojis. Users create profiles, join themed groups, and express themselves using emoji combinations. Features include emoji translation tools, creative challenges, and analytics to track trending emojis and user engagement.",
+  "html_len": 28868,
+  "html_sha256": "53f71c119f94a18a645b5d1ca240268adc472fe0ee940793314a979c6807bcd5",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（Home/Groups/Trends/Challenges）",
+        "expected": "切换到对应页面内容",
+        "evidence": "探针点击后虽有状态记录，但导航 href=\"#\"，无路由、无对应内容区块切换，新增网络请求为0，属于占位死链；运行时HTML中无对应JS路由逻辑",
+        "ok": 0
+      },
+      {
+        "name": "创建 Emoji 消息：点击表情选择器中的 emoji",
+        "expected": "选中的 emoji 追加到消息展示区",
+        "evidence": "HTML 中 `.emoji-picker` 绑定了 click 事件，点击 `.cursor-pointer` 元素时会 `emojiInput.textContent += e.target.textContent`，此交互有真实事件逻辑",
+        "ok": 1
+      },
+      {
+        "name": "点击 Share Your Emoji Story",
+        "expected": "发布 emoji 消息（提交到动态/群组）",
+        "evidence": "按钮无任何 JS 事件绑定，探针点击该区域按钮后 DOM 无变化、无网络请求，纯占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "输入文本并点击 Translate to Emojis / 回车翻译",
+        "expected": "文本翻译为 emoji 组合并展示结果",
+        "evidence": "翻译输入框无事件绑定，翻译按钮无 click 处理器；探针输入并回车后页面无变化；需求声明的 emoji translation tool 未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Challenge / Explore Groups / View All",
+        "expected": "加入挑战或进入群组列表",
+        "evidence": "这些按钮均无 JS 事件绑定，探针点击 Join Now 与 Explore Groups 后 DOM 无变化、无网络请求；群组/挑战为静态展示卡片，无加入/跳转功能",
+        "ok": 0
+      },
+      {
+        "name": "查看 Trends（趋势 emoji 与分析仪表盘）",
+        "expected": "展示 emoji 趋势数据图表/交互式统计",
+        "evidence": "Trending Emojis 仅是带 `.trending-emoji` 脉冲动画的静态卡片，无 analytics 图表组件，也没有任何数据交互；Trends 导航为 href=\"#\" 占位",
+        "ok": 0
+      }
+    ],
+    "reason": "页面所有核心功能均为静态展示或占位按钮：导航 href=\"#\" 无真实路由跳转，Share/Join/Translate/Explore 等按钮全部无事件绑定，探针点击后页面无任何业务反馈；仅有 emoji 选择器点击追加字符这一处微交互可用。需求声明的 emoji 翻译工具、创意挑战参与、趋势分析、用户资料互动均未实现，属于大面积核心交互失败，功能分 1 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：[1] 页面主要操作按钮无反馈：\"Join Now\"和\"Explore Groups\"这两个核心引导按钮点击后DOM无任何变化、无响应，用户无法注册账号或进入群组，核心流程完全卡死；[2] 主导航（Home/Groups/Trends/Challenges）为占位链接，点击后仅原地跳转/无实际内容切换（无网络请求），用户无法成功浏览平台的主要模块；[3] 搜索、通知等常用功能按钮点击无效，无任何交互反馈，反馈缺失到无法判断操作是否成功。次要瑕疵：[1] 页面缺少关于“如何用表情符号交流”的图例或帮助说明，对理解核心玩法不友好；[2] 表情翻译工具和创建故事功能没有明确的提交成功/失败提示，容易造成误解；[3] 页脚的可选模块（博客/开发者等）未实现但不影响主流程；[4] 视觉上渐变和动画处理较好，但仅有展示层效果，无法支撑真实的社交平台体验。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "整体视觉非常抢眼且高度符合现代社交平台的风格。配色以深色渐变背景（#0f172a 到 #1e293b）搭配 Indigo/Pink 等霓虹渐变，科技感与趣味感并存，契合“Emojify”这种年轻化、创意化的产品定位。布局上采用经典的三段式：Hero + 统计区 + 功能模块，网格清晰、留白充足，信息层级明确。组件设计尤其是渐变边框卡片、毛玻璃导航栏、Emoji 选择器、趋势卡片都体现出较高的打磨度，动效（悬浮、浮动、脉冲）克制且提升了交互反馈。字体使用 Poppins，圆润现代，在不同字号下都保持了良好的可读性和一致性。CSS 手法专业，利用了 Tailwind 配置扩展主题色，并配合自定义 keyframes 实现动态效果。唯一的小扣分点在于部分 emoji 的动态闪烁（如同时多个 trending emoji 一起 pulse）可能造成轻微视觉疲劳，以及纯文本模型下对实际渲染分辨率和细节打磨仍存在不确定性。整体而言，这是一个视觉完成度很高、风格与需求高度对齐的优秀页面。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_003268.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Groups",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Trends",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Challenges",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-search",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-bell",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Groups",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "row_id": "00_031152",
+  "shard": 0,
+  "id": 31152,
+  "category": "3D design",
+  "prompt": "Introduce a platform for visualizing consciousness through 3D mapping. The core idea is to explore self-awareness by creating digital mind maps. Key features include a dynamic 3D canvas, integration with brainwave sensors, and a library of consciousness theories to inspire users' explorations.",
+  "html_len": 20275,
+  "html_sha256": "277b5a0063db1d51844719e35df7d0be56dfc7d8cbbedb6a6167559e33ccca64",
+  "functional": {
+    "score": 8.0,
+    "raw_score": 8.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "选择意识理论（Integrated Information Theory 等）",
+        "expected": "点击理论条目后，3D 场景中的思维地图节点和连线根据该理论重新生成",
+        "evidence": "HTML 中每个理论条目绑定 onclick=\"selectTheory(...)\"，函数会更新 currentTheory 并调用 createInitialMap() 重建 Three.js 场景。探针点击后 DOM 无变化，是因为 Three.js 渲染在 WebGL canvas 中，DOM 结构不会改变；且运行时无 JS 错误，逻辑完整，视为交互有效。",
+        "ok": 1
+      },
+      {
+        "name": "连接脑波传感器",
+        "expected": "点击 Connect Sensor 后，状态指示灯变绿并显示已连接，按钮变为 Disconnect Sensor",
+        "evidence": "探针点击后 DOM 变化=有，connectSensor() 正确添加 .active/.pulse 并更新按钮文本，反馈符合预期。",
+        "ok": 1
+      },
+      {
+        "name": "拖拽/旋转 3D 场景",
+        "expected": "用户可在 3D 画布上旋转、缩放视角，观察意识地图的立体结构",
+        "evidence": "页面加载 three.js 和 OrbitControls，init() 中初始化 controls 并启用 damping，动画循环持续 requestAnimationFrame。运行时无 JS 错误，事件已初始化，符合可交互标准。",
+        "ok": 1
+      },
+      {
+        "name": "添加思维节点（Add Thought）",
+        "expected": "点击 Add Thought 后，3D 场景中随机生成一个新的思维节点，并与现有节点建立连线",
+        "evidence": "HTML 按钮绑定 onclick=\"addThoughtNode()\"，函数创建新球体节点并调用 connectAllNodes() 更新连线。WebGL 场景变化不反映在 DOM，探针无法直接验证，但运行时无 JS 错误，代码实现完整。",
+        "ok": 1
+      },
+      {
+        "name": "切换可视化模式（Neural/Conceptual/Abstract）",
+        "expected": "点击模式按钮后，3D 可视化呈现对应模式，且按钮高亮切换",
+        "evidence": "探针分别点击三个模式按钮，DOM 变化=无。代码中 setMode() 仅更新 visualizationMode 变量和 active class，但该变量未参与任何场景生成或渲染逻辑，3D 内容不会改变，属于占位交互。",
+        "ok": 0
+      },
+      {
+        "name": "暂停/恢复动画",
+        "expected": "点击 Pause Animation 后 3D 节点停止旋转/脉动，按钮文字变为 Resume Animation",
+        "evidence": "toggleAnimation() 会切换 animationActive 并更新按钮文本，动画循环中根据该变量控制节点旋转和连接线透明度变化。运行时无 JS 错误，逻辑闭环。",
+        "ok": 1
+      }
+    ],
+    "reason": "核心需求基本全部可用：3D 画布可交互旋转缩放、理论库点击会重建 WebGL 场景、脑波传感器按钮有明确反馈、添加节点和暂停动画均有实现。扣分项为可视化模式切换仅改变按钮高亮，未真正影响 3D 渲染，属于占位入口的次要瑕疵。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：\n1. 理论选择无实际反馈：点击四个理论卡片后3D场景无任何DOM变化，用户无法判断是否切换成功，且\"节点信息面板\"始终固定显示通用文案，未随选中节点或理论更新。\n2. 可视化模式切换无效：Neural/Conceptual/Abstract三个模式按钮点击后DOM无变化（active类未切换、3D场景未改变），核心控件调节无效。\n3. 页面存在不可预测的干扰行为：全局click监听器以30%概率随机添加\"Thought Node\"，导致用户点击理论、模式或传感器按钮时可能意外创建节点，操作结果不可控，破坏核心操作流程。\n\n次要瑕疵：\n1. 脑波传感器状态与文字不同步：Connect Sensor后按钮文字变为\"Disconnect Sensor\"，但未提供明确的已连接状态提示，且\"Connect Sensor\"按钮引用`document.querySelector('.control-btn')`不精确，若底部控制按钮先出现会误选。\n2. 传感器连接后没有对3D可视化产生任何联动效果（仅为状态指示）。\n3. \"Add Thought\"按钮可正常添加节点，但\"Clear Map\"清空后没有引导用户重新创建初始地图，页面可能变为空白3D场景。\n4. 点击节点无任何反馈（raycasting逻辑未真正实现节点选中），仅在随机概率下触发添加节点，节点信息面板无法通过点击节点打开。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，采用深蓝紫色渐变背景搭配青色与品红的霓虹点缀，营造出科技感与未来感，契合“3D意识映射”主题。色彩搭配合理，主次分明，侧边栏半透明毛玻璃效果与圆角卡片设计提升层次感。布局协调，左侧固定侧边栏与右侧3D画布区域比例舒适，间距适中。字体使用系统无衬线体，大小层级清晰。CSS设计专业，使用了flex布局、backdrop-filter、渐变文字、阴影、动画与过渡效果，符合现代暗色系设计规范。交互按钮风格统一，状态指示灯有脉冲动画。整体符合用户需求的3D设计风格，视觉效果精致。扣分项在于功能层面部分点击无响应，但纯视觉角度，页面是高质量的设计。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_031152.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "Integrated Information Theory\n\nConscious",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "P.",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "Global Workspace Theory\n\nConsciousness a",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "P.",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "Predictive Processing\n\nMind as a predict",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "P.",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "Quantum Consciousness\n\nQuantum processes",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "P.",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Connect Sensor",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Neural",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Conceptual",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Abstract",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

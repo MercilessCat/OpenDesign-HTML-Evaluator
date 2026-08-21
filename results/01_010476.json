@@ -1,0 +1,175 @@
+{
+  "row_id": "01_010476",
+  "shard": 1,
+  "id": 10476,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Design an engaging educational platform to simulate and analyze phishing attempts. Users can learn through interactive scenarios, receive personalized feedback on their responses, and access resources to enhance cybersecurity awareness, transforming potential threats into learning opportunities for improved digital safety.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11994,
+  "html_sha256": "54be6ffbea28fb9ab034147165c99dda7b08662b53722a0fd742005c19a1b477",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击“This looks suspicious”判断钓鱼",
+        "expected": "反馈面板显示对该钓鱼邮件的正确分析",
+        "evidence": "探针点击后 DOM 变化=有；脚本将 feedbackPanel 替换为“Excellent Detection!”及红旗分析内容",
+        "ok": 1
+      },
+      {
+        "name": "点击“This seems legitimate”判断正常",
+        "expected": "反馈面板显示安全提醒/风险说明",
+        "evidence": "safeBtn 在 DOMContentLoaded 中绑定了 click 事件，会写入“Security Reminder”内容；事件绑定明确，应正常更新反馈面板",
+        "ok": 1
+      },
+      {
+        "name": "点击顶部导航 Home/Scenarios/Resources/Progress",
+        "expected": "切换到对应栏目或滚动到对应内容",
+        "evidence": "四个 <a> 均 href=\"#\"，无路由或对应 section id；探针显示仅 hash/顶部跳转，无实际内容切换",
+        "ok": 0
+      },
+      {
+        "name": "点击邮件内“Verify Identity Now”",
+        "expected": "模拟点击钓鱼链接并给出警示或交互反馈",
+        "evidence": "该 button 未绑定任何事件，探针点击后 DOM 变化=无，无反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击邮件内“Report Suspicious Email”",
+        "expected": "进入举报/反馈流程或给出提示",
+        "evidence": "该 button 未绑定任何事件，探针点击后 DOM 变化=无，无反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "核心的两个分类判断按钮能更新反馈面板，完成基本学习闭环；但导航四个链接均为 href=\"#\" 占位，邮件内“Verify Identity Now”和“Report Suspicious Email”点击无反应，存在 2 个以上关键入口未实现，因此分数不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 顶部导航（Home/Scenarios/Resources/Progress）均为 `href=\"#\"` 占位链接，点击后仅跳回页面顶部，无实际导航功能；2. 邮件模拟中的“Verify Identity Now”和“Report Suspicious Email”按钮点击后无任何反馈，用户在探索场景时点击无响应，容易误以为页面卡死；3. “Sign In”按钮点击无任何反应，属于入口无反馈。次要瑕疵：资源卡片（Red Flags Guide 等）及页脚社交图标均为静态占位不可点击；邮件中的头像区域为一个空的虚线框，视觉上尚未完成；页面仅有单一固定场景，缺少多个交互场景切换，个性化反馈和完整学习闭环不足。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，采用清爽的蓝色渐变背景与白色卡片搭配，色彩协调且符合网络安全教育主题。布局为左右两栏式，左侧模拟钓鱼场景，右侧反馈与资源区，结构清晰紧凑，在视口内无需滚动即可完整展示内容。字体选用 Poppins，现代圆润，标题、按钮和正文层级分明，间距舒适。组件设计精细，卡片圆角、阴影、悬停上浮效果和渐变过渡提升了互动感和专业度。Tailwind CSS 的使用符合现代设计规范，交互按钮点击后动态更新反馈面板，逻辑简洁有效。轻微扣分点：HTML 中存在自闭合 div 标签写法（如 `<div class=\"...\" />`），不符合 HTML 规范，可能引起解析歧义；导航链接为占位符 `#`，实际点击无内容切换，影响真实性。但整体视觉效果和设计质量仍属上乘。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_010476.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Scenarios",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Progress",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Verify Identity Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Report Suspicious Email",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "This looks suspicious",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

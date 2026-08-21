@@ -1,0 +1,104 @@
+{
+  "row_id": "01_027484",
+  "shard": 1,
+  "id": 27484,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Design a comprehensive platform for visualizing pipeline status in infrastructure projects. The primary purpose is to provide real-time updates and analytics on pipeline conditions. Key features include 3D modeling, predictive maintenance alerts, and integration with GIS for precise geographic mapping, ensuring operational efficiency and safety.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 4605,
+  "html_sha256": "33420596295db1c003bbce640630788cdc603be1ff22e402a86cee6ad5df3354",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Refresh 刷新按钮",
+        "expected": "重新获取/更新管道状态数据，或至少给出刷新成功的视觉反馈",
+        "evidence": "探针点击后 DOM 无变化、无新增 JS 错误、无网络请求；HTML 中按钮没有绑定 onClick 或事件监听器，只是静态图标按钮",
+        "ok": 0
+      },
+      {
+        "name": "点击 Settings 设置按钮",
+        "expected": "打开设置面板、下拉菜单或配置选项",
+        "evidence": "探针点击后页面无任何 DOM 变化、无弹窗、无新增 JS 错误；按钮没有事件处理逻辑",
+        "ok": 0
+      },
+      {
+        "name": "拖拽 3D 管道模型进行视角操作",
+        "expected": "3D 模型能够旋转、平移或缩放，体现 3D modeling 功能",
+        "evidence": "探针在 canvas 上拖拽后无像素变化；HTML 中 canvas 只是 2D context 静态绘制的一条线和三个圆点，没有 WebGL、OrbitControls、pointer/touch 事件或 requestAnimationFrame，不构成可交互 3D 模型",
+        "ok": 0
+      },
+      {
+        "name": "使用 GIS 地图查看管道地理位置",
+        "expected": "展示可交互 GIS 地图，或能查看管道精确地理位置信息",
+        "evidence": "页面只有灰色虚线框 'Interactive Map Placeholder'，没有地图库、瓦片、标记或任何绑定事件；GIS 集成仅为占位，无法使用",
+        "ok": 0
+      }
+    ],
+    "reason": "页面仅完成了静态仪表盘展示。核心交互大面积失败：Refresh 和 Settings 按钮无响应，3D 模型只是静态 2D 线段绘制，GIS 区域是纯占位框。需求声明的 3D modeling、GIS 集成、实时/刷新更新均未实现，主要任务无法完成，因此功能分很低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在2个核心可用性问题：1）顶部“Refresh”按钮点击后无任何实际反馈（无DOM变化、无网络请求、无提示），无法完成手动刷新实时数据这一核心操作；2）顶部“Settings”按钮同样点击无反应，设置入口形同虚设。次要瑕疵包括：3D模型实际为2D静态示意图，无法拖拽或旋转，与“3D modeling”预期不符；GIS区域为占位符，未提供真实地理映射；维护警报和状态列表为静态内容，不具备实时更新能力；页面未展示图例或说明，用户对颜色含义需自行猜测。整体视觉和信息结构较清晰，但关键交互失效使其“能用但不好用”。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉吸引力良好，采用现代仪表盘风格，Tailwind CSS 使用得当，蓝白灰配色与状态色（绿/黄/红）搭配合理，信息层级清晰。布局为左侧宽画布+右侧三卡片，结构均衡，符合单页无滚动要求。卡片hover动效细腻，阴影与圆角处理规范，整体体现专业度。但存在明显短板：1）canvas 仅为简单的线段和圆点，不足以支撑“3D建模”的产品定位，视觉上偏简陋；2）GIS地图为灰色虚线占位框，缺乏设计细节，拉低整体质感；3）Header和Footer设计较常规，缺少品牌个性；4）按钮无交互反馈，功能感弱。总体来说，页面在基础规范和色彩上达标，但核心可视化区域表现力不足，仍有明显提升空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_027484.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Refresh",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Settings",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

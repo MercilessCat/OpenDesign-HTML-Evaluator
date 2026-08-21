@@ -1,0 +1,201 @@
+{
+  "row_id": "06_094252",
+  "shard": 6,
+  "id": 94252,
+  "category": "Website",
+  "prompt": "Launch a hub for grassroots charity fundraisers, empowering small nonprofits to reach larger audiences. Allow users to create and share campaigns, track progress with real-time analytics, and connect with volunteers. Integrate success stories and a network for collaboration between various organizations.",
+  "html_len": 33702,
+  "html_sha256": "a1785e75345ec905b783f3cafad3c206a39e09985bc5931a380b215062e7e36e",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "浏览导航区块",
+        "expected": "点击导航链接后页面滚动到对应内容区块",
+        "evidence": "探针点击 Home、Campaigns、Analytics、Stories、Network 五个导航锚点均产生 DOM 变化/页面跳转，无 JS 错误",
+        "ok": 1
+      },
+      {
+        "name": "创建活动（Start a Campaign）",
+        "expected": "点击后打开创建活动的表单或引导流程",
+        "evidence": "探针点击该按钮后 DOM 无变化、无新增网络请求，按钮无任何事件绑定或链接，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "开始筹款（Start Fundraising）",
+        "expected": "点击后进入发起筹款的操作流程",
+        "evidence": "探针点击后 DOM 无变化、无新增网络请求，按钮无事件绑定，无实际功能",
+        "ok": 0
+      },
+      {
+        "name": "访问个人中心（用户图标）",
+        "expected": "点击后打开用户菜单/登录界面",
+        "evidence": "探针点击用户图标按钮后 DOM 无变化，仅图标被点击指示，无业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "加入协作网络（Join the Network）",
+        "expected": "点击后弹出注册/加入网络表单或跳转",
+        "evidence": "HTML 中该按钮无 onclick、href 或任何事件监听，点击不会产生任何业务反馈，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "分享活动",
+        "expected": "活动卡片上提供分享按钮或链接，可分享到社交平台",
+        "evidence": "页面没有任何针对活动的分享按钮；仅页脚有社交图标，但均为 href=\"#\" 占位链接，实际分享功能缺失",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面是完整的静态展示型网站，导航锚点跳转有效，内容展示齐全；但核心功能如创建活动、开始筹款、加入网络、个人中心等关键按钮均无事件绑定或占位，点击无任何反馈，分享功能完全缺失。需求声明的核心操作大面积未实现，仅浏览和展示可用，因此分数极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题（3个）：①所有核心操作按钮无实际功能——Hero区\"Start Fundraising\"\"Explore Campaigns\"、导航\"Start a Campaign\"、底部\"Join the Network\"、精选活动\"Support Now\"\"View All Campaigns\"等点击后均无任何DOM变化、无新网络请求、无跳转，属占位型裸按钮，核心流程无法推进；②整站缺乏任何功能性输入/交互组件（input=0），用户无法创建活动、发起捐赠、提交联系信息或连接志愿者，\"创建-分享-追踪-协作\"主流程完全不可用；③成功故事、协作网络等区块中的交互控件同样无效，属于多个核心功能入口无反馈。次要瑕疵：①活动卡片图片存在ERR_BLOCKED_BY_ORB导致部分图片无法展示（影响观感但不影响逻辑）；②分析图表canvas无数据初始化脚本，图表区可能为空白；③页面虽有ID锚点但导航点击为页面内部跳转，缺少视觉反馈；④缺少按钮hover/active状态之外的交互说明（如点击后去向），降低了可预期性。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "整体视觉吸引力强，采用现代渐变色背景（浅蓝至浅青）与品牌色（靛蓝、翠绿、琥珀）搭配，色彩和谐且符合公益慈善主题。布局结构清晰完整，依次展示了导航、Hero、数据统计、功能特性、活动案例、数据分析、成功故事、协作网络、CTA和页脚，层级分明，节奏合理。字体使用 Poppins，圆角卡片、阴影和悬停动效设计专业，符合现代网页设计规范。交互探针显示导航链接可跳转，但部分按钮点击无响应。最大的视觉减分项是多个 Unsplash 图片因网络请求被阻止而无法加载，导致活动卡片和成功故事区域出现空白图片区域，影响整体完整度和美观性。若图片能正常加载，该页面可达到 8.5 分以上。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1526662092153-f0d43c1cfcdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1526662092153-f0d43c1cfcdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1526662092153-f0d43c1cfcdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1526662092153-f0d43c1cfcdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1526662092153-f0d43c1cfcdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1526662092153-f0d43c1cfcdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1526662092153-f0d43c1cfcdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1526662092153-f0d43c1cfcdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1526662092153-f0d43c1cfcdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_094252.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Campaigns",
+      "href": "#campaigns",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#analytics",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Stories",
+      "href": "#stories",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Network",
+      "href": "#network",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start a Campaign",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-user",
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Fundraising",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

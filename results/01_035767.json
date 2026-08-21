@@ -1,0 +1,175 @@
+{
+  "row_id": "01_035767",
+  "shard": 1,
+  "id": 35767,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Design an intuitive portal for calculating shipping costs based on various factors like destination, package size, and delivery speed. The site features an advanced AI-driven estimator, side-by-side carrier comparisons, and eco-friendly shipping options, empowering users to make informed and cost-effective shipping decisions effortlessly.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14543,
+  "html_sha256": "6876ecd9a6d3ff69af3a3836937975d5462d1c9528b5725907b17166aa887148",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Calculate Costs 计算运费",
+        "expected": "根据目的地、包裹尺寸、配送速度和重量等输入更新AI估算费用及承运商价格",
+        "evidence": "按钮无任何事件绑定，页面无自定义JS逻辑；探针虽未直接测试此按钮，但从HTML代码看点击不会产生任何结果，页面始终显示预设的$42.75和固定价格表",
+        "ok": 0
+      },
+      {
+        "name": "选择包裹尺寸按钮",
+        "expected": "点击后按钮切换选中高亮状态，并作为费用计算参数",
+        "evidence": "探针点击 Small/Medium/Large 按钮后 DOM 均无变化；按钮没有 onclick 或脚本绑定，Medium 的默认高亮也无法切换",
+        "ok": 0
+      },
+      {
+        "name": "选择配送速度按钮",
+        "expected": "点击后切换选中状态，并影响运费估算",
+        "evidence": "HTML 中 Standard/Express/Overnight 按钮无事件绑定，与尺寸按钮同样为静态装饰性按钮，点击不会有反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击承运商对比中的选择按钮",
+        "expected": "选中该承运商并高亮标识，作为最终选择参与对比",
+        "evidence": "承运商行的勾选按钮仅含图标和样式类，无事件处理函数；点击不会有任何选中或高亮变化，属于占位交互",
+        "ok": 0
+      },
+      {
+        "name": "导航链接点击",
+        "expected": "点击 Home/Calculator/Carriers/Eco Options 应平滑滚动到对应区块或切换单页内容",
+        "evidence": "探针点击导航链接后发生页面跳转，但 href=\"#\" 仅产生空锚点跳转，页面没有对应内容区块切换或滚动定位效果，属于无效占位链接",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上完成了设计需求，但所有核心交互均未实现：计算按钮无事件、选项按钮无法选中、承运商选择无反馈、导航为占位链接。AI运费估算和承运商对比仅为静态展示，无法完成任何计算或选择任务，因此核心功能大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）主操作“Calculate Costs”点击后无任何反馈，输入项（目的地、尺寸、速度、重量）与结果完全无联动，AI 估算和价格均为静态展示，核心“计算运费”的任务无法完成；2）关键参数控件无效：包裹尺寸和配送速度按钮点击后选中态不变化，重量滑杆下方始终显示固定的“10 lbs”，承运商对比中的 Select 按钮也无法切换，用户无法有效调节或确认输入状态。次要瑕疵：顶部导航和“Get Started”为占位链接/按钮，没有实际功能；页面缺少说明、图例和输入校验提示；AI 估算区域文案暗示实时分析但实际无交互；整体内容较多，可能超出单屏展示。由于存在多个核心可用性问题，按锚定规则只能落在 2-3 分，考虑到视觉层级和信息结构尚可，给 3 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力较好。配色采用清新蓝绿渐变（#f0f9ff→#e0f2fe）为背景，主色#3b82f6与辅助色#10b981搭配和谐，符合现代SaaS风格。布局为经典的三段式（header/main/footer），主内容区左右分栏，左侧表单与右侧结果对比区结构清晰，信息层级分明。字体选用Poppins，圆角卡片、阴影、hover上浮等处理精细，符合主流UI组件规范。AI渐变卡片与绿色Eco标签为页面增加视觉亮点。扣分点：纯色块占比偏多，缺少真实图片或图标细节支撑（如货代logo为占位框）；部分交互点击无视觉反馈；页面视觉层次略显单一，未充分发挥多层级对比的丰富度，但整体仍属专业水准。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_035767.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Calculator",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Carriers",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Eco Options",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Small",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Medium",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Large",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

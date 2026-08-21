@@ -1,0 +1,233 @@
+{
+  "row_id": "05_058688",
+  "shard": 5,
+  "id": 58688,
+  "category": "Website",
+  "prompt": "Develop an interactive backpacking route planner that integrates personalized itineraries, local guides, and community-driven tips. Users can customize trips, access real-time weather, and safety alerts. Features include a social hub for sharing experiences and a digital map with AR navigation, creating a comprehensive planning tool for adventurers.",
+  "html_len": 34042,
+  "html_sha256": "08d720c067a9b91242b67347b52f92c19b987082083107488bccb8525c59e3c7",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Planning Now 开始规划",
+        "expected": "进入路线规划流程或跳转到规划器/地图区域",
+        "evidence": "探针点击后仅有 DOM 样式变化（hover/active），无新增网络请求或 JS 错误；HTML 中该 button 无 onclick、无 href，未绑定任何业务事件，属于纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "拖拽活动到行程构建器",
+        "expected": "将 Available Activities 拖入 Your Itinerary 并更新行程列表",
+        "evidence": "HTML 中活动卡片仅有 cursor-move 样式，无 draggable 属性、无 dragstart/drop 事件监听，无法实现拖拽定制",
+        "ok": 0
+      },
+      {
+        "name": "保存自定义行程",
+        "expected": "点击 Save Custom Itinerary 后保存行程或给出成功反馈",
+        "evidence": "按钮无 onclick、无事件监听，探针点击无业务反馈（仅样式变化），保存功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点赞/评论社交帖子",
+        "expected": "点赞数增加或展开评论区",
+        "evidence": "HTML 中点赞/评论 button 无 onclick 等事件绑定，无响应式交互逻辑，点击不会产生任何业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "浏览数字地图",
+        "expected": "地图可拖动、缩放查看路线区域",
+        "evidence": "Leaflet 已初始化（运行时发出大量 OSM 瓦片请求，无 JS 错误），地图容器存在并支持默认平移缩放；离线导致瓦片加载失败但不计入功能缺陷",
+        "ok": 1
+      },
+      {
+        "name": "使用 AR 导航",
+        "expected": "通过 AR 叠加指引路线方向",
+        "evidence": "页面 Footer 中“AR Navigation”链接为 href=\"#\" 纯占位，无 AR 脚本、无相机接口、无 AR 叠加界面，核心功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉完整但几乎全是静态展示：开始规划、保存行程、社交点赞评论、AR 导航等核心入口均无事件绑定，行程拖拽未实现，实时天气/安全警报为硬编码数据，仅锚点跳转和 Leaflet 基础地图可用。用户无法完成路线规划、行程定制或社交分享等主要任务，功能严重缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 核心地图不可用：Leaflet 瓦片请求大量失败（50个 ERR_ABORTED），地图区域无法正常显示底图，也没有路线/兴趣点标记或加载失败提示，用户无法用地图规划路线。2) 行程定制流程是死的：页面宣称“Drag and drop”，但活动卡片没有可拖拽交互，“Save Custom Itinerary”点击无任何保存/反馈，用户不能真正定制或保存行程。3) Hero 区两个主要 CTA（Start Planning Now / Explore Community Routes）都是无事件按钮，点击没有跳转、滚动或提示，属于主要入口无反馈。4) 顶部 Sign In、社区点赞/评论、移动端汉堡菜单等按钮同样无实际行为。次要瑕疵：天气/安全数据是静态展示，缺少位置选择/刷新/说明；Trending Routes 的配图是空占位块；AR Navigation/本地向导等 feature 仅有宣传卡片，无实际入口；缺少表单输入、搜索筛选和图例说明。整体视觉和信息层级清楚，但核心规划动作全部无法完成，因此降档到低分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 1.2,
+  "baseline_overall": 1.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://c.tile.openstreetmap.org/10/165/359.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/166/359.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/164/360.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/167/360.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/164/359.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/167/359.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/164/361.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/167/361.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/165/360.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/166/360.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/165/361.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/166/361.png -> net::ERR_ABORTED",
+      "https://images.unsplash.com/photo-1434394353901-a23235ad027d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://c.tile.openstreetmap.org/10/165/359.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/166/359.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/164/360.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/167/360.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/164/359.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/167/359.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/164/361.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/167/361.png -> net::ERR_ABORTED",
+      "https://images.unsplash.com/photo-1434394353901-a23235ad027d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://a.tile.openstreetmap.org/10/165/360.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/166/360.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/165/361.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/166/361.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/165/359.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/166/359.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/164/360.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/167/360.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/164/359.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/167/359.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/164/361.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/167/361.png -> net::ERR_ABORTED",
+      "https://images.unsplash.com/photo-1434394353901-a23235ad027d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://a.tile.openstreetmap.org/10/165/360.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/166/360.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/165/361.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/166/361.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/165/359.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/166/359.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/164/360.png -> net::ERR_ABORTED",
+      "https://c.tile.openstreetmap.org/10/167/360.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/164/359.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/167/359.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/164/361.png -> net::ERR_ABORTED",
+      "https://a.tile.openstreetmap.org/10/167/361.png -> net::ERR_ABORTED",
+      "https://images.unsplash.com/photo-1434394353901-a23235ad027d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://a.tile.openstreetmap.org/10/165/360.png -> net::ERR_ABORTED",
+      "https://b.tile.openstreetmap.org/10/166/360.png -> net::ERR_ABORTED"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_058688.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Planner",
+      "href": "#planner",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Planning Now",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Community Routes",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "img",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

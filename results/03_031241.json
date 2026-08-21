@@ -1,0 +1,103 @@
+{
+  "row_id": "03_031241",
+  "shard": 3,
+  "id": 31241,
+  "category": "Game dev",
+  "prompt": "Develop an immersive archery simulation in an enchanted forest setting. Users practice their skills through various challenges. Core features include customizable bows, interactive targets, and a leaderboard. The platform integrates storytelling elements, enhancing user experience with quests and magical creatures.",
+  "html_len": 24554,
+  "html_sha256": "dd65c52a1c4215d071a1b902fafd2865f81f56b72d100397f6f6c79d6cb91032",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "开始冒险",
+        "expected": "点击 Begin Adventure 后进入游戏场景，显示游戏 UI 并启动 Three.js",
+        "evidence": "自动点击 Begin Adventure 后 DOM 有变化、无新增 JS 错误；startButton 绑定 switchScreen('game') 与 initThreeJS()，startScreen 隐藏、gameUI 显示。",
+        "ok": 1
+      },
+      {
+        "name": "射箭并命中目标",
+        "expected": "在游戏视口中点击/触摸射箭，箭射向可见靶子，命中后更新分数/命中率并有命中反馈",
+        "evidence": "document 绑定 mousedown/touchstart 调用 fireArrow 会创建箭和 UI 箭头；但 checkHits 只检测箭到固定点 (0,0,-15) 的距离，与 scene 中随机摆放的 5 个可见 target 无碰撞检测，targets 被击中后也没有任何反应；射箭反馈与可见靶子脱节。",
+        "ok": 0
+      },
+      {
+        "name": "自定义弓",
+        "expected": "点击 Customize Bow 进入弓自定义界面，调整威力/精度滑杆和箭矢类型时数值与选择更新并影响后续射击",
+        "evidence": "bowCustomize 绑定 switchScreen('customize')；powerSlider/accuracySlider 有 input 事件更新 gameState 与文本，fireArrow 使用 power/accuracySetting；arrowType change 仅更新 gameState，尚未体现在箭矢外观/效果上。",
+        "ok": 1
+      },
+      {
+        "name": "暂停/恢复",
+        "expected": "游戏中点击 Pause 出现暂停界面，点击 Resume 返回游戏",
+        "evidence": "pauseButton 切换 pauseScreen 隐藏状态并切换 isPaused；resumeButton 调用 switchScreen('game') 显示游戏 UI；但动画循环在暂停时仍继续运行。",
+        "ok": 1
+      },
+      {
+        "name": "查看排行榜",
+        "expected": "开始界面能看到排行榜及分数",
+        "evidence": "startScreen 内存在 leaderboardList，含三条静态记录（Forest Guardian 1250 等）；没有动态写入或更新当前成绩的逻辑。",
+        "ok": 1
+      },
+      {
+        "name": "完成任务/遇见魔法生物",
+        "expected": "任务有可推进的目标，森林中有魔法生物互动，完成后进入结算界面",
+        "evidence": "gameUI 只静态显示 questTitle/questDescription（The Lost Arrow）；代码中没有魔法生物实体或互动逻辑，也没有任务完成条件；gameOverScreen 从未被任何逻辑显示，Play Again/Menu 按钮所在的结算屏不可达。",
+        "ok": 0
+      }
+    ],
+    "reason": "开始冒险、自定义弓、暂停/恢复和静态排行榜基本可用，但核心的靶子命中判定与可见目标脱节，魔法生物/任务完成与结算流程缺失，箭矢类型和排行榜也仅停留在静态/状态层，主要玩法并未完整实现，因此不能高于 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 1.2,
+  "baseline_overall": 1.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_031241.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Adventure",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

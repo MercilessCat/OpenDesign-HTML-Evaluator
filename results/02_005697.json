@@ -1,0 +1,188 @@
+{
+  "row_id": "02_005697",
+  "shard": 2,
+  "id": 5697,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Design a vibrant platform integrating advanced data visualization techniques with modern frameworks like React and Vue. Users explore tutorials, create interactive projects, and share innovations. Core functionalities include customizable libraries, real-time collaborative coding spaces, and community-driven showcases of cutting-edge data visualizations.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10444,
+  "html_sha256": "cce6b609122bf33f9c075beeb797a265f494391366d925efe397570257f8bbee",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航 Tutorials",
+        "expected": "跳转到教程页面或展示教程内容",
+        "evidence": "探针点击后 DOM 有变化但无新增网络请求，页面为单页且 href=\"#\"，无路由跳转，无任何教程内容加载，属占位死链",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Projects",
+        "expected": "跳转到项目页面或展示项目列表",
+        "evidence": "href=\"#\"，探针点击后无实际内容变化，无路由，纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Community / Showcase",
+        "expected": "跳转到社区或展示页面",
+        "evidence": "两个链接均为 href=\"#\"，探针点击后无实际内容加载，无路由，纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started 按钮",
+        "expected": "触发注册/开始使用流程或跳转",
+        "evidence": "探针点击后 DOM 变化=无，仅 JS 添加 scale-95 按钮缩放动画，无业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Tutorials 按钮",
+        "expected": "进入教程浏览或展示教程列表",
+        "evidence": "探针点击后 DOM 变化=无，无网络请求，无内容加载，按钮无实际功能",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Projects 按钮",
+        "expected": "查看项目列表或项目展示",
+        "evidence": "探针点击后 DOM 变化=无，无网络请求，无内容加载，按钮无实际功能",
+        "ok": 0
+      },
+      {
+        "name": "点击图表刷新按钮（sync-alt）",
+        "expected": "刷新或更新可视化图表",
+        "evidence": "探针点击后 DOM 变化=无，虽然 setInterval 每 3 秒自动改变图表高度，但点击按钮本身无任何响应",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整，但核心功能全部缺失。所有导航链接（Tutorials/Projects/Community/Showcase）均为 href=\"#\" 占位死链，无法实现需求中浏览教程、查看项目、社区展示等功能；Get Started、Explore Tutorials、View Projects 等按钮点击后除缩放动画外无任何业务响应；图表刷新按钮同样无反馈。需求声明的核心交互入口均未真正实现。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部导航（Tutorials、Projects、Community、Showcase）均为占位链接，点击后仅URL添加hash，页面内容没有任何实际切换或跳转，主要入口无有效反馈；2. 核心操作按钮（Get Started、Explore Tutorials、View Projects）点击后均无任何功能性响应，无法完成用户探索教程或查看项目的目标；3. 图表刷新按钮点击无效，仅有视觉缩放但无实际功能。次要瑕疵：模拟图表缺少坐标轴标签和图例，统计数据缺少说明性文字，部分装饰性动画（柱状图随机变化）无实际意义。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力强，采用深色渐变背景搭配高饱和的紫、粉、蓝渐变点缀，营造出科技感与活力并存的现代数据可视化平台氛围。色彩搭配合理，主色（Indigo/Purple/Pink）与深色背景形成良好对比，且各色在不同区域（标签、图表、统计数字）中有所呼应，视觉统一且富有层次。布局协调，左侧内容区与右侧图表预览区形成对称结构，卡片栅格和统计面板排布有序，在单屏内信息密度适中，主次分明。字体采用Inter，风格现代；间距与圆角设置规范，卡片hover微动效和按钮脉冲动画提升了精致感。CSS设计专业，使用了Tailwind配置扩展主题色、backdrop-filter玻璃拟态、渐变边框（gradient-border）和模拟图表条等细节，整体符合现代网页设计规范，且高度契合用户需求中“vibrant platform integrating advanced data visualization”的风格定位。扣一分因图表仅为静态模拟，功能交互深度有限，且部分链接点击后无实际页面内容支撑。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_005697.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Projects",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Showcase",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Tutorials",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Projects",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-sync-alt text-sla",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "row_id": "03_004580",
+  "shard": 3,
+  "id": 4580,
+  "category": "Game dev",
+  "prompt": "Design an intuitive interface for arranging quilt patterns and creating unique patchwork designs. Users can craft digital quilts, participate in design challenges, and showcase their work in an online gallery. The site offers a pattern library, a collaborative quilting tool, and seasonal quilt themes for inspiration.",
+  "html_len": 21921,
+  "html_sha256": "6a41e7ddc7dabd1bee75774b125f3fea085572ed4efc0ec3336f51ef45940999",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "Select pattern from Pattern Library",
+        "expected": "Selected pattern becomes active and is used for the next patch placed on the canvas.",
+        "evidence": "Pattern items have data-pattern attributes and click listeners update currentPattern and toggle active class; no JS errors. Minor flaw: no .pattern-item.active CSS, so selected state has no strong vis",
+        "ok": 1
+      },
+      {
+        "name": "Adjust color and size",
+        "expected": "Color swatch / size button highlights and following canvas patches use the selected color/size.",
+        "evidence": "Color and size controls have click handlers toggling .active and updating currentColor/currentSize; CSS defines .active highlight for both. Probe clicks did not report DOM mutation but no JS errors; c",
+        "ok": 1
+      },
+      {
+        "name": "Place/arrange patch on design canvas",
+        "expected": "Clicking or dragging on the empty canvas adds a quilt patch of the selected pattern/color/size.",
+        "evidence": "Probe pointer drag on canvas produced DOM and pixel changes with 0 JS errors; fabric mouse:down handler calls addShapeToCanvas() and creates the corresponding fabric shape.",
+        "ok": 1
+      },
+      {
+        "name": "Save design and showcase in gallery",
+        "expected": "Save Design should persist the quilt to Your Designs/Community Gallery or export a file.",
+        "evidence": "The saveBtn handler only calls alert('Design saved! In a full implementation, this would be saved to your gallery.'); no gallery update or download occurs. Probe click produced no DOM/network change.",
+        "ok": 0
+      },
+      {
+        "name": "Join seasonal design challenge",
+        "expected": "Clicking Join Challenge should accept the challenge, start entry mode, or give meaningful feedback.",
+        "evidence": "Challenge button has no addEventListener in the script; probe click produced no DOM/network change and no JS error, confirming it is a dead placeholder.",
+        "ok": 0
+      },
+      {
+        "name": "Collaborative quilting tool",
+        "expected": "Users can collaborate on a quilt in real time or via shared sessions.",
+        "evidence": "No collaborative UI, session controls, or related script functionality exists anywhere in the page; it is a single-user local canvas only.",
+        "ok": "NA"
+      }
+    ],
+    "reason": "The core local quilt-drawing loop works: pattern/color/size selection and placing patches on the canvas are functional and produce visible updates. However, two demanded key entries are unimplemented (Save/Showcase is only an alert placeholder; Join Challenge is a dead button), and the collaborative quilting tool has no entry at all. With requirements like online showcase, challenges, and collaboration largely missing, functional score is capped at 4.",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 5.0,
+    "reason": "核心可用性问题：1. “Join Challenge”按钮没有任何事件绑定，点击后无任何反馈，无法参与设计挑战，这是一个核心功能入口的失效。次要瑕疵：1. 图案选择器（Pattern Library）没有默认选中态高亮，用户无法直观判断当前使用哪个图案；2. “Save Design”点击后仅弹出 alert，并不会将作品真正保存到“Your Designs”区域，保存成功性缺乏可视化确认；3. “Community Gallery”和“Your Designs”中的作品点击无反应，无法查看详情或进行互动；4. 页面缺少协作 quilting 工具的入口，与用户需求中提到的协作编辑体验不符；5. 整体操作学习成本较低，画布绘图、颜色/尺寸切换等核心设计流程已能正常工作，但由于“挑战”入口失效，核心功能闭环被打破，因此评为“能用但不好用”。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面视觉设计专业且贴合拼布主题。色彩搭配以暖棕、紫红、奶油色为主，营造出温馨手工艺感，与拼布艺术风格高度一致。背景使用柔和渐变，字体选用现代圆润的Poppins，整体氛围协调。布局采用经典三栏式——图案库、设计画布、社区画廊，信息层级清晰；面板有圆角与柔和阴影，悬停微小上浮提升交互反馈，符合现代网页设计规范。图案、颜色、尺寸选择器设计直观，按钮渐变和状态清晰。响应式断点设置合理，确保不同屏幕下可用。唯一小扣分点是色彩对比度偏柔和，可能对视觉冲击力有所削弱，但整体完成度很高。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 6.75,
+  "baseline_overall": 6.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_004580.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Small",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Medium",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Large",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "🏆\nJoin Challenge",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "💾\nSave Design",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "🗑️\nClear Canvas",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "↩️\nUndo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "row_id": "01_014885",
+  "shard": 1,
+  "id": 14885,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Build a creative platform for designing visual effects using nodes and connections in a 3D space. Users can experiment with shaders, preview real-time visualizations, and share their creations with a community. Provide tutorials and collaborative tools for beginners and experts to innovate together.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 8367,
+  "html_sha256": "427f2f47da6041feebd4890ed42f42538c07b439f2e075ea6c02684c6711ef09",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Creating 按钮进入创建流程",
+        "expected": "进入3D节点编辑器或开始创建界面",
+        "evidence": "探针点击后无DOM变化、无网络请求、无JS错误；HTML中按钮未绑定任何点击事件，纯静态占位",
+        "ok": 0
+      },
+      {
+        "name": "点击 Tutorials 按钮查看教程",
+        "expected": "展示教程内容或切换到教程页面",
+        "evidence": "探针点击后无DOM变化、无网络请求、无JS错误；按钮无事件绑定，无功能反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 按钮登录",
+        "expected": "弹出登录表单或跳转到登录页",
+        "evidence": "探针点击后无DOM变化、无网络请求、无JS错误；按钮无事件绑定，纯占位",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Community 链接",
+        "expected": "切换到社区页面或展示社区内容",
+        "evidence": "链接 href=\"#\"，探针点击后仅有锚点跳转，无实际路由或内容更新，无网络请求，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Studio 链接",
+        "expected": "进入Studio工作区",
+        "evidence": "链接 href=\"#\"，无真实路由或页面切换，点击后无对应内容变化，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Tutorials/Resources 链接",
+        "expected": "展示教程或资源内容",
+        "evidence": "链接同为 href=\"#\"，探针显示仅锚点跳转，无实现对应功能，纯占位",
+        "ok": 0
+      }
+    ],
+    "reason": "页面仅为静态营销着陆页，所有导航链接和按钮均为占位或无效，核心需求（3D节点编辑器、着色器实验、实时预览、社区分享、教程协作）均未实现，用户主要交互全部失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "【核心可用性问题】页面存在3个无反馈的核心按钮：1) “Sign In”按钮点击后无任何DOM变化、无网络请求、无提示，登录入口不可用；2) 主操作CTA“Start Creating”点击后同样无任何反馈，用户无法进入创建流程，核心任务卡死；3) “Tutorials”按钮点击无反馈。此类主要入口/核心操作点击后无法判断是否成功，导致页面无法完成引导或转化，且核心可用性问题数量≥2，按锚定规则应落入2-3分档。\n【次要瑕疵】顶部导航Studio/Community/Tutorials/Resources均为占位链接，点击仅产生#跳转，实际无对应内容或页面；功能卡片描述了节点编辑、着色器、社区协作等能力，但均无实际交互或预览，作为平台型Landing Page暂缺真实功能佐证；页面整体视觉、信息层级清晰，但不构成本次主要扣分点。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "该页面整体视觉表现出色，高度符合“3D视觉特效创作平台”的科技感和现代感定位。深色渐变背景（#0f172a 到 #1e293b）搭配靛蓝/紫色（#6366f1 / #8b5cf6）作为品牌色，色彩搭配和谐且具备行业辨识度；背景中模糊发光的“节点光斑”动效与主题呼应，增强了空间深度。\n\n布局上采用经典的单屏落地页结构：顶部导航、左侧主文案、右侧2x2功能卡片、底部页脚，层级清晰、比例均衡，视口适配良好。字体使用 Inter，字号和字重层级分明，标题与正文对比度充分；卡片采用半透明毛玻璃效果（backdrop-blur）、圆角边框和悬停上浮+发光阴影，组件设计精致且符合现代 UI 趋势（glassmorphism、glow effect）。\n\nCSS 使用 Tailwind 配置自定义色板，配合少量手写过渡与动画，代码专业干净，交互反馈（悬停发光、背景脉冲）虽简洁但提升了品质感。头像群像、图标按钮等细节也为页面增添了可信度。\n\n扣分项：功能按钮（Sign In / Start Creating）无实际行为，导航链接产生空跳转，部分交互停留在视觉层面；背景光斑元素与“节点/连接”主题的关联度稍弱，若能有更明确的节点连线视觉会更惊艳。但就视觉设计本身而言，完成度和美感都属上乘。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_014885.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Studio",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Tutorials",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "row_id": "00_014528",
+  "shard": 0,
+  "id": 14528,
+  "category": "3D design",
+  "prompt": "Develop an online gallery dedicated to virtual museum designs in 3D using HTML5. Users can explore, create, and share virtual museum spaces. Key features include customizable templates, interactive walkthroughs, and a showcase of innovative virtual exhibitions from global designers and creators.",
+  "html_len": 19042,
+  "html_sha256": "5e24ec19e50976846ce0f7e8f64d2c6ed710d1e7741e97508ddbf83e3255a92e",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（如 Gallery）",
+        "expected": "平滑滚动到对应区块",
+        "evidence": "HTML中 nav-links 设置为 <a href=\"#gallery\">，JS 为 a[href^=\"#\"] 绑定了 scrollIntoView 平滑滚动；探针点击后无 JS 错误，仅 DOM 结构无变化，滚动行为不改变 DOM，故导航功能正常。",
+        "ok": 1
+      },
+      {
+        "name": "拖拽旋转 3D 场景",
+        "expected": "OrbitControls 控制视角旋转/缩放",
+        "evidence": "页面初始化了 Three.js 场景、渲染器、20 个浮动几何体，并创建了 THREE.OrbitControls 和 requestAnimationFrame 动画循环；运行时无初始 JS 错误，canvas 已挂载，3D 交互应可用。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Start Exploring 按钮",
+        "expected": "弹出欢迎提示或进入画廊",
+        "evidence": "JS 绑定了 alert 点击事件，但探针显示“中心被 <CANVAS> 盖住 [JS click 兜底]”，真实用户点击被 Three.js 画布遮挡，无法触发按钮；因此实际反馈不可达。",
+        "ok": 0
+      },
+      {
+        "name": "点击博物馆卡片查看详情",
+        "expected": "进入展览详情或打开可交互的 3D 展示",
+        "evidence": "博物馆卡片是纯静态 div，未绑定任何点击事件或详情链接；用户点击卡片无任何页面变化，探索功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Create 导航创建博物馆",
+        "expected": "进入创建工具或模板选择",
+        "evidence": "导航存在 <a href=\"#create\">，但页面没有任何 id=\"create\" 的区块，也没有创建/模板编辑功能；点击后 querySelector 返回 null，无任何反馈，属于未实现的占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击社交分享链接",
+        "expected": "跳转到社交平台或执行分享",
+        "evidence": "社交链接 href=\"#\"，点击后产生 JS 错误 \"'#' is not a valid selector\"，且无任何分享功能，纯占位入口。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面提供了可交互的 3D 背景场景（OrbitControls 旋转）和导航滚动，但核心业务功能大面积缺失：没有创建工具、没有分享功能、博物馆卡片无法点击查看详情、Start Exploring 按钮被 canvas 遮挡不可用。“explore, create, share”中仅 3D 背景可浏览，创建和分享完全未实现，且存在多个占位/死链入口，离需求相去甚远。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：1）主 CTA 'Start Exploring' 被绝对定位的 Three.js 画布层覆盖，真实用户无法点击，且点击后仅弹 alert，不能进入任何探索流程；2）导航 'Create' 锚点指向不存在的 #create，点击无任何效果，创建功能完全不可达；3）所有博物馆卡片均为静态展示，没有链接或点击事件，无法进入任意虚拟博物馆或体验 Interactive Walkthroughs，用户探索/分享的核心目标无法完成；4）社交链接为 href='#' 占位，点击会触发 JS 错误。次要瑕疵：3D 背景与卡片内容无关联，缺少操作说明；导航滚动反馈不明显；卡片/创作者的更多信息入口缺失。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强：深蓝渐变背景搭配珊瑚红和青绿色的渐变强调色，营造出科技感与现代美术馆氛围。Three.js动态3D几何体作为背景，贴合“3D虚拟博物馆”主题，增强了沉浸感。布局结构清晰，固定导航、全屏Hero、卡片网格、特性区和创作者展示区层次分明，采用Flex和Grid实现响应式设计。字体使用Segoe UI，字号层级合理，按钮、卡片、标签等组件设计统一，圆角、阴影、毛玻璃效果和过渡动画细节到位，整体CSS专业度较高，符合现代网页设计规范。不足之处在于Hero区域的Three.js画布以绝对定位覆盖全屏，可能遮挡文字和按钮交互（探针显示按钮被canvas盖住）；存在两个querySelector的JS错误，导航链接点击无实际滚动效果；部分视觉元素如卡片和图标样式重复度较高，略显千篇一律。综合视觉设计优秀，但交互和细节瑕疵使评分未达满分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Failed to execute 'querySelector' on 'Document': '#' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '#' is not a valid selector."
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_014528.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#gallery",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Creators",
+      "href": "#creators",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Create",
+      "href": "#create",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "CANVAS.",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "📱",
+      "href": "#",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "💻",
+      "href": "#",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

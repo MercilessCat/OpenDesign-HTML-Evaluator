@@ -1,0 +1,186 @@
+{
+  "row_id": "01_035820",
+  "shard": 1,
+  "id": 35820,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Build a user-friendly platform for configuring domain name system filters, enhancing internet safety. Users can create and apply custom filtering rules to block harmful content. The interface provides real-time feedback, usage analytics, and a library of pre-configured filters. Users can also manage settings across multiple devices for consistent protection.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 9475,
+  "html_sha256": "ade986f3010e2cea2e868e8738bc04efdc57543c6eb7f8abc586a121eb112ca2",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "保存过滤规则",
+        "expected": "点击 Save Filter 后保存当前配置并给出成功反馈",
+        "evidence": "探针点击 Save Filter 后 DOM 无变化、无网络请求、无 JS 错误；HTML 中按钮未绑定任何事件。",
+        "ok": 0
+      },
+      {
+        "name": "应用规则到设备",
+        "expected": "点击 Apply to Devices 后将规则应用到设备并显示应用状态",
+        "evidence": "探针点击 Apply to Devices 后 DOM 无变化、无网络请求；按钮无事件处理。",
+        "ok": 0
+      },
+      {
+        "name": "同步设备",
+        "expected": "点击 Sync Devices 后执行同步并更新设备状态/反馈",
+        "evidence": "探针点击 Sync Devices 后 DOM 无变化、无网络请求；按钮无事件处理。",
+        "ok": 0
+      },
+      {
+        "name": "添加预配置过滤器",
+        "expected": "点击预配置过滤器旁的加号将模板加入当前配置",
+        "evidence": "三个加号按钮被探针点击后均无 DOM 变化；按钮无事件绑定。",
+        "ok": 0
+      },
+      {
+        "name": "打开设置",
+        "expected": "点击 Settings 后打开设置面板或弹出菜单",
+        "evidence": "探针点击 Settings 后 DOM 无变化、无网络请求；按钮无事件处理。",
+        "ok": 0
+      },
+      {
+        "name": "输入自定义域名",
+        "expected": "在文本域输入域名并回车后添加到过滤列表或触发反馈",
+        "evidence": "探针在输入框输入“测试”并回车后 DOM 无变化，无任何提交或添加行为。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉结构完整，但所有核心交互（保存过滤器、应用规则、同步设备、添加预置过滤器、设置）均为静态占位，按钮未绑定任何事件，点击后无任何反馈；输入框回车也无业务响应。用户命令中要求的“创建和应用自定义规则、实时反馈、多设备管理”等核心功能均未实现，属于基本不可用页面。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. “Save Filter”点击后无任何保存/反馈，核心操作无法完成；2. “Apply to Devices”点击后无任何应用效果或反馈，跨设备配置流程卡死；3. “Sync Devices”点击无响应；4. 三个预配置模板的“+”按钮点击无效，无法添加模板；5. “Settings”按钮为死路，点击无任何页面反馈。次要瑕疵：页面无操作成功/失败提示，也无帮助说明；部分状态（Active、实时监控、Last Updated）为静态展示，未随操作变化；缺少对过滤规则已生效的明确图例。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "从HTML/CSS源码来看，这是一个视觉质量较高的现代单页仪表盘界面。整体采用Tailwind CSS，主色调为蓝色（#3b82f6）+ 绿色（#10b981）+ 深灰蓝（#1e293b），搭配浅灰背景（bg-gray-50），色彩统一、专业，符合网络安全/DNS管理类产品的调性。布局上使用max-w-4xl居中、flex纵向结构，header/main/footer层级清晰；主配置区与右侧统计卡片形成两栏网格，信息密度适中，页面在视口内完整呈现。组件细节较讲究：卡片使用rounded-xl + shadow-md，输入框有focus ring，按钮有hover过渡，标签页和进度条也具备良好视觉反馈。字体依赖Tailwind默认sans体系，排版干净易读。缺点在于：整体设计偏模板化，缺少定制化视觉记忆点；所有按钮和部分列表项只有静态样式，没有真实交互反馈；没有自定义字体、复杂动画或更精致的视觉层次，因此尚未达到顶尖设计水准。但作为现代UI组件型页面，整体美观度和专业性良好。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_035820.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sync Devices",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save Filter",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Apply to Devices",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-plus",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-plus",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-plus",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Settings",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "text",
+      "tag": "input",
+      "text": "",
+      "href": null,
+      "type": "text",
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "typed": "测试",
+      "fill_method": "playwright",
+      "enter_pressed": true,
+      "pixels_changed": false
+    }
+  ]
+}

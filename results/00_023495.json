@@ -1,0 +1,133 @@
+{
+  "row_id": "00_023495",
+  "shard": 0,
+  "id": 23495,
+  "category": "3D design",
+  "prompt": "Experience cutting-edge military training through virtual reality simulations. This platform offers realistic, immersive scenarios for skill development and strategy training. Features include collaborative exercises, scenario customization, performance analytics, and integration with existing training systems to enhance preparedness and decision-making.",
+  "html_len": 21683,
+  "html_sha256": "b8fb3352b01a47e90e6670eaca594270878498735e47b10a83c8933a4dd728e8",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "拖拽 3D 场景旋转视角",
+        "expected": "拖拽后相机视角发生旋转/缩放，场景响应操作",
+        "evidence": "页面包含 Three.js 场景、OrbitControls、requestAnimationFrame，运行时无 JS 错误；探针在 canvas 上拖拽无报错，按判例可交互",
+        "ok": 1
+      },
+      {
+        "name": "选择训练场景（如 Desert Operations）",
+        "expected": "选中场景高亮，且 3D 训练环境/主题切换为对应场景",
+        "evidence": "HTML 为 .scenario-option 绑定 click，点击会切换 .active 并弹出“Scenario changed to...”通知；但没有修改地形/环境/参数，场景内容实际未切换",
+        "ok": 0
+      },
+      {
+        "name": "START MISSION 开始任务",
+        "expected": "进入任务加载并启动/切换模拟状态",
+        "evidence": "按钮 click 仅调用 showNotification('START MISSION command executed')；探针点击后仅通知类 DOM 变化，无任务状态改变，无实际模拟启动逻辑",
+        "ok": 0
+      },
+      {
+        "name": "PAUSE 暂停训练",
+        "expected": "暂停当前模拟/动画，再次点击可继续",
+        "evidence": "点击只显示“PAUSE command executed”通知；animate() 无条件持续执行，无暂停状态变量，实际未暂停",
+        "ok": 0
+      },
+      {
+        "name": "RESET 重置训练",
+        "expected": "重置场景/车辆/任务状态到初始",
+        "evidence": "点击只显示“RESET command executed”通知；没有重置相机、车辆或场景数据的代码，探针点击后也无业务状态变化",
+        "ok": 0
+      },
+      {
+        "name": "进入协作练习/系统集成",
+        "expected": "提供入口并可发起/配置协作训练或集成现有训练系统",
+        "evidence": "整个页面没有协作练习、系统集成的按钮/链接/模块，需求功能入口缺失",
+        "ok": "NA"
+      }
+    ],
+    "reason": "3D 场景和视角拖拽真实可交互，但场景选择、START/PAUSE/RESET 都只触发通知或高亮，未改变场景或任务状态；协作练习和系统集成入口缺失，性能分析也仅为静态数字。核心训练任务无法完成，功能大面积占位。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. “START MISSION / PAUSE / RESET”按钮点击后仅弹出“command executed”通知，并未真正启动、暂停或重置训练流程，核心操作无实际效果；2. 场景选择（Urban Combat等）点击后仅切换选中样式并弹出通知，3D场景内容未发生任何变化，核心控件调节无效。次要瑕疵：缺少操作说明与引导；按钮命名与行为不符（如“START MISSION”实际不启动任务）；雷达仅装饰性动画，未承载有效信息；视觉反馈与功能实际状态不一致，容易误导用户。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力很强，军事科技感与VR沉浸感塑造到位。深蓝至蓝紫的渐变背景搭配青色（#00f2fe）与亮蓝（#4facfe）高亮，色彩统一且对比鲜明，符合3D设计、军事模拟类产品的现代审美。布局清晰：顶部标题区、左下标板、右侧场景选择器、右下控制按钮与雷达组件分区明确，层次合理。组件细节精致：毛玻璃（backdrop-filter）、圆角胶囊按钮、发光边框、渐变文字、雷达扫描与加载动画等，体现了较高的CSS专业水准。3D场景（地形、战车、障碍物）也增强了页面的视觉丰富度。轻微扣分点：雷达等元素使用绝对定位，在窄屏或特定分辨率下可能与其他面板重叠；缺少响应式布局；整体组件种类较多，视觉信息密度略高，但未造成严重混乱。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_023495.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "START MISSION",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.loading-overlay",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "PAUSE",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.loading-overlay",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "RESET",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.loading-overlay",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

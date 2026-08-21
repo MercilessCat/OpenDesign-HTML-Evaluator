@@ -1,0 +1,181 @@
+{
+  "row_id": "02_018162",
+  "shard": 2,
+  "id": 18162,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Design an interactive global map tracking refugee movements, highlighting temporal and spatial patterns. Core features include data overlays for socio-economic factors, storytelling elements, and predictive analytics. The platform empowers users to explore humanitarian trends and potential solutions, fostering empathy and informed policy discussions.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 17850,
+  "html_sha256": "fdd453c2aed0a603ae9ffe84f9742992ed1c5e57b0cb0129572cd90b4e78f268",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击主导航“Dashboard”链接",
+        "expected": "页面应切换到 Dashboard 视图或滚动到对应内容区，提供导航反馈",
+        "evidence": "探针点击后虽有 DOM 变化，但实际是 href=\"#\" 导致的锚点跳转，没有路由或内容切换，属于纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击“Explore Data”按钮",
+        "expected": "触发数据探索功能，打开交互式地图或数据面板",
+        "evidence": "探针点击后 DOM 无变化、无新增网络请求；按钮无事件绑定，未实现任何功能",
+        "ok": 0
+      },
+      {
+        "name": "点击年份按钮“2022”",
+        "expected": "地图更新为 2022 年难民流动数据",
+        "evidence": "探针点击后 DOM 无变化，按钮无事件绑定，年份切换未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击“GDP per Capita”叠加层按钮",
+        "expected": "地图上显示社会经济数据叠加层",
+        "evidence": "按钮没有绑定任何 JS 事件，代码中无对应处理逻辑，点击不会产生反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击故事点“Syrian Family Journey”",
+        "expected": "展开故事详情或触发叙事时间轴",
+        "evidence": "story-point 仅有 hover 样式，没有 click 事件绑定，点击无反应",
+        "ok": 0
+      },
+      {
+        "name": "悬停地图数据点",
+        "expected": "数据点半径增大，提供视觉悬停反馈",
+        "evidence": "D3 代码中绑定了 mouseover/mouseout 事件，且运行时无 JS 错误，此交互有效",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉完整但核心交互大量缺失：导航为占位链接、Explore Data 按钮无反应、年份切换无变化、数据叠加层和故事点均未绑定事件。仅地图数据点悬停有反馈。需求中的交互式全球地图、数据叠加、叙事和预测分析均未真正实现，核心任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部导航“Data Sources/About/Policy Insights”均为占位链接（href=\"#\"），点击仅改变hash，无实际页面跳转或内容反馈；2. “Explore Data”主按钮点击后DOM无任何变化，无响应；3. 年份切换按钮（2023/2022/2021）点击后地图无任何数据更新或视觉反馈，核心控件调节无效；4. 社会经济数据叠加按钮（GDP/Education/Conflict Zones）也未绑定任何交互逻辑，点击无效。次要瑕疵：地图仅用抽象色块和线条代替真实国家轮廓，难以对应图例中的难民路线；预测趋势条缺少时间范围和指标说明；故事卡片和导航视觉上可交互但无展开行为；页面整体高度可能超出视口，与“fits within viewport”要求不符。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 1.2,
+  "baseline_overall": 1.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_018162.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Data Sources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "About",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Policy Insights",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Data",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "2023",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "2022",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "2021",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

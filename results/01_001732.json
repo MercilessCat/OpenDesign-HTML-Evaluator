@@ -1,0 +1,136 @@
+{
+  "row_id": "01_001732",
+  "shard": 1,
+  "id": 1732,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Design a sophisticated interface to monitor and optimize battery health across devices. Features include real-time health diagnostics, usage pattern analysis, and predictive lifespan insights. Users can receive personalized tips for extending battery life, schedule maintenance alerts, and visualize energy consumption trends for better device management.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13796,
+  "html_sha256": "2769d1c365b2db6bd672dbcd5256faa03c5af3a0226b1a9d108e9eaf7fde5506",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Refresh Data 刷新数据",
+        "expected": "电量、健康值等数据发生变化，或至少出现刷新状态的视觉反馈",
+        "evidence": "探针点击后 DOM 无变化，无新增 JS 错误，无新增网络请求；按钮仅有 hover 样式，没有绑定任何点击事件",
+        "ok": 0
+      },
+      {
+        "name": "点击 Schedule Maintenance Alert 设置维护提醒",
+        "expected": "弹出提醒确认、日程选择或状态提示，表示维护提醒已设置",
+        "evidence": "探针点击后 DOM 无变化，无新增 JS 错误，无新增网络请求；按钮为纯展示，没有事件处理逻辑",
+        "ok": 0
+      },
+      {
+        "name": "点击 Day 切换能耗日视图",
+        "expected": "能耗图表切换为日维度数据，或至少该标签高亮显示当前选中状态",
+        "evidence": "探针点击后 DOM 无变化，无新增 JS 错误，无新增网络请求；该按钮无事件绑定，图表始终为静态柱状图",
+        "ok": 0
+      },
+      {
+        "name": "点击 Week 切换能耗周视图",
+        "expected": "能耗图表切换为周维度数据，或至少该标签高亮显示当前选中状态",
+        "evidence": "探针点击后 DOM 无变化，无新增 JS 错误，无新增网络请求；该按钮无事件绑定，图表与点击前完全一致",
+        "ok": 0
+      },
+      {
+        "name": "点击 Month 切换能耗月视图",
+        "expected": "能耗图表切换为月维度数据，或至少该标签高亮显示当前选中状态",
+        "evidence": "探针点击后 DOM 无变化，无新增 JS 错误，无新增网络请求；该按钮无事件绑定，图表与点击前完全一致",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整，内容覆盖了需求中的电池健康状态、使用统计、优化建议和能耗趋势，但所有交互按钮均为静态展示，点击无任何业务反馈。Refresh Data、Schedule Maintenance Alert、Day/Week/Month 图表切换全部未实现，核心功能大面积缺失，仅有 setInterval 定时模拟数据变化，无法满足用户对监控和优化电池健康的实际交互预期。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在多个核心可用性问题：\n1. 核心操作按钮无实际反馈：'Refresh Data'按钮点击后DOM无变化、无loading状态、无数据刷新提示，手动刷新功能不可用；\n2. 'Schedule Maintenance Alert'按钮点击后无任何反应，维护提醒是页面说明中的核心功能但完全无法操作；\n3. 'Day/Week/Month'三个时间切换按钮点击后均无DOM变化，能耗趋势无法按时间维度切换，核心数据可视化交互失效。\n\n次要瑕疵：\n1. 能耗柱状图缺少Y轴刻度与数值标注，无法准确读取能耗值变化；\n2. 温度、电压进度条缺少明确量程范围（如电压条宽度78%对应多少V）；\n3. 'Battery Protection Active'为静态声明，无任何机制说明或操作入口；\n4. 页面每5秒自动刷新无视觉提示，用户无法感知数据正在更新；\n5. 按钮hover有样式反馈但点击无业务状态反馈，容易让用户误以为操作无效。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力较高，采用深色渐变背景（#0f172a → #1e293b）搭配半透明毛玻璃卡片和明亮的蓝、绿、黄点缀色，风格现代且符合电池健康监控产品的科技感与专业属性。色彩搭配协调，主次分明，对比度充足，文本可读性好。布局采用三列栅格与区域化卡片结构，信息层级清晰，Header、功能卡片、图表区和Footer在视觉上均衡有序，符合单页仪表盘设计要求。字体使用Inter，字重与层级控制到位；间距、圆角、阴影和渐变等CSS细节处理专业，Tailwind的运用熟练。图表区以纯CSS条形图呈现能耗趋势，简洁直观。轻微扣分在于个别交互按钮点击后没有可见反馈或状态变化，功能的‘活感’略弱；另外深色背景上的某些小图标对比较为平淡，但整体不影响审美品质。综合来看，这是一款设计优良、视觉统一的现代UI组件型页面。",
+    "attempts": 2
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_001732.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Refresh Data",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Schedule Maintenance Alert",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Day",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Week",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Month",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

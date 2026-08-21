@@ -1,0 +1,181 @@
+{
+  "row_id": "01_013573",
+  "shard": 1,
+  "id": 13573,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create an engaging platform focused on enhancing user experience with actionable empty states. Users explore intuitive suggestions and interactive elements to reengage with the platform. Key features include personalized recommendations, gamified interactions, and feedback loops, transforming empty states into opportunities for user engagement and satisfaction.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11499,
+  "html_sha256": "0021f72e34d10d75163bfcec553b86617af8f1279a9dbb72f0c0f62de1028f2f",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航链接（Home/Features/Examples/Contact）",
+        "expected": "点击导航应切换到对应内容区块或产生路由变化，展示对应页面内容",
+        "evidence": "探针点击4个导航链接均报告'页面跳转'，但HTML中全部为href='#'，无任何路由或内容切换逻辑；点击只是改变URL hash或滚至顶部，无实质业务反馈，属于典型占位入口",
+        "ok": 0
+      },
+      {
+        "name": "Get Started 按钮",
+        "expected": "作为主要CTA，点击后应触发引导流程（如滚动到演示区、弹出引导弹窗或显示下一环节）",
+        "evidence": "探针点击后DOM无变化、无JS错误、无网络请求；按钮无事件绑定，点击无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "Live Demo 按钮",
+        "expected": "作为核心交互演示入口，点击后应展示可操作的空状态演示或进入交互式体验",
+        "evidence": "探针点击后DOM无变化、无JS错误、无网络请求；核心演示功能完全未实现，按钮为纯视觉元素",
+        "ok": 0
+      },
+      {
+        "name": "Documentation 按钮",
+        "expected": "点击后应展示文档内容或提供文档访问反馈",
+        "evidence": "探针点击后DOM无变化、无JS错误、无网络请求；按钮为无事件绑定的占位入口",
+        "ok": 0
+      },
+      {
+        "name": "Find Connections 按钮（空状态演示区）",
+        "expected": "作为空状态核心行动点，点击后应模拟推荐连接、更新空状态展示或触发交互反馈",
+        "evidence": "探针点击后DOM无变化、无JS错误、无网络请求；空状态演示区无法响应用户操作，'可操作的空状态'核心需求缺失",
+        "ok": 0
+      },
+      {
+        "name": "Create Post 按钮（空状态演示区）",
+        "expected": "点击后应创建帖子或切换空状态为有内容状态，体现'空状态转化为机会'",
+        "evidence": "HTML中该按钮无任何事件绑定，与同区域Find Connections按钮一样均无交互；空状态完全不可操作",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整、三张功能卡片内容符合主题，但所有关键交互入口均为占位或无事件绑定：4个导航链接href='#'无实际路由，Get Started、Live Demo、Documentation、Find Connections、Create Post五个按钮点击后DOM均无任何变化，无JS反馈、无网络请求。需求强调'可操作的空状态'和'交互式平台'，但页面上空状态演示及所有CTA都不可交互，核心交互大面积失败，功能性严重缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 顶部导航链接（Home/Features/Examples/Contact）为占位链接，点击仅跳转页面顶部，无实际内容导航或锚点目标，主要入口无实际反馈；2. 所有核心CTA按钮（Get Started、Live Demo、Documentation、Find Connections）点击后均无DOM变化、无网络请求、无任何交互反馈，核心操作完全无法完成；3. 交互演示区模拟的empty state场景中，“Find Connections”按钮无响应，演示流程卡死，无法体验页面宣称的“actionable empty states”核心功能，用户无法判断操作是否成功。次要瑕疵：页面信息结构清晰、视觉设计美观，但缺少对按钮功能状态的说明文字，hover效果与点击无响应形成反差，易让用户产生困惑；导航链接与实际单页无滚动布局不匹配，存在导航死路预期。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力高，采用了现代流行的渐变背景（浅蓝到浅紫），色彩搭配和谐统一，主色靛蓝、紫、粉的渐进使用既突出品牌感又不刺眼。布局清晰：header、hero区、三卡片、交互示例、footer，层次分明且间距得当，符合单页视口要求。字体使用Inter，字形现代，标题与正文大小对比明确，可读性好。卡片设计精致，圆角、阴影、悬停上浮动效提升了专业感，交互按钮具有清晰的状态反馈。整体设计符合现代SaaS/UI组件展示风格，与用户需求“engaging empty states”主题高度匹配。略微扣分点在于导航链接点击会跳转但无实际落地页、部分按钮无实际功能，但就视觉而言已达到专业水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_013573.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Examples",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Contact",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Live Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Documentation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Find Connections",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

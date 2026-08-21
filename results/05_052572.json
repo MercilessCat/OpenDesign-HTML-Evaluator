@@ -1,0 +1,181 @@
+{
+  "row_id": "05_052572",
+  "shard": 5,
+  "id": 52572,
+  "category": "Website",
+  "prompt": "Create a platform for users to share real-time feedback and experience stories about public transport. The site will feature interactive maps, sentiment analysis, and a community forum to discuss solutions, fostering proactive dialogue between passengers and transport authorities for service improvement.",
+  "html_len": 37382,
+  "html_sha256": "6f35b8a740daf4595d72923ceee7c78fa9df81683e005f088a5a651760b5c50f",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航切换区块",
+        "expected": "页面平滑滚动到对应模块（Home/Map/Feedback/Forum/Analytics）",
+        "evidence": "探针点击 Home/Map/Feedback/Forum/Analytics 均触发 DOM 变化并发生页面跳转（锚点定位），无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击“Share Your Experience”按钮",
+        "expected": "跳转至反馈表单或打开分享入口",
+        "evidence": "探针点击后 DOM 无变化、无 JS 错误、无网络请求，按钮无事件绑定，核心 CTA 为死按钮。",
+        "ok": 0
+      },
+      {
+        "name": "点击“View Map Insights”按钮",
+        "expected": "跳转至交互地图或展示地图数据",
+        "evidence": "探针点击后 DOM 无变化，按钮无事件；地图区域实际为占位文字“Interactive map visualization would appear here”，交互地图未实现。",
+        "ok": 0
+      },
+      {
+        "name": "提交反馈表单",
+        "expected": "提交成功并反馈新反馈出现在列表中",
+        "evidence": "HTML 中 form 无 action/onsubmit，提交按钮 type=submit 无 JS 处理，评分按钮 type=button 无事件；提交不会产生新反馈或成功提示，仅可能刷新页面。",
+        "ok": 0
+      },
+      {
+        "name": "在论坛发布讨论",
+        "expected": "发帖后新讨论出现在论坛列表中",
+        "evidence": "论坛表单无 action/onsubmit，Post Discussion 按钮无 JS 绑定；无发帖处理逻辑，点击无法新增帖子。",
+        "ok": 0
+      },
+      {
+        "name": "查看情感分析图表",
+        "expected": "看到情感趋势和问题分类的可视化数据",
+        "evidence": "页面存在两个 canvas（#sentimentChart、#issuesChart）并引用了 Chart.js，运行时无 JS 错误，可推断图表已完成渲染；同时性能表格和情感标签提供了数据分析内容。",
+        "ok": 1
+      }
+    ],
+    "reason": "导航锚点可用，情感分析图表疑似正常渲染，但核心用户任务大面积失败：分享体验按钮、查看地图按钮均为死按钮，反馈提交和论坛发帖表单无事件处理，交互地图仅占位，无法完成用户分享反馈、查看交互地图、参与论坛讨论等主要需求。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) Hero 区两个主要 CTA（Share Your Experience、View Map Insights）点击后无任何反馈，也不跳转或滚动到对应板块，核心任务入口失效；2) 导航栏 Sign In 按钮点击无反应，登录入口不可用；3) 反馈表单的评分按钮（Poor/Fair/Good/Excellent）没有选中态，点击后仅 hover 变化，无法完成“评分”这一核心输入；4) “交互地图”区域是占位文案而非可用地图，地图洞察功能不可用。次要瑕疵：图表区缺少必要的图例/说明，若未初始化则为空白；论坛发帖/回复交互停留在展示层，提交后缺少明确的成功或失败反馈。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较强：Hero区使用蓝绿渐变，配合白色卡片和浮动圆形装饰，形成了清晰、现代的品牌印象；配色系统统一（primary蓝、secondary绿、accent紫）、对比协调，符合交通主题。布局层次分明，导航固定、各内容区块（统计、地图、反馈、分析、论坛）划分清晰，留白与间距使用得当。字体采用 Poppins，卡片圆角、阴影、边框配色（积极/消极/中性反馈）等组件细节打磨到位，过渡动画与悬停效果增强了交互感。地图区域目前仅为占位提示，互动性弱，略微拉低视觉完成度；部分按钮无实际功能，但独立于视觉评估。总体符合现代网页设计规范，且与用户需求中“实时反馈、情绪分析、社区论坛”的开放、协作气质相匹配。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_052572.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Map",
+      "href": "#map",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Feedback",
+      "href": "#feedback",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Forum",
+      "href": "#forum",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#analytics",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Share Your Experience",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Map Insights",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

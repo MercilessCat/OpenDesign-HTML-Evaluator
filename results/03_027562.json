@@ -1,0 +1,171 @@
+{
+  "row_id": "03_027562",
+  "shard": 3,
+  "id": 27562,
+  "category": "Game dev",
+  "prompt": "Design a charming and interactive website where users care for and style magical unicorns. The platform includes grooming challenges, virtual salons, and fashion showcases. Users can share their styled unicorns in a vibrant community, participate in themed contests, and unlock new tools and accessories through creative gameplay and community engagement.",
+  "html_len": 25919,
+  "html_sha256": "190775024a239d415dab2659266cd455abc1db402aa8d88e809805b33bb1ff94",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "使用梳理工具（Brush/Shampoo/Dryer）",
+        "expected": "独角兽的 Happiness/Sparkle/Beauty 数值提升，并出现星星/泡泡/风等视觉反馈",
+        "evidence": "探针点击三个工具按钮后 DOM 均有变化、无 JS 错误；HTML 中三个按钮均绑定了 click 事件，调用 updateStats 和 createSparkles/createBubbles/createWind。",
+        "ok": 1
+      },
+      {
+        "name": "选择饰品（Crown/Bow/Glasses 等）",
+        "expected": "对应饰品被添加到独角兽身上并重绘 canvas，同时出现星星反馈",
+        "evidence": "HTML 中 .accessory-item 均绑定 click，将 data-accessory 推入 unicorn.accessories 后调用 drawUnicorn()；无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "选择独角兽颜色",
+        "expected": "独角兽身体颜色改变并重绘，出现星星反馈",
+        "evidence": "HTML 中 [data-color] 色块均绑定 click，设置 unicorn.color 后调用 drawUnicorn()；无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "保存/分享已造型的独角兽",
+        "expected": "弹出保存/分享提示，分享后 Stars 增加并出现彩带效果",
+        "evidence": "探针点击 Save/Share 后 DOM 有变化、无 JS 错误；HTML 中绑定 alert、createConfetti，Share 还会更新 #stars 数值。",
+        "ok": 1
+      },
+      {
+        "name": "参与主题比赛（Enter Contest）",
+        "expected": "进入比赛流程、弹出比赛内容或报名界面",
+        "evidence": "探针点击 Enter Contest 后 DOM 无变化；HTML 中该按钮没有绑定任何 click 事件，是纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "参与挑战/解锁新工具或配件",
+        "expected": "存在挑战任务或解锁进度，完成后能解锁新工具/配件",
+        "evidence": "页面没有任何 challenge/unlock/解锁进度相关 DOM 或事件绑定，需求声明的挑战与解锁玩法未实现。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心装扮流程可用：梳理工具、饰品、颜色、保存/分享均有真实反馈；但主题比赛按钮无事件反馈，挑战/解锁系统缺失，属于需求声明关键功能未实现，按评分锚定不超过 4，故给 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 'Enter Contest'按钮点击无任何反馈，入口失效；2) 部分配件（flower、wings、scarf、hat）点击后独角兽无对应视觉变化，用户无法感知操作成功；3) 彩虹色选项点击后身体填充色无效，独角兽可能显示为黑色。次要瑕疵：社区展示卡片为空白占位；缺少操作引导说明；保存/分享提示简陋但不影响功能。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较强，风格明确，契合‘魔法独角兽’主题。色彩搭配以粉、蓝、紫等梦幻色系为主，背景渐变柔和，组件配色也使用了低饱和度的浅色系，整体和谐统一。布局采用三列网格和卡片式设计，工具区、展示区、社区区层次分明，间距合理。字体选用 Comic Neue 圆体，符合可爱、童趣的游戏风格。CSS 细节如圆角、阴影、悬浮动效、闪烁粒子、漂浮动画等增强了交互感和精致度，符合现代网页设计要求。交互探针显示主要按钮和道具点击均有动态反馈，功能性与视觉结合较好。扣分点：社区展示区的占位图仅为空虚线框，视觉完成度不足；canvas 手绘独角兽较为简单，缺乏真实图片或更精细的 3D 渲染效果，导致整体精致度略打折扣。但总体而言，页面非常好地实现了用户预期的‘迷人、互动、魔法独角兽’体验。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_027562.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "🖌️\nBrush",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "SPAN.text-2xl",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "🧴\nShampoo",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "SPAN.text-2xl",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "💨\nDryer",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "SPAN.text-2xl",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Share",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Enter Contest",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "row_id": "04_029271",
+  "shard": 4,
+  "id": 29271,
+  "category": "Website",
+  "prompt": "Empower creators with a hub featuring reviews, tutorials, and community insights into no-code website builders. Users can compare tools, access design resources, and share their projects. Key features include expert reviews, a resource library, and a showcase gallery, democratizing web development and inspiring innovative digital creations.",
+  "html_len": 35200,
+  "html_sha256": "449cb6f78fe9c98e16bbd885a96b522b294115839a40bb7f8d643be465bcd004",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "Navigate via nav link to Tools",
+        "expected": "Page scrolls to the tools comparison section",
+        "evidence": "Probe: clicking <a>Tools</a> caused DOM change and page jump, no JS errors.",
+        "ok": 1
+      },
+      {
+        "name": "Click hero 'Explore Tools' button",
+        "expected": "Page scrolls to or navigates to the tool comparison area",
+        "evidence": "Probe: clicking <button>Explore Tools</button> caused no DOM change and no network request; button has no href/event binding.",
+        "ok": 0
+      },
+      {
+        "name": "Click 'Browse Templates' resource button",
+        "expected": "User accesses a template resource library or download area",
+        "evidence": "Probe: clicking <button>Browse Templates</button> caused DOM change and page jump with no JS errors, although the button has no obvious href/event in static HTML.",
+        "ok": 1
+      },
+      {
+        "name": "Submit a project to the showcase gallery",
+        "expected": "A submission form or upload flow opens",
+        "evidence": "The 'Submit Your Project' button in the community showcase has no event listener or link in the HTML; clicking it produces no functional response. This is the main entry for the required 'share their ",
+        "ok": 0
+      },
+      {
+        "name": "Subscribe via email CTA form",
+        "expected": "Form submission gives success feedback or redirects",
+        "evidence": "The email form has no action attribute and no JS submit handler; entering an email and clicking Sign up will not produce any meaningful page change or confirmation.",
+        "ok": 0
+      },
+      {
+        "name": "Open mobile navigation menu",
+        "expected": "Hamburger button expands the mobile menu",
+        "evidence": "The button #mobile-menu-button exists but has no event binding, and #mobile-menu is hidden with the 'hidden' class; clicking cannot toggle the menu.",
+        "ok": 0
+      }
+    ],
+    "reason": "The page displays substantial static content (tool comparison, resource cards, gallery), and some anchor navigation works. However, several core and expected interactions are unimplemented: the primary 'Explore Tools' CTA does nothing, 'Submit Your Project' (required for sharing projects) is a dead button, the email subscription form has no working submission, and the mobile menu cannot open. At least two key requirement-related entries are placeholders, so the page is only minimally functional ",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "【核心可用性问题】\n1. 导航栏及移动端菜单的 \"Get Started\" 按钮（共2处）点击后无任何反馈，无跳转、无弹窗、无提示，用户注册/开始使用的主流程完全走不通；\n2. Hero 区 \"Explore Tools\" 按钮点击无任何反馈，用户浏览工具的核心路径为死路；\n3. Community 区 \"Submit Your Project\" 按钮点击无反馈，用户分享项目这一核心功能无法使用；\n4. 邮箱订阅表单的 \"Sign up\" 提交逻辑缺失，注册流程不完整。\n\n【次要瑕疵】\n1. 工具对比表格中的平台 Logo 均为灰色虚线占位框，无实际品牌图标；\n2. 所有用户头像均为灰色虚线圆圈占位符，无真实图片；\n3. 资源区按钮（如 Browse Templates、Watch Now）点击后跳转段落，缺少过渡预览或说明；\n4. 页面存在大块渐变纯色占位区域（如画廊卡片配图），视觉完成度受影响。\n\n【总结】页面视觉风格统一、信息层级清晰、锚点导航可用，但 4 个核心操作入口失效，用户无法完成注册、浏览工具和提交作品等关键任务，属于典型的\"能用但不好用\"，因此按标准给予 3 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面视觉素养出色，整体呈现专业级 SaaS 产品的质感。设计亮点突出：1) 色彩体系成熟——indigo/violet/pink 的渐变主色贯穿导航、按钮、图标与 CTA 区块，配合浅蓝到浅粉的柔和页底，形成统一且有记忆度的视觉识别；2) 布局结构清晰——每个内容区块（hero、功能卡、对比表、资源卡、作品展览、用户证言、CTA）均遵循 max-w-7xl 居中并保持 py-16 的呼吸节奏，信息层级分明，浏览动线顺畅；3) 细节考究——导航固定半透明阴影、卡片 hover 位移+阴影过渡、图标 hover 缩放、hero 模拟浏览器窗口的微交互设计，都体现出对动效节奏的良好把控；4) Typography 上 Inter 字体配合 extrabold 大标题与抗锯齿渐变色文字，符合 2024 年主流的 Creator/SaaS 审美方向；5) 响应式结构完整，移动端菜单逻辑完备。扣分点主要在于：工具对比表中平台 logo 以灰色虚线占位框呈现，视觉上略显未完成；头像区域同样使用占位符风格，弱化了社区感的真实性；且整体视觉风格较为周正，缺少一点令人印象深刻的记忆点或突破性设计。但综合来看，其设计系统性、配色成熟度与交互质感均处于中上水平，与 'Empowering Creators' 的品牌调性高度对齐。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_029271.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tools",
+      "href": "#tools",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#resources",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Tools",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Gallery",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Browse Templates",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

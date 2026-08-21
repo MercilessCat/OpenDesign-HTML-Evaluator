@@ -1,0 +1,103 @@
+{
+  "row_id": "03_025027",
+  "shard": 3,
+  "id": 25027,
+  "category": "Game dev",
+  "prompt": "Create an interactive dimension-hopping adventure site where users explore alternate realities. The core idea revolves around dynamic world-building and narrative exploration. Features include user-driven storylines, immersive 3D environments, artifact collection, and a community-driven dimension-creation toolkit.",
+  "html_len": 22852,
+  "html_sha256": "769d4145be31edeb35097cf9a207fba172a04186117aeae26b5b7b007f28c0f9",
+  "functional": {
+    "score": 8.0,
+    "raw_score": 8.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Begin Adventure 开始冒险",
+        "expected": "开始屏幕隐藏，HUD 显示，3D 动画开始运行",
+        "evidence": "探针点击后 DOM 变化存在，无 JS 错误；HTML 中 startBtn 绑定 startGame，切换 .hidden 并调用 animate()",
+        "ok": 1
+      },
+      {
+        "name": "点击 Hop Dimensions 跳跃维度",
+        "expected": "当前维度名称/描述更新，3D 场景背景色和粒子颜色变化",
+        "evidence": "hopBtn 绑定 enterRandomDimension，更新 currentDimensionEl/dimensionDescEl，并修改 scene.background、scene.fog 和粒子颜色",
+        "ok": 1
+      },
+      {
+        "name": "点击 Inventory 打开库存",
+        "expected": "HUD 隐藏，库存屏幕显示并列出已收集的神器",
+        "evidence": "inventoryBtn 绑定 showInventory，切换隐藏并动态填充 artifactsContainer；逻辑完整",
+        "ok": 1
+      },
+      {
+        "name": "点击 Create Dimension 打开维度创建器",
+        "expected": "HUD 隐藏，显示维度创建面板",
+        "evidence": "createBtn 绑定 showCreationScreen，切换 hidden；表单含名称、物理规则、视觉主题等完整控件",
+        "ok": 1
+      },
+      {
+        "name": "输入维度名称并点击 Publish to Multiverse",
+        "expected": "弹出发布成功提示，返回 HUD 界面",
+        "evidence": "publishDimension 绑定 publishNewDimension，读取输入值后 alert 提示，并切回 hud",
+        "ok": 1
+      },
+      {
+        "name": "在 HUD 可见时点击空白处收集神器",
+        "expected": "神器计数 +1，并显示收集通知",
+        "evidence": "document click 监听在排除导航按钮后调用 collectArtifact，更新 artifactCountEl 并通过 showArtifactNotification 弹出提示",
+        "ok": 1
+      }
+    ],
+    "reason": "核心冒险流程完整可用：开始、维度跳跃、库存、创建、神器收集均能正确响应并产生符合预期的反馈；3D 场景有 requestAnimationFrame 动画且无 JS 错误。次要瑕疵：Game Over 屏幕无触发路径，share-btn 无事件绑定，但不影响主要玩法。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) 创建维度功能无效——用户填写维度名称、物理规则、视觉主题并点击“Publish to Multiverse”后，新维度并未真正加入游戏维度池，之后“Hop Dimensions”永远只会跳转到预置的4个维度，用户创建的维度无法被访问，发布操作对游戏无实际影响；2) 游戏结束流程完全缺失——endGame() 函数从未被任何事件触发，Game Over 屏幕永远无法到达，其中“Share Your Journey”按钮也没有绑定任何事件响应，“Explore Again”（Restart）按钮因此成为死路，用户无法完成一轮游戏或分享旅程。次要瑕疵：3D场景仅作为装饰背景，鼠标拖拽无任何交互反馈；“点击任意空白处收集神器”这一核心玩法没有任何提示或引导，用户难以发现；HUD 面板上的非按钮区域（如维度名称、描述文字）被点击也会误触发神器收集；页面缺少社区维度浏览/检索入口，用户需求中的“community-driven dimension-creation toolkit”仅有单向创建表单，无社区互动闭环。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "整体视觉效果采用深色渐变背景（#0f0c29 → #302b63 → #24243e），搭配霓虹紫、蓝、粉等亮点色，符合'多维宇宙冒险'的科幻主题，氛围感强。布局上使用全屏覆盖层与九宫格卡片组合，层次分明，主行动按钮醒目。卡片hover有上浮+光晕效果，按钮有脉冲动效，交互反馈设计细致。字体使用系统无衬线字体，整体可读性良好，但缺少视觉层级上的差异化字体设计。3D场景通过Three.js加入粒子、几何体旋转和场景颜色响应，增强了沉浸感。主要扣分点：按钮样式重复且颜色过饱和，浮层背景透明度较高，视觉分量略重；部分界面元素（如HUD信息块）样式偏简陋，与现代精品网页设计相比精致度不足；CSS未严格模块化，工具类与自定义混用。总体而言，视觉风格与需求高度匹配，但细节打磨和设计统一性还有提升空间。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_025027.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Adventure",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

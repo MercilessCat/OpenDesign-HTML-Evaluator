@@ -1,0 +1,181 @@
+{
+  "row_id": "00_001434",
+  "shard": 0,
+  "id": 1434,
+  "category": "3D design",
+  "prompt": "Launch a creative space for animators to share HTML5-based 3D animations, offering tools for collaborative projects and feedback. The site includes a gallery for showcasing user work, educational resources for skill development, and networking opportunities to connect with industry professionals.",
+  "html_len": 16173,
+  "html_sha256": "7ce130849ca5def8a831c01080354631e6c0b618d870313c3f54a244c9eb7a84",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航锚点跳转到对应板块",
+        "expected": "页面平滑滚动到 Features / Gallery / Resources / Community 等对应区块",
+        "evidence": "JS 中对所有 nav a 绑定了 preventDefault 和 scrollTo smooth，目标 section id 均存在；探针未检测到 JS 错误，滚动反馈不会体现为 DOM 文本变化，判定可用。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Join AnimSpace 按钮加入/注册",
+        "expected": "出现注册流程、跳转登录页或打开加入表单",
+        "evidence": "按钮只有 hover transition 和 mouseenter/mouseleave 样式事件，没有 click 业务处理；探针点击无网络请求、无页面跳转、无表单或弹窗，无法完成加入/注册。",
+        "ok": 0
+      },
+      {
+        "name": "上传/分享自己的 3D 动画作品",
+        "expected": "出现上传入口、文件选择或创作/分享工具",
+        "evidence": "页面没有上传按钮、input file、表单或创作入口；gallery 和 CTA 均未提供分享流程，核心需求未实现。",
+        "ok": "NA"
+      },
+      {
+        "name": "点击作品卡片查看动画详情/播放",
+        "expected": "打开作品详情、动画播放或作者信息",
+        "evidence": "gallery-item 只是 6 个带渐变背景的空 div，没有链接、点击事件、弹窗或播放器；点击后无业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击社交链接联系行业专业人士",
+        "expected": "跳转到真实的外部社交平台、个人主页或社区群组",
+        "evidence": "社交链接 href=\"#\"，探针点击只是页面内 hash 跳转，无真实外部 URL、无网络请求，无法建立行业联系。",
+        "ok": 0
+      },
+      {
+        "name": "与 Hero 区域的 3D 背景交互",
+        "expected": "3D 场景持续渲染，并随鼠标移动产生视差反馈",
+        "evidence": "Three.js 创建了 20 个浮动网格对象并通过 requestAnimationFrame 持续旋转/浮动；监听 mousemove 移动相机，运行时无 JS 错误，判定交互可用。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉完整、3D 背景和导航可用，但核心业务功能大面积未实现：Join CTA 无注册行为，作品卡片不可点击查看，社交链接为占位死链，上传/分享与协作工具无实际入口；教育资源和协作功能仅停留在描述文案。主要任务无法完成，因此功能分较低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：1. 主CTA按钮“Join AnimSpace”点击后没有任何业务响应，未触发注册/登录流程，也没有任何提示或跳转，用户无法完成“加入社区”这一核心任务。2. 导航链接虽配置了平滑滚动脚本，但自动交互探针显示点击后DOM无变化，且无额外反馈，用户可能感觉不到页面已响应（尽管代码层面有滚动逻辑，但实际行为对用户不够明确）。次要瑕疵：1. 社交媒体的链接均为“#”占位，点击后只会跳到页面顶部或刷新，无法访问真实社交平台，属于未实现功能。2. 画廊中的作品仅以彩色渐变占位，没有实际3D动画展示，也无法点击查看详情，与“展示用户作品”的目标不符。3. 教育资源卡片是静态内容，无跳转或交互，仅作为展示文案。4. 页面缺少对“如何加入”“社区规则”等基本说明，帮助性文字不足。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力较强，采用深色渐变背景（#0f0c29 → #302b63 → #24243e）搭配霓虹渐变文字（青→品红、橙→粉），符合3D动画创意空间的现代、沉浸式风格定位。色彩搭配合理，主色调统一且辅以高饱和渐变点缀，视觉层次分明。布局协调，Hero区占满首屏，Three.js动态3D粒子背景与前景文字形成深度感；Features、Gallery、Resources等区块采用网格与Flex布局，卡片间距均匀，圆角与阴影设计精致，毛玻璃效果（backdrop-filter）提升了质感。字体使用Segoe UI系统字体栈，标题通过渐变文字与下划线装饰突出重点，各区块间距（5rem/10%内边距）充分，呼吸感良好。CSS专业度较高，运用了渐变、模糊遮罩、过渡动画、阴影、响应式断点等现代技术，组件设计（导航胶囊、圆角按钮、卡片悬浮效果）统一且细节到位。交互探针显示导航平滑滚动与CTA按钮动画正常执行，JS无错误，进一步印证了页面的完整性与可用性。虽然画廊区域仅为纯色渐变占位块，缺乏真实作品缩略图，略微削弱了资源展示的说服力，但整体视觉效果已经超出平均水准，设计规范与用户需求的风格高度对齐。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_001434.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#gallery",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#resources",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join AnimSpace",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "📘",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "🐦",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

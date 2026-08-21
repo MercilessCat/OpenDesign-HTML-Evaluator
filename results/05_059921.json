@@ -1,0 +1,201 @@
+{
+  "row_id": "05_059921",
+  "shard": 5,
+  "id": 59921,
+  "category": "Website",
+  "prompt": "Construct a research hub for crop circle enthusiasts exploring theories and evidence. Core idea promotes scientific inquiry and creative exploration of crop circles. Users can submit findings, access research papers, and join collaborative projects. Key features include a comprehensive database, mapping tools, and expert interviews.",
+  "html_len": 25763,
+  "html_sha256": "e3fc8bec99ba5864ab5b8daf781fd64f6db14724bb6a87898df782471a86593b",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航到数据库/社区区块",
+        "expected": "点击导航链接后页面平滑滚动到 Database 或 Community 内容区块",
+        "evidence": "HTML 中 a[href^=\"#\"] 绑定了平滑滚动逻辑，#database 与 #community 锚点均存在；探针点击 Database/Community 导航后新增 JS 错误为 0，滚动不改变 DOM 树，故探针报告 DOM 无变化属于检测局限，从代码逻辑看滚动已执行。",
+        "ok": 1
+      },
+      {
+        "name": "点击导航 Home",
+        "expected": "回到页面顶部或给出首页反馈",
+        "evidence": "Home 链接 href=\"#\"，平滑滚动代码对 href=\"#\" 执行 document.querySelector('#') 抛出 \"Failed to execute 'querySelector' on 'Document': '#' is not a valid selector\"，且 preventDefault 阻断了默认跳转；探针点击后新增 JS 错误 1 条，页面无任何有效跳转。",
+        "ok": 0
+      },
+      {
+        "name": "搜索研究论文",
+        "expected": "输入关键词并回车后显示匹配的论文列表",
+        "evidence": "数据库搜索框 <input> 无 form 包裹、无 oninput/onkeydown/onkeyup 事件绑定，页面脚本中不存在任何搜索过滤逻辑；输入并回车不会产生任何页面变化。",
+        "ok": 0
+      },
+      {
+        "name": "阅读研究论文",
+        "expected": "点击 Read Paper / Load More Papers 后打开论文详情或加载更多内容",
+        "evidence": "三张论文卡片上的 \"Read Paper\" 按钮以及底部 \"Load More Papers\" 按钮均为无事件绑定的静态按钮，页面脚本中无对应点击处理；点击后无业务反馈，只有 hover 样式层变化，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "使用交互式地图",
+        "expected": "地图可拖拽、缩放，并能点击标记查看地点信息",
+        "evidence": "Leaflet 在 DOMContentLoaded 中成功初始化：L.map('#map') 创建地图并添加了 tileLayer 和 5 个 marker；页面初始 JS 错误为 0，Leaflet 脚本加载成功，地图本体可正常交互。",
+        "ok": 1
+      },
+      {
+        "name": "提交发现",
+        "expected": "点击 Submit Findings / Submit Research / Report Formation 后打开提交表单或跳转至提交流程",
+        "evidence": "探针点击 Hero 的 \"Submit Findings\" 后 DOM 无变化、无 JS 错误、无网络请求；CTA 区域两个提交按钮也无任何事件绑定，页面不存在提交流程或表单逻辑，全部为死按钮。",
+        "ok": 0
+      },
+      {
+        "name": "加入协作项目",
+        "expected": "点击 Join Project 后加入项目或打开申请流程",
+        "evidence": "两个协作项目卡片上的 \"Join Project\" 按钮均无事件绑定，HTML 脚本中无对应处理函数；点击只有 hover/focus 样式变化，无实际业务反馈。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为静态展示型落地页，数据库论文、统计数据、协作项目等以静态卡片完整呈现，Leaflet 地图可交互、指向既有锚点的导航可用；但核心功能大面积未实现：提交发现、加入协作项目、阅读论文详情、搜索/筛选数据库全部为无事件绑定的占位按钮，专家访谈（expert interviews）需求内容完全缺失，Home/Research/Resources 导航为死链且点击 Home 会触发 JS 错误。主要任务无法完成，按锚定规则给 2 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在多个核心可用性问题：1) Hero区'Explore Database'和'Submit Findings'等主要操作按钮点击后无任何响应（探针确认DOM无变化、无反馈），核心流程无法启动；2) 'Load More Papers'、'Submit Research'、'Report Formation'等关键按钮均未绑定事件，属占位按钮；3) 导航'Home'链接点击触发JS错误（querySelector('#')无效），导致回顶失效；4) 'Resources'导航无对应锚点，点击后无反馈。次要瑕疵：Hero背景图因网络请求被阻塞而缺失；地图筛选按钮、搜索框无实际筛选/搜索功能；页脚及社媒链接为占位；地图缺少图例说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉吸引力较好，色彩统一（以绿色系为主），符合“科学探索”与“田野”主题。布局结构清晰，导航、数据统计、功能卡片、数据库清单、地图、社区项目、CTA及页尾一应俱全，信息层级分明。字体采用Inter现代无衬线体，间距与圆角、阴影、过渡动画使用得当，卡片悬停效果细腻，具有专业的现代网页设计感。但存在若干减分项：Hero背景图片因网络请求失败（ERR_BLOCKED_BY_ORB）无法显示，仅剩渐变遮罩，视觉冲击力下降；一个JS错误（'#' is not a valid selector）导致平滑滚动功能在部分锚点失效；导航部分链接与按钮交互反馈不一致；全页面视觉语言整体接近通用科研/企业模板，缺少麦田怪圈主题的独特神秘气质和创意性表达。",
+    "attempts": 2
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d4f2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d4f2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d4f2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d4f2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d4f2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d4f2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d4f2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d4f2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d4f2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1500382018106-8c5f5d9d4f2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [
+      "Failed to execute 'querySelector' on 'Document': '#' is not a valid selector."
+    ],
+    "load_timeout": false,
+    "render_error": null,
+    "load_retry": true
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_059921.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Research",
+      "href": "#research",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Database",
+      "href": "#database",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#resources",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 1,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Research",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Database",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Submit Findings",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

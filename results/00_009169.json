@@ -1,0 +1,181 @@
+{
+  "row_id": "00_009169",
+  "shard": 0,
+  "id": 9169,
+  "category": "3D design",
+  "prompt": "Create an immersive platform for artists and designers to explore and manipulate virtual sculptures using mathematical fields. Users can visualize, edit, and share unique 3D creations. Key features include real-time rendering, collaborative editing, and a community gallery for showcasing and critiquing designs.",
+  "html_len": 20953,
+  "html_sha256": "89684026afb7cb73647090cd44a4f7199bea3a5d2a9ffb8311aae1afb419cfe5",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "在 3D 视口拖拽旋转/缩放查看雕塑",
+        "expected": "相机随鼠标拖拽环绕模型旋转，滚动缩放，视口实时更新",
+        "evidence": "Three.js 场景、OrbitControls 已初始化，animate() 中有 requestAnimationFrame 持续渲染；运行时 0 条 JS 错误，可判定 3D 浏览交互可用。",
+        "ok": 1
+      },
+      {
+        "name": "点击工具按钮切换雕塑形态（如 Sphere/Fractal）",
+        "expected": "选择不同数学工具后，3D 雕塑形态发生对应变化",
+        "evidence": ".tool-btn 有 click 监听，但 createSculpture() 每次生成同一个 TorusKnot+球体+立方体组合，不区分按钮；代码注释也写明“In a real app, this would change the sculpture type”。点击只改变按钮背景并重置同一雕塑。",
+        "ok": 0
+      },
+      {
+        "name": "调整参数滑杆修改雕塑",
+        "expected": "复杂度/振幅/频率等参数变化时，3D 模型参数和形态同步更新",
+        "evidence": "slider 的 input 事件只更新右侧百分比文本，没有连接到 Three.js 模型；HTML 中注释明确“In a real app, this would modify sculpture parameters”。滑杆未真正驱动雕塑编辑。",
+        "ok": 0
+      },
+      {
+        "name": "社区画廊查看作品/点赞",
+        "expected": "点击 View 加载或展示作品详情，点击 Like 更新点赞反馈",
+        "evidence": "探针点击 View、Like 均 DOM 变化=无；按钮没有事件绑定。Gallery 中 View、Like、Grid 切换均为静态占位。",
+        "ok": 0
+      },
+      {
+        "name": "顶部导航切换页面（Gallery/Community/Tutorials/Profile）",
+        "expected": "点击导航切换到画廊、社区、教程或个人页",
+        "evidence": "所有 nav 链接均为 href=\"#\"，没有路由或 click 处理；探针点击后无真实内容切换，仅占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "协作编辑或分享",
+        "expected": "提供邀请协作者、实时同步编辑或生成分享链接的能力",
+        "evidence": "页面没有任何协作编辑、分享按钮、相关事件或网络接口，核心功能完全缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "仅 3D 视口的实时渲染和旋转浏览可用；所有编辑工具、参数滑杆、社区画廊按钮、顶部导航均为占位或无效逻辑，协作编辑与分享入口缺失，核心需求大面积未实现。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）核心编辑流程完全无效——所有工具按钮（Sphere/Torus/Wave/Fractal/Twist/Bend/Noise/Mirror）点击后均调用同一个createSculpture()函数，生成完全相同的默认几何体；参数滑块（Complexity/Amplitude/Frequency）拖动后仅更新百分比文本，3D雕塑无任何变化；材质选择无实际效果。用户无法通过任何控件真正编辑雕塑，页面核心目的无法达成。2）主要导航与画廊操作全部为占位——顶部Studio/Gallery/Community/Tutorials/Profile均为#链接，无法到达独立页面；画廊View/Like按钮以及Grid视图切换点击均无响应，分享与评论流程不可达。次要瑕疵：缺少操作引导/图例，用户不知道画布支持拖拽旋转缩放；画廊预览图使用纯CSS渐变占位而非实际雕塑缩略图；工具命名与行为不符（点Sphere不会出现球体）；协作编辑入口缺失；页面视觉美观但信息层级缺少主次区分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面整体视觉吸引力强，深色科技感主题与‘3D数学雕塑平台’的定位高度契合。色彩搭配专业，以深蓝渐变(#1a1a2e→#0f3460)为基底，辅以#4cc9f0和#4361ee的高亮蓝紫色，形成冷静、沉浸式的创作氛围，并利用rgba半透明背景与blur技术营造出层次丰富的玻璃拟态风格，符合现代Web设计趋势。布局协调，采用经典的三栏工作台结构（工具面板/3D画布/社区画廊），主次分明，响应式断点处理合理。字体使用Segoe UI系列，字号梯度清晰，间距统一，各面板、按钮、卡片均具备良好的圆角、阴影和hover交互反馈，CSS细节打磨到位。虽然画廊缩略图仅用渐变占位、部分按钮交互无实际功能，但作为视觉设计已足够精致，且Three.js场景的叠加进一步强化了产品气质。综合评分8.5。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_009169.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Studio",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Profile",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Grid",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Like",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

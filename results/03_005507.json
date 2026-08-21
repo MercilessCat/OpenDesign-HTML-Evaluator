@@ -1,0 +1,90 @@
+{
+  "row_id": "03_005507",
+  "shard": 3,
+  "id": 5507,
+  "category": "Game dev",
+  "prompt": "Design an online platform that transforms the art of painting into an engaging game. Users paint simple artworks using virtual tools, share their creations, and participate in art challenges. Features include a diverse palette of brushes, community galleries for showcasing art, and painting tutorials to inspire creativity.",
+  "html_len": 28611,
+  "html_sha256": "40a6c7f2fcd698370970fabc7e60acec83513ad557399f56da523d29a619a562",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Creating 进入游戏",
+        "expected": "从欢迎页切换到绘画主界面，显示画布、工具栏和计时器",
+        "evidence": "探针点击 #start-game 后 DOM 无任何变化，新增 JS 错误 0、网络请求 0；HTML 中 start-screen 与 game-screen 的切换逻辑没有实际触发，用户卡在欢迎页。",
+        "ok": 0
+      },
+      {
+        "name": "在画布上绘制",
+        "expected": "鼠标/触摸拖拽时 canvas 出现笔迹",
+        "evidence": "画布位于初始 hidden 的 #game-screen 中，必须通过 Start 进入；Start 失效导致画布不可达。脚本虽定义了 mousedown/mousemove 绘制监听，但在可用流程中无法产生任何绘制反馈。",
+        "ok": 0
+      },
+      {
+        "name": "选择颜色/切换画笔",
+        "expected": "选择颜色或画笔后，当前工具状态更新且绘制效果改变",
+        "evidence": "颜色/画笔选项的点击监听只切换 active 类；draw() 从未读取 gameState.brushType，圆头/方头/喷枪实际绘制效果相同。且工具面板在 start 失效后不可见，无法操作。",
+        "ok": 0
+      },
+      {
+        "name": "提交并分享作品",
+        "expected": "完成作品后出现计分/结算界面，并可将作品分享到社区",
+        "evidence": "#submit-artwork 与 #share-artwork 按钮存在，但页面没有任何成功提示/跳转/网络请求逻辑；分享按钮位于不可达的结算屏，属于占位入口，需求中的分享功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "查看社区画廊作品详情",
+        "expected": "点击画廊卡片可查看作品大图或详情",
+        "evidence": ".artwork-card 仅带 hover 缩放 CSS，无 click 绑定；点击卡片不会产生任何 DOM 变化或详情展示。",
+        "ok": 0
+      },
+      {
+        "name": "打开绘画教程",
+        "expected": "页面提供教程入口并能展示绘画教程内容",
+        "evidence": "HTML 和脚本中均未发现 tutorial/教程 相关模块或按钮，需求声明的 tutorials 功能完全缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心流程从 Start 按钮即失效，探针点击后无任何 DOM 变化，用户无法进入绘画界面；画布、工具、提交/分享等功能都不可达，画笔多样性未真正实现，教程缺失。页面仅有静态展示的欢迎页和画廊卡片，未构成可玩的绘画游戏。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：点击“Start Creating! 🎨”后页面无任何 DOM 变化，开始游戏这一主要入口完全失效，用户被卡在开始页，无法进入绘画、挑战、分享等核心流程，属于阻断级问题。次要瑕疵：社区画廊使用纯色渐变占位而非真实作品，且不可交互；绘画教程模块缺失；缺少挑战规则和操作说明。页面视觉风格和分区较清楚，但主入口失效导致整体不可用。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉设计优秀，采用蓝紫色渐变背景，配合半透明玻璃拟态（backdrop-blur）、圆角卡片和阴影，营造出符合艺术创作氛围的现代感。色彩搭配协调，白色文字与渐变背景形成良好对比，强调色（粉色、紫色、绿色）使用得当。布局合理，画布区域与工具面板分区明确，社区画廊和挑战卡片排列整齐，响应式设计考虑周全。组件细节用心，颜色选择器、画笔预览、计时环形进度条等设计直观且互动反馈明确。CSS运用专业，过渡动画、悬停效果和渐变动效让页面富有活力。整体贴合游戏开发平台的风格，视觉吸引力强。扣分项在于设计中缺乏真实图片素材（画廊作品为纯色块），部分区域视觉效果略显空泛，且整体依赖渐变和半透明层，层次感稍弱，但综合而言仍属于高质量设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_005507.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating! 🎨",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

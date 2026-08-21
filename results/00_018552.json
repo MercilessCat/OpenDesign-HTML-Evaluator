@@ -1,0 +1,142 @@
+{
+  "row_id": "00_018552",
+  "shard": 0,
+  "id": 18552,
+  "category": "3D design",
+  "prompt": "Create a dynamic environment where users can explore advanced tracking in 3D spaces, enhancing user experiences in virtual worlds. The site offers interactive case studies, real-time tracking demos, and development tools for integrating tracking into web applications. Users can collaborate and share insights in dedicated forums.",
+  "html_len": 17754,
+  "html_sha256": "1ad721829959d099ec4f2a811329895ba0d1f21bc98c1c5d7991b853c2170f14",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "探索3D场景（拖拽旋转视角）",
+        "expected": "通过鼠标拖拽/滚轮旋转缩放3D场景",
+        "evidence": "Three.js场景已初始化，OrbitControls绑定在canvas上；探针在canvas上指针拖拽后无JS错误，运行时信号0错误；controls.update()在动画循环中持续执行",
+        "ok": 1
+      },
+      {
+        "name": "点击Start Interactive Demo",
+        "expected": "相机在多个目标位置间动画切换，展示不同追踪视角",
+        "evidence": "探针点击后DOM变化=有，无JS错误；代码中moveCamera()使用requestAnimationFrame做缓动动画，依次移动相机到3个预设位置",
+        "ok": 1
+      },
+      {
+        "name": "点击Reset Camera",
+        "expected": "相机平滑回到初始视角(0,10,30)",
+        "evidence": "探针点击后DOM变化=有，无JS错误；代码中animateReset()对camera.position做1.5秒缓动重置动画",
+        "ok": 1
+      },
+      {
+        "name": "移动鼠标查看实时追踪点",
+        "expected": "鼠标经过时出现发光追踪点，模拟实时位置跟踪",
+        "evidence": "全局mousemove监听器以30%概率创建.tracking-point元素并在1秒后移除；触摸移动同样支持；运行时无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "点击Join Community Forum",
+        "expected": "打开社区论坛页面或进入交流板块",
+        "evidence": "按钮无任何click事件绑定，无href，仅静态button；探针点击后只有hover/focus样式层变化，无业务反馈；需求中'共享见解的专属论坛'未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击Documentation",
+        "expected": "打开开发工具文档或SDK接入页",
+        "evidence": "按钮无click事件绑定，无href；探针点击后无业务反馈；需求中'将追踪集成到Web应用的开发工具/文档'未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "核心3D体验可用：Three.js场景成功渲染，OrbitControls拖拽/缩放正常，Start Demo相机动画、Reset Camera重置、鼠标实时追踪点均真实工作且无JS错误。但需求声明的关键入口'社区论坛'和'开发文档'均为纯占位按钮，点击无任何业务响应；此外Interactive Case Studies等卡片也无点击交互，仅为静态展示。存在2个及以上需求关键功能未实现，按规则评分不高于4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 5.0,
+    "reason": "核心可用性问题：1. 底部导航按钮（Join Community Forum、Documentation）点击后仅有DOM变化但无实际页面跳转或功能响应，属于主要入口无实际反馈；2. 追踪点生成依赖随机概率（30%），交互过程不够稳定可控，但核心3D场景渲染与相机控制正常。次要瑕疵：1. 按钮文字与行为略有出入（Start Interactive Demo实际是相机视角动画而非交互式演示）；2. 无图例或说明文字解释3D场景中的元素含义；3. 统计数字（10K+、500+）为静态占位，无数据来源说明；4. 页面底部©年份为2023，与当前时间不符。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力很强。采用深蓝紫色渐变背景，搭配青色(#4cc9f0)、电蓝(#4361ee)和深紫(#3a0ca3)的配色，营造出浓厚的科技感与沉浸式3D氛围，与用户需求的'3D design'风格高度契合。布局结构清晰：顶部居中标题与副标题，统计区、三张功能卡片、交互演示区、底部页脚层次分明，grid和flex布局响应式良好。标题使用渐变色文字并带光晕，卡片采用毛玻璃效果（backdrop-filter）和半透明边框，悬停时有上移动画和阴影提升，按钮设计为渐变圆角并具有细腻的过渡反馈。字体采用Segoe UI系统字体栈，字号层级合理（标题3.5rem、副标题1.2rem、正文1.1rem），行高1.6保证可读性。CSS技术运用专业，包括渐变、阴影、圆角、backdrop-filter、过渡动画以及媒体查询，符合现代网页设计规范。背景中的Three.js粒子、浮动立方体、网格和轨道控制进一步增强了交互感和视觉深度，鼠标移动产生的跟踪光点与主题呼应。整体视觉风格统一、精致且富有动感，仅因部分半透明卡片在复杂3D背景上可能存在轻微对比度挑战，但瑕不掩瑜，属于上乘设计。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 6.75,
+  "baseline_overall": 6.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_018552.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Interactive Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Camera",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Community Forum",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Documentation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

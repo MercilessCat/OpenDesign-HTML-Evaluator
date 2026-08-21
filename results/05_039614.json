@@ -1,0 +1,183 @@
+{
+  "row_id": "05_039614",
+  "shard": 5,
+  "id": 39614,
+  "category": "Website",
+  "prompt": "Craft an engaging website focused on urban energy shielding solutions. Provide resources on innovative technologies, community-driven projects, and expert insights. Feature interactive simulations, case studies of shielded cities, and a collaborative space for sharing ideas and developing new shielding concepts in response to climate challenges.",
+  "html_len": 35828,
+  "html_sha256": "2d9ccd7f1c9bda76dcda79f3ce3c294f8b82ac8fd526a96e0f2147ac28bf500f",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "导航锚点切换",
+        "expected": "点击导航链接后平滑滚动至对应内容区块（如Technologies、Case Studies）",
+        "evidence": "探针显示点击Home、Technologies等导航链接后，DOM有变化且发生页面锚点跳转，符合预期。",
+        "ok": 1
+      },
+      {
+        "name": "加入倡议按钮",
+        "expected": "点击“Join Initiative”按钮后触发相应动作，如弹出注册/登录框或跳转社区页",
+        "evidence": "探针显示点击后页面无任何DOM变化、无JS错误无网络请求。HTML中该button无id和onclick事件绑定，属于纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "模拟场景切换",
+        "expected": "点击Heat Wave/Storm Protection等按钮，切换下方模拟canvas或数据的显示",
+        "evidence": "HTML中展示模拟的div（#hero-simulation和#simulation-canvas）为空容器，无canvas元素及Three.js初始化代码。所有模拟按钮无事件绑定。点击任何模拟按钮都不会有视觉或数据变化。需求中的“互动模拟”核心功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "查看案例研究按钮",
+        "expected": "点击“View Case Studies”按钮后展示案例详情",
+        "evidence": "探针显示点击后有DOM变化并跳转至#casestudies区域。该区域有3个完整的静态案例卡片可供浏览。",
+        "ok": 1
+      },
+      {
+        "name": "提交创意表单",
+        "expected": "填写“Share Your Ideas”表单信息并点击提交后，出现成功提示或数据传递逻辑",
+        "evidence": "form元素无onsubmit处理逻辑，提交按钮type=submit无事件绑定。页面也没有任何自定义的提交反馈机制。用户输入信息后点击提交不会有任何响应，属于死表单。",
+        "ok": 0
+      },
+      {
+        "name": "探索解决方案按钮",
+        "expected": "点击“Explore Solutions”主按钮后滚动至“Technologies”技术介绍区域",
+        "evidence": "探针显示点击按钮后有DOM变化（依据href实现滚动），无JS错误，符合跳转预期。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面作为信息展示型单页较为完整，导航锚点可用，案例研究进行了展示。但核心需求中的“互动模拟”与“协作空间”两项关键功能未实现（模拟区域为空壳无任何交互，表单提交无反馈），且“Join Initiative”按钮为死链占位。存在多个需求声明未实现的关键入口，因此评分较低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "存在2个及以上核心可用性问题：1. \"Join Initiative\" 按钮点击后无任何反应，属于主要入口/导航无实际反馈；2. 交互模拟区域的场景切换按钮（Heat Wave Scenario、Storm Protection、Air Quality Mode）和\"Customize Your City's Shield\"按钮均未绑定交互逻辑，点击无效，导致核心的模拟功能无法操作，核心控件调节无效。次要瑕疵：部分内容链接（页脚 Solutions/Resources 等）为占位链接；\"Explore Solutions\"按钮点击后未跳转至对应内容；表单提交后无成功/错误提示；模拟区域缺少操作指引说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力较强，采用深蓝至青蓝的渐变主色调，搭配半透明毛玻璃卡片、霓虹渐变文字和光晕动效，营造出科技感与未来感，契合'城市能源防护'主题。色彩搭配统一且层次分明，主色#0ea5e9与辅助色#0284c7、强调色#7dd3fc在深色背景上对比舒适，视觉焦点清晰。布局上采用标准的一页式营销结构：导航、Hero、数据统计、技术卡片、模拟交互、案例展示、社区表单、页脚，信息层级分明，节奏合理。字体选用Poppins，圆润现代，标题与正文的字重和大小搭配得当；卡片圆角、阴影、悬停上浮等细节提升了精致度。CSS设计专业，运用了backdrop-filter、渐变、动画关键帧、tailwind配置扩展等现代技术，且无运行时错误。不足之处在于页面缺少真实图片素材，全部依赖渐变和图标，视觉多样性稍弱；表单控件背景透明度处理有细微粗糙感；部分交互按钮（如Join Initiative）无实际反馈。总体而言，该页面设计水准中上，明显优于普通模板网站，风格与需求高度对齐。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_039614.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Technologies",
+      "href": "#technologies",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulations",
+      "href": "#simulations",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Case Studies",
+      "href": "#casestudies",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Initiative",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Solutions",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Case Studies",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

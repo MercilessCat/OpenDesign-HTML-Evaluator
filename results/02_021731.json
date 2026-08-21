@@ -1,0 +1,144 @@
+{
+  "row_id": "02_021731",
+  "shard": 2,
+  "id": 21731,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Design an immersive financial market visualization platform, enhancing trading insights via dynamic data displays. Users analyze market trends through interactive graphs, simulations, and predictive models. Key features include real-time trading simulations, expert analysis forums, and personalized portfolios for strategic investment planning.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11243,
+  "html_sha256": "12b4b6c2c63003f99604a00686990a650c0e337e92402e7e728332521e57888a",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "[raw] ```json\n{\n  \"interactions\": [\n    {\n      \"name\": \"点击导航链接（Dashboard/Markets/Portfolio/Analysis）\",\n      \"expected\": \"在单页应用中切换视图内容，展示对应模块\",\n      \"evidence\": \"探针显示点击后有DOM变化和页面跳转，但HTML中所有导航链接均为 href=\\\"#\\\" 占位，无任何路由或事件绑定；实际是浏览器默认锚点跳转导致页面重载，并未切换任何视图内容。\",\n      \"ok\": 0\n    },\n    {\n      \"name\": \"点击 Sign ",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在 4 个核心可用性问题。1. 导航链接（Dashboard/Markets/Portfolio/Analysis）为占位链接，点击后跳转但页面无实际内容切换，用户无法访问对应板块，属于导航死路。2. Sign In 与 Register 按钮点击无任何反馈，登录/注册流程不可用，核心入口失效。3. 图表时间范围按钮（1D/1W/1M/1Y）点击无效果，图表数据不随选择变化，核心控件调节无效。4. Trading Simulator 的『Start Simulation』按钮无事件绑定，模拟交易核心功能无法启动。此外，Expert Analysis 仅静态展示，无论坛交互；图表只含单条数据线，缺少多市场对比；虚拟交易无法真正下单，均属次要瑕疵。视觉设计专业，但核心功能大面积不可用，严重影响任务完成。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面采用深色金融科技风格，整体视觉吸引力强。色彩搭配以深蓝灰为主色调，辅以蓝色高亮和绿色/红色涨跌指示，对比清晰且符合金融主题。布局上使用三栏网格，卡片分区明确，主次分明，空间利用合理。字体选用Poppins，清晰现代；卡片圆角、毛玻璃效果和阴影提升了层次感。Chart.js图表带有渐变填充和流畅曲线，增强了数据可视化专业度。各功能模块（行情、投资组合、模拟交易、专家分析）完整呈现，符合用户对沉浸式金融可视化平台的需求。交互上存在hover效果和脉冲动画，但导航链接未阻止默认跳转导致页面刷新，按钮点击无实际功能，稍显不足。整体符合现代网页设计规范，视觉完成度高。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_021731.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Markets",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Portfolio",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analysis",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Register",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "1D",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "1W",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

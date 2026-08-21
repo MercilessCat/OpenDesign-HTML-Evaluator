@@ -1,0 +1,183 @@
+{
+  "row_id": "06_060776",
+  "shard": 6,
+  "id": 60776,
+  "category": "Website",
+  "prompt": "Create a website offering personalized gaming peripheral customization using AI-driven design tools. Users can craft unique controllers and keyboards, optimized for individual play styles. Features include virtual try-ons, community design challenges, and a marketplace for trading custom designs, fostering an ecosystem of innovation and personalization in gaming.",
+  "html_len": 32645,
+  "html_sha256": "7c39dbaa6be466a0944e2425deae731dc16ec7a6fe936a9695099942678f5f35",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Designing 开始设计",
+        "expected": "进入 AI 设计工具，可定制控制器/键盘",
+        "evidence": "按钮无 href/无事件绑定，探针仅检测到按钮自身 hover/pulse 样式变化；页面无设计工具界面、无 canvas、无输入控件，Three.js 仅被引入但从未初始化",
+        "ok": 0
+      },
+      {
+        "name": "与 3D 控制器模型交互（虚拟试戴）",
+        "expected": "显示可旋转/缩放的 3D 控制器模型，体验虚拟试戴",
+        "evidence": "hero 区域 #controller-model 仅包含静态图标和文字；页面 canvas=0，无任何 Three.js 场景初始化代码，探针无法验证像素变化，虚拟试戴功能完全未实现",
+        "ok": 0
+      },
+      {
+        "name": "查看市场产品（View/产品卡片）",
+        "expected": "点击后进入产品详情页或展示产品信息",
+        "evidence": "产品卡和 View 按钮均无 href、无事件绑定，点击只会触发卡片 hover 样式，无任何业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "参与社区设计挑战",
+        "expected": "可查看挑战详情或报名参加挑战",
+        "evidence": "挑战区块为纯静态内容，无按钮、无链接、无事件绑定，点击挑战卡片无任何反应",
+        "ok": 0
+      },
+      {
+        "name": "浏览更多设计（Browse All Designs）",
+        "expected": "加载更多市场设计或跳转到完整市场页面",
+        "evidence": "按钮无 onclick、无 href，点击无任何 DOM 业务变化，纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "导航锚点跳转（Features/Marketplace/Community）",
+        "expected": "点击导航滚动到对应板块",
+        "evidence": "探针显示点击后 DOM 有变化且有页面跳转，HTML 中对应 href 锚点存在，导航行为正常",
+        "ok": 1
+      }
+    ],
+    "reason": "页面本质为纯静态营销落地页：核心功能（AI 设计工具、虚拟试戴、市场交易、社区挑战）均无实际实现，所有关键 CTA 只是占位按钮，无事件绑定、无路由、无表单、无 canvas/3D 场景；只有锚点导航可用。核心交互大面积失败，分数锚定 0-3。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 页面核心操作“Start Designing / Start Designing Now”点击后无实际功能，无法进入设计工具或开启任何定制流程，核心任务流程完全卡死在入口。\n2. 用户需求中的“虚拟试穿（Virtual Try-On）”实际未实现：Hero区标注为“Interactive 3D Controller Model”的区域仅为静态图标加文字，Three.js 已引入但未渲染任何 3D 模型，该核心功能缺失。\n3. 导航/工具按钮中的搜索、购物车点击后无任何反馈或反应（购物车直接影响交易流程的起点），Sign In 也没有弹出登录框或跳转登录页，属于主要入口无反馈。\n\n次要瑕疵：\n- Marketplace 中“Browse All Designs”为死链式占位，无法浏览更多设计。\n- 社区挑战展示后没有“参与挑战/查看详情”的可用入口，无法实际参与。\n- 缺乏搜索框输入区域，搜索只能点按钮但无法输入。\n- 页面中的价格/商品卡片均不可点击购买，仅展示外观。\n- 视觉风格和响应式布局表现良好，但美观不能弥补核心功能不可用的问题。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，深色主题搭配靛蓝/紫色渐变，营造出科技感与游戏氛围，与AI定制游戏外设的需求高度契合。色彩搭配合理，主色#6366f1和#8b5cf6在深色背景上形成鲜明的品牌识别，辅助色使用得当，层次分明。布局协调，导航、Hero、统计、功能卡片、市场展示、社区和CTA等区块结构清晰，信息层级明确，视觉重心突出。字体采用Inter，字重和字号搭配合理，间距（padding/margin）控制得当，卡片圆角和阴影设计专业，玻璃拟态（backdrop-filter）和渐变光晕提升了质感。自定义CSS中的动画、悬停效果和光效细节丰富，符合现代网页设计规范。代码中还引入了Three.js（虽未实际渲染3D模型，但预留了交互区域），体现了对用户需求中虚拟试穿功能的意图。不足在于部分图片使用随机用户头像占位，且3D模型区域仅用图标展示，视觉完整度略受影响，但整体设计成熟，评分较高。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_060776.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Marketplace",
+      "href": "#marketplace",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-search",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-shopping-cart",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Designing",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

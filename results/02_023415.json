@@ -1,0 +1,178 @@
+{
+  "row_id": "02_023415",
+  "shard": 2,
+  "id": 23415,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Enhance peacebuilding efforts with a platform visualizing conflict resolution strategies and outcomes. Users explore dynamic simulations, analyze intervention effectiveness, and share success stories. Features include interactive training modules, case study libraries, and collaborative discussion spaces, fostering global understanding and promoting peaceful solutions.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 9456,
+  "html_sha256": "10da3758e51320a4be467689ba2170f61595e914e39eb1e887337a114c4e84b2",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航菜单点击",
+        "expected": "点击“Dashboard/Simulations/Stories”应切换到对应内容或路由，页面发生实质性变化",
+        "evidence": "探针显示三个导航链接点击后仅 URL 添加 #（页面跳转记录），DOM 变化为 hover 样式层，页面主体内容无任何切换。HTML 中 href=\"#\"，无对应 JS 事件绑定。",
+        "ok": 0
+      },
+      {
+        "name": "Run Simulation 按钮",
+        "expected": "触发动态冲突模拟并展示结果或变化",
+        "evidence": "探针点击“Run Simulation”后 DOM 无变化，无网络请求。HTML 中该按钮仅被通用按钮事件绑定添加了 animate-pulse 动画类，500ms 后移除，没有实际模拟逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "Continue Learning 按钮",
+        "expected": "进入培训模块或开始学习进程",
+        "evidence": "探针点击“Continue Learning”后 DOM 无变化，无网络请求。同 Run Simulation，仅触发了通用动画类，无业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "社区分享消息输入",
+        "expected": "输入消息并提交后，消息出现在讨论区，页面有新增内容反馈",
+        "evidence": "探针对输入框输入“测试”并回车，DOM 无变化，无网络请求，无 JS 错误。没有事件绑定处理表单提交。",
+        "ok": 0
+      },
+      {
+        "name": "图表展示（Canvas）",
+        "expected": "Canvas 呈现冲突趋势数据图表",
+        "evidence": "HTML 含 Canvas，且 Chart.js 初始化时有效绘图。运行时无 JS 错误，点击、拖拽无效果属正常。图表是静态数据展示，满足“数据可视化”基本需求。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉样式完整，Chart.js 静态图表正常渲染。但需求中声明的动态模拟、培训模块、社区讨论等核心功能均为纯占位入口：导航链接为 #、按钮仅触发 pulse 动画无实际功能、输入框提交无响应。关键交互大面积失败，功能得分极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 顶部导航 Dashboard/Simulations/Stories 都是 # 占位链接，点击后只是跳到页面顶部或改变 hash，没有进入对应页面或给出实际内容反馈；2) “Run Simulation”点击后只有 pulse 动画，没有真正运行模拟、生成结果或更新数据；3) “Continue Learning”点击后无实际学习内容加载或进度变化；4) 社区 Hub 的输入框和发送按钮点击/回车后没有发布消息或任何成功反馈。次要瑕疵：图表缺少图例和数据说明；模拟区域只是静态图标，未提示可交互；案例库条目不可点击、无详情入口；输入框没有标签，可访问性不足。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用了现代简约的设计风格。主色调以紫蓝色渐变为主，搭配绿色、蓝色、橙色等辅助色，色彩和谐且具有层次感，符合数据可视化平台的专业气质。布局上采用三栏网格结构，信息分区明确，卡片式设计统一，圆角、阴影和hover上浮效果增强了交互感和精致度。字体选用Segoe UI和system-ui，可读性良好，间距适中。Chart.js图表与页面主题契合，静态数据卡片、列表和输入框等组件风格统一。css使用Tailwind框架，代码规范，现代感强。虽然导航链接点击会跳转页面，且部分区域可能因视口高度受限存在拥挤，但整体视觉设计专业、美观，与用户需求的peacebuilding和数据可视化主题高度对齐。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_023415.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Stories",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Run Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Continue Learning",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-paper-plane",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "text",
+      "tag": "input",
+      "text": "",
+      "href": null,
+      "type": "text",
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "typed": "测试",
+      "fill_method": "playwright",
+      "enter_pressed": true,
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

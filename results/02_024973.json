@@ -1,0 +1,175 @@
+{
+  "row_id": "02_024973",
+  "shard": 2,
+  "id": 24973,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Create a comprehensive website analyzing public petition success through interactive visualizations of historical data, trends, and influential factors. Users can explore case studies, discover best practices, and engage in advocacy forums. The platform empowers civic participation, sharing knowledge and strategies for effective change-making initiatives.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 8403,
+  "html_sha256": "84acc55b99c5bc5f10b3e4ddbe41fd3b7f7211a1db56b7dfb358b5ad0d1e9538",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 View Trends 按钮查看趋势",
+        "expected": "展示或切换趋势数据可视化内容",
+        "evidence": "探针点击按钮后 DOM 无变化，无新增网络请求和 JS 错误，按钮无事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击 Download Report 下载报告",
+        "expected": "触发报告下载或提供下载反馈",
+        "evidence": "探针点击后 DOM 无变化，无下载行为发生",
+        "ok": 0
+      },
+      {
+        "name": "点击 View All Cases 查看所有案例",
+        "expected": "显示更多案例列表或进入案例详情页",
+        "evidence": "探针点击后 DOM 无变化，无路由跳转或内容展开",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Forum 加入论坛",
+        "expected": "跳转到论坛或弹出注册/登录界面",
+        "evidence": "探针点击后 DOM 无变化，无任何交互反馈",
+        "ok": 0
+      },
+      {
+        "name": "通过导航链接切换页面模块",
+        "expected": "切换到 Case Studies、Best Practices 等对应内容",
+        "evidence": "导航链接为 href=\"#\"，无路由或内容切换逻辑，点击仅跳转页面顶部，核心模块未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉结构完整，Chart.js 图表正常渲染且无 JS 错误，但核心交互大面积缺失：所有按钮（View Trends、Download Report、View All Cases、Join Forum 等）点击均无反馈，导航为 href=\"#\" 占位死链，用户无法完成探索案例、参与社区等主要任务，符合需求声明的关键入口未实现超过 2 个，故功能评分极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）多个核心操作按钮点击后无任何反馈——'View Trends'、'Download Report'、'Join Forum'、'View All Cases →'点击均无DOM变化、无网络请求、无JS提示，用户点击后无法判断操作是否成功，属于核心操作无法完成；2）导航链接（Dashboard、Case Studies、Best Practices、Community）虽显示'页面跳转'，但均为href=\"#\"占位链接，实际只是锚点跳转并无内容切换，属主要入口无真实反馈；3）页面设计为单页展示，但用户需求中的'探索案例研究、发现最佳实践、参与倡导论坛'等核心功能均未实现，存在功能性死路。次要瑕疵：页面虽渲染正常、图表可显示，但缺乏交互反馈说明（如按钮无提示文字或状态变化），且'Community'、'Best Practices'等模块均为空壳，仅作为占位展示。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力良好，采用现代主流的卡片式布局与柔和蓝紫渐变背景，色彩搭配以靛蓝和绿色为主，兼顾专业感与亲和力；导航、英雄区、图表、数据指标、案例和CTA区块结构清晰，主次分明，符合数据可视化平台的气质。字体使用Segoe UI系统字体，可读性好；卡片圆角、阴影、悬停上浮效果等细节提升了组件质感；Chart.js图表与整体风格融合度高。不足之处在于页面信息密度一般，部分按钮点击无反馈，交互性稍弱，但作为视觉设计评价，整体达到专业水准。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_024973.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Case Studies",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Best Practices",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Forum",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Trends",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Download Report",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View All Cases →",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

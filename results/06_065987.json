@@ -1,0 +1,194 @@
+{
+  "row_id": "06_065987",
+  "shard": 6,
+  "id": 65987,
+  "category": "Website",
+  "prompt": "A dedicated platform for connecting environmental enthusiasts with ocean plastic cleanup initiatives. Users can discover projects, volunteer opportunities, and educational resources. Key features include an interactive project map, volunteer matching service, and a knowledge hub for learning about ocean conservation efforts.",
+  "html_len": 27790,
+  "html_sha256": "913a323a02dffebf3c7eb2d4fb23093eaaf70a299960e64933f5aadacac0b460",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航 Projects 跳转项目列表",
+        "expected": "页面平滑滚动到 Featured Cleanup Projects 区域并展示项目卡片",
+        "evidence": "探针点击后 DOM 有变化且无 JS 错误；HTML 中 href=\"#projects\" 有效并绑定了平滑滚动，逻辑正常执行。",
+        "ok": 1
+      },
+      {
+        "name": "点击导航 Map 查看交互式地图",
+        "expected": "页面滚动到 Global Cleanup Projects 地图区域，可查看地图标记",
+        "evidence": "探针点击后无 DOM 变化但无 JS 错误；HTML 中 href=\"#map\" 有效，Leaflet 地图已初始化并添加了 5 个带 popup 的 marker，无相关运行时错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Find Projects Near Me 查找附近项目",
+        "expected": "根据位置筛选并显示附近项目，或至少跳转到地图/项目列表",
+        "evidence": "探针点击后虽有 DOM 变化，但按钮未绑定任何点击事件，无业务逻辑；DOM 变化只是按钮 focus 样式层，非预期功能反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore projects 探索项目",
+        "expected": "跳转到项目列表或项目详情页",
+        "evidence": "探针点击后新增 JS 错误（querySelector('#') 无效），因为该链接 href=\"#\" 且被平滑滚动脚本错误处理，无实际跳转或内容更新。",
+        "ok": 0
+      },
+      {
+        "name": "在地图上拖拽/缩放查看项目标记",
+        "expected": "地图可平移缩放，标记可点击显示项目名称",
+        "evidence": "Leaflet 库已加载，DOMContentLoaded 中创建 L.map 并添加 tileLayer 及标记；运行时无相关 JS 错误，按规则视为可交互。",
+        "ok": 1
+      },
+      {
+        "name": "点击项目卡片上的 Join Project 报名",
+        "expected": "进入项目详情或报名流程",
+        "evidence": "HTML 中该按钮无 onclick 或任何事件监听，点击无业务反馈；项目卡片本身也不可点击。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面具备可用的 Leaflet 交互地图和项目/资源静态展示，导航锚点滚动基本正常。但核心业务入口大面积占位：Find Projects Near Me、Explore projects、Join Project 等按钮/链接无实际功能或点击报错；志愿者匹配和知识库链接均为 href=\"#\" 死链；注册/报名等主要任务无法完成，关键入口未实现超 2 个，故评分较低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 核心 CTA 按钮全部无效——「Join Now」「Find Projects Near Me」「Volunteer Today」「Sign Up Free」「View All Projects」以及项目卡上的「Join Project」「Learn More」「Register」均未绑定任何点击处理，点击后仅产生焦点变化，无实际功能、无反馈，用户无法完成注册、报名、查找项目等核心任务，属于核心操作卡死。\n2. 大量占位链接（href=\"#\"）导致交互报错——导航中的「Home」和内容区「Explore projects」「Find your role」「Start learning」「Browse papers」等链接点击后触发平滑滚动脚本 querySelector('#') 抛错，点击无任何效果且新增 JS 错误，主要入口/导航无实际反馈。\n3. 地图筛选控件形同虚设——右上角 Filter Projects 的复选框没有任何筛选逻辑，勾选/取消对地图标记无影响，核心控件调节无效。\n\n次要瑕疵：\n1. 第一张项目卡配图加载失败（ERR_BLOCKED_BY_ORB），显示破图，影响视觉完整性。\n2. 地图筛选面板缺少图例/说明，用户不清楚筛选结果应如何呈现。\n3. 页脚社交图标、About Us 等链接均为占位，点击无反应。\n4. 订阅表单没有提交反馈或校验提示。\n\n页面整体视觉和层级清晰，地图可以正常显示标记，但核心操作链路全部失效，按评分锚定存在 2 个以上核心可用性问题，故评为 3 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉吸引力良好，海洋蓝与青色调搭配和谐，符合环保/海洋主题，品牌色系贯穿始终。Hero区渐变覆盖+背景图增强了氛围，卡片圆角、阴影、悬停上浮和玻璃态统计卡片等细节体现出一定的专业度。模块结构清晰，布局协调，Poppins字体与整体风格匹配。\n\n扣分点：1) 资源区的紫色Toolkit卡片与全局蓝青色系不统一，视觉上略有割裂；2) 运行时有4张外部图片请求失败，导致项目卡片出现空白图片位，破坏了设计完整性；3) 存在JS错误，'#' 不是合法的querySelector选择器，影响空链接的平滑滚动功能；4) 部分按钮使用原生button而非a链接，存在语义问题。虽然页面风格符合现代网页设计规范，但仍有明显可感知的缺陷，未达到精致高分的水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1542393881856-23d80f4759a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542393881856-23d80f4759a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542393881856-23d80f4759a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542393881856-23d80f4759a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542393881856-23d80f4759a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542393881856-23d80f4759a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542393881856-23d80f4759a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542393881856-23d80f4759a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1542393881856-23d80f4759a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [
+      "Failed to execute 'querySelector' on 'Document': '#' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '#' is not a valid selector."
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_065987.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Projects",
+      "href": "#projects",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Map",
+      "href": "#map",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#resources",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Find Projects Near Me",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Learn More",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore projects",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "row_id": "01_007096",
+  "shard": 1,
+  "id": 7096,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create an engaging platform for customizing digital profiles with unique titles and badges. Users earn achievements through community interactions and can equip badges to showcase expertise and interests. The site offers gamification elements, social sharing, and integration with virtual events, fostering a vibrant online community.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14219,
+  "html_sha256": "026926d246e21b6f9812ea58230aa262e5b23e31f6659e77e0cc03a2b51e1864",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "编辑用户名",
+        "expected": "在输入框中输入新用户名，输入框内容即时更新，完成个人资料定制的基础编辑",
+        "evidence": "存在input[type=text]且value为TechEnthusiast92，浏览器原生输入支持；运行时无JS错误，输入后输入框显示新值是原生反馈",
+        "ok": 1
+      },
+      {
+        "name": "选择Profile Title",
+        "expected": "从下拉列表中选择一个标题，select控件显示所选标题，完成标题定制",
+        "evidence": "存在select元素含4个标题选项，原生选择会更新下拉框显示；无额外事件但也无阻断，选择反馈即时可见",
+        "ok": 1
+      },
+      {
+        "name": "编辑Bio简介",
+        "expected": "在文本域中修改个人简介，文本域内容随输入更新",
+        "evidence": "存在textarea含默认Bio文案，具备原生编辑能力；无JS错误，输入内容可直接显示在文本域中",
+        "ok": 1
+      },
+      {
+        "name": "点击徽章以装备/查看详情",
+        "expected": "用户需求核心功能为可装备徽章展示专业与兴趣，点击徽章应出现装备切换、选中状态或详情弹窗",
+        "evidence": "6个badge-card均为div，只有cursor-pointer和hover过渡样式，无click事件绑定，无任何装备/选中/弹窗逻辑；核心需求未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击活动Join/Register按钮",
+        "expected": "点击“Join”或“Register”后应有加入活动/注册成功的反馈，如按钮状态变化或确认提示",
+        "evidence": "探针点击Join和Register均报告DOM变化=无，按钮无事件处理，完全静默",
+        "ok": 0
+      },
+      {
+        "name": "点击顶部导航链接",
+        "expected": "点击Home/Badges/Achievements/Community应切换到对应内容或滚动到对应区域",
+        "evidence": "四个导航均为href=\"#\"纯占位链接，无对应锚点/路由/内容切换；点击只产生hash变化，页面无实质导航反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击Sign In登录按钮",
+        "expected": "点击Sign In应出现登录弹窗或跳转登录流程",
+        "evidence": "探针点击Sign In报告DOM变化=无，无事件绑定，按钮纯装饰",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉完整、UI美观，基础表单输入（用户名、标题下拉、Bio）原生可用且展示完整；但用户需求中的核心功能“装备徽章”完全未实现，活动Join/Register、Sign In、View All等按钮全部无点击反馈，导航为href=\"#\"占位入口，需求声明的关键交互大面积失败，功能上仍偏向静态展示页。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1）所有主要操作按钮（Sign In、View All、Join、Register）点击均无任何反馈，核心操作无法完成；2）徽章卡片显示为可点击（cursor-pointer）但点击无反应，无法实现装备徽章的核心功能；3）Profile Title下拉选择后无任何内容更新，个性化定制控件调节无效；4）导航链接（Home/Badges/Achievements/Community）为占位链接，点击后无实质内容切换。次要瑕疵：个人资料编辑无保存入口，刷新后修改丢失；锁定徽章缺少解锁条件说明；社交链接为占位符；页面内容超出视口需滚动，但整体视觉美观、信息结构清晰。综上，页面大部分交互为静态展示，用户无法完成定制个人资料、装备徽章、参与活动等主要任务。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.8,
+    "reason": "整体视觉吸引力强，设计现代且风格统一。色彩搭配以靛蓝(#6366f1)、紫罗兰(#8b5cf6)、粉红(#ec4899)为主色调，配合淡蓝到淡粉的柔和渐变背景，既营造出科技感又带有游戏化的活力氛围，与'ProfileCraft'数字身份定制平台的定位高度契合。布局采用标准头部+双栏主内容+页脚结构，左栏聚焦个人资料编辑与进度条，右栏展示徽章网格与活动列表，信息层级清晰，疏密得当。字体使用Poppins，圆润现代，标题与正文对比度良好。卡片采用大圆角、柔和阴影和轻量级hover上浮效果，质感细腻。徽章卡片使用不同渐变色区分类型，视觉节奏明快，进度条渐变与整体配色呼应。代码基于Tailwind CSS并定制主题色，符合现代网页设计规范，专业度较高。轻微扣分点：内容量较大，在标准桌面视口下完全无滚动有一定挑战；部分按钮仅为视觉展示，缺少交互反馈。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.27,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_007096.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Badges",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Achievements",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View All",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Register",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

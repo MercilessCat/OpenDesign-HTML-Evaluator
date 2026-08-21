@@ -1,0 +1,90 @@
+{
+  "row_id": "03_018275",
+  "shard": 3,
+  "id": 18275,
+  "category": "Game dev",
+  "prompt": "Enter a whimsical world of scarecrow fashion! This platform allows users to design, dress, and share customized scarecrow outfits for different seasons and events. Key features include a creative editor, seasonal challenges, and a virtual fashion show where users vote on the best-dressed scarecrows.",
+  "html_len": 27968,
+  "html_sha256": "5d610b6196e5af04e33e1908eefdf9bb5b744b5a871a02a796faa93f1de3f517",
+  "functional": {
+    "score": 8.0,
+    "raw_score": 8.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "开始设计",
+        "expected": "点击“Start Designing!”后从开始界面切换到游戏编辑器界面",
+        "evidence": "探针点击该按钮后DOM有变化，且无JS错误；JS中绑定 switchScreen('game')，逻辑完善",
+        "ok": 1
+      },
+      {
+        "name": "切换身体部位",
+        "expected": "点击Hat/Shirt等部位按钮后，该部位被选中高亮，下方物品列表更新为对应部位的服装选项",
+        "evidence": "静态代码分析：每个.scarecrow-part按钮绑定click事件，切换active-part并调用updateItemSelection()刷新物品列表；运行时无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "选择服装物品",
+        "expected": "点击某个服装项目后，该物品被应用到稻草人对应部位，分数增加，选中状态显示",
+        "evidence": "静态代码分析：selectItem()更新selectedItems、调用applyItemToScarecrow()改变对应DOM样式、updateScore()增加分数；事件绑定完整",
+        "ok": 1
+      },
+      {
+        "name": "进入虚拟时装秀并投票",
+        "expected": "点击“Virtual Runway”进入时装秀界面，显示分数；点击“Vote for Yours!”后分数增加并出现彩带特效",
+        "evidence": "静态代码分析：switchScreen('runway')更新玩家/对手分数，handleVote()增加20分并调用createConfetti()；无JS错误",
+        "ok": 1
+      },
+      {
+        "name": "参加季节挑战并提交",
+        "expected": "点击“Seasonal Challenge”显示挑战要求并开启倒计时；提交设计后获得评分并回到编辑器",
+        "evidence": "静态代码分析：startChallenge()随机切换挑战并调用switchScreen('challenge')，submitChallengeDesign()计算分数并返回；事件绑定完整",
+        "ok": 1
+      },
+      {
+        "name": "分享设计",
+        "expected": "用户能够分享自己定制的稻草人服装（如生成链接或社交分享）",
+        "evidence": "页面HTML中未发现任何分享按钮、链接或相关入口；需求提及“share customized scarecrow outfits”，但功能完全未实现",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心交互（开始设计、编辑器换装、虚拟时装秀投票、季节挑战）均可用，代码逻辑完整且无运行时错误；仅存在分享功能缺失这一非关键需求未实现，以及部分展示位（如时装秀中的稻草人形象）为占位文本等次要瑕疵，整体功能可用性良好。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) 虚拟走秀页面未渲染用户设计的稻草人，两个展示区均为占位文本，无法查看/比较作品，投票失去意义；2) 鞋子部件选择无可见效果，不同鞋子都显示为灰色，核心编辑控件反馈无效；3) 季节挑战的得分与用户实际搭配无关，随机生成且不看需求，提交结果与用户操作脱节。次要瑕疵：挑战计时器未在离开页面时清除，之后可能弹出无关提示；开始页功能卡不可点击；暂无分享功能；分数含义不清晰。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 6.5,
+    "reason": "页面整体风格活泼、主题性强，但存在明显的视觉专业度不足。优点：1) 采用蓝紫渐变背景搭配亮色卡片，色彩鲜明，符合游戏类目的卡通趣味调性；2) 圆角、阴影、渐变动效及浮动静物动画使界面具有一定的层次感；3) 布局清晰，开始/编辑/跑道/挑战各模块划分明确，操作按钮醒目。缺点：1) 使用Comic Sans MS字体严重削弱了现代感，显得廉价；2) 整体配色虽然丰富但缺乏统一和谐，红、黄、蓝、紫、绿等纯色并置略显杂乱；3) 稻草人的CSS绘制较为简陋，五官、肢体用简单色块拼凑，精致度不足；4) 组件设计较为基础，如未用CSS网格/flex布局优化（实际大量依赖Tailwind类），自定义样式较少，现代设计规范运用不足。综合来看，页面能传达出欢乐游戏氛围，但视觉设计和CSS专业度处于中游水平，仍有较大提升空间。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.9,
+  "baseline_overall": 5.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_018275.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Designing!",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

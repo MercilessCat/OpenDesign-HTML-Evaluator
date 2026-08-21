@@ -1,0 +1,210 @@
+{
+  "row_id": "05_035148",
+  "shard": 5,
+  "id": 35148,
+  "category": "Website",
+  "prompt": "Create a dynamic platform connecting adaptive sports enthusiasts, offering event calendars, athlete profiles, and live-streaming of competitions. Users can explore virtual tours of venues, participate in forums, and find resources on accessibility in sports. Foster a vibrant community celebrating achievements and promoting inclusivity in wheelchair sports.",
+  "html_len": 32247,
+  "html_sha256": "21a9de9df6060060036a308866dfca75aaefa8912fd50cf45381127fe7825fc8",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "导航链接跳转（Home/Events/Athletes/Community/Resources）",
+        "expected": "点击导航链接后页面滚动到对应锚点区域",
+        "evidence": "探针点击5个导航链接均产生DOM变化且页面跳转，符合锚点导航预期",
+        "ok": 1
+      },
+      {
+        "name": "Sign In 登录按钮",
+        "expected": "点击后出现登录弹窗或跳转登录页面",
+        "evidence": "探针点击Sign In后DOM无变化、无网络请求，按钮无任何事件绑定，属占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "Join Now 注册按钮",
+        "expected": "点击后出现注册表单或跳转注册流程",
+        "evidence": "探针点击Join Now后DOM无变化、无网络请求，按钮未实现注册功能",
+        "ok": 0
+      },
+      {
+        "name": "Hero区 Explore Events 按钮",
+        "expected": "点击后滚动到活动日历或活动列表区域",
+        "evidence": "探针点击后DOM无变化、无跳转，按钮无响应，属死按钮",
+        "ok": 0
+      },
+      {
+        "name": "活动卡片 Register 按钮",
+        "expected": "点击后进入活动报名流程或打开报名表单",
+        "evidence": "HTML中活动卡片Register按钮无事件绑定，探针未检测其响应，属占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "论坛 Start New Topic 按钮",
+        "expected": "点击后出现发帖表单或编辑器",
+        "evidence": "HTML中按钮无点击事件处理，探针无反应，功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为纯展示型静态页，导航锚点可用，但所有核心功能按钮（登录/注册/探索活动/报名/发帖）均无事件绑定、点击无任何反馈；需求中的动态平台、活动日历交互、运动员档案、直播、虚拟导览、论坛发帖等功能仅停留在视觉展示层面，核心交互大面积失败，故评分3分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 登录/注册入口全部失效——「Sign In」「Join Now」按钮点击无任何DOM变化、无反馈，用户无法注册或登录账号，平台最核心的身份参与流程全面阻断。\n2. Hero区主CTA按钮「Explore Events」点击无反应，无法跳转或滚动至事件区块，首屏引导行为失败。\n3. 所有活动卡片的「Register」报名按钮均无点击响应，用户无法完成赛事报名这一核心任务。\n4. 「Start New Topic」发帖按钮点击无效，社区互动（发帖、讨论）无法启动。\n5. 页面大量链接（页脚Quick Links、Resources链接、运动员社交链接、资源卡片“Explore Maps/Browse Equipment/View Programs”等）均为href=\"#\"占位链接，点击无内容跳转，主要导航/入口缺乏实际反馈。\n\n次要瑕疵：\n- 需求中的“直播流（Live Streaming）”和“虚拟场馆导览（Virtual Tours）”仅以文字/链接形式存在，主流程中未实现任何可交互功能。\n- 论坛分类仅为静态列表，不可点击进入对应讨论区。\n- 运动员卡片无独立详情页，档案系统未真正落地。\n- 统计数字（15K+等）无数据来源佐证，削弱可信度。\n\n视觉与信息层级表现良好（导航清晰、区块分隔明确），但核心操作链路几乎全部阻断，用户无法完成登录、报名、发帖等平台基本任务，因此判定为存在2个以上核心可用性问题。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体视觉设计具有较高质量：采用Tailwind构建，配色以蓝绿橙为主，清新且富有活力，符合运动社区调性；Poppins字体、渐变背景、卡片悬浮阴影、统计卡渐变色块、圆角与间距处理均体现现代设计规范，布局结构清晰（导航/英雄区/数据/事件/运动员/论坛/资源/CTA/页脚）。主要扣分点在于外部图片加载被拦截（ERR_BLOCKED_BY_ORB），运动员头像等图片无法显示，造成圆形占位区域空白，削弱视觉完整性与吸引力；且部分按钮（如Sign In/Join Now）点击无响应，影响交互体验但尚不直接破坏静态美感。若图片可正常加载，整体可达8.5分以上。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1597024580036-d5da9c0bf8c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1597024580036-d5da9c0bf8c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1597024580036-d5da9c0bf8c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1597024580036-d5da9c0bf8c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1597024580036-d5da9c0bf8c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1597024580036-d5da9c0bf8c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1597024580036-d5da9c0bf8c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1597024580036-d5da9c0bf8c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1597024580036-d5da9c0bf8c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_035148.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Events",
+      "href": "#events",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Athletes",
+      "href": "#athletes",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#resources",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Events",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

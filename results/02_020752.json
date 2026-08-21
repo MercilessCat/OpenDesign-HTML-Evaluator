@@ -1,0 +1,163 @@
+{
+  "row_id": "02_020752",
+  "shard": 2,
+  "id": 20752,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Visualize urban wellness by exploring a platform that illustrates the multifaceted benefits of green spaces. Users can interact with dynamic maps, predictive models, and community forums to understand and advocate for urban greenery's impact on health, biodiversity, and climate resilience. The site fosters community-driven change through data storytelling.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 8746,
+  "html_sha256": "fd71bcfbc18ecb776d23b8a3a0104eb49d545ebbc81114336b08d14be3cd94c7",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航链接 Maps/Models/Community 切换视图",
+        "expected": "点击后应切换或定位到对应数据视图（地图、模型、社区）",
+        "evidence": "导航均为 href=\"#\" 占位链接，无路由或视图切换逻辑；探针显示仅 URL hash 变化，页面主体内容无变化，符合死链特征",
+        "ok": 0
+      },
+      {
+        "name": "与 Interactive Urban Green Spaces Map 交互",
+        "expected": "地图应支持缩放、点击或查看动态数据，体现“可交互动态地图”",
+        "evidence": "地图区域为静态 div，仅含图标和文字覆盖层，无 canvas/地图库/事件绑定，点击或拖拽无任何数据反馈",
+        "ok": 0
+      },
+      {
+        "name": "查看 Climate Resilience Forecast 预测图",
+        "expected": "预测模型图应可查看数据提示或响应交互",
+        "evidence": "Chart.js 成功初始化并渲染折线图；探针在 canvas 上拖拽产生像素变化且无 JS 错误，表明图表有基本悬停/提示反馈",
+        "ok": 1
+      },
+      {
+        "name": "点击 Join Discussion 进入社区互动",
+        "expected": "应进入论坛、展开讨论或允许用户参与社区",
+        "evidence": "按钮无事件绑定和业务逻辑，探针点击仅产生样式层 DOM 变化，无页面跳转、无网络请求、无功能反馈，属占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Create Advocacy Report 生成报告",
+        "expected": "应生成/展示一份可用的倡导报告",
+        "evidence": "按钮无事件绑定，点击无任何实际功能反馈，仅按钮样式变化，属于未实现的占位功能",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉和基础图表渲染完成，但核心需求中的动态地图、社区论坛互动、报告生成以及导航切换均未实现；多处关键入口为 href=\"#\" 或空按钮占位，核心交互大面积失败。仅预测图表具备 Chart.js 基础交互，整体功能完成度低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 顶部导航链接（Dashboard/Maps/Models/Community）均为占位链接，点击仅跳转到页面顶部，无法到达对应功能模块，核心入口无实际反馈；2. 地图区域仅为静态占位展示，并非用户需求中的可交互动态地图，无法查看或操作数据；3. 预测模型和社区论坛仅呈现静态内容，没有提供用户可操作的交互或数据探索机制。次要瑕疵：缺少图例和说明文字，图表模式命名不够精确，按钮（Join Discussion、Create Advocacy Report）无实际跳转或功能响应，但不影响主流程的主要展示效果。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "页面整体视觉吸引力良好，以绿色生态为主题，色彩搭配自然协调（青绿、翠绿与白色、灰色结合），符合城市绿地数据可视化平台的定位。布局采用左侧主区（地图+统计卡片）与右侧辅助区（图表+社区+行动卡片）的双栏结构，信息层次清晰，卡片圆角与阴影设计提升了精致感。字体选择系统UI字体，可读性较好，间距基本合理，符合现代网页设计规范。Chart.js折线图正常渲染，为页面增添了数据动态感。\n\n扣分点：1) 地图区域仅为静态占位，缺少真正的交互地图，作为数据可视化平台视觉表现力不足；2) 'Create Advocacy Report'按钮同时应用了 'bg-white' 和自定义 '.btn-primary' 背景渐变，存在样式冲突，可能导致文本对比度不佳；3) 导航链接使用 '#' 并未实现实际跳转，交互探针显示有DOM变化但功能空洞；4) 页面虽要求单屏，但内容元素较多，在实际屏幕上可能略显拥挤。\n\n总体而言，页面风格统一、干净美观，但在细节和功能完整性上略有欠缺，因此给出7.5分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_020752.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Maps",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Models",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Discussion",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Create Advocacy Report",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

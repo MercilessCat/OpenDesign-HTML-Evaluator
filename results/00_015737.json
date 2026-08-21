@@ -1,0 +1,149 @@
+{
+  "row_id": "00_015737",
+  "shard": 0,
+  "id": 15737,
+  "category": "3D design",
+  "prompt": "Design a platform for visualizing cellular processes in 3D, providing educational resources and interactive simulations for students and researchers. Users can manipulate variables to observe how cells react, offering insights into biology and medicine. The site fosters exploration and understanding of complex biological systems.",
+  "html_len": 21946,
+  "html_sha256": "39d2420742a5b9fc6803f0fccf59900fc3828986f11313a2d5f37462ef3f942c",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "3D场景加载与旋转拖拽",
+        "expected": "加载3D细胞模型并可通过鼠标拖拽旋转视角",
+        "evidence": "页面JS错误6条（THREE.CapsuleGeometry is not a constructor）导致init()中断，animate()未执行，场景未渲染；canvas指针拖拽无像素变化、无DOM变化。",
+        "ok": 0
+      },
+      {
+        "name": "调节Glucose浓度滑块",
+        "expected": "滑动滑块时更新数值并改变葡萄糖分子可见性",
+        "evidence": "setupEventListeners()在init()抛错后未执行，滑块input事件未绑定；点击其他按钮均无DOM变化，推断滑块同样无反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击Mitosis按钮",
+        "expected": "切换有丝分裂动画并更新过程说明",
+        "evidence": "探针点击Mitosis按钮后DOM无变化、无新增JS错误，说明事件监听未绑定，功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击Respiration按钮",
+        "expected": "切换呼吸作用动画并更新过程说明",
+        "evidence": "探针点击Respiration按钮后DOM无变化，事件监听未绑定，功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击Reset Simulation按钮",
+        "expected": "重置滑块、按钮状态和3D场景",
+        "evidence": "探针点击Reset按钮后DOM无变化，事件监听未绑定，功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击Toggle Animation按钮",
+        "expected": "暂停/恢复3D动画并更新按钮文字",
+        "evidence": "探针点击Toggle Animation按钮后DOM无变化，事件监听未绑定，功能未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面初始化时因THREE.CapsuleGeometry不存在而抛出6个JS错误，init()中断导致animate()和setupEventListeners()均未执行。3D场景未渲染，所有滑块和按钮的事件监听未绑定，核心交互全部失效，仅静态UI外观存在。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 三维场景初始化失败：THREE.CapsuleGeometry 在当前 three.js r128 版本中不是构造函数，createMitochondria() 抛出异常，导致 init() 中断，3D 渲染循环未启动，主可视化区域实际空白/无内容；2. 由于 init() 在 setupEventListeners() 之前抛错，事件监听器未绑定，所有滑块和按钮均无响应，核心操作（调节葡萄糖/氧气/温度、切换 Mitosis/Respiration、Reset、动画开关）全部失效；3. 交互探针显示按钮点击后 DOM 无变化、画布无渲染，反馈完全缺失，用户无法判断操作是否成功。次要瑕疵：页面标题、面板布局和视觉风格基本符合主题，但缺少图例/操作说明，且部分功能在功能可用时也需要补充帮助文字；不过这些次要问题在核心功能未生效的情况下不影响降档结论。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 6.0,
+    "reason": "页面整体视觉风格明确，采用深蓝青色渐变背景、半透明毛玻璃面板和青蓝渐变高亮，符合现代科技/生物教育类网站的审美方向。色彩搭配协调，主色 #4facfe 与 #00f2fe 在深色背景上辨识度高，白色文字和低透明辅色层次清晰。布局采用左右两栏 flex 结构，可视化区与控制区比例合理，卡片圆角、阴影、边框统一，间距宽松，视觉上具备专业感。标题使用渐变文字，滑块和按钮的定制样式也较精致。\n\n扣分主要原因：运行时 JavaScript 报错（THREE.CapsuleGeometry is not a constructor）导致 3D 场景初始化中断，核心可视化区域没有真正渲染出细胞模型和动态效果，只剩空荡的深色面板和少量绝对定位标签，页面最重要的视觉中心缺位。此外交互探针显示按钮点击后 DOM 无变化，说明交互视觉反馈也未生效。因此虽然 CSS 外壳美观，但作为 3D 可视化平台，关键视觉表现力受损，综合评分中等偏上。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.0,
+  "baseline_overall": 3.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_015737.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Mitosis",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Respiration",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Toggle Animation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

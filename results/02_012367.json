@@ -1,0 +1,184 @@
+{
+  "row_id": "02_012367",
+  "shard": 2,
+  "id": 12367,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Design a simulation hub where users manipulate cellular automata to model complex systems. The platform offers a sandbox environment, visualization tools, and a community repository for sharing simulations. Features include a pattern library, real-time collaboration, and challenges that encourage users to explore phenomena like urban growth and ecosystem dynamics.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12959,
+  "html_sha256": "bb4570069ce1a23f102f6f21c3cb042bcb6db388a18b35a88ae5f3c7611791e7",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航菜单项（Sandbox/Patterns/Community/Challenges）",
+        "expected": "切换到对应模块或视图，更新页面内容",
+        "evidence": "探针点击导航链接后发生页面跳转；HTML 中 href=\"#\" 均为锚点占位，无任何路由或内容切换逻辑，点击只会回到页面顶部",
+        "ok": 0
+      },
+      {
+        "name": "点击模拟控制播放/暂停/停止按钮",
+        "expected": "开始/暂停/停止元胞自动机模拟动画并更新 canvas",
+        "evidence": "探针点击 fa-play、fa-pause、fa-stop 按钮后 DOM 变化均为无；JS 中未对这些按钮绑定任何事件，canvas 只有一次静态 drawGrid() 绘制，无动画逻辑",
+        "ok": 0
+      },
+      {
+        "name": "点击模拟类型按钮（Urban Growth/Ecosystem Dynamics 等）",
+        "expected": "加载对应模拟类型到 canvas，展示不同的元胞自动机规则",
+        "evidence": "JS 仅对 .btn-primary 绑定 animate-pulse 样式动画；点击后 canvas 无任何变化，不加载任何模拟规则",
+        "ok": 0
+      },
+      {
+        "name": "点击模式库条目（Conway's Glider/Pulsar 等）",
+        "expected": "将选中模式加载到模拟画布中预览",
+        "evidence": "JS 仅对 .pattern-card 切换 ring 边框样式；点击后 canvas 像素无任何更新，模式未加载",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 登录按钮",
+        "expected": "打开登录弹窗/跳转登录页或给出反馈",
+        "evidence": "探针点击后 DOM 变化=无，页面无任何反应；按钮未绑定任何事件",
+        "ok": 0
+      },
+      {
+        "name": "点击社区分享/挑战入口按钮",
+        "expected": "打开分享流程、跳转到挑战列表或展示相关内容",
+        "evidence": "Share Your Simulation 和 View All Challenges 按钮未绑定任何事件；社区条目仅有 hover 样式，点击无业务反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉布局完整但所有核心交互均为占位或死链状态：导航链接 href=\"#\" 无路由、模拟控制按钮无事件绑定、模拟类型按钮仅触发样式动画不改变画布、模式库条目仅切换边框不加载内容、Sign In 和社区/挑战入口全部无响应。需求声明的沙盒模拟、可视化工具、模式库、社区仓库等核心功能均未真正实现，页面本质是静态展示壳。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 仿真核心控制按钮（播放/暂停/停止/重置）点击后画布无任何变化，核心操作流程完全卡死；2. 主导航（Sandbox/Patterns/Community/Challenges）全部为 href=\"#\" 占位链接，点击后无实际页面或反馈；3. 仿真预设按钮（Urban Growth/Ecosystem Dynamics/Traffic Flow/Forest Fire）点击后仅触发短暂脉冲动画，画布状态从未改变，属于核心控件调节无效；4. Sign In/Share Your Simulation/View All Challenges 等按钮点击均无任何响应，反馈缺失到无法判断操作是否成功。次要瑕疵：模式卡片选中仅切换外框、并未真正加载对应模式；社区内容为静态占位数据；初始化画布为静态随机网格，缺乏动态仿真暗示；缺少说明文字或图例帮助用户理解画布颜色含义；图标按钮无文字提示，影响可理解性。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "这是一个深色科技风格的数据可视化模拟平台页面，整体视觉完成度较高。色彩上以深蓝(#0f172a)到紫色(#7c3aed)的渐变背景为核心基调，搭配蓝色(#2563eb)主按钮和灰色系卡片，形成了专业、现代的科技感氛围，与“细胞自动机模拟实验室”的主题高度契合。布局上，采用主流的三列网格结构（左侧大画布+右侧侧边栏），信息层级清晰，视觉重心突出。组件质量出色：圆角卡片、毛玻璃质感控制条、圆形图标控制按钮、悬停上浮与描边反馈等细节处理体现了较高的设计水准。Canvas绘制的网格与随机彩色细胞图案为页面增加了真实的可视化感受。扣分点在于：部分文字使用默认字体缺乏个性；canvas区域与页面背景色接近，边界层次稍弱；右侧三个功能卡片（模式库、社区、挑战）结构雷同，视觉上略缺乏差异化节奏。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_012367.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Sandbox",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Patterns",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Challenges",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-play",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-pause",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-stop",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

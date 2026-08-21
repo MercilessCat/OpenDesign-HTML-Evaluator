@@ -1,0 +1,136 @@
+{
+  "row_id": "02_029317",
+  "shard": 2,
+  "id": 29317,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Create a platform that visualizes wind farm energy production through real-time data dashboards. Users monitor output, analyze efficiency, and explore predictive maintenance insights. Key features include interactive 3D models, integration with IoT sensors, and AI-driven analytics, enabling operators to optimize energy production and reduce operational costs effectively.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 16602,
+  "html_sha256": "d36b91fd0c2e34159d1999e9ec0208c63345db44c476c15e553ecd58316ec7e8",
+  "functional": {
+    "score": 5.0,
+    "raw_score": 5.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "切换图表时间范围（24H/7D/30D）",
+        "expected": "点击 24H/7D/30D 后，图表应切换为对应周期的能量/风速数据，并高亮当前选中按钮。",
+        "evidence": "探针依次点击 24H、7D、30D，DOM 变化均为无，新增 JS 错误 0；HTML 中这三个按钮没有绑定点击事件，也没有更新 Chart.js 数据的逻辑，只有静态背景样式，因此点击后图表数据不变。",
+        "ok": 0
+      },
+      {
+        "name": "悬停查看风机 3D 状态卡片",
+        "expected": "鼠标悬停风机卡片时，卡片翻转并显示该风机的功率、维护状态等详情。",
+        "evidence": "HTML/CSS 中有 .turbine:hover .turbine-inner { transform: rotateY(180deg); }，背面包含 #17/#22/#05/#12 的功率和维护信息；该 hover 交互规则完整，且运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "在能量图表上悬停/拖动查看数据",
+        "expected": "用户与 canvas 图表交互时，图表应给出 tooltip/高亮等视觉反馈。",
+        "evidence": "探针在 canvas 上指针拖拽后，DOM 无变化但 canvas 像素有变化，新增 JS 错误 0；Chart.js 图表已成功初始化，说明图表对指针操作有可见响应。",
+        "ok": 1
+      },
+      {
+        "name": "监控实时功率输出",
+        "expected": "实时总功率数值能随时间自动刷新，体现实时数据仪表盘。",
+        "evidence": "JS 中 setInterval 每 5000ms 更新 document.querySelector('.metric-value') 的文本，模拟总功率输出的实时变化；运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Dashboard 按钮",
+        "expected": "点击后应有返回/刷新仪表盘视图的反馈，或至少高亮当前页面状态。",
+        "evidence": "探针点击 Dashboard 后 DOM 变化为无，新增 JS 错误 0；该按钮没有绑定任何事件，点击后没有任何可见响应。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面整体能正常渲染为风电场能量数据仪表盘：图表、指标卡、风机翻转卡片和实时刷新均可用；但 24H/7D/30D 时间范围按钮完全没有事件绑定，点击后图表不切换，直接影响用户按时间范围分析效率的核心任务；Dashboard 按钮也无反馈，因此只能判定为部分核心交互失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 时间范围切换控件完全无效。点击 24H/7D/30D 按钮后，图表数据、标签和按钮选中态均无任何变化，核心交互功能形同虚设，用户无法按预期查看不同时间维度的数据。\n2. 顶部导航“Dashboard”按钮点击无任何实际反馈，属于占位性导航按钮，用户点击后无法获得响应，造成操作死路。\n\n次要瑕疵：\n1. 涡轮机卡片仅实现 CSS 翻转效果，并非需求中描述的“交互式 3D 模型”，功能深度不足。\n2. 部分指标缺少说明或图例，例如“Active Turbines 24/28”的分子分母含义、预测维护准确率的统计口径等，用户理解成本偏高。\n3. 页面缺少操作引导或帮助提示，用户需自行探索功能，初次上手有一定困惑。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力强，采用深色渐变背景配合玻璃拟态卡片，营造出科技感与专业感，符合数据可视化平台的定位。色彩搭配合理，以蓝色系为主，辅以绿色、琥珀色、红色作为状态提示，层次清晰且对比度良好。布局采用三栏网格，左侧指标、中间图表、右侧交互模型，结构均衡且信息密度适中，符合现代仪表盘设计规范。字体采用Poppins，配合精心设计的渐变数字、悬浮阴影、脉冲动画等细节，组件质感出色。CSS专业度高，使用Tailwind CDN结合自定义样式，实现了blur背景、3D翻转交互、动态进度条等效果。图表使用Chart.js且配色与整体风格统一。页面在视觉上具备高完成度，仅存在按钮交互反馈弱、部分细节可优化等小问题，但整体表现优秀。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 5.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_029317.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Dashboard",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "24H",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "7D",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "30D",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

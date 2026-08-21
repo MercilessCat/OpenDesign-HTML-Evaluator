@@ -1,0 +1,182 @@
+{
+  "row_id": "05_057012",
+  "shard": 5,
+  "id": 57012,
+  "category": "Website",
+  "prompt": "Design a virtual sanctuary for nurturing ideas through digital thought gardens. Users cultivate concepts, connect them with others, and visualize their growth over time. The site includes interactive mind maps, a seed exchange for idea sharing, and a reflective journal feature to track intellectual development and foster creative cross-pollination.",
+  "html_len": 27746,
+  "html_sha256": "132b1c7c906c63a6503255fa10c3094535ebe416969011c9d5f06ba1352c8326",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航到 Mind Map 区域",
+        "expected": "点击后平滑滚动到 Mind Map 板块并显示相关内容",
+        "evidence": "探针点击<a>Mind Map</a>：DOM有变化，页面跳转，无JS错误，说明锚点跳转生效",
+        "ok": 1
+      },
+      {
+        "name": "点击 Start Planting 开始种植",
+        "expected": "开始种植流程或跳转到种植/思维导图界面，页面应有反馈",
+        "evidence": "探针点击<button>Start Planting</button>：DOM无变化，无JS错误，无网络请求，按钮无任何业务事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击 Add Idea 添加想法节点",
+        "expected": "在思维导图中新增一个概念节点或弹出输入框",
+        "evidence": "探针点击<button>Add Idea</button>：DOM无变化，无JS错误，代码中该按钮没有事件监听，D3图仅为静态渲染",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Gardens 探索花园",
+        "expected": "跳转到其他花园或展示更多内容，页面应有变化",
+        "evidence": "探针点击<button>Explore Gardens</button>：DOM无变化，无JS错误，无业务逻辑，属于纯展示占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "在 Seed Exchange 点击 Plant 种植想法",
+        "expected": "将该想法加入我的花园并反馈种植成功",
+        "evidence": "HTML中所有 Plant 按钮均无 onclick 或事件绑定，点击不会触发任何逻辑（静态检查无相应JS），且类似按钮探针表现为无反馈",
+        "ok": 0
+      },
+      {
+        "name": "在 Journal 输入内容并点击 Save Entry 保存",
+        "expected": "保存日记条目并显示在下方列表中，或给出保存成功反馈",
+        "evidence": "textarea和Save Entry按钮均无事件绑定，代码中无任何保存逻辑，探针未检测到相关交互，页面为静态展示",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉结构完整，包含思维导图、种子交换、日志等模块，但几乎所有核心交互均为占位：Start Planting、Add Idea、Explore Gardens、Plant、Save Entry均无事件绑定，点击无反馈。仅有导航锚点滚动可用，未实现用户需求中的交互式思维导图、想法分享与日志记录功能，属于核心交互大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 主要 CTA 按钮（Start Planting、Explore Gardens）点击后无任何响应；2. 思维导图区的 Add Idea 按钮无效，且导图本身只是静态示例，无法新增、编辑或拖拽节点，核心的“种植想法”流程无法完成；3. Seed Exchange 的 Plant 按钮和 Browse More Seeds 按钮均无实际动作，无法完成种子分享/种植；4. Journal 的 Save Entry 及格式工具按钮无响应，反思记录无法保存，核心日志功能不可用；5. 移动端汉堡菜单无展开逻辑，移动导航失效。以上多个核心操作均存在死路，导致页面虽有清晰的信息结构和美观的视觉设计，但实质上只是静态展示页。次要瑕疵：导航锚点可跳转但无当前区块高亮；Footer 社交链接为占位；静态图表缺少图例与说明；动画细节丰富但无法弥补核心功能缺失。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面视觉设计非常出色。整体采用深色渐变背景（#0f172a 至 #1e293b），营造出静谧、沉浸的‘思想花园’氛围，与主题高度契合。主色以紫色（#8b5cf6）、粉色（#ec4899）和靛蓝（#6366f1）为主，形成富有层次感的渐变搭配，点缀绿色（seeding图标）和多种状态色，色彩统一且对比舒适，符合现代暗色系网页设计潮流。布局结构清晰：固定导航、Hero区、思维导图、种子交换、反思日志、成长追踪到页脚，层级分明，信息流顺畅。玻璃拟态卡片（.card-glass）配合毛玻璃效果、柔和阴影和悬停提升动效，增加了页面的精致度与专业感。字体采用Inter，整体字重与间距把控良好，标题使用了渐变色文字，视觉吸引力强。D3思维导图作为核心交互区域有合理的占位与引导设计。虽然部分按钮（如Start Planting）当前无实际功能，但视觉呈现完整。整体风格与现代设计规范一致，且精准契合‘数字思考花园’的空间感与创意调性。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_057012.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Mind Map",
+      "href": "#garden",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Seed Exchange",
+      "href": "#exchange",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Journal",
+      "href": "#journal",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Growth",
+      "href": "#growth",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Planting",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Gardens",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Idea",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

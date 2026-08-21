@@ -1,0 +1,182 @@
+{
+  "row_id": "06_088009",
+  "shard": 6,
+  "id": 88009,
+  "category": "Website",
+  "prompt": "Uncover the hidden gems of perception distortion through a curated archive of immersive art experiences. Users can explore mind-bending virtual exhibits, participate in guided tours, and contribute interpretations to enrich the collective understanding of visual perception. This platform serves as a nexus for artists and enthusiasts to push the boundaries of visual storytelling.",
+  "html_len": 27947,
+  "html_sha256": "526a3ad3c71c0e86032376b42650a6135837dddb3fe8014fdd8b04c3ff16f037",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航 Exhibits/Tours/Community/About",
+        "expected": "切换到对应内容区或路由跳转到展览/导览/社区/关于页面",
+        "evidence": "探针点击后仅因 href=\"#\" 产生锚点跳转，无路由、无内容区切换；导航链接为纯占位入口，核心导航功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Exploring 按钮",
+        "expected": "进入虚拟展览沉浸式体验或展示展览列表",
+        "evidence": "探针点击后 DOM 无任何变化，无新增网络请求、无 JS 错误；按钮无事件绑定，完全无反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击展览卡片上的 Explore 按钮",
+        "expected": "打开对应展览的详情页或启动沉浸式体验",
+        "evidence": "三个展览卡片的 Explore 按钮在 HTML 中无 onclick、无 href、无事件监听；点击无反应，页面也没有任何 canvas/WebGL 展览场景被初始化",
+        "ok": 0
+      },
+      {
+        "name": "参与导览（如 Perception Masterclass）",
+        "expected": "提供加入导览的入口并可完成报名/参与",
+        "evidence": "导览区块只有静态卡片展示时间表，没有『加入/预约/参与』按钮或链接，未绑定任何交互事件；需求声明的 guided tour 参与入口缺失",
+        "ok": "NA"
+      },
+      {
+        "name": "贡献解读（提交自己的 interpretation）",
+        "expected": "提供表单或输入框让用户提交对展览的解读",
+        "evidence": "社区部分仅有静态展示的过往贡献和『View All Contributions』按钮（该按钮无事件）；页面没有任何输入框、textarea 或提交通道，contribute 功能入口缺失",
+        "ok": "NA"
+      },
+      {
+        "name": "点击 View Exhibits / View All Exhibits / View All Contributions 等按钮",
+        "expected": "展示全部展览或全部贡献列表",
+        "evidence": "探针点击部分按钮仅有 hover/focus 样式层 DOM 变化，无内容切换、无路由、无网络请求；按钮未绑定实际业务逻辑",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉和内容展示完善，但几乎所有核心交互均为占位或死链：导航 href=\"#\" 无路由、Start Exploring/Explore 等按钮无事件绑定、导览无参与入口、贡献无提交通道。需求声明的『探索虚拟展览、参与导览、贡献解读』均无法完成，页面实际为静态展示页，主要用户任务大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 主导航（Exhibits/Tours/Community/About）均为href=\"#\"占位链接，点击后仅跳到页面顶部，无法定位到对应内容板块，主要入口导航失效；2. 主行动按钮“Start Exploring”点击后无任何DOM变化或反馈，核心探索流程无法启动；3. “View Exhibits”、展馆卡片中的“Explore”、“View All Exhibits”、“Start Your Journey”等关键内容访问按钮均无实际功能，点击后无法完成浏览/参与导览等核心任务。以上导致用户无法有效使用页面达成目标。次要瑕疵：登录/注册按钮未实现真实认证流程；汉堡菜单按钮无展开逻辑；页面缺少图片，仅靠图标和渐变展示，信息呈现较单薄；所有页脚链接均为占位；部分交互仅有hover效果，无行为反馈。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "该页面视觉效果相当出色，深度契合“沉浸式艺术体验”这一主题。色彩上以深色背景(#0f172a→#1e293b)搭配indigo/violet渐变色，整体风格统一且具有强烈的艺术感，符合现代网站设计中的暗色模式趋势。布局方面，Hero区、展品卡片、导览介绍、社区留言、CTA和Footer等区块划分清晰，层级分明，间距控制到位，视觉节奏顺畅。字体选用Space Grotesk作为标题字体、Inter作为正文字体，兼具科技感与可读性。组件设计上，卡片悬浮动画、玻璃拟态(backdrop-filter)、渐变文本、浮动渐变形状、发光阴影等元素明显提升了页面质感，CSS使用专业且细节丰富。此外，页面的静态视觉特征与用户需求中的Art/Immersive风格高度对齐——整体传达出前卫、神秘、探索性的艺术氛围。小幅扣分的原因：页面完全依赖CSS视觉替代真实图片，虽然设计感强但缺少实际内容图像支撑；部分按钮链接不明显，微交互相对简单；整体完成度较高，但在业界顶级水准下仍有一定优化空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_088009.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Exhibits",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tours",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "About",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Exhibits",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

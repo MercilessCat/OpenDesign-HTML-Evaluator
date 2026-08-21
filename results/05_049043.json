@@ -1,0 +1,182 @@
+{
+  "row_id": "05_049043",
+  "shard": 5,
+  "id": 49043,
+  "category": "Website",
+  "prompt": "Discover an advanced search engine dedicated to biotechnology patents, offering comprehensive filtering options and AI-driven insights. Scientists, researchers, and innovators can delve into patent landscapes, track technological trends, and access detailed analytics. Key features include a personalized dashboard, alerts for new patents, and collaborative tools for research teams.",
+  "html_len": 32668,
+  "html_sha256": "3472244f867db31f61eacb87612cfb0b753e33f87810282f75f39ce44cf31d14",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "关键词搜索专利",
+        "expected": "输入关键词后展示或跳转到专利检索结果页",
+        "evidence": "页面存在搜索输入框和 Search 按钮，但 HTML 中没有 form action、没有事件绑定，也没有搜索结果容器；探针未发现任何搜索反馈逻辑，同类按钮点击均无 DOM 变化。",
+        "ok": 0
+      },
+      {
+        "name": "顶部导航 Search/Analytics/Dashboard/Team",
+        "expected": "点击导航跳转到对应功能页面",
+        "evidence": "所有导航项均为 href=\"#\"，没有真实路由或页面切换；探针显示 DOM 变化/页面跳转，但只是 hash 锚点变化，页面内容未切换到对应功能，属占位死链。",
+        "ok": 0
+      },
+      {
+        "name": "Start Searching / Request Demo CTA",
+        "expected": "进入搜索页或发起演示预约",
+        "evidence": "探针点击 Start Searching 和 Request Demo 均无 DOM 变化，无新增 JS 错误、无网络请求；按钮没有绑定实际业务事件。",
+        "ok": 0
+      },
+      {
+        "name": "Sign In 登录",
+        "expected": "打开登录/注册界面或跳转登录页",
+        "evidence": "探针点击 Sign In 后 DOM 无变化，无网络请求、无 JS 错误、无弹窗或路由变化。",
+        "ok": 0
+      },
+      {
+        "name": "Explore Dashboard / View Reports / New Analysis",
+        "expected": "进入个性化仪表盘或触发分析操作",
+        "evidence": "Explore Dashboard 按钮无事件处理；仪表盘预览中的 View Reports、New Analysis 按钮同样无点击反馈，无法进入看板或生成分析。",
+        "ok": 0
+      },
+      {
+        "name": "趋势图筛选按钮",
+        "expected": "点击 All Tech / Gene Therapy 等按钮切换图表数据",
+        "evidence": "趋势图筛选按钮为静态 button，没有绑定点击更新图表的逻辑；Chart.js 初始化脚本不完整，未提供任何 update 处理，点击无反馈。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上是一个完整的生物技术专利搜索平台落地页，但核心功能几乎全部未实现：搜索无结果反馈、导航和 CTA 为占位死链、登录无响应、仪表盘和图表筛选按钮均无事件绑定。主要任务无法完成，按专家判例核心交互大面积失败，功能分仅 2 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 主要行动按钮均无实际响应，Sign In、Start Searching、Request Demo 点击后无任何 DOM 变化或网络请求，用户无法登录或发起搜索；2. 四处主导航链接（Home/Search/Analytics/Dashboard/Team）点击后仅跳回页面顶部，无法到达对应功能页面，属于无效导航；3. 搜索栏 Search 按钮无绑定行为，用户输入关键词及选择技术领域后点击不会产生搜索结果，核心专利检索流程无法完成；4. 页面底部 Explore Dashboard、Start Free Trial、Schedule Demo、View Reports、New Analysis 等按钮均未绑定事件，所有转化路径均为死路。次要瑕疵：1. 顶部 Hero 动画图标与业务无直接关联，占位感较强；2. 图表区域仅放置 canvas 但初始化脚本被截断，Trend 图表可能空白，影响数据洞察展示；3. 各卡片 Learn more 链接均为占位链接，无实际详情页；4. 页脚版权年份为 2023，未随年份更新。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力高，采用现代SaaS风格设计。色彩搭配以蓝色系为主（primary #1e40af、secondary #0ea5e9），辅以紫色（accent #8b5cf6）和渐变背景，符合生物科技行业专业、创新、可信赖的调性。布局上采用了Hero区、搜索栏、功能卡片网格、Dashboard预览、图表区、用户评价、CTA和页脚，层次分明，信息架构清晰。字体使用Inter，圆角、阴影、渐变、悬浮动画（card-hover、animate-float）等细节处理到位，体现了较专业的CSS设计水准。响应式设计也考虑周全（md:断点、flex/grid适配）。虽略有模板化痕迹，但不影响整体美感。无JS错误，交互探针正常，整体完成度高。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_049043.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Search",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Team",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Searching",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Request Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

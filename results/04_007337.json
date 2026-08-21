@@ -1,0 +1,181 @@
+{
+  "row_id": "04_007337",
+  "shard": 4,
+  "id": 7337,
+  "category": "Website",
+  "prompt": "Build a storytelling community that uses scent as a narrative element. Integrate scent mapping, user-generated stories, and virtual scent experiences. Users can create, share, and explore multisensory tales, fostering a vibrant community of scent-inspired storytellers while discovering how aroma influences emotions and memory.",
+  "html_len": 32946,
+  "html_sha256": "30ef62fd176e2bbc6e5efb2440bd4e4340dc264013f1398e49238fbcad43aeb4",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接 Explore",
+        "expected": "跳转到探索页面或显示对应内容区域",
+        "evidence": "探针点击后页面无实质内容变化，href=\"#\" 无路由，仅 URL 变为 #，属于占位死链",
+        "ok": 0
+      },
+      {
+        "name": "点击导航链接 Stories",
+        "expected": "跳转到故事列表页面或展示故事内容",
+        "evidence": "探针点击后页面无实质内容变化，href=\"#\" 无路由，属于占位死链",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 按钮",
+        "expected": "打开登录表单/模态框或触发登录流程",
+        "evidence": "探针点击后 DOM 变化=无，新增 JS 错误=0，按钮无事件绑定，无任何业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Now 按钮",
+        "expected": "打开注册流程或引导加入社区",
+        "evidence": "探针点击后 DOM 变化=无，新增 JS 错误=0，按钮无事件绑定，无任何业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Your Journey 按钮",
+        "expected": "开始创建故事/进入创作引导流程",
+        "evidence": "探针点击后 DOM 变化=无，新增 JS 错误=0，按钮无事件绑定，无任何业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Stories 按钮",
+        "expected": "进入故事探索页面或展示更多故事",
+        "evidence": "探针点击后 DOM 变化=无，新增 JS 错误=0，按钮无事件绑定，无任何业务反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为静态展示型落地页，所有核心导航和操作按钮均为占位/死链接：导航 href=\"#\" 无路由，Sign In、Join Now、Start Your Journey、Explore Stories 等按钮点击后毫无反应。需求中的创建、分享、探索故事，以及气味映射、虚拟气味体验等关键功能完全未实现，页面仅停留在概念展示层面，无法完成任何用户任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 主导航 Explore/Stories/Scent Map/Community 均为 href=\"#\" 占位链接，点击不能进入对应内容或区块，主要入口没有有效反馈；2) Sign In、Join Now、Start Your Journey、Explore Stories 等核心按钮点击后无任何 DOM/网络/JS 变化，登录、注册、开始探索等核心任务无法完成；3) Scent Map 文案提示“Click on scent markers to experience stories”，但地图标记没有绑定点击事件，交互地图实际不可交互；4) 新闻订阅等表单提交没有成功或失败反馈，用户无法判断操作是否成功。次要瑕疵：故事卡片缺少真实配图，头像为灰色占位，地图缺图例和说明，整体页面视觉风格和信息层级清晰，但核心操作大面积失效，因此按 2-3 分档评为 2 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉非常出色，优秀的配色体系（sage/lavender/mint/coral/amber）配合柔和的渐变背景，营造出温暖、自然、带有梦幻感的氛围，完美契合“气味叙事”的主题。布局结构清晰且富有节奏感：导航、Hero、功能模块、故事展示、香气地图、社区招募和页脚依次展开，信息层级明确。字体搭配优雅（Playfair Display 衬线标题 + Poppins 无衬线正文），增强了品牌感。组件设计精致，卡片圆角、阴影、悬停上浮、粒子动画、光晕效果等细节提升了品质感。全站使用 Tailwind 与自定义 CSS 相结合，过渡动画流畅，符合现代网页设计规范。唯一小缺陷是部分按钮（Sign In、Join Now 等）点击后无实际交互，但视觉上不影响美观性。整体可以认定为高水准的视觉设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_007337.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Stories",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Scent Map",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Your Journey",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Stories",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

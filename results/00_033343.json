@@ -1,0 +1,146 @@
+{
+  "row_id": "00_033343",
+  "shard": 0,
+  "id": 33343,
+  "category": "3D design",
+  "prompt": "Develop a secure platform for VR environments focused on multi-party computations, enabling users to collaborate safely on complex tasks. The site offers tools for data sharing, encryption, and real-time communication within a 3D space. Features include customizable security settings, user authentication, and collaborative project management.",
+  "html_len": 21948,
+  "html_sha256": "93f7f6c4f19cda71ef74862782f9cb539a27f1d9ba59de24889ca26037a57cf1",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "3D 场景拖拽旋转/缩放",
+        "expected": "通过 OrbitControls 拖拽旋转/缩放 3D 场景，视角变化",
+        "evidence": "脚本中实例化了 THREE.OrbitControls，并存在 requestAnimationFrame 动画循环；探针在 canvas 上拖拽无 JS 错误，运行时 0 错误，按规则判定可交互",
+        "ok": 1
+      },
+      {
+        "name": "顶部导航切换（Dashboard/Projects/Settings）",
+        "expected": "点击导航按钮切换到对应仪表盘、项目列表或设置页面",
+        "evidence": "这些按钮未绑定任何点击事件；探针点击 Dashboard/Projects 后 DOM 无变化，Settings 的 DOM 变化仅为探针 click 兜底干扰，无真实导航",
+        "ok": 0
+      },
+      {
+        "name": "New Session 新建协作会话",
+        "expected": "创建新的安全协作会话或进入会话配置",
+        "evidence": "New Session 按钮没有事件绑定；探针点击后无会话创建相关变化，核心协作入口未实现",
+        "ok": 0
+      },
+      {
+        "name": "安全设置调节（加密等级滑块与开关）",
+        "expected": "加密等级滑块可拖动，数据共享/实时通信/匿名模式开关可切换",
+        "evidence": "input[type=range] 和 checkbox 为原生控件，CSS 对 checked 状态有样式反馈，控件本身可操作；但无值显示或业务联动，属于浅层交互",
+        "ok": 1
+      },
+      {
+        "name": "底部工具按钮切换（数据共享/加密/协作）",
+        "expected": "点击工具按钮后选中对应工具并高亮",
+        "evidence": "脚本为 .tool-btn 绑定了 click 事件，点击会移除其他按钮 active 并高亮当前按钮",
+        "ok": 1
+      },
+      {
+        "name": "用户认证登录/注册",
+        "expected": "提供登录或注册入口，完成用户认证",
+        "evidence": "页面上没有登录、注册按钮或表单，需求声明的用户认证功能缺失",
+        "ok": "NA"
+      }
+    ],
+    "reason": "3D 场景可旋转，安全控件和底部工具按钮有基础交互反馈；但顶部导航按钮和 New Session 均为无事件占位，项目管理和协作会话无法启动，用户认证入口缺失，多个需求声明的关键入口未实现，因此分数不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 主要导航按钮（Dashboard、Projects）点击后无任何DOM变化、反馈或功能跳转，是纯粹的占位死链接；\n2. New Session按钮点击仅产生背景滚动干扰，无法真正创建或开始一个会话，核心操作无法完成；\n3. 安全控制区的加密级别滑块和所有开关（数据共享、实时通信、匿名模式）调节后均无实际效果，也不改变任何界面状态，属于调节无效且无反馈；\n4. 底部四个工具按钮点击仅高亮切换，实际不存在对应功能，用户无法进行任何协作相关操作；\n5. 页面所宣传的3D协作环境（数据共享、加密可视化、协作管理）无任何可操作的实现，3D场景仅为旋转装饰物，无法服务任务目标。\n\n次要瑕疵：\n1. 界面缺少说明文字或引导，用户不知道如何开始协作、如何理解3D场景中各元素含义；\n2. 参与者列表是静态数据，没有添加/移除/管理功能；\n3. 通知条无关闭按钮，只能等待自动消失；\n4. 移动端隐藏了导航按钮但没有替代入口，小屏无法访问导航功能。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，深色渐变背景（#0f0c29→#302b63→#24243e）与霓虹青绿色（#00ffff/#00ff9d）点缀搭配，营造出科技感与安全氛围，符合VR多方可信计算平台的定位。3D粒子系统、动态节点和连接线增强了沉浸感，虽为代码生成但设计意图明确。色彩搭配合理，主次分明，绿色作为强调色贯穿关键UI元素（logo、按钮、状态指示），辅助色青色与背景形成良好对比。布局上，顶部导航、右侧安全控制面板、底部工具条分区清晰，层次分明；flex布局和半透明毛玻璃效果（backdrop-filter）使用得当，组件（滑块、开关、头像、通知）设计统一且细节完整。CSS整体专业，采用渐变、圆角、阴影、transition等现代技术，符合当前网页设计趋势。扣分点主要是交互反馈较弱（部分按钮点击无明显响应）、侧边栏可能挤压3D视角，以及少量视觉元素（如渐变背景与3D背景叠加）在对比度上略有干扰，但整体美观度在同类产品中属上乘。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_033343.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Dashboard",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Projects",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Settings",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "H2.panel-title",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Session",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "H2.panel-title",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "row_id": "06_067020",
+  "shard": 6,
+  "id": 67020,
+  "category": "Website",
+  "prompt": "Launch an all-encompassing portal guiding entrepreneurs through the business startup journey. Users access step-by-step roadmaps, funding advice, and success stories. Core features include interactive business plan builders, a mentoring network, and industry-specific resources, empowering aspiring business owners to confidently navigate the complexities of launching a company.",
+  "html_len": 37368,
+  "html_sha256": "ca5d9ca84f464f1f4d2d09931f3323fd2470c8909c308d93f433b09dad30d73b",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "导航到各内容区块",
+        "expected": "点击 Home/Features/Roadmap/Success Stories/Contact 锚点链接后平滑跳转到对应章节",
+        "evidence": "探针依次点击 5 个导航链接，均报告 DOM 变化和页面锚点跳转，无 JS 错误、无失败网络请求，导航功能正常可用。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Get Started 按钮开始",
+        "expected": "触发注册/开始流程，如下一步引导、弹窗或跳转",
+        "evidence": "导航栏与移动菜单中的 Get Started 按钮未绑定任何事件，探针点击后 DOM 无变化、无网络请求，为死按钮。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Your Journey 按钮",
+        "expected": "进入创业向导或路线图工具",
+        "evidence": "Hero 区 Start Your Journey 按钮点击后 DOM 无变化、无网络请求，仅有 hover 样式，无任何业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "使用 Business Plan Builder",
+        "expected": "打开可交互的商业计划表单/模板并生成文档",
+        "evidence": "Features 区仅有静态描述卡片，卡片无链接、无按钮、无事件绑定；探针未发现可操作入口，核心功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "使用 Mentor Network 导师网络",
+        "expected": "浏览/搜索导师、发起联系或预约咨询",
+        "evidence": "页面只有 Mentor Network 营销卡片，无导师列表、无搜索或连接控件，无事件绑定，核心功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "查看 Funding Advice 资金建议",
+        "expected": "获取具体的融资策略、投资者数据库或资金资源",
+        "evidence": "Funding Guidance 卡片仅含一段宣传文案，无实际融资文章、工具、数据库或可点击资源，内容未落地。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上完整呈现了需求中的各模块，锚点导航可用，路线图概述与成功故事可浏览；但核心业务功能（Business Plan Builder、Mentor Network、Funding Advice、行业特定资源）全部为静态占位，无任何可交互实现，主要 CTA 按钮也无反应，用户无法完成创业向导、计划书制作或导师连接等核心任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1）主要CTA按钮（Get Started、Start Your Journey）点击后无任何反馈或跳转，无法开始核心流程；2）移动端汉堡菜单按钮无交互代码，无法展开导航，移动用户无法访问菜单；3）Contact导航链接指向不存在的锚点，点击无实际联系内容；4）页面宣传的交互式商业计划构建器、导师网络、行业资源等核心功能仅为静态卡片展示，没有可供用户操作的入口或实际功能，导致用户无法完成创业启动等核心任务。次要瑕疵：引入了ScrollReveal但未初始化，动画效果缺失；缺少联系表单等具体交互模块。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "从 HTML/CSS 源码推断，这是一个完成度较高的现代 SaaS 创业平台落地页。整体视觉采用浅色渐变背景（淡蓝到淡粉），主色为靛蓝、紫、粉的渐变组合，色彩搭配协调且符合“创业、科技、活力”的气质。布局层次分明：固定导航、Hero 双栏展示、六宫格特色卡片、竖向时间轴 Roadmap、成功故事区块，各部分留白充足，信息节奏清晰。组件设计统一，大量使用圆角、柔和阴影、图标圆形底色、渐变文字和 hover 动效，配合 floating、pulse、animated-border 等细节，页面显得精致且富有交互感。CSS 基于 Tailwind + 自定义主题色，整体工程化程度高，符合现代网页设计规范。\n\n扣分点：部分细节不够极致，例如 feature-card 的 hover 缺少 transition，过渡略显生硬；提供的源码中成功故事区块未完整闭合且 Contact 锚点对应区块缺失；页面较多依赖外链图片，若图片加载失败会影响视觉完成度。总体属于中上水平，达到专业网站的美观标准。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_067020.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Roadmap",
+      "href": "#roadmap",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Success Stories",
+      "href": "#testimonials",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Contact",
+      "href": "#contact",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Your Journey",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Watch Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

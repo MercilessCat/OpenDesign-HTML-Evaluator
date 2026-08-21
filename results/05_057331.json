@@ -1,0 +1,181 @@
+{
+  "row_id": "05_057331",
+  "shard": 5,
+  "id": 57331,
+  "category": "Website",
+  "prompt": "Design an interactive database tracing the cognitive evolution of species over time. Users explore fossil records, engage in timeline analyses, and contribute to cognitive research. Key features include a 3D fossil viewer, evolutionary timeline editor, and a collaborative research forum for paleo-cognitive studies.",
+  "html_len": 38550,
+  "html_sha256": "01070cc2e82429f09e6e8d644f569cce6f7fdeee9e642c1b101ed0fd95a74561",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "使用3D化石查看器",
+        "expected": "加载并展示可交互的3D化石模型，支持旋转/缩放",
+        "evidence": "#fossil-viewer内部只有静态文本\"3D Fossil Viewer Loading...\"，无canvas元素、无OrbitControls或requestAnimationFrame，three.js虽加载但从未初始化；Reset View/Fullscreen按钮无事件绑定",
+        "ok": 0
+      },
+      {
+        "name": "点击Start Exploring按钮",
+        "expected": "跳转到探索/化石查看区域",
+        "evidence": "探针点击后DOM无变化、无网络请求、无JS错误，按钮未绑定任何事件，页面无跳转",
+        "ok": 0
+      },
+      {
+        "name": "点击Contribute Data按钮",
+        "expected": "打开贡献数据的入口或表单",
+        "evidence": "探针点击后DOM无变化、无网络请求，按钮为占位无事件；这是需求\"contribute to cognitive research\"的核心入口，未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击Join Research按钮",
+        "expected": "进入加入研究/注册流程",
+        "evidence": "探针点击后DOM无变化、无网络请求，按钮无事件绑定，纯占位",
+        "ok": 0
+      },
+      {
+        "name": "选择物种并编辑时间线",
+        "expected": "选择物种后时间线高亮/筛选，Add Milestone和Save Timeline生效",
+        "evidence": "物种选择项仅有cursor-pointer样式和hover效果，无事件绑定；Add Milestone和Save Timeline按钮均无onclick，时间线为纯静态内容，编辑器功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "搜索/参与论坛讨论",
+        "expected": "输入关键词过滤讨论，或点击New Discussion创建帖子",
+        "evidence": "搜索input无事件监听和过滤逻辑；New Discussion按钮无事件绑定；论坛帖子仅有cursor-pointer样式，点击无反应，协作论坛核心功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整但几乎所有核心交互均为静态占位：3D化石查看器未初始化、时间线编辑器控件无事件绑定、论坛搜索/发帖无反应、主CTA按钮点击无效果。需求声明的交互式数据库核心功能（探索3D化石、编辑时间线、参与研究/论坛）均未真正实现，功能性得分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：1) 3D化石查看器仅有“Loading...”占位，无实际3D渲染，Reset View/Fullscreen按钮无效；2) 首屏“Start Exploring”、“Contribute Data”按钮点击后无任何反馈（DOM无变化），属于死按钮；3) “Join Research”按钮同样点击无效；4) 时间线编辑器中的“Add Milestone”、“Save Timeline”等控件未实现实际功能，用户无法真正编辑或保存时间线；5) 论坛“New Discussion”按钮无响应。核心操作（探索化石、编辑时间线、参与研究）均无法完成，页面仅具视觉展示。次要瑕疵：搜索框无实际过滤功能，时间线滑块与认知特性选择无联动效果，部分导航链接仅为锚点跳转，缺少操作帮助说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，采用深色渐变背景（#0f172a 到 #1e293b）搭配indigo、紫色、粉色等高明度点缀色，营造出科技感与学术氛围，符合认知进化数据库的主题。色彩搭配和谐，主次分明，文字与背景对比度良好。布局结构清晰，依次展示导航、Hero区、功能卡片、3D查看器占位、时间线编辑器和论坛，信息层级合理，视觉动线流畅。字体使用Inter，现代简洁；各组件（按钮、卡片、时间线节点、滚动条）的圆角、阴影、渐变和悬停动画设计精细，CSS专业度高。渐变边框、backdrop-blur、卡片悬浮效果等细节提升了精致度。虽未调用Three.js展示真实3D模型，但视觉上已提供占位区域，不影响整体美观。总体设计符合现代网页规范，与用户需求中的“交互式数据库”风格高度对齐。扣分项为3D查看器区域为空壳、部分按钮无实际功能，但作为视觉评估，仍属优秀水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_057331.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore",
+      "href": "#explore",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Timeline",
+      "href": "#timeline",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Forum",
+      "href": "#forum",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Research",
+      "href": "#research",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Research",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Contribute Data",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

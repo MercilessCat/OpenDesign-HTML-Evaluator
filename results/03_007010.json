@@ -1,0 +1,108 @@
+{
+  "row_id": "03_007010",
+  "shard": 3,
+  "id": 7010,
+  "category": "Game dev",
+  "prompt": "Develop an interactive disaster survival game where players navigate through virtual environments, learning safety strategies. Core idea: disaster preparedness simulation. Core functionality: evade virtual earthquakes. Key features: realistic scenarios, safety quizzes, survival gear customization, and community leaderboards.",
+  "html_len": 30627,
+  "html_sha256": "94123baf0a6fddddffd44b9b23e6c13c1064cef1a507898fadea8b897cb9f508",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 START SIMULATION 开始游戏",
+        "expected": "进入装备选择界面，显示装备定制选项",
+        "evidence": "探针点击后 DOM 无变化，新增 JS 错误 0。脚本中 initScene() 因 THREE.CapsuleGeometry is not a constructor 报错，导致后续 setupEventListeners() 未执行，按钮未绑定有效事件。",
+        "ok": 0
+      },
+      {
+        "name": "选择生存装备（gear-item）进行定制",
+        "expected": "装备项高亮选中，并计入已选装备列表",
+        "evidence": "gearScreen 初始为 hidden，且因启动按钮失效无法进入该界面；用户无法触达装备选择流程，核心功能不可用。",
+        "ok": 0
+      },
+      {
+        "name": "点击 BEGIN SURVIVAL MISSION 开始生存任务",
+        "expected": "隐藏装备界面，显示 HUD 并启动 3D 地震生存场景",
+        "evidence": "事件绑定在 setupEventListeners 中，因 initScene 抛错而未执行；且 gearScreen 不可达，该按钮无法实际点击使用。",
+        "ok": 0
+      },
+      {
+        "name": "使用 WASD/方向键在 3D 场景中移动躲避地震",
+        "expected": "玩家角色随按键移动，镜头跟随，并触发地震坠物碰撞反馈",
+        "evidence": "player 对象创建时使用 THREE.CapsuleGeometry 抛错，scene 初始化中断；animate 循环未运行，无法进入 gameplay 状态，键盘移动逻辑不会执行。",
+        "ok": 0
+      },
+      {
+        "name": "回答生存安全测验题目",
+        "expected": "点击选项后显示正确/错误反馈、提示并更新分数",
+        "evidence": "quizScreen 依赖游戏流程在震后触发；但由于启动与游戏流程全部失效，测验界面不可达。nextQuizBtn 等事件也未完成绑定。",
+        "ok": 0
+      },
+      {
+        "name": "查看社区排行榜",
+        "expected": "显示排行榜条目与玩家得分",
+        "evidence": "排行榜入口在 gameOverScreen 的 VIEW LEADERBOARD 按钮，依赖完整游戏流程到达；该按钮事件未绑定，且流程在开始阶段即崩溃，排行榜功能不可用。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面因 Three.js r128 不兼容 THREE.CapsuleGeometry，导致初始化场景时抛出 JS 错误，后续所有事件绑定未执行。探针点击 START SIMULATION 无任何 DOM 变化，游戏主流程从第一入口即失效；装备定制、地震躲避、安全测验、排行榜等核心功能全部不可达，完全无法完成用户需求。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 游戏初始化时调用了 THREE.CapsuleGeometry，但所加载的 Three.js r128 版本不支持该几何体，导致场景初始化抛错，游戏无法正常启动。2. 由于初始化失败，后续事件监听器没有正确绑定，点击“START SIMULATION”按钮无任何反馈，玩家无法进入装备选择或游戏主流程，整个页面不可用。次要瑕疵：装备选择缺少说明提示；排行榜使用 mock 数据；社区/教程等模块未实现；动画与视觉设计尚可，但均因核心故障无法体验。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 6.5,
+    "reason": "页面视觉设计立意良好，深色半透明背景搭配红橙渐变按钮与白色文字，整体配色统一且契合“灾难生存”主题；组件（按钮、装备卡、测验选项）使用了圆角、阴影、悬停动效等现代设计语言，布局上各界面均居中、间距合理，CSS整体专业。但实际运行中存在严重问题：Three.js 的 CapsuleGeometry 构造失败导致3D场景无法渲染，核心画面缺失，视觉上仅剩UI层浮于空背景，使页面显得单调、缺乏沉浸感；同时按钮交互因JS中断而失效，影响整体体验。若3D场景正常渲染，页面视觉分数会更高。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.2,
+  "baseline_overall": 3.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_007010.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "START SIMULATION",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

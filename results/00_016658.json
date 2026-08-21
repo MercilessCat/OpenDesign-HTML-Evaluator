@@ -1,0 +1,129 @@
+{
+  "row_id": "00_016658",
+  "shard": 0,
+  "id": 16658,
+  "category": "3D design",
+  "prompt": "Create a nostalgic experience for fans of classic gaming graphics. This site allows users to generate and explore retro-style 3D environments reminiscent of the PS1 era. Features include a pixelation engine, customizable shaders, and a gallery of user creations, fostering a community of retro gaming enthusiasts.",
+  "html_len": 17738,
+  "html_sha256": "b3b96396b7b18a206137739138d467ee859dfcfe75ddb20b47633f57778bb5bd",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击 GENERATE WORLD 生成新世界",
+        "expected": "3D 场景重新生成不同的复古建筑、平台、金字塔等环境",
+        "evidence": "按钮绑定了 generateNewWorld，回调会清除并重建 scene 中的世界对象；探针未检测到 DOM 变化是因为场景渲染在 WebGL canvas 中，且 JS 无错误，符合预期。",
+        "ok": 1
+      },
+      {
+        "name": "拖拽 3D 画布旋转视角探索场景",
+        "expected": "拖拽应旋转/缩放相机视角，实现场景探索",
+        "evidence": "页面没有 OrbitControls，controls 变量未初始化，也没有 pointer/touch 拖拽事件；虽然存在 requestAnimationFrame，但它只驱动自动旋转和渲染，不处理用户拖拽。探针 canvas 拖拽后无交互反馈，事件未初始化。",
+        "ok": 0
+      },
+      {
+        "name": "拖动 Pixelation 分辨率滑块",
+        "expected": "渲染分辨率/像素化程度发生明显变化",
+        "evidence": "input 绑定了 updatePixelation，调用 renderer.setPixelRatio(value/10+0.1)，能改变渲染分辨率，JS 无错误。",
+        "ok": 1
+      },
+      {
+        "name": "调节 Dithering/Saturation/Contrast 着色器滑块",
+        "expected": "画面抖动、饱和度、对比度实时变化",
+        "evidence": "updateDithering/updateSaturation/updateContrast 函数体为空或仅注释，没有修改任何材质/着色器 uniform；拖动不会产生视觉反馈，自定义着色器功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Gallery 中的用户作品",
+        "expected": "加载/切换并展示用户创作的 3D 场景",
+        "evidence": "四个 .gallery-item 仅有 CSS 渐变与 hover 样式，没有任何事件监听或加载逻辑，点击无反应，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 SAVE SCENE 保存场景",
+        "expected": "生成 PNG 下载链接并下载当前场景画面",
+        "evidence": "按钮绑定了 takeScreenshot，创建 a[download] 并触发点击；探针无 DOM 变化符合下载行为预期，JS 无错误。",
+        "ok": 1
+      }
+    ],
+    "reason": "核心的生成世界、像素化分辨率、保存场景有效，但探索拖拽完全没有事件，画廊为占位入口，自定义着色器滑块中多项无效果；需求声明的关键能力有多个未实现，因此分数不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) 多个核心调节控件无效：Dithering、Saturation、Contrast 滑块只有 UI 没有实际效果；Fog Density 滑块设置的是普通 Fog 的 density，但场景创建的是 THREE.Fog，不会真正改变雾效，用户调节后看不到任何反馈。2) 3D 场景无法主动探索：画布拖拽无视角变化，没有平移/旋转/缩放相机控制，用户只能用固定视角看自动旋转的物体，违背“explore retro-style 3D environments”的核心目标。次要瑕疵：底部 gallery 缩略图只是样式占位，点击无社区/画廊浏览功能；缺少操作引导和图例；滑块没有数值显示；SAVE SCENE 没有下载成功的明确反馈。整体视觉风格契合 PS1 主题，但由于多个核心交互失效，属于能用但明显不好用的档位。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，高度契合PS1复古3D风格的定位。色彩搭配采用青、品红、黄的霓虹色调，对比鲜明且充满怀旧游戏氛围；深色渐变背景与悬浮发光元素形成良好的层次感。布局上，头部控制区、中央画布与底部画廊呈纵向分区，横向控件排列有序，响应式设计考虑了移动端适配。字体选用Courier New等宽字体，配合文字阴影和字母间距，强化了终端/复古界面气息。CSS细节专业，包含扫描线、CRT弧光、像素网格等特效，按钮悬停动效自然，阴影和渐变使用得当。不足之处在于整体深色区域较多，控件密度较高，可能带来视觉压迫感；部分交互逻辑未在探针测试中体现，但视觉层面完成度很好。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_016658.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "GENERATE WORLD",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "SAVE SCENE",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "RESET VIEW",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

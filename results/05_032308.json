@@ -1,0 +1,182 @@
+{
+  "row_id": "05_032308",
+  "shard": 5,
+  "id": 32308,
+  "category": "Website",
+  "prompt": "Design a speculative storytelling hub where users explore folklore through 'what-if' scenarios. It offers collaborative story-building tools, discussion forums, and a library of alternative endings. Key features include a narrative generator, cultural background resources, and an interactive map connecting folklore themes worldwide.",
+  "html_len": 32329,
+  "html_sha256": "10cdcdde28a6017eba7349890c4b9085bdec50c4472808865600fdbe13c4e19c",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "启动叙事生成器（点击 Start Creating Stories）",
+        "expected": "进入故事创建流程，至少打开生成器界面或出现可编辑表单",
+        "evidence": "探针点击该按钮后 DOM 无任何变化，页面无跳转、无网络请求；HTML 中该 button 无 onclick 或绑定的 JS 事件，纯占位",
+        "ok": 0
+      },
+      {
+        "name": "浏览故事库（点击 Explore Library）",
+        "expected": "跳转或展示另类结局/故事库内容",
+        "evidence": "探针点击后 DOM 无变化、无网络请求；按钮无事件绑定，无实际入口",
+        "ok": 0
+      },
+      {
+        "name": "登录/注册（点击 Sign In）",
+        "expected": "弹出登录框或跳转登录页",
+        "evidence": "探针点击 Sign In 后 DOM 无变化；HTML 中 button 无任何响应逻辑",
+        "ok": 0
+      },
+      {
+        "name": "加入讨论（点击 Join Discussion）",
+        "expected": "进入该故事的讨论区或打开讨论面板",
+        "evidence": "该 button 无事件绑定，点击不会触发任何交互；页面无弹窗或路由变化",
+        "ok": 0
+      },
+      {
+        "name": "操作全球民俗地图",
+        "expected": "地图可点击/拖拽，展示民俗主题连接",
+        "evidence": "canvas 只绘制静态抽象图形，无 click/pointer/touch 事件，无 requestAnimationFrame；探针无 canvas 交互报告，地图非交互式",
+        "ok": 0
+      },
+      {
+        "name": "查看全部社区故事（点击 View All Community Stories）",
+        "expected": "展示更多社区创作或跳转社区列表",
+        "evidence": "探针未测此按钮，但 HTML 中该 button 无 onclick 或 href，是静态占位，点击不会产生反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉和内容展示完整，但核心功能全部是占位：叙事生成器、故事库、讨论、登录、交互地图、社区故事入口均无实际事件绑定或业务反馈。仅有顶部锚点导航可以滚动页面，主要任务无法完成，因此评分极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 主要操作按钮（Sign In、Start Creating Stories、Explore Library）点击后无任何DOM变化或网络请求，用户无法登录、创建故事或进入故事库，形成明显死路；2. 页面宣称的互动功能（如Narrative Generator、Global Folklore Map、Collaborative Workspaces）实际仅为静态展示卡片，无法操作或产生数据变化，核心任务无法完成。次要瑕疵：1. 交互式地图缺少图例和操作提示，用户难以理解其含义；2. 多个按钮和链接（如Join Discussion、View All Community Stories、Create Your Account、Explore Without Signup）疑似均为占位，未绑定实际功能；3. 部分视觉动效（如pulse、floating）与核心内容无关，可能轻微分散注意力。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，深色渐变背景（#0f172a → #1e293b）搭配紫罗兰-洋红渐变点缀（#6366f1, #8b5cf6, #ec4899），营造出神秘、奇幻且现代的氛围，与“folklore speculation”主题高度契合。色彩搭配合理协调，主次分明，渐变文字和卡片光效提升了层次感。布局结构清晰，导航、Hero、特性卡片、地图、社区、资源、CTA、页脚等区块组织有序，网格排版平衡，信息层级明确。字体运用专业，Playfair Display作为标题字体增强文学感，Poppins作为正文字体保证可读性，字体搭配符合现代网页设计规范。组件设计细致，卡片悬浮效果、pulse按钮动画、floating动效、毛玻璃背景（backdrop-blur）、圆角与阴影应用娴熟，CSS实现体现较高专业水准。图表与地图区域使用canvas元素，虽可能为占位绘制，但整体视觉规划完整。交互探针显示导航链接点击有效，无JS错误，技术可靠性良好。扣分原因：部分按钮（如Sign In）无实际交互反馈，且Three.js/Chart.js未真正驱动可视化，可能使交互深度稍显不足；但仅从视觉呈现角度评价，该页面设计优秀。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_032308.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore",
+      "href": "#explore",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#resources",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating Stories",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Library",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

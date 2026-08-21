@@ -1,0 +1,181 @@
+{
+  "row_id": "01_029788",
+  "shard": 1,
+  "id": 29788,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Facilitate personal growth with a platform that guides users in setting and achieving goals. The core idea focuses on structured goal management. Users define objectives, track progress, and celebrate achievements. Key features include personalized goal recommendations, progress visualizations, and community support, creating an empowering environment for individuals striving for success in various aspects of life.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 16051,
+  "html_sha256": "c3f9a964fce7d574dd602762121c9b551dba456432d26a2caa4603d03195242a",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（Dashboard/Goals/Community/Resources）",
+        "expected": "切换到对应视图或内容区更新",
+        "evidence": "探针显示点击后DOM有变化并出现页面跳转，但链接均为href=\"#\"，无路由或内容切换逻辑，实际仅改变页面锚点，核心导航功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击Sign In按钮",
+        "expected": "打开登录表单或执行登录流程",
+        "evidence": "探针点击Sign In后DOM无变化、无网络请求、无JS错误，按钮无任何事件绑定或业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击推荐卡片的Add to Goals按钮",
+        "expected": "将推荐目标加入个人目标列表并更新状态",
+        "evidence": "探针点击两个Add to Goals按钮后DOM均无变化、无网络请求、无JS错误，功能完全未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击Join Now按钮",
+        "expected": "加入学习小组或跳转社区页面",
+        "evidence": "探针点击Join Now后DOM无变化、无网络请求、无JS错误，按钮无实际功能。",
+        "ok": 0
+      },
+      {
+        "name": "点击View All Activity按钮",
+        "expected": "展示更多社区动态或进入活动列表",
+        "evidence": "页面存在该按钮但无任何事件绑定，点击后无反馈，属于纯展示占位。",
+        "ok": 0
+      },
+      {
+        "name": "点击Create New Goal按钮",
+        "expected": "弹出创建目标表单或引导用户设置目标",
+        "evidence": "按钮无点击事件，探针未覆盖但HTML中无相关JS逻辑，从代码看点击无任何反应。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面仅完成静态视觉呈现，所有核心交互入口（导航、登录、添加目标、加入小组、查看全部、创建目标）均为占位或死链，点击无业务反馈，无法完成目标管理、进度追踪、社区互动等关键任务；大量按钮无事件绑定，属于功能性未实现。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部导航 Dashboard/Goals/Community/Resources 均使用 # 占位链接，点击后仅改变 hash/回到页首，没有进入对应的内容或页面，主要入口无实际反馈；2. Sign In、Add to Goals、Join Now 等核心操作按钮点击后无 DOM 变化、无网络请求、无任何成功/失败提示，且 Create New Goal、View All Activity 在代码中也没有事件绑定，导致登录、添加目标、加入社区、创建目标等关键任务无法完成；3. 页面没有可用的输入表单或进度更新机制，用户无法真正定义目标、跟踪进度或庆祝成就，核心目标管理流程断裂。次要瑕疵：页面目的和信息分区较清晰、视觉风格统一；但推荐/社区模块仅为静态展示，无法互动；进度图缺少具体数值/图例；页脚社交链接同为占位链接。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较强，符合现代仪表盘/管理平台的常见审美；配色以蓝色为主、绿色和紫色作为功能性辅助色，并用灰白渐变背景做了层次区分，色彩搭配和谐统一。布局采用典型的三栏栅格（左两栏主内容、右栏推荐/社区），响应式处理得当，卡片圆角、阴影与间距的设置比较专业。组件方面：进度条、状态徽章、柱状图、推荐卡片、社区动态列表都具备清晰的信息层级，视觉风格统一。hover过渡和微交互也符合现代网页设计规范。不足之处在于：字体和字号完全依赖浏览器默认，缺少自定义的字体细节打磨；柱状图是纯手写div模拟，缺少坐标轴和更多视觉反馈，略显简单；部分按钮（如Sign In、Add to Goals）点击无实际交互反馈，对“现代感”略有减分。但综合来看，CSS运用熟练，页面整洁干净，达成目标管理平台所需的激励、清晰和值得信赖的视觉氛围，是一个质量不错的单页设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_029788.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Goals",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add to Goals",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add to Goals",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

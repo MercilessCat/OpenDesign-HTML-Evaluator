@@ -1,0 +1,181 @@
+{
+  "row_id": "02_024652",
+  "shard": 2,
+  "id": 24652,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Navigate the complexities of global peace initiatives with a dynamic visualization tool. Users can track treaty compliance, analyze disarmament progress, and visualize geopolitical tensions. Key features include interactive maps, historical timelines, and expert analyses, providing a comprehensive view of global disarmament efforts.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13537,
+  "html_sha256": "e3ccd1f57cf3450c73750098b1d87cf9fd675c367a955b735be958cb2dab76fe",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接 Dashboard/Maps/Analytics/Reports",
+        "expected": "切换到对应的可视化视图或页面区块",
+        "evidence": "导航链接均为 href=\"#\"，没有路由或内容切换逻辑；探针点击后仅发生页面跳转（回到顶部），没有业务内容变化",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Data 按钮",
+        "expected": "加载或展示更多数据探索视图",
+        "evidence": "按钮没有绑定事件处理逻辑；探针点击后 DOM 变化=无、无网络请求、无页面跳转",
+        "ok": 0
+      },
+      {
+        "name": "点击年份/主题筛选按钮 2023 与 Disarmament",
+        "expected": "根据筛选条件更新地图或数据图表",
+        "evidence": "两个筛选按钮均无事件绑定；探针点击后 DOM 变化=无，无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "交互式地图点击",
+        "expected": "展示地图区域或条约合规详情",
+        "evidence": "地图区域是静态占位内容，仅包含装饰性圆点和图标，无地图库、无事件监听、无 canvas 交互",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Full Analysis Report",
+        "expected": "展开或跳转到完整专家分析报告",
+        "evidence": "按钮无事件处理；探针点击后 DOM 变化=无，无内容展开或跳转",
+        "ok": 0
+      },
+      {
+        "name": "点击 Detailed Report 按钮",
+        "expected": "打开详细报告页面或模态框",
+        "evidence": "按钮无 onclick 或 JS 绑定，页面中无对应弹窗/路由逻辑，点击不会产生业务反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面仅完成静态视觉展示，核心的动态可视化功能（交互地图、筛选、报告查看、导航切换）全部未实现；所有按钮和导航都是占位/死链，无任何有效业务反馈，用户无法完成需求声明的关键任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "作为数据可视化工具，页面视觉和信息框架尚可，但核心交互几乎全部失效。\n\n【核心可用性问题】\n1. 顶部导航链接（Dashboard、Maps、Analytics、Reports）均为占位链接：点击后仅 URL 变为 #，页面内容无任何变化，导航形同虚设。\n2. “Explore Data”按钮无任何反馈，点击不触发任何操作。\n3. 图表筛选按钮“2023”和“Disarmament”点击无效果，用户无法切换年份或查看类别数据。\n4. “View Full Analysis Report”按钮无任何响应，无法查看专家报告。\n\n以上导致用户无法完成“追踪条约合规、分析裁军进展、可视化地缘政治紧张”等核心任务，页面实际上是一个静态展示页，而非可用的数据可视化工具。\n\n【次要瑕疵】\n- 交互地图为静态占位图，标记点不可点击，缺少图例说明。\n- 图表没有标注 y 轴含义、数据单位或具体数值标签，数据可读性弱。\n- 部分加载动画（柱状图高度动画）在页面初始化后即完成，缺乏后续交互呼应。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力良好，采用现代仪表板风格，蓝白主色调搭配橙色点缀，色彩和谐专业。布局为经典的三栏式（左侧主体+右侧边栏），网格与卡片结构清晰，间距均匀，视觉层次分明。卡片使用圆角、阴影和轻微hover上移效果，增强了精致感和交互反馈。图表区域虽为CSS模拟（地图占位、条形图、进度条），但设计简洁且配色统一，不影响整体美观。时间线、专家引言、统计指标等组件布局紧凑，增强信息可读性。字体使用Tailwind默认无衬线字体，清晰规范。不足之处：地图区域仅为图标占位，缺乏真实可视化细节；条形图没有坐标轴和数值标签，略显单薄；导航链接点击后仅改变hash，功能感较弱。但整体已符合现代数据可视化页面的视觉规范，专业度较高。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_024652.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Maps",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Reports",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Data",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "2023",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Disarmament",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Full Analysis Report",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

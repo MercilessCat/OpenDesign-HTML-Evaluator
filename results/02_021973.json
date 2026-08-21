@@ -1,0 +1,175 @@
+{
+  "row_id": "02_021973",
+  "shard": 2,
+  "id": 21973,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Explore an interactive platform visualizing the cost-benefit analysis of privacy-preserving techniques in data collection. Users can simulate different scenarios, comparing privacy levels against utility and cost. Key features include dynamic graphs, scenario builders, and expert community discussions to enhance understanding of privacy trade-offs in data science.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13368,
+  "html_sha256": "6c4a1dddd59bbb1f54d9b9c021c11521d358dc7a730be9d0dbadb7693b63ecd7",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "点击导航链接（Dashboard/Scenarios/Community/Resources）",
+        "expected": "导航到对应页面或单页内切换到对应内容区块",
+        "evidence": "探针显示4个导航链接均只有 href=\"#\"，点击后仅 URL 追加锚点，页面内容无任何切换；无路由或事件绑定，属于纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "拖动场景构建器滑块（隐私/效用/预算）",
+        "expected": "滑块数值变化并更新对应参数显示，进而联动图表或指标",
+        "evidence": "滑块绑定了 input 事件，会向 nextElementSibling 的第一个 span 写入数值，但覆盖了原有的“Low”标签且不更新图表或指标；有视觉反馈但不符合场景参数联动预期。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Run Simulation 按钮",
+        "expected": "基于当前滑块参数重新计算并刷新图表和成本/效用指标",
+        "evidence": "探针显示点击后有 DOM 变化，但代码只将按钮文案依次改为“Simulating...”“Simulation Complete”，并最终恢复原样；图表和指标数据完全未更新，核心模拟功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 2D / 3D 图表模式切换",
+        "expected": "在二维与三维图表视图间切换，呈现不同可视化形式",
+        "evidence": "探针显示点击“2D”和“3D”按钮均无任何 DOM 变化、无网络请求、无 JS 错误；HTML 中按钮也未绑定任何事件，功能完全未实现。",
+        "ok": 0
+      },
+      {
+        "name": "进入专家社区讨论（Forum/Community入口）",
+        "expected": "打开社区讨论区，展示专家讨论内容或进入相关页面",
+        "evidence": "导航中“Community”为 href=\"#\" 死链，footer 中“Forum”按钮无任何事件绑定，探针点击无 DOM 变化；需求声明的专家社区讨论功能完全缺失。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉布局和 Chart.js 静态图表渲染正常，但核心场景模拟不联动图表、2D/3D 切换无效、社区讨论/资源等关键入口均为占位或死链，Sign In、Export Report 等按钮也无事件反馈，主要任务（模拟场景并动态比较隐私与效用/成本）无法完成，因此功能评分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：1. 顶部导航（Dashboard/Scenarios/Community/Resources）为占位链接，点击后仅跳转锚点，无实际内容切换或有效反馈；2. Sign In 按钮点击后无任何反应；3. 2D/3D 视图切换按钮点击后图表无变化，核心控件调节无效；4. 滑块滑动后仅把“Low”标签错误替换为数值，且图表和指标均未联动更新；5. Run Simulation 按钮点击后仅按钮文字变化，图表数据与场景结果未实际更新，模拟功能未真正生效。次要瑕疵：滑块缺少当前数值显示与说明；图表缺少图例或单位提示；部分按钮视觉反馈不足；社区/资源模块为占位未实现。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用了现代流行的卡片式布局和渐变色彩元素，符合数据可视化主题的科技感与专业感。色彩搭配以蓝、紫、绿为主色调，对比协调且层次分明，背景浅灰衬托白色卡片，视觉舒适。布局上采用三栏网格结构，左侧控制面板、中间图表展示、右侧（底部）数据卡片，信息组织清晰，主次分明，符合用户对场景模拟与数据对比的需求。字体和间距方面，使用Tailwind默认字体系统，标题和正文字号合理，卡片内边距充足，悬停效果增加了交互细腻度。CSS设计专业，运用了圆角、阴影、渐变和过渡动效，且通过Chart.js实现了动态图表，整体风格与用户需求高度对齐。扣分项：导航链接为占位符（#），点击会跳转顶部，影响体验；图表区域高度固定为80，在部分视口下可能略显局促；按钮交互缺少更丰富的反馈。但总体而言，页面视觉质量优秀，达到专业水准。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_021973.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Scenarios",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Run Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "2D",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "3D",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

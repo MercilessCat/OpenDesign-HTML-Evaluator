@@ -1,0 +1,181 @@
+{
+  "row_id": "01_008723",
+  "shard": 1,
+  "id": 8723,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create an educational platform that transforms complex calculations into interactive learning experiences. Users explore mathematical concepts through visual tools and simulations. The site offers step-by-step guidance, customizable problem sets, and real-time feedback, promoting deeper understanding and engagement with advanced mathematics.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13157,
+  "html_sha256": "9b0ba3aef6cf2f374b4be7f8d29c08e29f17670245195d92eea8156601f5e74d",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航菜单项点击",
+        "expected": "点击 Home/Concepts/Simulations/Resources 应跳转到对应内容或展示对应板块",
+        "evidence": "探针显示点击后仅发生 hash 跳转（href=\"#\"），无任何内容切换；HTML 中链接未绑定路由或事件，纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "Run Simulation 按钮",
+        "expected": "点击后应启动可视化模拟，产生动画或更新结果",
+        "evidence": "探针显示 DOM 有变化，但经核实变化来自 .math-component 的通用点击高亮（加边框），按钮本身无事件绑定，无模拟逻辑",
+        "ok": 0
+      },
+      {
+        "name": "可视化红点拖拽",
+        "expected": "拖动 SVG 中的红色点可改变切点位置，并实时更新导数/切线信息",
+        "evidence": "SVG 中的 circle 未绑定 pointer/touch/mouse 事件，页面完全没有拖拽交互逻辑，提示文字“Try moving the red point”是虚假引导",
+        "ok": 0
+      },
+      {
+        "name": "问题数量滑块调整",
+        "expected": "拖动滑块时，显示的问题数量（如“10 problems”）应随之变化",
+        "evidence": "input range 元素未绑定 input/change 事件，旁边的问题数量文本为静态内容，拖动不会产生任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "Generate Practice Set 按钮",
+        "expected": "点击后应根据所选函数类型/难度/数量生成一组练习题并展示",
+        "evidence": "探针显示 DOM 有变化，但只是卡片点击高亮；无生成练习的逻辑，页面未出现任何新题目或结果输出",
+        "ok": 0
+      },
+      {
+        "name": "Sign In 按钮",
+        "expected": "点击 Sign In 应打开登录界面、模态框或跳转登录页",
+        "evidence": "探针报告点击后 DOM 无变化、无新增请求、无 JS 错误，按钮无任何事件绑定，纯占位按钮",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整，但所有核心交互均为占位或仅触发卡片高亮样式反馈：导航无路由、模拟按钮无逻辑、SVG 可视化不可拖拽、定制滑块和生成练习无任何业务响应、登录按钮无反应。需求声明的交互学习、实时反馈、模拟等功能全部未实现，属于核心交互大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 主导航链接（Home、Concepts、Simulations、Resources）均为 '#' 占位链接，点击后只是跳转页面顶部，无实际导航功能；2) 核心操作按钮 'Run Simulation'、'Customize'、'Generate Practice Set' 点击后仅触发卡片边框高亮，并未执行任何仿真、定制或生成练习集的真实功能，操作无效；3) 'Sign In' 按钮点击后无任何反馈（DOM无变化、无提示、无跳转），用户无法判断操作是否成功。次要瑕疵：滑块缺少 'aria-label' 关联标签，自定义控件未实际影响状态；页面虽有实时反馈区域但内容为预置模拟，未关联用户操作；整体视觉设计良好，但核心功能均为空壳，严重影响可用性。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力强，采用现代感十足的 Tailwind CSS 与简洁的卡片式布局，色彩搭配以清爽的蓝色（#3b82f6）和绿色（#10b981）为主，辅以灰色背景，形成专业且舒适的视觉体验。布局上，两栏结构合理，左侧为交互式可视化区域，右侧为学习工具与反馈面板，信息组织清晰有序。卡片均使用大圆角、柔和阴影及悬停上浮动效，增强了交互感和精致度。SVG 曲线图、步骤引导条、表单控件等组件设计统一，细节处理到位。字体采用无衬线体系，行距和留白恰当，可读性良好。实时反馈面板和按钮状态设计友好，整体符合现代教育类产品的设计风格。仅有的小瑕疵是缺乏更独特的字体个性，视觉层次略偏保守，但整体已属上乘。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_008723.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Concepts",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Run Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Customize",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Generate Practice Set",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

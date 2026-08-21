@@ -1,0 +1,185 @@
+{
+  "row_id": "02_001771",
+  "shard": 2,
+  "id": 1771,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Build an immersive digital space for exploring narrative structures in reports. Users can customize story arcs, visualize data relationships, and simulate reader engagement. Core features include interactive timelines, emotion mapping, and multimedia integration, empowering storytellers to craft compelling, data-driven narratives.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14706,
+  "html_sha256": "de104dcd548ce32eaccfbe7b55f1ac7e5ecfa594b15c84ceeb0e471a8c805b91",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "Create Story 创建故事",
+        "expected": "点击后生成/更新叙事故事框架，并刷新可视化数据",
+        "evidence": "探针点击后 DOM 无变化，新增 1 条 JS 错误：querySelector '.w-full.bg-gray-200.rounded-full.h-2.5' 选择器无效；按钮仅短暂移除/恢复 pulse 动画，没有实际业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "Generate Framework 生成框架",
+        "expected": "根据叙事类型、情感强度、角色/章节参数生成新的故事弧线并更新图表",
+        "evidence": "探针点击后 DOM 无变化、无 JS 错误、无网络请求；HTML 中该按钮没有绑定任何事件处理，是静态占位按钮。",
+        "ok": 0
+      },
+      {
+        "name": "自定义叙事参数（Narrative Type / 情感滑块 / 角色数 / 章节数）",
+        "expected": "调整参数后时间线与情感映射随输入变化",
+        "evidence": "select、input[type=range]、input[type=number] 均未绑定 change/input 事件；修改后页面没有任何动态反馈，时间线和情绪曲线保持静态。",
+        "ok": 0
+      },
+      {
+        "name": "交互式时间轴节点",
+        "expected": "点击时间轴节点可查看对应叙事阶段、数据关系或读者参与详情",
+        "evidence": "时间轴节点只是普通 div，没有 click/pointer/touch 事件，也没有任何路由或数据切换逻辑；整个可视化区域是静态 SVG 和布局元素。",
+        "ok": 0
+      },
+      {
+        "name": "顶部导航 Dashboard/Templates/Analytics/Export",
+        "expected": "点击导航切换到对应视图或功能页",
+        "evidence": "四个导航链接均为 href=\"#\" 纯占位入口，没有路由或内容切换；点击只产生 hash/URL 变化，主体内容不变，符合占位入口判例。",
+        "ok": 0
+      },
+      {
+        "name": "下载/展开可视化按钮",
+        "expected": "点击下载图表或全屏展开可视化",
+        "evidence": "探针点击两个图标按钮后 DOM 均无变化，HTML 中无事件绑定，也没有对应功能实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉结构和静态数据展示较完整，但核心功能几乎全部未实现：Create Story 点击报 JS 错误，Generate Framework 无反应，叙事参数控件无事件绑定，时间轴不可交互，导航为 href=\"#\" 占位入口，下载/展开也是死按钮。用户需求中的交互式时间线、情感映射、模拟读者参与等功能均未落地，主要任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部主导航 Dashboard/Templates/Analytics/Export 均为 href=# 占位链接，点击后只有页面跳转/滚动，没有实际内容切换或反馈；2. Create Story 主按钮点击后抛出 JS 错误，原因是 querySelector('.w-full.bg-gray-200.rounded-full.h-2.5') 选择器非法，导致后续 DOM 更新中断，操作失败；3. Generate Framework 是页面核心操作按钮，点击后完全无响应；4. Emotional Intensity 滑块、Characters/Chapters 数字输入等核心调节控件修改后不影响任何可视化结果，反馈缺失。次要瑕疵：页面缺少必要的数值说明/图例，Emotional Intensity 没有当前值显示；部分图标按钮无 aria-label 且点击无响应；Footer 中的 Refresh Data、Share Report、Settings 按钮也未绑定实际行为。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "该页面整体采用现代 SaaS 仪表板风格：浅蓝渐变背景、白色圆角卡片、蓝/紫/青色彩体系，搭配 Inter 字体，视觉上专业、干净、易读。布局使用三栏网格，左侧控制面板与右侧可视化区域分工明确，卡片阴影和悬停动效也增加了精致度。但视觉表现偏向常规模板，未完全契合‘沉浸式数字空间’的定位；时间线区域使用大量绝对定位，标签在边缘可能溢出或相互重叠，SVG 曲线用 preserveAspectRatio=\"none\" 拉伸可能导致曲线失真；点击‘Create Story’时存在 JS 选择器错误，交互完成度受到影响。总体而言，视觉质量在同级页面中属于中上水平，但仍有进一步提升空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Failed to execute 'querySelector' on 'Document': '.w-full.bg-gray-200.rounded-full.h-2.5' is not a valid selector."
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_001771.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Templates",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Export",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Create Story",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Generate Framework",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-download text-gra",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-expand text-gray-",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

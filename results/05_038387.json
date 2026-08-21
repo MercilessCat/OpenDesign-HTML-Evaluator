@@ -1,0 +1,177 @@
+{
+  "row_id": "05_038387",
+  "shard": 5,
+  "id": 38387,
+  "category": "Website",
+  "prompt": "Design an interactive platform that integrates home security systems with drone technology. Users can customize drone patrol schedules, receive real-time surveillance feeds, and manage security alerts. Features include a control dashboard, AI-driven threat analysis, and community forums for sharing security tips and innovations.",
+  "html_len": 36023,
+  "html_sha256": "635ce091faf662970a56e049d61a1086f28efbece5d514d9a9d473b27b66eb1a",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "顶部导航切换功能视图",
+        "expected": "点击 Dashboard/Drones/Surveillance/Alerts/Community 后主区域切换到对应页面或区块，并更新高亮",
+        "evidence": "探针点击这 5 个 <a> 均无 JS 错误/网络请求，仅 href=\"#\" 导致跳转/样式变化；HTML 中无路由、无目标 section id，页面仍为同一份静态 Dashboard 内容",
+        "ok": 0
+      },
+      {
+        "name": "新建/自定义无人机巡逻任务",
+        "expected": "点击 New Mission 后打开创建任务弹窗/表单，可编辑巡逻区域、时间和无人机",
+        "evidence": "探针点击 New Mission 无业务 DOM 变化（仅合成 click 兜底）；HTML 中按钮无 onclick，页面 input=0、无 modal/form，无法自定义巡逻计划",
+        "ok": 0
+      },
+      {
+        "name": "管理安全警报/通知",
+        "expected": "点击通知铃铛或警报条目后弹出通知列表、可查看详情或标记处理",
+        "evidence": "探针点击铃铛按钮后 DOM 变化=无、无 JS 错误；Recent Alerts 只是静态列表，没有事件处理或弹层",
+        "ok": 0
+      },
+      {
+        "name": "查看/全屏实时监控画面",
+        "expected": "点击监控画面或 Fullscreen 后能看到/放大对应实时画面",
+        "evidence": "探针点击 Fullscreen 只有 DOM 样式层变化，HTML 无 requestFullscreen/JS 事件，且 video=0/canvas=0；四个监控卡片只是带图标的静态占位，无真实画面或切换能力",
+        "ok": 0
+      },
+      {
+        "name": "社区发帖/互动",
+        "expected": "点击 New Post 出现发帖表单，点赞/评论/分享按钮有计数或操作反馈",
+        "evidence": "HTML 中 New Post 按钮和 like/comment/share 按钮均无 onclick/事件监听，也没有发帖表单/弹窗；点击不会产生业务反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面仅完成了视觉静态展示（仪表盘、无人机卡片、巡逻表格、监控占位、社区帖子），但核心交互全部不可用：导航无路由、不能创建/编辑巡逻计划、不能管理警报、实时监控无画面/全屏、社区无法发帖互动。需求中的多个关键功能入口是死链/占位，主要任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 顶部主导航（Dashboard/Drones/Surveillance/Alerts/Community）均为 href=\"#\" 占位链接，点击后仅发生锚点跳转（URL 加 #），页面内容无真正切换，用户无法进入对应功能模块的详情页或操作页，属于主要入口无实际反馈。\n2. 核心任务无法完成：页面展示的巡逻计划表是只读的，没有任何编辑/新增/删除调度控件，用户无法“自定义无人机巡逻计划”；监控画面全部为静态占位图，无真实视频流，用户无法“接收实时监控”；警报列表虽有展示，但没有标记已读、忽略、升级等任何管理操作，无法完成“管理安全警报”。\n3. 多个关键按钮（如“New Mission”“New Post”、通知铃铛）点击后无实际业务反馈，不能创建任务或帖子，属于核心操作流程卡死。\n\n次要瑕疵：\n- 缺少巡逻计划设置的引导说明或编辑入口提示，用户只能看到冷冰冰的表格。\n- “AI Threat Analysis”的风险等级只做了展示，未提供风险详情查看或处置建议，命名与实际深度不符。\n- Community Hub 帖子卡片中的点赞/评论/分享按钮均为装饰，无法互动。\n- 视频区域中的摄像头图标和“REC/LIVE”标签造成误导，仿佛有实时画面，实际只是占位符。\n- 通知铃铛和头像下拉无任何菜单或提示，视觉上像可点击控件但没有任何响应细节。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面采用深色渐变背景+毛玻璃卡片+蓝青点缀，整体视觉统一，安全监控/无人机平台的科技感很强。布局使用响应式栅格，统计卡片、控制中心、威胁分析、监控画面和社区模块分区清晰，间距与层级合理，符合现代 Dashboard 设计规范。字体选用 Poppins，状态指示灯、进度条、漂浮动画、卡片 hover 抬升等细节体现专业 CSS 水平，色彩搭配主次分明且无冲突。扣分点：监控视频区域仅为图标占位，缺少真实画面或可视化元素，视觉冲击力稍弱；部分卡片结构重复度较高，且导航和部分按钮为占位行为。整体依然是一款视觉完成度高、风格与用户需求匹配的页面。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_038387.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Drones",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Surveillance",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Alerts",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-bell text-lg",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Mission",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Fullscreen",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

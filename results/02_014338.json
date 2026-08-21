@@ -1,0 +1,181 @@
+{
+  "row_id": "02_014338",
+  "shard": 2,
+  "id": 14338,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Construct a platform visualizing public transport resilience in urban networks. Users can explore data-driven scenarios, assess vulnerabilities, and test solutions. Features include interactive maps, predictive modeling tools, and a collaborative environment for sharing strategies to enhance transport infrastructure's adaptability and reliability.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12014,
+  "html_sha256": "bc4776217a0686c0835a97b37e7dba3a96c520a8c844be1dacf7e450a08a1dd3",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "导航菜单切换（Dashboard/Scenarios/Tools/Collaborate）",
+        "expected": "点击导航链接应切换到对应内容区域或滚动到相应模块，体现单页应用导航功能",
+        "evidence": "所有导航链接 href=\"#\"，无路由或 JS 点击处理；探针点击后虽有 DOM 变化和锚点跳转，但仅回到页面顶部，无内容切换或业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "地图图层切换（Subway/Bus/Tram）",
+        "expected": "点击图层按钮应切换地图显示的交通模式，更新地图内容",
+        "evidence": "HTML 中这三个按钮没有绑定任何事件处理程序；探针点击后 DOM 变化仅来自浏览器默认 hover/active 样式，地图仍是静态占位图，无实际功能",
+        "ok": 0
+      },
+      {
+        "name": "情景测试（Extreme Weather / Infrastructure Failure 等）",
+        "expected": "点击情景按钮应应用对应场景并更新地图和漏洞分析结果",
+        "evidence": "JS 中绑定了 click 事件，点击后按钮增加高亮 ring，地图切换为加载动画，1.5 秒后显示“Scenario Applied”及对应情景名称，反馈明确且符合预期",
+        "ok": 1
+      },
+      {
+        "name": "登录按钮（Sign In）",
+        "expected": "点击 Sign In 应触发登录流程，如弹出登录框或跳转登录页",
+        "evidence": "按钮无 JS 事件绑定，探针点击后只有 DOM 样式层变化（hover），无弹窗、跳转或任何业务反馈，属于占位按钮",
+        "ok": 0
+      },
+      {
+        "name": "分享策略（Share Strategy）",
+        "expected": "点击分享按钮应允许用户提交或发布策略，进入协作流程",
+        "evidence": "按钮无 click 事件绑定，探针点击后无新增 JS 错误/网络请求，也无任何内容变化，属于占位入口，协作功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "查看预测趋势图表",
+        "expected": "页面应展示预测建模工具的可靠性指数趋势图，用户可见",
+        "evidence": "使用 Chart.js 在 canvas 上绘制了折线图，页面加载后渲染成功，无 JS 错误，图表内容完整可见",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉设计完整，但核心功能大多为占位或未实现：导航、登录、地图图层切换、分享策略均无实际反馈；仅有情景选择按钮具备模拟交互且能看到明确更新。交互式地图、预测建模工具、协作环境等多处关键需求未真正落地，用户无法完成核心任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 导航链接（Dashboard/Scenarios/Tools/Collaborate）均为 href=\"#\" 占位链接，点击后仅跳转页面顶部，没有对应页面或内容，主要入口点击无实际反馈；2. 页面核心功能「交互式交通网络地图」仅为静态渐变背景+文字占位，不存在真正的地图可视化，无法进行探索、缩放、选择路线等核心操作，核心任务无法完成。次要瑕疵：1. 地图上的 Subway/Bus/Tram 图层切换按钮没有任何逻辑，点击后无效果；2. Sign In 按钮没有登录流程或任何反馈；3. 协作区「Share Strategy」按钮未绑定交互事件；4. 场景按钮点击后只显示成功文案占位，指标数据没有真实联动变化；5. 缺少图例或说明文字帮助用户理解各项指标含义。页面整体视觉设计较为美观，Chart.js 图表和场景选择动效已实现，但主要流程和核心功能仍为占位状态，导致可用性不足。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "页面整体视觉设计较为现代、干净，符合数据可视化平台的风格。使用 Tailwind CSS 与 Font Awesome 图标，布局采用三列栅格结构（左侧地图与场景区、右侧指标与协作区），信息层级清晰。色彩以 indigo 紫色渐变为主色调，配合灰色背景与红黄绿状态色，对比度和可读性良好。卡片设计带有阴影和悬停动效，细节处理专业。Chart.js 折线图有效增强数据可视化感受。\n\n扣分点：1）所谓“交互式地图”仅为一幅渐变占位图，缺少真实地图或数据可视化元素，视觉冲击力有限；2）页面内容较多，在实际视口中很可能需要滚动，不完全符合“无需滚动可见全部内容”的需求；3）部分导航链接和按钮仅为占位，交互反馈不足。整体仍属于中上水平的现代仪表盘设计，但仍有提升空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_014338.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Scenarios",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tools",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Collaborate",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Subway",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Bus",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Tram",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

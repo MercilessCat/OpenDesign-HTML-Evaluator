@@ -1,0 +1,142 @@
+{
+  "row_id": "03_006039",
+  "shard": 3,
+  "id": 6039,
+  "category": "Game dev",
+  "prompt": "Develop an engaging puzzle platform where users unscramble images to reveal hidden stories. Users solve picture puzzles, unlock narratives, and share solutions. Key features include daily challenges, a library of puzzles with varying difficulty, and community forums for tips and collaboration, creating a space for creativity and problem-solving.",
+  "html_len": 22606,
+  "html_sha256": "c4c3448ea816344dccb5af355f9491be5f23658e48c699dc737ed659f01bd962",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "打开谜题库",
+        "expected": "点击 Puzzle Library 按钮后打开谜题库模态框，展示不同难度的谜题",
+        "evidence": "JS 中 library-btn 绑定 click 事件，移除 #library-modal 的 hidden 类；探针点击后 DOM 有变化，且模态框中存在 Ancient Ruins/Ocean Depths/Mountain Peak 等卡片。",
+        "ok": 1
+      },
+      {
+        "name": "关闭谜题库",
+        "expected": "点击关闭按钮后谜题库模态框隐藏",
+        "evidence": "HTML 中 close-library 绑定 click 事件添加 hidden 类；运行时无 JS 错误，模态框可正常关闭。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Daily Challenge 按钮",
+        "expected": "进入每日挑战或开始今日谜题",
+        "evidence": "JS 中只调用 alert('Starting daily challenge!')，没有加载每日挑战内容或切换游戏状态；该功能为占位反馈，未真正实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击侧边栏 Play Now 启动每日挑战",
+        "expected": "开始 Mystic Forest 每日挑战谜题",
+        "evidence": "该按钮无任何事件绑定，探针点击虽有 DOM 变化但属于样式/focus 层，无业务逻辑触发，无法启动挑战。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Discussion 进入社区论坛",
+        "expected": "进入社区讨论区或打开论坛入口",
+        "evidence": "按钮无事件绑定，无 href 或数据行为；探针点击无业务性 DOM 变化，社区论坛仅为展示占位，未实现交互。",
+        "ok": 0
+      },
+      {
+        "name": "在拼图板上进行拼图操作",
+        "expected": "拖拽/点击拼图块以重新排列碎片，还原图像并解锁故事",
+        "evidence": "拼图块有 dragstart/dragend 事件，但没有任何 drop/dragover 监听，拖拽无法交换位置；点击仅增加 moves 计数，15 次后自动模拟 solvePuzzle 并显示故事，并非真正的拼图机制。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉包装完整，但核心功能大面积未实现：拼图无法通过拖拽真正重排，每日挑战按钮和 Play Now 均为占位，社区论坛 Join Discussion 无实际交互；仅谜题库模态框的打开/关闭可用。需求中至少两个关键入口（每日挑战、社区论坛）未实现，主要任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题: 1) 拼图玩法未真正实现：拼图块虽有拖拽事件但没有放置/落点逻辑，用户无法通过拖拽完成拼图，实际只能靠点击拼图块15次自动判定完成；2) 点击Next Puzzle后流程卡死：story-reveal层移除revealed类后仍以absolute+inset-0覆盖整个拼图区（opacity:0但未设置pointer-events:none），拦截对拼图区的全部点击，且新生成的拼图块未重新绑定任何事件，玩家无法继续游戏；3) 多个主要入口无实际功能：Play Now（每日挑战）、Join Discussion（社区）按钮和拼图库中的拼图卡片均未绑定任何点击处理，点击无反应；Daily Challenge头部按钮仅弹alert占位，未真正进入挑战流程。次要瑕疵: 页面明确引导用户“Drag the scrambled pieces”，但拖拽没有任何实际效果，也无任何图例/说明解释真实的完成方式；时间耗尽时只停止计时器，不给用户超时反馈；拼图库卡片缺少选中/进入状态提示；社区模块显示为预览但无法实际参与。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉表现出色，符合游戏类平台的风格定位。色彩上采用深蓝至红色的戏剧性渐变背景，配合像素风标题（Press Start 2P）与玻璃态卡片（backdrop-filter），营造出沉浸式的冒险解谜氛围，与现代Web游戏设计趋势对齐。布局采用三栏网格结构，主游戏区与社区、进度、每日挑战等侧边栏分区明确，信息层级清晰。组件细节丰富：计时器条采用多色渐变、拼图块具备悬浮与拖拽动效、按钮带glow辉光效果、故事揭示动画和彩纸特效增强了互动反馈。字体搭配合理（Roboto正文+像素标题），间距与圆角统一，CSS运用专业，动画与过渡自然流畅。扣分点：背景红色渐变略强烈，可能对长时间游戏产生视觉疲劳；拼图区使用编号色块代替真实图片，视觉表现力有限，且少量文字（如灰色说明）与背景对比度稍显不足。整体仍是一款完成度高、富有吸引力的游戏UI设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_006039.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Daily Challenge",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Puzzle Library",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Next Puzzle",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Discussion",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Play Now",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

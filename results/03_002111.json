@@ -1,0 +1,103 @@
+{
+  "row_id": "03_002111",
+  "shard": 3,
+  "id": 2111,
+  "category": "Game dev",
+  "prompt": "Develop an alchemy-themed platform for users to experiment with virtual ingredients, creating potions with varied effects. Users discover recipes, manage resources, and explore magical lore. Key features include a dynamic recipe book, potion trading with other users, and a quest system for rare ingredient acquisition.",
+  "html_len": 23632,
+  "html_sha256": "2ca8de1e1ba1e7b4ee32567e7b4974cb1bb6af5d1766e8a18f84a901074d0d66",
+  "functional": {
+    "score": 3.0,
+    "raw_score": 3.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "选择食材加入坩埚",
+        "expected": "点击食材后食材被加入坩埚，界面显示所选成分并提示成功",
+        "evidence": "HTML中每个食材元素绑定 click 事件调用 selectIngredient()，函数会更新 cauldron 视觉并调用 showNotification()；运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "酿造药水",
+        "expected": "点击 Brew Potion 后按配方成功酿造或失败并给出反馈，更新统计与资源",
+        "evidence": "探针点击 Brew Potion 按钮后 DOM 有变化且无 JS 错误；代码中 brewPotion() 根据成分校验配方，成功时显示药水、增加金币/数量，失败时提示并扣金币。",
+        "ok": 1
+      },
+      {
+        "name": "清空坩埚",
+        "expected": "点击 Clear Cauldron 后已选成分被清空，坩埚复位并提示",
+        "evidence": "探针点击 Clear Cauldron 后 DOM 有变化且无 JS 错误；代码中 clearCauldron() 清空 selectedIngredients 并显示通知。",
+        "ok": 1
+      },
+      {
+        "name": "查看动态配方书",
+        "expected": "页面展示已发现配方及其成分和效果，并在发现新配方时更新",
+        "evidence": "renderRecipes() 只渲染 discovered 为 true 的配方卡片；新配方发现后会重新渲染并更新计数。页面运行时配方区域正常显示已发现配方。",
+        "ok": 1
+      },
+      {
+        "name": "药水交易",
+        "expected": "提供与其他用户交易药水的入口和功能",
+        "evidence": "页面 HTML 与 JS 中没有任何交易市场、交易按钮或相关函数，需求声明的关键功能完全缺失。",
+        "ok": "NA"
+      },
+      {
+        "name": "任务系统获取稀有材料",
+        "expected": "提供任务系统，玩家通过任务获取稀有材料",
+        "evidence": "页面没有任务面板、任务列表或任何任务相关逻辑，需求声明的关键功能完全缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面实现了炼金酿造、配方发现、资源管理等核心玩法，且主要操作均有正确反馈。但需求明确要求的药水交易和任务系统两大关键功能完全缺失，无任何入口或实现，导致整体功能不完整，按规则不高于4分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 8.0,
+    "reason": "无核心可用性问题。主要操作链路（选材→入锅→酿造→出结果→更新配方）完整可用，两个按钮均有明确反馈，无JS错误。\n次要瑕疵：①初始坩埚区域为空，无引导说明文字，用户不知如何开始；②材料卡片不显示剩余数量，选材时无法判断库存，且数量为0的材料仍可被选中；③页面标注“12 recipes”但实际仅5个配方，信息不一致；④酿造失败仅提示失败，未说明扣除5金币，反馈不完整；⑤成功酿造的药水仅短暂显示，没有持久化的药水库存，不利于后续交易场景；⑥需求中的任务系统、交易功能未实现，但无入口、不影响核心酿造流程，不计为核心问题；⑦动画/视觉整体风格统一，具有较好的氛围感。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "整体视觉吸引力良好：深蓝渐变背景搭配霓虹蓝紫主色调，营造出神秘魔幻的炼金术氛围，与“炼金实验室”主题高度契合。色彩搭配协调，以#4cc9f0、#4361ee、#3a0ca3等蓝紫色系为基调，辅以橙色渐变按钮作为点缀，冷暖对比得当，视觉层次分明。页面布局采用响应式网格和卡片式结构，统计栏、炼金站、配方书两栏分布清晰，间距与对齐规范，组件圆角、阴影、过渡动画设计现代。CSS运用了flex/grid、backdrop-filter、渐变、关键帧动画等技巧，符合当前游戏UI的玻璃态风格。不足之处在于素材完全依赖emoji，缺少定制图标或插画，视觉丰富度稍弱；功能上交易、任务等模块未在页面呈现，影响了内容的完整感。但就现有视觉品质而言，设计专业、风格统一、交互反馈完整，达到较好水准。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 6.75,
+  "baseline_overall": 6.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_002111.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Clear Cauldron",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Brew Potion",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

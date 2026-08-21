@@ -1,0 +1,135 @@
+{
+  "row_id": "02_015801",
+  "shard": 2,
+  "id": 15801,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Visualize the vastness of space and the challenges of interstellar communication delays. Users simulate real-time data transmission scenarios, explore cosmic distances, and engage with interactive tutorials. Key features include a 3D cosmic map, delay calculators, and collaborative learning modules.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 7546,
+  "html_sha256": "5f410fd89064135620735dfb1d098efa65096460a3a5cea6b08d8b2245087cd1",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "缩放3D宇宙地图",
+        "expected": "点击后3D地图视角拉近或拉远，画面呈现缩放变化",
+        "evidence": "Zoom In/Out 按钮均绑定了 click 事件，修改 camera.position.z；探针显示无 DOM 变化，但 Three.js 渲染循环会重新渲染，无 JS 错误，属有效的 WebGL 交互",
+        "ok": 1
+      },
+      {
+        "name": "拖拽旋转3D宇宙地图",
+        "expected": "通过鼠标拖拽旋转场景，从不同角度观察天体",
+        "evidence": "探针在 canvas 上拖拽后无 DOM 变化、像素不可测；HTML 中未引入 OrbitControls，也没有 pointer/touch 事件，拖拽交互未初始化",
+        "ok": 0
+      },
+      {
+        "name": "选择目的地更新延迟",
+        "expected": "切换目的地后，单向传输时间随之更新",
+        "evidence": "select 元素绑定了 change 事件，calculateDelay() 根据目的地距离重新计算并更新 #delay-time，逻辑完整",
+        "ok": 1
+      },
+      {
+        "name": "调整数据大小滑块",
+        "expected": "拖动滑块后显示数据大小变化，延迟时间同步重新计算",
+        "evidence": "range 元素绑定了 input 事件，更新 #size-value 并调用 calculateDelay()，反馈符合预期",
+        "ok": 1
+      },
+      {
+        "name": "模拟数据传输",
+        "expected": "点击按钮后出现传输中/完成的状态反馈",
+        "evidence": "探针显示点击后 DOM 有变化；按钮文本依次变为 'Transmitting...'、'Transmission Complete!'，随后恢复，符合模拟传输预期",
+        "ok": 1
+      },
+      {
+        "name": "访问协作学习模块",
+        "expected": "页面提供协作学习模块入口并可进入交互",
+        "evidence": "页面 HTML 中未发现任何协作学习模块相关入口或内容，需求明确列出的关键功能未实现",
+        "ok": "NA"
+      },
+      {
+        "name": "访问交互式教程",
+        "expected": "页面提供交互式教程入口并参与学习",
+        "evidence": "页面中没有教程模块相关按钮、链接或内容，仅有模拟传输按钮，不构成交互式教程",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面核心功能（3D地图缩放、延迟计算、模拟传输）基本可用，但 3D 地图无法拖拽旋转，且协作学习模块和交互式教程两个需求关键入口完全缺失，按关键功能未实现两项的规则，评分不高于4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 8.0,
+    "reason": "无核心可用性问题。页面主要功能（目的地选择、数据量滑块、延迟计算、缩放、模拟传输按钮）均可正常操作并产生反馈，无死路或流程卡死。次要瑕疵：1) 3D 宇宙地图缺少天体名称/图例，用户难以识别太阳、地球、火星，且地图不支持拖拽旋转，探索感有限；2) 可选目的地（月球、旅行者1号、比邻星）未在地图中体现，切换目的地时地图无联动；3) 延迟计算将数据大小直接乘以传播时间，未说明带宽假设，易让用户误解“延迟”含义；4) “Simulate Transmission”按钮仅有文字变化，没有展示实际传输过程或结果，反馈较浅；5) 需求中提到的交互教程、协作学习模块未实现，但不影响主流程。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面以深色宇宙为主题，灰黑渐变背景配合白色文字，整体氛围契合“星际通信与数据可视化”的设定，主题一致性较好。布局采用左右双栏卡片式结构，左侧为3D星空可视化，右侧为延迟计算器，信息层级清晰，区块划分均衡，符合现代数据可视化页面的常见模式。颜色搭配基本和谐，深灰卡片与蓝色、紫色、绿色按钮形成足够对比，视觉重心稳定。使用Tailwind CSS确保组件间距、圆角、边框等基础规范到位，但整体设计略显中规中矩：标题字体层级单一，缺乏强烈的视觉焦点；3D场景仅由三个基础几何体和星点粒子构成，缺少光照、纹理、轨道线或更丰富的空间层次，显得较为朴素；卡片没有阴影或更细腻的层次处理，精致度有限。交互方面，Zoom In/Out、滑块实时计算延迟、模拟传输按钮反馈均能正常运作，符合现代网页轻交互体验。综合来看，该页面干净、清晰、主题统一，但视觉冲击力和设计细节仍有提升空间，因此给出7分。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 6.5,
+  "baseline_overall": 6.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_015801.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Zoom In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Zoom Out",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Simulate Transmission",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

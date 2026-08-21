@@ -1,0 +1,181 @@
+{
+  "row_id": "02_010953",
+  "shard": 2,
+  "id": 10953,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Reimagine sustainability with a platform visualizing solar panel lifecycle management. Users explore end-of-life scenarios through interactive models and impact assessments. Key features include recycling process simulations, environmental footprint analysis, and innovation showcases, promoting sustainable practices and advancements in solar technology.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12913,
+  "html_sha256": "bfe8a0486e09c14944f6bd9d9a59dd45a7904fcf6a1fa01dc62a3b1b1275f819",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "主导航切换（Home/Lifecycle/Impact/Innovation）",
+        "expected": "点击导航应在单页内切换到对应内容区块或更新视图",
+        "evidence": "导航链接均为 href=\"#\"，无路由、无对应锚点 id、无 JS 事件绑定；探针点击后虽有 DOM 变化/跳转记录，但只是哈希占位跳转，实际没有内容切换",
+        "ok": 0
+      },
+      {
+        "name": "Explore Data 按钮",
+        "expected": "点击后应触发数据探索视图或跳转到可视化区域",
+        "evidence": "探针点击后 DOM 变化=无，新增JS错误=0，新增网络请求=0；按钮无 onclick 或事件绑定，点击无业务反馈",
+        "ok": 0
+      },
+      {
+        "name": "Start Simulation 按钮",
+        "expected": "点击后应启动或更新回收过程模拟，图表/内容出现动态变化",
+        "evidence": "探针点击后 DOM 变化=无，无网络请求、无 JS 错误；按钮为静态按钮，无事件绑定，无法启动模拟",
+        "ok": 0
+      },
+      {
+        "name": "View Impact Report 按钮",
+        "expected": "点击后应展示环境影响报告或相关可视化详情",
+        "evidence": "探针点击后 DOM 变化=无，无事件绑定；按钮没有实际功能，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "图表指标切换（Materials/Energy/Footprint）",
+        "expected": "点击后应切换图表数据维度或更新模拟图表",
+        "evidence": "探针点击 Materials 后 DOM 变化=无；三个按钮均无 onclick，Chart.js 初始化后没有绑定任何更新逻辑，点击无反馈",
+        "ok": 0
+      },
+      {
+        "name": "Explore Innovations 按钮",
+        "expected": "点击后应展开或跳转到创新展示内容",
+        "evidence": "HTML 中该按钮无事件绑定，只有 hover 样式；点击不会产生业务反馈，属于占位入口",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉和数据图表（Chart.js）正常渲染，运行时无 JS 错误；但所有核心交互入口均为占位/无事件绑定：导航 href=\"#\"、Start Simulation、View Impact Report、Explore Data、图表指标切换、Explore Innovations 点击后都无实际功能，用户无法完成模拟、影响报告查看、图表切换等关键任务，因此功能分低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. Start Simulation、View Impact Report、Explore Data、Explore Innovations 等主要交互按钮均未绑定任何事件，点击后无任何反馈，核心模拟与评估流程无法启动；2. 图表上方的 Materials/Energy/Footprint 切换控件点击无效，用户无法切换图表视图，核心控件调节失效；3. 图表仅静态渲染，没有交互响应，无法支撑用户所期望的“交互式模型”与“场景探索”。次要瑕疵：主导航链接均为 href=\"#\" 占位链接，点击后不切换或滚动到对应内容区块；图表缺少图例或指标说明；页脚社交链接为占位符；小屏下内容仍需滚动，不符合单屏预期。页面信息结构清晰、视觉配色专业、图表渲染正常，但核心交互全面缺失，因此评分处于“存在2个及以上核心可用性问题”的区间，给予2分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "整体视觉设计质量较高，符合现代数据可视化平台风格。色彩搭配以绿色系（#2D7A6C、#5DBB9E）为主，配合暖橙色强调色（#FFB84D）和浅绿色背景，既突出了可持续能源主题，又保持了视觉舒适度与对比度。布局采用经典的三栏网格结构，信息层级清晰：左侧突出主视觉和核心图表，右侧放置影响卡片与创新展示，符合用户对数据可视化平台的专业预期。组件设计规范，卡片采用圆角、阴影和hover上浮效果，按钮和标签样式统一，体现了较好的UI打磨。两个Chart.js图表（柱状图与环形图）增强了数据可视化表现力，与主题相关且配色与整体风格一致。不足之处包括：页面内容密度较高，在常见视口下可能无法完全做到‘单屏无滚动’；导航链接点击后会产生页面跳转，可能破坏单页体验；部分按钮（如Explore Data、Start Simulation）无实际交互反馈；未引入自定义字体，字体层级略显普通。整体而言，这是一份专业、协调且贴合环保科技主题的现代页面设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_010953.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Lifecycle",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Impact",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Innovation",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Data",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Impact Report",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Materials",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "row_id": "03_009400",
+  "shard": 3,
+  "id": 9400,
+  "category": "Game dev",
+  "prompt": "Build a digital sandbox where players reconstruct lost civilizations using historical data and imagination. The site offers architectural blueprints, cultural insights, and urban planning challenges. Users can collaborate to build empires, participate in archaeological digs, or simulate ancient economies, creating an immersive educational experience that combines history and strategic gameplay.",
+  "html_len": 25572,
+  "html_sha256": "a2a5988a78b7746da6fa4b42c45769f742a1866d921b31b81fd389db3c7fc19e",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "选择文明",
+        "expected": "点击某个文明（如 Ancient Egypt）后应出现选中高亮或状态提示，并允许继续开始游戏",
+        "evidence": "探针点击按钮后 DOM 无变化；HTML 中 selectCivilization 仅设置 gameState.civilization 并给 start-button 重复添加已有 glow class，没有任何可见选中反馈",
+        "ok": 0
+      },
+      {
+        "name": "开始重建（Begin Reconstruction）",
+        "expected": "点击后应隐藏开始界面并进入包含 3D 场景和 HUD 的主游戏界面",
+        "evidence": "探针点击后 DOM 无变化、无 JS 错误；游戏开始所需的文明选择未产生有效状态，startGame 中 alert 或直接返回，gameplay-screen 未显示，核心流程卡死",
+        "ok": 0
+      },
+      {
+        "name": "放置建筑（Construction Palette）",
+        "expected": "点击建筑卡片（House/Farm/Temple/Market）后应在 3D 场景中生成对应建筑，并更新资源和通知",
+        "evidence": "HTML 中 building-card 有 onclick 调 placeBuilding，函数确实会向场景添加 Mesh 并更新 DOM；但该面板位于 hidden 的 gameplay-screen 中，由于开始游戏失败，用户无法触达此交互",
+        "ok": 0
+      },
+      {
+        "name": "打开考古挖掘界面",
+        "expected": "点击 Archaeology 按钮应切换到考古挖掘界面",
+        "evidence": "showArchaeology 函数存在并可切换 hidden 类，但该按钮在 gameplay-screen 顶栏，而 gameplay-screen 从未被显示，交互入口不可达",
+        "ok": 0
+      },
+      {
+        "name": "打开经济模拟界面",
+        "expected": "点击 Economy 按钮应切换到经济模拟界面",
+        "evidence": "showEconomy 函数存在并可切换 hidden 类，但同样因 game 无法开始，按钮不可见不可点击",
+        "ok": 0
+      },
+      {
+        "name": "3D 场景拖拽交互",
+        "expected": "拖拽场景可旋转视角或操作地形",
+        "evidence": "探针在 canvas 上指针拖拽后 DOM 和像素变化均为无/不可测；HTML 中无 OrbitControls、pointer/touch 事件，只有 requestAnimationFrame 动画循环，拖拽无任何响应",
+        "ok": 0
+      }
+    ],
+    "reason": "页面核心流程失败：选择文明无可见反馈，点击开始时未进入游戏主界面，导致所有核心玩法（建筑放置、考古、经济模拟）均不可达；3D 场景也无拖拽交互。虽然代码中部分功能逻辑存在，但用户实际无法完成任何关键任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "【核心可用性问题】1. 考古界面中的三个Artifact物品点击后无任何反馈/功能，属于主要入口点击无实际反应，核心操作无法完成；2. 右侧地形工具（Flatten Land、Plant Forest、Create Water、Build Road）点击后仅弹出“Terrain modified successfully!”通知，但地形实际无任何变化，属于控件调节无效且反馈错误。\\n\\n【次要瑕疵】1. 选择文明后无视觉选中反馈（开始按钮原有glow类导致添加类无效），用户无法确认是否选中成功；2. 建筑放置采用随机位置，用户无法指定建造地点，不符合沙盒建造操作习惯；3. 建筑持续自转动画，视觉上不合理且干扰观察；4. 经济模拟器实为静态信息展示，无实际模拟交互；5. 重新开始游戏后再次启动会重复创建动画循环，存在潜在性能问题；6. 建筑卡片仅有图标与费用，缺少功能说明文字。\"",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 5.0,
+    "reason": "页面整体处于中等偏下水平。优点：使用Three.js构建了3D场景（天空、地面、树木、水体），为游戏提供了沉浸感；深色半透明HUD面板搭配亮色按钮属于常用游戏UI风格；开始按钮的发光动画和卡片hover缩放体现了细节动效。但存在明显问题：1）色彩搭配较为杂乱，文明选择按钮黄/红/蓝、HUD按钮紫/青/红、资源条绿/黄/蓝，缺乏统一主题；2）CSS有明显缺陷，地形按钮使用了无效类`bg-brown-600`，导致这些按钮没有背景色，视觉上不完整；3）建筑卡片仅用简单色块示意，缺少纹理或图标，显得简陋；4）布局上左侧面板和右侧工具面板绝对定位，在中等屏幕下可能拥挤或遮挡，缺少响应式考量；5）字体和间距使用了Tailwind默认体系，但标题和正文缺少层次感，游戏内提示文字字号偏小；6）开始屏幕的文明选择点击后无视觉反馈，交互反馈缺失。整体设计符合游戏开发页面的基本框架，但视觉精致度和专业度不足，有待打磨。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.2,
+  "baseline_overall": 3.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_009400.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Ancient Egypt",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Roman Empire",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Mesopotamia",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Reconstruction",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

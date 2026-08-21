@@ -1,0 +1,184 @@
+{
+  "row_id": "01_028919",
+  "shard": 1,
+  "id": 28919,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create an accessible platform for exploring and interacting with three-dimensional content. Offer intuitive navigation tools, customizable viewing experiences, and collaborative features for users to engage with 3D models across industries, promoting understanding and innovation through immersive digital experiences.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11498,
+  "html_sha256": "4883861413875b5fc0cd21388f6259b6ab692d1e5b0e18901cb9cf9b38a775cd",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（Gallery/Tools/Collaborate/Industries）",
+        "expected": "跳转到对应页面或切换对应内容板块",
+        "evidence": "探针点击后 DOM 有变化，但 HTML/JS 显示链接均指向 href=\"#\"，JS 仅对 nav 链接切换 text-primary 高亮类，没有路由或内容切换，属于占位导航",
+        "ok": 0
+      },
+      {
+        "name": "在 3D 模型区域拖拽旋转/滚轮缩放",
+        "expected": "3D 模型随拖拽旋转、随滚轮缩放",
+        "evidence": "页面有 model-placeholder 和“Drag to rotate • Scroll to zoom”文案，但没有 canvas/WebGL，也没有 pointer、touch 或 wheel 事件绑定；探针无法产生任何 3D 变化",
+        "ok": 0
+      },
+      {
+        "name": "点击模型控制按钮（旋转/放大/下载）",
+        "expected": "执行旋转视角、放大视图、下载模型等实际功能",
+        "evidence": "探针点击三个 control-btn 均无 DOM 变化；源码中点击只是临时添加 animate-spin 动画，没有实现任何模型控制或下载功能",
+        "ok": 0
+      },
+      {
+        "name": "点击导航工具按钮（Orbit Control / Pan View / Zoom Fit）",
+        "expected": "切换或启用对应的 3D 导航操作模式",
+        "evidence": "这些按钮在 HTML 中存在，但没有绑定任何事件处理函数；探针/源码均显示点击后不会改变页面状态或启用任何工具",
+        "ok": 0
+      },
+      {
+        "name": "自定义视图（选择背景色 / 开启线框）",
+        "expected": "背景色应用到 3D 场景，线框开关切换模型显示模式",
+        "evidence": "背景色按钮和 wireframe checkbox 均无事件绑定；checkbox 只有原生勾选外观，不会影响 3D 视图",
+        "ok": 0
+      },
+      {
+        "name": "点击 Invite Team 邀请团队",
+        "expected": "打开邀请流程、弹窗或至少产生可感知的协作操作反馈",
+        "evidence": "按钮无 JS 事件绑定，探针没有对它的独立结果，但 HTML 源码中无 onclick/addEventListener；点击不会触发任何功能",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉上完成了现代 UI 布局，但核心需求是“可交互的 3D 内容探索平台”。实际上没有真实 3D 渲染、没有拖拽/缩放交互、导航工具和自定义视图均为静态占位，协作按钮也无事件绑定；主要任务全部无法完成，仅剩少量高亮和动画装饰，因此功能分很低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 页面核心功能为“交互式3D模型查看器”，但模型区域仅为静态占位图，无法拖拽旋转、缩放或进行任何3D操作，核心交互完全缺失；2. 右侧导航工具（Orbit Control、Pan View、Zoom Fit）和自定义控件（背景色切换、Wireframe开关）点击均无实际效果，无法调节或影响视图；3. “Sign In”按钮点击无任何反馈，属于无效操作。次要瑕疵：顶部导航链接仅为高亮切换，未跳转或展示对应内容；下载、全屏等控制按钮仅有旋转动画，无实际功能；缺少对3D模型加载状态或操作方式的说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力高，采用深色科技感背景配以蓝色到紫色的渐变主调，符合3D探索平台的主题定位。色彩搭配合理，主色#2563eb和#7c3aed的渐变在深色背景上形成良好对比，文字使用浅色#f8fafc保证可读性。布局采用经典的头、主、脚结构，主区域左右分栏，左侧模型查看器占据较大空间，右侧功能面板有序排列，视觉重心明确，协调均衡。字体使用Inter，现代感强，卡片圆角、阴影和悬停上移效果增强了界面质感，控制按钮的动画交互提升了趣味性。CSS设计专业，利用Tailwind工具类加少量自定义样式实现了整洁且一致的视觉语言，符合现代网页设计规范。扣分点：部分交互按钮（如Sign In）无实际反馈，导航点击仅切换颜色，视觉上稍显单薄；右侧功能卡片内容密度略高，但整体不影响美观。综合评定为优秀水平。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_028919.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tools",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Collaborate",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Industries",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-sync-alt",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-expand",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-download",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

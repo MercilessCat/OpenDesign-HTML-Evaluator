@@ -1,0 +1,182 @@
+{
+  "row_id": "01_034707",
+  "shard": 1,
+  "id": 34707,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Develop an intuitive interface for managing environment variables with a focus on collaboration and automation. Users can create, edit, and deploy configurations across projects seamlessly, with version control and secure sharing options. Leverage AI to suggest optimizations and detect anomalies to ensure robust application performance and security.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12627,
+  "html_sha256": "53e936b98e6d216a652c4813d228e3e5195d49530746b0529eb6ad2fd9e59c2b",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "创建新配置",
+        "expected": "点击 New Config 后应弹出新建配置表单或添加新配置项",
+        "evidence": "探针点击 New Config 按钮后 DOM 无变化，无 JS 错误，无网络请求；按钮无事件绑定，仅静态占位",
+        "ok": 0
+      },
+      {
+        "name": "保存环境变量修改",
+        "expected": "点击 Save Changes 后应持久化修改并给出保存成功反馈",
+        "evidence": "探针点击 Save Changes 后 DOM 无变化，无错误、无请求；没有保存逻辑，输入框改动不会触发任何业务响应",
+        "ok": 0
+      },
+      {
+        "name": "查看版本历史",
+        "expected": "点击 History 应展示配置版本记录或历史面板",
+        "evidence": "探针点击 History 后 DOM 无变化，无错误、无请求；按钮无事件绑定，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "应用 AI 优化建议",
+        "expected": "点击 Apply Suggestion 应把 MAX_CONNECTIONS 值自动更新为 150 并反映到输入框",
+        "evidence": "HTML 中 JS 仅将按钮自身文字改为 Applied 并短暂变色，2 秒后复原；输入框值不会改变，未真正应用建议",
+        "ok": 0
+      },
+      {
+        "name": "切换 API Key 可见性",
+        "expected": "点击眼睛图标应在密码与明文之间切换，并同步图标状态",
+        "evidence": "JS 已绑定 click 事件，会切换 input type 并在 fa-eye/fa-eye-slash 间切换，符合预期",
+        "ok": 1
+      },
+      {
+        "name": "导航到 Dashboard/Projects 等页面",
+        "expected": "点击导航链接应切换到对应页面内容或视图",
+        "evidence": "导航链接均为 href=\"#\"，无路由或视图切换；探针报告 URL 跳转但页面内容未变化，属于占位入口",
+        "ok": 0
+      }
+    ],
+    "reason": "页面主要功能按钮（创建配置、保存、历史、AI建议应用、导航）均为静态占位或无响应，只有密码可见性切换可用；用户无法完成环境变量管理的核心任务，需求声明的关键功能大面积缺失。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. “Save Changes”按钮点击后无任何DOM变化和反馈，用户无法判断保存是否成功，属于核心操作反馈缺失；2. “New Config”按钮点击后无任何反应，无法创建新配置，核心操作流程卡死；3. “History”按钮点击后无任何反应，无法查看版本历史，核心功能不可用。存在3个核心可用性问题，按标准评分2-3分。次要瑕疵：导航链接（Dashboard/Projects/Team/Settings）为占位链接，无实际内容切换；通知铃铛点击无反馈；AI建议按钮仅临时显示“Applied!”但未真正修改配置；页面缺少环境变量格式说明或帮助提示。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "这是一个视觉上相当成熟的现代 SaaS 仪表板页面，整体风格干净、专业，与“环境变量管理与协作自动化”的主题高度契合。色彩搭配上，蓝色主色 + 绿色次色的组合符合技术工具类产品的惯例，配合灰白背景、状态彩色标签（绿/黄/蓝），形成清晰且不刺眼的视觉层级。布局采用头部 + 主内容 + 底部页脚结构，主内容区域使用 1:2 的左右分栏，左侧配置列表与右侧编辑器关系明确，组件间距均匀，留白充分，信息密度适中。字体方面使用 Tailwind 默认的无衬线体系，字号层次清楚。组件设计质量良好：卡片带圆角、边框和微妙阴影，hover 状态有过渡反馈，密码输入框有显隐切换，按钮、输入框、选择框、头像、通知图标等细节齐备，AI 优化建议区域以紫色图标和柔和底色形成视觉亮点，贴合协作与智能化主题。CSS 基于 Tailwind CDN 构建，利用 utility class 实现响应式布局和交互状态，没有明显错误，代码整洁规范，能较好地体现现代 UI 组件页面的评价标准。不足之处在于视觉风格偏模板化，缺少更强烈的品牌记忆点或视觉个性，页面整体“好看但不够惊艳”，这限制了它向更高分突破的空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_034707.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Projects",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Team",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Settings",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-bell text-gray-60",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Config",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "History",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save Changes",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "row_id": "00_021600",
+  "shard": 0,
+  "id": 21600,
+  "category": "3D design",
+  "prompt": "Develop an eco-conscious website focused on reducing the carbon footprint of 3D apps. Users explore sustainable design practices, energy-efficient coding techniques, and green hosting options. Offer an impact calculator, case studies, and certification badges for eco-friendly apps. Encourage responsibility and innovation in digital sustainability.",
+  "html_len": 17496,
+  "html_sha256": "eccac97672540fa0576ff2312a353f23315f82a8c2b569c97183ed01f595a3e8",
+  "functional": {
+    "score": 10.0,
+    "raw_score": 10.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "使用碳足迹计算器",
+        "expected": "在输入框中填写用户数、时长并选择托管类型后，点击 Calculate Impact，结果区域显示对应的每月 CO₂ 估算值",
+        "evidence": "HTML 中有 id=users/hours/hosting 的输入框和选择框，button 绑定 onclick=calculateFootprint()；JS 函数读取参数后按公式计算并更新 #result 的 innerText。探针自动点击该按钮时 DOM 无变化，但这是因为默认输入下计算结果与页面加载时已运行的结果相同，且无 JS 错误、无网络请求，函数逻辑正确。",
+        "ok": 1
+      },
+      {
+        "name": "拖拽旋转 3D 可视化模型",
+        "expected": "用户拖拽 canvas 时模型视角随 OrbitControls 旋转，场景持续动画",
+        "evidence": "Three.js 初始化代码创建 IcosahedronGeometry 球体和线框，并启用 THREE.OrbitControls、enableDamping 和 requestAnimationFrame 动画循环；探针拖拽 canvas 后像素虽不可测，但无 JS 错误，满足可交互判定条件。",
+        "ok": 1
+      },
+      {
+        "name": "浏览可持续设计与绿色托管内容",
+        "expected": "页面展示可持续设计实践、节能编码技巧、绿色托管选项等完整内容卡片",
+        "evidence": "页面包含两个主卡片，分别列出优化资产管理、节能渲染、绿色托管供应商、边缘计算等条目，文本内容完整且无占位链接。",
+        "ok": 1
+      },
+      {
+        "name": "查看认证徽章与案例研究",
+        "expected": "页面展示 EcoCertified / EnergyEfficient / CircularDesign 徽章及三个案例研究，内容可阅读",
+        "evidence": "badges 区块有三个 badge 卡片，case-studies 区块有三个 study 卡片，均包含标题、描述和影响数据，静态展示完整。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面完整实现了需求中的可持续设计指南、绿色托管、碳足迹计算器、3D 可视化、案例研究和认证徽章。计算器逻辑和 3D 交互均无 JS 错误；探针点击计算无 DOM 变化归因于默认输入下结果相同，不影响可用性。无占位死链，核心交互全部可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 8.0,
+    "reason": "无核心可用性问题。页面目的清晰（Eco3D Initiative 标题与副标题直接说明可持续3D开发），信息结构合理（设计实践、绿色托管、计算器、3D可视化、统计、徽章、案例研究分块呈现），核心操作（碳足迹计算）流程完整且可重复执行：输入参数、选择托管类型、点击 Calculate Impact 后结果区域会更新，代码逻辑正确且无 JS 错误。次要瑕疵包括：3D 可视化区域未提供拖拽/旋转操作提示，用户可能不知道场景可交互；计算器初始加载即显示默认结果，若用户未修改输入直接点击按钮，结果不变，可能误以为是按钮失效；页面为长单页但缺少导航锚点/返回顶部，长滚动场景下定位不便；按钮点击仅更新文本，没有更明显的反馈（如动画、颜色变化）；统计数字未标注数据来源，削弱可信度。整体视觉风格统一，卡片与绿色主题贴合，无影响使用的核心阻断。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，采用深绿色渐变背景搭配亮绿色强调色，主题统一且符合环保可持续的定位。色彩搭配合理，主次分明，文本浅绿色与背景对比良好，按钮使用渐变绿色并带悬停效果，交互反馈清晰。布局采用响应式网格，卡片、统计区块、徽章和案例等结构层次分明，间距均匀，整体协调。组件设计质量较高，圆角、半透明背景、毛玻璃效果和阴影提升了现代感，渐变文字标题和3D交互画布增加了视觉亮点。CSS运用了grid、flex、backdrop-filter、transition等现代技术，符合当前网页设计规范。微小的不足在于字体完全依赖系统字体栈，缺乏独特设计感；部分半透明效果在低端浏览器兼容性可能稍弱，以及3D画布区域在未加载时可能出现空白，但整体设计专业、美观，与用户需求高度契合。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 8.5,
+  "baseline_overall": 8.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_021600.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Calculate Impact",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

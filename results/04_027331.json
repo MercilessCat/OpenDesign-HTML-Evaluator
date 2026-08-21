@@ -1,0 +1,182 @@
+{
+  "row_id": "04_027331",
+  "shard": 4,
+  "id": 27331,
+  "category": "Website",
+  "prompt": "A virtual workshop for creating digital golems, blending mythology with modern technology. Users design and animate golems, participate in creative challenges, and explore the history and symbolism of golems, fostering a community around digital myth-making and interactive storytelling.",
+  "html_len": 25676,
+  "html_sha256": "cae3ed4825a0857e25faff7ee60ab64b5292b6114cf41752bb249856cf5d79aa",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航点击 Workshop",
+        "expected": "平滑滚动到 Workshop / 创建工作室区域",
+        "evidence": "导航 href 为 #workshop，但页面不存在对应 id 的目标元素；平滑滚动脚本 querySelector 返回 null 后不执行；探针点击后 DOM 无变化、无 JS 错误。",
+        "ok": 0
+      },
+      {
+        "name": "导航点击 Challenges",
+        "expected": "平滑滚动到 Creative Challenges 区域",
+        "evidence": "href 为 #challenges，页面存在对应 section；探针点击后 DOM 有变化，且无新增 JS 错误；锚点滚动逻辑生效。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Hero 的 Enter Workshop 按钮",
+        "expected": "进入数字 Golem 设计工作坊或滚动到创作区",
+        "evidence": "按钮无 href 和事件监听；探针点击后 DOM 无变化，没有出现编辑器或跳转。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Creating 按钮",
+        "expected": "开始创建 Golem / 打开创作工具",
+        "evidence": "HTML 中该 button 无 onclick 或 addEventListener；探针点击后 DOM 无变化，未出现任何创作流程。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Challenge 按钮",
+        "expected": "加入挑战，出现报名或确认反馈",
+        "evidence": "按钮无事件绑定，也没有加入挑战的后续流程；探针虽然报告 DOM 变化，但结合 HTML 看应为 hover/focus 样式层，非业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "查看 3D Golem 模型动画",
+        "expected": "模型在画布中渲染并自动旋转/浮动",
+        "evidence": "initGolemScene 创建 Three.js 场景并调用 requestAnimationFrame 持续渲染，运行时无 JS 错误；模型有自动旋转与浮动动画。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉内容丰富，Challenges 锚点导航和 3D 模型自动动画可用；但创建 Golem 的核心入口（Enter Workshop、Start Creating）均无反应，加入挑战和社区按钮无业务事件，Workshop 导航为死链，多个 href=# 占位。核心创作与参与任务大面积不可完成，按规则给 2 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 导航“Workshop”链接指向不存在的#workshop锚点，点击无任何反应；2. “Enter Workshop”主按钮点击无效，无法进入工作坊；3. “Start Creating”按钮无效，无法开始创建流程；4. “Explore Mythology”按钮无效，无法跳转。多个核心操作入口均无反馈，用户的核心任务（进入工作坊并创建数字魔像）无法完成。次要瑕疵：缺少操作引导说明；部分按钮（如“Join Challenge”）仅有视觉反馈但无实际功能；页脚大量占位链接无效；移动端菜单按钮未实现。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力强，深色星空背景与紫色神秘光效营造出'数字神话'主题氛围，符合用户需求。配色以深蓝紫渐变为主，搭配黏土色与神秘紫点缀，色彩和谐且层次分明。布局采用分区明确的网格结构，Hero、3D预览、挑战卡片、数据统计等模块节奏感良好。字体选择上，Orbitron标题字体凸显科技感，Merriweather正文衬线体增添了经典神话质感，搭配得当。CSS细节专业：多组关键帧动画（背景渐变漂移、浮动、脉冲）、粒子系统、卡片悬浮光晕、圆角与阴影设计均体现了较高的制作水准。虽然部分按钮交互无反馈，但不影响视觉评价。整体符合现代网页设计规范，是一个颇具设计完成度的主题型网站。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_027331.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Workshop",
+      "href": "#workshop",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Challenges",
+      "href": "#challenges",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Mythology",
+      "href": "#history",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Enter Workshop",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Mythology",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Challenge",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

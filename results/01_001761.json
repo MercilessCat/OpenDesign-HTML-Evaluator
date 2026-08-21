@@ -1,0 +1,175 @@
+{
+  "row_id": "01_001761",
+  "shard": 1,
+  "id": 1761,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create a platform to boost civic participation through interactive discussions and feedback loops. Users can engage in policy debates, propose initiatives, and track community projects. Key features include virtual town halls, impact analytics, and a gamified participation system, fostering a vibrant civic ecosystem.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11144,
+  "html_sha256": "a604b151dd67549333708674d8f3514c72ae8460fbb006e93b443a1adbd0ba83",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（Home/Discussions/Projects/Analytics）",
+        "expected": "切换对应页面内容或展示对应模块",
+        "evidence": "探针显示点击后有DOM变化和URL跳转，但HTML中所有导航链接href=\"#\"，仅为锚点占位，无路由或内容切换逻辑，属于死链占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Discussion 按钮",
+        "expected": "进入讨论创建流程或打开政策辩论界面",
+        "evidence": "探针点击后DOM变化=无，新增JS错误=0，新增网络请求=0；按钮仅有animate-pulse样式动画，无业务功能",
+        "ok": 0
+      },
+      {
+        "name": "点击 Propose Initiative 按钮",
+        "expected": "打开提议/提案表单或跳转到倡议页面",
+        "evidence": "探针点击后DOM变化=无，新增JS错误=0，新增网络请求=0；按钮无任何业务反馈，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "点击 View All Discussions 按钮",
+        "expected": "展示全部讨论列表或跳转到讨论板块",
+        "evidence": "探针点击后DOM变化=无，新增JS错误=0，新增网络请求=0；按钮无点击事件处理业务逻辑",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Now 按钮",
+        "expected": "触发注册/加入流程或打开用户认证界面",
+        "evidence": "探针点击后DOM变化=无，新增JS错误=0，新增网络请求=0；按钮无实际功能，属纯占位",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计符合现代UI要求，Tailwind样式和布局完整，但所有核心交互均为占位。导航链接href=\"#\"无路由切换，所有按钮点击无业务反馈。用户需求中的政策辩论、提出倡议、社区项目跟踪、虚拟市政厅、影响分析、游戏化参与等核心功能全部未实现，页面本质是静态落地页，交互成功率几乎为零。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 顶部导航（Home/Discussions/Projects/Analytics）均为 href=\"#\"，点击只是回到页面顶部，无法切换到对应内容，导航无实际功能；2. 所有核心操作按钮（Join Now、Start Discussion、Propose Initiative、View All Discussions、Explore All Projects）点击后仅触发 pulse 动画，没有产生任何业务行为，无法完成参与讨论、发起倡议、查看项目等任务；3. 缺少真实反馈机制，用户无法判断点击是否成功。次要瑕疵：页面作为概念展示视觉清晰，但 CTA 与导航均为占位实现；部分按钮文案与行为不一致；社交链接、Live 状态、进度条等均为静态装饰，无后续内容。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "整体视觉表现优秀，页面主题与公民参与平台的定位高度匹配。色彩搭配以蓝色系（primary #2563eb 与 secondary #0ea5e9）为主体，传递出信任、透明和治理感，辅以橙色 accent 点缀，在讨论条目与进度条上形成视觉层级，既专业又不单调。布局采用左右双栏结构：左侧为 Hero 区域与三个功能卡片，右侧为讨论预览和项目进度面板，信息组织清晰、主次分明，符合现代 SaaS / 政务平台的常见范式。字体方面，基于 Tailwind 默认字体栈，标题层级（text-4xl/5xl 与 text-xl）明确，正文与辅助文字对比度良好；卡片圆角、阴影、边框与 hover 反馈细腻统一，按钮的 hover 上浮与按压动画提升了交互感。整体设计干净、美观，具备专业 UI 作品应有的完成度。扣分点在于：背景为纯灰（bg-gray-50）缺少更丰富的质感或层次，导航链接点击后跳转而按钮仅有脉冲反馈，且内容较多时在较小视口下可能略微超出首屏；视觉上虽精致但个性化与记忆点稍弱，未达到惊艳级别，因此给予 8 分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_001761.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Discussions",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Projects",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Analytics",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Discussion",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Propose Initiative",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View All Discussions",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

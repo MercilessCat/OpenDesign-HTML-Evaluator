@@ -1,0 +1,181 @@
+{
+  "row_id": "00_002029",
+  "shard": 0,
+  "id": 2029,
+  "category": "3D design",
+  "prompt": "Create an educational site focused on optimizing visual complexity in virtual environments. Users can learn advanced techniques, access performance metrics, and participate in workshops to master visualization efficiency. Key features include a culling simulation tool, expert-led tutorials, and a community forum for resource sharing.",
+  "html_len": 27245,
+  "html_sha256": "eaeaa7a96f46ee8899b4ca8e1af8f6bf9bddb5ae19c3b33f36b43ad8fd9b3cf3",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "顶部导航锚点跳转",
+        "expected": "点击导航链接应平滑滚动到对应页面分区（Home/Features/Simulation/Workshops/Community）",
+        "evidence": "探针依次点击 Home、Features、Simulation、Workshops、Community 均出现 DOM 变化并发生页面内跳转，无 JS 错误，符合预期。",
+        "ok": 1
+      },
+      {
+        "name": "CTA 按钮「Start Learning Today」",
+        "expected": "点击后应引导用户开始学习（如跳转到课程页、弹窗或展示后续内容）",
+        "evidence": "探针点击该按钮后 DOM 无变化、无网络请求、无 JS 错误，页面没有任何反馈，属于死按钮。",
+        "ok": 0
+      },
+      {
+        "name": "Frustum Culling 模拟开关",
+        "expected": "点击后应切换视锥剔除可视化并更新 draw calls、polygons、FPS 等性能指标",
+        "evidence": "探针点击该按钮后 DOM 无变化，未报告 canvas 像素变化，无 JS 错误；尽管静态代码中有事件绑定，但运行时没有任何反馈，核心模拟交互未生效。",
+        "ok": 0
+      },
+      {
+        "name": "Occlusion Culling 模拟开关",
+        "expected": "点击后应切换遮挡剔除并更新性能指标",
+        "evidence": "探针点击该按钮后 DOM 无变化，无 canvas 像素变化，无 JS 错误，页面无反馈，核心模拟交互未生效。",
+        "ok": 0
+      },
+      {
+        "name": "社区论坛入口",
+        "expected": "点击「Forums」应进入资源分享论坛或展示论坛内容",
+        "evidence": "页面 footer 中 Community > Forums 链接为 href=\"#\"，无路由、无事件绑定，属于纯占位入口，未实现需求声明的社区功能。",
+        "ok": 0
+      },
+      {
+        "name": "专家教程入口",
+        "expected": "点击「Tutorials」应打开专家引导教程",
+        "evidence": "页面 footer 中 Resources > Tutorials 链接为 href=\"#\"，无实际内容或跳转，属于纯占位入口，未实现专家教程功能。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面仅有静态展示和导航锚点跳转可用，核心的 culling simulation 工具按钮点击无任何反馈，CTA 按钮为死按钮，社区论坛和专家教程均为占位链接（href=\"#\"），与需求声明的关键功能严重不符，整体不可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 核心功能culling simulation完全不可用——模拟器canvas未渲染（页面canvas=0），点击Frustum Culling/Occlusion Culling按钮无任何DOM变化与反馈，核心控件调节无效；\n2. 主CTA按钮“Start Learning Today”点击后无跳转、无弹窗、无任何反馈，为主要操作死路。\n\n次要瑕疵：\n- 页面footer中Documentation/Tutorials/Forums/Discord等链接均为“#”占位，社区相关功能未实现但不影响主流程；\n- 工作坊卡片仅有信息和日期展示，无报名/注册入口；\n- 模拟器控制按钮缺少选中/激活状态视觉，即使用户开启功能也无法直观判断当前启用了哪些剔除选项；\n- 移动端无汉堡菜单，窄屏下导航项可能排布拥挤。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 6.0,
+    "reason": "页面整体视觉设计感较强，采用了当前流行的深色渐变背景与青绿渐变点缀，主题色调统一，具有一定的科技感和现代感。布局结构清晰，头部固定导航、Hero区、功能卡片、模拟器、工作坊和页脚层次分明，视觉流程顺畅。字体方面使用系统无衬线字体，可读性良好；卡片、按钮、导航悬停等细节处理较细腻，圆角、阴影、玻璃态背景运用到位。交互组件（Three.js 3D场景、交互控制按钮）为页面增加了动态吸引力。扣分点在于：视觉风格略显模板化，缺乏独特品牌记忆点；部分区域（如feature-icon和workshop-image）依赖emoji而非SVG/图标，显得不够精致；文本信息层级区分不足，大量段落使用同色灰色；色彩搭配虽协调但对比度和饱和度处理略显常规，缺少专业3D设计站点应有的高级质感。总体视觉效果良好，但未达到顶尖设计水准。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.6,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_002029.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Simulation",
+      "href": "#simulation",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Workshops",
+      "href": "#workshops",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Learning Today",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Frustum Culling",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Occlusion Culling",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

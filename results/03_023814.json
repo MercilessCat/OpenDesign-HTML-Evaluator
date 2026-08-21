@@ -1,0 +1,169 @@
+{
+  "row_id": "03_023814",
+  "shard": 3,
+  "id": 23814,
+  "category": "Game dev",
+  "prompt": "Create an interactive website where users learn card strategies through a simplified blackjack game. Core idea: gamify learning of probability and strategy. Core functionality: simulate games, track wins/losses. Key features: tutorials, AI opponents, and leaderboards to foster competitive learning.",
+  "html_len": 26681,
+  "html_sha256": "5d87287964cef41cb449ec338f75146865b1219a2dc05bbed46a79bcec52bb5d",
+  "functional": {
+    "score": 7.0,
+    "raw_score": 7.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "下注（点击筹码）",
+        "expected": "点击筹码后当前下注金额增加、余额减少",
+        "evidence": "HTML 中 .chip[data-value] 均绑定 placeBet；placeBet 修改 currentBet/balance 并调用 updateUI。探针未覆盖 div.chip，但事件绑定明确存在。",
+        "ok": 1
+      },
+      {
+        "name": "下注后发牌（Deal Cards）",
+        "expected": "玩家和庄家各获得两张牌，显示手牌并进入玩家回合",
+        "evidence": "startGame 在 currentBet>0 时抽牌、设置 gamePhase='player-turn' 并调用 updateUI/showActionButtons。探针直接点击 Deal 时因未下注 currentBet=0 而 alert 拦截，DOM 无变化，符合预期守卫。",
+        "ok": 1
+      },
+      {
+        "name": "要牌（Hit）",
+        "expected": "玩家手牌增加一张、点数刷新，超21则爆牌结算",
+        "evidence": "playerHit 仅在 player-turn 阶段抽牌并 updateUI，超21调用 endGame/updateStats。探针在 betting 阶段点击无变化是阶段守卫，非功能缺失。",
+        "ok": 1
+      },
+      {
+        "name": "停牌并结算（Stand）",
+        "expected": "庄家补牌至17+，比较点数，弹出胜负并更新统计",
+        "evidence": "playerStand 切换到 dealer-turn 后执行 dealerPlay，按规则补牌并 endGame/updateStats。探针在非玩家回合点击无变化属正常。",
+        "ok": 1
+      },
+      {
+        "name": "教程翻页（Next/Previous）",
+        "expected": "点击 Next/Previous 切换教程步骤",
+        "evidence": "Tutorial 按钮能打开弹层（探针 DOM 有变化），但 next-tutorial/prev-tutorial 在 JS 中未绑定任何事件，点击不会切换步骤。",
+        "ok": 0
+      },
+      {
+        "name": "打开排行榜（Leaderboard）",
+        "expected": "弹出排行榜并显示当前玩家积分",
+        "evidence": "探针点击 Leaderboard 后 DOM 有变化；代码在打开前用 gameState.balance 更新 player-score，关闭按钮也有监听。",
+        "ok": 1
+      }
+    ],
+    "reason": "核心对局流程（下注、发牌、要牌、停牌/庄家结算、胜负统计和排行榜）可用，符合简化21点学习游戏的主体需求；但教程弹层内 Next/Previous 无事件、分牌 Split 仅 alert 'coming soon' 为占位，AI 与排行榜也较简，故给7分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：\n1. 游戏未开始（下注阶段）时，Hit、Stand两个核心操作按钮可见且无禁用态，点击后完全无反馈，用户首次进入页面易产生按钮失效的困惑；Split按钮点击虽有alert但实际功能未实现，同样暴露了状态管理混乱。\n\n次要瑕疵：\n1. Tutorial弹窗中的Previous/Next翻页按钮未绑定事件，点击无效，但内容可滚动查看；\n2. Split功能仅显示“coming soon”占位提示，未真正实现；\n3. Leaderboard展示的是静态预设数据，并非本地真实记录；\n4. 未下注时点击Deal Cards直接弹出浏览器原生alert，反馈方式生硬且无引导；\n5. 缺少“如何开始”的引导文案，新用户需自行摸索下注→发牌流程；\n6. Dealer抽牌过程为同步执行，点击Stand后直接跳转结果，缺乏过程动画，节奏突兀。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高。背景采用深绿至中绿的渐变，契合Blackjack赌场主题，视觉上沉稳且有氛围感。色彩搭配合理，统计面板用不同颜色（绿/红/黄/靛蓝）区分数据，按钮也采用对应功能色，清晰易识别。布局采用Tailwind网格与flex，结构规整，游戏区、统计区、筹码区层次分明，横向纵向间距舒适。字体使用Roboto，清晰现代。组件细节到位：卡片有悬停上浮和阴影过渡，筹码有圆形设计及缩放反馈，模态框圆角适中，半透明遮罩增强聚焦。CSS设计专业，包含渐变、过渡、动画、3D翻转等现代效果，整体符合现代网页设计规范。扣分点：卡片视觉表现较简单（直接用文字符号而非标准扑克牌布局），牌背缺乏装饰，缺少图标或图片元素，视觉冲击力稍弱，但作为教学游戏已足够吸引人。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_023814.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Tutorial",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Leaderboard",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Hit",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Stand",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Double Down",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Split",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Deal Cards",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

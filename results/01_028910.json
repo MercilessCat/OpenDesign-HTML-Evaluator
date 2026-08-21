@@ -1,0 +1,183 @@
+{
+  "row_id": "01_028910",
+  "shard": 1,
+  "id": 28910,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Design an engaging tool for evaluating risks through an interactive slider interface. Users assess potential outcomes by adjusting parameters and receiving instant visual feedback. Incorporate scenario analysis, expert insights, and predictive modeling features. Enable collaboration through shared reports and discussions to enhance decision-making and risk management strategies.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 17262,
+  "html_sha256": "a6d5f0fd6534277c9bddf8237939a710f5c91aca5505e0fdbb46f103b6879018",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "调整概率滑块",
+        "expected": "拖动滑块后百分比数值、填充条/滑块位置和风险矩阵中的风险点应同步更新",
+        "evidence": "HTML 中 input#probabilitySlider 绑定 input 事件，监听器会更新 #probFill/#probThumb/#probValue 并调用 updateRiskMatrix()；运行时无 JS 错误，代码路径完整。",
+        "ok": 1
+      },
+      {
+        "name": "调整影响滑块",
+        "expected": "拖动滑块后影响数值、填充条以及风险矩阵风险点应同步更新",
+        "evidence": "代码用 getElementById('impaValue') 获取标签，但 DOM 中只有 impactValue，赋值 value.textContent 会抛 TypeError，导致 updateRiskMatrix() 不执行；因此数值标签和矩阵点不会更新，只有轨道填充会变。",
+        "ok": 0
+      },
+      {
+        "name": "调整时间滑块",
+        "expected": "拖动滑块后月份数值和填充条应更新",
+        "evidence": "input#timeSlider 绑定 input 事件，更新 #timeFill/#timeThumb/#timeValue；无 JS 错误，功能完整。",
+        "ok": 1
+      },
+      {
+        "name": "点击导航菜单",
+        "expected": "Dashboard/Scenarios/Reports/Collaboration 应切换到对应内容或至少产生真实路由变化",
+        "evidence": "四个导航链接均为 href='#'，探针点击无新网络请求且无真实内容切换，只有浏览器锚点/焦点变化，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Create New Scenario",
+        "expected": "应创建新场景或弹出编辑场景的入口/对话框",
+        "evidence": "探针点击按钮后 DOM 变化=无、无 JS 错误、无网络请求，按钮未绑定新增场景逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "提交协作评论/讨论",
+        "expected": "输入评论并点击发送后，讨论列表应新增一条消息",
+        "evidence": "评论输入框与发送按钮没有 form 提交或 click 事件绑定，HTML 中无处理逻辑，点击不会产生任何业务反馈。",
+        "ok": 0
+      }
+    ],
+    "reason": "核心滑块交互基本具备，但影响滑块存在 id 取值错误导致风险矩阵不随 impact 更新；导航、新建场景、协作评论均无真实功能；专家见解和预测建模模块缺失。需求中多个关键入口为占位，故评分不高。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 主导航所有链接（Dashboard/Scenarios/Reports/Collaboration）均为占位链接，点击仅产生#跳转，无实际内容变化；2. “Create New Scenario”按钮点击无任何反馈，无法创建场景，核心操作卡死；3. 评论输入框与发送按钮无提交逻辑，点击无效，协作讨论功能不可用；4. “Sign In”按钮无功能；5. 顶部同步/设置图标按钮均为占位，点击无响应。次要瑕疵：1. 风险矩阵指示器坐标受grid gap影响定位不精确，矩阵也缺少图例说明；2. 影响滑块数值颜色未随等级变化（始终保持黄色），与概率滑块行为不一致；3. 时间滑块百分比计算未考虑min值偏移，初始刻度存在微小偏差；4. 内容较长时在常见视口高度下需要滚动，不满足单屏可见要求；5. 页面上未明确体现专家见解与预测建模功能，仅展示静态场景卡片。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较强，具备现代风险仪表盘的设计氛围。色彩搭配合理，以蓝色为主调，绿/黄/红三色渐变用于风险程度表达，既符合语义化也增强了视觉层次。布局采用左侧主面板+右侧辅助面板的对称网格结构，间距与卡片阴影处理得当，专业感较强。字体方面使用默认字体系列，但层级清晰；滑块组件的自定义渐变轨道和白色圆钮视觉反馈明确，配合实时风险矩阵联动体现了交互设计的用心。CSS方面基于Tailwind并补充了少量自定义样式，悬停动效和过渡提升了细腻度，但存在滑块容器内div重叠、时间滑块的数值ID选择器潜在缺陷等细节问题，因此不是满分。整体符合现代UI设计规范，与用户需求的‘交互式风险评估工具’主题高度契合。",
+    "attempts": 2
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_028910.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Scenarios",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Reports",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Collaboration",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-sync-alt",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-cog",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Create New Scenario",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

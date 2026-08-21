@@ -1,0 +1,188 @@
+{
+  "row_id": "01_008171",
+  "shard": 1,
+  "id": 8171,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create a dynamic platform that reinvents media interaction with intuitive, customizable video control interfaces. The core functionality is to enhance user engagement through innovative gesture-based controls, offering features like personalized shortcuts, real-time feedback, and adaptive learning for improved accessibility and user experience. Transform how users navigate their video content effortlessly.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 11980,
+  "html_sha256": "35c71893d3f45b81ed3963d0c4c67fde687277aaf0cdf2a8c0263186d5a0faba",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "导航链接",
+        "expected": "点击导航链接应跳转到对应内容区块或页面",
+        "evidence": "探针报告点击后DOM变化有且页面跳转，但HTML中所有导航链接均为href=\"#\"，无任何路由或滚动事件；点击实际是空锚点跳转到页面顶部，属于纯占位入口，功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "Get Started 按钮",
+        "expected": "点击后应触发注册、演示或某种业务反馈",
+        "evidence": "探针报告点击后DOM无变化、无JS错误、无网络请求；HTML中该按钮无事件绑定，点击无任何反应",
+        "ok": 0
+      },
+      {
+        "name": "Live Demo 按钮",
+        "expected": "点击后应启动视频演示或切换播放状态",
+        "evidence": "探针报告点击后DOM有变化；JS绑定事件会切换播放/暂停图标，页面有反馈",
+        "ok": 1
+      },
+      {
+        "name": "View Documentation 按钮",
+        "expected": "点击后应打开文档或跳转到文档页面",
+        "evidence": "探针报告点击后DOM有变化，但HTML中无任何事件绑定；该变化仅为hover/focus样式层，无实际业务反馈，属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "音量/全屏控制按钮",
+        "expected": "点击音量按钮应显示音量控制或静音切换",
+        "evidence": "探针点击中间音量按钮后DOM无变化；HTML中这些按钮未绑定事件，视频播放器为纯静态模拟，无实际控制功能",
+        "ok": 0
+      },
+      {
+        "name": "手势控制区域",
+        "expected": "点击手势区域应切换手势控制的激活状态",
+        "evidence": "JS为.gesture-area绑定click事件，可添加/移除active类并更新状态文字；属于有反馈的交互",
+        "ok": 1
+      },
+      {
+        "name": "快捷键卡片",
+        "expected": "点击快捷键卡片应有选中或高亮反馈",
+        "evidence": "JS为.shortcut-key绑定click事件，可切换背景色类bg-primary/bg-gray-800；交互反馈符合预期",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉美观、结构符合单页要求，但核心交互大量占位：导航链接全部为href=\"#\"无实际路由，Get Started和View Documentation按钮无任何事件，视频播放器（音量/全屏/进度条）为纯静态模拟，均无法完成需求中『可交互视频控制』的核心功能。仅Live Demo图标切换、手势区域状态切换、快捷键高亮有轻量反馈，不足以支撑页面声明的产品价值，主要任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 顶部导航 Features/Solutions/Pricing/Docs 均为占位链接，点击后没有对应内容或有效落地页；2) 主 CTA “Get Started” 点击后无任何响应；3) 视频演示区的核心控件大多无效：中央播放键无事件，音量按钮点击无效果，进度条不可调节，快捷键只改变底色并不能真正控制播放；4) “View Documentation” 点击后因事件绑定错误，切换的是“Live Demo”按钮的播放/暂停图标，反馈明显错位。次要瑕疵：对自适应学习、个性化快捷键等核心卖点缺少更具体的说明；无障碍焦点样式不足；整体视觉和信息层级清晰，但交互多为单向视觉反馈，无法完成用户预期的核心操作。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力强，采用深色主题与霓虹紫/靛蓝渐变搭配，科技感和现代感突出，贴合“创新视频控制”主题。色彩搭配专业（#6366f1、#8b5cf6与#0f172a、#f8fafc形成高对比），阅读舒适。布局采用左右分栏结构，左侧内容区层次清晰，右侧视频播放器模拟组件丰富且细节到位（播放按钮、进度条、手势交互区、快捷键栏），视觉重心均衡。字体使用Inter字体，字重和行距得当，卡片间距、内边距、圆角与阴影设计统一，hover动效流畅。CSS运用了Tailwind框架，自定义样式简洁，包含渐变、阴影、关键帧动画，符合现代网页设计规范。交互操作（手势区切换、播放/暂停切换）反馈明确，进一步增强界面质感。整体专业度高，几乎无视觉短板。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_008171.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Solutions",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Pricing",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Docs",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Live Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Documentation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-volume-up",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

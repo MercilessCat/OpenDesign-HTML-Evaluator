@@ -1,0 +1,90 @@
+{
+  "row_id": "03_015170",
+  "shard": 3,
+  "id": 15170,
+  "category": "Game dev",
+  "prompt": "Immerse yourself in a magical sanctuary, caring for unicorns. Players nurture unicorns, explore enchanted realms, and unlock mystical powers. Features include a unicorn genetics lab, community quests, and a gallery for sharing creations. Seasonal events and lore-rich adventures enhance the sanctuary experience, sparking imagination and wonder.",
+  "html_len": 21941,
+  "html_sha256": "7d6339b1c85c1710b23f587a73ae9c139b23c456a8d45ac95fd8b15726bee171",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击Enter Sanctuary进入游戏",
+        "expected": "隐藏开始界面，显示游戏主界面，初始化独角兽和游戏循环",
+        "evidence": "探针点击后DOM变化=有，无JS错误；HTML中startBtn事件监听器切换start-screen/gameplay-screen并调用initGame()",
+        "ok": 1
+      },
+      {
+        "name": "点击Feed Unicorn喂食按钮",
+        "expected": "饥饿度增加、快乐增加、金币减少，显示通知和粒子效果，UI状态条更新",
+        "evidence": "feedBtn绑定click事件，调用feedUnicorn()，逻辑完整（扣金币、加状态、显示浮动文字+通知+粒子），状态条同步更新",
+        "ok": 1
+      },
+      {
+        "name": "点击Cast Spell施法按钮",
+        "expected": "消耗魔法能量，增加快乐和分数，生成可点击收集的魔法球",
+        "evidence": "magicBtn绑定click事件调用castSpell()，逻辑完整（魔法能量>=20时扣能量、加快乐、加分数、生成5个魔法球），魔法球有独立点击收集逻辑",
+        "ok": 1
+      },
+      {
+        "name": "点击Quest任务按钮",
+        "expected": "满足条件时获得金币和分数奖励并通知，不满足时提示独角兽需要更多照顾",
+        "evidence": "questBtn绑定click事件调用completeQuest()，根据快乐/饥饿值判断发放奖励或拒绝，逻辑完整",
+        "ok": 1
+      },
+      {
+        "name": "点击画面中的独角兽",
+        "expected": "对点击的独角兽执行喂食，增加饥饿/快乐，减少金币",
+        "evidence": "createUnicorn()中为每个独角兽div添加了click事件监听器，调用feedUnicorn(unicorn)，逻辑可执行",
+        "ok": 1
+      },
+      {
+        "name": "需求中的基因实验室/画廊/季节事件/故事冒险入口",
+        "expected": "页面上应有可进入基因实验室、画廊分享、季节活动、故事冒险的功能入口",
+        "evidence": "页面仅有Feed/Cast Spell/Quest三个游戏按钮及开始/重开界面，完整缺失genetics lab、gallery、seasonal events、lore-rich adventures四项需求功能的入口",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心游戏循环（开始游戏、喂食、施法、任务、点击独角兽）均有完整事件绑定且逻辑可执行，探针确认开始按钮有效，无JS错误；但需求明确声明的独角兽基因实验室、画廊分享、季节性活动、故事冒险共4个关键功能在页面中完全没有入口，属于重大核心缺失，按标准分数不高于4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 8.0,
+    "reason": "未发现核心可用性问题：开始/重新开始流程均可正常完成，喂食、施法、任务按钮都有明确反馈，状态条实时更新，无占位链接、无流程卡死。次要瑕疵：1) “Hunger”条实际是饱食度/饱腹感，喂食会上升，命名容易让用户误解；2) Quest 按钮没有任务列表或条件说明，更像随机奖励，玩家不清楚具体任务内容；3) 游戏结束画面在 Happiness 或 Hunger 降到 0 时弹出，但缺少提前预警，且文案“Sanctuary Complete!/You've become a true unicorn guardian!”把失败描述成完成，容易误导；4) 直接点击独角兽喂食不扣金币，与“Feed Unicorn”按钮行为不一致；5) 需求中提到的基因实验室、社区画廊、季节事件等未实现，但不影响当前喂养主流程。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 6.0,
+    "reason": "页面整体传达了魔幻独角兽的主题氛围，使用了丰富的渐变和动画效果（如脉动的魔法球、漂浮文字、粒子特效），配合圆角卡片与毛玻璃质感，具备一定的视觉吸引力。色彩取材大胆（紫、粉、橙、蓝、红），贴合游戏类别的活泼想象，但整体色彩搭配略欠和谐：背景采用了深蓝-红-黄的高对比渐变，与起始屏的紫/粉/黄渐变风格不一致，切换时视觉跳跃感较强。布局上，游戏界面的状态栏、操作按钮、随机独角兽分布基本合理，但元素之间缺乏统一的层级感和视觉重心，白色独角兽SVG在亮色背景下对比度不足。字体采用系统常见Segoe UI，标题通过大字号和阴影增强存在感，但正文与UI间距处理一般。CSS实现上使用了渐变、阴影、过渡、backdrop-filter等现代技术，具有专业基础，但颜色值大量硬编码，缺乏设计变量，且部分样式（如body背景与游戏屏幕采用不同渐变）容易显得杂乱。整体而言，页面具备游戏感和魔法氛围，但在设计精致度和视觉统一性上仍有提升空间。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 6.0,
+  "baseline_overall": 6.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_015170.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Enter Sanctuary",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

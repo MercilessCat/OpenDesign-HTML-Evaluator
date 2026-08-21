@@ -1,0 +1,181 @@
+{
+  "row_id": "03_025814",
+  "shard": 3,
+  "id": 25814,
+  "category": "Game dev",
+  "prompt": "Develop an interactive platform offering step-by-step guides to basket weaving, enhanced with 3D models and AR tutorials. Users can choose from various patterns, track progress, and share creations. Features include a virtual coach, community challenges, and a gallery for showcasing completed baskets.",
+  "html_len": 26462,
+  "html_sha256": "6c5ef8bd6f9b9fff333622748d6f102599fc31e64f73c0671f5d2daf2e8b4f58",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Explore Patterns 进入图案区",
+        "expected": "页面滚动/跳转到图案列表区域",
+        "evidence": "链接为 <a href=\"#patterns\">，页面存在 id=\"patterns\" 的 section；探针点击后发生页面内跳转且无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Start Learning 选择图案并开始学习",
+        "expected": "选中对应图案并加载/切换到该图案的分步教程",
+        "evidence": "图案卡上的 Start Learning 按钮均无事件绑定；探针连续点击两个按钮后 DOM 无变化、无网络请求，属于占位按钮。",
+        "ok": 0
+      },
+      {
+        "name": "点击步骤列表切换教程步骤",
+        "expected": "右侧步骤内容随点击的步骤切换",
+        "evidence": ".step-item 仅有 cursor/active 样式，无 onclick 或事件绑定；静态 HTML 中没有步骤内容切换逻辑，探针也未发现可用的内容变化。",
+        "ok": 0
+      },
+      {
+        "name": "标记步骤完成 / 继续项目",
+        "expected": "当前步骤被标记完成，进度从 65% 等数据更新",
+        "evidence": "Mark Step Complete 和 Continue Project 按钮均无事件处理器；进度条和统计数值是写死的静态数据，点击不会更新。",
+        "ok": 0
+      },
+      {
+        "name": "启用 AR 视图 / 查看 3D 模型",
+        "expected": "显示可旋转/缩放的 3D 编织篮模型，或开启 AR 教程视图",
+        "evidence": "运行时元素统计 canvas=0，#basket-model 容器未渲染出任何 WebGL 画布；AR toggle 只是 CSS 滑块开关，无 onchange 或真实 AR 逻辑。",
+        "ok": 0
+      },
+      {
+        "name": "加入社区挑战 / 查看参赛作品",
+        "expected": "完成报名、注册或查看对应挑战详情",
+        "evidence": "Join Challenge、View Entries、Register Now 等按钮均无事件绑定，点击后没有任何业务反馈，是纯占位入口。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面基本是一个静态展示页：只有 Explore Patterns 锚点跳转可用，其余核心交互——选择图案开始学习、步骤切换、进度更新、3D/AR、社区挑战——全部无响应或未实现；顶部导航均为 href=\"#\" 空占位，虚拟教练和作品分享入口也缺失。主要任务无法完成，因此功能分偏低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 顶部主导航 Home/Patterns/Gallery/Community/Profile 都是 href=\"#\" 空链接，点击只跳回顶部或产生无意义跳转，无法进入对应栏目，主要入口无实际反馈；2) 图案卡片的“Start Learning”按钮点击后 DOM 无变化、无网络请求，用户无法开始任何编织教程；3) “Continue Project”“Mark Step Complete”等进度相关按钮没有绑定有效行为，无法继续项目或更新进度；4) 3D 模型容器为空，页面无 canvas，AR 开关只是一个样式化复选框，没有实际 AR 内容，3D/AR 教学核心功能不可用；5) 社区挑战按钮（Join Challenge/View Entries/Register Now）同样无响应。次要瑕疵：视觉层级和配色较为清晰，但图片多为 emoji 占位；导航“Patterns”未指向 #patterns，命名与行为不一致；AR 开关缺少说明；部分交互控件缺少帮助提示。基于存在多项核心可用性问题，判定为“能用但不好用”的较低档。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较好。色彩搭配以棕色系大地色为主，契合编织工艺主题，配色方案统一且和谐（如#8B4513、#D2B48C、#F5DEB3的组合），背景渐变柔和，视觉层次分明，符合现代网页设计规范。布局方面，采用标准头部、Hero区、卡片网格、步骤引导、页脚等模块化设计，结构清晰，节奏舒展，信息层次分明。字体选择上，Poppins无衬线体搭配Courier Prime等宽体用于Logo，形成了功能性与手工感的结合，设计较专业。组件细节丰富，包括进度条、开关、步骤列表、卡片悬停效果、网格布局等，均体现出较高设计完成度。色彩、圆角、阴影的使用统筹得当，营造出温暖、手作的体验氛围。不足之处在于：页面依赖表情符号和CSS色块代替真实图片，导致视觉冲击力不强、真实感偏低；Hero区SVG纹理较为单一，3D模型区域为空白容器，未使用JavaScript渲染模型或生成占位视觉；footer存在未完成代码，页面不完整。综合而言，这是一个视觉设计成熟、贴合用户需求风格的页面，但缺乏真实视觉素材和动态内容，离顶尖水准还有距离。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_025814.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Patterns",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Profile",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore Patterns",
+      "href": "#patterns",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Learning",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Learning",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "row_id": "03_018486",
+  "shard": 3,
+  "id": 18486,
+  "category": "Game dev",
+  "prompt": "Navigate vibrant cosmic vistas as you explore nebulae in a visually stunning space adventure. Users pilot custom spacecraft, collect cosmic artifacts, and participate in cooperative missions. The platform offers immersive graphics, educational content about space phenomena, and a community for sharing discoveries.",
+  "html_len": 16946,
+  "html_sha256": "af4c9b02ce478551e0d2d9a11c56c9aa0c365f6b89206e324dd6c5720555850a",
+  "functional": {
+    "score": 8.0,
+    "raw_score": 8.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 BEGIN MISSION 开始任务",
+        "expected": "开始界面隐藏，游戏 HUD 显示，生成飞船并进入游戏状态",
+        "evidence": "探针点击 BEGIN MISSION 后 DOM 有变化，新增 JS 错误 0，无网络请求；HTML 中 startButton 绑定 click 后调用 startGame，隐藏 startScreen、显示 stats，并创建 ship 元素。",
+        "ok": 1
+      },
+      {
+        "name": "使用方向键移动飞船",
+        "expected": "飞船位置随按键改变",
+        "evidence": "HTML 中 window 绑定了 keydown/keyup，keys 状态在 updateGame 中驱动 shipX/shipY 并更新 .ship 元素位置；同时 Three.js 动画中也根据方向键移动 shipMesh。无 JS 错误，逻辑完整。",
+        "ok": 1
+      },
+      {
+        "name": "收集宇宙文物",
+        "expected": "飞船碰到文物后文物消失、分数 +1，并补充新文物",
+        "evidence": "updateGame 中包含矩形碰撞检测，命中后移除对应 artifact 元素、score++ 更新显示，并通过 setTimeout 重新生成文物。代码逻辑完整且无运行时错误。",
+        "ok": 1
+      },
+      {
+        "name": "游戏倒计时结束显示任务完成",
+        "expected": "60 秒倒计时结束后显示 MISSION COMPLETE 画面和最终得分",
+        "evidence": "timerInterval 每秒递减 timeLeft，时间为 0 时调用 endGame，隐藏 stats、取消 setInterval、显示 gameOverScreen 并写入 finalScore。逻辑正确。",
+        "ok": 1
+      },
+      {
+        "name": "点击 NEW MISSION 重新开始",
+        "expected": "回到游戏进行状态，重置分数、时间并重新生成飞船",
+        "evidence": "restartButton 绑定 click，事件中移除旧 ship 并调用 startGame()，重置所有游戏参数并重新进入 playing 状态。",
+        "ok": 1
+      },
+      {
+        "name": "进入合作任务 / 社区分享 / 教育内容入口",
+        "expected": "需求中声明了 cooperative missions、community 和 educational content，页面上应有对应入口或相应功能",
+        "evidence": "HTML 中未发现任何与“合作任务”“社区分享”“教育内容”相关的按钮、链接或导航入口；除开始界面文本外没有任何可进入这些功能的控件，因此交互入口缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心游戏流程（开始、移动飞船、收集文物、倒计时结束、重开）全部完整实现且运行无 JS 错误，探针点击 BEGIN MISSION 后 DOM 正常变化，交互反馈符合预期。但需求中提到的合作任务、社区分享、教育内容等平台特性在单页中完全没有入口，属于需求未完整覆盖，故扣分至 8 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：点击“NEW MISSION”重开游戏后，2D飞船元素被移除但未重新创建，玩家只能看到3D飞船，而碰撞收集逻辑仍使用不可见的2D坐标，导致玩家无法明确操控收集对象，游戏流程在重开后无法正常继续（重开游戏后无法继续）。次要瑕疵：控制说明仅标注←→和空格，未提及↑↓方向键；3D飞船与2D飞船/文物同时渲染且键盘同时驱动，可能造成“双飞船”视觉混乱；碰撞检测区域与视觉船体存在偏移；收集文物时缺少音效或更强的视觉反馈；自定义飞船、合作任务、教育内容、社区分享等需求功能未实现，但不影响主流程。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉风格与“宇宙探索/游戏开发”的需求高度契合。背景使用深蓝紫渐变(#0f0c29→#302b63→#24243e)营造深邃空间感，配合动态生成的200颗星星和Three.js的粒子星云，视觉层次丰富，沉浸感强。主标题使用渐变文字(#4fc3f7→#e1bee7)并带发光效果，时尚且符合游戏氛围；按钮采用紫色到青色的渐变色、大圆角、阴影和悬浮上移效果，交互反馈清晰。色彩搭配以深紫、蓝、青紫、金色为主，协调统一，金色光球文物在暗背景上形成视觉焦点。布局方面，游戏容器居中、尺寸合理，开始界面元素垂直居中，叠层结构清晰，统计面板和引擎按钮位置符合游戏UI习惯。组件设计有质感，圆角、阴影、渐变、动效运用得当。不足之处在于使用通用Arial字体，缺乏定制感；2D飞船与3D场景混搭略显简单；在更精细的排版和质感细节上仍有提升空间，但整体视觉完成度高，符合现代网页游戏设计规范。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_018486.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "BEGIN MISSION",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

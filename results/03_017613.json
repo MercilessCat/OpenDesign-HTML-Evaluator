@@ -1,0 +1,97 @@
+{
+  "row_id": "03_017613",
+  "shard": 3,
+  "id": 17613,
+  "category": "Game dev",
+  "prompt": "Create an engaging platform for role-playing enthusiasts to master inventory management. Users organize items effectively, navigating challenges that simulate real-game scenarios. Offer tutorials, tips, and interactive quizzes to enhance skills. Include leaderboards and achievements to motivate players to optimize their inventory strategies.",
+  "html_len": 27475,
+  "html_sha256": "027eac149b5c7c16c90d04221bf36dc279c50e0955be62c1f3a41f2d964b1795",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Start Adventure 开始游戏",
+        "expected": "切换到游戏界面，生成背包格子、待整理物品、倒计时和分数",
+        "evidence": "探针点击 Start Adventure 后 DOM 无变化、无 JS 报错；虽然有 startGame() 和事件绑定代码，但实际没有发生画面切换或元素生成，按钮不可用",
+        "ok": 0
+      },
+      {
+        "name": "点击 Tutorial 查看教程",
+        "expected": "从开始界面切换到教程界面，显示 How to Play 步骤",
+        "evidence": "探针点击 Tutorial 后 DOM 无变化；教程 screen 仍应是隐藏状态，事件未生效",
+        "ok": 0
+      },
+      {
+        "name": "拖拽物品到背包格子并整理",
+        "expected": "物品被放入格子，形成堆叠/排序，分数与效率随之更新",
+        "evidence": "HTML 有 draggable 物品和 .slot 格子，但游戏界面无法进入；代码中只有 dragstart 和 slot 点击移除逻辑，未形成可用的整理闭环",
+        "ok": 0
+      },
+      {
+        "name": "点击 Submit Inventory 提交结算",
+        "expected": "结束倒计时，计算效率/最终分数，显示结算页排行榜与成就",
+        "evidence": "endGame() 和结算按钮存在，但核心开始/教程按钮均未生效，玩家无法进入游戏，因此无法触发结算；不具备实际可用性",
+        "ok": 0
+      },
+      {
+        "name": "参加互动测验",
+        "expected": "出现测验题目并选择答案后获得反馈/评分",
+        "evidence": "页面只有 .quiz-question/.quiz-option 样式，没有 quiz 页面/题目 DOM，也没有相关 JS 逻辑；需求中的测验功能完全缺失",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心入口 Start Adventure 与 Tutorial 经探针点击均无 DOM 变化，导致游戏无法开始、教程无法查看，背包整理/提交结算等核心玩法全部不可达；同时需求中的互动测验未实现。页面虽然绘制了完整 UI，但实际不可用，功能性极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "核心可用性问题：点击“Start Adventure”和“Tutorial”按钮后页面无任何反应，无法进入游戏或教程，所有交互均失效，核心流程完全不可用。次要瑕疵：若脚本修复后仍存在以下问题——游戏内拖拽物品放入背包的交互未完整实现，点击槽位即移除物品且无确认提示；效率计算以空槽数量为准，与“整理背包”的游戏目标矛盾；排行榜为静态演示数据，无实际更新；教程缺少“开始游戏”的直接入口；成就解锁仅在结算页展示，缺乏过程反馈。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较强，主题鲜明，符合RPG游戏风格。色彩搭配以深蓝、金色和渐变红为主，对比强烈且富有游戏氛围，但色彩饱和度较高，稍显浓重。布局协调，使用Flex和Grid实现清晰的组件排列，间距与圆角处理得当，卡片、网格、进度条等组件设计统一。字体选择常规，标题醒目，按钮采用圆角渐变并带有悬停动效，交互反馈良好。CSS运用了渐变、阴影、过渡和响应式媒体查询，整体现代且专业。功能方面虽存在点击无响应的信号，但视觉层面符合用户需求‘engaging platform for role-playing enthusiasts’，整体完成度较高，扣分主要在于色彩搭配略为常见、视觉层次感不够丰富，以及缺乏更多装饰性图形元素。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_017613.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Adventure",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Tutorial",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

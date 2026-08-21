@@ -1,0 +1,181 @@
+{
+  "row_id": "00_005697",
+  "shard": 0,
+  "id": 5697,
+  "category": "3D design",
+  "prompt": "Create an educational site exploring the intersection of quantum computing and 3D rendering. Users learn through interactive simulations and theoretical explorations, understanding how quantum principles can revolutionize rendering. Features include multi-level courses, quizzes, and a sandbox environment for experimenting with quantum-enhanced rendering techniques.",
+  "html_len": 19646,
+  "html_sha256": "478aa69e131daef9df0693724d2c0f1314e38f9c916e96f736ea0682fbed2f56",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "导航到 Courses/Sandbox 等板块",
+        "expected": "点击导航链接后页面滚动/跳到对应内容区域",
+        "evidence": "四个 <a> 分别指向 #courses/#sandbox/#features/#about，探针点击后 DOM 有变化且无 JS 错误并发生页面内跳转；符合锚点导航预期。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Start Learning Quantum Rendering 开始学习",
+        "expected": "进入课程/学习引导页面或展示课程内容",
+        "evidence": "按钮 .cta-button 在 script 中只绑定了 mouseenter/mouseleave 改变背景色，没有 click 处理；点击不会触发学习流程，探针的 DOM 变化仅来自样式层。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Enroll Now 报名/进入课程",
+        "expected": "打开课程详情、报名流程或至少进入该课程内容",
+        "evidence": "三个 Enroll Now 按钮位于 .course-card 内，卡片只绑定了点击后短暂 translateY 动画；没有课程详情、报名表单或路由变化，属于占位式按钮。",
+        "ok": 0
+      },
+      {
+        "name": "在 Sandbox 拖拽旋转 3D 场景",
+        "expected": "3D 场景随鼠标拖拽旋转/缩放，反馈交互",
+        "evidence": "sandbox-canvas 使用 Three.js + OrbitControls，enableDamping 且 requestAnimationFrame 持续渲染；运行时无 JS 错误，符合可交互 WebGL 判据。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Sandbox 模式按钮切换 Classical/Quantum/Superposition",
+        "expected": "切换渲染模式并更新场景/画面",
+        "evidence": "三个 .control-btn 在 HTML 中无 onclick，script 中也没有为其添加任何事件监听；点击不会改变渲染模式，属未实现功能。",
+        "ok": 0
+      },
+      {
+        "name": "参加课程测验",
+        "expected": "有测验入口并可以答题/提交",
+        "evidence": "页面没有 quiz 组件、测验问题、input 或相关入口；需求声明的测验功能未实现。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面具备可用的锚点导航和可拖拽的 Three.js 3D 展示，但核心学习链路残缺：CTA 按钮无点击行为、Enroll Now 仅为装饰动画、沙盒模式按钮全部无事件、测验功能完全缺失，且课程仅停留于静态卡片，未实现多级别课程。主要教育任务无法完成，故给 3 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：\n1. 课程核心操作无法完成：所有\"Enroll Now\"按钮未绑定任何点击逻辑（仅有卡片CSS抖动动画），点击后无报名、无跳转、无表单，用户无法开始任何课程学习。\n2. Sandbox核心控件全部无效：\"Classical Mode\"、\"Quantum Mode\"、\"Superposition View\"三个模式切换按钮无任何事件绑定，点击无任何响应，实验环境的核心功能完全不可用。\n3. 主要导航存在死路：导航栏\"About\"链接指向不存在的#about锚点，点击后页面无任何跳转或视觉变化。\n4. 主CTA按钮\"Start Learning Quantum Rendering\"无click事件逻辑，仅切换hover背景色，点击后页面无任何实质反馈或跳转，主路径卡死。\n\n次要瑕疵：\n- 课程卡片点击只触发无意义的抖动动画，容易被误解为操作成功但实际无进展。\n- Sandbox区域缺少使用说明/模式图例，用户不清楚各模式作用。\n- 移动端（≤768px）导航栏被直接隐藏且无替代菜单，移动用户无法跳转页面分区。\n- Hero区3D粒子画布启用了OrbitControls，用户可能误拖拽背景导致交互困惑。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "该页面在视觉设计上表现优异。整体采用深蓝紫渐变背景（#0f0c29 → #302b63 → #24243e）搭配青（#00dbde）与品红（#fc00ff）霓虹渐变作为主色调，营造出强烈的科技感与未来感，与量子计算+3D渲染的教育主题高度契合。色彩搭配对比鲜明且协调，白色文字在深色背景上可读性良好。布局方面，固定导航、全屏Hero、课程卡片网格、沙箱实验区、特性卡片、页脚等模块层次分明，间距均匀，使用flex/grid构筑了稳固的响应式结构。组件设计精致：玻璃态卡片（backdrop-filter + 半透明背景）、圆角按钮、渐变图标、悬停抬升动效、霓虹渐变文字标题，加上Three.js粒子动画和可交互相应的3D沙箱，显著提升了页面沉浸感与专业度。CSS运用了渐变、关键帧动画、过渡、阴影等现代技术，且无控制台错误与网络失败，技术实现扎实。仅有的小瑕疵是导航锚点跳转略显常规，以及个别按钮点击反馈稍弱，但不影响整体视觉完成度。总体而言，这是一个高度符合现代网页设计规范、视觉吸引力强且风格对标的优秀作品。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_005697.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Courses",
+      "href": "#courses",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Sandbox",
+      "href": "#sandbox",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "About",
+      "href": "#about",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Learning Quantum Rendering",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Enroll Now",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Enroll Now",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Enroll Now",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

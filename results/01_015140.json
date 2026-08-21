@@ -1,0 +1,175 @@
+{
+  "row_id": "01_015140",
+  "shard": 1,
+  "id": 15140,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Develop a virtual ecosystem where users explore circular economy principles through interactive simulations and dynamic material flow visualizations. Users can engage with scenarios, test solutions, and visualize impacts, promoting sustainable practices and innovative thinking. The core functionality revolves around educating and inspiring users to embrace eco-friendly strategies in their industries.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13701,
+  "html_sha256": "057bbf97e85fa6ea765e356ef7a4fdc092881979c3f2c969530967aa4bbbf2a1",
+  "functional": {
+    "score": 6.0,
+    "raw_score": 6.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "启动模拟",
+        "expected": "点击 Start Simulation 后，物质流可视化开始动画，节点脉冲，按钮变为 Pause",
+        "evidence": "探针点击 Start Simulation 按钮后 DOM 有变化，无 JS 错误。HTML 中对应事件会为 .ecosystem-circle 添加 animate-pulse、放大节点，并让 .material-flow 线条变粗，按钮文本切换为 Pause。",
+        "ok": 1
+      },
+      {
+        "name": "重置模拟",
+        "expected": "点击 Reset 后，模拟动画停止，节点恢复原状，按钮变回 Start",
+        "evidence": "探针点击 Reset 按钮后 DOM 有变化，无 JS 错误。HTML 中对应事件会移除 animate-pulse、恢复节点尺寸、线条样式和按钮文本。",
+        "ok": 1
+      },
+      {
+        "name": "选择场景卡片",
+        "expected": "点击 Manufacturing / Fashion / Electronics 场景后，卡片被选中高亮，并更新中央可视化节点",
+        "evidence": "HTML 中 .scenario-card 绑定了 click 事件，点击后会清除其他卡片的高亮并给当前卡片加 ring，同时更新中央 .ecosystem-circle 的内容为场景名称。虽无探针直接触发，但代码逻辑完整且无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "暂停模拟（第二次点击 Start/Pause）",
+        "expected": "点击变为 Pause 的按钮后，模拟应暂停，按钮恢复为 Start",
+        "evidence": "HTML 中 startBtn 的 click 监听器没有根据当前状态分支，始终执行启动逻辑并将按钮设置为 Pause。第二次点击不会真正暂停，也不会切回 Start，反馈不符合预期。",
+        "ok": 0
+      },
+      {
+        "name": "导航切换内容",
+        "expected": "点击 Home / Scenarios / Visualize / Learn 应跳转到对应内容区块或切换视图",
+        "evidence": "探针显示点击这些 <a href=\"#\"> 后发生页面跳转但无实际内容切换；导航链接没有路由或锚点对应，纯占位入口，点击仅回到页面顶部，反馈不符合预期。",
+        "ok": 0
+      }
+    ],
+    "reason": "核心交互（启动模拟、重置、选择场景）均可用，且无 JS 错误；但暂停按钮逻辑失效，导航链接均为纯占位，影响完整交互体验。整体页面可基本使用，但存在明显功能瑕疵。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 顶部导航（Home、Scenarios、Visualize、Learn）均为占位链接，点击后没有跳转到对应内容或提供实际页面反馈，用户无法通过导航切换视图。2. “Start Simulation”按钮点击后变为“Pause Simulation”，但再次点击不会真正暂停模拟，按钮状态与实际行为不符，核心控件调节无效。\n次要瑕疵：1. 页脚社交图标（Twitter、LinkedIn、GitHub）为占位链接。2. 选择场景后，影响指标（Impact Metrics）不会随场景动态更新，反馈不完整。3. 场景名在可视化节点上仅取第一个单词（如“Fashion Industry”只显示“Fashion”），命名不精确。4. 页面本身为单页布局，导航以“#”为目标，无明显功能，容易让用户困惑。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力良好，采用环保主题的绿色系（#2D7D5F、#3E9B7A）搭配浅色背景（#F0FDF4），色彩协调且符合循环经济主题。布局上使用三列网格结构，左侧可视化区域与右侧场景卡片、指标面板形成清晰的信息层级，主次分明。组件设计较专业：圆形节点配以不同颜色区分功能（生产、消费、回收、废物），SVG流线箭头带脉冲动画增强了动态感；场景卡片采用渐变背景和左侧边框，悬停时上浮加阴影，交互反馈明确。头尾样式统一，导航和社交媒体图标使用hover颜色过渡，细节到位。\n\n不足之处：\n1. 回收节点使用黄色背景（#FFB84D）配白色文字，对比度不足，可读性稍弱；\n2. 可视化节点为绝对定位硬编码，在窄屏下可能错位，响应式适配不完美；\n3. 页面内容较多，若在较小视口下可能无法单屏完全展示，与需求略有偏差。\n\n总体符合现代网页设计规范，风格与环保教育主题高度对齐，交互简单而有效，是一份中等偏上的UI设计。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.9,
+  "baseline_overall": 5.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_015140.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Scenarios",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Visualize",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Learn",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Simulation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

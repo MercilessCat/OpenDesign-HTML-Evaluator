@@ -1,0 +1,130 @@
+{
+  "row_id": "03_013098",
+  "shard": 3,
+  "id": 13098,
+  "category": "Game dev",
+  "prompt": "Create a retro-inspired arcade platform focused on endless flying challenges. Offer unique levels, customizable avatars, and global leaderboards. Encourage player creativity with a level editor, allowing for user-generated content and community sharing. Bring nostalgia with a modern twist, blending classic gameplay with innovative features.",
+  "html_len": 21923,
+  "html_sha256": "5e0af8cc3f0ac6705e2dcf8171220337aca408335266aac42c7dd6c54a5ec980",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "开始飞行并用键盘操控飞机",
+        "expected": "点击 START MISSION 进入游戏画面，出现可操控的 3D 飞行场景，方向键/WASD 可移动飞机",
+        "evidence": "探针点击 START MISSION 后 DOM 变化=有，0 条 JS 错误；HTML 中 playBtn 绑定 switchScreen('game') 并调用 initThreeJS()，animate 循环读取 keys 更新 player.position，Three.js 场景与键盘监听均已初始化",
+        "ok": 1
+      },
+      {
+        "name": "自定义飞行员外观",
+        "expected": "点击不同头像可选中，保存后游戏中飞机使用对应颜色",
+        "evidence": ".avatar-option 均有 click 监听，点击会切换 selected 并更新 gameState.avatar；getAvatarColor() 根据 gameState.avatar 设置飞机颜色，saveAvatar 有反馈提示",
+        "ok": 1
+      },
+      {
+        "name": "进入关卡编辑器并编辑格子",
+        "expected": "点击 LEVEL EDITOR 后打开编辑器，点击 10x10 网格中的格子可循环切换空位/平台/障碍/道具",
+        "evidence": "探针点击 LEVEL EDITOR 后 DOM 变化=有；initializeLevelEditor() 为 100 个格子绑定 click，toggleBlockType() 会切换 block 的 class、data-type 和显示字符",
+        "ok": 1
+      },
+      {
+        "name": "保存并测试自定义关卡",
+        "expected": "将玩家编辑的关卡数据持久化，并在测试关卡中实际加载编辑内容",
+        "evidence": "saveLevel() 只 alert('Level saved successfully!')，注释明确说明真实实现未完成；testLevel() 只 alert 后 switchScreen('game')，未读取或应用任何编辑后的格子数据，属于占位实现",
+        "ok": 0
+      },
+      {
+        "name": "查看全球排行榜",
+        "expected": "点击 LEADERBOARD 打开排行榜页面，能看到玩家排名和分数",
+        "evidence": "探针点击 LEADERBOARD 后 DOM 变化=有；排行榜页面展示 5 条硬编码分数和玩家名，离线静态展示可用，但并非接入真实全球数据",
+        "ok": 1
+      },
+      {
+        "name": "把自制关卡分享到社区",
+        "expected": "提供发布/分享/上传自制关卡到社区的功能入口",
+        "evidence": "页面没有任何分享、发布、上传或社区 UGC 入口，编辑器只有 SAVE LEVEL / TEST LEVEL / BACK 按钮，需求中的社区分享功能完全缺失",
+        "ok": "NA"
+      }
+    ],
+    "reason": "主菜单、游戏启动、键盘操控、外观选择、编辑器格子和排行榜页面均可交互；但关卡编辑器的保存/测试只是 alert 占位，无法真正持久化或载入玩家编辑的关卡，社区分享入口完全缺失，且排行榜为静态硬编码，未完整实现需求中 UGC/社区共享等核心能力，故按关键功能未实现锚定给 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在2个核心可用性问题：\n1. 核心玩法机制缺失：障碍物与能量块没有碰撞检测，玩家穿过障碍物不受影响、碰到能量块也无任何反馈，所谓“避障收集”玩法实际不可玩，核心操作等于无效。\n2. 关卡编辑器功能失效：编辑网格后点击“SAVE LEVEL”仅弹提示并未持久化，点击“TEST LEVEL”进入的是默认生成的关卡，用户自定义内容完全未生效，核心编辑/测试流程无法达成。\n\n次要瑕疵：\n- 排行榜为静态写死数据，不会提交或展示玩家真实分数。\n- 自定义头像只弹“已保存”提示，刷新后丢失，且未真正影响游戏内模型外观。\n- 游戏开始后没有暂停、退出或返回主菜单的入口，玩家只能等待失败结束。\n- 关卡编辑器缺少关于网格如何对应实际关卡空间/尺寸的说明。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉风格与用户需求高度契合——复古街机感强烈。主色调采用深蓝/暗红霓虹渐变背景，搭配黄色标题与青色霓虹光晕，营造出经典的像素游戏氛围；按钮使用粉红渐变和圆角、悬浮阴影，具备街机按键的质感。布局以居中卡片式游戏容器为核心，层级清晰，各功能界面（主菜单、游戏、通关、定制、编辑器、排行榜）结构明确。字体选择方面，明确指定了'Press Start 2P'这类像素字体，不过页面未实际引入该字体文件，浏览器回退到 cursive/Arial，削弱了像素风格的一致性和辨识度，这是主要扣分点。其余CSS细节如过渡动画、脉冲效果、头像选中高亮、网格编辑器的色块区分（绿/红/黄/蓝）都较为专业，提升了交互视觉反馈。整体而言，该页面在色彩搭配、组件设计、动效交互和氛围营造上均达到较高水准，唯一明显不足是字体资源未加载，导致文字部分在部分环境中无法呈现预期的复古像素质感。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_013098.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "START MISSION",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "CUSTOMIZE PILOT",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "LEVEL EDITOR",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "LEADERBOARD",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

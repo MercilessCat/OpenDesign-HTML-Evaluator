@@ -1,0 +1,168 @@
+{
+  "row_id": "00_013075",
+  "shard": 0,
+  "id": 13075,
+  "category": "3D design",
+  "prompt": "Develop an online platform for visualizing cognitive maps and brain activity in 3D. Users can explore neural pathways and brain functions interactively. Features include detailed anatomical models, integration with real-time data from EEG/MEG scans, and educational tools for students and professionals in neuroscience fields.",
+  "html_len": 17493,
+  "html_sha256": "89e5121866726178063333defba7cf981c0b80a5c5948fd4bac0c0e8a5d84f85",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "3D 脑模型拖拽旋转/缩放",
+        "expected": "拖拽/滚轮改变相机视角，可从多角度查看脑模型和神经通路",
+        "evidence": "Three.js 场景初始化了 OrbitControls 并运行 requestAnimationFrame；探针在 canvas 上拖拽无 JS/网络错误，虽无法验证 WebGL 像素，但按判例视为可交互。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Reset View",
+        "expected": "相机重置到初始视角",
+        "evidence": "按钮绑定 controls.reset()，是标准 OrbitControls 重置方法；探针点击无 DOM/错误，但属于视图级反馈，判为可用。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Pause Animation",
+        "expected": "暂停/恢复脑模型旋转与神经通路动画",
+        "evidence": "点击切换 isAnimating 并更新按钮文字；探针检测到 DOM 变化，无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Hide Data",
+        "expected": "底部数据面板显示/隐藏，按钮文字同步更新",
+        "evidence": "点击切换 data-panel 的 display 和按钮文字；探针检测到 DOM 变化，无错误。",
+        "ok": 1
+      },
+      {
+        "name": "选择脑区（Frontal/Parietal/Temporal/Occipital/Cerebellum）",
+        "expected": "对应脑区在 3D 模型中高亮或定位，并展示脑区详情",
+        "evidence": "JS 只对 .region-item 切换 active 类并 console.log，代码注释明确“真实应用会高亮”；3D 脑区未联动。",
+        "ok": 0
+      },
+      {
+        "name": "切换 EEG/MEG/Neural Connectivity 数据选项卡",
+        "expected": "数据面板内容随选项卡切换为对应 EEG/MEG/连接数据",
+        "evidence": "三个 .tab-btn 均未绑定任何事件；探针点击均无 DOM 变化、无 JS 错误，属于占位入口。",
+        "ok": 0
+      }
+    ],
+    "reason": "3D 场景浏览、视角重置、动画暂停/恢复、数据面板显隐等基础交互可用；但脑区选择未联动 3D 模型，EEG/MEG/Neural Connectivity 三个数据标签点击无响应，且未实现真实 EEG/MEG 数据接入，核心功能存在多个缺失，故给 4 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 数据面板的 EEG Activity / MEG Data / Neural Connectivity 三个页签点击后无任何实际反馈：内容不切换、选中态不变，用户无法查看不同数据模式，属于核心控件无效；2. 点击大脑分区只改变侧栏高亮，3D 场景中对应区域没有高亮、聚焦或数据联动，核心的“探索脑区”操作无法真正完成。次要瑕疵：缺少对 3D 拖拽/缩放等操作引导；侧栏区域与 3D 模型颜色没有图例对应；数据数值为静态，未体现实时 EEG/MEG 更新，也不随所选区域变化；Reset View 在相机未移动时没有可见反馈；无教学/帮助入口。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "整体视觉吸引力高，深蓝色渐变背景搭配青绿荧光色系，营造出科技感与神经科学主题相契合的沉浸式氛围。色彩搭配合理，主色#00c9ff与#92fe9d形成亮眼对比，辅助色以半透明白和深色透明背景为主，层次分明。布局协调，顶部导航、右侧脑区面板、底部数据面板形成清晰的信息层级，同时通过绝对定位悬浮于3D画布之上，不遮挡核心视图。字体使用现代无衬线字体，字号适中，间距与圆角处理符合当前主流UI规范。组件设计质量较好，按钮和卡片均采用毛玻璃效果（backdrop-filter）、平滑过渡和悬浮动效，增强交互反馈。CSS运用了flex/grid布局、渐变、关键帧动画等专业技巧，整体风格统一。虽然3D画布在初始HTML中未显示（运行时动态创建），但代码结构和渲染逻辑完整；部分交互按钮（如标签切换）未实现实际切换效果，但视觉层面不影响美观度。综合视觉表现、配色、布局、组件和专业化程度，给出8.5分。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.5,
+  "baseline_overall": 5.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_013075.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset View",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Pause Animation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Hide Data",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "EEG Activity",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "MEG Data",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Neural Connectivity",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "row_id": "00_025776",
+  "shard": 0,
+  "id": 25776,
+  "category": "3D design",
+  "prompt": "Launch an engaging website for animating 3D models with HTML5. Users can upload models and apply a range of animations and effects, perfect for storytelling or presentations. The platform offers a library of animation presets, timeline editing tools, and an export feature to integrate animations into various projects.",
+  "html_len": 19743,
+  "html_sha256": "eea0cdbc9bbec6117c0bc07de623777ba62575df60d88000a8b5a3516b968d04",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "旋转/缩放查看3D模型",
+        "expected": "用户拖拽视角时场景实时旋转/缩放",
+        "evidence": "HTML 中实例化了 THREE.OrbitControls 绑定到 renderer.domElement，animate() 持续调用 controls.update() 和 renderer.render()；运行时 0 条 JS 错误。画布像素探针无法直接验证 WebGL，但控制器已正确初始化。",
+        "ok": 1
+      },
+      {
+        "name": "上传3D模型文件",
+        "expected": "选择或拖入 GLTF/GLB/OBJ 后，模型替换默认方块并显示在场景中",
+        "evidence": "file-input change 和 drop 事件只 alert('In a full implementation, this would load your 3D model.')；没有 GLTFLoader/OBJLoader，也没有把上传模型加入 scene。Browse Files 点击探针无 DOM 变化。属核心占位功能。",
+        "ok": 0
+      },
+      {
+        "name": "选择动画预设并播放",
+        "expected": "从预设列表选择后模型开始对应旋转/弹跳/脉冲等动画",
+        "evidence": "animation-select 的 change 事件调用 playRotationAnimation 等创建 AnimationClip 并播放；play-animation 按钮会重新触发 change。示例模型已加入 scene，animate 循环调用 animationMixer.update(delta)，运行时无 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "调整动画速度",
+        "expected": "切换速度后动画播放速率相应变化",
+        "evidence": "页面有 speed-control 下拉框，但 JS 中未绑定任何 change/input 事件，也没有把速度值应用到 animationMixer.timeScale 或其他位置，选择速度不会产生任何效果。",
+        "ok": 0
+      },
+      {
+        "name": "编辑时间轴关键帧",
+        "expected": "拖动关键帧/播放头可调整动画时间和关键帧",
+        "evidence": "timeline 和 .keyframe 元素都是静态 div，只有 CSS cursor:pointer，没有绑定 mousedown/drag 等交互事件；playhead 固定 left:20%，无法编辑。",
+        "ok": 0
+      },
+      {
+        "name": "导出动画",
+        "expected": "导出视频或 GLTF，生成可下载的动画文件",
+        "evidence": "export-video 与 export-gltf 的 click 处理器仅 alert('In a full implementation, this would...')，没有生成文件、没有下载、也没有导出逻辑。核心占位功能。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面能展示 Three.js 示例模型并支持 OrbitControls 旋转查看；选择预设后也能驱动动画。但用户需求中的核心闭环——上传模型、时间轴编辑、导出——均只是 alert/静态占位，速度控制也未实现，主要任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：① 上传模型未实现，选择/拖拽文件后只弹提示，并未加载或替换场景中的示例模型，用户无法上传自己的模型；② 导出功能未实现，Export Video 和 Export GLTF 仅弹提示，无法生成/下载产物；③ 时间线编辑器不可交互，keyframe/playhead 是静态元素，不能添加/移动/编辑关键帧；④ Speed 选择器没有绑定逻辑，调整速度对动画无任何影响；⑤ New Project 没有真正清空/重置场景，只弹出提示。次要瑕疵：页面没有说明当前模型为示例占位，缺少加载状态/成功反馈；时间线缺少刻度/时间轴说明；上传区声明支持 GLTF/GLB/OBJ 但实际未加载；动画播放按钮与动画下拉选择器功能重复，且缺少已上传模型状态提示；整体视觉风格和信息分区清晰，但这些核心功能缺失使页面仍是演示壳而非可用工具。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力高，深蓝渐变背景搭配霓虹蓝紫渐变标题，形成鲜明、现代的3D工具氛围。色彩搭配合理：主色#4cc9f0和#4361ee在深色背景上具有高识别度，同时半透明面板、阴影和圆角增强了层次感与玻璃拟态质感。布局上采用左右分区（3D查看区+控制面板），结构清晰，间距统一，主次分明。字体采用系统级Segoe UI，字号层级合理，按钮、下拉框、上传区域均设计了悬停/过渡状态，细节到位。CSS应用了渐变、backdrop-filter、box-shadow、flex/grid等现代技术，整体符合3D设计工具类的专业视觉规范。扣分点主要在于部分交互元素（如导出按钮）仅以alert提示，缺乏真实功能反馈，但视觉层面几乎无瑕疵。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_025776.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "NEW PROJECT",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "BROWSE FILES",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "▶️ PLAY ANIMATION",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "EXPORT VIDEO",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "EXPORT GLTF",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

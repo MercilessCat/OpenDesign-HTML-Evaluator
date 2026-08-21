@@ -1,0 +1,169 @@
+{
+  "row_id": "02_017271",
+  "shard": 2,
+  "id": 17271,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Access a futuristic platform that visualizes renewable energy grid stability. Users can explore real-time data on energy production, consumption, and grid health through interactive dashboards. The site offers simulations, predictive analytics, and insights into renewable energy trends, empowering stakeholders to optimize grid performance and promote sustainable energy solutions.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14674,
+  "html_sha256": "9cb0e017159f8993e526a7c0eca1914409d4e15e8dd1b7402440571cc51e7918",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "刷新数据",
+        "expected": "点击 Refresh Data 后应更新关键指标或同步时间",
+        "evidence": "探针点击后 DOM 无变化、无网络请求；HTML 仅全局绑定 scale-95 动画，无数据刷新逻辑",
+        "ok": 0
+      },
+      {
+        "name": "切换图表时间范围",
+        "expected": "点击 24H/7D/30D 应切换图表的时段和数据",
+        "evidence": "探针点击三个按钮均 DOM 无变化；Chart.js 数据未更新，按钮无专属事件处理",
+        "ok": 0
+      },
+      {
+        "name": "运行场景模拟",
+        "expected": "点击 Solar Surge / Wind Variability / Grid Stress Test 应模拟场景并更新仪表盘",
+        "evidence": "探针点击后无 DOM 变化、无请求；按钮仅有缩放动画，模拟逻辑未实现",
+        "ok": 0
+      },
+      {
+        "name": "图表拖拽探索",
+        "expected": "在图表上拖拽应平移/缩放或展示可交互数据视图",
+        "evidence": "探针拖拽后 canvas 有像素变化但 DOM 无变化，且无 pointer/touch 或拖拽初始化代码，仅有 Chart.js 默认 tooltip",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为静态仪表盘，所有核心交互按钮（刷新、时间范围切换、场景模拟）都只有按压缩放动画，未实现数据更新或图表切换；预测分析为静态文本。交互成功率 0%，需求声明的交互式仪表盘/模拟功能未实现。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 时间范围按钮“24H/7D/30D”点击后均无实际效果：图表数据、标签和选中状态都没有变化，用户无法切换查看不同时间维度的数据。\n2. 场景模拟器中的“Solar Surge / Wind Variability / Grid Stress Test”三个按钮点击后不产生任何模拟结果，不改变指标、图表或输出，核心模拟功能不可用。\n3. “Refresh Data”按钮点击后无数据更新、无加载反馈、无网络请求，实时刷新功能失效，用户无法判断操作是否成功。\n以上均属于核心控件调节无效/核心操作无法完成，且数量超过1个，因此按2-3分档。\n\n次要瑕疵：\n- 图表和关键指标缺少简要说明或单位图例，初次使用者需要自行理解GW、效率等含义。\n- Renewable Mix的百分比合计为95%，缺少“其他能源”的说明，容易让用户对数据完整性产生困惑。\n- 预测性分析和推荐区域为纯静态展示，没有更多详情入口，功能深度有限。\n- 按钮仅有瞬时缩放动效，无持续状态反馈，容易让人觉得点击没有生效。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，采用深色渐变背景（#0f172a 到 #1e293b）配合玻璃拟态卡片（rgba(30,41,59,0.7)+backdrop-blur+细边框），营造出科技感与沉浸感，契合“可再生能源电网”的未来主题。色彩搭配专业：背景深蓝灰，主强调色为蓝（#60a5fa / #38bdf8）和绿（#10b981），辅以黄、红、蓝灰等状态色，对比度良好，信息层级清晰。布局采用12列网格（3-6-3）实现三栏仪表盘，主次分明，卡片间距均匀，视觉重量平衡。字体使用 Inter，字号和字重搭配合理，关键指标采用渐变文字突出数据。组件设计规范：圆角、阴影、悬停上浮、进度条、状态指示灯等细节精致，图表用 Chart.js 绘制的双线图配色协调。整体符合现代 Dashboard 设计规范，无明显视觉硬伤。扣分点：部分按钮（如 Refresh、场景模拟）仅为视觉反馈，无实际功能交互；页面内容较满，在低分辨率下可能出现溢出裁剪风险；右栏“Recommendations”区略显单调，与左侧区域信息密度有落差。但总体视觉完成度高，值得 8 分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_017271.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Refresh Data",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "24H",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "7D",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "30D",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Solar Surge",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Wind Variability",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Grid Stress Test",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

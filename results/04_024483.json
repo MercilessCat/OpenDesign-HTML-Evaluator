@@ -1,0 +1,181 @@
+{
+  "row_id": "04_024483",
+  "shard": 4,
+  "id": 24483,
+  "category": "Website",
+  "prompt": "Design a digital wishing well platform where users share hopes and dreams, supported by community encouragement and collaborative goal-setting tools. This site blends tradition with technology, creating a space for collective positivity and personal growth in a connected digital community.",
+  "html_len": 27048,
+  "html_sha256": "bc32b18da0a4f49bcb2fc85b5bd487363b1a21de2cc3098c836475691bd2c33c",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "提交梦想（Cast Your Dream into the Well）",
+        "expected": "填写梦想后提交，显示成功反馈，并让梦想出现在社区列表中",
+        "evidence": "HTML 中表单有 submit 监听，会 alert 并 reset；但探针点击提交按钮后 DOM 无变化，也没有新增梦想卡片，空表单也能“成功”，分享梦想的核心闭环未实现。",
+        "ok": 0
+      },
+      {
+        "name": "支持他人梦想（Support 按钮）",
+        "expected": "点击后支持数 +1，并给出视觉反馈",
+        "evidence": "探针点击 Support(24) 后 DOM 有变化且无 JS 错误；HTML 中监听器会更新支持数并添加 pulse 动画，功能可用。",
+        "ok": 1
+      },
+      {
+        "name": "导航到 Community / Goals",
+        "expected": "切换到对应页面或内容板块",
+        "evidence": "Home、Community、Goals、About 均为 href=\"#\" 占位链接，探针点击仅有 hash 跳转，无路由、无内容切换，不能到达对应页面。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Make a Wish Now",
+        "expected": "跳转到许愿表单或打开梦想发布入口",
+        "evidence": "按钮无事件绑定，探针点击后 DOM 无变化、无跳转，未滚动到表单或打开任何界面。",
+        "ok": 0
+      },
+      {
+        "name": "Sign In 登录",
+        "expected": "打开登录/注册流程",
+        "evidence": "Sign In 按钮无事件处理，探针点击后无任何反馈，登录入口未实现。",
+        "ok": 0
+      },
+      {
+        "name": "使用协作目标设定工具",
+        "expected": "可以创建目标、设置里程碑或查看协作进度",
+        "evidence": "页面只有“Achieve Together”等文字描述卡片，没有任何可点击的目标设定、里程碑或协作工具入口，需求中的功能缺失。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面视觉完成度较高，但核心交互大多为占位：唯一真正可用的是支持按钮 +1；梦想提交只 alert/reset，未形成社区内容更新；导航、CTA、登录均为死链或无事件；协作目标设定工具完全没有入口。主要用户任务（分享梦想、社区互动、目标协作）无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. 多个主要入口/CTA 点击后无实际反馈：'Make a Wish Now'、'Sign In'、'View All Dreams'、'Learn More'、'Get Started Free' 等均无跳转、弹窗或状态变化，用户无法判断操作是否生效。\n2. 顶部导航 Home/Community/Goals/About 以及 footer 大量链接都是 href='#' 占位链接，点击不会进入对应页面/内容，导航形同虚设。\n3. 提交梦想的核心流程没有真正完成：提交后仅弹出 alert 并重置表单，新梦想没有出现在 Community Dreams 列表中，用户无法确认自己的愿望是否被分享；且空表单也能提交，缺少校验。\n\n次要瑕疵：\n- 评论按钮没有实现，Support 按钮有反馈但 Comment 点击无效。\n- 缺少图例/帮助文字，部分功能（如头像叠放、Support 计数）含义不够直观。\n- 提交用 alert 弹窗，阻断体验且与整体视觉风格不一致。\n- select 下拉在深色背景下的可读性需要检查。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "该页面整体视觉设计质量较高。色彩搭配以深色渐变背景（#0f172a→#1e293b）为基础，配合紫罗兰/品红渐变（#6366f1、#8b5cf6、#ec4899）作为主色调，营造出梦幻、神秘且积极向上的氛围，与“数字许愿井”的主题高度契合。页面布局结构清晰，从导航、Hero区、表单区、社区梦想卡片、功能说明、数据统计到CTA和页脚，层次分明，间距规范。字体选用Poppins，现代圆润，阅读舒适；组件采用玻璃拟态效果（背景模糊、半透明白、精致圆角与阴影），配合悬浮上移动效和脉动动画，提升视觉质感和交互反馈。CSS技术运用专业：自定义Tailwind配色、关键帧动画（星群闪烁、浮动、脉冲）、渐变文字、3D悬停微交互等，符合现代网页设计规范。交互探针显示无JS错误，按钮点击有反馈，页面功能基本可用。唯一可优化之处在于页面实际渲染依赖CSS背景与无图片内容，可能因缺乏真实插画而显得稍显单一，但整体视觉吸引力与设计完成度很高，完全满足用户对“社区积极能量、传统与现代融合”的需求。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_024483.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Goals",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "About",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Make a Wish Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Cast Your Dream into the Well",
+      "href": null,
+      "type": "submit",
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Support (24)",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

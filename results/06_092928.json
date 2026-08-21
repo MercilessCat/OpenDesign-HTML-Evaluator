@@ -1,0 +1,180 @@
+{
+  "row_id": "06_092928",
+  "shard": 6,
+  "id": 92928,
+  "category": "Website",
+  "prompt": "Envision a futuristic travel agency specializing in tours to reconstructed habitats of extinct species. Users explore virtual itineraries, engage in interactive simulations, and book trips to conservation sites. Features include immersive VR experiences, educational resources on extinct species, and a platform for booking eco-friendly travel packages.",
+  "html_len": 36122,
+  "html_sha256": "8b85b1816cfbaf5976b5ac8a20e45932f1498aaa65314fb71e49df7f22b9bc21",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "浏览特色远征",
+        "expected": "点击导航“Expeditions”或“Explore Expeditions”按钮后滚动到远征展示区，查看虚拟行程卡片",
+        "evidence": "探针点击 Expeditions 链接和 Explore Expeditions 按钮后 DOM 均有变化（锚点/JS 兜底滚动），无新增 JS 错误；页面完整展示 3 张可选的虚拟行程卡片，含价格与内容介绍",
+        "ok": 1
+      },
+      {
+        "name": "填写预订表单提交",
+        "expected": "填写姓名、邮箱、选择远征和日期后提交，获得预订确认或相应业务反馈",
+        "evidence": "预订区存在完整表单（姓名/邮箱/远征选择/日期输入框），但 form 无 action 属性、submit 按钮无 JS 提交处理逻辑，提交后不会产生任何预订确认反馈；HTML 证据显示该预订流程未实现",
+        "ok": 0
+      },
+      {
+        "name": "体验 VR 虚拟游览演示",
+        "expected": "点击“Virtual Tour Demo”或“Try Demo”后启动 VR/交互式沉浸模拟体验",
+        "evidence": "探针点击 Virtual Tour Demo 后 DOM 无变化且新增 1 条 JS 错误；页面元素统计 canvas=0，虽引用 three.js 但未创建任何 WebGL 场景，Try Demo 按钮同样无事件绑定，VR 功能实为占位",
+        "ok": 0
+      },
+      {
+        "name": "查看灭绝物种教育资源",
+        "expected": "点击导航“Species”滚动到进化时间线，查看已灭绝物种的教育信息",
+        "evidence": "探针点击 Species 链接后 DOM 有变化（滚动到 #species 时间线区域）；时间线完整展示非鸟恐龙、四足动物、陆地植物等教育内容，信息呈现符合预期",
+        "ok": 1
+      },
+      {
+        "name": "联系旅行社",
+        "expected": "点击“Contact Us”按钮后打开联系渠道、反馈窗口或跳转联系方式页面",
+        "evidence": "探针点击 Contact Us 按钮后 DOM 无变化、无新增 JS 错误；该按钮无 href、无 onclick 等任何事件绑定，是纯占位入口",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完整但核心功能大量未实现：可浏览远征展示区和物种教育时间线（导航锚点滚动可用），但 VR/互动模拟演示完全失效（点击无反馈且报 JS 错误）、预订表单无提交逻辑、Contact Us 按钮为死链。需求中的“虚拟行程浏览”部分可用，而“interactive simulations”和“booking platform”均无法完成，关键占位入口达到 3 个，按锚定规则不高于 4 分，结合核心任务大面积失败给 3 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "页面存在多个核心可用性问题，导致整体不好用。具体如下：\n\n【核心可用性问题】\n1. 主导航“Home”链接点击后无有效反馈，且新增JavaScript错误（无效的'#'选择器），无法正常回到页面顶部，属于主要导航点击无实际反馈。\n2. 导航栏“Contact Us”按钮点击后无任何反应，既没有打开联系表单，也没有展示联系方式，反馈完全缺失。\n3. “Virtual Tour Demo”按钮（VR演示核心入口）点击后无效果，同时新增JavaScript错误，交互模拟功能无法启动，属于核心操作无法完成。\n4. 页面初始加载即存在2条JavaScript错误（无效的'#'选择器），导致部分交互绑定失效，进一步破坏可用性。\n\n【次要瑕疵】\n- 卡片上“Book Now”按钮仅滚动至预订区，并未自动填充或联动对应行程，反馈不够精确。\n- 预订表单的提交按钮在代码中缺失或不完整，预订流程可能无法真正完成。\n- 物种时间线内容较少，缺乏更多互动或详细教育资料，未充分利用主题资源。\n- 部分按钮（如“Contact Us”）无说明性文案，用户无法预知点击结果。\n- 视觉设计出色，但动画和动效在功能未达标时反而加剧了期望落差。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，深色渐变背景搭配蓝紫主色调，营造出强烈的未来科技感与探险氛围，与“时空旅行/灭绝物种重建”主题高度契合。色彩搭配合理，使用#0ea5e9（天蓝）、#8b5cf6（紫）、#10b981（绿）作为点缀色，在深色背景上对比鲜明且和谐。布局结构完整，包含导航、Hero、统计数据、特色行程、技术展示、时间线与预订表单，层级清晰，网格与Flex运用得当，卡片、圆角、阴影、渐变、悬浮动画等细节设计专业，符合现代深色UI潮流。字体选用Orbitron与Poppins，兼顾科技感与可读性。CSS中自定义的发光按钮、卡片悬浮、浮动动画、时间线等元素丰富了视觉表现。扣分点：页面重度依赖图标与渐变背景替代真实图片，缺少沉浸式视觉素材，导致部分区块略显抽象；运行时存在2条JS错误（锚点选择器问题）及个别点击交互无响应，虽不影响静态外观，但削弱整体体验。综合评分8分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Failed to execute 'querySelector' on 'Document': '#' is not a valid selector.",
+      "Failed to execute 'querySelector' on 'Document': '#' is not a valid selector."
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_092928.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Expeditions",
+      "href": "#expeditions",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Species",
+      "href": "#species",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Technology",
+      "href": "#technology",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Book Now",
+      "href": "#booking",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Contact Us",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Expeditions",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Virtual Tour Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

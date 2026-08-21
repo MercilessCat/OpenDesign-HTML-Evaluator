@@ -1,0 +1,181 @@
+{
+  "row_id": "01_007487",
+  "shard": 1,
+  "id": 7487,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Design a visually engaging platform for creating and showcasing SVG animations. The core idea is an intuitive timeline editor for seamless animation design. Key features include drag-and-drop creation tools, live preview options, and a community gallery for sharing and discovering animations, fostering creativity and collaboration.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14789,
+  "html_sha256": "231a27513d042a06b6db366df9919d6e7a96b24527437cfb2cd115ed3922843a",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "顶部导航切换（Editor/Gallery/Templates/Docs）",
+        "expected": "点击导航应切换到对应区块/路由并显示对应内容",
+        "evidence": "四个导航链接均为 href=\"#\"，无路由或事件绑定；探针点击后仅产生哈希跳转/回到顶部，无实质内容变化，属于占位导航。",
+        "ok": 0
+      },
+      {
+        "name": "使用左侧绘制工具（Select/Rectangle/Circle/Path）",
+        "expected": "激活对应绘制工具，并能在预览区拖拽创建或选择 SVG 元素",
+        "evidence": "探针点击 Select、Rectangle 时 DOM 无变化；HTML 中这些按钮没有绑定点击处理，无法进入绘制或拖拽模式。",
+        "ok": 0
+      },
+      {
+        "name": "播放/控制时间轴动画",
+        "expected": "点击 Play 播放或暂停时间轴动画",
+        "evidence": "Play 按钮没有事件处理；脚本中的 querySelector('.timeline-editor .play-button') 匹配不到任何元素，点击不会控制动画。",
+        "ok": 0
+      },
+      {
+        "name": "点击时间轴节点选择关键帧",
+        "expected": "选中关键帧并高亮显示",
+        "evidence": "脚本为 .timeline-node 添加了 click 监听，点击会切换 ring 样式，属于有效的视觉反馈。",
+        "ok": 1
+      },
+      {
+        "name": "从社区画廊查看动画",
+        "expected": "点击画廊卡片会在预览区加载对应动画",
+        "evidence": "JS 只给被点卡片加边框并短暂重置现有 SVG 动画，未加载任何新动画；所有卡片是静态占位内容，预览区展示的动画不会改变。",
+        "ok": 0
+      },
+      {
+        "name": "分享作品（Share Your Creation）",
+        "expected": "打开发布/上传作品流程",
+        "evidence": "按钮无点击事件，探针点击后无 DOM 变化，功能未实现。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面核心创作链路几乎不可用：绘制工具、时间轴播放、社区画廊浏览与分享均为占位或无事件绑定，只有点击时间轴节点有简单的选中高亮。无法完成“创建和展示 SVG 动画”的主要任务，因此分数为 2。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 绘图工具栏 Select/Rectangle/Circle/Path 点击无任何状态或行为变化，用户无法选择工具，拖拽创建主流程不可用；2. 时间轴编辑器的 Play/Plus 按钮没有绑定有效逻辑，无法播放/暂停动画或添加关键帧；3. 预览区的 Expand/Download 点击无效，无法全屏或导出；4. 顶部导航为占位链接，Editor/Gallery/Templates/Docs 点击后只发生占位跳转，无法定位到对应内容；Sign In/Get Started/Share 等主要入口点击后无反馈。次要瑕疵：社区画廊点击仅加高亮边框，未真正切换/加载动画；缺少操作说明、图例和快捷键；部分按钮命名指向不明确。由于存在多项核心可用性问题，按锚定给 3 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力高，采用现代靛紫渐变主色调搭配浅蓝灰渐变背景，色彩和谐且层次清晰。布局为经典的三栏结构（工具区、预览区、社区画廊），信息组织合理，视觉重心明确。字体使用 Inter，字号与字重搭配得当，间距和圆角处理细腻，组件（按钮、卡片、时间轴节点、预览面板）均具有专业级质感。CSS 基于 Tailwind 且引入自定义过渡、阴影和关键帧动画，hover 反馈丰富，符合现代网页设计规范。微交互（如画廊卡片 hover 上浮、时间轴节点缩放、SVG 呼吸动画）提升精致感。仅因部分交互按钮（如 Play）缺少功能实现，以及视觉上元素密度略高，扣除 1 分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_007487.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Editor",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Templates",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Docs",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Select",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Rectangle",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

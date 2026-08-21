@@ -1,0 +1,165 @@
+{
+  "row_id": "04_005940",
+  "shard": 4,
+  "id": 5940,
+  "category": "Website",
+  "prompt": "Experience sensory fusion in a gallery showcasing synesthetic UX prototypes. Experiment with interfaces that blend sight, sound, and touch, offering users novel ways to interact with technology. Participate in workshops and discussions on enhancing user experiences through sensory integration.",
+  "html_len": 29417,
+  "html_sha256": "f64aee6763e9a0b8486657216887e875f6484d27a3730e36c3d3211e6df5bdd7",
+  "functional": {
+    "score": 0.0,
+    "raw_score": 0.0,
+    "cap_applied": false,
+    "interactions": [],
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 0.0,
+    "reason": "ERROR: APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 0.0,
+  "baseline_overall": 0.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://cdn.jsdelivr.net/npm/tsparticles@1.40.1/dist/tsparticles.min.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://cdn.jsdelivr.net/npm/tsparticles@1.40.1/dist/tsparticles.min.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://cdn.jsdelivr.net/npm/tsparticles@1.40.1/dist/tsparticles.min.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://cdn.jsdelivr.net/npm/tsparticles@1.40.1/dist/tsparticles.min.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://cdn.jsdelivr.net/npm/tsparticles@1.40.1/dist/tsparticles.min.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://cdn.jsdelivr.net/npm/tsparticles@1.40.1/dist/tsparticles.min.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://cdn.jsdelivr.net/npm/tsparticles@1.40.1/dist/tsparticles.min.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://cdn.jsdelivr.net/npm/tsparticles@1.40.1/dist/tsparticles.min.js -> net::ERR_BLOCKED_BY_ORB",
+      "https://cdn.jsdelivr.net/npm/tsparticles@1.40.1/dist/tsparticles.min.js -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [
+      "particlesJS is not defined",
+      "particlesJS is not defined",
+      "particlesJS is not defined",
+      "particlesJS is not defined",
+      "particlesJS is not defined",
+      "particlesJS is not defined",
+      "particlesJS is not defined",
+      "particlesJS is not defined",
+      "particlesJS is not defined"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\04_005940.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#gallery",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Workshops",
+      "href": "#workshops",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Experience",
+      "href": "#experience",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Contact",
+      "href": "#contact",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Enter Gallery",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Workshop Schedule",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Try Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Try Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

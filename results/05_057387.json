@@ -1,0 +1,182 @@
+{
+  "row_id": "05_057387",
+  "shard": 5,
+  "id": 57387,
+  "category": "Website",
+  "prompt": "Design a supportive online community dedicated to parenting. The site offers expert advice, peer support groups, and interactive workshops. Features include virtual events, Q&A sessions, and customizable parenting plans. Facilitate meaningful connections and provide resources to help parents navigate the challenges and joys of raising children in a digital age.",
+  "html_len": 25717,
+  "html_sha256": "f68db6cde534315c30e6ba90f6ea0fa7f98e8db1f990c3b57771fa1d62285898",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航 Features 进入功能板块",
+        "expected": "页面应滚动到“Everything You Need as a Parent”功能特性区块",
+        "evidence": "探针点击后 DOM 有变化并发生页面跳转，无 JS 错误；href 指向 #features 且对应 section 存在。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Join Community 加入社区",
+        "expected": "应打开注册/加入流程、弹出窗口或至少给出进入社区的反馈",
+        "evidence": "探针点击后 DOM 无变化、无网络请求、无 JS 错误；按钮未绑定任何业务事件，属于无功能入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started Free 开始使用",
+        "expected": "应进入免费试用或创建账号流程",
+        "evidence": "探针点击后 DOM 无变化（JS click 兜底），无网络请求；按钮无实际业务处理。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Community 浏览社区",
+        "expected": "应进入社区页面或展示支持群组内容",
+        "evidence": "探针点击后 DOM 无变化、无网络请求；按钮未绑定事件。",
+        "ok": 0
+      },
+      {
+        "name": "点击核心功能入口（Build Your Plan / Browse Workshops / View Upcoming Events）",
+        "expected": "应进入定制育儿计划、研讨会或活动页面",
+        "evidence": "这些链接均为 href=\"#\" 且无路由或事件绑定，点击只是占位，不能打开任何对应功能页。",
+        "ok": 0
+      },
+      {
+        "name": "在示例支持群组输入消息并发送",
+        "expected": "输入消息后应发送到群组会话，或触发登录/加入流程",
+        "evidence": "页面有输入框和纸飞机发送按钮，但无 form action 和 JS 事件绑定；输入并回车或点击发送不会产生消息。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面是一个静态营销落地页：仅导航锚点 #features 可跳转，其余核心 CTA（加入社区、免费试用、浏览社区）和功能入口（定制育儿计划、研讨会、活动等）均为无事件绑定的占位入口，示例群组消息也无法发送。用户无法完成加入社区、报名活动、定制育儿计划等主要任务，核心交互大面积失效。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）首屏三个核心行动按钮（Join Community、Get Started Free、Explore Community）点击后均无任何DOM变化、无网络请求、无跳转，用户无法执行注册/加入社区等最关键操作，符合'核心操作无法完成'的降档标准；2）移动端导航菜单按钮（hamburger）点击后无反应，移动端用户无法展开菜单，影响主要入口的可用性。次要瑕疵：导航锚点链接功能正常但无滚动平滑之外的着陆反馈；页面中所有卡片'了解更多'类链接（如Browse Workshops、Find Your Group等）均为占位链接，点击后无实际反馈；FAQ手风琴代码引用了不存在的.faq-question元素，功能未实际生效；社区预览中的消息发送按钮点击后无任何反馈；移动端菜单JS为空的实现注释。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉设计专业且现代，色彩搭配和谐（以靛蓝、紫罗兰、粉色渐变为主，辅以柔和背景渐变），符合亲子社区温馨又值得信赖的调性。布局结构清晰，导航、Hero、数据统计、功能卡片、用户评价、CTA及页脚层次分明，节奏感良好。字体选择Poppins，圆角、阴影、渐变、卡片悬停效果等CSS细节处理到位，组件风格统一。交互上按钮缺乏实际功能是轻微扣分项，且页面缺少真实图片素材，略显模板化，但整体视觉吸引力强，符合现代网页设计规范。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_057387.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Events",
+      "href": "#events",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#resources",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started Free",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Community",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

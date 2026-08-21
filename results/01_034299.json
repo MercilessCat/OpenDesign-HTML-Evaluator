@@ -1,0 +1,183 @@
+{
+  "row_id": "01_034299",
+  "shard": 1,
+  "id": 34299,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create a minimalist and intuitive interface for performing basic and advanced calculations, featuring a history log and customizable themes. Users can perform quick computations, save formulas for future use, and explore educational content on mathematical concepts. Key features include scientific mode, theme customization, and a formula library.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 15321,
+  "html_sha256": "1b9d8de778b85ae92573c56ce00a07ee7221dc41e40a2d7c9aee4c26a1e149ac",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "基础计算并查看结果",
+        "expected": "点击数字和运算符后，按等号应显示计算结果",
+        "evidence": "数字和运算符按钮绑定了 click 事件，显示可更新；但等号按钮 class 为 btn-eq，JS 只绑定了 .btn-num/.btn-op/.btn-func，未给 .btn-eq 绑定任何事件，点击 = 无法触发计算。",
+        "ok": 0
+      },
+      {
+        "name": "科学模式切换",
+        "expected": "点击 Scientific 显示科学函数面板，点击 Basic 隐藏",
+        "evidence": "探针点击 Scientific 后 DOM 变化=有；toggleScientificMode 能正确切换 hidden 和按钮激活样式。",
+        "ok": 1
+      },
+      {
+        "name": "科学函数计算",
+        "expected": "sin/cos/√/log 等函数应参与计算并给出结果",
+        "evidence": "科学函数按钮只调 handleSpecialFunction 默认分支，把字符串直接追加到 currentInput，没有解析或求值逻辑；等号按钮也无事件，无法完成任何科学计算。",
+        "ok": 0
+      },
+      {
+        "name": "主题定制",
+        "expected": "点击主题按钮在多个主题间切换，页面配色变化",
+        "evidence": "探针点击主题按钮后 DOM 变化=有；changeTheme 会在 theme-light/theme-dark/theme-blue 间轮换，body class 更新。",
+        "ok": 1
+      },
+      {
+        "name": "历史记录点击复用",
+        "expected": "点击历史记录应回填公式或重新计算",
+        "evidence": ".history-item 只有 cursor-pointer 样式，没有 addEventListener/onclick；探针也未出现业务反馈，点击历史记录无任何功能。",
+        "ok": 0
+      },
+      {
+        "name": "公式库与教育内容探索",
+        "expected": "点击公式卡片应查看详情、插入公式或展示数学概念说明",
+        "evidence": ".formula-item 只有 cursor-pointer 样式，没有事件绑定；点击卡片无详情、无公式插入，公式库仅为静态占位，未实现“保存公式/教育内容”需求。",
+        "ok": 0
+      }
+    ],
+    "reason": "主题切换和科学面板开关可用，但核心计算链路因等号按钮未绑定事件而断裂，科学函数不参与实际计算，历史记录和公式库点击均为占位，多个需求声明的关键功能未实现。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 等号按钮根本没有绑定点击事件，2+3 后按 = 无任何反应，无法得到计算结果；只能靠继续按运算符间接触发计算，基本操作流程卡死。2. 科学模式的 sin/cos/tan/log/ln/√/^/!/括号只会往输入框插入字符，没有任何求值逻辑，输入这些函数后无法得出结果，高级计算不可用。3. 主题切换只改变 body 上的 theme-* 类，但这类只定义 CSS 变量，页面实际使用的 bg-bgSecondary/text-textPrimary 等 Tailwind 类无效，没有元素应用这些变量，所以切换主题后界面外观没有变化，主题定制核心功能无效。4. % 按钮实现为取模而不是百分比，比如 5 % 2 会得到 1，与用户对百分比按钮的预期不符，反馈错误。5. 公式库中卡片有 cursor-pointer 但没有点击事件，公式库只是静态展示，不能保存/加载/查看详情，与需求中的公式库/保存公式不符。次要瑕疵：帮助按钮无任何响应；数字和运算符按钮没有可见按钮样式，点击区不明显；无键盘输入支持；历史记录没有空状态或操作引导，头部历史项点击无反馈；主题按钮缺少当前主题状态提示。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 6.0,
+    "reason": "页面整体布局结构清晰，使用Tailwind构建了头部、主区域和侧边栏，色彩搭配以蓝色为主色调，辅以浅灰和白色，视觉基调统一；主题切换、科学模式切换等交互设计增加了功能亮点。但核心计算器按键（btn-num、btn-op、btn-func）未定义专门的视觉样式，仅依赖浏览器默认按钮外观，导致按钮缺乏圆角、配色与适配感，与侧边栏卡片和头部按钮的精致风格形成明显落差，破坏了整体视觉一致性和专业度。布局上，计算器区域和侧边栏高度匹配尚可，但科学面板的切换与整体间距处理略显生硬。字体、间距虽有多处使用Tailwind工具类，但按钮文字和显示区域排版仍有优化空间。因此，页面具备一定设计基础，但在组件细节和CSS统一性上未达到现代专业UI标准。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.6,
+  "baseline_overall": 3.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_034299.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-palette",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-question-circle",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Basic",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Scientific",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "C",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "⌫",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "%",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "÷",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "row_id": "01_017463",
+  "shard": 1,
+  "id": 17463,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create a sleek interface for toggling between light and dark modes, exploring the science and aesthetics of visual comfort. The core idea is to enhance user experience through personalized theme settings. Features include automatic scheduling, customizable color palettes, ambient light detection, and educational content on the benefits of dark mode.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 7880,
+  "html_sha256": "bbc9fa12487dc482774ea763ca2a9a68d63c2ed8bbb7fed8b6a7c20b8f51b9d8",
+  "functional": {
+    "score": 9.0,
+    "raw_score": 9.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击主题开关切换到深色模式",
+        "expected": "点击开关后页面整体从浅色变为深色，滑块右移并变为品牌色，主题偏好保存到 localStorage。",
+        "evidence": "HTML 中 #theme-toggle 是被 label 包裹的 checkbox；脚本 addEventListener('change') 在勾选时向 document.documentElement 添加 dark 类并 localStorage.setItem('theme','dark')。CSS input:checked 切换滑块背景和位移，body/header/footer 均",
+        "ok": 1
+      },
+      {
+        "name": "点击主题开关切回浅色模式",
+        "expected": "取消勾选后页面恢复白底深字，滑块回到左侧，主题偏好保存为 light。",
+        "evidence": "同一 change 监听中 else 分支移除 dark 类并写入 'light'；CSS 默认 .slider 状态和 body bg-white text-gray-900 会生效。",
+        "ok": 1
+      },
+      {
+        "name": "刷新后主题状态持久化",
+        "expected": "刷新页面后仍保持上一次选择的明暗模式。",
+        "evidence": "加载脚本读取 localStorage.getItem('theme')，若为 dark 则在初始化时添加 dark 类并设置 checkbox.checked=true。",
+        "ok": 1
+      },
+      {
+        "name": "浏览暗色模式益处教育内容",
+        "expected": "用户能看到 Benefits of Dark Mode 列表和引言，内容完整呈现。",
+        "evidence": "右侧渐变卡片包含 4 个带勾选图标的益处条目及一句引言，文本完整，页面无滚动溢出迹象。",
+        "ok": 1
+      },
+      {
+        "name": "查看自动调度/色板/光线检测等特性卡片",
+        "expected": "主页展示 Auto Schedule、Color Palettes、Light Detection、Research Based 四张卡片及说明。",
+        "evidence": "主区域 grid 中四个 .card-hover 卡片分别渲染这些主题，并配有图标和说明文字；CSS 提供 hover 上浮效果。",
+        "ok": 1
+      }
+    ],
+    "reason": "核心目标——明暗模式切换——真实可用并有 localStorage 持久化，视觉反馈明确；教育内容和四项特性卡片完整呈现，运行时无 JS 或网络错误。仅个别高级特性（自动调度/调色板/光线检测）没有内部设置控件，但作为单页 UI 组件展示，不影响主要可用性。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 8.0,
+    "reason": "核心可用性问题：无。明暗切换开关功能正常，主题状态持久化，反馈清晰，页面结构清晰，主流程通畅。次要瑕疵：1. 特性卡片（Auto Schedule、Color Palettes、Light Detection）仅为静态文本，没有对应交互，可能让用户误以为可点击；2. 切换控件两侧的“Light/Dark”标签不随当前模式高亮，存在轻微歧义；3. 在较小视口下内容可能溢出，未严格满足“一屏无滚动”的要求。这些均不影响核心明暗切换功能。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力较高，采用Tailwind CSS构建，布局清晰且现代。色彩搭配合理，浅色模式简洁明亮，深色模式使用深蓝色系并配以靛蓝/紫色渐变卡片，对比度良好。布局通过flex和grid实现响应式，主内容区域左右分栏，左侧信息卡片排列整齐，右侧深色渐变面板形成视觉焦点，页面结构协调。字体、间距、圆角、阴影等细节处理专业，卡片hover效果和主题切换过渡动画增强了交互感。自定义toggle-switch组件样式简洁，功能完整，并支持localStorage持久化。整体符合现代网页设计规范，与“UI component”主题高度契合。扣分项：未显式定义字体族，可能受浏览器默认影响；页面内容较多，在较矮的视口下可能需要轻微滚动才能完整显示，但整体视觉表现优秀。",
+    "attempts": 1
+  },
+  "regime": "POLISHED",
+  "overall_score": 8.5,
+  "baseline_overall": 8.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_017463.png",
+  "probe": []
+}

@@ -1,0 +1,187 @@
+{
+  "row_id": "02_019770",
+  "shard": 2,
+  "id": 19770,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Develop a site focused on enhancing chart readability through innovative legend designs. Users can explore interactive examples, apply custom legends to their data, and access tutorials on effective data storytelling. Key features include a legend design tool and community gallery for sharing creative solutions.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10374,
+  "html_sha256": "fcbc0cad23509c30f1004a8d164ac55c8add48f5ec059c466ec7b95787a1d67c",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航 Examples",
+        "expected": "跳转到示例页面或展示交互式图表示例",
+        "evidence": "探针点击 <a href=\"#\">Examples</a> 后页面跳转，但仅为锚点定位，无路由切换、无实际示例内容加载；导航为纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Tool",
+        "expected": "打开 Legend 设计工具或展示工具界面",
+        "evidence": "探针点击 <a href=\"#\">Tool</a> 后仅锚点跳转，无工具渲染、无内容更新；功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Gallery",
+        "expected": "跳转到社区画廊并展示用户提交的图例方案",
+        "evidence": "探针点击 <a href=\"#\">Gallery</a> 后仅锚点跳转，无画廊内容加载；占位链接。",
+        "ok": 0
+      },
+      {
+        "name": "点击导航 Tutorials",
+        "expected": "跳转到数据故事教程页面",
+        "evidence": "探针点击 <a href=\"#\">Tutorials</a> 后仅锚点跳转，无教程内容；需求中的教程入口未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Legend Designer 按钮",
+        "expected": "打开或展示传奇设计工具，允许用户自定义图例",
+        "evidence": "探针点击按钮后 DOM 变化=无，新增JS错误=0，按钮无事件绑定，点击无任何反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Community Gallery 按钮",
+        "expected": "打开社区画廊，展示社区分享的解决方案",
+        "evidence": "探针点击按钮后 DOM 变化=无，新增JS错误=0，按钮无事件绑定，交互未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started 按钮",
+        "expected": "开始使用 LegendCraft 或进入主流程",
+        "evidence": "探针点击后 DOM 变化=无，新增JS错误=0，无网络请求，按钮为死按钮。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面虽具有完整视觉布局，但需求声明的核心功能均未实现：所有导航链接为 href=\"#\" 占位，Legend Designer、Community Gallery、Get Started 等按钮点击无任何响应。用户无法探索交互示例、使用图例设计工具或进入社区画廊，页面本质是静态展示页，核心交互大面积失败。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 主导航（Home、Examples、Tool、Gallery、Tutorials）均为占位链接（href=\"#\"），点击后仅跳转页面顶部，无法访问任何实际功能或内容；2. 核心操作按钮（Get Started、Legend Designer、Community Gallery）点击后无任何DOM变化或反馈，核心工具无法使用；3. 页面宣称的交互式示例仅为静态占位图，无任何交互功能，无法完成探索示例的任务。次要瑕疵：页面内容超出单屏视口，需滚动查看，不符合单页免滚动要求；功能模块（设计工具、图库、教程）均未实现，缺少必要说明文字；底部社交链接同样为占位链接。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力强，采用现代感的蓝色主调搭配紫色和黄色点缀，配色和谐且符合数据可视化主题。布局清晰，Header、Hero、Features、Gallery、Footer结构完整，卡片式设计配合圆角、阴影和悬浮动效，提升了高级感与交互性。字体使用Inter，排版清晰易读。背景渐变和图表占位符的条纹设计增添了细节趣味。虽然按钮缺少实际功能、导航为占位链接，但作为视觉设计已具备专业水准，整体符合现代Web设计规范与用户需求风格。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_019770.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Examples",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tool",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Legend Designer",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Community Gallery",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

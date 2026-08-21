@@ -1,0 +1,181 @@
+{
+  "row_id": "00_024756",
+  "shard": 0,
+  "id": 24756,
+  "category": "3D design",
+  "prompt": "Develop a comprehensive learning hub for mastering 3D skeletal animations using cutting-edge libraries. The main purpose is to educate users through interactive tutorials. Key features include step-by-step guides, code snippets, real-time animation previews, and a community forum for troubleshooting and sharing insights.",
+  "html_len": 20141,
+  "html_sha256": "66e9075aeb279f2c72f0187392457e56be0ab98e780cbb83d8c49d9ade0267fb",
+  "functional": {
+    "score": 7.0,
+    "raw_score": 7.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航 Tutorials 锚点",
+        "expected": "页面滚动/跳转到教程板块",
+        "evidence": "探针点击后 DOM 变化且有页面跳转，无 JS 错误；HTML 中 a 标签 href=\"#tutorials\" 为有效锚点",
+        "ok": 1
+      },
+      {
+        "name": "点击 Play Animation 按钮",
+        "expected": "播放动画或给出提示反馈",
+        "evidence": "探针报告 DOM 无变化但无 JS 错误；HTML 中按钮绑定 click 事件，执行 alert('Animation is already playing!...')，动画本身已在自动播放，属于有反馈",
+        "ok": 1
+      },
+      {
+        "name": "点击 Toggle Wireframe 按钮",
+        "expected": "角色网格切换线框渲染",
+        "evidence": "探针检测 WebGL 像素变化不可测，但 HTML 中按钮绑定 click 事件切换 skinnedMesh.material.wireframe，且运行时无 JS 错误，按 WebGL 交互规则视为可交互",
+        "ok": 1
+      },
+      {
+        "name": "在实时预览 canvas 上拖拽旋转",
+        "expected": "场景随拖拽旋转（OrbitControls）",
+        "evidence": "探针像素不可测，但 HTML 中初始化了 THREE.OrbitControls 并绑定 renderer.domElement，运行时无 JS 错误，符合可交互判定条件",
+        "ok": 1
+      },
+      {
+        "name": "点击 Reset Position 按钮",
+        "expected": "角色回到初始位置/姿势",
+        "evidence": "探针点击后 DOM 无变化；HTML 中事件仅设置 skinnedMesh.rotation.set(0,0,0)，而骨骼动画持续驱动骨骼，视觉上无有效重置反馈",
+        "ok": 0
+      },
+      {
+        "name": "在社区论坛发帖/分享见解",
+        "expected": "提供发帖或分享入口",
+        "evidence": "页面只有静态论坛帖子展示，没有任何发帖表单、回复按钮或分享入口，需求中的 sharing insights 功能未提供交互入口",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面完整实现了教程步骤、代码片段、实时3D骨骼动画预览和静态社区论坛展示；导航锚点有效，OrbitControls拖拽与线框切换可用。主要扣分项为 Reset Position 按钮点击后无有效视觉反馈，以及社区论坛缺少发帖/分享的交互入口。整体核心学习功能可用，仅存在次要交互瑕疵与部分需求未闭环。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：1）顶部导航链接（Tutorials/Preview/Community/Resources）指向的锚点在页面中不存在，点击后不会滚动到任何区域，主要入口无实际反馈；2）预览区“Play Animation”按钮点击后仅弹出“Animation is already playing!”，无法控制播放/暂停，反馈错误且操作无效；3）“Reset Position”按钮点击后角色无明显变化，也没有任何成功/失败反馈，用户无法确认操作生效；4）社区论坛仅为静态帖子展示，完全没有发帖/回复功能，无法实现用户需求中“分享见解”的核心目标；5）教程步骤是纯静态内容，没有交互机制（如步骤切换、标记完成、代码执行等），不符合“interactive tutorials”的核心定位。次要瑕疵包括：代码片段缺少复制按钮；移动端导航被隐藏且无替代菜单；预览动画与教程代码没有联动；动画关键帧使用VectorKeyframeTrack作用在quaternion上，数值维度不匹配，可能导致动画表现异常。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉设计出色，深蓝色渐变背景搭配青绿渐变的强调色，色彩搭配专业且贴合3D科技主题。布局采用清晰的对称双列网格，面板、步骤卡片、代码块和论坛帖子的层次感分明，半透明磨砂玻璃效果与柔和阴影提升了现代感。字体排版有节奏，主标题的大号渐变文字醒目，内容区域字号与行距舒适。组件设计细致，胶囊形按钮、代码块左侧色条、卡片悬浮动效均体现专业CSS功底，并具备响应式适配。整体视觉吸引力强，符合现代网页设计规范，且与用户需求的3D设计学习中心风格高度一致。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_024756.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Tutorials",
+      "href": "#tutorials",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Preview",
+      "href": "#preview",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#forum",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#resources",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Play Animation",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Position",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Toggle Wireframe",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

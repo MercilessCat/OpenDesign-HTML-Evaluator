@@ -1,0 +1,163 @@
+{
+  "row_id": "00_019559",
+  "shard": 0,
+  "id": 19559,
+  "category": "3D design",
+  "prompt": "Create a platform for dynamic animations where users explore and create immersive 3D perspectives. The core idea is to enable interactive storytelling through animation. Users can design, share, and collaborate on animations with various themes using intuitive tools. Key features include real-time editing, community sharing, and AI-driven animation suggestions.",
+  "html_len": 17426,
+  "html_sha256": "31c8c9490aa5c07a3d8ea39f39a3d3273246a7d7da36993c3a1e184a4bd4314d",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "探索/旋转 3D 场景",
+        "expected": "鼠标拖拽旋转视角，看到 3D 角色、浮岛、粒子等动画场景",
+        "evidence": "运行时出现 7 次 'THREE.CapsuleGeometry is not a constructor'，init() 在创建角色时中断，animate() 和渲染循环未执行；探针在 canvas 上拖拽无像素变化、无反馈。OrbitControls 虽已创建但没有渲染循环驱动，场景无法使用。",
+        "ok": 0
+      },
+      {
+        "name": "切换主题（Space/Ocean/Forest/Cyber）",
+        "expected": "切换后场景背景色、雾色随主题改变",
+        "evidence": "主题选项只是 div，没有任何 onclick 绑定；setupThemeSelector() 需在 init() 尾部调用，但 init() 因 CapsuleGeometry 报错提前中断，事件监听从未注册。点击只能触发 CSS hover，无法切换 active 或改变场景。",
+        "ok": 0
+      },
+      {
+        "name": "调整动画速度/物体缩放滑块",
+        "expected": "拖动滑块实时改变动画速度或物体缩放",
+        "evidence": "两个 range input 在 HTML 中无 oninput/onchange，JS 中也没有绑定事件；滑块只有浏览器默认拖动反馈，不会影响任何动画或 3D 物体。",
+        "ok": 0
+      },
+      {
+        "name": "添加动画层（Add Animation Layer）",
+        "expected": "点击后新增动画层或打开对应编辑面板",
+        "evidence": "探针点击按钮后 DOM 无变化、无网络请求、无 JS 错误；源码中该按钮没有绑定任何事件，属于纯占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "AI 动画建议（AI Suggestions）",
+        "expected": "点击后展示 AI 生成的动画建议或建议面板",
+        "evidence": "探针点击按钮后 DOM 无变化、无网络请求、无 JS 错误；该按钮没有任何事件处理逻辑，核心需求中的 AI 建议功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "新建/保存/分享项目（New Project/Save/Share）",
+        "expected": "点击后执行新建、保存或分享流程，并给出界面反馈",
+        "evidence": "探针分别点击 New Project、Save、Share，均为 DOM 无变化、无网络请求、无 JS 错误；源码中也未绑定任何事件，所有头部操作按钮都是死入口。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面核心任务完全不可用：Three.js 初始化因 THREE.CapsuleGeometry 在 r128 中不存在而中断，3D 场景/动画/视角探索全部失效；主题切换和滑块没有业务绑定；新建、保存、分享、添加动画层、AI 建议等关键入口全部为无事件占位。页面只呈现了 UI 骨架，任何主要交互都没有正确反馈。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 3D场景初始化失败（THREE.CapsuleGeometry is not a constructor），核心渲染与动画功能无法正常启动，用户无法探索或编辑3D内容；2. 顶部主要操作按钮（New Project、Save、Share）点击均无任何反馈，未绑定实际功能，核心操作流程受阻；3. 侧边栏的动画速度、对象缩放滑块无事件绑定，调节无效，核心控件不可用；4. 侧边栏'Add Animation Layer'和'AI Suggestions'按钮无响应，次要功能缺失。次要瑕疵：页面缺少操作引导和说明，用户难以理解如何开始创作；协作面板为静态展示，无实际协作能力；主题切换虽有效但受场景错误影响无法正常呈现；状态栏对象数量为随机模拟，反馈不准确。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "该页面整体视觉设计现代且符合3D创意工具定位：深蓝渐变背景搭配青绿与珊瑚红强调色，营造出科技感和沉浸感；毛玻璃效果（backdrop-filter）与圆角面板提升了层次和质感；header、左右侧栏和状态栏布局清晰，组件风格统一，渐变文字和胶囊按钮设计时尚。但存在明显扣分项：由于THREE.CapsuleGeometry在r128中不可用，Three.js初始化中断，3D场景未能渲染，导致页面核心视觉内容缺失，背景仅剩静态渐变，削弱了“动态动画沉浸式3D”的视觉表现；同时所有按钮点击均无响应且缺少实际交互反馈，影响用户体验。此外，组件细节较简单（无图标、CSS变量未使用），设计不算顶级。综合视觉设计基础良好，但动态性与完成度不足，给7分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.4,
+  "baseline_overall": 3.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_019559.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "New Project",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Share",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Animation Layer",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "AI Suggestions",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

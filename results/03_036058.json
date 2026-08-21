@@ -1,0 +1,162 @@
+{
+  "row_id": "03_036058",
+  "shard": 3,
+  "id": 36058,
+  "category": "Game dev",
+  "prompt": "Design a virtual arcade featuring a digital version of whack-a-mole. The core functionality is quick reflex challenges in a dynamic setting. Key features include various difficulty levels, themed environments, and multiplayer modes, offering a nostalgic yet modern take on arcade gaming that's both fun and competitive.",
+  "html_len": 17821,
+  "html_sha256": "9d7f4800d6b16c4a73ce3a4694db4b7dcc23fd469527a251c8df0cba9afbd0d4",
+  "functional": {
+    "score": 8.0,
+    "raw_score": 8.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "选择主题（Forest）",
+        "expected": "主题被选中，按钮获得高亮脉冲效果，游戏中的鼹鼠颜色会随主题变化",
+        "evidence": "探针点击后报告DOM无变化，但代码中setTheme('forest')会设置currentTheme并切换按钮的pulse类；无JS错误。主题选择实际影响getMoleColor()生成鼹鼠颜色，功能已生效。探针未捕获class级DOM变动，不能据此判定交互失败。",
+        "ok": 1
+      },
+      {
+        "name": "选择难度开始游戏（Easy）",
+        "expected": "隐藏开始界面，显示游戏网格、计分和计时器，游戏状态激活",
+        "evidence": "探针点击Easy按钮后DOM有变化，无JS错误、无网络请求。代码中startGame('easy')隐藏startScreen、显示gameScreen，并初始化网格和计时器，符合预期。",
+        "ok": 1
+      },
+      {
+        "name": "点击冒出的鼹鼠得分",
+        "expected": "若点击时鼹鼠处于升起状态，则得分增加、鼹鼠缩回、显示+10特效；未命中则扣分",
+        "evidence": "代码中每个洞元素绑定了click事件，handleHoleClick()根据data-active状态更新分数并触发hitEffect动画。JS逻辑完整、无运行时错误。探针未覆盖游戏内网格点击，但事件绑定明确存在，可判定交互可用。",
+        "ok": 1
+      },
+      {
+        "name": "启动多人模式（2 Players Battle）",
+        "expected": "进入游戏，显示双人独立计分区域，以hard难度进行，命中后轮流切换玩家",
+        "evidence": "探针点击“2 Players Battle”后DOM有变化，无JS错误。代码startMultiplayer()设置多人模式、移除multiplayerScore隐藏状态并初始化游戏，符合预期。",
+        "ok": 1
+      },
+      {
+        "name": "游戏结束后点击PLAY AGAIN",
+        "expected": "返回开始界面，可重新选择主题/难度/模式",
+        "evidence": "代码中resetGame()将gameOverScreen隐藏、startScreen显示。按钮绑定onclick，无JS错误；探针未覆盖（需先进入结束状态），但根据脚本逻辑该交互有效。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面核心玩法完整：难度选择、单人/多人模式、游戏内点击鼹鼠计分、游戏结束重开均可用。主题选择虽然探针报告DOM无变化，是因为class切换未被探针捕获，实际功能已实现（影响鼹鼠颜色）。整体仅有少量次要瑕疵如主题环境表现较单一（仅改变鼹鼠颜色），不影响核心任务完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1) 重开游戏后流程卡死：initGameGrid 未清空全局 moles 数组，第二次开始后数组长度变为18，旧节点与新节点混用，导致地鼠弹出与点击索引错位，可见地鼠打不到、空洞也可能加分，重开局无法正常继续。2) 主题选择实际无效：Forest/Desert/Space 点击后没有环境变化，CSS 的 theme-forest/desert/space 类从未应用，仅微弱改变地鼠颜色，用户无法感知主题选择成功或生效。3) 多人模式未形成有效双人对战：没有当前玩家/回合指示，也没有双人输入分工，成功点击只是轮流把分数给 P1/P2，玩家不知道一次点击该计给谁，核心的 competitive multiplayer 目标无法达成。次要瑕疵：单局结束返回开始后，顶部的单人 SCORE 可能残留旧分数；QUIT 按钮无二次确认，容易误触；缺少难度/主题选中态的明确文字反馈；无音效/动画反馈也较单一。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "页面整体街机风格鲜明，像素字体与霓虹灯效果契合主题，色彩以深蓝、红色渐变为主调，搭配黄色标题与青色细节，营造出强烈的复古街机氛围，与用户需求中的‘怀旧而现代’定位高度匹配。布局分区清晰，开始界面包含主题选择、难度选择、多人模式与玩法说明，信息层次合理。地洞的 radial-gradient 立体感与鼹鼠弹跳、命中波纹、多人模式呼吸发光等动画提升了游戏互动质感。\n\n扣分点：1）主题切换按钮点击后 DOM 无变化，setTheme 内使用 event.target 在按钮内联 onclick 场景下失效，导致森林/沙漠/太空主题背景切换无法生效，直接影响视觉反馈和个性化体验；2）Press Start 2P 像素字体用于正文说明文字时可读性较差；3）.pixel-border 类定义了但未使用，Tailwind 的 bg-brown-800 也可能无效；4）游戏网格场景缺乏装饰元素，视觉丰富度一般；5）多人模式比分区的蓝/红对比在暗背景上不够突出，可辨识度中等。整体是一个主题感强、但细节有待打磨的街机风页面。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_036058.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Forest",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Desert",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Space",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Easy",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Medium",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Hard",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "2 Players Battle",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

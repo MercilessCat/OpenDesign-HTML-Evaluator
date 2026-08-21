@@ -1,0 +1,149 @@
+{
+  "row_id": "01_004040",
+  "shard": 1,
+  "id": 4040,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Create a real-time platform for visualizing and analyzing event streams in clustered environments. Users can monitor cluster health, identify patterns, and receive alerts for anomalies. Key features include interactive dashboards, machine learning insights, and customizable notifications. The core idea is enhancing operational awareness and decision-making through live data visualization.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 8659,
+  "html_sha256": "97ebf65e29db615afcfd6f28a064693926c77a70bcd32a4b19e08f6029a85bb0",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 Dashboard 按钮",
+        "expected": "导航到仪表板视图或至少切换激活状态，展示实时监控主页",
+        "evidence": "探针点击后 DOM 变化=无，新增 JS 错误=0；HTML 中按钮无 onclick 或事件监听绑定，仅有样式类。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Settings 按钮",
+        "expected": "打开设置面板，支持自定义通知等配置",
+        "evidence": "探针点击后 DOM 变化=无，新增 JS 错误=0；按钮未绑定任何业务逻辑，纯占位样式。",
+        "ok": 0
+      },
+      {
+        "name": "点击时间范围按钮 1m",
+        "expected": "将实时事件流图表切换为 1 分钟时间窗口，图表数据范围变化",
+        "evidence": "探针点击后 DOM 变化=无，新增 JS 错误=0；按钮无 click 监听，图表数据未受影响。",
+        "ok": 0
+      },
+      {
+        "name": "点击时间范围按钮 5m",
+        "expected": "将实时事件流图表切换为 5 分钟时间窗口，图表数据范围变化",
+        "evidence": "探针点击后 DOM 变化=无，新增 JS 错误=0；按钮无 click 监听，图表数据未受影响。",
+        "ok": 0
+      },
+      {
+        "name": "点击时间范围按钮 15m",
+        "expected": "将实时事件流图表切换为 15 分钟时间窗口，图表数据范围变化",
+        "evidence": "探针点击后 DOM 变化=无，新增 JS 错误=0；按钮无 click 监听，图表数据未受影响。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面所有可交互按钮（Dashboard、Settings、时间范围切换）点击后均无任何反馈，未绑定任何事件逻辑，属于纯静态占位。需求中的交互式仪表板、可自定义通知等核心功能未实现，仅完成静态内容展示与自动刷新的图表，因此核心交互大面积失败，功能评分极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 5.0,
+    "reason": "核心可用性问题：1. 顶部导航按钮 'Dashboard' 和 'Settings' 点击后无任何反应（DOM无变化、无反馈），是典型的占位链接，导致用户主要导航操作无实际反馈。2. 时间范围按钮 '1m'、'5m'、'15m' 点击后图表数据无任何变化，核心控件调节无效，且无选中状态反馈，用户无法实际切换时间范围查看数据。次要瑕疵：1. 图表区域无图例或说明文字，y轴无单位，用户难以理解数据具体含义。2. 节点状态仅有红绿颜色区分，无图例说明，且红色节点为随机生成，未与'Anomaly Detection'面板中的告警信息对应。3. 实时事件流区域只有一张抽象曲线图，缺少具体事件条目，未充分体现'实时事件流'的内容。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "整体视觉质量较高。深色主题现代感强，蓝色主色、绿色成功色与灰色卡片搭配协调，层次分明。页面布局采用典型仪表盘结构（顶部状态栏、核心指标卡、实时图表面板、异常检测面板），网格与间距统一，卡片圆角、阴影和hover状态设计规范。Typography虽未显式定义字体族，但Tailwind默认字体与排版在多数浏览器中表现稳定。视觉上比较突出的细节包括脉冲状态点、ML学习面板的渐变背景、Chart.js曲线图，均提升了专业感和科技感。扣分点：所有按钮（Dashboard/Settings/时间切换）均无实际视觉反馈，降低互动品质；24个节点状态系随机生成，视觉排布杂乱且颜色分布不稳定；图表的实时更新关闭了动画，每秒更新会让线条跳跃，不够流畅。但整体仍符合现代监控类Dashboard设计风格，达到专业水准。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_004040.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Dashboard",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Settings",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "1m",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "5m",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "15m",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

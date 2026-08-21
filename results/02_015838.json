@@ -1,0 +1,129 @@
+{
+  "row_id": "02_015838",
+  "shard": 2,
+  "id": 15838,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Develop a website that visualizes emotional resilience data in disaster-affected areas through interactive maps and charts. Users can explore resilience factors, support networks, and recovery progress. Features include real-time data updates, storytelling from affected individuals, and resources for building resilience in communities.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10445,
+  "html_sha256": "50d54389b1e52efac43140641ff8c1b30565939ffce4aa987701fd3b651967bd",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "切换灾害类型下拉框",
+        "expected": "选择不同灾害类型后，地图与图表数据随之更新",
+        "evidence": "页面存在 <select> 选项，但 script 中无 onchange/change 事件监听，切换后不会触发任何数据更新；HTML 证据显示该下拉框是静态控件。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Live Data 按钮",
+        "expected": "开启或刷新实时数据更新状态",
+        "evidence": "按钮无 onclick 或事件监听；探针点击后有 DOM 变化但无 JS 错误、无网络请求，该变化仅来自 hover/focus 样式层，无实际业务反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Resources 按钮",
+        "expected": "跳转或展开资源区内容",
+        "evidence": "按钮无 onclick、无 href、无事件绑定；探针点击后只有样式层 DOM 变化，没有资源区切换或跳转行为。",
+        "ok": 0
+      },
+      {
+        "name": "下载完整资源包",
+        "expected": "下载资源包或给出下载反馈",
+        "evidence": "按钮没有 download、href 或 onclick 事件；探针点击后无新增网络请求，无下载行为，属于无功能的占位按钮。",
+        "ok": 0
+      },
+      {
+        "name": "探索互动地图/查看灾情点详情",
+        "expected": "点击地图上的灾情点可查看 resilience factor、support network 等详情",
+        "evidence": "地图区域是静态 div 加 SVG data URI 背景，没有 pointer/click 事件绑定，也没有可交互图层或弹层，互动地图功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "查看恢复趋势图表",
+        "expected": "图表正常渲染，悬停数据点可查看数值/趋势",
+        "evidence": "Chart.js 成功初始化 recoveryChart，页面无 JS 错误；图表默认 tooltip 支持悬停查看数据，canvas 有像素反馈。",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉和内容结构完整，Chart.js 图表可正常显示，自动实时更新代码存在；但用户核心操作（切换灾害类型、实时数据按钮、资源按钮、下载资源包、探索互动地图）均为无事件的静态控件，互动地图完全缺失，主要探索任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1. 地图为静态SVG背景，无任何交互能力，与标题'Interactive Resilience Map'不符，用户无法点击或悬停查看区域数据；2. 灾难类型下拉框（Hurricane Recovery/Earthquake Zones/Flood Areas）切换后地图无任何变化，核心控件调节无效；3. 'Live Data'、'Resources'、'Download Full Resource Pack'等按钮均未绑定实际功能，点击无有效结果，属于主要入口无实际反馈。次要瑕疵：地图图例（支持网络、恢复进度、脆弱区域）无对应可交互数据；资源列表无链接跳转；缺少数值说明文字和帮助引导。页面整体视觉现代、布局清晰，Chart.js图和进度条自动更新模拟了实时数据，但核心交互缺失导致目标任务（探索地图、切换灾种）无法完成，降档至3分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 6.5,
+    "reason": "页面整体视觉风格干净、现代，使用了 Tailwind 与品牌感的靛蓝色主色调，卡片、圆角、阴影和间距比较统一，信息层级清晰，作为数据看板的基础视觉框架是合格的。底部资源区、故事卡片和统计进度条都有较好的可读性，Chart.js 折线图也为页面增添了真实的数据可视化感。\n\n但作为「情绪韧性数据可视化」页面，核心的地图可视化区域明显偏弱：大块白色区域实际只是一个低精度点阵背景加图例，缺少真实地图或可感知的地理数据分布，视觉上更像占位符，使页面在主题契合度上大打折扣。此外，部分按钮（Live Data、Resources、Download Full Resource Pack）点击后没有实质性页面反馈，存在一定的虚假交互感；story 区域使用内部滚动，在单页无滚动布局中稍显局促。整体视觉完成度中等偏上，但核心可视化表现力不足以支撑更高评分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.8,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_015838.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Live Data",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Resources",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Download Full Resource Pack",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    }
+  ]
+}

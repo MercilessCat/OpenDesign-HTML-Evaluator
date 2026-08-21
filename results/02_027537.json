@@ -1,0 +1,182 @@
+{
+  "row_id": "02_027537",
+  "shard": 2,
+  "id": 27537,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Engage in a digital exploration of belief systems' persistence. Users delve into interactive visualizations of conspiracy theories, tracking their evolution and societal impact. The platform includes forums for discussion, tools for mapping belief networks, and resources for understanding cognitive biases and information dissemination.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 13798,
+  "html_sha256": "2c5a5bc46bcc1f6e1fe587cd5e93a99ecf9f2e42636bfca86ef7760987880e51",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "导航菜单点击（Dashboard/Visualizations/Forums/Resources）",
+        "expected": "点击导航项应切换到对应内容视图或滚动到对应区块",
+        "evidence": "探针显示点击导航链接后DOM有变化但最终只是href=\"#\"无路由跳转，页面没有对应内容区块或路由逻辑，均为占位入口",
+        "ok": 0
+      },
+      {
+        "name": "Timeline 视图切换按钮",
+        "expected": "点击“Timeline”按钮应切换可视化到时间线视图",
+        "evidence": "探针点击后DOM变化=无，新增JS错误=0，按钮未绑定任何业务事件，点击无反应",
+        "ok": 0
+      },
+      {
+        "name": "Network 视图切换按钮",
+        "expected": "点击“Network”按钮应切换可视化到网络视图",
+        "evidence": "探针点击后DOM变化=有，但HTML中该按钮没有click事件绑定，DOM变化仅为hover/focus样式层，无实际视图切换",
+        "ok": 0
+      },
+      {
+        "name": "点击可视化节点（QAnon等）",
+        "expected": "点击节点应高亮或展示对应信念系统的详细信息",
+        "evidence": "JS中为.network-node绑定了click事件，点击后切换ring-4/ring-white选中样式，有明确视觉反馈",
+        "ok": 1
+      },
+      {
+        "name": "Explore Full Dataset 按钮",
+        "expected": "点击应进入完整数据集或打开更多数据视图",
+        "evidence": "按钮无click事件绑定，探针DOM变化=有仅为样式层变化，无实际数据展示或页面跳转功能",
+        "ok": 0
+      },
+      {
+        "name": "工具卡片点击（Belief Mapper/Community Forum/Trend Analyzer/Bias Library）",
+        "expected": "点击卡片应打开对应工具、论坛或教育资源",
+        "evidence": "四个工具卡片仅有cursor-pointer和hover样式，无任何click事件绑定；论坛、信念映射工具、学习资源均为未实现的占位入口",
+        "ok": 0
+      }
+    ],
+    "reason": "页面是一个静态展示型单页，视觉布局和主题内容完整，但需求中的核心交互能力大面积未实现：导航为占位死链，Timeline/Network无视图切换，Explore Full Dataset无功能，四个工具/论坛/资源入口均无事件绑定。仅有可视化节点点击高亮这一项提供反馈，主要任务（交互式探索信念演化、使用映射工具、参与论坛讨论）无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）顶部导航（Dashboard/Visualizations/Forums/Resources）均为占位链接，点击无实际导航或内容切换，用户无法到达任何功能页面；2）可视化区域Timeline/Network视图切换按钮无任何事件逻辑，点击Timeline无视觉/状态反馈，核心控件调节无效；3）Analytical Tools四张卡片（Belief Mapper、Community Forum、Trend Analyzer、Bias Library）及Explore Full Dataset按钮均未实现实际功能，论坛等需求明确的核心模块不可用，点击后流程无路可走。次要瑕疵：缺数据来源/指标定义的说明文字；社区活动配图为虚线占位框，观感未完成；移动端汉堡菜单无展开逻辑；页面信息密度较高，在矮屏上可能溢出视口。整体视觉和信息层级较好，但可用性因核心交互缺失明显降档。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较高，采用现代Dashboard式布局，以蓝紫渐变头部（#2563eb→#7c3aed）营造科技感与数据探索主题的氛围，色彩搭配和谐，主次分明。布局使用Tailwind网格系统，三栏结构（可视化、指标、工具/动态）在视口内合理排布，卡片间距留白均匀，层次清晰。字体采用默认无衬线体系，标题加粗、正文灰阶对比足够，可读性好。组件设计规范：圆角卡片、进度条、悬停上浮阴影、彩色节点连线图等品质到位，体现了专业的UI细节。CSS使用Tailwind为主，辅以少量自定义过渡和渐变，代码干净规范。与“数据可视化/阴谋论探索”主题对齐，风格成熟且符合现代Web设计规范。不足之处：网络可视化为占位式DOM实现，真实图表深度略欠；两个活动缩略图为空白虚线占位框，稍显粗糙；Timeline按钮点击无反馈，轻微影响互动完整感，但整体仍是高质量的视觉设计。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_027537.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Visualizations",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Forums",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Timeline",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Network",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Full Dataset",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

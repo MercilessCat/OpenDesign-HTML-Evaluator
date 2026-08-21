@@ -1,0 +1,181 @@
+{
+  "row_id": "06_065915",
+  "shard": 6,
+  "id": 65915,
+  "category": "Website",
+  "prompt": "A creative space for digital memory preservation using holographic technology. Users design and share holographic scrapbooks, combining photos, videos, and 3D elements. Features include a hologram creation tool, customizable templates, and a community gallery, offering a futuristic way to cherish and share personal histories.",
+  "html_len": 29895,
+  "html_sha256": "d47c4955f58cb10de5ea410926c83e821a765c0870e45a81e82aa1087fb129c6",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "通过导航跳转到页面各 section",
+        "expected": "点击 Home/Features/Gallery/Pricing 后页面滚动到相应内容区域",
+        "evidence": "探针显示 4 个导航锚点点击均产生 DOM 变化且发生页面跳转；HTML 中 Features/Gallery/Pricing 链接分别指向 #features/#gallery/#pricing，对应 section 存在",
+        "ok": 1
+      },
+      {
+        "name": "点击「立即开始创建」进入全息图创建工具",
+        "expected": "进入全息剪贴簿编辑器，可制作 3D 项目",
+        "evidence": "探针点击后 DOM 无变化、无跳转、无新网络请求；按钮无任何事件绑定，只是静态 CTA，创建工具入口缺失",
+        "ok": 0
+      },
+      {
+        "name": "登录 / 注册（Sign In / Get Started）",
+        "expected": "打开登录或注册流程",
+        "evidence": "探针点击 Sign In 与 Get Started 均为 DOM 无变化、无跳转；HTML 中按钮未绑定事件，认证功能完全未实现",
+        "ok": 0
+      },
+      {
+        "name": "从功能卡片进入「3D 创建工具 / 模板 / 画廊」",
+        "expected": "点击 Learn more / Explore templates / Visit gallery 打开对应工具或页面",
+        "evidence": "这些入口是 div+span 文本，没有 href 或 click 事件，属于纯展示占位，点击无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "浏览社区画廊（View Full Gallery）",
+        "expected": "打开完整社区画廊并可查看/分享作品",
+        "evidence": "View Full Gallery 按钮无事件处理器，点击无变化；画廊卡片为静态 div 不可进入详情，完整的社区画廊功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "选择定价套餐（Start Free Trial 等）",
+        "expected": "发起订阅 / 免费试用流程",
+        "evidence": "三个定价按钮与 CTA 区按钮均无事件绑定，点击无反应，付费/试用流程为占位",
+        "ok": 0
+      }
+    ],
+    "reason": "页面是一个视觉完整的全息记忆营销单页：导航锚点可以跳转到各内容区，Three.js 全息动画可正常渲染且无 JS 错误；但需求声明的核心能力——全息图创建工具、自定义模板、社区画廊、登录/注册、分享与订阅——全部以静态按钮/占位入口存在，点击后无任何 DOM 变化或跳转，主要用户任务完全无法完成，故功能分极低。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）'Start Creating Now'（创建全息剪贴簿的核心入口）点击无任何反馈，用户无法开始核心创作流程；2）'Sign In'登录入口点击无反应，用户无法进入账户体系；3）导航栏'Get Started'主要CTA按钮点击无反馈；4）'Watch Demo'演示入口点击无反应。以上均属于'主要入口/导航点击无实际反馈'的核心可用性问题。次要瑕疵：'Learn more'、'Explore templates'、'Visit gallery'为div元素伪装成链接，点击无效果；'View Full Gallery'及定价区'Get Started'、'Start Free Trial'、'Contact Sales'按钮均无事件绑定；底部社交/资源链接为'#'占位，点击跳回顶部。整体页面信息架构清晰、视觉风格统一、锚点导航正常，但所有核心交互功能均为静态占位，无法完成用户主任务，因此评分较低。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 9.0,
+    "reason": "页面整体视觉吸引力强，完美契合未来全息记忆保存的主题。采用深蓝至灰蓝的暗色渐变背景，搭配紫罗兰、品红等霓虹渐变点缀，营造出强烈的科技感和未来氛围。色彩搭配协调统一，主次分明，文字可读性良好。布局结构清晰，导航、Hero、功能、流程、画廊、定价、CTA和页脚等区块层级分明，间距均匀，视觉节奏流畅。字体选择专业，Orbitron用于标题体现科幻感，Inter用于正文保证可读性，粗细对比恰当。组件设计精致，玻璃拟态卡片、发光边框、悬浮动画、微光扫描等细节丰富且克制，提升了页面的质感。CSS运用了高级技巧如backdrop-filter、渐变文字、多重阴影和关键帧动画，代码规范专业。Three.js实现的全息线框球体增强页面创意。整体设计符合现代网页设计规范，与用户需求的未来主义全息风格高度对齐。扣分点：部分按钮点击后无响应，交互反馈缺失。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_065915.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Gallery",
+      "href": "#gallery",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Pricing",
+      "href": "#pricing",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Creating Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Watch Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "row_id": "02_000096",
+  "shard": 2,
+  "id": 96,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Generate a platform for businesses to visualize and analyze website A/B testing results. Users can intuitively compare test variations with interactive graphs and heatmaps, gaining actionable insights through data stories and fostering data-driven decision-making for website optimization and user experience enhancement.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 12136,
+  "html_sha256": "a06ac2562bd0de7319811200ead34476f84a77dac114bf496275beff27c8d53c",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航链接（Dashboard/Reports/Heatmaps/Insights）",
+        "expected": "切换到对应报表视图或内容区域",
+        "evidence": "探针点击 Dashboard/Reports/Heatmaps/Insights 后报告有 DOM 变化但页面跳转，HTML 中所有导航链接 href=\"#\" 无路由，单页内无对应内容切换，点击仅跳转到页面顶部锚点",
+        "ok": 0
+      },
+      {
+        "name": "点击 Sign In 按钮",
+        "expected": "打开登录界面或登录流程",
+        "evidence": "探针点击后 DOM 变化=无，新增JS错误=0，按钮无事件绑定，无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Free Trial 按钮",
+        "expected": "进入试用注册流程或展示相关表单",
+        "evidence": "探针点击后 DOM 变化=无，新增JS错误=0，按钮无事件绑定，无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 View Demo 按钮",
+        "expected": "加载演示环境或展示示例数据",
+        "evidence": "探针点击后 DOM 变化=无，新增JS错误=0，按钮无事件绑定，无任何反馈",
+        "ok": 0
+      },
+      {
+        "name": "查看转换率对比图表（Canvas）",
+        "expected": "图表正常渲染，悬停可查看数据提示",
+        "evidence": "Chart.js CDN 加载成功，页面无 JS 错误，conversionChart 和 barChart 均完成初始化渲染；Chart.js 默认带有 tooltip 悬停交互",
+        "ok": 1
+      }
+    ],
+    "reason": "导航链接全部为 href=\"#\" 占位入口，点击后单页内无内容切换；Sign In、Start Free Trial、View Demo 三个主要行动按钮均无事件绑定，点击毫无反馈，核心用户任务（登录、注册、查看演示、导航浏览报表）全部无法完成。仅两个 Chart.js 图表正常渲染，可作为唯一可用的可视化内容。核心交互大面积失败，功能评分 1。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 页面主要导航（Dashboard/Reports/Heatmaps/Insights）均为 href=\"#\" 占位链接，点击后仅跳回页面顶部或URL变化，无实际页面/内容切换，属于主要入口点击无实际反馈。2. 三个核心操作按钮（Sign In、Start Free Trial、View Demo）点击后无任何响应，无跳转、无表单、无提示，用户无法完成登录、注册或查看演示的核心任务，流程卡死。次要瑕疵：导航菜单项命名暗示完整功能模块但实际未实现，缺少功能说明或使用引导；社交链接（Twitter/LinkedIn/GitHub）及底部链接同样为占位符，但未影响主流程展示。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.5,
+    "reason": "整体视觉完成度较高，符合现代数据可视化SaaS平台的设计规范。色彩搭配专业，以蓝色系(#2563eb, #0ea5e9)为主，辅以浅灰背景和深色文字，对比度良好且传递出科技、可信赖的品牌气质；布局采用标准单页结构（导航/英雄区/功能卡片/数据墙/页脚），层级清晰、信息分区合理，卡片hover动效增加了精致感；Chart.js绘制的线图与柱状图贴合A/B测试分析主题，增强了页面作为数据平台的可信度。\n\n主要失分点：(1) 导航链接为`#`占位符，点击后仅触发跳转而无实际内容切换或锚点滚动，作为单页网站存在交互逻辑瑕疵；(2) 热力图模块使用CSS渐变模拟，视觉真实感与信息传达力较弱；(3) 页面内容总高度明显超过一屏，与“无需滚动即可查看全部内容”的需求存在偏差；(4) 字体未做专门定制（依赖Tailwind默认字体栈），标题与正文的层次差异不够突出，略显平庸；(5) 视觉冲击力主要靠首屏大标题和渐变统计条支撑，中部特性卡片区域相对平淡，缺少更丰富的图表或数据模块来维持用户兴趣。\n\n总体而言，该页面色彩、布局、组件质量均属中上水平，能清晰传达产品定位，但在细节打磨和交互完整性上仍有提升空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.6,
+  "baseline_overall": 3.5,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_000096.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Reports",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Heatmaps",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Insights",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Free Trial",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "View Demo",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "row_id": "00_005100",
+  "shard": 0,
+  "id": 5100,
+  "category": "3D design",
+  "prompt": "Access a creative platform to render, manipulate, and display intricate 3D objects seamlessly. Users can transform objects with dynamic lighting and textures. Features include a versatile rendering engine, customizable object properties, and an integrated gallery for showcasing designs and receiving community feedback.",
+  "html_len": 18158,
+  "html_sha256": "dd4a69557449ba4e4ac855f54adde684ce59a270e5866e2b06d1ec262880ab11",
+  "functional": {
+    "score": 4.0,
+    "raw_score": 4.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "调整旋转滑块 (Rotation X/Y/Z)",
+        "expected": "3D 物体随滑块值改变旋转角度",
+        "evidence": "每个滑块都绑定了 input 事件，代码中直接设置 object.rotation（如 rotX -> object.rotation.x = degToRad(value)），运行时无 JS 错误，Three.js 场景正常渲染。探针未直接测试滑块，但 HTML 事件绑定明确。",
+        "ok": 1
+      },
+      {
+        "name": "调整缩放滑块 (Scale)",
+        "expected": "3D 物体大小随滑块值改变",
+        "evidence": "scale 滑块绑定 input 事件，设置 object.scale.set(scale, scale, scale)，事件逻辑完整，无 JS 报错。",
+        "ok": 1
+      },
+      {
+        "name": "点击颜色选项",
+        "expected": "3D 物体颜色改变",
+        "evidence": "每个 .color-option 元素绑定 click 事件，点击后更新 active 类并设置 object.material.color.set(data-color)，事件逻辑完整。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Reset View 按钮",
+        "expected": "重置物体旋转、缩放、材质和灯光参数",
+        "evidence": "按钮绑定 click 事件，代码中重置 object.rotation/scale、material 属性、灯光强度及所有滑块值。探针显示 DOM 结构无变化，但实际效果发生在 canvas 渲染层（像素不可测），且无 JS 错误，应视为有效操作。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Save Design 按钮",
+        "expected": "将当前设计保存到 gallery",
+        "evidence": "点击后仅弹出 alert('Design saved to your gallery!')，并未真正将设计加入下方 gallery，也未实现持久化存储。需求声明的 gallery 集成功能未实现，属于占位入口。探针显示 DOM 无变化。",
+        "ok": 0
+      },
+      {
+        "name": "点击 gallery 中的设计条目",
+        "expected": "查看或加载对应 3D 设计",
+        "evidence": "gallery-item 元素只有 CSS hover 样式，没有绑定任何 click 事件或路由，点击无反应。需求中的展示画廊与社区反馈功能未实现，纯占位。",
+        "ok": 0
+      }
+    ],
+    "reason": "核心 3D 操纵功能（旋转、缩放、颜色、重置）均通过 Three.js 事件完整实现，页面无 JS 错误。但需求明确要求的 gallery 设计保存/展示和社区分享功能未真正实现：Save/Share 仅弹窗提示，gallery 条目无点击事件，存在至少 2 个关键占位入口，因此功能分不高于 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 画布底部的画廊项（gallery-item）未绑定任何点击事件，点击无实际反馈，无法查看或加载设计，是主要导航入口失效；2. “Save Design”和“Share”按钮仅弹出alert提示，并未真正保存设计到画廊或分享到社区，核心操作实际不可完成且反馈误导；3. 渲染画布尺寸使用window.innerWidth/innerHeight设置，未扣除侧边栏宽度，导致canvas渲染缓冲与显示区域宽高比不一致，3D物体会被拉伸变形，操作反馈错误。次要瑕疵：滑块缺少数值显示；Randomize随机化后滑块未同步，显示值与实际状态不一致；Reset View仅重置物体变换未重置相机视角，与按钮名称略有出入；社区反馈模块未实现。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力较强，采用深蓝渐变背景搭配荧光色点缀，符合3D创意平台的科技感与专业定位。色彩搭配合理，主色#4361ee与#4cc9f0形成和谐的蓝色系，辅以高饱和度强调色（粉色、橙色、紫色）用于色板与画廊，增强了视觉层次。布局结构清晰，左侧控制面板与右侧3D画布区域划分明确，毛玻璃效果（backdrop-filter）提升了现代感。字体使用系统字体栈，字号与间距控制得当，滑块、颜色选择器、按钮等组件样式统一且有交互反馈（hover态、缩放动效）。CSS设计整体专业，运用了渐变、圆角、flex/grid布局、响应式适配，符合现代Web设计规范。扣分项在于部分组件细节较简单（如默认滑块样式、缺少阴影/动画），canvas渲染区域与侧边栏的尺寸适配可能存在小瑕疵，但整体视觉完成度高，与用户需求的3D设计平台风格高度契合。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 5.0,
+  "baseline_overall": 4.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_005100.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset View",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Randomize",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save Design",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Share",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

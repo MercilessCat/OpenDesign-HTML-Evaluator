@@ -1,0 +1,157 @@
+{
+  "row_id": "00_006164",
+  "shard": 0,
+  "id": 6164,
+  "category": "3D design",
+  "prompt": "Develop an interactive learning hub exploring HTML5's capacity for 3D object manipulation. Core idea: Demystifying 3D on the web. Users engage in hands-on tutorials and challenges, with features like a sandbox environment, community project showcase, and gamified learning paths to enhance understanding and skill development.",
+  "html_len": 18620,
+  "html_sha256": "89e3040d3f921cb77a5d9448654e3d2c022abe1a9ea7c7975b3ce901656a0f68",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "旋转/缩放/平移 3D 场景",
+        "expected": "用户拖拽鼠标旋转场景、滚动缩放、Shift+拖拽平移，画面实时变化",
+        "evidence": "#webgl-canvas 是 div 而非 canvas，Three.js 初始化报 'e.getContext is not a function' 6 次，renderer 创建失败，OrbitControls 未初始化；即使拖拽也不会有 3D 渲染反馈",
+        "ok": 0
+      },
+      {
+        "name": "调整 Rotation Speed 滑块",
+        "expected": "调节滑块后 3D 物体旋转速度实时变化",
+        "evidence": "滑块绑定了 input 事件并更新 rotationSpeed，但 renderer 初始化失败、动画循环未运行，拖动后无任何可视变化",
+        "ok": 0
+      },
+      {
+        "name": "点击 Add Object 添加物体",
+        "expected": "新的 3D 物体出现在沙盒场景中，角度/材质可见",
+        "evidence": "点击后 object-count 文本有变化（DOM 变化为真），但 renderer 未创建，新增物体不会被渲染到画布上；用户看不到任何新增 3D 对象",
+        "ok": 0
+      },
+      {
+        "name": "点击 Reset Scene 重置场景",
+        "expected": "场景恢复初始物体，相机位置重置",
+        "evidence": "点击后 DOM 无变化，并新增 JS 错误 'Cannot read properties of undefined (reading 'reset')'，因为 controls 未初始化；功能完全失败",
+        "ok": 0
+      },
+      {
+        "name": "点击 Pause Rotation 暂停旋转",
+        "expected": "3D 物体停止/恢复旋转",
+        "evidence": "点击后只切换了按钮文字，但动画循环未启动、场景未渲染，isRotating 的变化没有任何实际视觉反馈",
+        "ok": 0
+      },
+      {
+        "name": "点击 Start Challenge 开始挑战",
+        "expected": "进入游戏化学习挑战流程",
+        "evidence": "该 button 没有 id 也没有事件绑定，点击后 DOM 无变化、无 JS 错误，是纯占位入口",
+        "ok": 0
+      }
+    ],
+    "reason": "页面核心 3D 渲染链路崩溃：把 div 当作 canvas 传给 THREE.WebGLRenderer，导致 'e.getContext is not a function'，renderer 与 OrbitControls 均未初始化。所有依赖 3D 可视化的交互（旋转、缩放、滑块控制、添加/重置/变色/暂停）都无法给用户正确反馈；Start Challenge 也是无事件占位按钮。主要任务完全无法完成，仅个别 DOM 计数或按钮文字发生变化，不能视为可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. WebGL渲染器初始化失败（e.getContext is not a function），3D场景完全无法渲染，canvas为空白，页面核心功能（交互式3D沙盒）完全不可用——这是最致命的问题。\n2. Reset Scene按钮点击后触发JS错误（Cannot read properties of undefined (reading 'reset')），控件无效且报错。\n3. Change Color按钮点击后无任何视觉反馈（因渲染失败，颜色修改不可见），用户无法判断操作是否成功。\n4. Start Challenge按钮点击无任何响应（无事件绑定），核心任务流程存在死路。\n\n次要瑕疵：\n- FPS计数器为随机数模拟，非真实性能数据，误导用户。\n- Challenge Difficulty滑杆无实际功能，调节无效果。\n- Community Showcase项目均为纯表情占位，点击无反馈，且非本页主流程。\n- 缺少错误提示或加载失败的状态说明，用户面对空白画布无从得知问题原因。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉设计专业且符合现代3D学习主题。深蓝渐变背景营造深邃科技感，与3D空间主题高度契合；色彩搭配和谐，以蓝色系为主（#4361ee、#4cc9f0）并结合紫色渐变，形成统一而有层次的视觉语言。布局采用三栏flex设计，沙盒区、控制区、展示区主次分明，间距与留白适中，卡片式面板配合毛玻璃效果（backdrop-filter）和悬浮阴影，提升了页面质感。字体使用Segoe UI等现代无衬线体，标题采用渐变文字并添加光晕，富有视觉冲击力。组件设计精致，滑块、按钮、进度条、统计卡片均具有细腻的交互反馈（hover上浮、阴影变化），网格布局的社区展示区简洁明了。响应式断点处理合理。扣分点：页面运行时存在Three.js初始化错误（canvas未成功渲染），导致3D区域实际为空白/黑屏，削弱了页面的视觉冲击力；此外部分按钮（如Start Challenge）功能未实现，交互完整性不足。但纯视觉设计层面仍表现优秀。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.83,
+  "signals": {
+    "console_errors": [
+      "THREE.WebGLRenderer: e.getContext is not a function",
+      "THREE.WebGLRenderer: e.getContext is not a function",
+      "THREE.WebGLRenderer: e.getContext is not a function",
+      "THREE.WebGLRenderer: e.getContext is not a function",
+      "THREE.WebGLRenderer: e.getContext is not a function",
+      "THREE.WebGLRenderer: e.getContext is not a function"
+    ],
+    "failed_requests": [],
+    "page_errors": [
+      "e.getContext is not a function",
+      "e.getContext is not a function",
+      "e.getContext is not a function",
+      "Cannot read properties of undefined (reading 'reset')",
+      "e.getContext is not a function",
+      "e.getContext is not a function",
+      "e.getContext is not a function"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\00_006164.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Add Object",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Reset Scene",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Pause Rotation",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Change Color",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Challenge",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

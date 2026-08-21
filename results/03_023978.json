@@ -1,0 +1,109 @@
+{
+  "row_id": "03_023978",
+  "shard": 3,
+  "id": 23978,
+  "category": "Game dev",
+  "prompt": "Create a mystical platform where players collect phoenix ashes for crafting magical items. Users embark on quests, solve puzzles, and explore enchanting landscapes. Features include an alchemy system, lore-driven storytelling, and player-driven markets, providing an immersive fantasy adventure that blends exploration, creativity, and commerce.",
+  "html_len": 28353,
+  "html_sha256": "5251399bf43c9e8ef84a7c4810529d3ba396738d042d86f82327708c12a55e28",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击 'Begin Quest' 开始游戏",
+        "expected": "开始界面隐藏，游戏 HUD（统计/背包/炼金/控制说明）显示",
+        "evidence": "探针点击 Begin Quest 后 DOM 有变化；startGame() 会隐藏 startScreen 并显示 stats/inventory/alchemy/controls 等模块。无新增 JS 错误。",
+        "ok": 1
+      },
+      {
+        "name": "使用 WASD/方向键移动角色",
+        "expected": "角色在 3D 世界中移动，场景视角/对象位置变化",
+        "evidence": "keydown 监听器存在，但 Three.js r128 不支持 CapsuleGeometry，init() 在创建玩家时抛错，player 未定义；按下方向键会访问 undefined 报错，且 animate() 未启动导致场景不渲染。canvas 拖拽亦无 DOM/像素变化。",
+        "ok": 0
+      },
+      {
+        "name": "按空格键收集凤凰灰烬",
+        "expected": "靠近灰烬时拾取并增加计数，伴随粒子/声音反馈",
+        "evidence": "collectAsh() 依赖 player 对象和 ashes 数组，但 init() 在 player 创建时抛错，createAshes() 后续未执行，ashes 为空；按空格无法触发任何收集效果，计数始终为0。",
+        "ok": 0
+      },
+      {
+        "name": "点击炼金配方制作物品",
+        "expected": "材料足够时制作成功并更新背包，不足时提示材料不足",
+        "evidence": "recipe 元素绑定 click 监听器，craftItem() 会检查库存（初始为0）并显示 notification 'Not enough materials!'；有反馈但成功制作路径因无法收集材料而不可达。",
+        "ok": 1
+      },
+      {
+        "name": "访问玩家驱动的市场",
+        "expected": "存在可交易的市场界面/入口",
+        "evidence": "HTML 中无任何市场相关模块、按钮或面板，需求声明的 player-driven markets 未实现。",
+        "ok": "NA"
+      },
+      {
+        "name": "接受任务/解决谜题",
+        "expected": "存在任务日志或可交互的谜题机制",
+        "evidence": "页面只有一段静态 lore 文字，无任务系统、谜题或 quest 入口，需求声明的 quests/puzzles 未实现。",
+        "ok": "NA"
+      }
+    ],
+    "reason": "页面启动时因 THREE.CapsuleGeometry 在 r128 中不存在导致 Three.js 初始化中断，玩家对象和灰烬场景未创建，移动与收集两大核心玩法失效，且动画循环未启动，3D 世界无法显示。开始按钮可切换到游戏界面，炼金点击有'材料不足'反馈，但无法真正制作；任务、谜题、玩家市场等需求入口完全缺失。主要游戏任务无法完成，整体不可用。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：\n1. THREE.CapsuleGeometry 在 Three.js r128 中不存在（页面运行时 3 条 JS 错误均指向此），导致 init() 初始化在创建玩家时中断：玩家角色未生成、15 个凤凰灰烬未创建、动画渲染循环未启动。用户点击“Begin Quest”后进入的实际是一个没有主角、没有可收集物、没有持续渲染的空场景。\n2. 移动、收集等核心操作全部依赖未创建的 player 对象，键盘/触控/收集按钮都会因 player 为 undefined 而报错或无效，核心玩法完全卡死。\n3. 重开游戏（New Adventure）会再次调用 init() 并再次触发 CapsuleGeometry 构造错误，场景清空后无法重建，形成不可恢复的死路。\n\n次要瑕疵：\n- 控制方式说明在游戏开始后才出现，且没有图例或帮助按钮。\n- 魔法值消耗后无恢复途径，导致部分炼金配方最终不可用。\n- 灰烬总数 15 个，收集完强制结束，但炼金/市场等宣传玩法未真正闭环。\n- 失败提示仅有短暂通知，没有说明具体缺少哪种材料。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 5.0,
+    "reason": "页面整体呈现的是“可运行的开发原型”而非精致视觉设计。色彩方向（深蓝/红/金）贴合凤凰与神秘主题，但渐变生硬（#1a2a6c→#b21f1f→#1a2a6c），大量rgba(0,0,0,0.6)悬浮面板使画面沉闷压抑。布局方面，stats/inventory/alchemy/controls四角面板缺少统一视觉框架与间距节奏，模块间勾连感弱，像素对齐精度不足。字体使用系统默认Segoe UI，没有引入奇幻风格字体，标题阴影过粗，字重层级单调，精致度低。组件细节上，按钮渐变和阴影尚可，但面板圆角、图标、配方卡片等元素风格不统一，缺乏质感与层次。CSS整体停留在“功能布局完成”阶段，无关键帧动画、无微交互，静态感强。最严重的问题是运行时JS报错3次，THREE.CapsuleGeometry在r128中不存在，3D场景初始化失败，游戏核心渲染无法呈现，直接影响最终视觉完成度。综合来看，方向正确但执行粗糙，距离专业网页设计仍有明显差距。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.2,
+  "baseline_overall": 3.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor",
+      "THREE.CapsuleGeometry is not a constructor"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_023978.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Begin Quest",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.notification",
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

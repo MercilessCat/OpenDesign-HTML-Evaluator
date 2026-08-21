@@ -1,0 +1,181 @@
+{
+  "row_id": "02_033033",
+  "shard": 2,
+  "id": 33033,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Design a platform offering visualized climate migration pathways with support resources. Users explore interactive maps showing migration trends, access community stories, and connect with services. Key features include predictive analytics, personalized resource recommendations, and forums for sharing experiences, aiming to empower individuals and communities navigating climate displacement.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 9654,
+  "html_sha256": "e213b56157c4546eb010ac567ff956f5502633f8165ec1bdb0337f935cb3a032",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "地图图层切换",
+        "expected": "点击 Sea Level Rise / Drought Patterns / Temperature Shifts 按钮后，地图显示对应的气候风险图层",
+        "evidence": "探针实际点击这些按钮后 DOM 变化=无，新增 JS 错误=0；HTML 中按钮未绑定任何点击业务逻辑，地图区域为静态模拟层（仅图钉图标和说明文字），无真实切换能力",
+        "ok": 0
+      },
+      {
+        "name": "主导航菜单",
+        "expected": "点击 Explore Maps / Stories / Resources / Community 导航到对应功能页面或内容板块",
+        "evidence": "导航链接 href=\"#\" 无路由，探针点击后虽有页面跳转但仅改变 URL hash，未切换任何业务内容，为纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "个性化资源推荐",
+        "expected": "点击 Personalize Recommendations 后生成个性化支持资源推荐",
+        "evidence": "HTML 中该按钮未绑定 onclick 或事件监听器，无任何点击处理逻辑；需求声明的个性化推荐功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "查看全部社区故事",
+        "expected": "点击 View All Stories 展示更多社区故事列表",
+        "evidence": "HTML 中该按钮未绑定事件处理，点击不会加载或展开更多故事；Community Voices 仅为静态预览卡片",
+        "ok": 0
+      },
+      {
+        "name": "加入论坛讨论",
+        "expected": "点击 Join Discussion 进入论坛讨论界面或提供参与入口",
+        "evidence": "HTML 中该按钮未绑定事件处理，Community Forum 板块仅为静态讨论帖占位，无实际论坛功能",
+        "ok": 0
+      },
+      {
+        "name": "预测分析图表",
+        "expected": "图表正确展示 2020-2050 年气候移民预测曲线",
+        "evidence": "Chart.js 成功初始化 migrationChart，canvas 已渲染；运行时 JS 错误 0 条，图表功能正常可用",
+        "ok": 1
+      }
+    ],
+    "reason": "页面视觉设计现代完整，预测分析图表渲染成功；但核心交互大面积失败：地图图层切换无反应、导航为占位链接、个性化推荐/社区故事/论坛按钮均为无事件绑定的占位入口，需求声明的核心功能（交互地图探索、个性化资源推荐、社区参与）主要任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部分区导航（Explore Maps、Stories、Resources、Community）均为 href=\"#\" 占位链接，点击后没有跳转到对应内容或提供实际反馈；2. 地图图层切换按钮（Sea Level Rise、Drought Patterns、Temperature Shifts）点击后无任何 DOM/功能变化，核心的地图筛选能力不可用；3. “Sign In”“View All Stories”“Personalize Recommendations”“Join Discussion”等核心操作按钮没有绑定有效事件或反馈，用户无法完成登录、查看完整故事、获取个性化推荐、加入讨论等主要任务。次要瑕疵：整体视觉和信息层级较清楚，但地图缺少图例/说明；预测图表未显示图例；多个模块只有静态预览，未实现完整流程。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体采用 Tailwind + Chart.js，宏观格局清晰：顶部渐变头部、主区域三栏网格，将地图、预测图表、社区故事、资源和论坛分区展示，符合数据可视化平台的现代 dashboard 风格。配色以蓝绿冷色为主，辅以柔和粉紫渐变和低饱和白卡片，视觉统一、无刺眼冲突；圆角、阴影、hover 上浮等细节提升了精致度。字体层级清楚，图标使用得当。但存在明显不足：核心“交互地图”仅是一个灰色占位块加图标/文本，未呈现地图可视化，视觉上较空洞；按钮点击无实际交互，导航 href=\"#\" 只是跳转顶部，影响体验；小屏下内容堆叠且可能超出单屏，未完全满足“不滚动”要求。整体美观度中上，但完成度与专业性受到占位图和非功能性交互拖累，因此给 7 分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 3.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_033033.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore Maps",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Stories",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sea Level Rise",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Drought Patterns",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Temperature Shifts",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": true
+    }
+  ]
+}

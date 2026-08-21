@@ -1,0 +1,181 @@
+{
+  "row_id": "06_068355",
+  "shard": 6,
+  "id": 68355,
+  "category": "Website",
+  "prompt": "Develop an expansive digital archive where users explore and exchange knowledge on underground civilizations. Featuring interactive 3D maps, expert lectures, and community forums, the site encourages collaborative research and storytelling. Users can contribute findings, engage in virtual excavations, and participate in archeological debates, fostering a global scholarly community.",
+  "html_len": 35608,
+  "html_sha256": "9e190df7d1705dbb0ed93be9420ff97fefce6e7bae180449cc957da8075ef1b7",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "点击导航 Lectures 跳转到讲座区",
+        "expected": "页面滚动/跳转到讲座区域并展示讲座内容",
+        "evidence": "探针点击 <a> Lectures 后 DOM 有变化、出现页面跳转，无新增 JS 错误；对应 href='#lectures'，锚点导航可用。",
+        "ok": 1
+      },
+      {
+        "name": "点击 Start Exploring 开始探索",
+        "expected": "进入探索页面或滚动到浏览地图/档案的探索区域",
+        "evidence": "探针点击 Start Exploring 后 DOM 无变化，无新增网络请求；按钮没有事件处理，页面未跳转或滚动，核心入口无反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Join Now 加入社区",
+        "expected": "弹出注册/登录表单或进入注册流程",
+        "evidence": "探针点击 Join Now 后 DOM 无变化，无弹窗、无跳转、无网络请求；注册功能未实现。",
+        "ok": 0
+      },
+      {
+        "name": "点击 Explore Maps 使用 3D 地图",
+        "expected": "打开可交互的 3D 地下文明地图",
+        "evidence": "HTML 中该按钮无 href/onclick 事件绑定，页面 canvas 元素数为 0，globe-container 仅为空容器，未初始化 Three.js 场景，3D 地图功能不可用。",
+        "ok": 0
+      },
+      {
+        "name": "点击讲座播放按钮观看专家讲座",
+        "expected": "播放视频或打开讲座详情页",
+        "evidence": "页面中无 <video> 元素，播放图标只是带 cursor-pointer 的 div，无播放器或事件绑定，点击不会产生任何视频反馈。",
+        "ok": 0
+      },
+      {
+        "name": "点击 New Post 在论坛发帖",
+        "expected": "出现发帖表单或进入发帖流程",
+        "evidence": "New Post 按钮无事件绑定，DOM 中 input 元素数为 0，没有发帖表单；论坛贴文为静态内容，无法贡献新主题。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面仅导航锚点可滚动跳转，其余关键功能均为占位：登录/注册、开始探索、3D 地图、专家讲座、论坛发帖等核心交互点击后无反馈，虚拟挖掘、辩论、提交研究发现等需求也未实现。主要用户任务无法完成，网站只能作为静态展示页。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部核心操作按钮“Sign In”和“Join Now”点击后无任何反馈，无法登录或注册；2. 首屏主要行动按钮“Start Exploring”点击无反应，用户无法进入核心探索流程；3. 多个功能卡片按钮如“Explore Maps / View Lectures / Join Community / Try Excavation / Browse Archive / Join Debate”以及“Watch Demo”等从HTML看均未绑定实际行为，属于大量死控点。由于存在2个及以上核心可用性问题，按标准降档至2分。次要瑕疵：页面视觉设计清晰、信息层级较好，但缺少对3D地图和实时活动数据的说明/图例；部分播放按钮与论坛“New Post”等仅有视觉样式而无实际功能，容易让用户误判可交互性。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉设计专业且富有吸引力。深色渐变背景与金色/蓝色强调色搭配，完美契合“地下文明”神秘、考古探险的主题氛围。色彩搭配和谐统一，对比度适中，文字可读性好。布局采用标准的分段式结构（导航、Hero、特性、讲座、社区、研究），网格与flex组合运用合理，卡片、按钮等组件间距统一，视觉层次清晰。字体选用Playfair Display配合Montserrat，标题与正文形成良好对比，体现了学术感与现代感的结合。CSS细节丰富：毛玻璃卡片、悬停上浮与阴影、渐变文字、脉冲动画、自定义滚动条等，均展示了较高的设计水准。不过，Hero区域的地图容器可能因Three.js未实际渲染而显示空白，影响了该区域视觉完整性；此外，整体风格虽符合现代暗色主题，但在创新性与视觉冲击力上仍有提升空间。综合评定为8分。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\06_068355.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Explore",
+      "href": "#explore",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Lectures",
+      "href": "#lectures",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Research",
+      "href": "#research",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Join Now",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Exploring",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

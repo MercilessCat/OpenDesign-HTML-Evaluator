@@ -1,0 +1,162 @@
+{
+  "row_id": "02_014737",
+  "shard": 2,
+  "id": 14737,
+  "category": "Data visualization",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is Data visualization.\n  - Revolutionize waste management strategies with an interactive dashboard visualizing global waste data. Users can explore patterns, compare regional statistics, and simulate management scenarios. The site supports data-driven decision-making for policymakers, businesses, and environmentalists, fostering sustainable solutions and community engagement.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 10451,
+  "html_sha256": "c586a1812e57cc828528e199dff4bec11e9a4d21068082c846882cf52742af40",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "查看/探索图表数据",
+        "expected": "柱状图（区域分布）和环形图（废弃物组成）渲染出来，指针悬停时有数据提示",
+        "evidence": "两个 Chart.js 图表初始化成功，运行时无 JS 错误；探针对第一个 canvas 拖拽后像素变化，说明图表对指针交互有视觉反馈",
+        "ok": 1
+      },
+      {
+        "name": "切换年份比较区域数据",
+        "expected": "选择 2022/2021 年份后，区域柱状图数据相应更新",
+        "evidence": "下拉框没有任何 onchange 事件或 JS 绑定，选择年份不会触发图表数据更新，属于需求中“比较区域统计”的核心功能缺失",
+        "ok": 0
+      },
+      {
+        "name": "调整场景模拟器滑块",
+        "expected": "拖动滑动条时对应百分比数值更新，模拟结果随之变化",
+        "evidence": "三个滑块绑定 input 事件并更新旁边的百分比标签（recyclingValue/organicValue/landfillValue），但“Projected Impact”结果数字写死为 350M tons，不随滑块变化，模拟功能只完成一半",
+        "ok": 1
+      },
+      {
+        "name": "点击导航菜单（Dashboard/Data Sources/Scenarios/About）",
+        "expected": "点击后切换到对应页面视图或滚动到对应内容区",
+        "evidence": "四个导航链接均为 href=\"#\"，无路由无锚点绑定，点击仅跳回页面顶部，无内容切换，属于纯占位入口",
+        "ok": 0
+      },
+      {
+        "name": "点击 Export Report 导出报告",
+        "expected": "触发报告导出或下载动作，并给出反馈",
+        "evidence": "按钮无任何事件绑定，探针点击后 DOM 无变化、无网络请求、无跳转，是失效按钮",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉和数据可视化图表渲染成功，滑块有基础反馈，但两个需求核心功能未完整实现：年份切换无法更新区域数据（比较统计）、场景模拟结果不会动态变化；同时导航菜单为 href=\"#\" 占位链接、导出按钮无响应，存在多个需求声明相关的未实现入口，因此评分 4。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "【核心可用性问题】\n1. 情景模拟器核心功能形同虚设：用户调节三个滑块参数时，仅显示数值变化，下方的“Projected Impact”结果始终为固定的“350M tons”，不会根据滑块的组合或数值变化重新计算/更新，属于核心控件的调节结果完全无效。\n2. 顶部导航（Dashboard、Data Sources、Scenarios、About）均为占位链接：点击后页面仅跳转到页首/#，没有任何对应内容的展示或视图切换，属于主要入口无实际可用功能。\n3. 导出报告按钮“Export Report”点击后无任何反馈，用户无法判断操作是否成功，反馈完全缺失。\n\n【次要瑕疵】\n1. 页脚社交图标和info图标只有悬停变色，没有可点击的具体功能或链接。\n2. 缺少必要的说明文字/图例，如数据来源说明不完整、图表没有单位标注说明。\n3. 模拟器区块与上方统计卡片/图表的联动关系未体现，缺少让用户理解其预测逻辑的引导说明。\n4. 视觉上整体统一美观，但未充分利用单页面视口空间，部分元素（如页脚）在视口内显得局促。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "该页面设计专业、现代，并很好地契合了数据可视化仪表板的需求。采用 Tailwind CSS 框架，布局结构明晰：页眉、统计卡片、两个图表（条形图与环形图）、交互式模拟器以及页脚，信息层级清晰。配色方案颇具吸引力，绿色强调节点紧扣回收与环保主题，渐变强调卡片与多色彩图表均有良好的区分度与可读性。卡片搭配阴影与悬停上移的动效，交互体感略显生动，同时不显冗余。字体设定与整体间距的运用维持了通透、鲜明的当代 UI 风格。交互探针亦显示主要导航与图表交互均正常运作。唯一的细微不足在于首张统计卡使用紫色渐变而其余为白色，视觉上略显得不均衡，以及图表及标题区域更丰富化的视觉质感仍可优化，但整体美观度与专业性均足以满足要求。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.33,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\02_014737.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Dashboard",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Data Sources",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Scenarios",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "About",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Export Report",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": true
+    },
+    {
+      "kind": "canvas",
+      "tag": "canvas",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "drag": "pointer drag on canvas",
+      "pixels_changed": false
+    }
+  ]
+}

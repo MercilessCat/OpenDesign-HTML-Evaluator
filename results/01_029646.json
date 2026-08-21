@@ -1,0 +1,187 @@
+{
+  "row_id": "01_029646",
+  "shard": 1,
+  "id": 29646,
+  "category": "UI component",
+  "prompt": "\nCreate a single-page website with the following requirements:\n\nThe website should be designed based on the specific content and theme described in the user command below. The user command is a natural language description that outlines the desired content, purpose, or theme of the website (e.g., a restaurant reservation site, a portfolio, etc.). Incorporate the user command's instructions holistically into the design, content, and functionality while adhering to the requirements below.\n\n- **Design and Layout**: \n  - Design a visually appealing, modern, and clean layout with a professional and aesthetic UI.\n  - Use a mainstream UI framework (e.g., Tailwind CSS, Bootstrap, or similar) for styling to ensure a polished and contemporary look.\n  - Ensure the design is highly readable with clear typography and sufficient contrast.\n\n- **Code Structure**:\n  - All code (HTML, CSS, JavaScript) must be integrated into a single HTML file.\n  - Use modern JavaScript syntax and, if needed, include CDN-hosted dependencies for frameworks (e.g., Tailwind CSS via CDN).\n  - Do not use external files or resources beyond CDN-hosted libraries.\n\n- **Content and Functionality**:\n  - The website must be a single page with all content visible without scrolling (fits within the viewport).\n  - Include a simple, elegant structure (e.g., header, main content, footer) tailored to the user command's description.\n  - Optionally, add lightweight interactivity (e.g., hover effects, button click actions) to enhance modern feel without complexity.\n\n- **User Command**:\n  - The topic of the website is UI component.\n  - Design an intuitive development tool that simplifies the BEM naming convention process. Users can generate consistent class names, validate structures, and collaborate on best practices. Key features include real-time syntax suggestions, error detection, and integration with popular IDEs to streamline front-end development workflows.\n\n- **Output**:\n  - Provide only the complete HTML code with embedded CSS and JavaScript in a single file.\n  - Do not include any explanatory text or comments outside the code.\n  - Ensure the code is clean, well-formatted, and functional in any modern browser.\n\nOutput only a single page html code. Do not include any explanatory text or comments outside the code.\n",
+  "html_len": 14083,
+  "html_sha256": "fac2c2680b4774b309f661698ffe6e18d5291af828d7d437645179b9b839ee34",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 4.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "生成BEM类名",
+        "expected": "输入Block/Element/Modifier后点击Generate Class Name，右侧显示组合后的类名",
+        "evidence": "generateBtn绑定了click事件，会读取输入框并更新#resultDisplay；页面初始化默认值为.card__title__large，探针点击Generate时输入未改变，故DOM无变化，但代码逻辑完整。",
+        "ok": 1
+      },
+      {
+        "name": "验证BEM语法",
+        "expected": "输入类名后点击Validate Class，显示有效/无效的验证反馈",
+        "evidence": "探针点击Validate Class后DOM有变化（显示提示信息）；validateBtn绑定了click事件，通过正则校验并更新#validationResult。",
+        "ok": 1
+      },
+      {
+        "name": "复制生成的类名",
+        "expected": "点击Copy to Clipboard将类名复制到剪贴板，并出现“Copied!”反馈",
+        "evidence": "探针点击Copy后产生JS错误：Failed to execute 'writeText' on 'Clipboard': Write permission denied，DOM无变化，按钮无成功反馈；页面未提供降级复制方案。",
+        "ok": 0
+      },
+      {
+        "name": "保存类名",
+        "expected": "点击Save保存当前生成的类名（如下载文件或提示保存成功）",
+        "evidence": "探针点击Save后DOM无变化、无JS错误；HTML中saveBtn未绑定任何事件，是纯占位按钮。",
+        "ok": 0
+      },
+      {
+        "name": "IDE集成入口",
+        "expected": "点击VS Code/WebStorm/CLI卡片查看插件或跳转到对应集成页面",
+        "evidence": "三个IDE集成卡片均为div，只有hover样式，无click事件、无链接，点击无任何反馈，属于占位入口。",
+        "ok": 0
+      },
+      {
+        "name": "刷新/设置按钮",
+        "expected": "点击刷新或设置图标应重置表单或打开设置面板",
+        "evidence": "探针点击Header中的两个图标按钮均无DOM变化、无JS错误；HTML中未绑定任何事件，纯装饰按钮。",
+        "ok": 0
+      }
+    ],
+    "reason": "页面实现了核心的BEM类名生成和语法验证功能，但复制到剪贴板因权限问题失败且无降级，保存按钮为无事件占位，IDE集成卡片和Header按钮均未实现功能，需求中提到的实时语法建议、错误检测和IDE集成等关键特性大部分缺失，因此功能性不完整，得分4分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 3.0,
+    "reason": "核心可用性问题：1）Copy to Clipboard 点击后触发 JS 错误（Clipboard write permission denied），且没有 catch/降级处理，按钮复制失败且无失败反馈；2）Save 按钮未绑定任何事件，点击后无反应，属于死按钮。次要瑕疵：头部 sync/settings 为占位按钮；IDE 集成卡片看起来可点击但无行为/跳转；页面没有实现实时语法建议，需要手动点击 Validate；footer 社交链接为空链接（#）。整体信息分区清晰、生成与验证主流程基本可用，但存在两个核心输出操作失效，故给 3 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 7.0,
+    "reason": "页面整体采用居中卡片式布局，搭配蓝绿渐变头部、柔和的浅色功能分区和一致性圆角阴影，基础框架整洁现代，符合当前主流工具类页面的结构规范。Tailwind样式使用熟练，按钮、输入框、焦点状态和过渡动画细节到位。但配色上同时使用了蓝、绿、琥珀、紫四种浅色背景，视觉信息驳杂、缺少统一的主色导向，显得不够克制；IDE集成区域用Chrome/Firefox浏览器图标代表VS Code、WebStorm，语义错位，影响专业性；字体使用系统默认，标题与正文字级层级较弱。整体视觉吸引力中等偏上，但距离专业级开发工具页面的精致感还有差距。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.0,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [
+      "Failed to execute 'writeText' on 'Clipboard': Write permission denied."
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\01_029646.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-sync-alt",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "I.fas fa-cog",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Generate Class Name",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Validate Class",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Copy to Clipboard",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Save",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "covered_by": "I.fab fa-github",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "covered_by": "I.fab fa-discord",
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

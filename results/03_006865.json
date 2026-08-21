@@ -1,0 +1,219 @@
+{
+  "row_id": "03_006865",
+  "shard": 3,
+  "id": 6865,
+  "category": "Game dev",
+  "prompt": "Build an immersive conservation-themed website where users manage ecosystems to protect endangered species. Features include interactive rescue missions, a biodiversity database, and a virtual sanctuary builder. Users earn badges for successful preservation strategies and can contribute to real-world conservation efforts through partnerships.",
+  "html_len": 27155,
+  "html_sha256": "84542181b15c4a0ad5921a32df0ad30f0249eed5c2f53869851a8dcba9fc1511",
+  "functional": {
+    "score": 1.0,
+    "raw_score": 1.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "浏览物种数据库（点击濒危物种卡片）",
+        "expected": "点击物种卡片后展示该物种的保护详情或相关反馈通知",
+        "evidence": "探针依次点击 6 张物种卡片（Siberian Tiger、Javan Rhino 等），DOM 均无变化，且每次新增 JS 错误 \"selectSpecies is not defined\"；HTML 中卡片虽绑定了 onclick=\"selectSpecies()\"，但该函数在运行时未生效，数据库浏览功能完全失效",
+        "ok": 0
+      },
+      {
+        "name": "开始救援任务（点击 Start Mission）",
+        "expected": "任务完成，任务数/物种拯救数/Eco Points 增加，并弹出完成通知",
+        "evidence": "探针点击 2 个 Start Mission 按钮后，DOM 无任何变化且新增 JS 错误；completeMission() 未产生业务反馈，统计栏数字和通知均未更新，救援任务核心流程不可用",
+        "ok": 0
+      },
+      {
+        "name": "使用虚拟保护区建造器控件",
+        "expected": "点击添加水源/食物/栖息地后出现对应提示，扩展保护区会消耗 Eco Points 并增加栖息地数量",
+        "evidence": "sanctuary-viewer 容器内 canvas 数量为 0，说明 Three.js 3D 场景未初始化；控件按钮调用的 addResource()/expandSanctuary() 与失效的 selectSpecies/completeMission 同处一个未正常执行的脚本环境中，点击同样无法产生有效反馈",
+        "ok": 0
+      },
+      {
+        "name": "获取/更新成就徽章",
+        "expected": "成功完成保护策略后徽章解锁、badgesEarned 统计增加",
+        "evidence": "徽章区域为静态 div，无任何点击事件；唯一能触发徽章状态变化的 completeMission() 已失效，badgesEarned 始终为固定值 6，徽章获取机制无法运作",
+        "ok": 0
+      },
+      {
+        "name": "查看虚拟保护区 3D 可视化",
+        "expected": "sanctuary-viewer 内渲染可交互的 3D 保护区场景（树木、地面等）",
+        "evidence": "运行时 canvas 元素统计为 0，sanctuaryCanvas 为空容器，WebGL 渲染器未挂载，页面视觉上没有任何 3D 内容，保护区可视化功能未实现",
+        "ok": 0
+      }
+    ],
+    "reason": "页面视觉设计完成度较高，但运行时所有核心游戏机制均失效：物种数据库点击报 \"selectSpecies is not defined\"、救援任务按钮点击无反馈并报错、保护区 3D 场景未渲染（canvas=0）、徽章获取依赖的任务系统无法运行。核心交互大面积失败，页面仅剩静态展示，无法完成任何用户需求中的主要任务。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1) 所有主要交互入口（物种卡片、Start Mission 按钮）点击后均无任何 DOM 变化，并报 JS 错误（selectSpecies is not defined），导致浏览生物多样性数据库、执行救援任务等核心操作完全无法完成，属于“主要入口/导航点击无实际反馈”和“核心操作无法完成”；2) 虚拟保护区构建器的可视化区域未渲染（页面无 canvas），核心模块（ sanctuary 构建）不可见，且相关按钮（Add Water Source 等）同样依赖未定义函数，核心控件调节无效；3) 交互反馈完全缺失，点击后既无内容变化也无通知提示，用户无法判断操作是否成功、是否死路。次要瑕疵：Font Awesome 外链被 CORS 阻止导致图标缺失；页面标题/文案中英文混杂（如“濒危物种数据库”与英文面板标题并列）；徽章与资源条缺少图例说明，未解锁徽章没有清晰解释；虽然视觉风格统一、色彩和动效营造了环保主题，但功能不可用使整体体验严重降级。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.2,
+    "reason": "该页面整体视觉吸引力较强，主题明确，沉浸感营造出色。设计上采用了深绿色渐变背景模拟森林氛围，搭配柔和的绿色系文字和面板，配合粒子动画与蒙层图案，形成了统一且富有自然气息的视觉基调。标题使用Montserrat字重并应用渐变文字与发光效果，醒目且符合游戏/环保主题。布局上采用卡片式网格与Flex布局，结构清晰，信息层级分明；卡片、按钮、徽章、资源条等组件均具备圆角、阴影、渐变、悬停动效等现代设计特征，视觉质感属于中上水平。不过也存在少量问题：面板背景使用了蓝色调(rgba(13,71,161,...))，与整体绿色主题存在轻微色彩冲突；Font Awesome脚本因CORS被阻止，导致图标缺失，影响按钮和标题的视觉完整性；部分中文标题与英文文案混排，语言风格不够统一。总体而言，页面视觉完成度较高，符合“沉浸式保护主题”的需求，但仍有优化空间。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 3.88,
+  "baseline_overall": 3.73,
+  "signals": {
+    "console_errors": [
+      "Access to script at 'https://kit.fontawesome.com/a076d05399.js' from origin 'http://127.0.0.1:31025' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "Failed to load resource: net::ERR_FAILED",
+      "Access to script at 'https://kit.fontawesome.com/a076d05399.js' from origin 'http://127.0.0.1:31025' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "Failed to load resource: net::ERR_FAILED",
+      "Access to script at 'https://kit.fontawesome.com/a076d05399.js' from origin 'http://127.0.0.1:31025' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "Failed to load resource: net::ERR_FAILED",
+      "Access to script at 'https://kit.fontawesome.com/a076d05399.js' from origin 'http://127.0.0.1:31025' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "Failed to load resource: net::ERR_FAILED",
+      "Access to script at 'https://kit.fontawesome.com/a076d05399.js' from origin 'http://127.0.0.1:31025' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "Failed to load resource: net::ERR_FAILED",
+      "Access to script at 'https://kit.fontawesome.com/a076d05399.js' from origin 'http://127.0.0.1:31025' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "Failed to load resource: net::ERR_FAILED",
+      "Access to script at 'https://kit.fontawesome.com/a076d05399.js' from origin 'http://127.0.0.1:31025' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "Failed to load resource: net::ERR_FAILED",
+      "Access to script at 'https://kit.fontawesome.com/a076d05399.js' from origin 'http://127.0.0.1:31025' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "Failed to load resource: net::ERR_FAILED",
+      "Access to script at 'https://kit.fontawesome.com/a076d05399.js' from origin 'http://127.0.0.1:31025' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "Failed to load resource: net::ERR_FAILED"
+    ],
+    "failed_requests": [
+      "https://kit.fontawesome.com/a076d05399.js -> net::ERR_FAILED",
+      "https://kit.fontawesome.com/a076d05399.js -> net::ERR_FAILED",
+      "https://kit.fontawesome.com/a076d05399.js -> net::ERR_FAILED",
+      "https://kit.fontawesome.com/a076d05399.js -> net::ERR_FAILED",
+      "https://kit.fontawesome.com/a076d05399.js -> net::ERR_FAILED",
+      "https://kit.fontawesome.com/a076d05399.js -> net::ERR_FAILED",
+      "https://kit.fontawesome.com/a076d05399.js -> net::ERR_FAILED",
+      "https://kit.fontawesome.com/a076d05399.js -> net::ERR_FAILED",
+      "https://kit.fontawesome.com/a076d05399.js -> net::ERR_FAILED"
+    ],
+    "page_errors": [
+      "selectSpecies is not defined",
+      "selectSpecies is not defined",
+      "selectSpecies is not defined",
+      "selectSpecies is not defined",
+      "selectSpecies is not defined",
+      "selectSpecies is not defined",
+      "completeMission is not defined",
+      "completeMission is not defined"
+    ],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_006865.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "🐅\nSiberian Tiger\nCritical",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.species-name",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "🦏\nJavan Rhino\nCritical",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.species-name",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "🐢\nLeatherback Turtle\nEndangered",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.species-name",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "🐼\nGiant Panda\nVulnerable",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.species-name",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "🐘\nAfrican Elephant\nEndangered",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.species-name",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "div",
+      "text": "🐋\nBlue Whale\nEndangered",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "covered_by": "DIV.species-name",
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Mission",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Mission",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 1,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

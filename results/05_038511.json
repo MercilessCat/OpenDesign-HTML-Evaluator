@@ -1,0 +1,176 @@
+{
+  "row_id": "05_038511",
+  "shard": 5,
+  "id": 38511,
+  "category": "Website",
+  "prompt": "Develop a discovery platform for indie game soundtracks, allowing users to explore, listen, and support indie composers. Feature curated playlists, composer profiles, and a marketplace for purchasing soundtracks, fostering appreciation and community around the artistry of indie game music.",
+  "html_len": 28618,
+  "html_sha256": "8fed53cec851b134c36a88e4a9e773ba06373de1b89e4bf947f7f3de033c0b7d",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 3.0,
+    "cap_applied": true,
+    "interactions": [
+      {
+        "name": "播放/暂停按钮",
+        "expected": "点击后播放/暂停状态切换，图标和动画随动",
+        "evidence": "HTML中JS为播放按钮绑定了click事件，切换fa-pause/fa-play图标并控制pulse类；交互可用",
+        "ok": 1
+      },
+      {
+        "name": "点击播放列表/专辑卡片",
+        "expected": "点击后触发播放提示（如弹窗）",
+        "evidence": "JS对.album-art和.playlist-card统一绑定click，弹出‘Now playing: 标题’，符合预期",
+        "ok": 1
+      },
+      {
+        "name": "导航 Discover/Playlists/Composers/Marketplace",
+        "expected": "点击后切换到对应板块/页面",
+        "evidence": "导航均使用href=\"#\"，无路由或事件绑定，点击仅跳转页面顶部/锚点，无内容切换；属于占位入口",
+        "ok": 0
+      },
+      {
+        "name": "市场购买专辑",
+        "expected": "提供购买、加入购物车等交易流程",
+        "evidence": "页面仅有专辑价格展示，点击专辑触发的是播放提示，没有购买按钮或结算流程；市场功能未实现",
+        "ok": 0
+      },
+      {
+        "name": "Browse Composers 按钮",
+        "expected": "点击后跳转或展示作曲家列表",
+        "evidence": "按钮无JS事件绑定，仅CSS hover样式，点击无业务反馈",
+        "ok": 0
+      }
+    ],
+    "reason": "页面为静态展示型原型，播放器播放/暂停和专辑点击播放可用，但核心导航、作曲家查看、市场购买等关键入口均为占位/死链，无实际业务实现。按规则关键入口多个未实现，功能完成度低，评3分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "核心可用性问题：1. 顶部导航及页脚主要链接均为 href=\"#\" 死链，点击无实际页面跳转或功能反馈，核心入口不可用；2. “Start Listening”“Browse Composers”“Sign In”等主要 CTA 点击后无有效交互，无法开始收听、浏览作曲家或登录；3. 播放器没有真实音频源，播放/暂停、切歌、进度条、音量均为模拟或无效操作，核心听歌功能不可用；4. 专辑和播放列表点击只弹出 alert，无法进入详情或播放，marketplace 也没有购买入口，核心购买流程无法完成。次要瑕疵：页面视觉层级清晰，信息结构易理解，但缺少说明/图例，部分按钮命名与实际行为不符，存在动画/视觉小细节问题。综合存在多个核心可用性问题，故评 2 分。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.5,
+    "reason": "页面整体视觉吸引力和设计质量较高。采用深色渐变背景与紫罗兰/靛蓝渐变强调色，符合游戏音乐平台的现代、沉浸式调性，与需求中“探索独立游戏原声带”的艺术氛围高度契合。色彩的明暗对比和渐变点缀（如hero标题的渐变文字、按钮与进度条）增强了视觉层次和品牌感。布局上，导航、精选播放列表、作曲家展示、市场专辑区和固定播放器结构清晰，卡片网格对齐良好，间距均匀，信息优先级明确。字体使用Inter，整体干净现代；组件设计精致，如毛玻璃播放列表卡片、悬停放大动画、圆形头像、专辑悬浮播放按钮等，细节丰富。CSS实现专业，使用了Tailwind配置、自定义动画、径向渐变和模糊效果，交互反馈自然。不足：部分图片在专辑区域重复出现（如Neon Nights/Cyber Dreams使用同一张图），降低了内容的真实感和丰富性；移动端固定播放器可能占用过多空间；整体风格虽好，但缺乏独特性，与许多音乐/多媒体暗色模板相似。综合而言，视觉质量优秀，仅有个别内容组织和原创性上的小瑕疵。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.17,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_038511.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Discover",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Playlists",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Composers",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Marketplace",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": true,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Sign In",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Listening",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Browse Composers",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "View All",
+      "href": "#",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "row_id": "05_033813",
+  "shard": 5,
+  "id": 33813,
+  "category": "Website",
+  "prompt": "Develop a platform dedicated to youth sports injury prevention, offering educational resources, interactive tutorials, and community forums. The site features personalized injury risk assessments, safety equipment guides, and expert consultations. Users can connect with professionals, share experiences, and access the latest research on safe sports practices.",
+  "html_len": 28856,
+  "html_sha256": "8e6e9127bb0f535b2af4d83d3b24abee45790e02c111af0f3f3227ff3c8c6883",
+  "functional": {
+    "score": 2.0,
+    "raw_score": 2.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "导航进入社区论坛",
+        "expected": "点击 Community 导航后应跳转/滚动到社区论坛区域，展示论坛内容",
+        "evidence": "页面中没有 id=\"community\" 的目标区块；探针点击 Community 后 DOM 无变化、无跳转；锚点平滑滚动因目标不存在而失效",
+        "ok": 0
+      },
+      {
+        "name": "开始个性化风险评估",
+        "expected": "点击 Start Risk Assessment 后进入风险评估流程（问卷/步骤）",
+        "evidence": "按钮无 onclick 或表单绑定，探针点击后无业务反馈（仅有样式层变化）；HTML 中无任何评估表单或后续步骤",
+        "ok": 0
+      },
+      {
+        "name": "点击 Get Started 开始使用",
+        "expected": "进入注册/登录或平台主界面",
+        "evidence": "导航及移动菜单中的 Get Started 按钮均为纯 <button>，无事件绑定；探针点击后 DOM 无变化、无网络请求、无跳转",
+        "ok": 0
+      },
+      {
+        "name": "查看教育文章详情",
+        "expected": "点击资源卡片 Learn more 后打开对应文章/资源页面",
+        "evidence": "所有资源卡片的 Learn more 链接均为 href=\"#\"，无事件绑定；点击不会产生任何内容变化或跳转",
+        "ok": 0
+      },
+      {
+        "name": "预约专家咨询",
+        "expected": "点击 Schedule Consultation 后进入预约表单或联系专家流程",
+        "evidence": "CTA 区 Schedule Consultation 按钮无事件绑定，点击后无反应；页面中也未提供任何预约或咨询表单",
+        "ok": 0
+      },
+      {
+        "name": "导航滚动到功能区块",
+        "expected": "点击导航 Features 平滑滚动到对应功能展示区域",
+        "evidence": "探针显示点击 Features 后 DOM 有变化；HTML 中锚点 #features 存在且平滑滚动 JS 已初始化，滚动功能可用",
+        "ok": 1
+      }
+    ],
+    "reason": "页面是一个静态营销展示页，需求声明的核心平台功能（风险评估、社区论坛、专家咨询、教育资源详情等）均以按钮或死链占位，点击后无实际业务反馈。仅导航锚点滚动可用，核心交互大面积失败，主要任务无法完成。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 2.0,
+    "reason": "存在多个核心可用性问题：1) Community导航为死链，页面不存在id=\"community\"的目标区块，点击完全无响应，而社区论坛是用户需求中的核心功能；2) \"Get Started\"、\"Explore Resources\"等主要CTA按钮点击无任何实际反馈，均为占位按钮；3) 用户需求中的个性化损伤风险评估、专家咨询、社区交流等核心任务均无实际可用流程（无任何表单、输入框或交互流程），点击\"Start Risk Assessment\"仅有JS兜底动作，无法真正完成评估；4) 首屏Hero中的\"Personalized Safety Dashboard\"为灰色虚线占位框，核心展示模块未实现。次要瑕疵：Hero背景图因ERR_BLOCKED_BY_ORB加载失败导致视觉缩水；资源卡片的\"Learn more\"链接指向\"#\"会跳回页面顶部而非展示内容；页脚社交链接同为占位无目标；全站无搜索、无登录注册入口，作为社区咨询平台缺少基本用户入口。页面视觉设计、信息层级和基础锚点导航本身良好，但用户核心目标均无法达成，属于典型的\"好看但不可用\"页面。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.2,
+    "reason": "页面整体视觉完成度高，符合现代医疗健康类网站设计规范。优点：1) 色彩系统统一且有递进，主色蓝绿紫（#3B82F6/#10B981/#8B5CF6）搭配浅蓝渐变背景，营造专业、可靠、活力的运动医疗氛围；2) Hero区深色半透明渐变叠加背景图，文字对比清晰，搭配浮动几何装饰和旋转卡片，层级丰富；3) 卡片设计精致，悬浮动效、圆角、阴影过渡自然，交互反馈专业；4) 字体统一使用Poppins，字重与层级明确，标题醒目；5) 响应式布局合理，导航、网格、按钮适配良好。扣分点：1) Hero区域使用Unsplash背景图但网络请求被拦截（ERR_BLOCKED_BY_ORB），实际渲染时背景图失效，深色渐变覆盖导致该区域视觉单薄；2) Hero右侧用灰色虚线占位框模拟产品截图，真实感不足，在成熟产品页中显得粗糙；3) testimonial头像均为灰色圆形占位，缺少真实或插画形象的完成度；4) 滚动动画依赖IntersectionObserver，但未设置初始透明状态，'animate-fade-in-up'只有在回调时才添加，可能造成部分元素延迟显现或闪烁；5) 部分空链接（'#'）和无实际功能的按钮，弱化UI的专业感。总体而言设计系统扎实，视觉层次、色彩、动效均表现优秀，但素材占位与背景图加载失败拉低了满分级别的精致度。",
+    "attempts": 1
+  },
+  "regime": "BROKEN",
+  "overall_score": 4.0,
+  "baseline_overall": 4.07,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [
+      "https://images.unsplash.com/photo-1540457179187-75906f09aeb4?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1540457179187-75906f09aeb4?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1540457179187-75906f09aeb4?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1540457179187-75906f09aeb4?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1540457179187-75906f09aeb4?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1540457179187-75906f09aeb4?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1540457179187-75906f09aeb4?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1540457179187-75906f09aeb4?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB",
+      "https://images.unsplash.com/photo-1540457179187-75906f09aeb4?ixlib=rb-4.0.3 -> net::ERR_BLOCKED_BY_ORB"
+    ],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\05_033813.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Home",
+      "href": "#home",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Features",
+      "href": "#features",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Resources",
+      "href": "#resources",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Community",
+      "href": "#community",
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "a",
+      "text": "Contact",
+      "href": "#contact",
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Get Started",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Start Risk Assessment",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Explore Resources",
+      "href": null,
+      "type": null,
+      "dom_changed": false,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "js_click_fallback": true,
+      "click_method": "js",
+      "pixels_changed": false
+    }
+  ]
+}

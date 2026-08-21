@@ -1,0 +1,174 @@
+{
+  "row_id": "03_000471",
+  "shard": 3,
+  "id": 471,
+  "category": "Game dev",
+  "prompt": "Embark on a botanical journey as users cultivate a digital herb garden. This website offers educational modules on herbal benefits and customized garden layouts. Features include AI-driven plant growth simulations, user-shared garden designs, and interactive workshops on traditional and modern herb uses in cooking and wellness.",
+  "html_len": 24280,
+  "html_sha256": "52a251d9a9a8a756dbe997415ba61809e16a2a10d30e6a5279721ebf29f91f74",
+  "functional": {
+    "score": 8.0,
+    "raw_score": 8.0,
+    "cap_applied": false,
+    "interactions": [
+      {
+        "name": "种植草药",
+        "expected": "点击 Plant 按钮后，草药出现在花园地块中，金币减少，并弹出成功通知",
+        "evidence": "探针点击 4 个 Plant 按钮均报告 DOM 变化且无 JS 错误；HTML 中 plantHerb() 会创建 plant-element、扣除金币、调用 updateStats() 并显示通知",
+        "ok": 1
+      },
+      {
+        "name": "选择浇水工具",
+        "expected": "点击 Water 按钮后，按钮高亮选中，并显示“💧 Water selected”通知",
+        "evidence": "探针点击后有 DOM 变化且无 JS 错误；selectTool('water') 切换 ring 样式并调用 showNotification()",
+        "ok": 1
+      },
+      {
+        "name": "选择阳光工具",
+        "expected": "点击 Sunlight 按钮后，按钮高亮选中，并显示“☀️ Sunlight selected”通知",
+        "evidence": "探针点击后有 DOM 变化且无 JS 错误；selectTool('sun') 切换 ring 样式并调用 showNotification()",
+        "ok": 1
+      },
+      {
+        "name": "展开/收起草药信息",
+        "expected": "点击 Show More Info / Show Less Info 后，草药信息面板在展开和收起之间切换，按钮文本同步变化",
+        "evidence": "探针点击后有 DOM 变化且无 JS 错误；toggleInfoBtn 切换 herbInfo 的 expanded 类并更新按钮文字",
+        "ok": 1
+      },
+      {
+        "name": "收获成熟草药",
+        "expected": "点击已生长完成的植物后，自动执行收获动画、增加金币和经验值，并从花园移除植物",
+        "evidence": "growPlant() 会给成熟植物绑定 click 事件并调用 harvestPlant()，包含动画、奖励结算和移除逻辑；运行时无 JS 错误，页面核心逻辑完整",
+        "ok": 1
+      },
+      {
+        "name": "用户共享花园设计",
+        "expected": "提供用户分享/浏览他人花园设计的入口",
+        "evidence": "页面没有共享设计、社区或类似入口，属于需求声明但未实现的功能，探针无法触发",
+        "ok": "NA"
+      },
+      {
+        "name": "互动工作坊",
+        "expected": "提供烹饪与养生主题的互动工作坊入口",
+        "evidence": "页面 HTML 中没有任何 workshop、course 或活动模块，属于需求声明但未实现的功能",
+        "ok": "NA"
+      }
+    ],
+    "reason": "核心游戏交互全部可用：种植、浇水/阳光工具选择、草药信息展开均已通过探针验证（DOM 有变化、无 JS 错误），收获逻辑也完整实现。页面实现了教育模块和植物生长模拟，但需求中声明的用户共享设计和互动工作坊在页面中完全没有入口，属于未实现的功能性缺失，因此扣分至 8 分。",
+    "attempts": 1
+  },
+  "usability": {
+    "score": 4.0,
+    "reason": "存在1个核心可用性问题：\n1. 浇水/阳光控件调节无效。界面提供Water和Sunlight两个核心工具，消耗资源并播放动画，但实际对植物生长没有任何影响（植物始终按固定setTimeout时间自动成熟，浇水/阳光既不能加速生长，也不是成熟条件）。页面也没有任何文字说明“植物会自主生长”这一规则，用户按常识浇水/晒光后观察不到任何实际效果，属于核心控件调节无效/反馈错误，严重降低游戏可用性。\n\n次要瑕疵：\n1. 生长进度条永远停在0%，中途无生长反馈，植物直接突然成熟，用户容易误以为游戏卡死或进度条无意义。\n2. 工具选择与植物点击交互易混淆：选中水/阳光后，点击成熟植物会执行浇水/晒光而非收获，用户可能误以为收获功能失灵；工具选中/取消状态仅靠按钮细微高亮，缺乏明确提示和取消说明。\n3. 未成熟的植物没有点击事件，玩家无法对生长中的植物进行任何交互，缺少引导。\n4. 需求中提到的AI驱动仿真、用户分享设计、互动工作坊等模块完全没有实现且无入口，功能覆盖与描述不符。\n5. 植物卡片整卡有hover和cursor:pointer效果，但点击卡片无反应，只有Plant按钮可点，存在误导。",
+    "attempts": 1
+  },
+  "aesthetic": {
+    "score": 8.0,
+    "reason": "页面整体视觉吸引力良好，色彩搭配以绿色自然系为主，背景采用柔和的绿色渐变，贴合“数字草药花园”的主题，营造清新舒适的氛围。布局使用响应式网格，信息层级清晰：顶部标题区、四格数据统计卡片、左侧花园主区域、右侧商店与知识面板，结构合理且呼应游戏类页面的功能需求。字体采用 Segoe UI 等现代无衬线体系，标题与正文层级分明。组件设计具备较高质量：圆角卡片、柔和阴影、悬停上浮效果、进度条以及生长/浇水/收获等关键帧动画，增强了交互感和游戏趣味，CSS 过渡与动画实现规范，与 Tailwind 结合自然。整体风格简洁统一，符合现代网页设计规范，并在视觉上契合用户需求中“教育模块 + 花园布局 + 模拟种植”的基调。不足在于视觉元素主要依赖 emoji 和简单 CSS 几何形状，缺少更细致的插画或纹理装饰，精致度略有欠缺，但作为游戏开发类页面已足够协调和完整。",
+    "attempts": 1
+  },
+  "regime": "CLUNKY",
+  "overall_score": 6.0,
+  "baseline_overall": 6.67,
+  "signals": {
+    "console_errors": [],
+    "failed_requests": [],
+    "page_errors": [],
+    "load_timeout": false,
+    "render_error": null
+  },
+  "screenshot": "C:\\Users\\Administrator\\OpenDesign-HTML-Evaluator\\aescode_out\\screenshots\\03_000471.png",
+  "probe": [
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "💧\nWater",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "☀️\nSunlight",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Plant",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Plant",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Plant",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Plant",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    },
+    {
+      "kind": "btn",
+      "tag": "button",
+      "text": "Show More Info",
+      "href": null,
+      "type": null,
+      "dom_changed": true,
+      "errors_added": 0,
+      "network_added": 0,
+      "navigated": false,
+      "click_method": "playwright",
+      "pixels_changed": false
+    }
+  ]
+}
